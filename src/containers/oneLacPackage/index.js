@@ -1,7 +1,7 @@
 import { provideHooks } from "redial";
 import HomeTownLoader from "containers/Loader";
 import { loadStores, isLoaded as isStoresLoaded } from "redux/modules/stores";
-import { loadPackages } from "redux/modules/lackpackages";
+import { loadPackages, loadPackagesSeo } from "redux/modules/lackpackages";
 import { PINCODE } from "helpers/Constants";
 
 const hooks = {
@@ -18,6 +18,7 @@ const hooks = {
   defer: ({ store: { dispatch, getState } }) => {
     if (!isStoresLoaded(getState())) {
       dispatch(loadStores()).catch(error => console.log(error));
+      dispatch(loadPackagesSeo()).catch(error => console.log(error));
     }
   }
 };

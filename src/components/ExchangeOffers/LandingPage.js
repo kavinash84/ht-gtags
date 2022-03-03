@@ -1,11 +1,20 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import Helmet from "react-helmet";
+import SeoContent from "hometown-components-dev/lib/SeoContent";
+import Container from "hometown-components-dev/lib/ContainerHtV1";
 import landingMainSlider from "../../../static/exchange-landing-banner.jpg";
 import landingCategory from "../../../static/landing-category.jpg";
 import Form from "./FormComp";
 import LeadSuccess from "./SuccessPage";
 import LandingPageLogo from "./LandingPageLogo";
 
+@connect(({ designbuild }) => ({
+  seoInfo:
+    designbuild.exchangeOffer &&
+    designbuild.exchangeOffer &&
+    designbuild.exchangeOffer.items
+}))
 class LandingPage extends Component {
   constructor(props) {
     super(props);
@@ -29,13 +38,18 @@ class LandingPage extends Component {
   }
   getUI = () => {
     const { UI } = this.state;
-    const { history } = this.props;
+    const { history, seoInfo } = this.props;
     if (UI === "Success") {
       return <LeadSuccess {...this.state} />;
     }
     return (
       <section>
-        <Helmet title={`Exchange-offeres`}>
+        <Helmet title={`${(seoInfo && seoInfo.page_title) || ""}`}>
+          <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
+          <meta
+            name="description"
+            content={seoInfo && seoInfo.meta_description}
+          />
           <script
             async
             src="https://www.googletagmanager.com/gtag/js?id=AW-832074530"
@@ -129,6 +143,16 @@ class LandingPage extends Component {
             />
           </div>
         </div>
+        {/* SEO Content */}
+        {seoInfo && seoInfo.seo_text && (
+          <SeoContent>
+            <Container>
+              <div>
+                <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
+              </div>
+            </Container>
+          </SeoContent>
+        )}
       </section>
     );
   };

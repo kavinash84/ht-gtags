@@ -5,6 +5,7 @@ import ResponsiveModal from "components/Modal";
 // import Container from "hometown-components/lib/Container";
 import Section from "hometown-components-dev/lib/SectionHtV1";
 import { checkRedirection } from "utils/helper";
+import Helmet from "react-helmet";
 // import ReviewMenu from "../ReviewMenu";
 // import BreadCrumb from "../../containers/Category/BreadCrumb";
 // import DeliveryAddress from "../Cart/deliveryAddress";
@@ -53,6 +54,7 @@ const formatPrice = price => {
   packageItems: cart.packageItems,
   cartUpdated: cart.cartUpdated,
   cartUpdating: cart.cartUpdating,
+  seoInfo: lackpackages && lackpackages.seo && lackpackages.seo.items,
   router
 }))
 export default class PackageCatalog extends Component {
@@ -308,10 +310,18 @@ export default class PackageCatalog extends Component {
       openProdModal,
       packageCatalog,
       proceedLoader,
-      cartUpdating
+      cartUpdating,
+      seoInfo
     } = this.props;
     return (
       <div className="wrapper">
+        <Helmet title={`${(seoInfo && seoInfo.page_title) || ""}`}>
+          <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
+          <meta
+            name="description"
+            content={seoInfo && seoInfo.meta_description}
+          />
+        </Helmet>
         <div className={styles.PackageCatalogContainer}>
           {/* <ReviewMenu backBtn={true} menuIcon={false} /> */}
           <div

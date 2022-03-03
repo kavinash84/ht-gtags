@@ -1,3 +1,5 @@
+import { PACKAGE_SEO } from "helpers/apiUrls";
+
 const CHANGE_PROD_MODAL = "lackpackages/CHANGE_PROD_MODAL";
 
 const CHANGE_SUDO_CART_MODAL = "lackpackages/CHANGE_SUDO_CART_MODAL";
@@ -39,6 +41,10 @@ const PROCEED_PACKAGE_CATALOG_SUCCESS =
   "lackpackages/PROCEED_PACKAGE_CATALOG_SUCCESS";
 const PROCEED_PACKAGE_CATALOG_FAIL =
   "lackpackages/PROCEED_PACKAGE_CATALOG_FAIL";
+
+const LOAD_PACKAGE_SEO = "lackpackages/LOAD_PACKAGE_SEO";
+const LOAD_PACKAGE_SEO_SUCCESS = "lackpackages/LOAD_PACKAGE_SEO_SUCCESS";
+const LOAD_PACKAGE_SEO_FAIL = "lackpackages/LOAD_PACKAGE_SEO_FAIL";
 
 const selectCat = (packageCats, data) => {
   let ReplcedData = [...packageCats];
@@ -87,6 +93,7 @@ const initialState = {
   pdpFromCart: "",
   replaceSku: "",
   currentPackage: "",
+  seo: "",
   loading: false
 };
 
@@ -233,6 +240,24 @@ export default function reducer(state = initialState, action = {}) {
         movetoCart: false,
         error: action.error
       };
+    case LOAD_PACKAGE_SEO:
+      return {
+        ...state,
+        loading: true,
+        movetoCart: false
+      };
+    case LOAD_PACKAGE_SEO_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        seo: action.result || ""
+      };
+    case LOAD_PACKAGE_SEO_FAIL:
+      return {
+        ...state,
+        loading: false,
+        error: action.error
+      };
     default:
       return state;
   }
@@ -291,6 +316,11 @@ export const setCurrentPackage = result => ({
 export const loadPackages = pincode => ({
   types: [LOAD_PACKAGES, LOAD_PACKAGES_SUCCESS, LOAD_PACKAGES_FAIL],
   promise: ({ client }) => client.get(`tesla/packages/get-packages/${pincode}`)
+});
+
+export const loadPackagesSeo = () => ({
+  types: [LOAD_PACKAGE_SEO, LOAD_PACKAGE_SEO_SUCCESS, LOAD_PACKAGE_SEO_FAIL],
+  promise: ({ client }) => client.get(PACKAGE_SEO)
 });
 
 export const loadPackageSudoCart = result => ({
