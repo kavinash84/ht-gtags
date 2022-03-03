@@ -40,30 +40,48 @@ const customStyles = {
 };
 
 const PRODUCTS = [
-  { value: "1", label: "Beds" },
-  { value: "2", label: "2 Door Wardrobe" },
-  { value: "3", label: "3 Door Wardrobes / Other Wardrobes" },
-  { value: "4", label: "1 Seater Sofa" },
-  { value: "5", label: "2 Seater Sofa" },
-  { value: "6", label: "3 Seater Sofa" },
-  { value: "7", label: "*4 Seater Dining Table Set (Table + Chairs)" },
+  { value: "1", label: "Beds; Exchange value = 20,000" },
+  { value: "2", label: "2 Door Wardrobe; Exchange value = 10,000" },
+  {
+    value: "3",
+    label: "3 Door Wardrobes / Other Wardrobes; Exchange value = 15,000"
+  },
+  { value: "4", label: "1 Seater Sofa; Exchange value = 6,000" },
+  { value: "5", label: "2 Seater Sofa; Exchange value = 15,000" },
+  { value: "6", label: "3 Seater Sofa; Exchange value = 25,000" },
+  {
+    value: "7",
+    label:
+      "*4 Seater Dining Table Set (Table + Chairs); Exchange value = 10,000"
+  },
   {
     value: "8",
-    label: "*6 Seater Dining Table set / Other Dining Table set (Table +Chairs)"
+    label:
+      "*6 Seater Dining Table set / Other Dining Table set (Table +Chairs); Exchange value = 20,000"
   },
-  { value: "9", label: "Other Furniture (Plastic Table/Chair)" },
-  { value: "10", label: "Mattress Cotton/Coir/foam" },
-  { value: "11", label: "Spring Mattress" },
-  { value: "12", label: "Bed Linen (per piece)" },
-  { value: "13", label: "Curtains (per piece)" },
-  { value: "14", label: "Pillows (per piece)" },
-  { value: "15", label: "Any other soft furnishings (per Kg)" },
-  { value: "16", label: "Cookware" },
+  {
+    value: "9",
+    label: "Other Furniture (Plastic Table/Chair); Exchange value = 3,000"
+  },
+  { value: "10", label: "Mattress Cotton/Coir/foam; Exchange value = 4,000" },
+  { value: "11", label: "Spring Mattress; Exchange value = 6,000" },
+  { value: "12", label: "Bed Linen (per piece); Exchange value = 500" },
+  { value: "13", label: "Curtains (per piece); Exchange value = 500" },
+  { value: "14", label: "Pillows (per piece); Exchange value = 500" },
+  {
+    value: "15",
+    label: "Any other soft furnishings (per Kg); Exchange value = 500"
+  },
+  { value: "16", label: "Cookware; Exchange value = 500" },
   {
     value: "17",
-    label: "Cutlery, Kitchenware, Dinnerware & tableware (per KG)"
+    label:
+      "Cutlery, Kitchenware, Dinnerware & tableware (per KG); Exchange value = 500"
   },
-  { value: "18", label: "Cooktops, Induction Tops (per Piece)" }
+  {
+    value: "18",
+    label: "Cooktops, Induction Tops (per Piece); Exchange value = 1,500"
+  }
 ];
 
 const CITIES = [
@@ -184,7 +202,6 @@ export default class ContactUs extends Component {
   // };
   onUploadImage = e => {
     e.preventDefault();
-    console.log(e.target.files, "e.target.files");
     const reader = new FileReader();
     const file = e.target.files[0];
     let typeError = false;
@@ -326,12 +343,6 @@ export default class ContactUs extends Component {
     const { switchUI } = this.props;
 
     const urlParams = new URLSearchParams(window.location.search);
-    console.log(
-      urlParams.get("utm_source"),
-      urlParams.get("utm_campaign"),
-      urlParams.get("utm_medium"),
-      urlParams.get("utm_term")
-    );
     let source = urlParams.get("utm_source")
       ? urlParams.get("utm_source")
       : "Website";
@@ -431,7 +442,6 @@ export default class ContactUs extends Component {
     //     ...getEvent(Number(selectedService))
     //   });
     // }
-    console.log(formData, "exchange-offer-submit");
     apiInstanceTest
       .post("/tesla/offers/cashback-offers", formData)
       .then(response => {
