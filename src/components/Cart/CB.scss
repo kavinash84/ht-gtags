@@ -1,0 +1,49 @@
+.CBContainer {
+  background-color: #fff8f4;
+  width: 100%;
+  padding: 15px 10% 20px 10%;
+  display:flex;
+  .CBContainerInnner {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    margin-left: 10%;
+    .CBItem,
+    .CBItemActive {
+      background-color: #fff8f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .number {
+        color: black;
+        font-size: 12px;
+        font-weight: 600;
+        background-color: #e0dfdf;
+        width: 20px;
+        height: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        margin-left: 2px;
+      }
+      .text {
+        color: #999999;
+        font-size: 14px;
+        margin-left: 5px;
+        margin-right: 2px;
+      }
+    }
+    .CBItemActive {
+      .number {
+        color: #f47020;
+        font-weight: 500;
+        border: 1px solid #f47020;
+        background-color: white;
+      }
+      .text {
+        color: #f47020;
+      }
+    }
+  }
+}

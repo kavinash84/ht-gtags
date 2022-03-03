@@ -275,7 +275,7 @@ export default class CartContainer extends Component {
         <Helmet title="Cart - HomeTown.in" />
         <Body>
           {/* Header */}
-          <Header />
+          {/* <Header /> */}
 
           {/* {loading && !loaded && <CartShimmer />} */}
           { initialLoading ? ( 
