@@ -112,7 +112,7 @@ const AddToCart = ({
         null
       ) : (
           <Fragment>
-            {!checkStatus || !checkSKUItem ? (
+            {!checkStatus ? (
               <Button
                 backgroundColor="#626463"
                 borderColor="#626463"
@@ -139,9 +139,11 @@ const AddToCart = ({
                 <Row mx={0} alignItems="center">
                   <Box as={Link} to={CART_URL} style={{ width: "320px", marginBottom: "10px", marginTop: "10px" }}>
                     <Button
-                      border="1px solid #626463"
                       backgroundColor="#626463"
+                      borderColor="#626463"
+                      width="70%"
                       color="#FFFFFF"
+                      // variant={`outline.primary.${size}`}
                       variant="outline.primary.large"
                       width={1}
                       height={height}

@@ -42,26 +42,113 @@ const HIDE_COUPON_LIST = "cart/HIDE_COUPON_LIST";
 const formatCartData = data => {
   if (Array.isArray(data)) {
     let arr = data.map(item => {
-      return {
-        ...item,
-        product_info: {
-          ...item.product_info,
-          stock: item.stock,
-          image: item.image,
-          unit_price: parseInt(item.product_info.price),
-          net_price: parseInt(item.product_info.special_price)
-        }
-      };
+      if (item.product_info.packageId) {
+        return item;
+      } else {
+        return {
+          ...item,
+          product_info: {
+            ...item.product_info,
+            stock: item.stock,
+            image: item.image,
+            unit_price: parseInt(item.product_info.price),
+            net_price: parseInt(item.product_info.special_price)
+          }
+        };
+      }
     });
     return arr;
   }
   return [];
 };
 
+const checkForPackages = cartData => {
+  if (Array.isArray(cartData.packages)) {
+    return cartData.cart;
+  } else if (cartData.packages && Object.keys(cartData.packages).length === 0) {
+    return cartData.cart;
+  } else {
+    let arrayOfObj = Object.values(cartData.packages).map(item => {
+      return {
+        configurable_sku: "",
+        created_at: "",
+        fk_customer: null,
+        id_customer_cart: item.id_customer_cart,
+        is_bogo: 0,
+        is_display: 1,
+        product_info: {
+          assembly_service: false,
+          cart_rule_discount: item.cart_rule_discount,
+          cart_rule_display_names: [],
+          category_details: [],
+          color: "",
+          color_family: "",
+          coupon_discount: item.coupon_discount,
+          delivery_time_text: item.delivery_time_text,
+          demo_product: false,
+          discount: item.discount,
+          gift_wrap: 0,
+          giftimageset: "",
+          image: `${item.images[0]}.jpg`,
+          is_available: item.is_available,
+          is_deliverable: item.is_deliverable,
+          is_freebie: "",
+          max_display_stock: "",
+          name: item.packageName,
+          net_price: item.subTotal,
+          offer_message: "",
+          packageId: item.packageId,
+          product_id: item.packageId,
+          shipping_time_text: item.shipping_time_text,
+          special_price: item.specialPrice,
+          stock: item.stock,
+          unit_price: item.unit_price,
+          url: ""
+        },
+        qty: 1,
+        session_id: "",
+        shipping_charges: 0,
+        simple_sku: "",
+        simpleSkus: item.simpleSkus,
+        updated_at: ""
+      };
+    });
+    return [...cartData.cart, ...arrayOfObj];
+  }
+};
+
+const formatPackageItems = packageData => {
+  if (Array.isArray(packageData.packageItems)) {
+    return [];
+  } else if (
+    packageData.packageItems &&
+    Object.keys(packageData.packageItems).length === 0
+  ) {
+    return [];
+  } else {
+    let arrayOfObj = Object.values(packageData.packageItems);
+    return arrayOfObj;
+  }
+};
+
+const getCurrentPackage = data => {
+  if (Array.isArray(data.packages)) {
+    return "";
+  } else if (data.packages && Object.keys(data.packages).length === 0) {
+    return "";
+  } else {
+    let arrayOfObj = Object.keys(data.packages);
+    return arrayOfObj[0];
+  }
+};
+
 const initialState = {
   loading: false,
+  initialLoading: false,
   data: [],
   summary: {},
+  packageItems: [],
+  currentPackage: "",
   demo_landing_page_url: "",
   loaded: false,
   addedToCart: false,
@@ -79,13 +166,16 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD_CART:
       return {
         ...state,
-        loading: true
+        loading: true,
+        initialLoading: true
       };
     case LOAD_CART_SUCCESS:
       return {
         ...state,
         data:
-          action.result && "cart" in action.result ? action.result.cart : [],
+          action.result && "cart" in action.result
+            ? checkForPackages(action.result)
+            : [],
         summary:
           action.result && "summary" in action.result
             ? action.result.summary
@@ -96,12 +186,16 @@ export default function reducer(state = initialState, action = {}) {
             : "",
         loading: false,
         loaded: true,
+        initialLoading: false,
+        currentPackage: getCurrentPackage(action.result),
+        packageItems: formatPackageItems(action.result),
         couponlistToggle: false
       };
     case LOAD_CART_FAIL:
       return {
         ...state,
         loading: false,
+        initialLoading: false,
         loaded: false
       };
     case ADD_TO_CART:
@@ -117,9 +211,19 @@ export default function reducer(state = initialState, action = {}) {
         addedToCart: true,
         quantityChange: false,
         couponlistToggle: false,
+        // data:
+        //   action.result && "cart" in action.result
+        //     ? formatCartData(action.result.cart.cart)
+        //     : [],
         data:
           action.result && "cart" in action.result
-            ? formatCartData(action.result.cart.cart)
+            ? formatCartData(
+                checkForPackages({
+                  ...action.result.cart,
+                  packages: action.result.packages,
+                  packageItems: action.result.packageItems
+                })
+              )
             : [],
         summary:
           action.result && "cart" in action.result
@@ -146,7 +250,10 @@ export default function reducer(state = initialState, action = {}) {
         addedToCart: true,
         couponlistToggle: false,
         data:
-          action.result && "cart" in action.result ? action.result.cart : [],
+          action.result && "cart" in action.result
+            ? checkForPackages(action.result)
+            : [],
+        packageItems: formatPackageItems(action.result),
         summary:
           action.result && "cart" in action.result ? action.result.summary : {}
       };
@@ -171,12 +278,13 @@ export default function reducer(state = initialState, action = {}) {
         quantityChange: false,
         data:
           action.result && "cart" in action.result
-            ? action.result.cart.cart
+            ? checkForPackages(action.result.cart)
             : [],
         summary:
           action.result && "cart" in action.result
             ? action.result.cart.summary
             : {},
+        packageItems: formatPackageItems(action.result.cart),
         couponlistToggle: false
       };
     case UPDATE_CART_FAIL:
@@ -200,12 +308,14 @@ export default function reducer(state = initialState, action = {}) {
         cartUpdated: true,
         data:
           action.result && "cart" in action.result
-            ? action.result.cart.cart
+            ? checkForPackages(action.result.cart)
             : [],
         summary:
           action.result && "cart" in action.result
             ? action.result.cart.summary
             : {},
+        packageItems: formatPackageItems(action.result.cart),
+        currentPackage: getCurrentPackage(action.result.cart),
         couponlistToggle: false
       };
     case REMOVE_FROM_CART_FAIL:
@@ -226,7 +336,10 @@ export default function reducer(state = initialState, action = {}) {
         cartSyncing: false,
         cartSynced: true,
         data:
-          action.result && "cart" in action.result ? action.result.cart : [],
+          action.result && "cart" in action.result
+            ? checkForPackages(action.result)
+            : [],
+        packageItems: formatPackageItems(action.result),
         summary:
           action.result && "summary" in action.result
             ? action.result.summary
@@ -441,9 +554,11 @@ export const removeFromCart = (
     types: [REMOVE_FROM_CART, REMOVE_FROM_CART_SUCCESS, REMOVE_FROM_CART_FAIL],
     promise: async ({ client }) => {
       try {
+        console.log(cartId, "cart cat");
         const response = await client.delete(`${ADDTOCART_API}/${pincode}`, {
           data: cartId
         });
+
         return response;
       } catch (error) {
         throw error;

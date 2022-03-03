@@ -24,8 +24,8 @@ export default class ProductDetails extends Component {
   render() {
     // console.log(this.props);
     const {
- loading, loaded, history, productDescription
-} = this.props;
+      loading, loaded, history, productDescription
+    } = this.props;
     return (
       <Wrapper>
         <Body>

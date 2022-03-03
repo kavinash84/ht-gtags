@@ -12,7 +12,7 @@ import Text from "hometown-components-dev/lib/TextHtV1";
 import Row from "hometown-components-dev/lib/RowHtV1";
 import { getCartListSKU } from "selectors/cart";
 import { PINCODE } from "helpers/Constants";
-import { addToCart } from "redux/modules/cart";
+import { addToCart, loadCart } from "redux/modules/cart";
 import { formatAmount } from "utils/formatters";
 
 import SlickSlider from "../SlickSlider";
@@ -74,7 +74,8 @@ const adjustSlides = length => ({
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      btAddToCart: addToCart
+      btAddToCart: addToCart,
+      loadCart: loadCart
     },
     dispatch
   );
@@ -223,7 +224,7 @@ class BaughtTogether extends React.Component {
 
   buySet = e => {
     e.preventDefault();
-    const { session, pincode, product, btAddToCart } = this.props;
+    const { session, pincode, product, btAddToCart, loadCart } = this.props;
     const { simples } = product;
     const simpleSku = Object.keys(simples)[0];
     const { btProds, btProdQty } = this.state;
@@ -257,6 +258,10 @@ class BaughtTogether extends React.Component {
         }
       }
     });
+    setTimeout(async () => {
+      await loadCart(session, pin);
+      // await document.getElementById("focus_bt_id").scrollIntoView();
+    }, 3000);
   };
 
   setbtTotal = () => {
@@ -367,8 +372,10 @@ class BaughtTogether extends React.Component {
                             alt="BT!"
                             height="100%"
                             width="auto"
-
-                            style={{ border: "2px solid #FAF4F2", width: "auto" }}
+                            style={{
+                              border: "2px solid #FAF4F2",
+                              width: "auto"
+                            }}
                           />
                         </div>
                       ) : prod.image ? (
@@ -376,8 +383,7 @@ class BaughtTogether extends React.Component {
                           style={{
                             position: "relative",
                             height: "250px",
-                            display: "flex",
-
+                            display: "flex"
                           }}
                         >
                           <Link to={prod.link}>
@@ -386,8 +392,10 @@ class BaughtTogether extends React.Component {
                               alt="BT!"
                               height="100%"
                               width="auto"
-
-                              style={{ border: "2px solid #FAF4F2", width: "auto" }}
+                              style={{
+                                border: "2px solid #FAF4F2",
+                                width: "auto"
+                              }}
                             />
                           </Link>
                         </div>
@@ -395,20 +403,18 @@ class BaughtTogether extends React.Component {
                       {prod.name ? (
                         <h5
                           style={{
+                            width: "300px",
                             textAlign: "left",
                             fontSize: "16px",
                             marginTop: "12px",
-                            marginBottom: "3px",
+                            marginBottom: "5px",
                             height: "40px",
                             fontWeight: "bold",
                             lineHeight: "1.3rem"
                           }}
-
                           lineHeight="1.3rem"
                         >
-                          {prod.name.split("").length > 50
-                            ? `${prod.name.slice(0, 50)}....`
-                            : prod.name}
+                          { prod.name}
                         </h5>
                       ) : null}
                       {index !== 0 ? (

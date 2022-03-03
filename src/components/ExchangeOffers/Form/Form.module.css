@@ -1,0 +1,54 @@
+.btn {
+  height: 36px;
+  border-radius: 3px;
+  background-color: #dc4c3a;
+  color: #FFF;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.customBtn {
+  height: 36px;
+  border-radius: 3px;
+  background-color: #58585A;
+  color: #FFF;
+  width: 100px;
+}
+
+.flexFlow {
+  -ms-flex-flow: wrap;
+      flex-flow: wrap;
+}
+
+.flexFlowRow {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row;
+          flex-flow: row;
+}
+
+.labelWidth {
+  width: 100px;
+  -ms-flex-negative: 0;
+      flex-shrink: 0;
+}
+
+.formThankYou {
+  position: fixed;
+  bottom: 0;
+  width: calc(100% + 60px);
+  left: 0;
+  border-radius: 0;
+  z-index: 1;
+}
+
+.landingInput {
+  border-radius: 5px;
+  height: 48px !important;
+}
+
+input[type="file"] {
+  border-radius: 0;
+  height: 40px !important;
+}
+/*# sourceMappingURL=Form.module.css.map */

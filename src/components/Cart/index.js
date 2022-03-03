@@ -39,6 +39,7 @@ import LoginModal from "containers/Login/LoginForm";
 import ProductQuantity from "./UpdateProductQuantity";
 import OrderSummary from "./OrderSummary";
 import PaymentMethods from "../PaymentMethods";
+import ProductItem from "./Product";
 
 /**
  * Images
@@ -49,6 +50,17 @@ const orderTrackIcon = require("../../../static/shipped.svg");
 const demoBanner = require("../../../static/campaign/select-for-demo-banner.jpg");
 // const cashbackBanner = require('../../../static/campaign/Cart-banner.jpg');
 const saveForLaterIcon = require("../../../static/wishListIcon.png");
+
+import SudoCart from "../PackageCatalog/sudoCart";
+import {
+  // togglePLPModal,
+  toggleProdModal,
+  loadPackageSudoCart,
+  toggleSCModal,
+  loadPackageCatalog
+} from "../../redux/modules/lackpackages";
+
+import PackagePDP from "../PackageCatalog/packagePDP";
 
 const styles = require("./Cart.scss");
 
@@ -188,10 +200,12 @@ const mapStateToProps = ({
   selectForDemo,
   productdetails,
   wishlist,
-  userLogin
+  userLogin,
+  isPackage
 }) => ({
   currentId: cart.key,
   cartChecked: cart.cartChecked,
+  packageItems: cart.packageItems,
   checkingCart: cart.checkingCart,
   cartUpdating: cart.cartUpdating,
   pincode: pincode.selectedPincode,
@@ -207,9 +221,18 @@ const mapStateToProps = ({
   loadingList: wishlist.data
 });
 
+const getSkusData = data => {
+  let arr = Object.keys(data);
+  arr = arr.map(item => {
+    return { simple_sku: item, qty: 1 };
+  });
+  return arr;
+};
+
 const Cart = ({
   demoProductsBanner,
   results,
+  packageItems,
   summary,
   removeFromCart,
   toggleWishList,
@@ -233,7 +256,8 @@ const Cart = ({
   isLoggedIn,
   wishListWaitList,
   // simpleSku,
-  loadingList
+  loadingList,
+  isPackage
 }) => {
   const cartItemLoading = customerCardId =>
     cartUpdating && currentId === customerCardId;
@@ -276,7 +300,11 @@ const Cart = ({
         <Box variant="col-8">
           <Row alignItems="center">
             <Box variant="col-8">
-              <Heading>My Shopping Cart : {cartItemsNumber} Items</Heading>
+              {packageItems.length > 0 ? (
+                <Heading>My Shopping Cart : {cartItemsNumber + (packageItems.length) - (1) } Items</Heading>
+              ) : (
+                <Heading>My Shopping Cart : {cartItemsNumber} Items</Heading>
+              )}
             </Box>
             <Box variant="col-4" textAlign="right">
               <Button
@@ -361,10 +389,14 @@ const Cart = ({
                   >
                     <Box variant="col-3" pr={0}>
                       <Link
-                        to={formatProductURL(
-                          item.product_info.name,
-                          item.configurable_sku
-                        )}
+                        to={
+                          item.product_info.packageId
+                            ? `/package-catalog/${item.product_info.packageId}`
+                            : formatProductURL(
+                                item.product_info.name,
+                                item.configurable_sku
+                              )
+                        }
                       >
                         <ImageShimmer
                           src={item.product_info.image}
@@ -388,10 +420,14 @@ const Cart = ({
                     </Box>
                     <Box variant="col-5" pl={30}>
                       <Link
-                        to={formatProductURL(
-                          item.product_info.name,
-                          item.configurable_sku
-                        )}
+                        to={
+                          item.product_info.packageId
+                            ? `/package-catalog/${item.product_info.packageId}`
+                            : formatProductURL(
+                                item.product_info.name,
+                                item.configurable_sku
+                              )
+                        }
                       >
                         <Box mb={10}>
                           <Heading
@@ -434,67 +470,88 @@ const Cart = ({
                         </Flex>
                       </Box>
                       <Flex alignItems="center">
+                        {item.product_info.packageId ? null : (
+                          <Button
+                            variant="link"
+                            fontSize={12}
+                            display="flex"
+                            alignItems="center"
+                            onClick={addToWishlist(
+                              item.configurable_sku,
+                              wishListData,
+                              toggleWishList,
+                              isLoggedIn,
+                              handleLoginModal,
+                              wishListWaitList,
+                              item.simple_sku,
+                              pincode,
+                              // item.id_customer_cart,
+                              {
+                                skuData: [
+                                  { simple_sku: item.simple_sku, qty: item.qty }
+                                ],
+                                packageId: false
+                              },
+                              sessionId,
+                              pincode,
+                              item.qty,
+                              item.product_info.product_id,
+                              loadingList,
+                              item,
+                              selectForDemo
+                            )(removeFromCart)}
+                          >
+                            <Image height={16} mr={10} src={saveForLaterIcon} />
+                            <Text fontSize={12}>Add to wishlist</Text>
+                          </Button>
+                        )}
+                        {item.product_info.packageId ? null : (
+                          <Text mx={8} fontSize={16}>
+                            {" "}
+                            |{" "}
+                          </Text>
+                        )}
+
                         <Button
                           variant="link"
                           fontSize={12}
                           display="flex"
                           alignItems="center"
-                          onClick={addToWishlist(
-                            item.configurable_sku,
-                            wishListData,
-                            toggleWishList,
-                            isLoggedIn,
-                            handleLoginModal,
-                            wishListWaitList,
-                            item.simple_sku,
-                            pincode,
-                            // item.id_customer_cart,
-                            {
-                              skuData: [
-                                { simple_sku: item.simple_sku, qty: item.qty }
-                              ],
-                              packageId: false
-                            },
-                            sessionId,
-                            pincode,
-                            item.qty,
-                            item.product_info.product_id,
-                            loadingList,
-                            item,
-                            selectForDemo
-                          )(removeFromCart)}
-                        >
-                          <Image height={16} mr={10} src={saveForLaterIcon} />
-                          <Text fontSize={12}>Add to wishlist</Text>
-                        </Button>
-                        <Text mx={8} fontSize={16}>
-                          {" "}
-                          |{" "}
-                        </Text>
-                        <Button
-                          variant="link"
-                          fontSize={12}
-                          display="flex"
-                          alignItems="center"
-                          disabled={cartItemLoading(
-                            item.product_info.product_id
-                          )}
-                          onClick={onClick(
-                            // item.id_customer_cart,
-                            {
-                              skuData: [
-                                { simple_sku: item.simple_sku, qty: item.qty }
-                              ],
-                              packageId: false
-                            },
-                            sessionId,
-                            pincode,
-                            item.qty,
-                            item.product_info.product_id,
-                            item.simple_sku,
-                            item,
-                            selectForDemo
-                          )(removeFromCart)(addToSelectForDemo)}
+                          disabled={cartItemLoading(item.id_customer_cart)}
+                          onClick={
+                            item.product_info.packageId
+                              ? onClick(
+                                  {
+                                    skuData: getSkusData(item.simpleSkus),
+                                    packageId: item.product_info.packageId
+                                  },
+                                  sessionId,
+                                  pincode,
+                                  item.qty,
+                                  item.product_info.product_id,
+                                  item.simple_sku,
+                                  item,
+                                  selectForDemo
+                                )(removeFromCart)(addToSelectForDemo)
+                              : onClick(
+                                  {
+                                    skuData: [
+                                      {
+                                        simple_sku: item.simple_sku,
+                                        qty: item.qty
+                                      }
+                                    ],
+                                    packageId: false
+                                  },
+                                  sessionId,
+                                  pincode,
+                                  item.qty,
+                                  item.product_info.product_id,
+                                  item.simple_sku,
+                                  item,
+                                  selectForDemo
+                                )(removeFromCart)(addToSelectForDemo)
+                          }
                         >
                           <CloseIcon width={14} height={14} mr={10} /> Remove
                         </Button>
@@ -594,20 +651,27 @@ const Cart = ({
                       </Box>
                     )} */}
                     </Box>
-                    <Box variant="col-2" textAlign="center">
-                      <ProductQuantity
-                        cartItemLoading={cartItemLoading}
-                        cartId={item.id_customer_cart}
-                        quantity={item.qty}
-                        simpleSku={item.simple_sku}
-                        skuId={item.configurable_sku}
-                        configId={
-                          item.product_info && item.product_info.product_id
-                            ? item.product_info.product_id
-                            : ""
-                        }
-                      />
-                    </Box>
+                    {item.product_info.packageId ? (
+                      <div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      </div>
+                    ) : (
+                      <Box variant="col-2" textAlign="center">
+                        <ProductQuantity
+                          cartItemLoading={cartItemLoading}
+                          cartId={item.id_customer_cart}
+                          quantity={item.qty}
+                          simpleSku={item.simple_sku}
+                          skuId={item.configurable_sku}
+                          configId={
+                            item.product_info && item.product_info.product_id
+                              ? item.product_info.product_id
+                              : ""
+                          }
+                        />
+                      </Box>
+                    )}
+
                     <Box variant="col-2">
                       <Label color="heading" fontSize={18}>
                         ₹{" "}
@@ -647,22 +711,41 @@ const Cart = ({
                           //   sessionId,
                           //   pincode
                           // )(removeFromCart)}
-                          onClick={onClick(
-                            // item.id_customer_cart,
-                            {
-                              skuData: [
-                                { simple_sku: item.simple_sku, qty: item.qty }
-                              ],
-                              packageId: false
-                            },
-                            sessionId,
-                            pincode,
-                            item.qty,
-                            item.product_info.product_id,
-                            item.simple_sku,
-                            item,
-                            selectForDemo
-                          )(removeFromCart)(addToSelectForDemo)}
+
+                          onClick={
+                            item.product_info.packageId
+                              ? onClick(
+                                  {
+                                    skuData: getSkusData(item.simpleSkus),
+                                    packageId: item.product_info.packageId
+                                  },
+                                  sessionId,
+                                  pincode,
+                                  item.qty,
+                                  item.product_info.product_id,
+                                  item.simple_sku,
+                                  item,
+                                  selectForDemo
+                                )(removeFromCart)(addToSelectForDemo)
+                              : onClick(
+                                  {
+                                    skuData: [
+                                      {
+                                        simple_sku: item.simple_sku,
+                                        qty: item.qty
+                                      }
+                                    ],
+                                    packageId: false
+                                  },
+                                  sessionId,
+                                  pincode,
+                                  item.qty,
+                                  item.product_info.product_id,
+                                  item.simple_sku,
+                                  item,
+                                  selectForDemo
+                                )(removeFromCart)(addToSelectForDemo)
+                          }
                         >
                           Remove
                         </Button>
@@ -819,6 +902,11 @@ const Cart = ({
                   )}
                 </Box>
               ) : null}
+
+              <ProductItem
+                isPackage={item.product_info.packageId ? true : false}
+                packageId={item.product_info.packageId}
+              />
             </Box>
           ))}
         </Box>

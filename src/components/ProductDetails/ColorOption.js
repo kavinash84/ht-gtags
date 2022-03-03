@@ -1,57 +1,17 @@
 import React from "react";
-import styled from "styled-components";
 import PropTypes from "prop-types";
-import Row from "hometown-components-dev/lib/RowHtV1";
-import Img from "hometown-components-dev/lib/ImageHtV1";
-import Button from "hometown-components-dev/lib/ButtonHtV1";
-import Div from "hometown-components-dev/lib/BoxHtV1";
 import { Link } from "react-router-dom";
+
+/**
+ * Components
+ */
+import Box from "hometown-components-dev/lib/BoxHtV1";
+import Col from "hometown-components-dev/lib/ColHtV1";
+import Button from "hometown-components-dev/lib/ButtonHtV1";
+import Image from "hometown-components-dev/lib/ImageHtV1";
+import Row from "hometown-components-dev/lib/RowHtV1";
 import ImageShimmer from "hometown-components-dev/lib/ImageShimmerHtV1";
 
-const LinkCustom = styled(Link)`
-  display: inline-block;
-`;
-
-const ProductImg = styled(Img)`
-  position: absolute;
-  max-width: 100%;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 0;
-  margin: auto;
-  border-radius: 30px;
-`;
-
-const ImgWrapper = styled.div`
-  background: #fff;
-  position: relative;
-  box-sizing: border-box;
-  width: 50px;
-  height: 50px;
-  margin-right: 0.5rem;
-  margin-bottom: 0.3125rem;
-`;
-
-// const CurrentImgWrapper = styled.div`
-//   background: #fff;
-//   position: relative;
-//   display: inline-block;
-//   box-sizing: border-box;
-//   width: 40px;
-//   height: 40px;
-//   margin-right: 0.5rem;
-//   margin-bottom: 0.3125rem;
-// `;
-
-const ColorOptions = styled(Div)`
-  max-height: 115px;
-  overflow:hidden;
-  ${props =>
-    props.active && {
-      maxHeight: "inherit"
-    }}
-`;
 const urlName = name =>
   name
     .split(" ")
@@ -61,52 +21,52 @@ const urlName = name =>
 const ColorOption = ({
   data,
   toggleShowMoreColorProducts,
-  showmorecolorproducts
+  showmorecolorproducts,
+  showmorecolorproductsCount
 }) => (
-    <Row mr="0" ml="0" mb="0" display="block" >
-      <ColorOptions active={!showmorecolorproducts}>
-        {data.map((item, index) => (
-          <LinkCustom
-            to={`/${urlName(item.meta.name)}/sku/${item.groupedattributes.sku}`}
-            key={String(index)}
-          >
-            <ImgWrapper>
-              <ImageShimmer src={`${item.image}.jpg`} height="60px">
+  <Box>
+    <Row active={!showmorecolorproducts} maxHeight={150} overflow="auto" mx={0}>
+      {data.map((item, index) => {
+        return (
+          <Col height={40} width={40} px={0} mr={10} mb={10}>
+            <Link
+              to={`/${urlName(item.meta.name)}/sku/${
+                item.groupedattributes.sku
+              }`}
+              key={String(index)}
+            >
+              <ImageShimmer src={`${item.swatch_image}`} height={40}>
                 {imageURL => (
-                  <ProductImg src={imageURL} alt={item.meta.name} width="60px" />
+                  <img
+                    style={{
+                      width: "40px",
+                      height: "40px",
+                      borderRadius: "20px",
+                      border: item.activeColor ? "50px" : "40px"
+                    }}
+                    src={imageURL}
+                    alt={item.meta.name}
+                    width={40}
+                    height={40}
+                  />
                 )}
               </ImageShimmer>
-            </ImgWrapper>
-          </LinkCustom>
-        ))}
-      </ColorOptions>
-      {data.length > 5 && (
-        <Div>
-          <Button
-            fontSize="13px"
-            backgroundColor="#ffffff"
-            btnType="link"
-            size="block"
-            ta="right"
-            color="#222222"
-            pt="15px"
-            pr="64px"
-            onClick={toggleShowMoreColorProducts}
-          >
-            {showmorecolorproducts ? "Show More" : "Show Less"}
-          </Button>
-        </Div>
-      )}
+            </Link>
+          </Col>
+        );
+      })}
     </Row>
-  );
+  </Box>
+);
 ColorOption.defaultProps = {
   showmorecolorproducts: true,
-  toggleShowMoreColorProducts: () => { }
+  toggleShowMoreColorProducts: () => {}
 };
 ColorOption.propTypes = {
   data: PropTypes.array.isRequired,
   showmorecolorproducts: PropTypes.bool,
-  toggleShowMoreColorProducts: PropTypes.func
+  toggleShowMoreColorProducts: PropTypes.func,
+  showmorecolorproductsCount: PropTypes.string.isRequired
 };
 
 export default ColorOption;

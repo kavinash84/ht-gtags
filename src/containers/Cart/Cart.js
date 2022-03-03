@@ -108,7 +108,7 @@ const HdfcPopMessage = () => (
   ({
     cart,
     cart: {
- cartChecked, summary, error, loading, loaded
+ cartChecked, summary, error, loading, loaded, initialLoading
 },
     webtochat: { dismiss, cartTimeout },
     paymentoptions
@@ -118,6 +118,7 @@ const HdfcPopMessage = () => (
     isCartChecked: cartChecked,
     summary,
     error,
+    initialLoading,
     loading,
     loaded,
     dismiss,
@@ -138,7 +139,7 @@ export default class CartContainer extends Component {
     history: PropTypes.object.isRequired,
     resetCheckKey: PropTypes.func.isRequired,
     loading: PropTypes.bool,
-    // loaded: PropTypes.bool,
+    initialLoading: PropTypes.bool,
     dismiss: PropTypes.bool,
     cartTimeout: PropTypes.number.isRequired,
     toggleWebToChat: PropTypes.func.isRequired,
@@ -153,6 +154,7 @@ export default class CartContainer extends Component {
     isCartChecked: false,
     outOfStockList: [],
     loading: false,
+    initialLoading:false,
     // loaded: false,
     dismiss: false
   };
@@ -261,6 +263,7 @@ export default class CartContainer extends Component {
       summary,
       summary: { total },
       loading,
+      initialLoading,
       outOfStockList,
       bflMinAmount
     } = this.props;
@@ -275,7 +278,22 @@ export default class CartContainer extends Component {
           <Header />
 
           {/* {loading && !loaded && <CartShimmer />} */}
-          {results && results.length === 0 ? (
+          { initialLoading ? ( 
+            <div
+                style={{
+                  height: "calc(100vh - 60px)",
+                  display: "flex",
+                  width: "100%",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  fontSize: "20px",
+                  fontWeight: 600
+                }}
+              >
+                Please Wait...
+              </div>
+          ) : (
+          results && results.length === 0 ? (
             <Section display="flex" padding="0.625rem" paddingTop="1.25rem" mb={0}>
               <Empty
                 title="Your Cart is Empty!"
@@ -288,7 +306,8 @@ export default class CartContainer extends Component {
                 <Image src={CartEmptyIcon} width="initial" m="auto" alt="Sorry no results found" />
               </Empty>
             </Section>
-          ) : null}
+          ) 
+             : null )}
           {!loading && results && results.length !== 0 ? (
             <Box className="asdfgh">
               {outOfStockList && outOfStockList.length > 0 && (

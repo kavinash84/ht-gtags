@@ -152,10 +152,11 @@ class BaughtTogether extends React.Component {
 
                                                     <h5
                                                         style={{
+                                                            width: "300px",
                                                             textAlign: "left",
                                                             fontSize: "18px",
                                                             marginTop: "12px",
-                                                            marginBottom: "5px",
+                                                            marginBottom: "15px",
                                                             height: "40px",
                                                             fontWeight: "bold",
                                                             lineHeight: "1.3rem",
@@ -163,7 +164,7 @@ class BaughtTogether extends React.Component {
                                                         }}
 
                                                     >
-                                                        {prod.name.split('').length > 50 ? `${prod.name.slice(0, 50)}....` : prod.name}
+                                                        {prod.name}
                                                     </h5>
 
 

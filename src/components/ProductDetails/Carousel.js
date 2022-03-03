@@ -38,7 +38,7 @@ export default class ProductDetailSlider extends Component {
 
     return (
       <Row>
-        <Col width="100%">
+        <Col width="100%" height="100%">
           <img className="hide" itemProp="image" src={(data && `${data[0].url}-zoom.jpg`) || ''} alt={title} />
           <Slider
             asNavFor={this.state.nav2}
