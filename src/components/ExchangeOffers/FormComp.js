@@ -474,7 +474,12 @@ export default class ContactUs extends Component {
             () => {
               const { history } = this.props;
               const { dispatch } = this.context.store;
-              dispatch(setExchangeCoupon(response.data.coupon));
+              dispatch(
+                setExchangeCoupon({
+                  coupon: response.data.coupon,
+                  validity: response.data.endDate
+                })
+              );
               history.push({
                 pathname: "/exchange-offers",
                 search: `?submit=thankyou&utm_source=${source}&utm_medium=${medium}&utm_campaign=${campaign}&utm_term=${term}`
