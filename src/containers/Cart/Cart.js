@@ -1,48 +1,48 @@
 /* eslint-disable max-len */
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import Helmet from 'react-helmet';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import Helmet from "react-helmet";
 
 /**
  * Modules / Selectors
  */
-import { resetCheck } from 'redux/modules/cart';
-import { getCartList, getStockOutProducts } from 'selectors/cart';
-import { togglePopUp } from 'redux/modules/webtochat';
+import { resetCheck } from "redux/modules/cart";
+import { getCartList, getStockOutProducts } from "selectors/cart";
+import { togglePopUp } from "redux/modules/webtochat";
 
 /**
  * Components
  */
-import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Flex from 'hometown-components-dev/lib/FlexHtV1';
-import Body from 'hometown-components-dev/lib/BodyHtV1';
-import Image from 'hometown-components-dev/lib/ImageHtV1';
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
-import Section from 'hometown-components-dev/lib/SectionHtV1';
-import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
+import Box from "hometown-components-dev/lib/BoxHtV1";
+import Flex from "hometown-components-dev/lib/FlexHtV1";
+import Body from "hometown-components-dev/lib/BodyHtV1";
+import Image from "hometown-components-dev/lib/ImageHtV1";
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
+import Section from "hometown-components-dev/lib/SectionHtV1";
+import Wrapper from "hometown-components-dev/lib/WrapperHtV1";
 
 /**
  * Page Components
  */
-import Cart from 'components/Cart';
-import Footer from 'components/Footer';
-import Header from 'components/Header';
-import CartShimmer from 'components/Cart/CartShimmer';
-import PinCode from 'components/PinCode';
-import ResponsiveModal from 'components/Modal';
-import Notifications from 'components/Notifications';
-import Empty from './Empty';
-import UnbxdRecommendedForYou from '../../components/Unbxd/unbxdRecommendedForYou';
+import Cart from "components/Cart";
+import Footer from "components/Footer";
+import Header from "components/Header";
+import CartShimmer from "components/Cart/CartShimmer";
+import PinCode from "components/PinCode";
+import ResponsiveModal from "components/Modal";
+import Notifications from "components/Notifications";
+import Empty from "./Empty";
+import UnbxdRecommendedForYou from "../../components/Unbxd/unbxdRecommendedForYou";
 
 /**
  * Icons / Images
  */
-const CartEmptyIcon = require('../../../static/emptyCart.png');
-const PincodeModalIcon = require('../../../static/map-placeholder.svg');
-const BajajFinance = require('../../../static/bajaj-finance.png');
+const CartEmptyIcon = require("../../../static/emptyCart.png");
+const PincodeModalIcon = require("../../../static/map-placeholder.svg");
+const BajajFinance = require("../../../static/bajaj-finance.png");
 
-const HdfcLogo = 'https://static.hometown.in/media/cms/BankLOGO/hdfc.gif';
+const HdfcLogo = "https://static.hometown.in/media/cms/BankLOGO/hdfc.gif";
 
 const demoProductsBanner = cart =>
   // console.log('demoProducts function', cart);
@@ -68,8 +68,8 @@ const BflPopMessage = () => (
       color="rgba(51, 51, 51, 0.85)"
       fontFamily="light"
     >
-      You are eligible for a zero-down payment No Cost EMI from Bajaj Finance if you have a{' '}
-      <strong>Bajaj Finance EMI Card</strong>.
+      You are eligible for a zero-down payment No Cost EMI from Bajaj Finance if
+      you have a <strong>Bajaj Finance EMI Card</strong>.
     </Heading>
     <Heading
       textAlign="center"
@@ -80,7 +80,8 @@ const BflPopMessage = () => (
       color="rgba(51, 51, 51, 0.85)"
       fontFamily="light"
     >
-      You are also eligible for an interest free EMI for 3 months if you have a <strong>HDFC Credit/Debit Card</strong>.
+      You are also eligible for an interest free EMI for 3 months if you have a{" "}
+      <strong>HDFC Credit/Debit Card</strong>.
     </Heading>
   </Box>
 );
@@ -99,7 +100,8 @@ const HdfcPopMessage = () => (
       color="rgba(51, 51, 51, 0.85)"
       fontFamily="light"
     >
-      You are also eligible for an interest free EMI for 3 months if you have a <strong>HDFC Credit/Debit Card</strong>.
+      You are also eligible for an interest free EMI for 3 months if you have a{" "}
+      <strong>HDFC Credit/Debit Card</strong>.
     </Heading>
   </Box>
 );
@@ -107,9 +109,7 @@ const HdfcPopMessage = () => (
 @connect(
   ({
     cart,
-    cart: {
- cartChecked, summary, error, loading, loaded, initialLoading
-},
+    cart: { cartChecked, summary, error, loading, loaded, initialLoading },
     webtochat: { dismiss, cartTimeout },
     paymentoptions
   }) => ({
@@ -154,7 +154,7 @@ export default class CartContainer extends Component {
     isCartChecked: false,
     outOfStockList: [],
     loading: false,
-    initialLoading:false,
+    initialLoading: false,
     // loaded: false,
     dismiss: false
   };
@@ -190,7 +190,7 @@ export default class CartContainer extends Component {
     if (!isCartChecked && nextProps.isCartChecked) {
       const { dispatch } = this.context.store;
       dispatch(resetCheckKey());
-      return history.push('/checkout/delivery-address');
+      return history.push("/checkout/delivery-address");
     }
     if (total !== nextPropsTotal) {
       this.checkForEmiEligibility(nextPropsTotal);
@@ -211,7 +211,7 @@ export default class CartContainer extends Component {
     if (total >= 20000 && !emiPopUpShown) {
       this.setState({
         open: true,
-        responsiveModalContent: 'emiModal',
+        responsiveModalContent: "emiModal",
         emiPopUpShown: true
       });
     }
@@ -233,7 +233,7 @@ export default class CartContainer extends Component {
     }
     this.setState({
       open: !this.state.open,
-      responsiveModalContent: open ? null : 'pincodeModal'
+      responsiveModalContent: open ? null : "pincodeModal"
     });
   };
 
@@ -244,7 +244,7 @@ export default class CartContainer extends Component {
     }
     this.setState({
       open: !open,
-      responsiveModalContent: open ? null : 'emiModal'
+      responsiveModalContent: open ? null : "emiModal"
     });
   };
   webToChat = () => {
@@ -252,7 +252,9 @@ export default class CartContainer extends Component {
     const { toggleWebToChat, dismiss } = this.props;
 
     const {
-      embedded_svc: { liveAgentAPI: { inviteButton: { isAvailable } = {} } = {} }
+      embedded_svc: {
+        liveAgentAPI: { inviteButton: { isAvailable } = {} } = {}
+      }
     } = window;
     // console.log(isAvailable, !dismiss, 'webToChat function');
     if (isAvailable && !dismiss) toggleWebToChat(true);
@@ -268,33 +270,65 @@ export default class CartContainer extends Component {
       bflMinAmount
     } = this.props;
     const { responsiveModalContent, open, emiPopUpShown } = this.state;
-    const modalClass = emiPopUpShown ? 'noCostEmiModal' : 'pincodeModal';
+    const modalClass = emiPopUpShown ? "noCostEmiModal" : "pincodeModal";
 
     return (
       <Wrapper>
-        <Helmet title="Cart - HomeTown.in" />
+        <Helmet title="Cart - HomeTown.in">
+          <script type="text/javascript">
+            {`
+             !function(f,b,e,v,n,t,s)
+             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+             n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+             if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+             n.queue=[];t=b.createElement(e);t.async=!0;
+             t.src=v;s=b.getElementsByTagName(e)[0];
+             s.parentNode.insertBefore(t,s)}(window, document,'script',
+             'https://connect.facebook.net/en_US/fbevents.js');
+             fbq('init', '1024172491523922');
+             fbq('track', 'add to cart');                         
+            `}
+          </script>
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=AW-845903914"
+          ></script>
+          <script type="text/javascript">
+            {`
+             window.dataLayer = window.dataLayer || [];
+             function gtag(){dataLayer.push(arguments);}
+             gtag('js', new Date());
+           
+             gtag('config', 'AW-845903914');
+            `}
+          </script>
+        </Helmet>
         <Body>
           {/* Header */}
           <Header />
 
           {/* {loading && !loaded && <CartShimmer />} */}
-          { initialLoading ? ( 
+          {initialLoading ? (
             <div
-                style={{
-                  height: "calc(100vh - 60px)",
-                  display: "flex",
-                  width: "100%",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  fontSize: "20px",
-                  fontWeight: 600
-                }}
-              >
-                Please Wait...
-              </div>
-          ) : (
-          results && results.length === 0 ? (
-            <Section display="flex" padding="0.625rem" paddingTop="1.25rem" mb={0}>
+              style={{
+                height: "calc(100vh - 60px)",
+                display: "flex",
+                width: "100%",
+                justifyContent: "center",
+                alignItems: "center",
+                fontSize: "20px",
+                fontWeight: 600
+              }}
+            >
+              Please Wait...
+            </div>
+          ) : results && results.length === 0 ? (
+            <Section
+              display="flex"
+              padding="0.625rem"
+              paddingTop="1.25rem"
+              mb={0}
+            >
               <Empty
                 title="Your Cart is Empty!"
                 subTitle="Looks like you haven’t made your choice yet."
@@ -303,11 +337,15 @@ export default class CartContainer extends Component {
                 subTitleWidth="43%"
                 p="10"
               >
-                <Image src={CartEmptyIcon} width="initial" m="auto" alt="Sorry no results found" />
+                <Image
+                  src={CartEmptyIcon}
+                  width="initial"
+                  m="auto"
+                  alt="Sorry no results found"
+                />
               </Empty>
             </Section>
-          ) 
-             : null )}
+          ) : null}
           {!loading && results && results.length !== 0 ? (
             <Box className="asdfgh">
               {outOfStockList && outOfStockList.length > 0 && (
@@ -333,10 +371,20 @@ export default class CartContainer extends Component {
           )}
 
           {/* Pincode Modal */}
-          <ResponsiveModal classNames={{ modal: modalClass }} onCloseModal={this.handleModal} open={open}>
-            {responsiveModalContent === 'pincodeModal' ? (
+          <ResponsiveModal
+            classNames={{ modal: modalClass }}
+            onCloseModal={this.handleModal}
+            open={open}
+          >
+            {responsiveModalContent === "pincodeModal" ? (
               <Box>
-                <Image width="100px" m="auto" mb="1.5rem" src={PincodeModalIcon} alt="Pincode" />
+                <Image
+                  width="100px"
+                  m="auto"
+                  mb="1.5rem"
+                  src={PincodeModalIcon}
+                  alt="Pincode"
+                />
                 <Heading
                   ellipsis={false}
                   color="rgba(0.0.0.0.8)"
@@ -347,11 +395,14 @@ export default class CartContainer extends Component {
                 >
                   Please enter your Pincode to serve you better
                 </Heading>
-                <PinCode color="#f2f2f2" onCloseModal={this.handlePincodeModal} />
+                <PinCode
+                  color="#f2f2f2"
+                  onCloseModal={this.handlePincodeModal}
+                />
               </Box>
             ) : null}
 
-            {responsiveModalContent === 'emiModal' ? (
+            {responsiveModalContent === "emiModal" ? (
               <Box>
                 {/* {total > bflMinAmount ? <BflPopMessage /> : <HdfcPopMessage />} */}
                 <HdfcPopMessage />
