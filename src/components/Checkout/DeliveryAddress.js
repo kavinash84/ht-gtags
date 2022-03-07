@@ -394,16 +394,31 @@ class DeliveryAddress extends Component {
         )}
 
         <Row>
-          <Col variant="col-12">
+          <Col variant="col-12" >
             {/* For logged in */}
             {!isLoggedIn && (
               <Box className={styles.isLoggedIn}>
-                <Label fontSize="1rem" mt="0" mb="0" color="textLight">
-                  Already have an account?
-                </Label>
-                <Button variant="linkPrimary" fontSize={16} onClick={this.handleLoginModal} ml={10}>
-                  Login
+                <div style={{
+                  display: "flex",
+                  textAlign: "center",
+                  justifyContent: "center",
+                  alignContent: "center"
+                }}>
+                  <Button style={{
+                    height: "50px",
+                    width: "200px",
+                    border: '1px solid #F47020',
+                    borderRadius: '4px',
+                    padding: '20px 45px',
+                    background: 'white',
+                    color: '#F47020',
+                    fontSize: '14px'
+                  }}
+                    onClick={this.handleLoginModal} ml={10}>
+                    Login
                 </Button>
+                </div>
+
                 <ResponsiveModal
                   classNames={{ modal: 'loginModal' }}
                   onCloseModal={this.handleLoginModal}

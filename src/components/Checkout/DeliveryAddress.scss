@@ -162,12 +162,14 @@
 .deliverBtnWrapper {
   position: fixed !important;
   bottom: 0;
+  left: 0;
   background: #fff;
   padding: 10px 30px;
   box-shadow: 0 -7px 14px -9px rgba(124, 122, 122, 0.5);
-  height: 100px;
+  height: 50%;
+  width: 100%;
   text-align: center;
   button {
-    width: 100%;
+    width: 200px;
   }
 }

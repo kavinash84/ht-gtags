@@ -129,15 +129,18 @@ const AddressForm = props => {
           onChangePincode={onChangePincode}
           feedBackMessage={pincodeFeedBackMessage}
         />
-        <FormInput
-          label=""
-          type="text"
-          placeholder="City *"
-          value={city}
-          feedBackError={cityFeedBackError}
-          feedBackMessage={cityFeedBackMessage}
-          readOnly
-        />
+        <div style={{ width: "50%" }}>
+          <FormInput
+            label=""
+            type="text"
+            placeholder="City *"
+            value={city}
+            feedBackError={cityFeedBackError}
+            feedBackMessage={cityFeedBackMessage}
+            readOnly
+          />
+        </div>
+
       </div>
       <FormInput
         label=""
