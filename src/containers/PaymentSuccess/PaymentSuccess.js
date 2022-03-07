@@ -1,41 +1,45 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import Helmet from "react-helmet";
 
 /* ====== Components ====== */
-import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Body from 'hometown-components-dev/lib/BodyHtV1';
-import Container from 'hometown-components-dev/lib/ContainerHtV1';
-import Flex from 'hometown-components-dev/lib/FlexHtV1';
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
-import Image from 'hometown-components-dev/lib/ImageHtV1';
-import Label from 'hometown-components-dev/lib/LabelHtV1';
-import Row from 'hometown-components-dev/lib/RowHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
-import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
-import FormInputHtV1 from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
-import ButtonHtV1 from 'hometown-components-dev/lib/ButtonHtV1';
+import Box from "hometown-components-dev/lib/BoxHtV1";
+import Body from "hometown-components-dev/lib/BodyHtV1";
+import Container from "hometown-components-dev/lib/ContainerHtV1";
+import Flex from "hometown-components-dev/lib/FlexHtV1";
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
+import Image from "hometown-components-dev/lib/ImageHtV1";
+import Label from "hometown-components-dev/lib/LabelHtV1";
+import Row from "hometown-components-dev/lib/RowHtV1";
+import Text from "hometown-components-dev/lib/TextHtV1";
+import Wrapper from "hometown-components-dev/lib/WrapperHtV1";
+import FormInputHtV1 from "hometown-components-dev/lib/FormsHtV1/FormInputHtV1";
+import ButtonHtV1 from "hometown-components-dev/lib/ButtonHtV1";
 // import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
 // import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 
 /* ====== Page Components ====== */
-import Footer from 'components/Footer';
-import Header from 'components/Header';
-import ThankYou from 'newComponents/ThankYou';
+import Footer from "components/Footer";
+import Header from "components/Header";
+import ThankYou from "newComponents/ThankYou";
 
 /**
  * Modules / Utils / Reducers /
  */
-import { formatAmount } from 'utils/formatters';
-import { formatProductURL, allowNChar } from 'utils/helper';
-import { paymentLoaded as setPaymentLoadStatus, setEmiPaymentType } from 'redux/modules/app';
-import { validatePassword } from 'utils/validation';
+import { formatAmount } from "utils/formatters";
+import { formatProductURL, allowNChar } from "utils/helper";
+import {
+  paymentLoaded as setPaymentLoadStatus,
+  setEmiPaymentType
+} from "redux/modules/app";
+import { validatePassword } from "utils/validation";
 
-import { isBlank } from 'js-utility-functions';
-import { setUserPassword } from 'redux/modules/setpassword';
+import { isBlank } from "js-utility-functions";
+import { setUserPassword } from "redux/modules/setpassword";
 
-import PixelAnalytics from './PixelAnalytics';
+import PixelAnalytics from "./PixelAnalytics";
 
 const mapStateToProps = ({
   setpassword,
@@ -57,31 +61,29 @@ class PaymentSuccess extends Component {
     super(props);
     this.state = {
       products: [],
-      password: '',
+      password: "",
       passwordError: false,
-      passwordErrorMessage: '',
-      confirmPassword: '',
+      passwordErrorMessage: "",
+      confirmPassword: "",
       confirmPasswordError: false,
-      confirmPasswordErrorMessage: '',
+      confirmPasswordErrorMessage: "",
       showSetPassword: true
     };
   }
   componentDidMount = () => {
-    const {
- history, data, error, paymentLoaded
-} = this.props;
-    if (data === 'An internal server error occurred' || paymentLoaded) {
-      return history.push('/');
+    const { history, data, error, paymentLoaded } = this.props;
+    if (data === "An internal server error occurred" || paymentLoaded) {
+      return history.push("/");
     }
 
-    if (data && error === '') {
+    if (data && error === "") {
       const { dispatch } = this.context.store;
       this.groupSimilarProducts();
       dispatch({
-        type: 'PUSH_TO_DATALAYER'
+        type: "PUSH_TO_DATALAYER"
       });
       dispatch(setPaymentLoadStatus(true));
-      dispatch(setEmiPaymentType(''));
+      dispatch(setEmiPaymentType(""));
     }
   };
 
@@ -94,7 +96,7 @@ class PaymentSuccess extends Component {
       this.setState({
         showSetPassword: false
       });
-      window.location = '/';
+      window.location = "/";
     }
   };
 
@@ -109,7 +111,7 @@ class PaymentSuccess extends Component {
     this.setState({
       password: value,
       passwordError: checkError.error,
-      passwordErrorMessage: checkError ? checkError.errorMessage : ''
+      passwordErrorMessage: checkError ? checkError.errorMessage : ""
     });
   };
 
@@ -124,7 +126,9 @@ class PaymentSuccess extends Component {
     this.setState({
       confirmPassword: value,
       confirmPasswordError: checkError,
-      confirmPasswordErrorMessage: checkError ? "Confirm Password doesn't match" : ''
+      confirmPasswordErrorMessage: checkError
+        ? "Confirm Password doesn't match"
+        : ""
     });
   };
 
@@ -143,7 +147,8 @@ class PaymentSuccess extends Component {
     // console.log('customerId check', customerId);
     // const checkOldPwd = isBlank(oldPwd) || oldPwdError;
     const checkPassword = isBlank(password) || passwordError;
-    const checkConfirmPassword = isBlank(confirmPassword) || confirmPasswordError;
+    const checkConfirmPassword =
+      isBlank(confirmPassword) || confirmPasswordError;
     // console.log(
     //   'parameter check',
     //   password,
@@ -168,14 +173,19 @@ class PaymentSuccess extends Component {
         // oldPwdError: checkOldPwd,
         // oldPwdErrorMessage: checkOldPwd ? "Old Password can't be blank" : '',
         passwordError: checkPassword,
-        passwordErrorMessage: checkPassword ? 'Password should be minimum 6 and maximum 15 characters' : '',
+        passwordErrorMessage: checkPassword
+          ? "Password should be minimum 6 and maximum 15 characters"
+          : "",
         confirmPasswordError: checkConfirmPassword,
-        confirmPasswordErrorMessage: checkConfirmPassword ? "Confirm Password doesn't match" : ''
+        confirmPasswordErrorMessage: checkConfirmPassword
+          ? "Confirm Password doesn't match"
+          : ""
       });
     }
     const { dispatch } = this.context.store;
     // console.log('before dispatch');
-    dispatch(setUserPassword({
+    dispatch(
+      setUserPassword({
         password,
         passwordError,
         passwordErrorMessage,
@@ -183,13 +193,14 @@ class PaymentSuccess extends Component {
         confirmPasswordError,
         confirmPasswordErrorMessage,
         customerId
-      }));
+      })
+    );
     // console.log('after dispatch');
     // console.log('before set state');
     this.setState({
-      password: '',
+      password: "",
       // oldPwd: '',
-      confirmPassword: ''
+      confirmPassword: ""
     });
     // console.log('after set state');
   };
@@ -234,9 +245,7 @@ class PaymentSuccess extends Component {
       response,
       isLoggedIn
     } = this.props;
-    const {
- loading, loaded, error, errorMessage, passwordUpdated
-} = response;
+    const { loading, loaded, error, errorMessage, passwordUpdated } = response;
     const {
       password,
       passwordFeedBackError,
@@ -251,6 +260,30 @@ class PaymentSuccess extends Component {
       return (
         <Wrapper>
           <Body>
+            <Helmet>
+              <script type="text/javascript">
+                {`
+              !function(f,b,e,v,n,t,s)
+              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+              if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+              n.queue=[];t=b.createElement(e);t.async=!0;
+              t.src=v;s=b.getElementsByTagName(e)[0];
+              s.parentNode.insertBefore(t,s)}(window, document,'script',
+              'https://connect.facebook.net/en_US/fbevents.js');
+              fbq('init', '1024172491523922');
+              fbq('track', 'Purchase');              
+            `}
+              </script>
+              <script type="text/javascript">
+                {`
+            gtag('event', 'conversion', {
+                'send_to': 'AW-845903914/tkEvCJrdi6YDEKrwrZMD',
+                'transaction_id': ''
+            });
+            `}
+              </script>
+            </Helmet>
             {/* Header */}
             <Header />
 
@@ -260,29 +293,39 @@ class PaymentSuccess extends Component {
                 <Box variant="col-10" mx="auto">
                   <Box
                     sx={{
-                      boxShadow: '4px 4px 4px 1px rgba(0, 0, 0, 0.14)',
+                      boxShadow: "4px 4px 4px 1px rgba(0, 0, 0, 0.14)",
                       borderRadius: 10,
-                      overflow: 'auto',
-                      border: 'light'
+                      overflow: "auto",
+                      border: "light"
                     }}
                   >
                     <ThankYou orderNo={orderNo} />
                     {showSetPassword && !isLoggedIn && (
-                      <Box sx={{ bg: 'rgb(159 155 146 / 0.25)' }} py={44}>
-                        <Box width={2 / 5} mx="auto" sx={{ position: 'relative' }}>
+                      <Box sx={{ bg: "rgb(159 155 146 / 0.25)" }} py={44}>
+                        <Box
+                          width={2 / 5}
+                          mx="auto"
+                          sx={{ position: "relative" }}
+                        >
                           <Box
                             sx={{
-                              position: 'absolute',
-                              left: 'calc(50% - 20px)',
+                              position: "absolute",
+                              left: "calc(50% - 20px)",
                               top: -44,
                               width: 0,
                               height: 0,
-                              borderLeft: '20px solid transparent',
-                              borderRight: '20px solid transparent',
-                              borderTop: '20px solid #FFF'
+                              borderLeft: "20px solid transparent",
+                              borderRight: "20px solid transparent",
+                              borderTop: "20px solid #FFF"
                             }}
                           />
-                          <Text mb={16} color="label" width={1} fontSize={16} fontFamily="medium">
+                          <Text
+                            mb={16}
+                            color="label"
+                            width={1}
+                            fontSize={16}
+                            fontFamily="medium"
+                          >
                             Set password & save your details for future
                           </Text>
                           <form onSubmit={this.onSubmitSetPassword}>
@@ -318,7 +361,9 @@ class PaymentSuccess extends Component {
                               height={44}
                               // disabled={loading || passwordFeedBackError || confirmPasswordFeedBackError}
                             >
-                              {response && !loading ? 'SET PASSWORD' : 'Please wait...'}
+                              {response && !loading
+                                ? "SET PASSWORD"
+                                : "Please wait..."}
                             </ButtonHtV1>
                             {response && loaded && passwordUpdated && (
                               <Label
@@ -331,8 +376,8 @@ class PaymentSuccess extends Component {
                                 marginBottom="0"
                                 fontfamily="regular"
                               >
-                                {' '}
-                                Password Updated !{' '}
+                                {" "}
+                                Password Updated !{" "}
                               </Label>
                             )}
                             {error && !loaded && (
@@ -347,10 +392,14 @@ class PaymentSuccess extends Component {
                                   marginBottom="0"
                                   fontfamily="regular"
                                 >
-                                  {errorMessage.new_password && 'Invalid new password !'}
-                                  {errorMessage.current_password && 'Invalid Current Password !'}
-                                  {errorMessage.repeat_password && 'Confirm password not match !'}
-                                  {errorMessage.error_message && 'Something went wrong !'}
+                                  {errorMessage.new_password &&
+                                    "Invalid new password !"}
+                                  {errorMessage.current_password &&
+                                    "Invalid Current Password !"}
+                                  {errorMessage.repeat_password &&
+                                    "Confirm password not match !"}
+                                  {errorMessage.error_message &&
+                                    "Something went wrong !"}
                                 </Label>
                               </Box>
                             )}
@@ -365,7 +414,7 @@ class PaymentSuccess extends Component {
                     </Text>
                   </Row>
 
-                  <Row sx={{ borderBottom: 'heading' }} mx={0} pb={5}>
+                  <Row sx={{ borderBottom: "heading" }} mx={0} pb={5}>
                     <Box variant="col-6" pl={0}>
                       <Text fontSize={16}>Product Details</Text>
                     </Box>
@@ -380,22 +429,35 @@ class PaymentSuccess extends Component {
                     </Box>
                   </Row>
                   {products.map(product => (
-                    <Row py={20} mx={0} alignItems="center" sx={{ position: 'relative', borderBottom: 'light' }}>
+                    <Row
+                      py={20}
+                      mx={0}
+                      alignItems="center"
+                      sx={{ position: "relative", borderBottom: "light" }}
+                    >
                       <Box variant="col-2" pl={0}>
-                        <Link to={formatProductURL(product.name, product.confSku)}>
+                        <Link
+                          to={formatProductURL(product.name, product.confSku)}
+                        >
                           <Image
                             width={1}
                             src={`${product.image}-top_sel_160.jpg`}
                             alt=""
-                            sx={{ boxShadow: 'productThumb' }}
+                            sx={{ boxShadow: "productThumb" }}
                           />
                         </Link>
                       </Box>
                       <Box variant="col-4" pl={15}>
                         {/* <Link to="/"> */}
                         <Box mb="10px">
-                          <Link to={formatProductURL(product.name, product.confSku)}>
-                            <Heading color="heading" fontSize={16} lineHeight={1.4}>
+                          <Link
+                            to={formatProductURL(product.name, product.confSku)}
+                          >
+                            <Heading
+                              color="heading"
+                              fontSize={16}
+                              lineHeight={1.4}
+                            >
                               {product.name}
                             </Heading>
                           </Link>
@@ -407,7 +469,7 @@ class PaymentSuccess extends Component {
                       </Box>
                       <Box variant="col-2">
                         <Label color="heading" fontSize={18}>
-                          {product.deliveryTime.split('Delivered by ')[1]}
+                          {product.deliveryTime.split("Delivered by ")[1]}
                         </Label>
                       </Box>
                       <Box variant="col-2">
@@ -449,14 +511,22 @@ class PaymentSuccess extends Component {
                           <Text>Rs {formatAmount(Math.abs(setDiscount))}</Text>
                         </Flex>
                       ) : null}
-                      <Row m="0" py="1em" sx={{ borderTop: 'divider' }}>
+                      <Row m="0" py="1em" sx={{ borderTop: "divider" }}>
                         <Box variant="col-6" p="0">
-                          <Text color="menuItem" fontSize={18} fontFamily="medium">
+                          <Text
+                            color="menuItem"
+                            fontSize={18}
+                            fontFamily="medium"
+                          >
                             Total Price :
                           </Text>
                         </Box>
                         <Box variant="col-6" p="0" textAlign="right">
-                          <Text color="menuItem" fontSize={18} fontFamily="medium">
+                          <Text
+                            color="menuItem"
+                            fontSize={18}
+                            fontFamily="medium"
+                          >
                             Rs {formatAmount(totalAmount)}
                           </Text>
                         </Box>
@@ -478,14 +548,14 @@ class PaymentSuccess extends Component {
 }
 PaymentSuccess.defaultProps = {
   data: {
-    order_date: '',
+    order_date: "",
     shipping_address: {
-      first_name: '',
-      last_name: '',
-      address1: '',
-      city: '',
-      postcode: '',
-      state: ''
+      first_name: "",
+      last_name: "",
+      address1: "",
+      city: "",
+      postcode: "",
+      state: ""
     },
     instant_discount: 0,
     sub_total_amount: 0,
@@ -495,10 +565,10 @@ PaymentSuccess.defaultProps = {
     net_order_amount: 0,
     cart_products: []
   },
-  error: '',
+  error: "",
   paymentLoaded: false,
   response: {},
-  customerId: '',
+  customerId: "",
   isLoggedIn: false
 };
 
