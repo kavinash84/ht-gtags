@@ -59,6 +59,7 @@ const mapStateToProps = ({
   paymentData: checkout.paymentData,
   loading: checkout.loading,
   addNewAddress: address.addNewAddress,
+  showAddAddress: checkout.showAddAddress,
   addresses: myaddress.data,
   currentaddressindex: address.shipping.index,
   shippingIsBilling: address.shippingIsBilling,
@@ -100,36 +101,34 @@ class DeliveryAddress extends Component {
   }
   componentWillReceiveProps(nextProps) {
     const {
-      isLoggedIn, nextstep, clearShippingAddress, onChangeEmail, userEmail, couponlistToggle, cart
+      isLoggedIn, nextstep, clearShippingAddress, onChangeEmail, userEmail, couponlistToggle, cart, AddNewAddress, showAddAddress
     } = this.props;
     const { dispatch } = this.context.store;
     if (nextProps.nextstep !== nextstep && nextProps.paymentData) {
-      // console.log(nextProps.paymentData);
       const { paymentData = {} } = nextProps;
-      dispatch(load({
-        paymentData,
-        cart
-      }));
+      dispatch(
+        load({
+          paymentData,
+          cart
+        })
+      );
     }
     if (isLoggedIn && nextProps.userEmail !== userEmail) {
       onChangeEmail('shipping', nextProps.userEmail);
       onChangeEmail('billing', nextProps.userEmail);
     }
-    if (nextProps.isLoggedIn && nextProps.isLoggedIn !== isLoggedIn) {
-      this.setState({
-        openLogin: false
-      });
+    if (nextProps.isLoggedIn !== isLoggedIn) {
       clearShippingAddress();
-      if (couponlistToggle) {
-        dispatch(loadCoupons());
-      }
-    }
-    if (nextProps.addresses.length > 0 && nextProps.addresses.length !== this.props.addresses.length) {
-      this.handleClick(0, nextProps.addresses);
     }
     if (nextProps.nextstep.success && nextProps.nextstep.success !== nextstep.success) {
       const { history } = this.props;
       history.push('/checkout/payment-options');
+    }
+    if (nextProps.showAddAddress !== showAddAddress) {
+      if (!showAddAddress) {
+        console.log('called...1');
+        dispatch(AddNewAddress(false));
+      }
     }
   }
   checkParams = () => {
@@ -282,7 +281,7 @@ class DeliveryAddress extends Component {
           dismissAfter: 2000
         }));
       } else {
-        const { sessionId } = this.props;
+        const { sessionId, AddNewAddress } = this.props;
         dispatch(sendDeliveryAddress(
           sessionId,
           {
@@ -304,7 +303,7 @@ class DeliveryAddress extends Component {
           dismissAfter: 2000
         }));
       } else {
-        const { sessionId } = this.props;
+        const { sessionId, AddNewAddress } = this.props;
         dispatch(sendDeliveryAddress(
           sessionId,
           {
@@ -323,16 +322,27 @@ class DeliveryAddress extends Component {
     const { toggleShippingIsBilling } = this.props;
     toggleShippingIsBilling();
   };
-  handleClick = (index, addresses) => {
-    const { setAddress, loadPincodeDetails } = this.props;
+  handleClick = index => {
+    const { addresses, setAddress, loadPincodeDetails } = this.props;
     this.setState({
       addressform: false
     });
     setAddress('shipping', addresses[index], index);
     loadPincodeDetails('shipping', addresses[index].pincode);
   };
+
+  isAddressSelected = () => {
+    const { dispatch } = this.context.store;
+    dispatch(
+      notifSend({
+        type: 'warning',
+        msg: 'Please Add new Address  /  Select delivery Address ',
+        dismissAfter: 2000
+      })
+    );
+  };
   toggleAddAddress = e => {
-    const { setAddress, isLoggedIn, userEmail } = this.props;
+    const { setAddress, isLoggedIn, userEmail, AddNewAddress } = this.props;
     e.preventDefault();
     this.setState({
       addressform: !this.state.addressform
@@ -350,6 +360,7 @@ class DeliveryAddress extends Component {
       index: null
     };
     setAddress('shipping', data, null);
+    AddNewAddress(!this.state.addressform);
   };
   render() {
     const {
@@ -368,30 +379,7 @@ class DeliveryAddress extends Component {
     return (
       <Container my={[60, 60, 60]} px={[24, 24, 0]}>
 
-        {isLoggedIn && !addNewAddress && (
-          <Div col="12" pb="0.625rem">
-            <button className={styles.addAddressBtn} onClick={this.toggleAddAddress}>
-              <Text color="rgb(0,0,0)" ta="left" mt="0" mb="0" >
-                <img className={styles.addAddressBtnIcon} src={addIcon} alt="Add New Address" />
-                {addresses.length > 0 ? 'Add New Address' : 'Add Address'}
-              </Text>
-            </button>
-          </Div>
-        )}
-        {addNewAddress && (
 
-          <Div className={styles.addNewAddressHeader}>
-            <Button bg="transparent" border="none" onClick={this.toggleAddAddress} p="0">
-              {' '}
-              <img src={BackIcon} alt="Close" /> <span>Add New Address</span>
-            </Button>
-
-            <Button bg="transparent" border="none" onClick={this.toggleAddAddress} p="0">
-              {' '}
-              <img src={CloseIcon} alt="Close" />{' '}
-            </Button>
-          </Div>
-        )}
 
         <Row>
           <Col variant="col-12" >
@@ -430,9 +418,32 @@ class DeliveryAddress extends Component {
                 </ResponsiveModal>
               </Box>
             )}
+            {isLoggedIn && !addNewAddress && (
+              <Div col="12" pb="0.625rem">
+                <button className={styles.addAddressBtn} onClick={this.toggleAddAddress}>
+                  <Text color="rgb(0,0,0)" ta="left" mt="0" mb="0" >
+                    <img className={styles.addAddressBtnIcon} src={addIcon} alt="Add New Address" />
+                    {addresses.length > 0 ? 'Add New Address' : 'Add Address'}
+                  </Text>
+                </button>
+              </Div>
+            )}
+            {addNewAddress && (
 
+              <Div className={styles.addNewAddressHeader}>
+                <Button bg="transparent" border="none" onClick={this.toggleAddAddress} p="0">
+                  {' '}
+                  <img src={BackIcon} alt="Close" /> <span>Add New Address</span>
+                </Button>
+
+                <Button bg="transparent" border="none" onClick={this.toggleAddAddress} p="0">
+                  {' '}
+                  <img src={CloseIcon} alt="Close" />{' '}
+                </Button>
+              </Div>
+            )}
             {/* For not logged in */}
-            {isLoggedIn && (
+            {isLoggedIn && !addNewAddress && (
               <Box>
                 <Row mx={0} mb={20}>
                   <Heading variant="heading.medium">My Saved Address</Heading>

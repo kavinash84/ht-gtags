@@ -9,6 +9,7 @@ import { withRouter } from "react-router";
  */
 import Button from "hometown-components-dev/lib/ButtonHtV1";
 import Box from "hometown-components-dev/lib/BoxHtV1";
+import Row from "hometown-components-dev/lib/RowHtV1";
 
 /**
  * Modules / selectors / helpers
@@ -102,15 +103,22 @@ class BuyNow extends React.Component {
                   configId,
                   quantity
                 )(addToCart)}
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center"
+                }}
               >
                 BUY NOW
               </Button>
             ) : (
-                <Box as={Link} variant="primary.large" to={CART_URL}>
-                  <Button variant="primary.large" width="320px">
-                    BUY NOW
+                <Row mx={0} alignItems="center">
+                  <Box as={Link} variant="primary.large" to={CART_URL} style={{ width: "320px", marginBottom: "10px", marginTop: "10px" }}>
+                    <Button variant="primary.large" width="380px" backgroundColor="#E9916B">
+                      BUY NOW
                 </Button>
-                </Box>
+                  </Box>
+                </Row>
               )}
           </Fragment>
         )}
