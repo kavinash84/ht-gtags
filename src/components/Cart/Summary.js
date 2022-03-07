@@ -12,7 +12,8 @@ const PriceSummary = ({ summaryPrice }) => {
     total,
     gift_wrap_amount,
     is_gift_wrap_applied,
-    combined_set_discount
+    combined_set_discount,
+    onClick
   } = summaryPrice;
   return (
     <div className={styles.PriceSummary_comtaimer}>
@@ -73,6 +74,23 @@ const PriceSummary = ({ summaryPrice }) => {
           </div>
           <div className={styles.price}>₹{total ? formatAmount(total) : 0}</div>
         </div>
+        <button
+          onClick={onClick}
+          style={{
+            width: "100%",
+            height: "40px",
+            fontSize: "14px",
+            color: "white",
+            backgroundColor: "#F47020",
+            borderRadius: "5px",
+            border: "1px solid #F47020",
+            marginBottom: "10px",
+            marginTop: "10px",
+            cursor: "pointer"
+          }}
+        >
+          Place Order
+        </button>
       </div>
     </div>
   );

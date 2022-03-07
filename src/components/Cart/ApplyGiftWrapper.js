@@ -66,7 +66,7 @@ class ApplyGiftWrapper extends React.Component {
     return (
       <React.Fragment>
         {this.state.shouldShow ? (
-          <div style={{ background: 'white', padding: '20px 25px', marginTop: '10px' }}>
+          <div style={{ background: 'white', padding: '5px 25px 20px' }}>
             <label className={styles.checkbox_container} style={{ marginBottom: '0px', color: 'black' }}>
               Add Gift wrap to eligible products
               <input

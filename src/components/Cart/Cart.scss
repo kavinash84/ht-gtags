@@ -94,7 +94,7 @@
 
 .pincode {
   position: relative !important;
-  width: 400px !important;
+  // width: 400px !important;
   max-width: 100% !important;
   input[type="text"] {
     background: #f7f7f7;
@@ -249,12 +249,13 @@
   background: #f2f2f2;
   padding: 10px 22px;
   width: 100%;
+  border-radius:10px;
   .address_wrapper {
     width: 100%;
     display: flex;
     justify-content: space-between;
     .address_container {
-      font-size: 12px;
+      font-size: 14px;
       .filtered_address {
         font-weight: 600;
         color: black;
@@ -331,16 +332,19 @@
 }
 
 .helpuContainer {
-  padding: 10px 20px;
+  padding: 60px 20px 30px;
   background-color: white;
   color: black;
+  text-align: center;
   .helpuHeader {
-    font-size: 16px;
+    font-size: 24px;
     font-weight: 600;
-    margin-bottom: 10px;
+    margin-bottom: 50px;
   }
   .helpuitem {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
     align-items: center;
     padding: 5px 0px;
     .helpuimg {
@@ -348,7 +352,9 @@
     }
     .helputext {
       font-size: 16px;
+      line-height: 25px;
       margin-left: 10px;
+      color:#707070;
     }
   }
 }
@@ -357,8 +363,6 @@
 
 .pincode {
   position: relative !important;
-  width: 400px !important;
-  max-width: 100% !important;
   input[type="text"] {
     background: #f7f7f7;
     border: 1px solid rgba(0, 0, 0, 0.03);

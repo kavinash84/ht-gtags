@@ -68,7 +68,7 @@ import PackagePDP from "../PackageCatalog/packagePDP";
 import CartBreadCumb from "./breadDumb";
 import PriceSummary from "./Summary";
 import ApplyGiftWrapper from "./ApplyGiftWrapper";
-import HappyToHelp from './HappyToHelp';
+import HappyToHelp from "./HappyToHelp";
 
 const styles = require("./Cart.scss");
 
@@ -162,7 +162,6 @@ const addToWishlist = (
     }
     dispatcher2(cartId, sessionId, pincode, qty, configId);
   } else {
-    // wishListWaitList(sku, simpleSku, selectedPincode);
     onOpenLoginModal();
   }
 };
@@ -184,22 +183,11 @@ const checkIsAnyProductOutofStoc = (results, outOfStockList) => {
   return isAnyProductOutofStoc;
 };
 
-// const mapStateToProps = ({ pincode, cart, app }) => ({   //Old
 const isSelected = (id, state) => state.some(arr => arr.simpleSku === id);
 
 const handleCheckboxClick = (id, data, state) => dispatchero => {
-  // console.log(e.target.value);
   despatchSelectForDemo(id, data, state, dispatchero);
 };
-
-// const isInWishList = (list, id) => list.forEach( item => {
-//   if(item.wishlist_info.configurable_sku === id) {
-//     console.log(item.wishlist_info.configurable_sku === id);
-//     return true;
-//   }
-//   console.log(item.wishlist_info.configurable_sku === id);
-//   return false;
-// });
 
 const mapStateToProps = ({
   pincode,
@@ -217,10 +205,7 @@ const mapStateToProps = ({
   packageItems: cart.packageItems,
   checkingCart: cart.checkingCart,
   cartUpdating: cart.cartUpdating,
-  cartTotal: cart.summary.total,
-  appliedCoupon: cart.summary.coupon,
   pincode: pincode.selectedPincode,
-  // sessionId: app.sessionId   //Old
   sessionId: app.sessionId, // New
   demoLandingPageUrl: cart.demo_landing_page_url,
   selectForDemo: selectForDemo.data,
@@ -228,7 +213,6 @@ const mapStateToProps = ({
   sku: productdetails.productDescription.sku,
   wishListData: wishlist.data,
   isLoggedIn: userLogin.isLoggedIn,
-  // simpleSku: getSimpleSku(productdetails),
   loadingList: wishlist.data
 });
 
@@ -253,22 +237,17 @@ const Cart = ({
   currentId,
   cartUpdating,
   checkCart,
+  checkingCart,
   cartTotal,
   appliedCoupon,
-  checkingCart,
   outOfStockList,
-  // handlePincodeModal   //Old
   handlePincodeModal,
   demoLandingPageUrl,
-  // eslint-disable-next-line no-shadow
   addToSelectForDemo,
   selectForDemo,
-  // demo_landing_page_url: demoLandingPageUrl,
-  // sku,
   wishListData,
   isLoggedIn,
   wishListWaitList,
-  // simpleSku,
   loadingList,
   isPackage
 }) => {
@@ -281,10 +260,7 @@ const Cart = ({
   );
   const cartItemsNumber = countCartItemNumbers(results);
 
-  // const simpleSku = getSimpleSku(productdetails);
-
   const [openLogin, setOpenLogin] = useState(false);
-  // const [disableBtn, setDisableBtn] = useState(false);
 
   useEffect(() => {
     if (isLoggedIn) {
@@ -296,807 +272,712 @@ const Cart = ({
     setOpenLogin(!openLogin);
   };
 
-  // const isInWishList = (list, id) => {
-  //   let disableButton = false;
-  //   list.forEach(item => {
-  //     if (item.wishlist_info.configurable_sku === id) {
-  //       disableButton = true;
-  //     }
-  //   });
-  //   return disableButton;
-  // };
-
   return (
-    <Box>
-      <Box pr="0px" pl="0px">
-        <CartBreadCumb />
-      </Box>
-      <Box pr="0px" pl="0px">
-        <DeliveryAddress />
-      </Box>
-      <Box pr="0px" pl="0px">
-        <ApplyCoupon price={cartTotal} coupon={appliedCoupon} />
-      </Box>
-      <ApplyGiftWrapper />
-      <Box>
-        <PriceSummary summaryPrice={summary} />
-      </Box>
-      <Box>
-        <Offers cartEmiDetails={summary} />
-      </Box>
-      <Box>
-        {results.map(item => (
-          <div>
-            {/* {item.is_display ? ( */}
-            <React.Fragment key={item.id_customer_cart}>
-              <div
-                className={styles.prodInlineBlockWrapper}
-                key={item.id_customer_cart}
+    <div pr="0px" pl="0px">
+      <CartBreadCumb />
+      <Container my={[30, 30, 60]}>
+        <Row>
+          {/* Product List */}
+          <Box variant="col-8" style={{ paddingTop: "35px" }}>
+            <Box pr="0px" pl="0px">
+              <DeliveryAddress />
+            </Box>
+            {/* <Row alignItems="center">
+            <Box variant="col-8">
+              {packageItems.length > 0 ? (
+                <Heading>
+                  My Shopping Cart : {cartItemsNumber + packageItems.length - 1}{" "}
+                  Items
+                </Heading>
+              ) : (
+                <Heading>My Shopping Cart : {cartItemsNumber} Items</Heading>
+              )}
+            </Box>
+            <Box variant="col-4" textAlign="right">
+              <Button
+                height="auto"
+                display="flex"
+                alignItems="center"
+                ml="auto"
+                disabled={isAnyProductOutofStoc}
+                justifyContent="center"
+                width={1}
+                onClick={() =>
+                  checkCartBeforeCheckout(
+                    checkCart,
+                    sessionId
+                  )(addToSelectForDemo)
+                }
               >
-                <ProductLine
-                  Pname={item.product_info.name}
-                  Pimage={item.product_info.image}
-                  deliveryBy={item.product_info.delivery_time_text}
-                  specialPrice={item.product_info.special_price}
-                  unitPrice={item.product_info.unit_price}
-                  netPrice={item.product_info.net_price}
-                  discount={item.product_info.discount}
-                  couponDiscount={item.product_info.couponDiscount}
-                  coupon={appliedCoupon}
-                  cartItemLoading={cartItemLoading}
-                  cartId={item.id_customer_cart}
-                  quantity={item.qty}
-                  simpleSku={item.simple_sku}
-                  skuId={item.configurable_sku}
-                  // demoProduct={item.product_info.demo_product}
-                  // handleCheckboxClick={handleCheckboxClick(
-                  //   item.simple_sku,
-                  //   item,
-                  //   selectForDemo
-                  // )(addToSelectForDemo)}
-                  // checked={isSelected(item.simple_sku, selectForDemo)}
-                  // landingPageLink={demoLandingPageUrl}
-                  onDelete={
-                    () =>
-                      onDelete(
-                        item.simple_sku,
-                        item
-                        // selectForDemo
-                      )
-                    // (addToSelectForDemo)
-                  }
-                  configId={
-                    item.product_info && item.product_info.product_id
-                      ? item.product_info.product_id
-                      : ""
-                  }
-                  assembly={item.product_info.assembly_service}
-                  productURL={
-                    item.product_info.packageId
-                      ? `/package-catalog/${item.product_info.packageId}`
-                      : formatProductURL(
-                          item.product_info.name,
-                          item.configurable_sku
-                        )
-                  }
-                  isPackage={item.product_info.packageId ? true : false}
-                  packageId={item.product_info.packageId}
+                <Image
+                  src={checkoutIcon}
+                  alt="Delete"
+                  height="18px"
+                  mr="0.625rem"
                 />
-              </div>
-            </React.Fragment>
-            {/* ):null} */}
-          </div>
-        ))}
-      </Box>
-      <Box>
-      <HappyToHelp />
-      </Box>
-    </Box>
-    // <Container my={[30, 30, 60]}>
-    //   <Row>
-    //     {/* Product List */}
-    //     <Box variant="col-8">
-    //       <Row alignItems="center">
-    //         <Box variant="col-8">
-    //           {packageItems.length > 0 ? (
-    //             <Heading>My Shopping Cart : {cartItemsNumber + (packageItems.length) - (1) } Items</Heading>
-    //           ) : (
-    //             <Heading>My Shopping Cart : {cartItemsNumber} Items</Heading>
-    //           )}
-    //         </Box>
-    //         <Box variant="col-4" textAlign="right">
-    //           <Button
-    //             height="auto"
-    //             display="flex"
-    //             alignItems="center"
-    //             ml="auto"
-    //             disabled={isAnyProductOutofStoc}
-    //             justifyContent="center"
-    //             width={1}
-    //             onClick={() =>
-    //               checkCartBeforeCheckout(
-    //                 checkCart,
-    //                 sessionId
-    //               )(addToSelectForDemo)
-    //             }
-    //           >
-    //             <Image
-    //               src={checkoutIcon}
-    //               alt="Delete"
-    //               height="18px"
-    //               mr="0.625rem"
-    //             />
-    //             SECURE CHECKOUT
-    //           </Button>
-    //         </Box>
-    //         <Row alignItems="center" variant="col-12" mt={20}>
-    //           <Image height="25px" mr={5} src={location} />
-    //           <Label color="textFilter" mr={5}>
-    //             For delivery details
-    //           </Label>
-    //           <Label color="textFilter" onClick={handlePincodeModal} mr={10}>
-    //             {pincode}
-    //           </Label>
-    //           <Button fontSize="16" color="white" onClick={handlePincodeModal}>
-    //             change
-    //           </Button>
-    //         </Row>
-    //       </Row>
-    //       {/* <Row type="block" m="0" mb="0" mt="1rem">
-    //         <Box>
-    //           <Link to="/promotions">
-    //             <Image src={cashbackBanner} alt="" />
-    //           </Link>
-    //         </Box>
-    //       </Row> */}
-    //       {demoProductsBanner && (
-    //         <Row type="block" m="0" mb="0" mt="1rem">
-    //           <Box>
-    //             <Image src={demoBanner} alt="" />
-    //           </Box>
-    //         </Row>
-    //       )}
-    //       <Row
-    //         mt={30}
-    //         mb={10}
-    //         mx={0}
-    //         pb={5}
-    //         sx={{
-    //           borderBottom: "heading"
-    //         }}
-    //       >
-    //         <Box variant="col-8" pl={0}>
-    //           <Text fontFamily="medium">Product Details</Text>
-    //         </Box>
-    //         <Box variant="col-2" pl={8}>
-    //           <Text fontFamily="medium">Qty.</Text>
-    //         </Box>
-    //         <Box variant="col-2">
-    //           <Text fontFamily="medium">Price</Text>
-    //         </Box>
-    //         {/* <button onClick={handleClickDemo} >TRIAL</button> */}
-    //       </Row>
-    //       {results.map(item => (
-    //         <Box>
-    //           {item.is_display ? (
-    //             <Box key={item.id_customer_cart} py={20}>
-    //               <Row
-    //                 alignItems="center"
-    //                 sx={{ position: "relative" }}
-    //                 pb={20}
-    //               >
-    //                 <Box variant="col-3" pr={0}>
-    //                   <Link
-    //                     to={
-    //                       item.product_info.packageId
-    //                         ? `/package-catalog/${item.product_info.packageId}`
-    //                         : formatProductURL(
-    //                             item.product_info.name,
-    //                             item.configurable_sku
-    //                           )
-    //                     }
-    //                   >
-    //                     <ImageShimmer
-    //                       src={item.product_info.image}
-    //                       height="100%"
-    //                       sx={{
-    //                         boxShadow: "0 1px 2px 0 #0000033"
-    //                       }}
-    //                     >
-    //                       {imageURL => (
-    //                         <Image
-    //                           width={1}
-    //                           src={imageURL}
-    //                           alt=""
-    //                           sx={{
-    //                             boxShadow: "productThumb"
-    //                           }}
-    //                         />
-    //                       )}
-    //                     </ImageShimmer>
-    //                   </Link>
-    //                 </Box>
-    //                 <Box variant="col-5" pl={30}>
-    //                   <Link
-    //                     to={
-    //                       item.product_info.packageId
-    //                         ? `/package-catalog/${item.product_info.packageId}`
-    //                         : formatProductURL(
-    //                             item.product_info.name,
-    //                             item.configurable_sku
-    //                           )
-    //                     }
-    //                   >
-    //                     <Box mb={10}>
-    //                       <Heading
-    //                         color="heading"
-    //                         fontSize={16}
-    //                         lineHeight={1.4}
-    //                         fontWeight="normal"
-    //                       >
-    //                         {item.product_info.name}
-    //                       </Heading>
-    //                     </Box>
-    //                     {item.product_info.color && (
-    //                       <Box mb={15}>
-    //                         <Text color="#575757">
-    //                           {item.product_info.color}
-    //                         </Text>
-    //                       </Box>
-    //                     )}
-    //                   </Link>
-    //                   <Box pb={20}>
-    //                     <Flex alignItems="center">
-    //                       <Image
-    //                         width="initial"
-    //                         height={20}
-    //                         mr={10}
-    //                         src={orderTrackIcon}
-    //                       />
-    //                       <Text
-    //                         color={
-    //                           item.product_info.delivery_time_text.indexOf(
-    //                             "Currently"
-    //                           ) === -1
-    //                             ? "#090909"
-    //                             : "red"
-    //                         }
-    //                         fontSize={12}
-    //                       >
-    //                         {item.product_info.delivery_time_text}
-    //                       </Text>
-    //                     </Flex>
-    //                   </Box>
-    //                   <Flex alignItems="center">
-    //                     {item.product_info.packageId ? null : (
-    //                       <Button
-    //                         variant="link"
-    //                         fontSize={12}
-    //                         display="flex"
-    //                         alignItems="center"
-    //                         onClick={addToWishlist(
-    //                           item.configurable_sku,
-    //                           wishListData,
-    //                           toggleWishList,
-    //                           isLoggedIn,
-    //                           handleLoginModal,
-    //                           wishListWaitList,
-    //                           item.simple_sku,
-    //                           pincode,
-    //                           // item.id_customer_cart,
-    //                           {
-    //                             skuData: [
-    //                               { simple_sku: item.simple_sku, qty: item.qty }
-    //                             ],
-    //                             packageId: false
-    //                           },
-    //                           sessionId,
-    //                           pincode,
-    //                           item.qty,
-    //                           item.product_info.product_id,
-    //                           loadingList,
-    //                           item,
-    //                           selectForDemo
-    //                         )(removeFromCart)}
-    //                       >
-    //                         <Image height={16} mr={10} src={saveForLaterIcon} />
-    //                         <Text fontSize={12}>Add to wishlist</Text>
-    //                       </Button>
-    //                     )}
-    //                     {item.product_info.packageId ? null : (
-    //                       <Text mx={8} fontSize={16}>
-    //                         {" "}
-    //                         |{" "}
-    //                       </Text>
-    //                     )}
+                SECURE CHECKOUT
+              </Button> */}
+            {/* </Box> */}
+            {/* <Row alignItems="center" variant="col-12" mt={20}> */}
+            {/* <Image height="25px" mr={5} src={location} />
+              <Label color="textFilter" mr={5}>
+                For delivery details
+              </Label>
+              <Label color="textFilter" onClick={handlePincodeModal} mr={10}>
+                {pincode}
+              </Label>
+              <Button fontSize="16" color="white" onClick={handlePincodeModal}>
+                change
+              </Button>
+            </Row> */}
+            {/* </Row> */}
+            {/* <Row type="block" m="0" mb="0" mt="1rem">
+            <Box>
+              <Link to="/promotions">
+                <Image src={cashbackBanner} alt="" />
+              </Link>
+            </Box>
+          </Row> */}
+            {/* {demoProductsBanner && (
+            <Row type="block" m="0" mb="0" mt="1rem">
+              <Box>
+                <Image src={demoBanner} alt="" />
+              </Box>
+            </Row>
+          )} */}
+            <Row
+              mt={30}
+              mb={10}
+              mx={0}
+              pb={5}
+              sx={{
+                borderBottom: "2px solid #F2F2F2"
+              }}
+            >
+              {/* <Box variant="col-8" pl={0}>
+                <Text fontFamily="medium">Product Details</Text>
+              </Box>
+              <Box variant="col-2" pl={8}>
+                <Text fontFamily="medium">Qty.</Text>
+              </Box>
+              <Box variant="col-2">
+                <Text fontFamily="medium">Price</Text>
+              </Box> */}
+              {/* <button onClick={handleClickDemo} >TRIAL</button> */}
+            </Row>
+            <div style={{ borderRight: "2px solid #F2F2F2" }}>
+              {results.map(item => (
+                <Box
+                  style={{
+                    background: "#FFF8F4",
+                    borderRadius: "10px",
+                    marginTop: "30px",
+                    marginRight: "20px"
+                  }}
+                >
+                  {item.is_display ? (
+                    <Box key={item.id_customer_cart} py={20}>
+                      <Row
+                        alignItems="center"
+                        sx={{ position: "relative" }}
+                        pb={20}
+                      >
+                        <Box
+                          variant="col-3"
+                          pr={0}
+                          style={{ padding: "15px 0px 0px 45px" }}
+                        >
+                          <Link
+                            to={
+                              item.product_info.packageId
+                                ? `/package-catalog/${item.product_info.packageId}`
+                                : formatProductURL(
+                                    item.product_info.name,
+                                    item.configurable_sku
+                                  )
+                            }
+                          >
+                            <ImageShimmer
+                              src={item.product_info.image}
+                              height="100%"
+                              sx={{
+                                boxShadow: "0 1px 2px 0 #0000033"
+                              }}
+                            >
+                              {imageURL => (
+                                <Image
+                                  width={1}
+                                  src={imageURL}
+                                  alt=""
+                                  sx={{
+                                    boxShadow: "productThumb"
+                                  }}
+                                />
+                              )}
+                            </ImageShimmer>
+                          </Link>
+                        </Box>
+                        <Box variant="col-5" pl={30}>
+                          <Link
+                            to={
+                              item.product_info.packageId
+                                ? `/package-catalog/${item.product_info.packageId}`
+                                : formatProductURL(
+                                    item.product_info.name,
+                                    item.configurable_sku
+                                  )
+                            }
+                          >
+                            <Box mb={10}>
+                              <Heading
+                                color="heading"
+                                fontSize={16}
+                                lineHeight={1.4}
+                                fontWeight="normal"
+                              >
+                                {item.product_info.name}
+                              </Heading>
+                            </Box>
+                            {item.product_info.color && (
+                              <Box mb={15}>
+                                <Text color="#575757">
+                                  {item.product_info.color}
+                                </Text>
+                              </Box>
+                            )}
+                          </Link>
+                          <Box pb={20}>
+                            <Flex alignItems="center">
+                              <Image
+                                width="initial"
+                                height={20}
+                                mr={10}
+                                src={orderTrackIcon}
+                              />
+                              <Text
+                                color={
+                                  item.product_info.delivery_time_text.indexOf(
+                                    "Currently"
+                                  ) === -1
+                                    ? "#090909"
+                                    : "red"
+                                }
+                                fontSize={12}
+                              >
+                                {item.product_info.delivery_time_text}
+                              </Text>
+                            </Flex>
+                          </Box>
+                          <Flex alignItems="center">
+                            {item.product_info.packageId ? null : (
+                              <Button
+                                variant="link"
+                                fontSize={12}
+                                display="flex"
+                                alignItems="center"
+                                onClick={addToWishlist(
+                                  item.configurable_sku,
+                                  wishListData,
+                                  toggleWishList,
+                                  isLoggedIn,
+                                  handleLoginModal,
+                                  wishListWaitList,
+                                  item.simple_sku,
+                                  pincode,
+                                  // item.id_customer_cart,
+                                  {
+                                    skuData: [
+                                      {
+                                        simple_sku: item.simple_sku,
+                                        qty: item.qty
+                                      }
+                                    ],
+                                    packageId: false
+                                  },
+                                  sessionId,
+                                  pincode,
+                                  item.qty,
+                                  item.product_info.product_id,
+                                  loadingList,
+                                  item,
+                                  selectForDemo
+                                )(removeFromCart)}
+                              >
+                                <Image
+                                  height={16}
+                                  mr={10}
+                                  src={saveForLaterIcon}
+                                />
+                                <Text fontSize={12}>Add to wishlist</Text>
+                              </Button>
+                            )}
+                            {item.product_info.packageId ? null : (
+                              <Text mx={8} fontSize={16}>
+                                {" "}
+                                |{" "}
+                              </Text>
+                            )}
 
-    //                     <Button
-    //                       variant="link"
-    //                       fontSize={12}
-    //                       display="flex"
-    //                       alignItems="center"
-    //                       disabled={cartItemLoading(item.id_customer_cart)}
-    //                       onClick={
-    //                         item.product_info.packageId
-    //                           ? onClick(
-    //                               {
-    //                                 skuData: getSkusData(item.simpleSkus),
-    //                                 packageId: item.product_info.packageId
-    //                               },
-    //                               sessionId,
-    //                               pincode,
-    //                               item.qty,
-    //                               item.product_info.product_id,
-    //                               item.simple_sku,
-    //                               item,
-    //                               selectForDemo
-    //                             )(removeFromCart)(addToSelectForDemo)
-    //                           : onClick(
-    //                               {
-    //                                 skuData: [
-    //                                   {
-    //                                     simple_sku: item.simple_sku,
-    //                                     qty: item.qty
-    //                                   }
-    //                                 ],
-    //                                 packageId: false
-    //                               },
-    //                               sessionId,
-    //                               pincode,
-    //                               item.qty,
-    //                               item.product_info.product_id,
-    //                               item.simple_sku,
-    //                               item,
-    //                               selectForDemo
-    //                             )(removeFromCart)(addToSelectForDemo)
-    //                       }
-    //                     >
-    //                       <CloseIcon width={14} height={14} mr={10} /> Remove
-    //                     </Button>
-    //                     {/* {item.product_info.demo_product && (
-    //                   <Box ml={15}>
-    //                     <div className="checkbox">
-    //                       <input
-    //                         type="checkbox"
-    //                         id={item.simple_sku}
-    //                         onClick={handleCheckboxClick(item.simple_sku, item, selectForDemo)(addToSelectForDemo)}
-    //                         checked={isSelected(item.simple_sku, selectForDemo)}
-    //                       />
-    //                       eslint-disable-next-line jsx-a11y/label-has-for
-    //                       <label htmlFor={item.simple_sku} />
-    //                     </div>
-    //                     <Label htmlFor="seeDemo" ml="10px" fon>
-    //                       Select for Demo
-    //                     </Label>
-    //                   </Box>
-    //                 )} */}
-    //                   </Flex>
-    //                   {item.product_info.demo_product && (
-    //                     <Box mt={15}>
-    //                       <div className="checkbox">
-    //                         <input
-    //                           type="checkbox"
-    //                           id={item.simple_sku}
-    //                           onClick={() =>
-    //                             handleCheckboxClick(
-    //                               item.simple_sku,
-    //                               item,
-    //                               selectForDemo
-    //                             )(addToSelectForDemo)
-    //                           }
-    //                           checked={isSelected(
-    //                             item.simple_sku,
-    //                             selectForDemo
-    //                           )}
-    //                         />
-    //                         {/* eslint-disable-next-line jsx-a11y/label-has-for */}
-    //                         <label htmlFor={item.simple_sku} />
-    //                       </div>
-    //                       <Label
-    //                         htmlFor="seeDemo"
-    //                         ml="10px"
-    //                         fontSize="14px"
-    //                         fontWeight="bold"
-    //                       >
-    //                         Select for Demo
-    //                       </Label>
-    //                     </Box>
-    //                   )}
-    //                   {item.product_info.offer_message ? (
-    //                     <Box mt="1rem">
-    //                       <Text
-    //                         color="orangered"
-    //                         fontSize="1rem"
-    //                         style={{ fontWeight: "bold" }}
-    //                       >
-    //                         {item.product_info.offer_message}
-    //                       </Text>
-    //                     </Box>
-    //                   ) : null}
-    //                   {/* {item.product_info.assembly_service && (
-    //                   <Box color="uspTitle" fontSize="0.75rem">
-    //                     <Image
-    //                       width="initial"
-    //                       height="20px"
-    //                       mr="0.625rem"
-    //                       mt="4px"
-    //                       mb="50px"
-    //                       float="left"
-    //                       src={assemblyIcon}
-    //                     />
-    //                     <Text color="#575757" fontSize="0.75rem" mt="0" mb="0">
-    //                       Assembly
-    //                     </Text>
-    //                     <Text fontSize="0.875rem" mt="0" mb="0">
-    //                       Offered By Hometown
-    //                     </Text>
-    //                     <Text fontSize="0.875rem" mt="0">
-    //                       <Button
-    //                         className={styles.popoverBtn}
-    //                         fontSize="0.875rem"
-    //                         color="#3cc0dc"
-    //                         btnType="link"
-    //                         p="0"
-    //                       >
-    //                         Details
-    //                       </Button>
-    //                       <Box className={styles.popover}>
-    //                         <Text fontSize="0.875rem" mt="0" mb="0" textAlign="center">
-    //                           Assembly will be done within 48hrs of Delivery & applicable within serviceable limits
-    //                         </Text>
-    //                       </Box>
-    //                     </Text>
-    //                   </Box>
-    //                 )} */}
-    //                 </Box>
-    //                 {item.product_info.packageId ? (
-    //                   <div>
-    //                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    //                   </div>
-    //                 ) : (
-    //                   <Box variant="col-2" textAlign="center">
-    //                     <ProductQuantity
-    //                       cartItemLoading={cartItemLoading}
-    //                       cartId={item.id_customer_cart}
-    //                       quantity={item.qty}
-    //                       simpleSku={item.simple_sku}
-    //                       skuId={item.configurable_sku}
-    //                       configId={
-    //                         item.product_info && item.product_info.product_id
-    //                           ? item.product_info.product_id
-    //                           : ""
-    //                       }
-    //                     />
-    //                   </Box>
-    //                 )}
+                            <Button
+                              variant="link"
+                              fontSize={12}
+                              display="flex"
+                              alignItems="center"
+                              disabled={cartItemLoading(item.id_customer_cart)}
+                              onClick={
+                                item.product_info.packageId
+                                  ? onClick(
+                                      {
+                                        skuData: getSkusData(item.simpleSkus),
+                                        packageId: item.product_info.packageId
+                                      },
+                                      sessionId,
+                                      pincode,
+                                      item.qty,
+                                      item.product_info.product_id,
+                                      item.simple_sku,
+                                      item,
+                                      selectForDemo
+                                    )(removeFromCart)(addToSelectForDemo)
+                                  : onClick(
+                                      {
+                                        skuData: [
+                                          {
+                                            simple_sku: item.simple_sku,
+                                            qty: item.qty
+                                          }
+                                        ],
+                                        packageId: false
+                                      },
+                                      sessionId,
+                                      pincode,
+                                      item.qty,
+                                      item.product_info.product_id,
+                                      item.simple_sku,
+                                      item,
+                                      selectForDemo
+                                    )(removeFromCart)(addToSelectForDemo)
+                              }
+                            >
+                              <CloseIcon width={14} height={14} mr={10} />{" "}
+                              Remove
+                            </Button>
+                          </Flex>
+                          {item.product_info.demo_product && (
+                            <Box mt={15}>
+                              <div className="checkbox">
+                                <input
+                                  type="checkbox"
+                                  id={item.simple_sku}
+                                  onClick={() =>
+                                    handleCheckboxClick(
+                                      item.simple_sku,
+                                      item,
+                                      selectForDemo
+                                    )(addToSelectForDemo)
+                                  }
+                                  checked={isSelected(
+                                    item.simple_sku,
+                                    selectForDemo
+                                  )}
+                                />
+                                {/* eslint-disable-next-line jsx-a11y/label-has-for */}
+                                <label htmlFor={item.simple_sku} />
+                              </div>
+                              <Label
+                                htmlFor="seeDemo"
+                                ml="10px"
+                                fontSize="14px"
+                                fontWeight="bold"
+                              >
+                                Select for Demo
+                              </Label>
+                            </Box>
+                          )}
+                          {item.product_info.offer_message ? (
+                            <Box mt="1rem">
+                              <Text
+                                color="orangered"
+                                fontSize="1rem"
+                                style={{ fontWeight: "bold" }}
+                              >
+                                {item.product_info.offer_message}
+                              </Text>
+                            </Box>
+                          ) : null}
+                          {/* {item.product_info.assembly_service && (
+                      <Box color="uspTitle" fontSize="0.75rem">
+                        <Image
+                          width="initial"
+                          height="20px"
+                          mr="0.625rem"
+                          mt="4px"
+                          mb="50px"
+                          float="left"
+                          src={assemblyIcon}
+                        />
+                        <Text color="#575757" fontSize="0.75rem" mt="0" mb="0">
+                          Assembly
+                        </Text>
+                        <Text fontSize="0.875rem" mt="0" mb="0">
+                          Offered By Hometown
+                        </Text>
+                        <Text fontSize="0.875rem" mt="0">
+                          <Button
+                            className={styles.popoverBtn}
+                            fontSize="0.875rem"
+                            color="#3cc0dc"
+                            btnType="link"
+                            p="0"
+                          >
+                            Details
+                          </Button>
+                          <Box className={styles.popover}>
+                            <Text fontSize="0.875rem" mt="0" mb="0" textAlign="center">
+                              Assembly will be done within 48hrs of Delivery & applicable within serviceable limits
+                            </Text>
+                          </Box>
+                        </Text>
+                      </Box>
+                    )} */}
+                        </Box>
+                        {item.product_info.packageId ? (
+                          <div>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          </div>
+                        ) : (
+                          <Box variant="col-2" textAlign="center">
+                            <ProductQuantity
+                              cartItemLoading={cartItemLoading}
+                              cartId={item.id_customer_cart}
+                              quantity={item.qty}
+                              simpleSku={item.simple_sku}
+                              skuId={item.configurable_sku}
+                              configId={
+                                item.product_info &&
+                                item.product_info.product_id
+                                  ? item.product_info.product_id
+                                  : ""
+                              }
+                            />
+                          </Box>
+                        )}
 
-    //                 <Box variant="col-2">
-    //                   <Label color="heading" fontSize={18}>
-    //                     ₹{" "}
-    //                     {item.product_info.net_price >
-    //                     item.product_info.unit_price * item.qty
-    //                       ? formatAmount(
-    //                           Number(item.product_info.unit_price) *
-    //                             Number(item.qty)
-    //                         )
-    //                       : formatAmount(Number(item.product_info.net_price))}
-    //                   </Label>
-    //                 </Box>
+                        <Box variant="col-2">
+                          <Label color="heading" fontSize={18}>
+                            ₹{" "}
+                            {item.product_info.net_price >
+                            item.product_info.unit_price * item.qty
+                              ? formatAmount(
+                                  Number(item.product_info.unit_price) *
+                                    Number(item.qty)
+                                )
+                              : formatAmount(
+                                  Number(item.product_info.net_price)
+                                )}
+                          </Label>
+                        </Box>
 
-    //                 {isProductOutofStock(item.configurable_sku) && (
-    //                   <Flex
-    //                     alignItems="center"
-    //                     justifyContent="center"
-    //                     bg="overlayLight"
-    //                     flexDirection="column"
-    //                     sx={{
-    //                       position: "absolute",
-    //                       width: "calc(100% - 32px)",
-    //                       height: "calc(100% - 40px)",
-    //                       zIndex: 1,
-    //                       left: 16,
-    //                       top: 20
-    //                     }}
-    //                   >
-    //                     <Heading fontSize={20} pb={10}>
-    //                       This product is out of stock please remove before
-    //                       proceed.
-    //                     </Heading>
-    //                     <Button
-    //                       variant="outline.primary"
-    //                       // onClick={onClick(
-    //                       //   item.id_customer_cart,
-    //                       //   sessionId,
-    //                       //   pincode
-    //                       // )(removeFromCart)}
+                        {isProductOutofStock(item.configurable_sku) && (
+                          <Flex
+                            alignItems="center"
+                            justifyContent="center"
+                            bg="overlayLight"
+                            flexDirection="column"
+                            sx={{
+                              position: "absolute",
+                              width: "calc(100% - 32px)",
+                              height: "calc(100% - 40px)",
+                              zIndex: 1,
+                              left: 16,
+                              top: 20
+                            }}
+                          >
+                            <Heading fontSize={20} pb={10}>
+                              This product is out of stock please remove before
+                              proceed.
+                            </Heading>
+                            <Button
+                              variant="outline.primary"
+                              // onClick={onClick(
+                              //   item.id_customer_cart,
+                              //   sessionId,
+                              //   pincode
+                              // )(removeFromCart)}
 
-    //                       onClick={
-    //                         item.product_info.packageId
-    //                           ? onClick(
-    //                               {
-    //                                 skuData: getSkusData(item.simpleSkus),
-    //                                 packageId: item.product_info.packageId
-    //                               },
-    //                               sessionId,
-    //                               pincode,
-    //                               item.qty,
-    //                               item.product_info.product_id,
-    //                               item.simple_sku,
-    //                               item,
-    //                               selectForDemo
-    //                             )(removeFromCart)(addToSelectForDemo)
-    //                           : onClick(
-    //                               {
-    //                                 skuData: [
-    //                                   {
-    //                                     simple_sku: item.simple_sku,
-    //                                     qty: item.qty
-    //                                   }
-    //                                 ],
-    //                                 packageId: false
-    //                               },
-    //                               sessionId,
-    //                               pincode,
-    //                               item.qty,
-    //                               item.product_info.product_id,
-    //                               item.simple_sku,
-    //                               item,
-    //                               selectForDemo
-    //                             )(removeFromCart)(addToSelectForDemo)
-    //                       }
-    //                     >
-    //                       Remove
-    //                     </Button>
-    //                   </Flex>
-    //                 )}
-    //               </Row>
+                              onClick={
+                                item.product_info.packageId
+                                  ? onClick(
+                                      {
+                                        skuData: getSkusData(item.simpleSkus),
+                                        packageId: item.product_info.packageId
+                                      },
+                                      sessionId,
+                                      pincode,
+                                      item.qty,
+                                      item.product_info.product_id,
+                                      item.simple_sku,
+                                      item,
+                                      selectForDemo
+                                    )(removeFromCart)(addToSelectForDemo)
+                                  : onClick(
+                                      {
+                                        skuData: [
+                                          {
+                                            simple_sku: item.simple_sku,
+                                            qty: item.qty
+                                          }
+                                        ],
+                                        packageId: false
+                                      },
+                                      sessionId,
+                                      pincode,
+                                      item.qty,
+                                      item.product_info.product_id,
+                                      item.simple_sku,
+                                      item,
+                                      selectForDemo
+                                    )(removeFromCart)(addToSelectForDemo)
+                              }
+                            >
+                              Remove
+                            </Button>
+                          </Flex>
+                        )}
+                      </Row>
 
-    //               {item.freebie_info && item.freebie_info.name && (
-    //                 <Box
-    //                   display="flex"
-    //                   ml="16.65%"
-    //                   p="15px"
-    //                   style={{ background: "#fbfbfb", position: "relative" }}
-    //                 >
-    //                   <Col className="td" variant="col-2" pr="0.625rem">
-    //                     <Link
-    //                       to={formatProductURL(
-    //                         item.freebie_info.name,
-    //                         item.configurable_sku
-    //                       )}
-    //                     >
-    //                       <ImageShimmer
-    //                         src={item.freebie_info.image}
-    //                         height="100px"
-    //                       >
-    //                         {imageURL => (
-    //                           <Image
-    //                             styles={{ width: "80%" }}
-    //                             src={imageURL}
-    //                             alt=""
-    //                           />
-    //                         )}
-    //                       </ImageShimmer>
-    //                     </Link>
-    //                   </Col>
-    //                   <Col
-    //                     className="td"
-    //                     variant="col-7"
-    //                     pr="1.5rem"
-    //                     pl="0.3125rem"
-    //                   >
-    //                     <Link
-    //                       to={formatProductURL(
-    //                         item.freebie_info.name,
-    //                         item.configurable_sku
-    //                       )}
-    //                     >
-    //                       <Box mb="10px">
-    //                         <Heading
-    //                           color="heading"
-    //                           fontSize={16}
-    //                           lineHeight={1.4}
-    //                           fontWeight="normal"
-    //                         >
-    //                           {item.freebie_info.name}
-    //                         </Heading>
-    //                       </Box>
-    //                     </Link>
-    //                     <Box>
-    //                       <Text
-    //                         color="#575757"
-    //                         fontSize="0.75rem"
-    //                         mt="0"
-    //                         mb="0"
-    //                       >
-    //                         Delivery Details
-    //                       </Text>
-    //                       <Text
-    //                         color={
-    //                           item.freebie_info.delivery_time_text.indexOf(
-    //                             "Currently"
-    //                           ) === -1
-    //                             ? "green"
-    //                             : "red"
-    //                         }
-    //                         fontSize="0.875rem"
-    //                         mt="0"
-    //                       >
-    //                         {item.freebie_info.delivery_time_text}
-    //                       </Text>
-    //                     </Box>
-    //                     {item.freebie_info.assembly_service && (
-    //                       <Box color="uspTitle" fontSize="0.75rem">
-    //                         <Text
-    //                           color="#575757"
-    //                           fontSize="0.75rem"
-    //                           mt="0"
-    //                           mb="0"
-    //                         >
-    //                           Assembly
-    //                         </Text>
-    //                         <Text fontSize="0.875rem" mt="0" mb="0">
-    //                           Offered By Hometown
-    //                         </Text>
-    //                         <Text fontSize="0.875rem" mt="0">
-    //                           <Button
-    //                             // className={styles.popoverBtn}
-    //                             fontSize="0.875rem"
-    //                             color="#3cc0dc"
-    //                             btnType="link"
-    //                             p="0"
-    //                           >
-    //                             Details
-    //                           </Button>
-    //                           <div>
-    //                             {/* className={styles.popover} */}
-    //                             <Text
-    //                               fontSize="0.875rem"
-    //                               mt="0"
-    //                               mb="0"
-    //                               ta="center"
-    //                             >
-    //                               Assembly will be done within 48hrs of Delivery
-    //                               & applicable within serviceable limits
-    //                             </Text>
-    //                           </div>
-    //                         </Text>
-    //                       </Box>
-    //                     )}
-    //                   </Col>
-    //                   <Box className="td" col="3" pr="0.625rem">
-    //                     <Row display="block" m="0">
-    //                       <Box col="12" ta="left">
-    //                         <Label color="textLight" mb="0" mt="0">
-    //                           Qty. {item.freebie_info.qty}
-    //                         </Label>
-    //                       </Box>
-    //                     </Row>
-    //                     <Box mt="0.3125rem">
-    //                       {item.freebie_info.unit_price !==
-    //                         item.freebie_info.special_price &&
-    //                         item.freebie_info.special_price !== 0 && (
-    //                           <React.Fragment>
-    //                             <Label color="black" fontSize="0.875rem" mt="0">
-    //                               Rs.{" "}
-    //                               {item.freebie_info.net_price >
-    //                               item.freebie_info.unit_price * item.qty
-    //                                 ? formatAmount(
-    //                                     Number(item.freebie_info.unit_price) *
-    //                                       Number(item.qty)
-    //                                   )
-    //                                 : formatAmount(
-    //                                     Number(item.freebie_info.net_price) *
-    //                                       Number(item.qty)
-    //                                   )}
-    //                             </Label>
-    //                             <br />
-    //                           </React.Fragment>
-    //                         )}
-    //                     </Box>
-    //                   </Box>
-    //                   <Box className={styles.freebieCartItem} />
-    //                 </Box>
-    //               )}
-    //             </Box>
-    //           ) : null}
+                      {item.freebie_info && item.freebie_info.name && (
+                        <Box
+                          display="flex"
+                          ml="16.65%"
+                          p="15px"
+                          style={{
+                            background: "#fbfbfb",
+                            position: "relative"
+                          }}
+                        >
+                          <Col className="td" variant="col-2" pr="0.625rem">
+                            <Link
+                              to={formatProductURL(
+                                item.freebie_info.name,
+                                item.configurable_sku
+                              )}
+                            >
+                              <ImageShimmer
+                                src={item.freebie_info.image}
+                                height="100px"
+                              >
+                                {imageURL => (
+                                  <Image
+                                    styles={{ width: "80%" }}
+                                    src={imageURL}
+                                    alt=""
+                                  />
+                                )}
+                              </ImageShimmer>
+                            </Link>
+                          </Col>
+                          <Col
+                            className="td"
+                            variant="col-7"
+                            pr="1.5rem"
+                            pl="0.3125rem"
+                          >
+                            <Link
+                              to={formatProductURL(
+                                item.freebie_info.name,
+                                item.configurable_sku
+                              )}
+                            >
+                              <Box mb="10px">
+                                <Heading
+                                  color="heading"
+                                  fontSize={16}
+                                  lineHeight={1.4}
+                                  fontWeight="normal"
+                                >
+                                  {item.freebie_info.name}
+                                </Heading>
+                              </Box>
+                            </Link>
+                            <Box>
+                              <Text
+                                color="#575757"
+                                fontSize="0.75rem"
+                                mt="0"
+                                mb="0"
+                              >
+                                Delivery Details
+                              </Text>
+                              <Text
+                                color={
+                                  item.freebie_info.delivery_time_text.indexOf(
+                                    "Currently"
+                                  ) === -1
+                                    ? "green"
+                                    : "red"
+                                }
+                                fontSize="0.875rem"
+                                mt="0"
+                              >
+                                {item.freebie_info.delivery_time_text}
+                              </Text>
+                            </Box>
+                            {item.freebie_info.assembly_service && (
+                              <Box color="uspTitle" fontSize="0.75rem">
+                                <Text
+                                  color="#575757"
+                                  fontSize="0.75rem"
+                                  mt="0"
+                                  mb="0"
+                                >
+                                  Assembly
+                                </Text>
+                                <Text fontSize="0.875rem" mt="0" mb="0">
+                                  Offered By Hometown
+                                </Text>
+                                <Text fontSize="0.875rem" mt="0">
+                                  <Button
+                                    // className={styles.popoverBtn}
+                                    fontSize="0.875rem"
+                                    color="#3cc0dc"
+                                    btnType="link"
+                                    p="0"
+                                  >
+                                    Details
+                                  </Button>
+                                  <div>
+                                    {/* className={styles.popover} */}
+                                    <Text
+                                      fontSize="0.875rem"
+                                      mt="0"
+                                      mb="0"
+                                      ta="center"
+                                    >
+                                      Assembly will be done within 48hrs of
+                                      Delivery & applicable within serviceable
+                                      limits
+                                    </Text>
+                                  </div>
+                                </Text>
+                              </Box>
+                            )}
+                          </Col>
+                          <Box className="td" col="3" pr="0.625rem">
+                            <Row display="block" m="0">
+                              <Box col="12" ta="left">
+                                <Label color="textLight" mb="0" mt="0">
+                                  Qty. {item.freebie_info.qty}
+                                </Label>
+                              </Box>
+                            </Row>
+                            <Box mt="0.3125rem">
+                              {item.freebie_info.unit_price !==
+                                item.freebie_info.special_price &&
+                                item.freebie_info.special_price !== 0 && (
+                                  <React.Fragment>
+                                    <Label
+                                      color="black"
+                                      fontSize="0.875rem"
+                                      mt="0"
+                                    >
+                                      Rs.{" "}
+                                      {item.freebie_info.net_price >
+                                      item.freebie_info.unit_price * item.qty
+                                        ? formatAmount(
+                                            Number(
+                                              item.freebie_info.unit_price
+                                            ) * Number(item.qty)
+                                          )
+                                        : formatAmount(
+                                            Number(
+                                              item.freebie_info.net_price
+                                            ) * Number(item.qty)
+                                          )}
+                                    </Label>
+                                    <br />
+                                  </React.Fragment>
+                                )}
+                            </Box>
+                          </Box>
+                          <Box className={styles.freebieCartItem} />
+                        </Box>
+                      )}
+                    </Box>
+                  ) : null}
 
-    //           <ProductItem
-    //             isPackage={item.product_info.packageId ? true : false}
-    //             packageId={item.product_info.packageId}
-    //           />
-    //         </Box>
-    //       ))}
-    //     </Box>
+                  <ProductItem
+                    isPackage={item.product_info.packageId ? true : false}
+                    packageId={item.product_info.packageId}
+                  />
+                </Box>
+              ))}
+            </div>
+          </Box>
 
-    //     {/* Pricing Sidebar */}
-    //     <Box variant="col-4">
-    //       <Box bg="sidebar" px={[15, 15, 40]} py={[20, 20, 30]}>
-    //         <OrderSummary
-    //           itemsTotal={summary.items}
-    //           savings={summary.savings}
-    //           setDiscount={summary.combined_set_discount}
-    //           shipping={summary.shipping_charges}
-    //           totalCart={summary.total}
-    //           loadingnextstep={checkingCart}
-    //           onClick={() =>
-    //             checkCartBeforeCheckout(
-    //               checkCart,
-    //               sessionId
-    //             )(addToSelectForDemo)
-    //           }
-    //           outOfStockList={outOfStockList}
-    //           discount={summary.coupon_discount}
-    //           landingPageLink={demoLandingPageUrl}
-    //           selectedForDemo={selectForDemo.length !== 0}
-    //           btnText="SECURE CHECKOUT"
-    //         />
-    //         <Box pb={20}>
-    //           <Heading fontSize={16} mb={5} color="#2c2e3f">
-    //             Exchange & Return Policy
-    //           </Heading>
-    //           <Text
-    //             fontSize={14}
-    //             lineHeight={1.3}
-    //             fontFamily="light"
-    //             color="#2c2e3f"
-    //             pb={5}
-    //           >
-    //             We are committed to ensuring your satisfaction with any product
-    //             you have ordered from us...
-    //           </Text>
-    //           <Label
-    //             color="#232324"
-    //             fontSize={12}
-    //             fontFamily="medium"
-    //             sx={{
-    //               borderBottom: "1px",
-    //               borderColor: "#232324"
-    //             }}
-    //           >
-    //             <Link to="/return-policy">Read More</Link>
-    //           </Label>
-    //         </Box>
-    //         <Box pb={24}>
-    //           <Heading fontSize={16} mb={5} color="#2c2e3f">
-    //             Terms & Conditions
-    //           </Heading>
-    //           <Text
-    //             fontSize={14}
-    //             lineHeight={1.3}
-    //             fontFamily="light"
-    //             color="#2c2e3f"
-    //             pb={5}
-    //           >
-    //             In using the HomeTown.in service, of Praxis Home Retail Ltd. you
-    //             are deemed to have accepted the terms and conditions..
-    //           </Text>
-    //           <Label
-    //             color="#232324"
-    //             fontSize={12}
-    //             fontFamily="medium"
-    //             borderBottom="1px"
-    //             borderColor="#232324"
-    //           >
-    //             <Link to="/terms-and-conditions">Read More</Link>
-    //           </Label>
-    //         </Box>
-    //         <PaymentMethods m={0} />
-    //       </Box>
-    //     </Box>
-    //   </Row>
-    //   {!isLoggedIn && (
-    //     <ResponsiveModal
-    //       classNames={{ modal: "loginModal" }}
-    //       onCloseModal={handleLoginModal}
-    //       open={openLogin}
-    //     >
-    //       <Box py={32} px={32}>
-    //         <LoginModal />
-    //       </Box>
-    //     </ResponsiveModal>
-    //   )}
-    // </Container>
+          {/* Pricing Sidebar */}
+          <Box variant="col-4">
+            <Box
+              style={{ paddingTop: "0px" }}
+              px={[15, 15, 40]}
+              py={[20, 20, 30]}
+            >
+              <Box pr="0px" pl="0px">
+                <ApplyCoupon price={cartTotal} coupon={appliedCoupon} />
+                <ApplyGiftWrapper />
+              </Box>
+              <Box>
+                <PriceSummary
+                  summaryPrice={summary}
+                  onClick={() =>
+                    checkCartBeforeCheckout(
+                      checkCart,
+                      sessionId
+                    )(addToSelectForDemo)
+                  }
+                />
+              </Box>
+              <Box>
+                <Offers cartEmiDetails={summary} />
+              </Box>
+              {/* <OrderSummary
+              itemsTotal={summary.items}
+              savings={summary.savings}
+              setDiscount={summary.combined_set_discount}
+              shipping={summary.shipping_charges}
+              totalCart={summary.total}
+              loadingnextstep={checkingCart}
+              onClick={() =>
+                checkCartBeforeCheckout(
+                  checkCart,
+                  sessionId
+                )(addToSelectForDemo)
+              }
+              outOfStockList={outOfStockList}
+              discount={summary.coupon_discount}
+              landingPageLink={demoLandingPageUrl}
+              selectedForDemo={selectForDemo.length !== 0}
+              btnText="SECURE CHECKOUT"
+            /> */}
+            </Box>
+          </Box>
+        </Row>
+        <Box pb={20}>
+          <HappyToHelp />
+        </Box>
+        {!isLoggedIn && (
+          <ResponsiveModal
+            classNames={{ modal: "loginModal" }}
+            onCloseModal={handleLoginModal}
+            open={openLogin}
+          >
+            <Box py={32} px={32}>
+              <LoginModal />
+            </Box>
+          </ResponsiveModal>
+        )}
+      </Container>
+    </div>
   );
 };
 

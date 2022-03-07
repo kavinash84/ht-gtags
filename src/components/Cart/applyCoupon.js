@@ -24,13 +24,7 @@ class ApplyCoupon extends Component {
   render() {
     const { price, coupon } = this.props;
     return (
-      <Div col="12" p="22px" style={{ background: 'white' }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <div style={{ fontWeight: 600, color: 'black', fontSize: '16px' }}>Shopping Cart</div>
-          <div style={{ color: 'black', fontSize: '16px' }}>
-            Total Price: <span style={{ fontWeight: 600, color: 'black' }}>₹{price ? formatAmount(price) : null}</span>
-          </div>
-        </div>
+      <Div col="12" p="22px 10px" style={{ background: 'white' }}>
         <div
           style={{
             border: '1px solid #E3E3E3',

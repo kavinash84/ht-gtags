@@ -45,22 +45,20 @@ class CartPincode extends React.Component {
     }
   }
   render() {
-    // console.log(document.getElementById('pincode_input').value, 'pincode_input');
     const { setPincodeOrCityQuery, setPincode, pincodeQuery, load, loading, loaded, results, showResults } = this.props;
     return (
-      <Div className={styles.pincode} pt="0" pb="0.3125rem">
+      <Div className={styles.pincode} pt="0" pb="0">
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
           <input
             type="text"
-            // id="pincode_input"
             placeholder="Enter Pincode For Delivery Details"
             onChange={onChange(setPincodeOrCityQuery, load)}
             value={pincodeQuery}
             ref={this.pincodeinputref}
-            style={{ background: 'white', borderRadius: '10px', padding: '5px 10px', color: '#707070' }}
+            style={{ background: 'white', borderRadius: '10px', padding: '5px 10px', color: '#707070' , width:'1000px'}}
           />
           <div
-            style={{ color: '#F47020', fontSize: '12px', marginLeft: '10px' }}
+            style={{ color: '#F47020', fontSize: '14px', marginLeft: '20px', cursor:'pointer'}}
             onClick={setPincodeInStore(setPincode, pincodeQuery)}
           >
             Check

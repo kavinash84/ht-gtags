@@ -10,22 +10,24 @@ const HappyToHelp = () => {
   return (
     <div className={styles.helpuContainer}>
       <div className={styles.helpuHeader}>Happy To Help</div>
+      <div style={{display: 'flex', flexDirection: 'row', justifyContent:'space-around'}}>
       <div className={styles.helpuitem}>
         <img src={phone} alt="phone" className={styles.helpuimg} />
         <div className={styles.helputext}>
-          Call us at 18002100004
+          Call us at <br></br> <span style={{color:'black'}}>18002100004</span>
         </div>
       </div>
       <div className={styles.helpuitem}>
         <img src={message} alt="phone" className={styles.helpuimg} />
         <div className={styles.helputext}>
           Write to us at <br />
-          care@hometown.in
+         <span style={{color:'black'}}>care@hometown.in</span> 
         </div>
       </div>
       <div className={styles.helpuitem}>
         <img src={dollericon} alt="phone2" className={styles.helpuimg} />
-        <div className={styles.helputext}>Easy returns Policy</div>
+        <div className={styles.helputext} style={{color:'black'}}>Easy returns Policy</div>
+      </div>
       </div>
     </div>
   );

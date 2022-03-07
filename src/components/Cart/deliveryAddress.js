@@ -23,17 +23,17 @@ class DeliveryAddress extends React.Component {
     return (
       <Row className={styles.pincodeCheck} type="block" m="0" mb="0" mt="0">
         {this.state.takePincode ? (
-          <Div col="12" pr="0" pl="0" className={styles.address_wrapper}>
+          <Div pr="0" pl="0">
             <CartPincode />
           </Div>
         ) : (
           <Div col="12" pr="0" pl="0" pt="10px" pb="10px" className={styles.address_wrapper}>
             <div className={styles.address_container}>
-              <div className={styles.filtered_address} style={{ marginTop: '5px' }}>
+              <div className={styles.filtered_address}>
                 Deliver To: {pincode}
               </div>
             </div>
-            <Button fontSize="0.75rem" color="#F47020" btnType="link" p="0" pl="5px">
+            <Button style={{backgroundColor:'none', textTransform:'none', height:'0px'}} fontSize="14px" color="#F47020" btnType="link" p="0" pl="5px">
               <div
                 onClick={() => {
                   this.setState({ takePincode: true });

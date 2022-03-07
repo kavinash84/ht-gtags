@@ -26,13 +26,13 @@ class Offers extends React.Component {
             >
               {cartEmiDetails.cart_emi_detail.map(item => (
                 <Link to="/promotions">
-                <p style={{ marginBottom: '3px' }}>{item.mobile}</p>
+                <p style={{ marginBottom: '3px', color: '#999999', }}>{item.mobile}</p>
                 </Link>
               ))}
             </div>
             {cartEmiDetails.cart_emi_detail.length > 1 && (
               <div
-                style={{ fontSize: '12px', color: '#F47020', padding: '15px' }}
+                style={{ fontSize: '12px', color: '#F47020', padding: '15px' , cursor:'pointer'}}
                 onClick={() => {
                   this.setState({ showMore: !this.state.showMore });
                 }}
