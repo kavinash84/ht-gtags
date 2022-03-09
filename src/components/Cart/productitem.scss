@@ -38,15 +38,7 @@
     justify-content: space-between;
     width: 100%;
     margin-bottom: 15px;
-    .qtybtn {
-      border: 1px solid #f47020;
-      border-radius: 5px;
-      padding: 0px 5px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      min-width: 70px;
-    }
+  
   }
 }
 .checkbox_container {
@@ -89,4 +81,16 @@
 /* When the checkbox is checked, add a blue background */
 .checkbox_container input:checked ~ .checkmark {
   background-color: #f47020;
+}
+
+.qtybtn {
+  border: 1px solid #f47020;
+  border-radius: 5px;
+  padding: 8px 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 70px;
+  margin-right: 20px;
+  margin-top: -15px;
 }

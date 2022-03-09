@@ -70,6 +70,8 @@ import PriceSummary from "./Summary";
 import ApplyGiftWrapper from "./ApplyGiftWrapper";
 import HappyToHelp from "./HappyToHelp";
 
+const Delete = require("../../../static/cart/delete.svg");
+
 const styles = require("./Cart.scss");
 
 const despatchClearSelectForDemo = dispatcheroEmpty => {
@@ -282,69 +284,6 @@ const Cart = ({
             <Box pr="0px" pl="0px">
               <DeliveryAddress />
             </Box>
-            {/* <Row alignItems="center">
-            <Box variant="col-8">
-              {packageItems.length > 0 ? (
-                <Heading>
-                  My Shopping Cart : {cartItemsNumber + packageItems.length - 1}{" "}
-                  Items
-                </Heading>
-              ) : (
-                <Heading>My Shopping Cart : {cartItemsNumber} Items</Heading>
-              )}
-            </Box>
-            <Box variant="col-4" textAlign="right">
-              <Button
-                height="auto"
-                display="flex"
-                alignItems="center"
-                ml="auto"
-                disabled={isAnyProductOutofStoc}
-                justifyContent="center"
-                width={1}
-                onClick={() =>
-                  checkCartBeforeCheckout(
-                    checkCart,
-                    sessionId
-                  )(addToSelectForDemo)
-                }
-              >
-                <Image
-                  src={checkoutIcon}
-                  alt="Delete"
-                  height="18px"
-                  mr="0.625rem"
-                />
-                SECURE CHECKOUT
-              </Button> */}
-            {/* </Box> */}
-            {/* <Row alignItems="center" variant="col-12" mt={20}> */}
-            {/* <Image height="25px" mr={5} src={location} />
-              <Label color="textFilter" mr={5}>
-                For delivery details
-              </Label>
-              <Label color="textFilter" onClick={handlePincodeModal} mr={10}>
-                {pincode}
-              </Label>
-              <Button fontSize="16" color="white" onClick={handlePincodeModal}>
-                change
-              </Button>
-            </Row> */}
-            {/* </Row> */}
-            {/* <Row type="block" m="0" mb="0" mt="1rem">
-            <Box>
-              <Link to="/promotions">
-                <Image src={cashbackBanner} alt="" />
-              </Link>
-            </Box>
-          </Row> */}
-            {/* {demoProductsBanner && (
-            <Row type="block" m="0" mb="0" mt="1rem">
-              <Box>
-                <Image src={demoBanner} alt="" />
-              </Box>
-            </Row>
-          )} */}
             <Row
               mt={30}
               mb={10}
@@ -353,18 +292,7 @@ const Cart = ({
               sx={{
                 borderBottom: "2px solid #F2F2F2"
               }}
-            >
-              {/* <Box variant="col-8" pl={0}>
-                <Text fontFamily="medium">Product Details</Text>
-              </Box>
-              <Box variant="col-2" pl={8}>
-                <Text fontFamily="medium">Qty.</Text>
-              </Box>
-              <Box variant="col-2">
-                <Text fontFamily="medium">Price</Text>
-              </Box> */}
-              {/* <button onClick={handleClickDemo} >TRIAL</button> */}
-            </Row>
+            ></Row>
             <div style={{ borderRight: "2px solid #F2F2F2" }}>
               {results.map(item => (
                 <Box
@@ -417,36 +345,172 @@ const Cart = ({
                             </ImageShimmer>
                           </Link>
                         </Box>
-                        <Box variant="col-5" pl={30}>
-                          <Link
-                            to={
-                              item.product_info.packageId
-                                ? `/package-catalog/${item.product_info.packageId}`
-                                : formatProductURL(
-                                    item.product_info.name,
-                                    item.configurable_sku
-                                  )
-                            }
+                        <Box variant="col-9" pl={30}>
+                          <div
+                            style={{ display: "flex", alignItems: "center" }}
                           >
-                            <Box mb={10}>
-                              <Heading
-                                color="heading"
-                                fontSize={16}
-                                lineHeight={1.4}
-                                fontWeight="normal"
-                              >
-                                {item.product_info.name}
-                              </Heading>
-                            </Box>
-                            {item.product_info.color && (
-                              <Box mb={15}>
-                                <Text color="#575757">
-                                  {item.product_info.color}
-                                </Text>
+                            <Link
+                              to={
+                                item.product_info.packageId
+                                  ? `/package-catalog/${item.product_info.packageId}`
+                                  : formatProductURL(
+                                      item.product_info.name,
+                                      item.configurable_sku
+                                    )
+                              }
+                            >
+                              <Box mb={10} style={{ maxWidth: "90%" }}>
+                                <Heading
+                                  color="heading"
+                                  fontSize={16}
+                                  lineHeight={1.4}
+                                  fontWeight="normal"
+                                >
+                                  {item.product_info.name}
+                                </Heading>
+                              </Box>
+                            </Link>
+                            {item.product_info.packageId ? (
+                              <div>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                              </div>
+                            ) : (
+                              <Box textAlign="center">
+                                <ProductQuantity
+                                  cartItemLoading={cartItemLoading}
+                                  cartId={item.id_customer_cart}
+                                  quantity={item.qty}
+                                  simpleSku={item.simple_sku}
+                                  skuId={item.configurable_sku}
+                                  configId={
+                                    item.product_info &&
+                                    item.product_info.product_id
+                                      ? item.product_info.product_id
+                                      : ""
+                                  }
+                                />
                               </Box>
                             )}
-                          </Link>
-                          <Box pb={20}>
+
+                            <Button
+                              variant="link"
+                              fontSize={12}
+                              mt="-15px"
+                              display="flex"
+                              alignItems="center"
+                              disabled={cartItemLoading(item.id_customer_cart)}
+                              onClick={
+                                item.product_info.packageId
+                                  ? onClick(
+                                      {
+                                        skuData: getSkusData(item.simpleSkus),
+                                        packageId: item.product_info.packageId
+                                      },
+                                      sessionId,
+                                      pincode,
+                                      item.qty,
+                                      item.product_info.product_id,
+                                      item.simple_sku,
+                                      item,
+                                      selectForDemo
+                                    )(removeFromCart)(addToSelectForDemo)
+                                  : onClick(
+                                      {
+                                        skuData: [
+                                          {
+                                            simple_sku: item.simple_sku,
+                                            qty: item.qty
+                                          }
+                                        ],
+                                        packageId: false
+                                      },
+                                      sessionId,
+                                      pincode,
+                                      item.qty,
+                                      item.product_info.product_id,
+                                      item.simple_sku,
+                                      item,
+                                      selectForDemo
+                                    )(removeFromCart)(addToSelectForDemo)
+                              }
+                            >
+                              <Image src={Delete} alt="delete" />
+                            </Button>
+                          </div>
+                          {item.product_info.brand && (
+                            <Box mb={15}>
+                              <Text color="#999999" fontSize="12px">
+                                By {""} {item.product_info.brand}
+                              </Text>
+                            </Box>
+                          )}
+
+                          <div style={{display: "flex", marginTop:"20px"}}>
+                            <div style={{ marginRight: "5px" }}>
+                              <div
+                                style={{
+                                  fontSize: "14px",
+                                  color: "black",
+                                  marginBottom: "5px",
+                                  fontWeight: 600
+                                }}
+                              >
+                                Delivery by:
+                              </div>
+                              <div
+                                style={{ fontSize: "14px", color: "#999999" , marginTop:'10px'}}
+                              >
+                                {item.product_info.delivery_time_text
+                                  .split(" ")
+                                  .splice(2)
+                                  .map(items => {
+                                    return " " + items;
+                                  })}
+                              </div>
+                            </div>
+                            <div style={{ marginRight: "5px" , marginLeft:'150px'}}>
+                              <div
+                                style={{
+                                  fontSize: "16px",
+                                  color: "#F47020",
+                                  marginBottom: "5px",
+                                  fontWeight: 600
+                                }}
+                              >
+                                ₹{item.product_info.net_price ? formatAmount(item.product_info.net_price) : null}
+                              </div>
+                              {item.product_info.discount ? (
+                                <div
+                                  style={{
+                                    fontSize: "14px",
+                                    whiteSpace: "nowrap",
+                                    marginTop: "10px"
+                                  }}
+                                >
+                                  <span
+                                    style={{
+                                      color: "#999999",
+                                      textDecoration: "line-through"
+                                    }}
+                                  >
+                                    ₹
+                                    {item.product_info.unit_price ? formatAmount(item.product_info.unit_price) : null}
+                                  </span>
+                                  <span
+                                    style={{
+                                      fontSize: "14px",
+                                      color: "#F47020",
+                                      marginLeft: "5px"
+                                    }}
+                                  >
+                                    {item.product_info.discount}% Off
+                                  </span>
+                                </div>
+                              ) : null}
+                            </div>
+                          </div>
+
+                          {/* <Box pb={20}>
                             <Flex alignItems="center">
                               <Image
                                 width="initial"
@@ -467,9 +531,9 @@ const Cart = ({
                                 {item.product_info.delivery_time_text}
                               </Text>
                             </Flex>
-                          </Box>
-                          <Flex alignItems="center">
-                            {item.product_info.packageId ? null : (
+                          </Box> */}
+                          {/* <Flex alignItems="center"> */}
+                          {/* {item.product_info.packageId ? null : (
                               <Button
                                 variant="link"
                                 fontSize={12}
@@ -510,59 +574,15 @@ const Cart = ({
                                 />
                                 <Text fontSize={12}>Add to wishlist</Text>
                               </Button>
-                            )}
-                            {item.product_info.packageId ? null : (
+                            )} */}
+                          {/* {item.product_info.packageId ? null : (
                               <Text mx={8} fontSize={16}>
                                 {" "}
                                 |{" "}
                               </Text>
-                            )}
+                            )} */}
 
-                            <Button
-                              variant="link"
-                              fontSize={12}
-                              display="flex"
-                              alignItems="center"
-                              disabled={cartItemLoading(item.id_customer_cart)}
-                              onClick={
-                                item.product_info.packageId
-                                  ? onClick(
-                                      {
-                                        skuData: getSkusData(item.simpleSkus),
-                                        packageId: item.product_info.packageId
-                                      },
-                                      sessionId,
-                                      pincode,
-                                      item.qty,
-                                      item.product_info.product_id,
-                                      item.simple_sku,
-                                      item,
-                                      selectForDemo
-                                    )(removeFromCart)(addToSelectForDemo)
-                                  : onClick(
-                                      {
-                                        skuData: [
-                                          {
-                                            simple_sku: item.simple_sku,
-                                            qty: item.qty
-                                          }
-                                        ],
-                                        packageId: false
-                                      },
-                                      sessionId,
-                                      pincode,
-                                      item.qty,
-                                      item.product_info.product_id,
-                                      item.simple_sku,
-                                      item,
-                                      selectForDemo
-                                    )(removeFromCart)(addToSelectForDemo)
-                              }
-                            >
-                              <CloseIcon width={14} height={14} mr={10} />{" "}
-                              Remove
-                            </Button>
-                          </Flex>
+                          {/* </Flex> */}
                           {item.product_info.demo_product && (
                             <Box mt={15}>
                               <div className="checkbox">
@@ -641,29 +661,8 @@ const Cart = ({
                       </Box>
                     )} */}
                         </Box>
-                        {item.product_info.packageId ? (
-                          <div>
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                          </div>
-                        ) : (
-                          <Box variant="col-2" textAlign="center">
-                            <ProductQuantity
-                              cartItemLoading={cartItemLoading}
-                              cartId={item.id_customer_cart}
-                              quantity={item.qty}
-                              simpleSku={item.simple_sku}
-                              skuId={item.configurable_sku}
-                              configId={
-                                item.product_info &&
-                                item.product_info.product_id
-                                  ? item.product_info.product_id
-                                  : ""
-                              }
-                            />
-                          </Box>
-                        )}
 
-                        <Box variant="col-2">
+                        {/* <Box variant="col-2">
                           <Label color="heading" fontSize={18}>
                             ₹{" "}
                             {item.product_info.net_price >
@@ -676,7 +675,7 @@ const Cart = ({
                                   Number(item.product_info.net_price)
                                 )}
                           </Label>
-                        </Box>
+                        </Box> */}
 
                         {isProductOutofStock(item.configurable_sku) && (
                           <Flex

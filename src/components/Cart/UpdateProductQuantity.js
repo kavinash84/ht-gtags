@@ -2,6 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
+const styles = require("./productitem.scss");
+
 /**
  * Components
  */
@@ -52,10 +54,8 @@ const ProductQuantity = ({
   cartItemLoading,
   configId
 }) => (
-  <Row alignItems="center">
-    <Button
-      variant="link"
-      color="textDark"
+  <div className={styles.qtybtn}>
+    <button
       onClick={onClick(
         cartId,
         skuId,
@@ -66,19 +66,23 @@ const ProductQuantity = ({
         configId
       )(updateQuantity)}
       disabled={cartItemLoading(cartId) || quantity <= 1}
+      style={{
+        padding: "0px",
+        border: "none",
+        background: "transparent",
+        cursor: "pointer"
+      }}
     >
-      <Image src={reductIcon} alt="" height={24} />
-    </Button>
-    <Label color="textLight" px={10}>
-      {cartItemLoading(cartId) || cartItemLoading(configId) ? (
-        <Image width={20} className="spin" src={LoaderIcon} />
-      ) : (
-        quantity
-      )}
-    </Label>
-    <Button
-      variant="link"
-      color="textDark"
+      -
+    </button>
+    <div style={{fontSize: "14px"}}>{quantity}</div>
+    <button
+      style={{
+        padding: "0px",
+        border: "none",
+        background: "transparent",
+        cursor: "pointer"
+      }}
       onClick={onClick(
         cartId,
         skuId,
@@ -90,9 +94,9 @@ const ProductQuantity = ({
       )(updateQuantity)}
       disabled={cartItemLoading(cartId)}
     >
-      <Image src={increaseIcon} alt="" height={24} />
-    </Button>
-  </Row>
+      +
+    </button>
+  </div>
 );
 
 ProductQuantity.defaultProps = {
