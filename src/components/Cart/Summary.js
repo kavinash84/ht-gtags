@@ -3,7 +3,7 @@ import { formatAmount } from "utils/formatters";
 
 const styles = require("./Cart.scss");
 
-const PriceSummary = ({ summaryPrice }) => {
+const PriceSummary = ({ summaryPrice , onClick }) => {
   const {
     coupon_discount,
     items,
@@ -12,8 +12,7 @@ const PriceSummary = ({ summaryPrice }) => {
     total,
     gift_wrap_amount,
     is_gift_wrap_applied,
-    combined_set_discount,
-    onClick
+    combined_set_discount
   } = summaryPrice;
   return (
     <div className={styles.PriceSummary_comtaimer}>
