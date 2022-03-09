@@ -92,6 +92,44 @@ class DesignBuildContainer extends React.Component {
             name="description"
             content={seoInfo && seoInfo.meta_description}
           />
+          {showScript ? (
+            // <!-- Facebook Pixel Code -->
+            <script>
+              {`
+               window.addEventListener('load',function(){
+                var x = 0;
+                var myVar = setInterval(function(){
+                  if(jQuery('h2:contains(Thank You For Your)').is(":visible")){
+                    if(x == 0){
+                      gtag('event', 'conversion', {'send_to': 'AW-832074530/h7wJCMXmzdcCEKLm4YwD'});
+                      x = 1;
+                    }
+                    clearInterval(myVar);
+                  }
+                }, 1000);
+              });
+              `}
+            </script>
+          ) : // <!-- End Facebook Pixel Code -->
+          null}
+          {showScript ? (
+            // <!-- Facebook Pixel Code -->
+            <script>
+              {`
+               !function(f,b,e,v,n,t,s)
+               {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+               n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+               if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+               n.queue=[];t=b.createElement(e);t.async=!0;
+               t.src=v;s=b.getElementsByTagName(e)[0];
+               s.parentNode.insertBefore(t,s)}(window, document,'script',
+               'https://connect.facebook.net/en_US/fbevents.js');
+               fbq('init', '1024172491523922');
+               fbq('track', 'Lead');               
+              `}
+            </script>
+          ) : // <!-- End Facebook Pixel Code -->
+          null}
         </Helmet>
         <Header handleModal={this.handleModal} />
         <TopBanner handleModal={this.handleModal} />
