@@ -49,10 +49,10 @@ const SITE_URL_MOBILE = "https://m.hometown.in";
   fetch: async ({ store: { dispatch, getState } }) => {
     const {
       pincode: { selectedPincode },
-      app: { sessionId, csrfToken }
+      app: { sessionId }
     } = getState();
     const defaultPincode = selectedPincode === "" ? PINCODE : selectedPincode;
-    if (!isSessionSet(getState()) || !sessionId || !csrfToken) {
+    if (!isSessionSet(getState()) || !sessionId) {
       await dispatch(generateSession(defaultPincode));
     }
     if (!isSectionLoaded(getState(), "menu")) {

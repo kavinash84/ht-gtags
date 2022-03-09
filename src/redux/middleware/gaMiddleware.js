@@ -301,7 +301,7 @@ export default function gaMiddleware() {
           // window.dataLayer.push(eventObject);
         }
         /* Cart Tracking */
-        if (type === "cart/ADD_TO_CART_SUCCESS") {
+        if (type === "cart/ADD_TO_CART_SUCCESSS") {
           const {
             id_customer_cart: idcustomerCart,
             cart: {
