@@ -69,10 +69,12 @@ import CartBreadCumb from "./breadDumb";
 import PriceSummary from "./Summary";
 import ApplyGiftWrapper from "./ApplyGiftWrapper";
 import HappyToHelp from "./HappyToHelp";
+import DemoModal from "./DemoModal";
 
 const Delete = require("../../../static/cart/delete.svg");
 
 const styles = require("./Cart.scss");
+const styless = require("./productitem.scss");
 
 const despatchClearSelectForDemo = dispatcheroEmpty => {
   const state = [];
@@ -445,7 +447,7 @@ const Cart = ({
                             </Box>
                           )}
 
-                          <div style={{display: "flex", marginTop:"20px"}}>
+                          <div style={{ display: "flex", marginTop: "20px" }}>
                             <div style={{ marginRight: "5px" }}>
                               <div
                                 style={{
@@ -458,7 +460,11 @@ const Cart = ({
                                 Delivery by:
                               </div>
                               <div
-                                style={{ fontSize: "14px", color: "#999999" , marginTop:'10px'}}
+                                style={{
+                                  fontSize: "14px",
+                                  color: "#999999",
+                                  marginTop: "10px"
+                                }}
                               >
                                 {item.product_info.delivery_time_text
                                   .split(" ")
@@ -468,7 +474,12 @@ const Cart = ({
                                   })}
                               </div>
                             </div>
-                            <div style={{ marginRight: "5px" , marginLeft:'150px'}}>
+                            <div
+                              style={{
+                                marginRight: "5px",
+                                marginLeft: "150px"
+                              }}
+                            >
                               <div
                                 style={{
                                   fontSize: "16px",
@@ -477,7 +488,10 @@ const Cart = ({
                                   fontWeight: 600
                                 }}
                               >
-                                ₹{item.product_info.net_price ? formatAmount(item.product_info.net_price) : null}
+                                ₹
+                                {item.product_info.net_price
+                                  ? formatAmount(item.product_info.net_price)
+                                  : null}
                               </div>
                               {item.product_info.discount ? (
                                 <div
@@ -494,7 +508,11 @@ const Cart = ({
                                     }}
                                   >
                                     ₹
-                                    {item.product_info.unit_price ? formatAmount(item.product_info.unit_price) : null}
+                                    {item.product_info.unit_price
+                                      ? formatAmount(
+                                          item.product_info.unit_price
+                                        )
+                                      : null}
                                   </span>
                                   <span
                                     style={{
@@ -583,7 +601,7 @@ const Cart = ({
                             )} */}
 
                           {/* </Flex> */}
-                          {item.product_info.demo_product && (
+                          {/* {item.product_info.demo_product && (
                             <Box mt={15}>
                               <div className="checkbox">
                                 <input
@@ -600,9 +618,9 @@ const Cart = ({
                                     item.simple_sku,
                                     selectForDemo
                                   )}
-                                />
-                                {/* eslint-disable-next-line jsx-a11y/label-has-for */}
-                                <label htmlFor={item.simple_sku} />
+                                /> */}
+                          {/* eslint-disable-next-line jsx-a11y/label-has-for */}
+                          {/* <label htmlFor={item.simple_sku} />
                               </div>
                               <Label
                                 htmlFor="seeDemo"
@@ -613,6 +631,32 @@ const Cart = ({
                                 Select for Demo
                               </Label>
                             </Box>
+                          )} */}
+                          {item.product_info.demo_product && (
+                            <div display="inline-block" style={{marginTop:'20px'}}>
+                              <label
+                                className={styless.checkbox_container}
+                                htmlFor={item.simple_sku}
+                              >
+                                Select For Virtual Demo
+                                <input
+                                  type="checkbox"
+                                  id={item.simple_sku}
+                                  onClick={() =>
+                                    handleCheckboxClick(
+                                      item.simple_sku,
+                                      item,
+                                      selectForDemo
+                                    )(addToSelectForDemo)
+                                  }
+                                  checked={isSelected(
+                                    item.simple_sku,
+                                    selectForDemo
+                                  )}
+                                />
+                                <span className={styless.checkmark}></span>
+                              </label>
+                            </div>
                           )}
                           {item.product_info.offer_message ? (
                             <Box mt="1rem">
@@ -926,6 +970,10 @@ const Cart = ({
                 <ApplyGiftWrapper />
               </Box>
               <Box>
+                <DemoModal
+                  landingPageLink={demoLandingPageUrl}
+                  selectedForDemo={selectForDemo.length !== 0}
+                />
                 <PriceSummary
                   summaryPrice={summary}
                   onClick={() =>
