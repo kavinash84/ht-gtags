@@ -51,6 +51,7 @@ import modularwardrobe from "./modules/modularwardrobe";
 import designbuild from "./modules/designbuild";
 import spaces from "./modules/spaces";
 import planyourkitchen from "./modules/planyourkitchen";
+import lackpackages from "./modules/lackpackages";
 
 export default function createReducers(asyncReducers) {
   return {
@@ -124,6 +125,7 @@ export default function createReducers(asyncReducers) {
     spaces,
     // planyourkitchen,
     planyourkitchen,
+    lackpackages,
     ...asyncReducers
   };
 }

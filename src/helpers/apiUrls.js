@@ -1,5 +1,6 @@
 /* Homepage */
 export const BANNERS = "tesla/banners/desktop";
+export const WARRANTY = "tesla/static/new_warranty";
 export const CATEGORY_MENU = "tesla/categories";
 export const PINCODE = "tesla/locations/pincode";
 export const HOMEPAGE_CATEGORIES = "tesla/page-sections/home/categories";
@@ -40,7 +41,9 @@ export const PRODUCT_DELIVERY_DETAILS = "tesla/product/delivery-detail";
 export const RELATED_PRODUCTS = "tesla/product/related-products";
 export const RECENTLY_VEIWED = "tesla/recently-viewed";
 export const EMI_OPTIONS = "tesla/bank-emi";
+export const BOUGHT_TOGETHER = "tesla/product/catalog-bought-together";
 export const COMBINED_BUY = "tesla/product/combined-set-products";
+export const PRODUCT_FINANCE_OPTIONS = "tesla/static/finance_options_new";
 /* Category Page */
 
 export const CATEGORY_PAGE = "tesla/categories";
@@ -118,6 +121,12 @@ export const DEAL_OF_THE_DAY = "tesla/static/homepagecoupons/deal_of_the_day";
 
 /* design and build */
 export const DESIGN_BUILD = "tesla/static/design_and_build_v1_desktop";
+
+/* exchange offer */
+export const EXCHANGE_OFFER = "tesla/static/landingpage/exchange-offers-cms";
+
+/* packages seo */
+export const PACKAGE_SEO = "tesla/static/landingpage/packages-cms";
 
 /* home interior */
 export const HOME_INTERIOR = "tesla/static/home_interior_desktop_v1";

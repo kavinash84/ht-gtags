@@ -1,56 +1,68 @@
-import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 // import { bindActionCreators } from 'redux';      //Old
 // import { bindActionCreators } from 'redux';      //New
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 /**
  * Helper / modules
  */
-import { formatProductURL } from 'utils/helper';
-import * as actionCreators from 'redux/modules/cart';
-import { formatAmount } from 'utils/formatters';
+import { formatProductURL } from "utils/helper";
+import * as actionCreators from "redux/modules/cart";
+import { formatAmount } from "utils/formatters";
 
 /**
  * Components
  */
-import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Col from 'hometown-components-dev/lib/ColHtV1';
-import Flex from 'hometown-components-dev/lib/FlexHtV1';
-import Button from 'hometown-components-dev/lib/ButtonHtV1';
-import Container from 'hometown-components-dev/lib/ContainerHtV1';
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
-import Label from 'hometown-components-dev/lib/LabelHtV1';
-import Image from 'hometown-components-dev/lib/ImageHtV1';
-import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
-import Row from 'hometown-components-dev/lib/RowHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
-import CloseIcon from 'hometown-components-dev/lib/Icons/Close';
-import * as actionCreatorsForDemo from 'redux/modules/selectForDemo'; // New
-import * as actionCreatorsForWishlist from 'redux/modules/wishlist';
+import Box from "hometown-components-dev/lib/BoxHtV1";
+import Col from "hometown-components-dev/lib/ColHtV1";
+import Flex from "hometown-components-dev/lib/FlexHtV1";
+import Button from "hometown-components-dev/lib/ButtonHtV1";
+import Container from "hometown-components-dev/lib/ContainerHtV1";
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
+import Label from "hometown-components-dev/lib/LabelHtV1";
+import Image from "hometown-components-dev/lib/ImageHtV1";
+import ImageShimmer from "hometown-components-dev/lib/ImageShimmerHtV1";
+import Row from "hometown-components-dev/lib/RowHtV1";
+import Text from "hometown-components-dev/lib/TextHtV1";
+import CloseIcon from "hometown-components-dev/lib/Icons/Close";
+import * as actionCreatorsForDemo from "redux/modules/selectForDemo"; // New
+import * as actionCreatorsForWishlist from "redux/modules/wishlist";
 // import { groupedAttributes as getgroupedAttributes, getBreadCrumbs, getSimpleSku } from 'selectors/product';
-import ResponsiveModal from 'components/Modal';
-import LoginModal from 'containers/Login/LoginForm';
+import ResponsiveModal from "components/Modal";
+import LoginModal from "containers/Login/LoginForm";
 
 /**
  * Page Components
  */
-import ProductQuantity from './UpdateProductQuantity';
-import OrderSummary from './OrderSummary';
-import PaymentMethods from '../PaymentMethods';
+import ProductQuantity from "./UpdateProductQuantity";
+import OrderSummary from "./OrderSummary";
+import PaymentMethods from "../PaymentMethods";
+import ProductItem from "./Product";
 
 /**
  * Images
  */
-const checkoutIcon = require('../../../static/checkout.svg');
-const location = require('../../../static/map-icon.svg');
-const orderTrackIcon = require('../../../static/shipped.svg');
-const demoBanner = require('../../../static/campaign/select-for-demo-banner.jpg');
+const checkoutIcon = require("../../../static/checkout.svg");
+const location = require("../../../static/map-icon.svg");
+const orderTrackIcon = require("../../../static/shipped.svg");
+const demoBanner = require("../../../static/campaign/select-for-demo-banner.jpg");
 // const cashbackBanner = require('../../../static/campaign/Cart-banner.jpg');
-const saveForLaterIcon = require('../../../static/wishListIcon.png');
+const saveForLaterIcon = require("../../../static/wishListIcon.png");
 
-const styles = require('./Cart.scss');
+import SudoCart from "../PackageCatalog/sudoCart";
+import {
+  // togglePLPModal,
+  toggleProdModal,
+  loadPackageSudoCart,
+  toggleSCModal,
+  loadPackageCatalog
+} from "../../redux/modules/lackpackages";
+
+import PackagePDP from "../PackageCatalog/packagePDP";
+
+const styles = require("./Cart.scss");
 
 const despatchClearSelectForDemo = dispatcheroEmpty => {
   const state = [];
@@ -182,10 +194,18 @@ const handleCheckboxClick = (id, data, state) => dispatchero => {
 // });
 
 const mapStateToProps = ({
- pincode, cart, app, selectForDemo, productdetails, wishlist, userLogin
+  pincode,
+  cart,
+  app,
+  selectForDemo,
+  productdetails,
+  wishlist,
+  userLogin,
+  isPackage
 }) => ({
   currentId: cart.key,
   cartChecked: cart.cartChecked,
+  packageItems: cart.packageItems,
   checkingCart: cart.checkingCart,
   cartUpdating: cart.cartUpdating,
   pincode: pincode.selectedPincode,
@@ -201,9 +221,18 @@ const mapStateToProps = ({
   loadingList: wishlist.data
 });
 
+const getSkusData = data => {
+  let arr = Object.keys(data);
+  arr = arr.map(item => {
+    return { simple_sku: item, qty: 1 };
+  });
+  return arr;
+};
+
 const Cart = ({
   demoProductsBanner,
   results,
+  packageItems,
   summary,
   removeFromCart,
   toggleWishList,
@@ -227,11 +256,16 @@ const Cart = ({
   isLoggedIn,
   wishListWaitList,
   // simpleSku,
-  loadingList
+  loadingList,
+  isPackage
 }) => {
-  const cartItemLoading = customerCardId => cartUpdating && currentId === customerCardId;
+  const cartItemLoading = customerCardId =>
+    cartUpdating && currentId === customerCardId;
   const isProductOutofStock = sku => outOfStockList.includes(sku);
-  const isAnyProductOutofStoc = checkIsAnyProductOutofStoc(results, outOfStockList);
+  const isAnyProductOutofStoc = checkIsAnyProductOutofStoc(
+    results,
+    outOfStockList
+  );
   const cartItemsNumber = countCartItemNumbers(results);
 
   // const simpleSku = getSimpleSku(productdetails);
@@ -266,7 +300,11 @@ const Cart = ({
         <Box variant="col-8">
           <Row alignItems="center">
             <Box variant="col-8">
-              <Heading>My Shopping Cart : {cartItemsNumber} Items</Heading>
+              {packageItems.length > 0 ? (
+                <Heading>My Shopping Cart : {cartItemsNumber + (packageItems.length) - (1) } Items</Heading>
+              ) : (
+                <Heading>My Shopping Cart : {cartItemsNumber} Items</Heading>
+              )}
             </Box>
             <Box variant="col-4" textAlign="right">
               <Button
@@ -277,9 +315,19 @@ const Cart = ({
                 disabled={isAnyProductOutofStoc}
                 justifyContent="center"
                 width={1}
-                onClick={() => checkCartBeforeCheckout(checkCart, sessionId)(addToSelectForDemo)}
+                onClick={() =>
+                  checkCartBeforeCheckout(
+                    checkCart,
+                    sessionId
+                  )(addToSelectForDemo)
+                }
               >
-                <Image src={checkoutIcon} alt="Delete" height="18px" mr="0.625rem" />
+                <Image
+                  src={checkoutIcon}
+                  alt="Delete"
+                  height="18px"
+                  mr="0.625rem"
+                />
                 SECURE CHECKOUT
               </Button>
             </Box>
@@ -316,7 +364,7 @@ const Cart = ({
             mx={0}
             pb={5}
             sx={{
-              borderBottom: 'heading'
+              borderBottom: "heading"
             }}
           >
             <Box variant="col-8" pl={0}>
@@ -334,14 +382,27 @@ const Cart = ({
             <Box>
               {item.is_display ? (
                 <Box key={item.id_customer_cart} py={20}>
-                  <Row alignItems="center" sx={{ position: 'relative' }} pb={20}>
+                  <Row
+                    alignItems="center"
+                    sx={{ position: "relative" }}
+                    pb={20}
+                  >
                     <Box variant="col-3" pr={0}>
-                      <Link to={formatProductURL(item.product_info.name, item.configurable_sku)}>
+                      <Link
+                        to={
+                          item.product_info.packageId
+                            ? `/package-catalog/${item.product_info.packageId}`
+                            : formatProductURL(
+                                item.product_info.name,
+                                item.configurable_sku
+                              )
+                        }
+                      >
                         <ImageShimmer
                           src={item.product_info.image}
                           height="100%"
                           sx={{
-                            boxShadow: '0 1px 2px 0 #0000033'
+                            boxShadow: "0 1px 2px 0 #0000033"
                           }}
                         >
                           {imageURL => (
@@ -350,7 +411,7 @@ const Cart = ({
                               src={imageURL}
                               alt=""
                               sx={{
-                                boxShadow: 'productThumb'
+                                boxShadow: "productThumb"
                               }}
                             />
                           )}
@@ -358,23 +419,50 @@ const Cart = ({
                       </Link>
                     </Box>
                     <Box variant="col-5" pl={30}>
-                      <Link to={formatProductURL(item.product_info.name, item.configurable_sku)}>
+                      <Link
+                        to={
+                          item.product_info.packageId
+                            ? `/package-catalog/${item.product_info.packageId}`
+                            : formatProductURL(
+                                item.product_info.name,
+                                item.configurable_sku
+                              )
+                        }
+                      >
                         <Box mb={10}>
-                          <Heading color="heading" fontSize={16} lineHeight={1.4} fontWeight="normal">
+                          <Heading
+                            color="heading"
+                            fontSize={16}
+                            lineHeight={1.4}
+                            fontWeight="normal"
+                          >
                             {item.product_info.name}
                           </Heading>
                         </Box>
                         {item.product_info.color && (
                           <Box mb={15}>
-                            <Text color="#575757">{item.product_info.color}</Text>
+                            <Text color="#575757">
+                              {item.product_info.color}
+                            </Text>
                           </Box>
                         )}
                       </Link>
                       <Box pb={20}>
                         <Flex alignItems="center">
-                          <Image width="initial" height={20} mr={10} src={orderTrackIcon} />
+                          <Image
+                            width="initial"
+                            height={20}
+                            mr={10}
+                            src={orderTrackIcon}
+                          />
                           <Text
-                            color={item.product_info.delivery_time_text.indexOf('Currently') === -1 ? '#090909' : 'red'}
+                            color={
+                              item.product_info.delivery_time_text.indexOf(
+                                "Currently"
+                              ) === -1
+                                ? "#090909"
+                                : "red"
+                            }
                             fontSize={12}
                           >
                             {item.product_info.delivery_time_text}
@@ -382,53 +470,88 @@ const Cart = ({
                         </Flex>
                       </Box>
                       <Flex alignItems="center">
-                        <Button
-                          variant="link"
-                          fontSize={12}
-                          display="flex"
-                          alignItems="center"
-                          onClick={addToWishlist(
-                            item.configurable_sku,
-                            wishListData,
-                            toggleWishList,
-                            isLoggedIn,
-                            handleLoginModal,
-                            wishListWaitList,
-                            item.simple_sku,
-                            pincode,
-                            item.id_customer_cart,
-                            sessionId,
-                            pincode,
-                            item.qty,
-                            item.product_info.product_id,
-                            loadingList,
-                            item,
-                            selectForDemo
-                          )(removeFromCart)}
-                        >
-                          <Image height={16} mr={10} src={saveForLaterIcon} />
-                          <Text fontSize={12}>Add to wishlist</Text>
-                        </Button>
-                        <Text mx={8} fontSize={16}>
-                          {' '}
-                          |{' '}
-                        </Text>
+                        {item.product_info.packageId ? null : (
+                          <Button
+                            variant="link"
+                            fontSize={12}
+                            display="flex"
+                            alignItems="center"
+                            onClick={addToWishlist(
+                              item.configurable_sku,
+                              wishListData,
+                              toggleWishList,
+                              isLoggedIn,
+                              handleLoginModal,
+                              wishListWaitList,
+                              item.simple_sku,
+                              pincode,
+                              // item.id_customer_cart,
+                              {
+                                skuData: [
+                                  { simple_sku: item.simple_sku, qty: item.qty }
+                                ],
+                                packageId: false
+                              },
+                              sessionId,
+                              pincode,
+                              item.qty,
+                              item.product_info.product_id,
+                              loadingList,
+                              item,
+                              selectForDemo
+                            )(removeFromCart)}
+                          >
+                            <Image height={16} mr={10} src={saveForLaterIcon} />
+                            <Text fontSize={12}>Add to wishlist</Text>
+                          </Button>
+                        )}
+                        {item.product_info.packageId ? null : (
+                          <Text mx={8} fontSize={16}>
+                            {" "}
+                            |{" "}
+                          </Text>
+                        )}
+
                         <Button
                           variant="link"
                           fontSize={12}
                           display="flex"
                           alignItems="center"
                           disabled={cartItemLoading(item.id_customer_cart)}
-                          onClick={onClick(
-                            item.id_customer_cart,
-                            sessionId,
-                            pincode,
-                            item.qty,
-                            item.product_info.product_id,
-                            item.simple_sku,
-                            item,
-                            selectForDemo
-                          )(removeFromCart)(addToSelectForDemo)}
+                          onClick={
+                            item.product_info.packageId
+                              ? onClick(
+                                  {
+                                    skuData: getSkusData(item.simpleSkus),
+                                    packageId: item.product_info.packageId
+                                  },
+                                  sessionId,
+                                  pincode,
+                                  item.qty,
+                                  item.product_info.product_id,
+                                  item.simple_sku,
+                                  item,
+                                  selectForDemo
+                                )(removeFromCart)(addToSelectForDemo)
+                              : onClick(
+                                  {
+                                    skuData: [
+                                      {
+                                        simple_sku: item.simple_sku,
+                                        qty: item.qty
+                                      }
+                                    ],
+                                    packageId: false
+                                  },
+                                  sessionId,
+                                  pincode,
+                                  item.qty,
+                                  item.product_info.product_id,
+                                  item.simple_sku,
+                                  item,
+                                  selectForDemo
+                                )(removeFromCart)(addToSelectForDemo)
+                          }
                         >
                           <CloseIcon width={14} height={14} mr={10} /> Remove
                         </Button>
@@ -457,21 +580,37 @@ const Cart = ({
                               type="checkbox"
                               id={item.simple_sku}
                               onClick={() =>
-                                handleCheckboxClick(item.simple_sku, item, selectForDemo)(addToSelectForDemo)
+                                handleCheckboxClick(
+                                  item.simple_sku,
+                                  item,
+                                  selectForDemo
+                                )(addToSelectForDemo)
                               }
-                              checked={isSelected(item.simple_sku, selectForDemo)}
+                              checked={isSelected(
+                                item.simple_sku,
+                                selectForDemo
+                              )}
                             />
                             {/* eslint-disable-next-line jsx-a11y/label-has-for */}
                             <label htmlFor={item.simple_sku} />
                           </div>
-                          <Label htmlFor="seeDemo" ml="10px" fontSize="14px" fontWeight="bold">
+                          <Label
+                            htmlFor="seeDemo"
+                            ml="10px"
+                            fontSize="14px"
+                            fontWeight="bold"
+                          >
                             Select for Demo
                           </Label>
                         </Box>
                       )}
                       {item.product_info.offer_message ? (
                         <Box mt="1rem">
-                          <Text color="orangered" fontSize="1rem" style={{ fontWeight: 'bold' }}>
+                          <Text
+                            color="orangered"
+                            fontSize="1rem"
+                            style={{ fontWeight: "bold" }}
+                          >
                             {item.product_info.offer_message}
                           </Text>
                         </Box>
@@ -512,21 +651,36 @@ const Cart = ({
                       </Box>
                     )} */}
                     </Box>
-                    <Box variant="col-2" textAlign="center">
-                      <ProductQuantity
-                        cartItemLoading={cartItemLoading}
-                        cartId={item.id_customer_cart}
-                        quantity={item.qty}
-                        simpleSku={item.simple_sku}
-                        skuId={item.configurable_sku}
-                        configId={item.product_info && item.product_info.product_id ? item.product_info.product_id : ''}
-                      />
-                    </Box>
+                    {item.product_info.packageId ? (
+                      <div>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      </div>
+                    ) : (
+                      <Box variant="col-2" textAlign="center">
+                        <ProductQuantity
+                          cartItemLoading={cartItemLoading}
+                          cartId={item.id_customer_cart}
+                          quantity={item.qty}
+                          simpleSku={item.simple_sku}
+                          skuId={item.configurable_sku}
+                          configId={
+                            item.product_info && item.product_info.product_id
+                              ? item.product_info.product_id
+                              : ""
+                          }
+                        />
+                      </Box>
+                    )}
+
                     <Box variant="col-2">
                       <Label color="heading" fontSize={18}>
-                        ₹{' '}
-                        {item.product_info.net_price > item.product_info.unit_price * item.qty
-                          ? formatAmount(Number(item.product_info.unit_price) * Number(item.qty))
+                        ₹{" "}
+                        {item.product_info.net_price >
+                        item.product_info.unit_price * item.qty
+                          ? formatAmount(
+                              Number(item.product_info.unit_price) *
+                                Number(item.qty)
+                            )
                           : formatAmount(Number(item.product_info.net_price))}
                       </Label>
                     </Box>
@@ -538,16 +692,17 @@ const Cart = ({
                         bg="overlayLight"
                         flexDirection="column"
                         sx={{
-                          position: 'absolute',
-                          width: 'calc(100% - 32px)',
-                          height: 'calc(100% - 40px)',
+                          position: "absolute",
+                          width: "calc(100% - 32px)",
+                          height: "calc(100% - 40px)",
                           zIndex: 1,
                           left: 16,
                           top: 20
                         }}
                       >
                         <Heading fontSize={20} pb={10}>
-                          This product is out of stock please remove before proceed.
+                          This product is out of stock please remove before
+                          proceed.
                         </Heading>
                         <Button
                           variant="outline.primary"
@@ -556,16 +711,41 @@ const Cart = ({
                           //   sessionId,
                           //   pincode
                           // )(removeFromCart)}
-                          onClick={onClick(
-                            item.id_customer_cart,
-                            sessionId,
-                            pincode,
-                            item.qty,
-                            item.product_info.product_id,
-                            item.simple_sku,
-                            item,
-                            selectForDemo
-                          )(removeFromCart)(addToSelectForDemo)}
+
+                          onClick={
+                            item.product_info.packageId
+                              ? onClick(
+                                  {
+                                    skuData: getSkusData(item.simpleSkus),
+                                    packageId: item.product_info.packageId
+                                  },
+                                  sessionId,
+                                  pincode,
+                                  item.qty,
+                                  item.product_info.product_id,
+                                  item.simple_sku,
+                                  item,
+                                  selectForDemo
+                                )(removeFromCart)(addToSelectForDemo)
+                              : onClick(
+                                  {
+                                    skuData: [
+                                      {
+                                        simple_sku: item.simple_sku,
+                                        qty: item.qty
+                                      }
+                                    ],
+                                    packageId: false
+                                  },
+                                  sessionId,
+                                  pincode,
+                                  item.qty,
+                                  item.product_info.product_id,
+                                  item.simple_sku,
+                                  item,
+                                  selectForDemo
+                                )(removeFromCart)(addToSelectForDemo)
+                          }
                         >
                           Remove
                         </Button>
@@ -574,28 +754,73 @@ const Cart = ({
                   </Row>
 
                   {item.freebie_info && item.freebie_info.name && (
-                    <Box display="flex" ml="16.65%" p="15px" style={{ background: '#fbfbfb', position: 'relative' }}>
+                    <Box
+                      display="flex"
+                      ml="16.65%"
+                      p="15px"
+                      style={{ background: "#fbfbfb", position: "relative" }}
+                    >
                       <Col className="td" variant="col-2" pr="0.625rem">
-                        <Link to={formatProductURL(item.freebie_info.name, item.configurable_sku)}>
-                          <ImageShimmer src={item.freebie_info.image} height="100px">
-                            {imageURL => <Image styles={{ width: '80%' }} src={imageURL} alt="" />}
+                        <Link
+                          to={formatProductURL(
+                            item.freebie_info.name,
+                            item.configurable_sku
+                          )}
+                        >
+                          <ImageShimmer
+                            src={item.freebie_info.image}
+                            height="100px"
+                          >
+                            {imageURL => (
+                              <Image
+                                styles={{ width: "80%" }}
+                                src={imageURL}
+                                alt=""
+                              />
+                            )}
                           </ImageShimmer>
                         </Link>
                       </Col>
-                      <Col className="td" variant="col-7" pr="1.5rem" pl="0.3125rem">
-                        <Link to={formatProductURL(item.freebie_info.name, item.configurable_sku)}>
+                      <Col
+                        className="td"
+                        variant="col-7"
+                        pr="1.5rem"
+                        pl="0.3125rem"
+                      >
+                        <Link
+                          to={formatProductURL(
+                            item.freebie_info.name,
+                            item.configurable_sku
+                          )}
+                        >
                           <Box mb="10px">
-                            <Heading color="heading" fontSize={16} lineHeight={1.4} fontWeight="normal">
+                            <Heading
+                              color="heading"
+                              fontSize={16}
+                              lineHeight={1.4}
+                              fontWeight="normal"
+                            >
                               {item.freebie_info.name}
                             </Heading>
                           </Box>
                         </Link>
                         <Box>
-                          <Text color="#575757" fontSize="0.75rem" mt="0" mb="0">
+                          <Text
+                            color="#575757"
+                            fontSize="0.75rem"
+                            mt="0"
+                            mb="0"
+                          >
                             Delivery Details
                           </Text>
                           <Text
-                            color={item.freebie_info.delivery_time_text.indexOf('Currently') === -1 ? 'green' : 'red'}
+                            color={
+                              item.freebie_info.delivery_time_text.indexOf(
+                                "Currently"
+                              ) === -1
+                                ? "green"
+                                : "red"
+                            }
                             fontSize="0.875rem"
                             mt="0"
                           >
@@ -604,7 +829,12 @@ const Cart = ({
                         </Box>
                         {item.freebie_info.assembly_service && (
                           <Box color="uspTitle" fontSize="0.75rem">
-                            <Text color="#575757" fontSize="0.75rem" mt="0" mb="0">
+                            <Text
+                              color="#575757"
+                              fontSize="0.75rem"
+                              mt="0"
+                              mb="0"
+                            >
                               Assembly
                             </Text>
                             <Text fontSize="0.875rem" mt="0" mb="0">
@@ -622,8 +852,14 @@ const Cart = ({
                               </Button>
                               <div>
                                 {/* className={styles.popover} */}
-                                <Text fontSize="0.875rem" mt="0" mb="0" ta="center">
-                                  Assembly will be done within 48hrs of Delivery & applicable within serviceable limits
+                                <Text
+                                  fontSize="0.875rem"
+                                  mt="0"
+                                  mb="0"
+                                  ta="center"
+                                >
+                                  Assembly will be done within 48hrs of Delivery
+                                  & applicable within serviceable limits
                                 </Text>
                               </div>
                             </Text>
@@ -639,14 +875,22 @@ const Cart = ({
                           </Box>
                         </Row>
                         <Box mt="0.3125rem">
-                          {item.freebie_info.unit_price !== item.freebie_info.special_price &&
+                          {item.freebie_info.unit_price !==
+                            item.freebie_info.special_price &&
                             item.freebie_info.special_price !== 0 && (
                               <React.Fragment>
                                 <Label color="black" fontSize="0.875rem" mt="0">
-                                  Rs.{' '}
-                                  {item.freebie_info.net_price > item.freebie_info.unit_price * item.qty
-                                    ? formatAmount(Number(item.freebie_info.unit_price) * Number(item.qty))
-                                    : formatAmount(Number(item.freebie_info.net_price) * Number(item.qty))}
+                                  Rs.{" "}
+                                  {item.freebie_info.net_price >
+                                  item.freebie_info.unit_price * item.qty
+                                    ? formatAmount(
+                                        Number(item.freebie_info.unit_price) *
+                                          Number(item.qty)
+                                      )
+                                    : formatAmount(
+                                        Number(item.freebie_info.net_price) *
+                                          Number(item.qty)
+                                      )}
                                 </Label>
                                 <br />
                               </React.Fragment>
@@ -658,6 +902,11 @@ const Cart = ({
                   )}
                 </Box>
               ) : null}
+
+              <ProductItem
+                isPackage={item.product_info.packageId ? true : false}
+                packageId={item.product_info.packageId}
+              />
             </Box>
           ))}
         </Box>
@@ -672,7 +921,12 @@ const Cart = ({
               shipping={summary.shipping_charges}
               totalCart={summary.total}
               loadingnextstep={checkingCart}
-              onClick={() => checkCartBeforeCheckout(checkCart, sessionId)(addToSelectForDemo)}
+              onClick={() =>
+                checkCartBeforeCheckout(
+                  checkCart,
+                  sessionId
+                )(addToSelectForDemo)
+              }
               outOfStockList={outOfStockList}
               discount={summary.coupon_discount}
               landingPageLink={demoLandingPageUrl}
@@ -683,16 +937,23 @@ const Cart = ({
               <Heading fontSize={16} mb={5} color="#2c2e3f">
                 Exchange & Return Policy
               </Heading>
-              <Text fontSize={14} lineHeight={1.3} fontFamily="light" color="#2c2e3f" pb={5}>
-                We are committed to ensuring your satisfaction with any product you have ordered from us...
+              <Text
+                fontSize={14}
+                lineHeight={1.3}
+                fontFamily="light"
+                color="#2c2e3f"
+                pb={5}
+              >
+                We are committed to ensuring your satisfaction with any product
+                you have ordered from us...
               </Text>
               <Label
                 color="#232324"
                 fontSize={12}
                 fontFamily="medium"
                 sx={{
-                  borderBottom: '1px',
-                  borderColor: '#232324'
+                  borderBottom: "1px",
+                  borderColor: "#232324"
                 }}
               >
                 <Link to="/return-policy">Read More</Link>
@@ -702,11 +963,23 @@ const Cart = ({
               <Heading fontSize={16} mb={5} color="#2c2e3f">
                 Terms & Conditions
               </Heading>
-              <Text fontSize={14} lineHeight={1.3} fontFamily="light" color="#2c2e3f" pb={5}>
-                In using the HomeTown.in service, of Praxis Home Retail Ltd. you are deemed to have accepted the terms
-                and conditions..
+              <Text
+                fontSize={14}
+                lineHeight={1.3}
+                fontFamily="light"
+                color="#2c2e3f"
+                pb={5}
+              >
+                In using the HomeTown.in service, of Praxis Home Retail Ltd. you
+                are deemed to have accepted the terms and conditions..
               </Text>
-              <Label color="#232324" fontSize={12} fontFamily="medium" borderBottom="1px" borderColor="#232324">
+              <Label
+                color="#232324"
+                fontSize={12}
+                fontFamily="medium"
+                borderBottom="1px"
+                borderColor="#232324"
+              >
                 <Link to="/terms-and-conditions">Read More</Link>
               </Label>
             </Box>
@@ -715,7 +988,11 @@ const Cart = ({
         </Box>
       </Row>
       {!isLoggedIn && (
-        <ResponsiveModal classNames={{ modal: 'loginModal' }} onCloseModal={handleLoginModal} open={openLogin}>
+        <ResponsiveModal
+          classNames={{ modal: "loginModal" }}
+          onCloseModal={handleLoginModal}
+          open={openLogin}
+        >
           <Box py={32} px={32}>
             <LoginModal />
           </Box>
@@ -755,12 +1032,12 @@ Cart.defaultProps = {
   demoProductsBanner: false,
   results: [],
   summary: null,
-  pincode: '',
+  pincode: "",
   cartUpdating: false,
-  currentId: '',
+  currentId: "",
   checkingCart: false,
   outOfStockList: [],
-  demoLandingPageUrl: '',
+  demoLandingPageUrl: "",
   selectForDemo: {}
   // addToSelectForDemo: PropTypes.func.isRequired
 

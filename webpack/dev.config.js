@@ -56,10 +56,10 @@ var webpackConfig = (module.exports = {
   entry: {
     main: [
       "webpack-hot-middleware/client?path=http://" +
-        host +
-        ":" +
-        port +
-        "/__webpack_hmr",
+      host +
+      ":" +
+      port +
+      "/__webpack_hmr",
       "react-hot-loader/patch",
       "./src/client.js"
     ]
@@ -156,7 +156,7 @@ var webpackConfig = (module.exports = {
     new webpack.LoaderOptionsPlugin({
       test: /\.(less|scss|css)/,
       options: {
-        postcss: function(webpack) {
+        postcss: function (webpack) {
           return [
             require("postcss-import")({ addDependencyTo: webpack }),
             require("postcss-url")(),
@@ -179,10 +179,10 @@ var webpackConfig = (module.exports = {
     new webpack.IgnorePlugin(/webpack-stats\.json$/),
 
     new webpack.DefinePlugin({
-      "process.env.APIHOST": '"stage-api.hometown.in/api/"',
+      "process.env.APIHOST": '"beta-api.hometown.in/api/"',
       "process.env.SITE_URL": '"localhost:3000"',
       "process.env.PAYMENT_URL":
-        '"https://stage-alice.hometown.in/checkout/finish/payment/"',
+        '"https://beta-alice.hometown.in/checkout/finish/payment/"',
       __CLIENT__: true,
       __SERVER__: false,
       __DEVELOPMENT__: true,
