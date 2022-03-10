@@ -6,6 +6,7 @@ import Section from "hometown-components-dev/lib/Section";
 import { connect } from "react-redux";
 import MainFurnitureSlider from "../FurnitureCategories/MainFurnitureSlider";
 import ShopByCategory from "./ShopByCategory/ShopByCategory";
+
 import ShopByCollection from "./ShopByCollection";
 // import CommonLayout from "./CommonLayout/CommonLayout";
 
@@ -17,6 +18,8 @@ import BannerImage from "./BannerImage";
 // import Outdoor from "./Outdoor";
 import BestSeller from "./BestSeller";
 import RecommendForYou from "./RecommendForYou/RecommendForYou";
+
+import ShopByBrand from './ShopByBrand/ShopByBrand';
 @connect(({ homepage: { menu }, category, category: { data } }) => ({
   menu: menu.data,
   category: data && data.items && data.items.text,
@@ -43,8 +46,8 @@ class HomeFurnishingContainer extends React.Component {
                 {cat.component === 1 ? (
                   <ShopByCategory title={cat.title} data={cat.data} />
                 ) : (
-                  ""
-                )}
+                    ""
+                  )}
                 {cat.component === 2 ? (
                   <BannerImage
                     alt={cat.title}
@@ -52,18 +55,18 @@ class HomeFurnishingContainer extends React.Component {
                     url_key={cat.url_key}
                   />
                 ) : (
-                  ""
-                )}
+                    ""
+                  )}
                 {cat.component === 3 ? (
                   <ShopByCollection title={cat.title} data={cat.data} />
                 ) : (
-                  ""
-                )}
+                    ""
+                  )}
                 {cat.component === 4 ? (
                   <BestBuy mainTitle={cat.title} data={cat.data} />
                 ) : (
-                  ""
-                )}
+                    ""
+                  )}
                 {cat.component === 5 ? (
                   <BannerImage
                     alt={cat.title}
@@ -71,14 +74,19 @@ class HomeFurnishingContainer extends React.Component {
                     url_key={cat.url_key}
                   />
                 ) : (
-                  ""
-                )}
+                    ""
+                  )}
                 {cat.component === 6 ? <BestSeller /> : ""}
                 {cat.component === 7 ? (
                   <RecommendForYou title={cat.title} data={cat.data} />
                 ) : (
-                  ""
-                )}
+                    ""
+                  )}
+                {cat.component === 8 ? (
+                  <ShopByBrand title={cat.title} data={cat.data} />
+                ) : (
+                    ""
+                  )}
               </div>
             ))}
         </div>
