@@ -301,17 +301,12 @@ export default function gaMiddleware() {
           // window.dataLayer.push(eventObject);
         }
         /* Cart Tracking */
-        if (type === "cart/ADD_TO_CART_SUCCESSS") {
-          const {
-            id_customer_cart: idcustomerCart,
-            cart: {
-              summary: { total }
-            }
-          } = action.result;
-          const {
-            result: { qty },
-            configId
-          } = action;
+        if (type === "cart/ADD_TO_CART_SUCCESS") {
+          const { configId } = action;
+          const cartItems = Object.values(action.result.cartItems);
+          const total = action.result.summary.total;
+          const product = cartItems.filter(item => item.config_id === configId);
+          const qty = product[0].qty;
           // if (!configId) {
           //   window.unbxd.addToCart(key, sku, simpleSku, pincode);
           //   console.log('unbxd addToCart callback invoked with - ', key, sku, simpleSku, pincode);
@@ -323,18 +318,14 @@ export default function gaMiddleware() {
               qty: `${qty}`
             });
           }
-          const [product] =
-            action.result &&
-            action.result.cart.cart.filter(
-              item => item.id_customer_cart === idcustomerCart
-            );
           const {
             name,
-            net_price: netprice,
+            selling_price: netprice,
             color,
-            brand,
-            category_details: categoryDetails
-          } = product.product_info;
+            brand
+            // category_details: categoryDetails
+          } = product[0];
+          const categoryDetails = "";
           const category = categoryDetails ? categoryDetails.join("/") : null;
           window.dataLayer.push(
             {
@@ -364,17 +355,14 @@ export default function gaMiddleware() {
           );
         }
         if (type === "cart/UPDATE_CART_SUCCESS") {
-          const {
-            id_customer_cart: idcustomerCart,
-            cart: {
-              summary: { total }
-            }
-          } = action.result;
-          const {
-            result: { qty: productQty },
-            configId,
-            qty
-          } = action;
+          const { data } = getState().cart;
+          const cartItems = Object.values(action.result.cartItems);
+          const total = action.result.summary.total;
+          const productt = data.filter(
+            (item, i) => item.cart_ids.length !== cartItems[i].cart_ids.length
+          );
+          const productQty = productt[0].qty;
+          const { configId, qty } = action;
           if (
             window &&
             window.Unbxd &&
@@ -388,18 +376,16 @@ export default function gaMiddleware() {
               qty: `${productQty}`
             });
           }
-          const [product] =
-            action.result &&
-            action.result.cart.cart.filter(
-              item => item.id_customer_cart === idcustomerCart
-            );
+          const product = data.filter(
+            (item, i) => item.cart_ids.length !== cartItems[i].cart_ids.length
+          );
           const {
             name,
             net_price: netprice,
             color,
-            brand,
-            category_details: categoryDetails
-          } = product.product_info;
+            brand
+          } = product[0].product_info;
+          const categoryDetails = "";
           const category = categoryDetails ? categoryDetails.join("/") : null;
           const { updateType } = action.result;
           window.dataLayer.push(
@@ -431,11 +417,7 @@ export default function gaMiddleware() {
         }
         if (type === "cart/REMOVE_FROM_CART_SUCCESS") {
           const { data } = getState().cart;
-          const {
-            cart: {
-              summary: { total }
-            }
-          } = action.result;
+          const total = action.result.summary.total;
           const { qty, configId } = action;
           if (window && window.Unbxd && window.Unbxd.track && configId && qty) {
             window.Unbxd.track("cartRemoval", {
@@ -444,7 +426,7 @@ export default function gaMiddleware() {
             });
           }
           const [product] = data.filter(
-            item => item.id_customer_cart === Number(action.result.cartId)
+            item => item.product_info.product_id === configId
           );
           if (product) {
             const checkKey = isKeyExists(
@@ -726,7 +708,7 @@ export default function gaMiddleware() {
       if (type === "cart/UPDATE_CART_SUCCESS") {
         if (action.result.cart.summary) {
           window.google_tag_params.ecomm_totalvalue =
-            action.result.cart.summary.total;
+            action.result.summary.total;
         }
       }
       if (type === "signUp/SIGNUP_SUCCESS") {

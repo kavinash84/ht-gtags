@@ -301,7 +301,10 @@ const Cart = ({
           <Row alignItems="center">
             <Box variant="col-8">
               {packageItems.length > 0 ? (
-                <Heading>My Shopping Cart : {cartItemsNumber + (packageItems.length) - (1) } Items</Heading>
+                <Heading>
+                  My Shopping Cart : {cartItemsNumber + packageItems.length - 1}{" "}
+                  Items
+                </Heading>
               ) : (
                 <Heading>My Shopping Cart : {cartItemsNumber} Items</Heading>
               )}
@@ -535,13 +538,7 @@ const Cart = ({
                                 )(removeFromCart)(addToSelectForDemo)
                               : onClick(
                                   {
-                                    skuData: [
-                                      {
-                                        simple_sku: item.simple_sku,
-                                        qty: item.qty
-                                      }
-                                    ],
-                                    packageId: false
+                                    cartIds: item.cart_ids
                                   },
                                   sessionId,
                                   pincode,
@@ -729,13 +726,7 @@ const Cart = ({
                                 )(removeFromCart)(addToSelectForDemo)
                               : onClick(
                                   {
-                                    skuData: [
-                                      {
-                                        simple_sku: item.simple_sku,
-                                        qty: item.qty
-                                      }
-                                    ],
-                                    packageId: false
+                                    cartIds: item.cart_ids
                                   },
                                   sessionId,
                                   pincode,

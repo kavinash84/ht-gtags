@@ -3,6 +3,7 @@ export const formatToArray = data => {
   const arr = cartItems.map(item => {
     return {
       id_customer_cart: item.cart_ids[0],
+      cart_ids: item.cart_ids,
       fk_customer: null,
       session_id: "",
       configurable_sku: item.configurable_sku,
@@ -18,7 +19,7 @@ export const formatToArray = data => {
       is_bogo: 0,
       is_display: 1,
       product_info: {
-        product_id: item.sku,
+        product_id: item.config_id,
         name: item.name,
         image: item.image_url,
         url: item.pdp_url,
@@ -37,9 +38,9 @@ export const formatToArray = data => {
         unit_price: item.max_retail_price,
         is_available: true,
         category_details: [],
-        color: "",
+        color: item.color,
         color_family: "",
-        brand: "HomeTown",
+        brand: item.brand,
         is_deliverable: item.is_deliverable,
         assembly_service: false,
         couponDiscount: 0,
