@@ -47,7 +47,7 @@ class CartPincode extends React.Component {
   render() {
     const { setPincodeOrCityQuery, setPincode, pincodeQuery, load, loading, loaded, results, showResults } = this.props;
     return (
-      <Div className={styles.pincode} pt="0" pb="0">
+      <Div className={styles.pincode} pt="0" pb="0" style={{width:'100%'}}>
         <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', width: '100%' }}>
           <input
             type="text"

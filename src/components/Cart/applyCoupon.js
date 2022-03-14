@@ -34,7 +34,8 @@ class ApplyCoupon extends Component {
             justifyContent: 'space-between',
             alignItems: 'center',
             marginTop: '15px',
-            background: coupon ? '#FFF8F4' : ''
+            background: coupon ? '#FFF8F4' : '',
+            cursor: 'pointer'
           }}
           onClick={this.onClick}
         >

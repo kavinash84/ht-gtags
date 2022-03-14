@@ -19,7 +19,7 @@ class Offers extends React.Component {
               style={{
                 fontSize: '12px',
                 color: '#999999',
-                padding: '10px 15px 15px',
+                padding: '8px 15px',
                 height: showMore ? 'auto' : '20px',
                 overflow: 'hidden'
               }}

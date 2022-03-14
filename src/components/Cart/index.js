@@ -217,7 +217,8 @@ const mapStateToProps = ({
   sku: productdetails.productDescription.sku,
   wishListData: wishlist.data,
   isLoggedIn: userLogin.isLoggedIn,
-  loadingList: wishlist.data
+  loadingList: wishlist.data,
+  appliedCoupon: cart.summary.coupon
 });
 
 const getSkusData = data => {
@@ -360,8 +361,9 @@ const Cart = ({
                                       item.configurable_sku
                                     )
                               }
+                              style={{ width: "80%" }}
                             >
-                              <Box mb={10} style={{ maxWidth: "90%" }}>
+                              <Box mb={10} style={{ maxWidth: "85%" }}>
                                 <Heading
                                   color="heading"
                                   fontSize={16}
@@ -398,6 +400,7 @@ const Cart = ({
                               variant="link"
                               fontSize={12}
                               mt="-15px"
+                              mr="25px"
                               display="flex"
                               alignItems="center"
                               disabled={cartItemLoading(item.id_customer_cart)}
@@ -459,20 +462,32 @@ const Cart = ({
                               >
                                 Delivery by:
                               </div>
-                              <div
-                                style={{
-                                  fontSize: "14px",
-                                  color: "#999999",
-                                  marginTop: "10px"
-                                }}
-                              >
-                                {item.product_info.delivery_time_text
-                                  .split(" ")
-                                  .splice(2)
-                                  .map(items => {
-                                    return " " + items;
-                                  })}
-                              </div>
+                              {item.product_info.is_deliverable ? (
+                                <div
+                                  style={{
+                                    fontSize: "14px",
+                                    color: "#999999",
+                                    marginTop: "10px"
+                                  }}
+                                >
+                                  {item.product_info.delivery_time_text
+                                    .split(" ")
+                                    .splice(2)
+                                    .map(items => {
+                                      return " " + items;
+                                    })}
+                                </div>
+                              ) : (
+                                <div
+                                  style={{
+                                    fontSize: "14px",
+                                    color: "#999999",
+                                    marginTop: "10px"
+                                  }}
+                                >
+                                  {item.product_info.delivery_time_text}
+                                </div>
+                              )}
                             </div>
                             <div
                               style={{
@@ -633,7 +648,10 @@ const Cart = ({
                             </Box>
                           )} */}
                           {item.product_info.demo_product && (
-                            <div display="inline-block" style={{marginTop:'20px'}}>
+                            <div
+                              display="inline-block"
+                              style={{ marginTop: "20px" }}
+                            >
                               <label
                                 className={styless.checkbox_container}
                                 htmlFor={item.simple_sku}
@@ -669,6 +687,8 @@ const Cart = ({
                               </Text>
                             </Box>
                           ) : null}
+
+          
                           {/* {item.product_info.assembly_service && (
                       <Box color="uspTitle" fontSize="0.75rem">
                         <Image
@@ -720,6 +740,8 @@ const Cart = ({
                                 )}
                           </Label>
                         </Box> */}
+
+                       
 
                         {isProductOutofStock(item.configurable_sku) && (
                           <Flex
@@ -786,6 +808,19 @@ const Cart = ({
                               Remove
                             </Button>
                           </Flex>
+                        )}
+
+                           {cartItemLoading(item.product_info.product_id) && (
+                          <div className={styles.loadingCart}>
+                            <h4>PLEASE WAIT...</h4>
+                            <p>WHILE IT UPDATES</p>
+                          </div>
+                        )}
+                        {cartItemLoading(item.id_customer_cart) && (
+                          <div className={styles.loadingCart}>
+                            <h4>PLEASE WAIT...</h4>
+                            <p>WHILE IT UPDATES</p>
+                          </div>
                         )}
                       </Row>
 
@@ -962,7 +997,7 @@ const Cart = ({
           <Box variant="col-4">
             <Box
               style={{ paddingTop: "0px" }}
-              px={[15, 15, 40]}
+              px={[15, 15, 0]}
               py={[20, 20, 30]}
             >
               <Box pr="0px" pl="0px">

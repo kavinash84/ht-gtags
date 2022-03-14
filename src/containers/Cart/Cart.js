@@ -310,12 +310,12 @@ export default class CartContainer extends Component {
              : null )}
           {!loading && results && results.length !== 0 ? (
             <Box className="asdfgh">
-              {outOfStockList && outOfStockList.length > 0 && (
+              {/* {outOfStockList && outOfStockList.length > 0 && (
                 <Notifications
                   msg="One or more items in your cart are out of stock. Please remove to continue"
                   type="error"
                 />
-              )}
+              )} */}
               <Cart
                 demoProductsBanner={demoProductsBanner(results)}
                 results={results}
