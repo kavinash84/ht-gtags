@@ -129,7 +129,7 @@ const AddressForm = props => {
           onChangePincode={onChangePincode}
           feedBackMessage={pincodeFeedBackMessage}
         />
-        <div style={{ width: "50%" }}>
+        <div style={{ width: "48%" }}>
           <FormInput
             label=""
             type="text"
