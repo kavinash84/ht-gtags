@@ -492,7 +492,7 @@ class DeliveryAddress extends Component {
               {(addressform || !isLoggedIn) && (
                 <Div style={{ background: '#FFFFFF' }} pl="15px" pr="15px">
                   {!isLoggedIn && (
-                    <Div style={{ fontSize: '14px', fontWeight: '600', marginBottom: '15px', color: '#323131' }}>
+                    <Div style={{ fontSize: '14px', fontWeight: '600', marginBottom: '15px', color: '#323131', marginTop: "15px" }}>
                       Or Continue As Guest
                     </Div>
                   )}
@@ -539,10 +539,12 @@ class DeliveryAddress extends Component {
             style={{
               border: '1px solid #F47020',
               borderRadius: '4px',
-              padding: '15px 35px',
+              padding: '15px 10px',
               background: 'white',
+              width: "260px",
               color: '#F47020',
-              fontSize: '14px'
+              fontSize: '16px',
+              cursor: "pointer"
             }}
             // disabled={loading || this.checkParams()}
             disabled={loading}
