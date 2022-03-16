@@ -99,12 +99,13 @@ class Coupon extends Component {
                 />
                 <Button
                   className={styles.applyCouponBtn}
-                  btnType="link"
+                  // btnType="link"
                   color="#f98d29"
                   fontFamily="semibold"
                   pl="0"
                   pr="0"
                   fontSize="0.875rem"
+                  style={{background:'none'}}
                   disabled={loading || (notifs.coupon && notifs.coupon.length > 0)}
                   onClick={appliedCoupon ? () => this.removeCoupon(appliedCoupon) : this.handleApply}
                 >
