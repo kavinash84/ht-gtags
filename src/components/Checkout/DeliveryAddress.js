@@ -546,7 +546,7 @@ class DeliveryAddress extends Component {
             // disabled={loading || this.checkParams()}
             disabled={loading}
             onClick={
-              isLoggedIn && !Addressform && (currentaddressindex === -1 || currentaddressindex === null)
+              isLoggedIn && !addressform && (currentaddressindex === -1 || currentaddressindex === null)
                 ? this.isAddressSelected
                 : this.handleSubmit
             }
