@@ -52,22 +52,19 @@ const styles = require('./DeliveryAddress.scss');
 const mapStateToProps = ({
   userLogin, app, checkout, myaddress, address, profile, cart
 }) => ({
-  results: getCartList(cart),
+  paymentData: checkout.paymentData,
   isLoggedIn: userLogin.isLoggedIn,
   sessionId: app.sessionId,
   nextstep: checkout.nextstep,
-  paymentData: checkout.paymentData,
   loading: checkout.loading,
-  addNewAddress: address.addNewAddress,
   showAddAddress: checkout.showAddAddress,
   addresses: myaddress.data,
   currentaddressindex: address.shipping.index,
+  addNewAddress: address.addNewAddress,
   shippingIsBilling: address.shippingIsBilling,
   userEmail: profile.data.email,
   address,
-  cart,
-  summary: cart.summary,
-  couponlistToggle: cart.couponlistToggle
+  cart
 });
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 @withRouter
@@ -101,7 +98,14 @@ class DeliveryAddress extends Component {
   }
   componentWillReceiveProps(nextProps) {
     const {
-      isLoggedIn, nextstep, clearShippingAddress, onChangeEmail, userEmail, couponlistToggle, cart, AddNewAddress, showAddAddress
+      isLoggedIn,
+      nextstep,
+      clearShippingAddress,
+      onChangeEmail,
+      userEmail,
+      cart,
+      showAddAddress,
+      AddNewAddress
     } = this.props;
     const { dispatch } = this.context.store;
     if (nextProps.nextstep !== nextstep && nextProps.paymentData) {
@@ -345,8 +349,10 @@ class DeliveryAddress extends Component {
     const { setAddress, isLoggedIn, userEmail, AddNewAddress } = this.props;
     e.preventDefault();
     this.setState({
-      addressform: !this.state.addressform
+      addressform: !this.state.addressform,
+      // AddNewAddress: !this.state.addressform
     });
+
     const data = {
       full_name: '',
       email: isLoggedIn ? userEmail : '',
@@ -360,22 +366,13 @@ class DeliveryAddress extends Component {
       index: null
     };
     setAddress('shipping', data, null);
-    AddNewAddress(!this.state.addressform);
+    // AddNewAddress(!this.state.addressform);
   };
   render() {
-    const {
-      isLoggedIn,
-      history,
-      loading,
-      addresses,
-      currentaddressindex,
-      shippingIsBilling,
-      userEmail,
-      summary,
-      results,
-      addNewAddress
-    } = this.props;
+    const { isLoggedIn, loading, addresses, currentaddressindex } = this.props;
+    const { shippingIsBilling, userEmail, addNewAddress } = this.props;
     const { addressform } = this.state;
+    console.log("address form", addressform, addNewAddress);
     return (
       <Container my={[60, 60, 60]} px={[24, 24, 0]}>
 
@@ -418,7 +415,7 @@ class DeliveryAddress extends Component {
                 </ResponsiveModal>
               </Box>
             )}
-            {isLoggedIn && !addNewAddress && (
+            {isLoggedIn && !addressform && (
               <Div col="12" pb="0.625rem">
                 <button className={styles.addAddressBtn} onClick={this.toggleAddAddress}>
                   <Text color="rgb(0,0,0)" ta="left" mt="0" mb="0" >
@@ -428,7 +425,7 @@ class DeliveryAddress extends Component {
                 </button>
               </Div>
             )}
-            {addNewAddress && (
+            {addressform && (
 
               <Div className={styles.addNewAddressHeader}>
                 <Button bg="transparent" border="none" onClick={this.toggleAddAddress} p="0">
@@ -443,7 +440,7 @@ class DeliveryAddress extends Component {
               </Div>
             )}
             {/* For not logged in */}
-            {isLoggedIn && !addNewAddress && (
+            {isLoggedIn && !addressform && (
               <Box>
                 <Row mx={0} mb={20}>
                   <Heading variant="heading.medium">My Saved Address</Heading>

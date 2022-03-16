@@ -41,6 +41,7 @@ const SET_STATE_ERROR = 'deliveryaddress/SET_STATE_ERROR';
 const SET_EMAIL_ERROR = 'deliveryaddress/SET_EMAIL_ERROR';
 
 const SET_ADDRESS_DETAILS = 'deliveryaddress/SET_ADDRESS_DETAILS';
+const ADD_NEW_ADDRESS = 'deliveryaddress/ADD_NEW_ADDRESS';
 
 // Pincode Methods
 const LOAD_PINCODE = 'deliveryaddress/LOAD_PINCODE';
@@ -126,6 +127,7 @@ const initialState = {
     // error: true,
     // formData: null
   },
+  addNewAddress: false,
   shippingIsBilling: true
 };
 
@@ -160,6 +162,11 @@ export default function reducer(state = initialState, action = {}) {
           email: action.email,
           emailFeedBackError: !emailIsValid(action.email)
         }
+      };
+    case ADD_NEW_ADDRESS:
+      return {
+        ...state,
+        addNewAddress: action.data
       };
     case SET_ADDRESS1:
       return {
@@ -673,6 +680,10 @@ export const setAddress = (formType, data, index) => ({
   index
 });
 
+export const AddNewAddress = data => ({
+  type: ADD_NEW_ADDRESS,
+  data
+});
 export const clearShippingAddress = formType => ({
   type: CLEAR_SHIPPING,
   formType
