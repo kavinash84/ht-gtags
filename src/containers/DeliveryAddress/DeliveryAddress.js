@@ -16,7 +16,7 @@ import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
 import DeliveryAddress from 'components/Checkout/DeliveryAddress';
 
 
-import CartBreadCumb from "../../components/Cart/breadDumb"
+// import CartBreadCumb from "../../components/Cart/breadDumb"
 // import HappyToHelp from "../../components/Cart/HappyToHelp"
 /**
  * modules / selectors / helpers
@@ -56,7 +56,7 @@ export default class DeliveryAddressContainer extends Component {
         {!addNewAddress && (
           <Body>
             {/* HeaderSecondary */}
-            <CartBreadCumb />
+            {/* <CartBreadCumb /> */}
             <DeliveryAddress />
             {/* <HappyToHelp /> */}
           </Body>
