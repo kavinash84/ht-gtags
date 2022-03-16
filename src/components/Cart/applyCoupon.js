@@ -14,8 +14,8 @@ const styles = require('./Coupon.scss');
 
 class ApplyCoupon extends Component {
   state = {
-    open: true,
-    openModal: true
+    open: false,
+    openModal: false
   };
 
   handleModal = () => {
