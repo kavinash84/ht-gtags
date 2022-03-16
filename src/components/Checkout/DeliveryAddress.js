@@ -514,7 +514,7 @@ class DeliveryAddress extends Component {
                   </div>
 
                 </Div>
-                <div style={{ padding: '5px', width: '100%', background: '#f7f7f7', marginTop: '35px' }} />
+                <div style={{ padding: '5px', width: '100%', background: '#f7f7f7' }} />
                 {!shippingIsBilling && (
                   <Row display="block" mr="0" ml="0" mt="1.5rem" mb="0" pl="15px" pr="15px" width="100%">
                     <Div col="12">
