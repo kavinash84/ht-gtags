@@ -1008,6 +1008,7 @@ const Cart = ({
                 <DemoModal
                   landingPageLink={demoLandingPageUrl}
                   selectedForDemo={selectForDemo.length !== 0}
+
                 />
                 <PriceSummary
                   summaryPrice={summary}

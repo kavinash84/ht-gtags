@@ -2,7 +2,8 @@ import {
   ADDTOCARTCOMBINED as ADDTOCARTCOMBINED_API,
   ADDTOCART as ADDTOCART_API,
   SYNCCART as SYNCCART_API,
-  CHECKCART as CHECKCART_API
+  CHECKCART as CHECKCART_API,
+  ADD_GIFT_WRAP as ADD_GIFT_WRAP_API
 } from "helpers/apiUrls";
 import { PINCODE } from "../../helpers/Constants";
 
@@ -15,6 +16,7 @@ const ADD_TO_CART_FAIL = "cart/ADD_TO_CART_FAIL";
 const ADD_TO_CART_COMBINED = "cart/ADD_TO_CART_COMBINED";
 const ADD_TO_CART_COMBINED_SUCCESS = "cart/ADD_TO_CART_COMBINED_SUCCESS";
 const ADD_TO_CART_COMBINED_FAIL = "cart/ADD_TO_CART_COMBINED_FAIL";
+const UPDATE_CART_AFTERCOUPON = "cart/UPDATE_CART_AFTERCOUPON";
 const UPDATE_CART = "cart/UPDATE_CART";
 const UPDATE_CART_SUCCESS = "cart/UPDATE_CART_SUCCESS";
 const UPDATE_CART_FAIL = "cart/UPDATE_CART_FAIL";
@@ -30,6 +32,9 @@ const CHECKCART_FAIL = "cart/CHECKCART_FAIL";
 const RESET_CART_CHECK = "cart/RESET_CART_CHECK";
 const SET_CURRENT_KEY = "cart/SET_CURRENT_KEY";
 const SET_QUANTITY_FLAG = "cart/SET_QUANTITY_FLAG";
+const CHECK_GIFTWRAP = "cart/CHECK_GIFTWRAP";
+const CHECK_GIFTWRAP_SUCCESS = "cart/CHECK_GIFTWRAP_SUCCESS";
+const CHECK_GIFTWRAP_FAIL = "cart/CHECK_GIFTWRAP_FAIL";
 
 const UPDATE_CART_SUMMARY_AFTER_COUPON =
   "cart/UPDATE_CART_SUMMARY_AFTER_COUPON";
@@ -371,6 +376,25 @@ export default function reducer(state = initialState, action = {}) {
         checkingCart: false,
         cartChecked: false
       };
+    case CHECK_GIFTWRAP:
+      return {
+        ...state,
+        loading: true
+      };
+    case CHECK_GIFTWRAP_SUCCESS:
+      return {
+        ...state,
+        // data: action.result && 'cart' in action.result ? action.result.cart : [],
+        // summary: action.result && 'summary' in action.result ? action.result.summary : {},
+        loading: false,
+        loaded: true
+      };
+    case CHECK_GIFTWRAP_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loaded: true
+      };
     case RESET_CART_CHECK:
       return {
         ...state,
@@ -380,6 +404,16 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         summary: action.summary
+      };
+      case UPDATE_CART_AFTERCOUPON:
+      return {
+        ...state,
+        data:
+          action.result && "cart" in action.result
+            ? checkForPackages(action.result.cart)
+            : [],
+        loading: false,
+        loaded: true
       };
     case SET_CURRENT_KEY:
       return {
@@ -598,9 +632,28 @@ export const checkCart = sessionId => ({
   }
 });
 
+export const checkGiftWrap = value => ({
+  types: [CHECK_GIFTWRAP, CHECK_GIFTWRAP_SUCCESS, CHECK_GIFTWRAP_FAIL],
+  promise: async ({ client }) => {
+    try {
+      const response = await client.post(`${ADD_GIFT_WRAP_API}`, {
+        isGiftWrapRequired: value
+      });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+});
+
 export const updateCartSummary = summary => ({
   type: UPDATE_CART_SUMMARY_AFTER_COUPON,
   summary
+});
+
+export const loadCartAfterCouponApplied = result => ({
+  type: UPDATE_CART_AFTERCOUPON,
+  result
 });
 
 export const resetCheck = () => ({

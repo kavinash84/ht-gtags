@@ -3,6 +3,7 @@ import Div from "hometown-components-dev/lib/BoxHtV1";
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import Coupon from './Coupon';
 import { formatAmount } from 'utils/formatters';
+import ResponsiveModal from "components/Modal";
 
 const SaleIcon = require('../../../static/cart/sale.svg');
 const Arrowforword = require('../../../static/cart/arrowForword.svg');
@@ -13,14 +14,22 @@ const styles = require('./Coupon.scss');
 
 class ApplyCoupon extends Component {
   state = {
-    open: false
+    open: true,
+    openModal: true
   };
-  onClick = e => {
-    e.preventDefault();
-    this.setState(prevState => ({
-      open: !prevState.open
-    }));
+
+  handleModal = () => {
+    this.setState({
+      openModal: !this.state.openModal
+    });
   };
+
+  // onClick = e => {
+  //   e.preventDefault();
+  //   this.setState(prevState => ({
+  //     open: !prevState.open
+  //   }));
+  // };
   render() {
     const { price, coupon } = this.props;
     return (
@@ -37,7 +46,7 @@ class ApplyCoupon extends Component {
             background: coupon ? '#FFF8F4' : '',
             cursor: 'pointer'
           }}
-          onClick={this.onClick}
+          onClick={this.handleModal}
         >
           <img src={SaleIcon} alt="sale" />
           {!coupon ? (
@@ -50,33 +59,32 @@ class ApplyCoupon extends Component {
           )}
           <img src={Arrowforword} alt="Arrow" />
         </div>
-        {this.state.open && (
-          <div className={`${styles.acSidebar} ${styles.show}`}>
-            <div className={styles.acSidebarContainer}>
+        <ResponsiveModal
+            classNames={{ modal: "couponmodal" }}
+            onCloseModal={this.handleModal}
+            open={this.state.openModal}
+            style={{ padding: "0rem" }}
+          >
+          <div>
+            <div>
               <div
                 className={styles.back}
                 style={{
                   display: 'flex',
                   justifyContent: 'space-between',
                   alignItems: 'center',
-                  padding: '15px 20px',
+                  padding: '20px 50px',
                   background: '#F2F2F2',
-                  margin: 0
+                  margin: 0,
+                  borderTopRightRadius:'20px',
+                  borderTopLeftRadius:'20px'
                 }}
               >
-                <Button bg="transparent" border="none" onClick={this.onClick} p="0">
-                  {' '}
-                  <img src={BackIcon} alt="Close" />{' '}
-                </Button>
-                <Button bg="transparent" border="none" onClick={this.onClick} p="0">
-                  {' '}
-                  <img src={CloseIcon} alt="Close" />{' '}
-                </Button>
               </div>
               <Coupon />
             </div>
           </div>
-        )}
+          </ResponsiveModal>
       </Div>
     );
   }

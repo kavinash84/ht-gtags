@@ -23,7 +23,7 @@ export default class DemoModal extends Component {
     const { onClickProceed, loadingnextstep, isSubmitted, outOfStockList, btnText, selectedForDemo } = this.props;
 
     return (
-      <Section mb="0" p="0.5rem 0.5rem 0.625rem">
+      <Section mb="0" p="0.5rem 0.5rem 0.625rem" mt="0px">
         {!openDemo && (
           <Container type="container" pr="0.3125rem" pl="0.3125rem">
             {selectedForDemo ? (

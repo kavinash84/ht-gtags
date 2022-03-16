@@ -86,7 +86,7 @@ class Coupon extends Component {
             )}
             <form onSubmit={this.handleApply}>
               <div
-                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '0px 15px' }}
+                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '15px 50px' }}
               >
                 <input
                   className={styles.applyCopupnField}

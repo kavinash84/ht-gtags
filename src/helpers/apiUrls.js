@@ -59,6 +59,7 @@ export const ADDTOCARTCOMBINED = "tesla/cart/combined-set-products";
 export const SYNCCART = "tesla/cart/sync";
 export const CHECKCART = "tesla/checkout";
 export const CUSTOMER_REGISTRATION = "tesla/checkout/customer-registration";
+export const ADD_GIFT_WRAP = "tesla/cart/gift-wrap";
 
 /* Session */
 export const SESSION = "tesla/session";
