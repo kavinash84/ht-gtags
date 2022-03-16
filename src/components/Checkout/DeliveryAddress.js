@@ -416,7 +416,7 @@ class DeliveryAddress extends Component {
               </Box>
             )}
             {isLoggedIn && !addressform && (
-              <Div col="12" pb="0.625rem">
+              <Div col="12" pb="0.625rem" mb="15px">
                 <button className={styles.addAddressBtn} onClick={this.toggleAddAddress}>
                   <Text color="rgb(0,0,0)" ta="left" mt="0" mb="0" >
                     <img className={styles.addAddressBtnIcon} src={addIcon} alt="Add New Address" />
@@ -546,7 +546,7 @@ class DeliveryAddress extends Component {
             // disabled={loading || this.checkParams()}
             disabled={loading}
             onClick={
-              isLoggedIn && !addNewAddress && (currentaddressindex === -1 || currentaddressindex === null)
+              isLoggedIn && !Addressform && (currentaddressindex === -1 || currentaddressindex === null)
                 ? this.isAddressSelected
                 : this.handleSubmit
             }
