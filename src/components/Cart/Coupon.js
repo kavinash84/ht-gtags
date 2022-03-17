@@ -104,7 +104,7 @@ class Coupon extends Component {
                   className={styles.applyCouponBtn}
                   color="#f98d29"
                   pl="0"
-                  pr="0"
+                  pr="20px"
                   fontSize="0.875rem"
                   style={{ background: "none" }}
                   disabled={
@@ -148,7 +148,7 @@ class Coupon extends Component {
         </div>
         <div
           pt="0.625rem"
-          pb="4rem"
+          pb="1rem"
           mb="0"
           mt="20px"
           display="flex"

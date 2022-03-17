@@ -175,7 +175,7 @@ export default class CartContainer extends Component {
     const popUpTimeoutId = setTimeout(this.webToChat, cartTimeout);
     // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ popUpTimeoutId });
-    this.checkForEmiEligibility(total);
+    // this.checkForEmiEligibility(total);
   }
   componentWillReceiveProps(nextProps) {
     const {
@@ -192,9 +192,9 @@ export default class CartContainer extends Component {
       dispatch(resetCheckKey());
       return history.push('/checkout/delivery-address');
     }
-    if (total !== nextPropsTotal) {
-      this.checkForEmiEligibility(nextPropsTotal);
-    }
+    // if (total !== nextPropsTotal) {
+    //   this.checkForEmiEligibility(nextPropsTotal);
+    // }
   }
   componentWillUnmount() {
     // console.log('componentWillUnmount function in cart');
@@ -204,18 +204,18 @@ export default class CartContainer extends Component {
     toggleWebToChat(false);
   }
 
-  checkForEmiEligibility = total => {
-    const { emiPopUpShown } = this.state;
+  // checkForEmiEligibility = total => {
+  //   const { emiPopUpShown } = this.state;
     // console.log('checkForEmiEligibility function', total, emiPopUpShown);
 
-    if (total >= 20000 && !emiPopUpShown) {
-      this.setState({
-        open: true,
-        responsiveModalContent: 'emiModal',
-        emiPopUpShown: true
-      });
-    }
-  };
+  //   if (total >= 20000 && !emiPopUpShown) {
+  //     this.setState({
+  //       open: true,
+  //       responsiveModalContent: 'emiModal',
+  //       emiPopUpShown: true
+  //     });
+  //   }
+  // };
 
   handleModal = e => {
     if (e) {
@@ -237,16 +237,16 @@ export default class CartContainer extends Component {
     });
   };
 
-  handleEmiModal = e => {
-    const { open } = this.state;
-    if (e) {
-      e.preventDefault();
-    }
-    this.setState({
-      open: !open,
-      responsiveModalContent: open ? null : 'emiModal'
-    });
-  };
+  // handleEmiModal = e => {
+  //   const { open } = this.state;
+  //   if (e) {
+  //     e.preventDefault();
+  //   }
+  //   this.setState({
+  //     open: !open,
+  //     responsiveModalContent: open ? null : 'emiModal'
+  //   });
+  // };
   webToChat = () => {
     // const { dispatch } = this.context.store;
     const { toggleWebToChat, dismiss } = this.props;
@@ -350,14 +350,14 @@ export default class CartContainer extends Component {
                 <PinCode color="#f2f2f2" onCloseModal={this.handlePincodeModal} />
               </Box>
             ) : null}
-
-            {responsiveModalContent === 'emiModal' ? (
-              <Box>
+            </ResponsiveModal>
+            {/* {responsiveModalContent === 'emiModal' ? (
+              <Box> */}
                 {/* {total > bflMinAmount ? <BflPopMessage /> : <HdfcPopMessage />} */}
-                <HdfcPopMessage />
-              </Box>
-            ) : null}
-          </ResponsiveModal>
+                {/* <HdfcPopMessage /> */}
+              {/* </Box>
+            ) : null} */}
+          
 
           {/* Footer */}
           <Footer />
