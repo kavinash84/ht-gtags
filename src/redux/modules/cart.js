@@ -3,7 +3,8 @@ import {
   ADDTOCART as ADDTOCART_API,
   SYNCCART as SYNCCART_API,
   CHECKCART as CHECKCART_API,
-  ADD_GIFT_WRAP as ADD_GIFT_WRAP_API
+  ADD_GIFT_WRAP as ADD_GIFT_WRAP_API,
+  GET_CONTACT
 } from "helpers/apiUrls";
 import { PINCODE } from "../../helpers/Constants";
 
@@ -38,6 +39,10 @@ const CHECK_GIFTWRAP_FAIL = "cart/CHECK_GIFTWRAP_FAIL";
 
 const UPDATE_CART_SUMMARY_AFTER_COUPON =
   "cart/UPDATE_CART_SUMMARY_AFTER_COUPON";
+
+  const LOAD_CART_CONTACT = "cart/LOAD_CART_CONTACT";
+const LOAD_CART_CONTACT_SUCCESS = "cart/LOAD_CART_CONTACT_SUCCESS";
+const LOAD_CART_CONTACT_FAIL = "cart/LOAD_CART_CONTACT_FAIL";
 
 const CLEAR_CART = "cart/CLEAR_CART";
 
@@ -152,6 +157,7 @@ const initialState = {
   initialLoading: false,
   data: [],
   summary: {},
+  contact: {},
   packageItems: [],
   currentPackage: "",
   demo_landing_page_url: "",
@@ -201,6 +207,24 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         initialLoading: false,
+        loaded: false
+      };
+      case LOAD_CART_CONTACT:
+      return {
+        ...state,
+        loading: true
+      };
+    case LOAD_CART_CONTACT_SUCCESS:
+      return {
+        ...state,
+        contact: action.result,
+        loading: false,
+        loaded: true
+      };
+    case LOAD_CART_CONTACT_FAIL:
+      return {
+        ...state,
+        loading: false,
         loaded: false
       };
     case ADD_TO_CART:
@@ -673,4 +697,9 @@ export const hideCouponList = () => ({
 export const setQuantityFlag = value => ({
   type: SET_QUANTITY_FLAG,
   value
+});
+
+export const getCartContactDetails = () => ({
+  types: [LOAD_CART_CONTACT, LOAD_CART_CONTACT_SUCCESS, LOAD_CART_CONTACT_FAIL],
+  promise: ({ client }) => client.get(GET_CONTACT)
 });

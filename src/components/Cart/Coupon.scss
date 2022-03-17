@@ -44,7 +44,7 @@
 .applyCopupnField {
   border: 1px solid #e3e3e3;
   border-radius: 8px;
-  width: 100%;
+  width: 75%;
   font-size: 14px;
   padding: 15px;
   outline: none !important;
@@ -52,7 +52,8 @@
   color: #707070;
 }
 .applyCouponBtn {
-  margin-left: 15px;
+  font-size: 12px;
+  // margin-left: 15px;
   background-color: none;
 }
 .offerList {
@@ -72,6 +73,7 @@
       list-style: none;
       border: 1px solid transparent;
       border-bottom: 1px solid #ebebeb;
+      margin-top: 20px;
       &:last-child {
         border-bottom: none;
       }
@@ -106,6 +108,8 @@
         line-height: 1.6;
         white-space: normal;
         margin-top: 3px;
+        margin-left: 80px;
+        padding-bottom: 20px;
       }
       .offerCondition {
         margin-top: 0.325rem;

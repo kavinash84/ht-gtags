@@ -208,6 +208,7 @@ const mapStateToProps = ({
   cartChecked: cart.cartChecked,
   packageItems: cart.packageItems,
   checkingCart: cart.checkingCart,
+  cartContact: cart.contact,
   cartUpdating: cart.cartUpdating,
   pincode: pincode.selectedPincode,
   sessionId: app.sessionId, // New
@@ -254,7 +255,8 @@ const Cart = ({
   isLoggedIn,
   wishListWaitList,
   loadingList,
-  isPackage
+  isPackage,
+  cartContact
 }) => {
   const cartItemLoading = customerCardId =>
     cartUpdating && currentId === customerCardId;
@@ -1008,7 +1010,6 @@ const Cart = ({
                 <DemoModal
                   landingPageLink={demoLandingPageUrl}
                   selectedForDemo={selectForDemo.length !== 0}
-
                 />
                 <PriceSummary
                   summaryPrice={summary}
@@ -1046,7 +1047,7 @@ const Cart = ({
           </Box>
         </Row>
         <Box pb={20}>
-          <HappyToHelp />
+          <HappyToHelp data={cartContact}/>
         </Box>
         {!isLoggedIn && (
           <ResponsiveModal

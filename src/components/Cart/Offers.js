@@ -26,7 +26,7 @@ class Offers extends React.Component {
             >
               {cartEmiDetails.cart_emi_detail.map(item => (
                 <Link to="/promotions">
-                <p style={{ marginBottom: '3px', color: '#999999', }}>{item.mobile}</p>
+                <p style={{ marginBottom: '3px', color: '#999999' }}>{item.desktop}</p>
                 </Link>
               ))}
             </div>

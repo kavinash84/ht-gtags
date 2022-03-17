@@ -33,7 +33,7 @@ class ApplyCoupon extends Component {
   render() {
     const { price, coupon } = this.props;
     return (
-      <Div col="12" p="22px 10px" style={{ background: 'white' }}>
+      <Div col="12" p="22px 10px 15px" style={{ background: 'white' }}>
         <div
           style={{
             border: '1px solid #E3E3E3',

@@ -484,12 +484,14 @@ class DemoForm extends Component {
   render() {
     const { landing } = this.props;
     const uiHtml = landing.data.items.text;
+    console.log(uiHtml,'uihtml')
     return (
       <React.Fragment>
         <div style={{ background: 'white', padding: '15px 15px 40px', marginTop: '50px' }}>
           {landing !== null && (
             <Description itemProp="description" fontSize="0.875rem" dangerouslySetInnerHTML={{ __html: uiHtml }} />
           )}
+      
         </div>
       </React.Fragment>
     );

@@ -55,10 +55,10 @@ class CartPincode extends React.Component {
             onChange={onChange(setPincodeOrCityQuery, load)}
             value={pincodeQuery}
             ref={this.pincodeinputref}
-            style={{ background: 'white', borderRadius: '10px', padding: '5px 10px', color: '#707070' , width:'1000px'}}
+            style={{ background: 'white', padding: '5px 10px', color: '#707070' , width:'600px', height:'50px', borderTopLeftRadius:'10px', borderBottomLeftRadius:'10px'}}
           />
           <div
-            style={{ color: '#F47020', fontSize: '14px', marginLeft: '20px', cursor:'pointer'}}
+            style={{ color: '#F47020', fontSize: '14px', marginLeft: '55px', cursor:'pointer'}}
             onClick={setPincodeInStore(setPincode, pincodeQuery)}
           >
             Check

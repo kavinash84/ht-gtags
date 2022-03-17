@@ -21,13 +21,13 @@ class DeliveryAddress extends React.Component {
   render() {
     const { pincode } = this.props;
     return (
-      <Row className={styles.pincodeCheck} type="block"  m="0" mb="0" mt="0" style={{padding:'10px 20px'}}>
+      <Row className={styles.pincodeCheck} type="block"  m="0" mb="0" mt="0" style={{padding:'0px 20px 0px 0px'}}>
         {this.state.takePincode ? (
           <Div pr="0" pl="0">
             <CartPincode />
           </Div>
         ) : (
-          <Div col="12" pr="0" pl="0" pt="10px" pb="10px" className={styles.address_wrapper}>
+          <Div col="12" pr="0" pl="20px" pt="20px" pb="20px" className={styles.address_wrapper}>
             <div className={styles.address_container}>
               <div className={styles.filtered_address}>
                 Deliver To: {pincode}
