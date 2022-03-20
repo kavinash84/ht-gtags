@@ -26,7 +26,7 @@ export default class DemoModal extends Component {
       <Section mb="0" p="0.5rem 0.5rem 0.625rem" mt="0px">
         {!openDemo && (
           <Container type="container" pr="0.3125rem" pl="0.3125rem">
-            {/* {selectedForDemo ? (
+            {selectedForDemo ? (
               <div
                 style={{ padding: '10px', color: '#F47020', fontSize: '14px', width: '100%', textAlign: 'center', lineHeight: '20px', cursor: 'pointer' }}
                 onClick={() => {
@@ -37,7 +37,7 @@ export default class DemoModal extends Component {
                 CLICK HERE TO SCHEDULE VIRTUAL DEMO
                 
               </div>
-            ) : null} */}
+            ) : null}
           </Container>
         )}
         <ResponsiveModal classNames={{ modal: 'mkModal' }} onCloseModal={this.handleModal} open={this.state.openDemo}>

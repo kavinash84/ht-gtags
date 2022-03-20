@@ -690,7 +690,6 @@ const Cart = ({
                             </Box>
                           ) : null}
 
-          
                           {/* {item.product_info.assembly_service && (
                       <Box color="uspTitle" fontSize="0.75rem">
                         <Image
@@ -742,8 +741,6 @@ const Cart = ({
                                 )}
                           </Label>
                         </Box> */}
-
-                       
 
                         {isProductOutofStock(item.configurable_sku) && (
                           <Flex
@@ -811,7 +808,7 @@ const Cart = ({
                             </Button>
                           </Flex>
                         )}
-
+                        {/* 
                            {cartItemLoading(item.product_info.product_id) && (
                           <div className={styles.loadingCart}>
                             <h4>PLEASE WAIT...</h4>
@@ -823,7 +820,7 @@ const Cart = ({
                             <h4>PLEASE WAIT...</h4>
                             <p>WHILE IT UPDATES</p>
                           </div>
-                        )}
+                        )} */}
                       </Row>
 
                       {item.freebie_info && item.freebie_info.name && (
@@ -1047,7 +1044,7 @@ const Cart = ({
           </Box>
         </Row>
         <Box pb={20}>
-          <HappyToHelp data={cartContact}/>
+          <HappyToHelp data={cartContact} />
         </Box>
         {!isLoggedIn && (
           <ResponsiveModal

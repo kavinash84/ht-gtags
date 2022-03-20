@@ -75,7 +75,13 @@ const ProductQuantity = ({
     >
       -
     </button>
-    <div style={{fontSize: "14px"}}>{quantity}</div>
+    {/* <div style={{fontSize: "14px"}}>{quantity}</div>
+     */}
+     {cartItemLoading(cartId) || cartItemLoading(configId) ? (
+        <Image width={20} className="spin" src={LoaderIcon} />
+      ) : (
+        quantity
+      )}
     <button
       style={{
         padding: "0px",
