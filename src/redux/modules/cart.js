@@ -40,109 +40,6 @@ const CLEAR_CART = "cart/CLEAR_CART";
 const TOGGLE_COUPON_LIST = "cart/TOGGLE_COUPON_LIST";
 const HIDE_COUPON_LIST = "cart/HIDE_COUPON_LIST";
 
-// const formatCartData = data => {
-//   if (Array.isArray(data)) {
-//     let arr = data.map(item => {
-//       if (item.product_info.packageId) {
-//         return item;
-//       } else {
-//         return {
-//           ...item,
-//           product_info: {
-//             ...item.product_info,
-//             stock: item.stock,
-//             image: item.image,
-//             unit_price: parseInt(item.product_info.price),
-//             net_price: parseInt(item.product_info.special_price)
-//           }
-//         };
-//       }
-//     });
-//     return arr;
-//   }
-//   return [];
-// };
-
-// const checkForPackages = cartData => {
-//   if (Array.isArray(cartData.packages)) {
-//     return cartData.cart;
-//   } else if (cartData.packages && Object.keys(cartData.packages).length === 0) {
-//     return cartData.cart;
-//   } else {
-//     let arrayOfObj = Object.values(cartData.packages).map(item => {
-//       return {
-//         configurable_sku: "",
-//         created_at: "",
-//         fk_customer: null,
-//         id_customer_cart: item.id_customer_cart,
-//         is_bogo: 0,
-//         is_display: 1,
-//         product_info: {
-//           assembly_service: false,
-//           cart_rule_discount: item.cart_rule_discount,
-//           cart_rule_display_names: [],
-//           category_details: [],
-//           color: "",
-//           color_family: "",
-//           coupon_discount: item.coupon_discount,
-//           delivery_time_text: item.delivery_time_text,
-//           demo_product: false,
-//           discount: item.discount,
-//           gift_wrap: 0,
-//           giftimageset: "",
-//           image: `${item.images[0]}.jpg`,
-//           is_available: item.is_available,
-//           is_deliverable: item.is_deliverable,
-//           is_freebie: "",
-//           max_display_stock: "",
-//           name: item.packageName,
-//           net_price: item.subTotal,
-//           offer_message: "",
-//           packageId: item.packageId,
-//           product_id: item.packageId,
-//           shipping_time_text: item.shipping_time_text,
-//           special_price: item.specialPrice,
-//           stock: item.stock,
-//           unit_price: item.unit_price,
-//           url: ""
-//         },
-//         qty: 1,
-//         session_id: "",
-//         shipping_charges: 0,
-//         simple_sku: "",
-//         simpleSkus: item.simpleSkus,
-//         updated_at: ""
-//       };
-//     });
-//     return [...cartData.cart, ...arrayOfObj];
-//   }
-// };
-
-// const formatPackageItems = packageData => {
-//   if (Array.isArray(packageData.packageItems)) {
-//     return [];
-//   } else if (
-//     packageData.packageItems &&
-//     Object.keys(packageData.packageItems).length === 0
-//   ) {
-//     return [];
-//   } else {
-//     let arrayOfObj = Object.values(packageData.packageItems);
-//     return arrayOfObj;
-//   }
-// };
-
-// const getCurrentPackage = data => {
-//   if (Array.isArray(data.packages)) {
-//     return "";
-//   } else if (data.packages && Object.keys(data.packages).length === 0) {
-//     return "";
-//   } else {
-//     let arrayOfObj = Object.keys(data.packages);
-//     return arrayOfObj[0];
-//   }
-// };
-
 const initialState = {
   loading: false,
   initialLoading: false,
@@ -175,7 +72,10 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         data:
           action.result && "cartItems" in action.result
-            ? formatToArray(action.result.cartItems)
+            ? formatToArray({
+                ...action.result.cartItems,
+                ...action.result.packages
+              })
             : [],
         summary:
           action.result && "summary" in action.result
@@ -217,7 +117,10 @@ export default function reducer(state = initialState, action = {}) {
         couponlistToggle: false,
         data:
           action.result && "cartItems" in action.result
-            ? formatToArray(action.result.cartItems)
+            ? formatToArray({
+                ...action.result.cartItems,
+                ...action.result.packages
+              })
             : [],
         summary:
           action.result && "summary" in action.result
@@ -248,7 +151,10 @@ export default function reducer(state = initialState, action = {}) {
         couponlistToggle: false,
         data:
           action.result && "cartItems" in action.result
-            ? formatToArray(action.result.cartItems)
+            ? formatToArray({
+                ...action.result.cartItems,
+                ...action.result.packages
+              })
             : [],
         summary:
           action.result && "summary" in action.result
@@ -280,7 +186,10 @@ export default function reducer(state = initialState, action = {}) {
         quantityChange: false,
         data:
           action.result && "cartItems" in action.result
-            ? formatToArray(action.result.cartItems)
+            ? formatToArray({
+                ...action.result.cartItems,
+                ...action.result.packages
+              })
             : [],
         summary:
           action.result && "summary" in action.result
@@ -313,7 +222,10 @@ export default function reducer(state = initialState, action = {}) {
         cartUpdated: true,
         data:
           action.result && "cartItems" in action.result
-            ? formatToArray(action.result.cartItems)
+            ? formatToArray({
+                ...action.result.cartItems,
+                ...action.result.packages
+              })
             : [],
         summary:
           action.result && "summary" in action.result
@@ -345,7 +257,10 @@ export default function reducer(state = initialState, action = {}) {
         cartSynced: true,
         data:
           action.result && "cartItems" in action.result
-            ? formatToArray(action.result.cartItems)
+            ? formatToArray({
+                ...action.result.cartItems,
+                ...action.result.packages
+              })
             : [],
         summary:
           action.result && "summary" in action.result
@@ -390,7 +305,10 @@ export default function reducer(state = initialState, action = {}) {
     case UPDATE_CART_SUMMARY_AFTER_COUPON:
       return {
         ...state,
-        summary: action.summary
+        summary: formatCartSummary({
+          ...action.summary,
+          cartEmiDetail: action.cartEmiDetail
+        })
       };
     case SET_CURRENT_KEY:
       return {
@@ -439,9 +357,7 @@ export const loadCart = (session, pincode) => ({
   types: [LOAD_CART, LOAD_CART_SUCCESS, LOAD_CART_FAIL],
   promise: async ({ client }) => {
     try {
-      const response = await client.get(
-        `${ADDTOCART_API}/${session}/${pincode}`
-      );
+      const response = await client.get(`${ADDTOCART_API}?pincode=${pincode}`);
       await setAppAuth({ client })(response);
       return response;
     } catch (error) {
@@ -566,9 +482,13 @@ export const removeFromCart = (
     promise: async ({ client }) => {
       try {
         console.log(cartId, "cart cat");
-        const response = await client.delete(`${ADDTOCART_API}/${pincode}`, {
-          data: cartId
-        });
+        const response = cartId.hasOwnProperty("packageId")
+          ? await client.delete(`${ADDTOCART_API}/delete-package`, {
+              data: cartId
+            })
+          : await client.delete(ADDTOCART_API, {
+              data: cartId
+            });
 
         return response;
       } catch (error) {

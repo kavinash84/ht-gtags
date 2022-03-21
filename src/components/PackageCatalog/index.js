@@ -157,16 +157,25 @@ export default class PackageCatalog extends Component {
       oldList
     } = this.props;
     const { selected } = this.state;
+    const skus = {};
+    if (Array.isArray(selected) && selected.length) {
+      selected.map(item => {
+        skus[item.simple_sku] = item.qty;
+      });
+    }
     const postData = {
-      new_skus: selected,
-      old_skus: oldList,
-      fk_cart_rule: currentPackage,
+      // new_skus: selected,
+      // old_skus: oldList,
+      // fk_cart_rule: currentPackage,
+      // pincode: selectedPincode,
+      // session_id: sessionId
+      packageId: currentPackage,
       pincode: selectedPincode,
-      session_id: sessionId
+      skus: skus
     };
     this.setState({ priceWarningModal: false, cartWarningModal: false });
     if (this.checkPriceStatus(packageCatalog)) {
-      dispatch(proceedPackageCatalog({ ...postData, fk_cart_rule: "" }));
+      dispatch(proceedPackageCatalog({ ...postData, packageId: "" }));
     } else if (this.checkDelivarableStatus(packageCatalog)) {
       dispatch(proceedPackageCatalog(postData));
     } else {

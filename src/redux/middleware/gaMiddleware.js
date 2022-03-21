@@ -97,8 +97,12 @@ export default function gaMiddleware() {
             window.google_tag_params.ecomm_pagetype = "home";
             window.google_tag_params.ecomm_totalvalue = "";
             window.google_tag_params.ecomm_prodid = [];
-          } else if (location === CART_URL) {
-            window.google_tag_params.ecomm_pagetype = "cart";
+          } else if (
+            location === CART_URL &&
+            window.google_tag_params &&
+            window.google_tag_params.ecomm_pagetype
+          ) {
+            window.google_tag_params.ecomm_pagetype;
             if (getState().cart.summary) {
               window.google_tag_params.ecomm_totalvalue = getState().cart.summary.total;
               window.google_tag_params.ecomm_prodid = getCartListSKU(
@@ -301,7 +305,7 @@ export default function gaMiddleware() {
           // window.dataLayer.push(eventObject);
         }
         /* Cart Tracking */
-        if (type === "cart/ADD_TO_CART_SUCCESS") {
+        if (type === "cart/ADD_TO_CART_SUCCESS" && action.configId) {
           const { configId } = action;
           const cartItems = Object.values(action.result.cartItems);
           const total = action.result.summary.total;
@@ -354,7 +358,7 @@ export default function gaMiddleware() {
             }
           );
         }
-        if (type === "cart/UPDATE_CART_SUCCESS") {
+        if (type === "cart/UPDATE_CART_SUCCESSS") {
           const { data } = getState().cart;
           const cartItems = Object.values(action.result.cartItems);
           const total = action.result.summary.total;
@@ -443,10 +447,9 @@ export default function gaMiddleware() {
               brand
             } = product.product_info;
             if (action.result) {
-              window.google_tag_params.ecomm_totalvalue =
-                action.result.cart.summary.total;
+              window.google_tag_params.ecomm_totalvalue = total;
               window.google_tag_params.ecomm_prodid = getCartListSKUFromResult(
-                action.result.cart
+                data
               );
             }
             window.dataLayer.push(
@@ -706,7 +709,7 @@ export default function gaMiddleware() {
         }
       }
       if (type === "cart/UPDATE_CART_SUCCESS") {
-        if (action.result.cart.summary) {
+        if (action.result.summary) {
           window.google_tag_params.ecomm_totalvalue =
             action.result.summary.total;
         }

@@ -458,18 +458,20 @@ const Cart = ({
                             mr={10}
                             src={orderTrackIcon}
                           />
-                          <Text
-                            color={
-                              item.product_info.delivery_time_text.indexOf(
-                                "Currently"
-                              ) === -1
-                                ? "#090909"
-                                : "red"
-                            }
-                            fontSize={12}
-                          >
-                            {item.product_info.delivery_time_text}
-                          </Text>
+                          {item.product_info.delivery_time_text && (
+                            <Text
+                              color={
+                                item.product_info.delivery_time_text.indexOf(
+                                  "Currently"
+                                ) === -1
+                                  ? "#090909"
+                                  : "red"
+                              }
+                              fontSize={12}
+                            >
+                              {item.product_info.delivery_time_text}
+                            </Text>
+                          )}
                         </Flex>
                       </Box>
                       <Flex alignItems="center">
@@ -490,10 +492,8 @@ const Cart = ({
                               pincode,
                               // item.id_customer_cart,
                               {
-                                skuData: [
-                                  { simple_sku: item.simple_sku, qty: item.qty }
-                                ],
-                                packageId: false
+                                cartIds: item.cart_ids,
+                                packageId: item.product_info.packageId
                               },
                               sessionId,
                               pincode,
@@ -525,7 +525,7 @@ const Cart = ({
                             item.product_info.packageId
                               ? onClick(
                                   {
-                                    skuData: getSkusData(item.simpleSkus),
+                                    cartIds: item.cart_ids,
                                     packageId: item.product_info.packageId
                                   },
                                   sessionId,
@@ -713,7 +713,7 @@ const Cart = ({
                             item.product_info.packageId
                               ? onClick(
                                   {
-                                    skuData: getSkusData(item.simpleSkus),
+                                    cartIds: item.cart_ids,
                                     packageId: item.product_info.packageId
                                   },
                                   sessionId,
