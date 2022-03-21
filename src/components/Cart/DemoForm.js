@@ -57,11 +57,11 @@ const setProductCategory = (landing, selectForDemo) => {
     categoryOption.unshift('<option selected disabled>Please select</option>');
     category.innerHTML = categoryOption;
 
-    if (selectForDemo.length !== 0) {
-      category.style.display = 'none';
-      category.required = false;
-      categorySection[0].style.display = 'none';
-    }
+    // if (selectForDemo.length !== 0) {
+    //   category.style.display = 'none';
+    //   category.required = false;
+    //   categorySection[0].style.display = 'none';
+    // }
 
     category.addEventListener('input', event => {
       event.preventDefault();

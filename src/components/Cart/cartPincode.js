@@ -58,7 +58,7 @@ class CartPincode extends React.Component {
             style={{ background: 'white', padding: '5px 10px', color: '#707070' , width:'700px', height:'50px', borderTopLeftRadius:'10px', borderBottomLeftRadius:'10px'}}
           />
           <div
-            style={{ color: '#F47020', fontSize: '14px', marginLeft: '85px', cursor:'pointer'}}
+            style={{ color: '#F47020', fontSize: '14px', marginLeft: '50px', cursor:'pointer', marginRight:'-100px'}}
             onClick={setPincodeInStore(setPincode, pincodeQuery)}
           >
             Check
