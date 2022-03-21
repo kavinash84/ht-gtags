@@ -372,7 +372,6 @@ class DeliveryAddress extends Component {
     const { isLoggedIn, loading, addresses, currentaddressindex } = this.props;
     const { shippingIsBilling, userEmail, addNewAddress } = this.props;
     const { addressform } = this.state;
-    console.log("address form", addressform, addNewAddress);
     return (
       <Container my={[60, 60, 60]} px={[24, 24, 0]}>
 
