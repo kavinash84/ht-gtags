@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 }))
 export default class DemoModal extends Component {
   state = {
-    openDemo: false
+    openDemo: true
   };
   handleModal = () => {
     this.setState({ openDemo: !this.state.openDemo });
@@ -40,7 +40,7 @@ export default class DemoModal extends Component {
             ) : null}
           </Container>
         )}
-        <ResponsiveModal classNames={{ modal: 'mkModal' }} onCloseModal={this.handleModal} open={this.state.openDemo}>
+        <ResponsiveModal classNames={{ modal: 'virtualModal' }} onCloseModal={this.handleModal} open={this.state.openDemo}>
           {openDemo && <DemoForm handleModal={this.handleModal} />}
         </ResponsiveModal>
       </Section>

@@ -8,6 +8,10 @@ import { submitOffer } from 'redux/modules/landing';
 import { addToSelectForDemo } from 'redux/modules/selectForDemo';
 import { connect } from 'react-redux';
 
+import Flex from 'hometown-components-dev/lib/FlexHtV1';
+import Div from 'hometown-components-dev/lib/BoxHtV1';
+import Img from 'hometown-components-dev/lib/ImageHtV1';
+
 import moment from 'moment';
 
 const startTime = date =>
@@ -487,12 +491,19 @@ class DemoForm extends Component {
     console.log(uiHtml,'uihtml')
     return (
       <React.Fragment>
-        <div style={{ background: 'white', padding: '15px 15px 40px', marginTop: '50px' }}>
+       <Div style={{width:'100%'}}>
+       <Flex>
+       <Img src="https://www.hometown.in/media/cms/D/Top-Image-Living1.jpg" style={{width: '50%', height:'90vh'}}/>
+       <Div style={{width:'50%', height:'90vh', backgroundColor: '#FFF8F4'}}>
+       <div style={{ background: '#FFF8F4', padding: '15px 15px 40px', marginTop: '50px' }}>
           {landing !== null && (
             <Description itemProp="description" fontSize="0.875rem" dangerouslySetInnerHTML={{ __html: uiHtml }} />
           )}
-      
         </div>
+       </Div>
+       </Flex>
+       </Div>
+       
       </React.Fragment>
     );
   }
