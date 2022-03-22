@@ -493,7 +493,7 @@ class DemoForm extends Component {
       <React.Fragment>
        <Div style={{width:'100%'}}>
        <Flex>
-       <Img src="https://www.hometown.in/media/cms/D/Top-Image-Living1.jpg" style={{width: '50%', height:'90vh'}}/>
+       <Img src="https://www.hometown.in/media/cms/designbuild/speaktoExperts.png" style={{width: '50%', height:'90vh'}}/>
        <Div style={{width:'50%', height:'90vh', backgroundColor: '#FFF8F4'}}>
        <div style={{ background: '#FFF8F4', padding: '10px 15px 0px', marginTop: '10px' }}>
           {landing !== null && (
