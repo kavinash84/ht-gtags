@@ -2,6 +2,7 @@ import { provideHooks } from 'redial';
 import HomeTownLoader from 'containers/Loader';
 import { PINCODE } from 'helpers/Constants';
 import { loadCart } from 'redux/modules/cart';
+import { loadStoresData } from "redux/modules/storelocator";
 import { getLandingData, getLandingCategoryData } from "redux/modules/landing";
 import { getCartContactDetails } from "../../redux/modules/cart";
 
@@ -14,6 +15,7 @@ const hooks = {
     await dispatch(getLandingData("added-from-cart"));
     await dispatch(getCartContactDetails());
     await dispatch(getLandingCategoryData());
+    await dispatch(loadStoresData());
     if (sessionId) {
       const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
       dispatch(loadCart(sessionId, pincode)).catch(error => console.log(error));
