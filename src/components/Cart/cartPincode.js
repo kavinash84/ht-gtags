@@ -22,9 +22,9 @@ const setPincodeInStore = (dispatcher, pincode) => e => {
   e.preventDefault();
   if (pincode) {
     dispatcher(pincode);
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+    // setTimeout(() => {
+    //   window.location.reload();
+    // }, 1000);
   }
 };
 
