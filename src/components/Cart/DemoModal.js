@@ -12,7 +12,7 @@ import { Link } from 'react-router-dom';
 }))
 export default class DemoModal extends Component {
   state = {
-    openDemo: true
+    openDemo: false
   };
   handleModal = () => {
     this.setState({ openDemo: !this.state.openDemo });
