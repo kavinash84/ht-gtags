@@ -274,7 +274,7 @@ export default function gaMiddleware() {
             });
             window.google_tag_params.ecomm_prodid = skus;
             window.google_tag_params.ecomm_totalvalue = String(totalValue);
-            window.dataLayer.push(eventObject);
+            // window.dataLayer.push(eventObject);
           }
 
           // eventObject.ecommerce.impressions = results.map((item, position) => {

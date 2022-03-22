@@ -81,7 +81,7 @@ import TitlePrice from "./TitlePrice";
 import HeadingTitlePrice from "./HeadingTitlePrice";
 import WishListButton from "hometown-components-dev/lib/WishlistButtonHtV1";
 // import Section from 'hometown-components-dev/lib/SectionHtV1';
-// import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
+import NewUnboxRecomondRecentlyViewed from "../NewUnboxWidges/recomondAndRecently";
 import LoginModal from "containers/Login/LoginForm";
 import AddToCart from "./pdpAddToCart";
 import BreadCrumb from "./BreadCrumb";
@@ -361,6 +361,11 @@ class ProductDetails extends React.Component {
     const popUpTimeoutId = setTimeout(this.webToChat, pdpTimeout);
     // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ popUpTimeoutId });
+    if (window && window.Unbxd && window.Unbxd.track && pid) {
+      window.Unbxd.track("product_view", { pid });
+      window.Unbxd.track("click", { pid: pid });
+      window.Unbxd.track("experience_impression", { pid: pid });
+    }
   }
   // componentWillReceiveProps(nextProps) {
   //   const { colorproducts } = this.props;
@@ -1591,11 +1596,18 @@ class ProductDetails extends React.Component {
               <BaughtTogether prodQty={prodQty} />
             </LazyLoad>
 
+            <NewUnboxRecomondRecentlyViewed
+              pageInfo={{
+                pageType: "PRODUCT",
+                productIds: [configId || ""]
+              }}
+            />
+
             {/* Complete the look */}
-            <UnbxdCompleteTheLook configId={configId} />
+            {/* <UnbxdCompleteTheLook configId={configId} /> */}
 
             {/* Related Products List */}
-            {relatedproductsList.length > 0 && (
+            {/* {relatedproductsList.length > 0 && (
               <Row py={36}>
                 <ProductCarousel
                   paddingTop="2.5rem"
@@ -1604,7 +1616,7 @@ class ProductDetails extends React.Component {
                   length={relatedproductsList.length}
                 />
               </Row>
-            )}
+            )} */}
 
             {/* Unbxd Recently Viewed */}
             {/* <Section>
