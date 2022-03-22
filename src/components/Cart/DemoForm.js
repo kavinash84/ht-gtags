@@ -495,7 +495,7 @@ class DemoForm extends Component {
        <Flex>
        <Img src="https://www.hometown.in/media/cms/D/Top-Image-Living1.jpg" style={{width: '50%', height:'90vh'}}/>
        <Div style={{width:'50%', height:'90vh', backgroundColor: '#FFF8F4'}}>
-       <div style={{ background: '#FFF8F4', padding: '15px 15px 40px', marginTop: '50px' }}>
+       <div style={{ background: '#FFF8F4', padding: '10px 15px 0px', marginTop: '10px' }}>
           {landing !== null && (
             <Description itemProp="description" fontSize="0.875rem" dangerouslySetInnerHTML={{ __html: uiHtml }} />
           )}
