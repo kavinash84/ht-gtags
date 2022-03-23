@@ -358,12 +358,13 @@ export default function gaMiddleware() {
             }
           );
         }
-        if (type === "cart/UPDATE_CART_SUCCESSS") {
+        if (type === "cart/UPDATE_CART_SUCCESS") {
           const { data } = getState().cart;
           const cartItems = Object.values(action.result.cartItems);
           const total = action.result.summary.total;
           const productt = data.filter(
-            (item, i) => item.cart_ids.length !== cartItems[i].cart_ids.length
+            (item, i) =>
+              item.configurable_sku === action.result.configurable_sku
           );
           const productQty = productt[0].qty;
           const { configId, qty } = action;
@@ -381,7 +382,8 @@ export default function gaMiddleware() {
             });
           }
           const product = data.filter(
-            (item, i) => item.cart_ids.length !== cartItems[i].cart_ids.length
+            (item, i) =>
+              item.configurable_sku === action.result.configurable_sku
           );
           const {
             name,
