@@ -54,9 +54,9 @@ class ApplyGiftWrapper extends React.Component {
     this.setState({ loading: true });
     this.setState({ isChecked: !this.state.isChecked });
     dispatch(checkGiftWrap(!this.state.isChecked));
-    setTimeout(() => {
-      this.setState({ loading: false });
-    }, 2000);
+    // setTimeout(() => {
+    //   this.setState({ loading: false });
+    // }, 2000);
     setTimeout(() => {
       dispatch(loadCart(session, pincode));
     }, 1000);
