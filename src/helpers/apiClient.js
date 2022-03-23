@@ -5,10 +5,10 @@ import getCookie from "../utils/cookies";
 export default function apiClient(req) {
   const instance = axios.create({
     baseURL: `https://${config.apiHost}`,
-    rejectUnauthorized: false,
-    params: {
-      devicePlatform: "desktop" // when ios app ready remove it & get the os from native code and pass here
-    }
+    rejectUnauthorized: false
+    // params: {
+    //   devicePlatform: "desktop" // when ios app ready remove it & get the os from native code and pass here
+    // }
   });
 
   let token;
@@ -44,6 +44,7 @@ export default function apiClient(req) {
         conf.headers.Authorization = `Bearer ${token}`;
       }
       conf.headers["X-SESSION-ID"] = session;
+      conf.headers["devicePlatform"] = "desktop";
       return conf;
     },
     error => Promise.reject(error)
