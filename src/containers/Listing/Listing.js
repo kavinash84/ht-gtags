@@ -325,6 +325,16 @@ export default class Listing extends Component {
     // let banners = [];
     // if (showBestOffers) banners = listingBestOffers[0][pathname].images;
     // console.log('listingBestOffers[pathname]', listingBestOffers[0][pathname]);
+    const obj = {
+      pageType: "CATEGORY"
+      // catlevel1Name: "furniture",
+      // catlevel2Name: "living-room-furniture",
+      // catlevel3Name: "sofas"
+    };
+    if (breadCrumbs && Array.isArray(breadCrumbs))
+      breadCrumbs.map((item, i) => {
+        obj[`catlevel${i + 1}Name`] = `${item.url_key}`.split("/")[i];
+      });
     /* eslint-disable react/no-danger */
     return (
       <Wrapper>
@@ -412,14 +422,7 @@ export default class Listing extends Component {
             </div>
 
             <div>
-              <NewUnboxBestSeller
-                pageInfo={{
-                  pageType: "CATEGORY",
-                  catlevel1Name: "furniture",
-                  catlevel2Name: "living-room-furniture",
-                  catlevel3Name: "sofas"
-                }}
-              />
+              <NewUnboxBestSeller pageInfo={obj} />
             </div>
 
             {seoInfo && seoInfo.seo_text && (
