@@ -1,9 +1,9 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import { PropTypes } from 'prop-types';
-import { checkGiftWrap, loadCart } from 'redux/modules/cart';
+import React from "react";
+import { connect } from "react-redux";
+import { PropTypes } from "prop-types";
+import { checkGiftWrap, loadCartGift } from "redux/modules/cart";
 
-const styles = require('./productitem.scss');
+const styles = require("./productitem.scss");
 
 @connect(({ app, cart, pincode }) => ({
   session: app.sessionId,
@@ -27,7 +27,8 @@ class ApplyGiftWrapper extends React.Component {
   componentDidMount() {
     const { summary, products } = this.props;
     this.setState({ isChecked: summary.is_gift_wrap_applied });
-    const found = products.find(element => element.product_info.gift_wrap === '1') || '';
+    const found =
+      products.find(element => element.product_info.gift_wrap === "1") || "";
     if (found) {
       this.setState({ shouldShow: true });
     } else {
@@ -38,8 +39,9 @@ class ApplyGiftWrapper extends React.Component {
   componentDidUpdate(prevProps, prevState) {
     const { summary, products } = this.props;
     if (prevProps.products !== products) {
-      const found = products.find(element => element.product_info.gift_wrap === '1') || '';
-      console.log(found, 'found');
+      const found =
+        products.find(element => element.product_info.gift_wrap === "1") || "";
+      console.log(found, "found");
       if (found) {
         this.setState({ shouldShow: true });
       } else {
@@ -54,12 +56,12 @@ class ApplyGiftWrapper extends React.Component {
     this.setState({ loading: true });
     this.setState({ isChecked: !this.state.isChecked });
     dispatch(checkGiftWrap(!this.state.isChecked));
-    // setTimeout(() => {
+    setTimeout(() => {
       this.setState({ loading: false });
-    // }, 2000);
-    // setTimeout(() => {
-      dispatch(loadCart(session, pincode));
-    // }, 1000);
+    }, 1000);
+    setTimeout(() => {
+      dispatch(loadCartGift(session, pincode));
+    }, 1000);
   };
 
   render() {

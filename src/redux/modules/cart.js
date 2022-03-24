@@ -37,10 +37,14 @@ const CHECK_GIFTWRAP = "cart/CHECK_GIFTWRAP";
 const CHECK_GIFTWRAP_SUCCESS = "cart/CHECK_GIFTWRAP_SUCCESS";
 const CHECK_GIFTWRAP_FAIL = "cart/CHECK_GIFTWRAP_FAIL";
 
+const LOAD_CART_GIFTWRAP = "cart/LOAD_CART_GIFTWRAP";
+const LOAD_CART_GIFTWRAP_SUCCESS = "cart/LOAD_CART_GIFTWRAP_SUCCESS";
+const LOAD_CART_GIFTWRAP_FAIL = "cart/LOAD_CART_GIFTWRAP_FAIL";
+
 const UPDATE_CART_SUMMARY_AFTER_COUPON =
   "cart/UPDATE_CART_SUMMARY_AFTER_COUPON";
 
-  const LOAD_CART_CONTACT = "cart/LOAD_CART_CONTACT";
+const LOAD_CART_CONTACT = "cart/LOAD_CART_CONTACT";
 const LOAD_CART_CONTACT_SUCCESS = "cart/LOAD_CART_CONTACT_SUCCESS";
 const LOAD_CART_CONTACT_FAIL = "cart/LOAD_CART_CONTACT_FAIL";
 
@@ -209,7 +213,7 @@ export default function reducer(state = initialState, action = {}) {
         initialLoading: false,
         loaded: false
       };
-      case LOAD_CART_CONTACT:
+    case LOAD_CART_CONTACT:
       return {
         ...state,
         loading: true
@@ -402,22 +406,22 @@ export default function reducer(state = initialState, action = {}) {
       };
     case CHECK_GIFTWRAP:
       return {
-        ...state,
-        loading: true
+        ...state
+        // loading: true
       };
     case CHECK_GIFTWRAP_SUCCESS:
       return {
-        ...state,
+        ...state
         // data: action.result && 'cart' in action.result ? action.result.cart : [],
         // summary: action.result && 'summary' in action.result ? action.result.summary : {},
-        loading: false,
-        loaded: true
+        // loading: false,
+        // loaded: true
       };
     case CHECK_GIFTWRAP_FAIL:
       return {
-        ...state,
-        loading: false,
-        loaded: true
+        ...state
+        // loading: false,
+        // loaded: true
       };
     case RESET_CART_CHECK:
       return {
@@ -429,7 +433,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         summary: action.summary
       };
-      case UPDATE_CART_AFTERCOUPON:
+    case UPDATE_CART_AFTERCOUPON:
       return {
         ...state,
         data:
@@ -463,6 +467,33 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...initialState
       };
+    case LOAD_CART_GIFTWRAP:
+      return {
+        ...state
+      };
+    case LOAD_CART_GIFTWRAP_SUCCESS:
+      return {
+        ...state,
+        data:
+          action.result && "cart" in action.result
+            ? checkForPackages(action.result)
+            : [],
+        summary:
+          action.result && "summary" in action.result
+            ? action.result.summary
+            : {},
+        demo_landing_page_url:
+          action.result && "demo_landing_page_url" in action.result
+            ? action.result.demo_landing_page_url
+            : "",
+        currentPackage: getCurrentPackage(action.result),
+        packageItems: formatPackageItems(action.result),
+        couponlistToggle: false
+      };
+    case LOAD_CART_GIFTWRAP_FAIL:
+      return {
+        ...state
+      };
     default:
       return state;
   }
@@ -484,6 +515,25 @@ const setAppAuth = ({ client }) => async response => {
 };
 export const loadCart = (session, pincode) => ({
   types: [LOAD_CART, LOAD_CART_SUCCESS, LOAD_CART_FAIL],
+  promise: async ({ client }) => {
+    try {
+      const response = await client.get(
+        `${ADDTOCART_API}/${session}/${pincode}`
+      );
+      await setAppAuth({ client })(response);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+});
+
+export const loadCartGift = (session, pincode) => ({
+  types: [
+    LOAD_CART_GIFTWRAP,
+    LOAD_CART_GIFTWRAP_SUCCESS,
+    LOAD_CART_GIFTWRAP_FAIL
+  ],
   promise: async ({ client }) => {
     try {
       const response = await client.get(
