@@ -2,7 +2,9 @@ import {
   ADDTOCARTCOMBINED as ADDTOCARTCOMBINED_API,
   ADDTOCART as ADDTOCART_API,
   SYNCCART as SYNCCART_API,
-  CHECKCART as CHECKCART_API
+  CHECKCART as CHECKCART_API,
+  ADD_GIFT_WRAP as ADD_GIFT_WRAP_API,
+  GET_CONTACT
 } from "helpers/apiUrls";
 import { PINCODE } from "../../helpers/Constants";
 
@@ -15,6 +17,7 @@ const ADD_TO_CART_FAIL = "cart/ADD_TO_CART_FAIL";
 const ADD_TO_CART_COMBINED = "cart/ADD_TO_CART_COMBINED";
 const ADD_TO_CART_COMBINED_SUCCESS = "cart/ADD_TO_CART_COMBINED_SUCCESS";
 const ADD_TO_CART_COMBINED_FAIL = "cart/ADD_TO_CART_COMBINED_FAIL";
+const UPDATE_CART_AFTERCOUPON = "cart/UPDATE_CART_AFTERCOUPON";
 const UPDATE_CART = "cart/UPDATE_CART";
 const UPDATE_CART_SUCCESS = "cart/UPDATE_CART_SUCCESS";
 const UPDATE_CART_FAIL = "cart/UPDATE_CART_FAIL";
@@ -30,9 +33,20 @@ const CHECKCART_FAIL = "cart/CHECKCART_FAIL";
 const RESET_CART_CHECK = "cart/RESET_CART_CHECK";
 const SET_CURRENT_KEY = "cart/SET_CURRENT_KEY";
 const SET_QUANTITY_FLAG = "cart/SET_QUANTITY_FLAG";
+const CHECK_GIFTWRAP = "cart/CHECK_GIFTWRAP";
+const CHECK_GIFTWRAP_SUCCESS = "cart/CHECK_GIFTWRAP_SUCCESS";
+const CHECK_GIFTWRAP_FAIL = "cart/CHECK_GIFTWRAP_FAIL";
+
+const LOAD_CART_GIFTWRAP = "cart/LOAD_CART_GIFTWRAP";
+const LOAD_CART_GIFTWRAP_SUCCESS = "cart/LOAD_CART_GIFTWRAP_SUCCESS";
+const LOAD_CART_GIFTWRAP_FAIL = "cart/LOAD_CART_GIFTWRAP_FAIL";
 
 const UPDATE_CART_SUMMARY_AFTER_COUPON =
   "cart/UPDATE_CART_SUMMARY_AFTER_COUPON";
+
+const LOAD_CART_CONTACT = "cart/LOAD_CART_CONTACT";
+const LOAD_CART_CONTACT_SUCCESS = "cart/LOAD_CART_CONTACT_SUCCESS";
+const LOAD_CART_CONTACT_FAIL = "cart/LOAD_CART_CONTACT_FAIL";
 
 const CLEAR_CART = "cart/CLEAR_CART";
 
@@ -147,6 +161,7 @@ const initialState = {
   initialLoading: false,
   data: [],
   summary: {},
+  contact: {},
   packageItems: [],
   currentPackage: "",
   demo_landing_page_url: "",
@@ -196,6 +211,24 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         initialLoading: false,
+        loaded: false
+      };
+    case LOAD_CART_CONTACT:
+      return {
+        ...state,
+        loading: true
+      };
+    case LOAD_CART_CONTACT_SUCCESS:
+      return {
+        ...state,
+        contact: action.result,
+        loading: false,
+        loaded: true
+      };
+    case LOAD_CART_CONTACT_FAIL:
+      return {
+        ...state,
+        loading: false,
         loaded: false
       };
     case ADD_TO_CART:
@@ -371,6 +404,25 @@ export default function reducer(state = initialState, action = {}) {
         checkingCart: false,
         cartChecked: false
       };
+    case CHECK_GIFTWRAP:
+      return {
+        ...state
+        // loading: true
+      };
+    case CHECK_GIFTWRAP_SUCCESS:
+      return {
+        ...state
+        // data: action.result && 'cart' in action.result ? action.result.cart : [],
+        // summary: action.result && 'summary' in action.result ? action.result.summary : {},
+        // loading: false,
+        // loaded: true
+      };
+    case CHECK_GIFTWRAP_FAIL:
+      return {
+        ...state
+        // loading: false,
+        // loaded: true
+      };
     case RESET_CART_CHECK:
       return {
         ...state,
@@ -380,6 +432,16 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         summary: action.summary
+      };
+    case UPDATE_CART_AFTERCOUPON:
+      return {
+        ...state,
+        data:
+          action.result && "cart" in action.result
+            ? checkForPackages(action.result.cart)
+            : [],
+        loading: false,
+        loaded: true
       };
     case SET_CURRENT_KEY:
       return {
@@ -405,6 +467,33 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...initialState
       };
+    case LOAD_CART_GIFTWRAP:
+      return {
+        ...state
+      };
+    case LOAD_CART_GIFTWRAP_SUCCESS:
+      return {
+        ...state,
+        data:
+          action.result && "cart" in action.result
+            ? checkForPackages(action.result)
+            : [],
+        summary:
+          action.result && "summary" in action.result
+            ? action.result.summary
+            : {},
+        demo_landing_page_url:
+          action.result && "demo_landing_page_url" in action.result
+            ? action.result.demo_landing_page_url
+            : "",
+        currentPackage: getCurrentPackage(action.result),
+        packageItems: formatPackageItems(action.result),
+        couponlistToggle: false
+      };
+    case LOAD_CART_GIFTWRAP_FAIL:
+      return {
+        ...state
+      };
     default:
       return state;
   }
@@ -426,6 +515,25 @@ const setAppAuth = ({ client }) => async response => {
 };
 export const loadCart = (session, pincode) => ({
   types: [LOAD_CART, LOAD_CART_SUCCESS, LOAD_CART_FAIL],
+  promise: async ({ client }) => {
+    try {
+      const response = await client.get(
+        `${ADDTOCART_API}/${session}/${pincode}`
+      );
+      await setAppAuth({ client })(response);
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+});
+
+export const loadCartGift = (session, pincode) => ({
+  types: [
+    LOAD_CART_GIFTWRAP,
+    LOAD_CART_GIFTWRAP_SUCCESS,
+    LOAD_CART_GIFTWRAP_FAIL
+  ],
   promise: async ({ client }) => {
     try {
       const response = await client.get(
@@ -598,9 +706,28 @@ export const checkCart = sessionId => ({
   }
 });
 
+export const checkGiftWrap = value => ({
+  types: [CHECK_GIFTWRAP, CHECK_GIFTWRAP_SUCCESS, CHECK_GIFTWRAP_FAIL],
+  promise: async ({ client }) => {
+    try {
+      const response = await client.post(`${ADD_GIFT_WRAP_API}`, {
+        isGiftWrapRequired: value
+      });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+});
+
 export const updateCartSummary = summary => ({
   type: UPDATE_CART_SUMMARY_AFTER_COUPON,
   summary
+});
+
+export const loadCartAfterCouponApplied = result => ({
+  type: UPDATE_CART_AFTERCOUPON,
+  result
 });
 
 export const resetCheck = () => ({
@@ -620,4 +747,9 @@ export const hideCouponList = () => ({
 export const setQuantityFlag = value => ({
   type: SET_QUANTITY_FLAG,
   value
+});
+
+export const getCartContactDetails = () => ({
+  types: [LOAD_CART_CONTACT, LOAD_CART_CONTACT_SUCCESS, LOAD_CART_CONTACT_FAIL],
+  promise: ({ client }) => client.get(GET_CONTACT)
 });
