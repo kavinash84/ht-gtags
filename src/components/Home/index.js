@@ -1151,7 +1151,7 @@ class HomeContainer extends Component {
         </div>
         {/* shop our bestsellers */}
 
-        {console.log(bestsellers, "bestsellers")}
+
         {bestsellers && bestsellers.length ? (
           <Div pl="10px" pr="10px" mt="30px" mb="15px" bg="#F7F0F0">
             <CategoryCarouselDeals
