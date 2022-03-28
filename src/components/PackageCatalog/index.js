@@ -113,12 +113,23 @@ export default class PackageCatalog extends Component {
       router
     } = this.props;
     const { selected } = this.state;
+    // const postData = {
+    //   new_skus: selected,
+    //   old_skus: oldList,
+    //   fk_cart_rule: currentPackage,
+    //   pincode: selectedPincode,
+    //   session_id: sessionId
+    // };
+    const skus = {};
+    if (Array.isArray(selected) && selected.length) {
+      selected.map(item => {
+        skus[item.simple_sku] = item.qty;
+      });
+    }
     const postData = {
-      new_skus: selected,
-      old_skus: oldList,
-      fk_cart_rule: currentPackage,
+      packageId: currentPackage,
       pincode: selectedPincode,
-      session_id: sessionId
+      skus: skus
     };
     if (isLoggedIn) {
       dispatch(savePackageCatalog(postData));
