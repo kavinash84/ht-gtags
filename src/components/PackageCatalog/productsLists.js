@@ -164,7 +164,7 @@ export default class ProductsList extends Component {
             {this.state.products && (
               <div className={styles.listContainer}>
                 {this.state.products.map((slide, i) => (
-                  <div className={styles.caroselItem} key={String(i)} style={{ width: "33%" }}>
+                  <div className={styles.caroselItem} key={String(i)} style={{ width: "30%" , margin: "15px 10px"}}>
                     <div
                       style={{ position: "relative" }}
                       onClick={() => {
