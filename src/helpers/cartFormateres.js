@@ -88,7 +88,7 @@ export const formatToArray = data => {
         gift_wrap: item.gift_wrap,
         special_price: 0,
         net_price: item.selling_price,
-        unit_price: item.max_retail_price,
+        unit_price: item.discounted_price,
         is_available: true,
         category_details: [],
         color: item.color,
