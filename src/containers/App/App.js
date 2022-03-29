@@ -345,6 +345,10 @@ export default class App extends Component {
                gtag('config', 'AW-845903914'); 
                `}
             </script>
+            <script
+              src="https://libraries.unbxdapi.com/recs-sdk/v2.1.0/unbxd_recs_template_sdk_apac.js"
+              async
+            ></script>
           </Helmet>
         )}
         <main className={styles.appContent}>
