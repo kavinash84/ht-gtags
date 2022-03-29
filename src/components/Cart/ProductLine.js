@@ -132,20 +132,18 @@ class ProductLine extends Component {
       isPackage,
       packageId
     } = this.props;
-    const deliveryArr = deliveryBy.split(" ");
     let deliveryStr = "";
-    let isDeliverable = true;
-    deliveryArr.map((item, i) => {
-      if (i === 0) {
-        if (item === "Not") {
-          isDeliverable = false;
-        }
+    if (deliveryBy) {
+      if (deliveryBy.includes("Delivered by")) {
+        deliveryBy.split(" ").map((item, i) => {
+          if (i > 1) {
+            deliveryStr = deliveryStr + " " + item;
+          }
+        });
       } else {
-        if (i > 1) {
-          deliveryStr = deliveryStr + " " + item;
-        }
+        deliveryStr = deliveryBy;
       }
-    });
+    }
     return (
       <React.Fragment>
         <div className={styles.productItemContainer}>
@@ -204,7 +202,7 @@ class ProductLine extends Component {
                 Delivery by:
               </div>
               <div style={{ fontSize: "12px", color: "#999999" }}>
-                {isDeliverable ? deliveryStr : deliveryBy}
+                {deliveryStr}
               </div>
             </div>
             <div style={{ marginRight: "5px" }}>
