@@ -117,7 +117,7 @@ class SuccessPage extends Component {
                 color: "#dc4c3a"
               }}
             >
-              Your voucher is valid till 31st Mar'22
+              Your voucher is valid till 21st Apr 2022
             </h2>
           </div>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
