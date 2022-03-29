@@ -1,17 +1,17 @@
-import { COUPON as COUPON_API } from 'helpers/apiUrls';
-import { updateCartSummary } from 'redux/modules/cart';
+import { COUPON as COUPON_API } from "helpers/apiUrls";
+import { updateCartSummary } from "redux/modules/cart";
 
-const LOAD_COUPONS = 'coupon/LOAD_COUPONS';
-const LOAD_COUPONS_SUCCESS = 'coupon/LOAD_COUPONS_SUCCESS';
-const LOAD_COUPONS_FAIL = 'coupon/LOAD_COUPONS_FAIL';
+const LOAD_COUPONS = "coupon/LOAD_COUPONS";
+const LOAD_COUPONS_SUCCESS = "coupon/LOAD_COUPONS_SUCCESS";
+const LOAD_COUPONS_FAIL = "coupon/LOAD_COUPONS_FAIL";
 
-const APPLY_COUPON = 'coupon/APPLY_COUPON';
-const APPLY_COUPON_SUCCESS = 'coupon/APPLY_COUPON_SUCCESS';
-const APPLY_COUPON_FAIL = 'coupon/APPLY_COUPON_FAIL';
+const APPLY_COUPON = "coupon/APPLY_COUPON";
+const APPLY_COUPON_SUCCESS = "coupon/APPLY_COUPON_SUCCESS";
+const APPLY_COUPON_FAIL = "coupon/APPLY_COUPON_FAIL";
 
-const REMOVE_COUPON = 'coupon/REMOVE_COUPON';
-const REMOVE_COUPON_SUCCESS = 'coupon/REMOVE_COUPON_SUCCESS';
-const REMOVE_COUPON_FAIL = 'coupon/REMOVE_COUPON_FAIL';
+const REMOVE_COUPON = "coupon/REMOVE_COUPON";
+const REMOVE_COUPON_SUCCESS = "coupon/REMOVE_COUPON_SUCCESS";
+const REMOVE_COUPON_FAIL = "coupon/REMOVE_COUPON_FAIL";
 
 const initialState = {
   loaded: false,
@@ -20,7 +20,7 @@ const initialState = {
   error: false,
   errorMessage: {},
   applied: false,
-  appliedCoupon: '',
+  appliedCoupon: "",
   summary: {},
   coupons: [],
   getingcoupon: false,
@@ -59,7 +59,7 @@ export default function reducer(state = initialState, action = {}) {
         loading: true,
         error: false,
         applied: false,
-        appliedCoupon: ''
+        appliedCoupon: ""
       };
     case APPLY_COUPON_SUCCESS:
       return {
@@ -96,7 +96,7 @@ export default function reducer(state = initialState, action = {}) {
         data: action.result,
         summary: [...state.summary, action.result.summary],
         applied: false,
-        appliedCoupon: ''
+        appliedCoupon: ""
       };
     case REMOVE_COUPON_FAIL:
       return {
@@ -117,7 +117,7 @@ export const applyCoupon = (coupon, sessionId, pincode) => dispatch =>
     types: [APPLY_COUPON, APPLY_COUPON_SUCCESS, APPLY_COUPON_FAIL],
     promise: async ({ client }) => {
       try {
-        const postData = { coupon, session_id: sessionId, pincode };
+        const postData = { coupon };
         const response = await client.post(COUPON_API, postData);
         dispatch(updateCartSummary(response.summary));
         return response;
@@ -132,7 +132,7 @@ export const removeCoupon = (coupon, sessionId, pincode) => dispatch =>
     types: [REMOVE_COUPON, REMOVE_COUPON_SUCCESS, REMOVE_COUPON_FAIL],
     promise: async ({ client }) => {
       try {
-        const postData = { coupon, session_id: sessionId, pincode };
+        const postData = { coupon };
         const response = await client.delete(COUPON_API, { data: postData });
         dispatch(updateCartSummary(response.summary));
         return response;
@@ -142,7 +142,7 @@ export const removeCoupon = (coupon, sessionId, pincode) => dispatch =>
     }
   });
 
-export const loadCoupons = (sessionId, pincode = '110004') => ({
+export const loadCoupons = (sessionId, pincode = "110004") => ({
   types: [LOAD_COUPONS, LOAD_COUPONS_SUCCESS, LOAD_COUPONS_FAIL],
-  promise: ({ client }) => client.get(`${COUPON_API}s/${sessionId}/${pincode}`)
+  promise: ({ client }) => client.get(`${COUPON_API}s`)
 });
