@@ -117,7 +117,7 @@ export const applyCoupon = (coupon, sessionId, pincode) => dispatch =>
     types: [APPLY_COUPON, APPLY_COUPON_SUCCESS, APPLY_COUPON_FAIL],
     promise: async ({ client }) => {
       try {
-        const postData = { coupon };
+        const postData = { coupon: coupon.toUpperCase() };
         const response = await client.post(COUPON_API, postData);
         dispatch(updateCartSummary(response.summary));
         return response;
