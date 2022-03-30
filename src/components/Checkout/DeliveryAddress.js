@@ -1,56 +1,66 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
 
 /**
  * modules / selectors / helpers
  */
-import { sendDeliveryAddress, resetGuestRegisterFlag } from 'redux/modules/checkout';
-import { loadCoupons } from 'redux/modules/coupon';
-import { load } from 'redux/modules/paymentoptions';
-import { bindActionCreators } from 'redux';
-import * as actionCreators from 'redux/modules/address';
-import { notifSend } from 'redux/modules/notifs';
-import { isBlank } from 'js-utility-functions';
-import { validateAddress } from 'utils/validation';
-const BackIcon = require('../../../static/cart/back.svg');
-const CloseIcon = require('../../../static/cart/close.svg');
-const addIcon = require('../../../static/cart/addAddressicon.svg');
+import {
+  sendDeliveryAddress,
+  resetGuestRegisterFlag
+} from "redux/modules/checkout";
+import { loadCoupons } from "redux/modules/coupon";
+import { load } from "redux/modules/paymentoptions";
+import { bindActionCreators } from "redux";
+import * as actionCreators from "redux/modules/address";
+import { notifSend } from "redux/modules/notifs";
+import { isBlank } from "js-utility-functions";
+import { validateAddress } from "utils/validation";
+const BackIcon = require("../../../static/cart/back.svg");
+const CloseIcon = require("../../../static/cart/close.svg");
+const addIcon = require("../../../static/cart/addAddressicon.svg");
 /**
  * Components
  */
-import Flex from 'hometown-components-dev/lib/FlexHtV1';
-import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Button from 'hometown-components-dev/lib/ButtonHtV1';
-import Card from 'hometown-components-dev/lib/CardHtV1';
-import Col from 'hometown-components-dev/lib/ColHtV1';
-import Container from 'hometown-components-dev/lib/ContainerHtV1';
-import Image from 'hometown-components-dev/lib/ImageHtV1';
-import Label from 'hometown-components-dev/lib/LabelHtV1';
-import Row from 'hometown-components-dev/lib/RowHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
-import Div from 'hometown-components-dev/lib/BoxHtV1';
-import Section from 'hometown-components-dev/lib/SectionHtV1';
-import { getCartList } from 'selectors/cart';
+import Flex from "hometown-components-dev/lib/FlexHtV1";
+import Box from "hometown-components-dev/lib/BoxHtV1";
+import Button from "hometown-components-dev/lib/ButtonHtV1";
+import Card from "hometown-components-dev/lib/CardHtV1";
+import Col from "hometown-components-dev/lib/ColHtV1";
+import Container from "hometown-components-dev/lib/ContainerHtV1";
+import Image from "hometown-components-dev/lib/ImageHtV1";
+import Label from "hometown-components-dev/lib/LabelHtV1";
+import Row from "hometown-components-dev/lib/RowHtV1";
+import Text from "hometown-components-dev/lib/TextHtV1";
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
+import Div from "hometown-components-dev/lib/BoxHtV1";
+import Section from "hometown-components-dev/lib/SectionHtV1";
+import { getCartList } from "selectors/cart";
+import { loadCart } from "redux/modules/cart";
 /**
  * Page Components
  */
-import ResponsiveModal from 'components/Modal';
-import LoginModal from 'containers/Login/LoginForm';
-import AddressForm from './AddressForm';
-import OrderSummary from './OrderSummary';
-import PaymentMethods from '../PaymentMethods';
+import ResponsiveModal from "components/Modal";
+import LoginModal from "containers/Login/LoginForm";
+import AddressForm from "./AddressForm";
+import OrderSummary from "./OrderSummary";
+import PaymentMethods from "../PaymentMethods";
 
 /**
  * Icons
  */
 // const addIcon = require('../../../static/increase.svg');
-const styles = require('./DeliveryAddress.scss');
+const styles = require("./DeliveryAddress.scss");
 
 const mapStateToProps = ({
-  userLogin, app, checkout, myaddress, address, profile, cart
+  userLogin,
+  app,
+  checkout,
+  myaddress,
+  address,
+  profile,
+  cart
 }) => ({
   paymentData: checkout.paymentData,
   isLoggedIn: userLogin.isLoggedIn,
@@ -66,7 +76,8 @@ const mapStateToProps = ({
   address,
   cart
 });
-const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ ...actionCreators }, dispatch);
 @withRouter
 class DeliveryAddress extends Component {
   static contextTypes = {
@@ -79,12 +90,10 @@ class DeliveryAddress extends Component {
   componentDidMount() {
     const { dispatch } = this.context.store;
     const { cart, history } = this.props;
-    const {
-      nextstep, isLoggedIn, onChangeEmail, userEmail
-    } = this.props;
+    const { nextstep, isLoggedIn, onChangeEmail, userEmail } = this.props;
     if (isLoggedIn) {
-      onChangeEmail('shipping', userEmail);
-      onChangeEmail('billing', userEmail);
+      onChangeEmail("shipping", userEmail);
+      onChangeEmail("billing", userEmail);
     }
     // if (addresses.length > 0) {
     //   this.handleClick(0);
@@ -93,7 +102,7 @@ class DeliveryAddress extends Component {
       dispatch(resetGuestRegisterFlag());
     }
     if (!cart.cartCheckData) {
-      history.push('/checkout/cart');
+      history.push("/checkout/cart");
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -118,19 +127,22 @@ class DeliveryAddress extends Component {
       );
     }
     if (isLoggedIn && nextProps.userEmail !== userEmail) {
-      onChangeEmail('shipping', nextProps.userEmail);
-      onChangeEmail('billing', nextProps.userEmail);
+      onChangeEmail("shipping", nextProps.userEmail);
+      onChangeEmail("billing", nextProps.userEmail);
     }
     if (nextProps.isLoggedIn !== isLoggedIn) {
       clearShippingAddress();
     }
-    if (nextProps.nextstep.success && nextProps.nextstep.success !== nextstep.success) {
+    if (
+      nextProps.nextstep.success &&
+      nextProps.nextstep.success !== nextstep.success
+    ) {
       const { history } = this.props;
-      history.push('/checkout/payment-options');
+      history.push("/checkout/payment-options");
     }
     if (nextProps.showAddAddress !== showAddAddress) {
       if (!showAddAddress) {
-        console.log('called...1');
+        console.log("called...1");
         dispatch(AddNewAddress(false));
       }
     }
@@ -225,10 +237,21 @@ class DeliveryAddress extends Component {
     // // addressform ? validateAddress(address1, 'address1').error || address1FeedBackError1 : false;
     // const addressError2 = addressform ? validateAddress(address2, 'address2').error || addressFeedBackError2 : false;
     // const addressError3 = addressform ? validateAddress(address3, 'address3').error || addressFeedBackError3 : false;
-    const addressError1 = validateAddress(address1, 'address1').error || address1FeedBackError1;
-    const addressError2 = validateAddress(address2, 'address2').error || addressFeedBackError2;
-    const addressError3 = validateAddress(address3, 'address3').error || addressFeedBackError3;
-    if (fullNameError || emailError || pincodeError || phoneError || addressError1 || addressError2 || addressError3) {
+    const addressError1 =
+      validateAddress(address1, "address1").error || address1FeedBackError1;
+    const addressError2 =
+      validateAddress(address2, "address2").error || addressFeedBackError2;
+    const addressError3 =
+      validateAddress(address3, "address3").error || addressFeedBackError3;
+    if (
+      fullNameError ||
+      emailError ||
+      pincodeError ||
+      phoneError ||
+      addressError1 ||
+      addressError2 ||
+      addressError3
+    ) {
       setNameError(formType, fullNameError);
       setEmailError(formType, emailError);
       setPincodeError(formType, pincodeError);
@@ -273,51 +296,59 @@ class DeliveryAddress extends Component {
     const { isLoggedIn } = this.props;
     const { addressform } = this.state;
     if (shippingIsBilling) {
-      const shippingForm = this.formValdiator(this.props, shipping, 'shipping');
+      const shippingForm = this.formValdiator(this.props, shipping, "shipping");
       if (shippingForm.error) {
         const message =
           isLoggedIn && !addressform
-            ? 'Please Add new Address  /  Select delivery Address '
-            : 'Please Fill All Details Correctly !';
-        dispatch(notifSend({
-          type: 'warning',
-          msg: message,
-          dismissAfter: 2000
-        }));
+            ? "Please Add new Address  /  Select delivery Address "
+            : "Please Fill All Details Correctly !";
+        dispatch(
+          notifSend({
+            type: "warning",
+            msg: message,
+            dismissAfter: 2000
+          })
+        );
       } else {
         const { sessionId, AddNewAddress } = this.props;
-        dispatch(sendDeliveryAddress(
-          sessionId,
-          {
-            shippingIsBilling,
-            shippingAddress: shippingForm.data,
-            billingAddress: shippingForm.data,
-            cartTotal
-          },
-          isLoggedIn
-        ));
+        dispatch(
+          sendDeliveryAddress(
+            sessionId,
+            {
+              shippingIsBilling,
+              shippingAddress: shippingForm.data,
+              billingAddress: shippingForm.data,
+              cartTotal
+            },
+            isLoggedIn
+          )
+        );
       }
     } else {
-      const shippingForm = this.formValdiator(this.props, shipping, 'shipping');
-      const billingForm = this.formValdiator(this.props, billing, 'billing');
+      const shippingForm = this.formValdiator(this.props, shipping, "shipping");
+      const billingForm = this.formValdiator(this.props, billing, "billing");
       if (shippingForm.error || billingForm.error) {
-        dispatch(notifSend({
-          type: 'warning',
-          msg: 'Fill All Details Correctly',
-          dismissAfter: 2000
-        }));
+        dispatch(
+          notifSend({
+            type: "warning",
+            msg: "Fill All Details Correctly",
+            dismissAfter: 2000
+          })
+        );
       } else {
         const { sessionId, AddNewAddress } = this.props;
-        dispatch(sendDeliveryAddress(
-          sessionId,
-          {
-            shippingIsBilling,
-            shippingAddress: shippingForm.data,
-            billingAddress: billingForm.data,
-            cartTotal
-          },
-          isLoggedIn
-        ));
+        dispatch(
+          sendDeliveryAddress(
+            sessionId,
+            {
+              shippingIsBilling,
+              shippingAddress: shippingForm.data,
+              billingAddress: billingForm.data,
+              cartTotal
+            },
+            isLoggedIn
+          )
+        );
       }
     }
   };
@@ -331,16 +362,17 @@ class DeliveryAddress extends Component {
     this.setState({
       addressform: false
     });
-    setAddress('shipping', addresses[index], index);
-    loadPincodeDetails('shipping', addresses[index].pincode);
+    setAddress("shipping", addresses[index], index);
+    loadPincodeDetails("shipping", addresses[index].pincode);
+    loadCart("", addresses[index].pincode);
   };
 
   isAddressSelected = () => {
     const { dispatch } = this.context.store;
     dispatch(
       notifSend({
-        type: 'warning',
-        msg: 'Please Add new Address  /  Select delivery Address ',
+        type: "warning",
+        msg: "Please Add new Address  /  Select delivery Address ",
         dismissAfter: 2000
       })
     );
@@ -349,23 +381,23 @@ class DeliveryAddress extends Component {
     const { setAddress, isLoggedIn, userEmail, AddNewAddress } = this.props;
     e.preventDefault();
     this.setState({
-      addressform: !this.state.addressform,
+      addressform: !this.state.addressform
       // AddNewAddress: !this.state.addressform
     });
 
     const data = {
-      full_name: '',
-      email: isLoggedIn ? userEmail : '',
-      pincode: '',
-      mobile: '',
-      address1: '',
-      address2: '',
-      address3: '',
-      city: '',
-      state: '',
+      full_name: "",
+      email: isLoggedIn ? userEmail : "",
+      pincode: "",
+      mobile: "",
+      address1: "",
+      address2: "",
+      address3: "",
+      city: "",
+      state: "",
       index: null
     };
-    setAddress('shipping', data, null);
+    setAddress("shipping", data, null);
     // AddNewAddress(!this.state.addressform);
   };
   render() {
@@ -374,37 +406,39 @@ class DeliveryAddress extends Component {
     const { addressform } = this.state;
     return (
       <Container my={[60, 60, 60]} px={[24, 24, 0]}>
-
-
-
         <Row>
-          <Col variant="col-12" >
+          <Col variant="col-12">
             {/* For logged in */}
             {!isLoggedIn && (
               <Box className={styles.isLoggedIn}>
-                <div style={{
-                  display: "flex",
-                  textAlign: "center",
-                  justifyContent: "center",
-                  alignContent: "center"
-                }}>
-                  <Button style={{
-                    height: "50px",
-                    width: "200px",
-                    border: '1px solid #F47020',
-                    borderRadius: '4px',
-                    padding: '20px 45px',
-                    background: 'white',
-                    color: '#F47020',
-                    fontSize: '14px'
+                <div
+                  style={{
+                    display: "flex",
+                    textAlign: "center",
+                    justifyContent: "center",
+                    alignContent: "center"
                   }}
-                    onClick={this.handleLoginModal} ml={10}>
+                >
+                  <Button
+                    style={{
+                      height: "50px",
+                      width: "200px",
+                      border: "1px solid #F47020",
+                      borderRadius: "4px",
+                      padding: "20px 45px",
+                      background: "white",
+                      color: "#F47020",
+                      fontSize: "14px"
+                    }}
+                    onClick={this.handleLoginModal}
+                    ml={10}
+                  >
                     Login
-                </Button>
+                  </Button>
                 </div>
 
                 <ResponsiveModal
-                  classNames={{ modal: 'loginModal' }}
+                  classNames={{ modal: "loginModal" }}
                   onCloseModal={this.handleLoginModal}
                   open={this.state.openLogin}
                 >
@@ -416,25 +450,42 @@ class DeliveryAddress extends Component {
             )}
             {isLoggedIn && !addressform && (
               <Div col="12" pb="0.625rem" mb="15px">
-                <button className={styles.addAddressBtn} onClick={this.toggleAddAddress}>
-                  <Text color="rgb(0,0,0)" ta="left" mt="0" mb="0" >
-                    <img className={styles.addAddressBtnIcon} src={addIcon} alt="Add New Address" />
-                    {addresses.length > 0 ? 'Add New Address' : 'Add Address'}
+                <button
+                  className={styles.addAddressBtn}
+                  onClick={this.toggleAddAddress}
+                >
+                  <Text color="rgb(0,0,0)" ta="left" mt="0" mb="0">
+                    <img
+                      className={styles.addAddressBtnIcon}
+                      src={addIcon}
+                      alt="Add New Address"
+                    />
+                    {addresses.length > 0 ? "Add New Address" : "Add Address"}
                   </Text>
                 </button>
               </Div>
             )}
             {addressform && (
-
               <Div className={styles.addNewAddressHeader}>
-                <Button bg="transparent" border="none" onClick={this.toggleAddAddress} p="0">
-                  {' '}
-                  <img src={BackIcon} alt="Close" /> <span>Add New Address</span>
+                <Button
+                  bg="transparent"
+                  border="none"
+                  onClick={this.toggleAddAddress}
+                  p="0"
+                >
+                  {" "}
+                  <img src={BackIcon} alt="Close" />{" "}
+                  <span>Add New Address</span>
                 </Button>
 
-                <Button bg="transparent" border="none" onClick={this.toggleAddAddress} p="0">
-                  {' '}
-                  <img src={CloseIcon} alt="Close" />{' '}
+                <Button
+                  bg="transparent"
+                  border="none"
+                  onClick={this.toggleAddAddress}
+                  p="0"
+                >
+                  {" "}
+                  <img src={CloseIcon} alt="Close" />{" "}
                 </Button>
               </Div>
             )}
@@ -446,8 +497,16 @@ class DeliveryAddress extends Component {
                 </Row>
                 <Row mx={-10}>
                   {addresses.map((item, index) => (
-                    <Col variant="col-12" px={10} mb={20} key={item.id_customer_address}>
-                      <button className={`${styles.addressBtn}`} onClick={() => this.handleClick(index)}>
+                    <Col
+                      variant="col-12"
+                      px={10}
+                      mb={20}
+                      key={item.id_customer_address}
+                    >
+                      <button
+                        className={`${styles.addressBtn}`}
+                        onClick={() => this.handleClick(index)}
+                      >
                         <div className={styles.customCheckbox}>
                           <div style={{ marginTop: "10px" }}>
                             {index === currentaddressindex ? (
@@ -455,10 +514,13 @@ class DeliveryAddress extends Component {
                                 <div className={styles.filled} />
                               </div>
                             ) : (
-                                <div className={styles.unchecked}></div>
-                              )}
+                              <div className={styles.unchecked}></div>
+                            )}
                           </div>
-                          <div className={styles.checkboxLabel}> {item.full_name} </div>
+                          <div className={styles.checkboxLabel}>
+                            {" "}
+                            {item.full_name}{" "}
+                          </div>
                         </div>
                         <div style={{ marginLeft: "30px", color: "#999999" }}>
                           {item.address1}
@@ -472,13 +534,11 @@ class DeliveryAddress extends Component {
                           <br />
                           {item.state}
                           <br />
-                          {item.gst || ''}
+                          {item.gst || ""}
                         </div>
                       </button>
                     </Col>
                   ))}
-
-
                 </Row>
               </Box>
             )}
@@ -486,21 +546,41 @@ class DeliveryAddress extends Component {
             {/* Address Form */}
             <form onSubmit={this.handleSubmit}>
               {(addressform || !isLoggedIn) && (
-                <Div style={{ background: '#FFFFFF' }} pl="15px" pr="15px">
+                <Div style={{ background: "#FFFFFF" }} pl="15px" pr="15px">
                   {!isLoggedIn && (
-                    <Div style={{ fontSize: '14px', fontWeight: '600', marginBottom: '15px', color: '#323131', marginTop: "15px" }}>
+                    <Div
+                      style={{
+                        fontSize: "14px",
+                        fontWeight: "600",
+                        marginBottom: "15px",
+                        color: "#323131",
+                        marginTop: "15px"
+                      }}
+                    >
                       Or Continue As Guest
                     </Div>
                   )}
-                  <AddressForm formType="shipping" isLoggedIn={isLoggedIn} userEmail={userEmail} />
+                  <AddressForm
+                    formType="shipping"
+                    isLoggedIn={isLoggedIn}
+                    userEmail={userEmail}
+                  />
                 </Div>
               )}
 
               <Row display="block" mr="0" ml="0" mt="1rem" mb="2.5rem">
-                <Div col="12" mb="10x" style={{ marginBottom: '15px' }} pl="15px" pr="15px">
-
+                <Div
+                  col="12"
+                  mb="10x"
+                  style={{ marginBottom: "15px" }}
+                  pl="15px"
+                  pr="15px"
+                >
                   <div display="inline-block">
-                    <label className={styles.checkbox_container} htmlFor="checkbox">
+                    <label
+                      className={styles.checkbox_container}
+                      htmlFor="checkbox"
+                    >
                       Billing Address Same As Shipping Address
                       <input
                         type="checkbox"
@@ -511,49 +591,73 @@ class DeliveryAddress extends Component {
                       <span className={styles.checkmark}></span>
                     </label>
                   </div>
-
                 </Div>
-                <div style={{ padding: '5px', width: '100%', background: '#f7f7f7' }} />
+                <div
+                  style={{
+                    padding: "5px",
+                    width: "100%",
+                    background: "#f7f7f7"
+                  }}
+                />
                 {!shippingIsBilling && (
-                  <Row display="block" mr="0" ml="0" mt="1.5rem" mb="0" pl="15px" pr="15px" width="100%">
+                  <Row
+                    display="block"
+                    mr="0"
+                    ml="0"
+                    mt="1.5rem"
+                    mb="0"
+                    pl="15px"
+                    pr="15px"
+                    width="100%"
+                  >
                     <Div col="12">
-                      <Div style={{ fontSize: '14px', fontWeight: '600', marginBottom: '15px', color: '#323131' }}>
+                      <Div
+                        style={{
+                          fontSize: "14px",
+                          fontWeight: "600",
+                          marginBottom: "15px",
+                          color: "#323131"
+                        }}
+                      >
                         Add Billing Address
                       </Div>
                     </Div>
-                    <AddressForm formType="billing" isLoggedIn={isLoggedIn} userEmail={userEmail} />
+                    <AddressForm
+                      formType="billing"
+                      isLoggedIn={isLoggedIn}
+                      userEmail={userEmail}
+                    />
                   </Row>
                 )}
               </Row>
             </form>
-
           </Col>
-
         </Row>
         <Div className={styles.deliverBtnWrapper}>
           <button
             style={{
-              border: '1px solid #F47020',
-              borderRadius: '4px',
-              padding: '15px 10px',
-              background: 'white',
+              border: "1px solid #F47020",
+              borderRadius: "4px",
+              padding: "15px 10px",
+              background: "white",
               width: "260px",
-              color: '#F47020',
-              fontSize: '16px',
+              color: "#F47020",
+              fontSize: "16px",
               cursor: "pointer"
             }}
             // disabled={loading || this.checkParams()}
             disabled={loading}
             onClick={
-              isLoggedIn && !addressform && (currentaddressindex === -1 || currentaddressindex === null)
+              isLoggedIn &&
+              !addressform &&
+              (currentaddressindex === -1 || currentaddressindex === null)
                 ? this.isAddressSelected
                 : this.handleSubmit
             }
           >
-            {loading ? 'Loading...' : 'Save and Continue'}
+            {loading ? "Loading..." : "Save and Continue"}
           </button>
         </Div>
-
       </Container>
     );
   }
@@ -563,7 +667,7 @@ DeliveryAddress.defaultProps = {
   // location: {},
   addresses: [],
   currentaddressindex: -1,
-  userEmail: '',
+  userEmail: "",
   summary: null,
   couponlistToggle: false,
   results: []
