@@ -124,6 +124,9 @@ class Listing extends React.Component {
         // console.log('window.renderListing(true); invoked in initial listing page ---------');
       }
     }
+    if (window && window.Unbxd && window.Unbxd.experiences) {
+      window.Unbxd.experiences = [];
+    }
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {

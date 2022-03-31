@@ -364,6 +364,9 @@ class ProductDetails extends React.Component {
     const popUpTimeoutId = setTimeout(this.webToChat, pdpTimeout);
     // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ popUpTimeoutId });
+    if (window && window.Unbxd && window.Unbxd.experiences) {
+      window.Unbxd.experiences = [];
+    }
     if (window && window.Unbxd && window.Unbxd.track && pid) {
       window.Unbxd.track("product_view", { pid });
       window.Unbxd.track("click", { pid: pid });
