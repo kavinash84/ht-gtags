@@ -847,7 +847,11 @@ class ProductDetails extends React.Component {
                     "@type" : "Offer",
                     "url": "${productURL || ""}",
                     "priceCurrency": "INR",
-                    "price": "${checkSpecialPrice || ""}",
+                    "price": "${
+                      Number(formatPrice(offerPrice))
+                        ? Number(formatPrice(offerPrice))
+                        : Number(specialPrice) || Number(price) || ""
+                    }",
                     "availability": "https://schema.org/InStock"
                   }
                 }
