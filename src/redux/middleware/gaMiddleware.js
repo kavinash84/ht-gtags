@@ -326,8 +326,8 @@ export default function gaMiddleware() {
             name,
             selling_price: netprice,
             color,
-            brand
-            // category_details: categoryDetails
+            brand,
+            configurable_sku
           } = product[0];
           const categoryDetails = "";
           const category = categoryDetails ? categoryDetails.join("/") : null;
@@ -345,7 +345,7 @@ export default function gaMiddleware() {
                       brand,
                       category,
                       list: "Listing",
-                      id: product.configurable_sku,
+                      id: configurable_sku,
                       quantity: 1
                     }
                   ]
