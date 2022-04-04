@@ -365,7 +365,11 @@ export const proceedPackageCatalog = postData => ({
   ],
   promise: async ({ client }) => {
     try {
-      const response = await client.post(`tesla/cart/add-package`, postData);
+      const response = postData.packageId
+        ? await client.post(`tesla/cart/add-package`, postData)
+        : await client.post(`tesla/cart/add-to-cart-multi`, {
+            skus: postData.skus
+          });
       return response;
     } catch (error) {
       throw error;
