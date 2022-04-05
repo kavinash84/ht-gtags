@@ -159,6 +159,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: true,
         movetoCart: false,
+        package_catalog: "",
         oldList: []
       };
     case LOAD_PACKAGE_CATALOG_SUCCESS:
