@@ -28,7 +28,7 @@ class ApplyGiftWrapper extends React.Component {
     const { summary, products } = this.props;
     this.setState({ isChecked: summary.is_gift_wrap_applied });
     const found =
-      products.find(element => element.product_info.gift_wrap === "1") || "";
+      products.find(element => element.product_info.gift_wrap === 1) || "";
     if (found) {
       this.setState({ shouldShow: true });
     } else {
@@ -40,7 +40,7 @@ class ApplyGiftWrapper extends React.Component {
     const { summary, products } = this.props;
     if (prevProps.products !== products) {
       const found =
-        products.find(element => element.product_info.gift_wrap === "1") || "";
+        products.find(element => element.product_info.gift_wrap === 1) || "";
       console.log(found, "found");
       if (found) {
         this.setState({ shouldShow: true });

@@ -326,7 +326,7 @@ export default function reducer(state = initialState, action = {}) {
     case CHECK_GIFTWRAP:
       return {
         ...state,
-        loading: true
+        // loading: true
       };
     case CHECK_GIFTWRAP_SUCCESS:
       return {
