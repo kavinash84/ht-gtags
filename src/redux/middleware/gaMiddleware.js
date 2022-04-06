@@ -569,6 +569,7 @@ export default function gaMiddleware() {
               cart_products: products = [],
               net_order_amount,
               shipping_charges,
+              packages = {},
               // transaction_id,
               order_no,
               coupon_code,
@@ -589,7 +590,7 @@ export default function gaMiddleware() {
               // });
               // groupedProducts = Object.values(groupedProducts);
               // console.log({ groupedProducts });
-              const cartList = products.map(x => {
+              let cartList = products.map(x => {
                 const {
                   // product_info: { product_id },
                   sku,
@@ -613,6 +614,20 @@ export default function gaMiddleware() {
                   brand
                 };
               });
+              if (Object.keys(packages).length !== 0) {
+                const packageItems = Object.values(packages).map(item => {
+                  return {
+                    id: item.package_id,
+                    name: item.package_name,
+                    quantity: 1,
+                    variant: "",
+                    category: "",
+                    price: item.package_discount,
+                    brand: "HomeTown"
+                  };
+                });
+                cartList = [...cartList, ...packageItems];
+              }
               paymentObj = {
                 event: "purchase",
                 ecommerce: {
