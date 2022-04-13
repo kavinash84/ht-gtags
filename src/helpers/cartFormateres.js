@@ -39,7 +39,7 @@ export const formatToArray = data => {
           giftimageset: false,
           gift_wrap: item.gift_wrap,
           special_price: 0,
-          net_price: item.selling_price,
+          net_price: item.paidPrice,
           unit_price: item.maxRetailPrice,
           is_available: true,
           category_details: [],
