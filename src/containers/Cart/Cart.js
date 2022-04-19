@@ -206,7 +206,7 @@ export default class CartContainer extends Component {
 
   // checkForEmiEligibility = total => {
   //   const { emiPopUpShown } = this.state;
-    // console.log('checkForEmiEligibility function', total, emiPopUpShown);
+  // console.log('checkForEmiEligibility function', total, emiPopUpShown);
 
   //   if (total >= 20000 && !emiPopUpShown) {
   //     this.setState({
@@ -401,14 +401,13 @@ export default class CartContainer extends Component {
                 />
               </Box>
             ) : null}
-            </ResponsiveModal>
-            {/* {responsiveModalContent === 'emiModal' ? (
+          </ResponsiveModal>
+          {/* {responsiveModalContent === 'emiModal' ? (
               <Box> */}
-                {/* {total > bflMinAmount ? <BflPopMessage /> : <HdfcPopMessage />} */}
-                {/* <HdfcPopMessage /> */}
-              {/* </Box>
+          {/* {total > bflMinAmount ? <BflPopMessage /> : <HdfcPopMessage />} */}
+          {/* <HdfcPopMessage /> */}
+          {/* </Box>
             ) : null} */}
-          
 
           {/* Footer */}
           <Footer />
