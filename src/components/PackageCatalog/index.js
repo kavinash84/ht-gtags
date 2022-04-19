@@ -124,7 +124,9 @@ export default class PackageCatalog extends Component {
     const skus = {};
     if (Array.isArray(selected) && selected.length) {
       selected.map(item => {
-        skus[item.simple_sku] = item.qty;
+        skus[item.simple_sku] = selected.filter(
+          it => it.simple_sku === item.simple_sku
+        ).length;
       });
     }
     const postData = {
@@ -172,7 +174,9 @@ export default class PackageCatalog extends Component {
     const skus = {};
     if (Array.isArray(selected) && selected.length) {
       selected.map(item => {
-        skus[item.simple_sku] = item.qty;
+        skus[item.simple_sku] = selected.filter(
+          it => it.simple_sku === item.simple_sku
+        ).length;
       });
     }
     const postData = {
