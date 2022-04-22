@@ -128,7 +128,8 @@ export const formatPackageItems = data => {
       image: item.image_url,
       name: item.name,
       simpleSku: item.sku,
-      is_deliverable: item.is_deliverable
+      is_deliverable: item.is_deliverable,
+      qty: item.qty
     };
   });
   return arr;
