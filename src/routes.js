@@ -252,7 +252,7 @@ const routes = [
       { path: "/writeReview", exact: true, component: WriteReview },
       { path: "/spaces", exact: true, component: Spaces },
       { path: "/warranty", exact: true, component: WarrantyPage },
-      { path: "/exchange-offers", exact: true, component: ExchangeOffer },
+      // { path: "/exchange-offers", exact: true, component: ExchangeOffer },
       { path: "/packages", exact: true, component: oneLacPackage },
       {
         path: "/package-catalog/:packageid",
