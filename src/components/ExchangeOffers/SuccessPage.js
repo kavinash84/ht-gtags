@@ -110,84 +110,41 @@ class SuccessPage extends Component {
             paddingBottom: "50px"
           }}
         >
-          {exchangeOfferCoupon ? (
-            <div style={{ padding: "20px" }}>
-              <h2
-                style={{
-                  marginBottom: "25px",
-                  textAlign: "center",
-                  fontSize: "28px"
-                }}
-              >
-                THANK YOU FOR REGISTERING IN OUR EXCHANGE PROGRAM.
-              </h2>
-              <h2 style={{ marginBottom: "25px", textAlign: "center" }}>
-                Your voucher code has been sent on your registered email ID and
-                mobile number
-              </h2>
-              <p
-                style={{
-                  marginBottom: "20px",
-                  textAlign: "center",
-                  fontSize: "20px"
-                }}
-              >
-                Visit the nearest HomeTown store and use your exchange voucher
-                code to redeem your EXCHANGE VOUCHER against our new collection
-                of furniture, mattress, homeware, decor, furnishings and much
-                more…
-              </p>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                  fontSize: "20px",
-                  marginBottom: "15px"
-                }}
-              >
-                <p style={{ fontWeight: 600 }}>Exchange Coupon : </p>
-                <input
-                  type="text"
-                  value={exchangeOfferCoupon.coupon}
-                  id="copyField"
-                  style={{
-                    border: "none",
-                    background: "transparent",
-                    width: "120px",
-                    fontWeight: 600,
-                    fontSize: "20px",
-                    textAlign: "center",
-                    marginTop: "5px"
-                  }}
-                  disabled
-                />
-                <button
-                  onClick={() => this.copyFunction()}
-                  style={{
-                    border: "none",
-                    padding: "6px 20px",
-                    cursor: "pointer",
-                    borderRadius: "3px",
-                    background: "#dc4c3a",
-                    color: "white",
-                    fontSize: "16px"
-                  }}
-                >
-                  copy
-                </button>
-              </div>
-              <h2
-                style={{
-                  marginBottom: "10px",
-                  textAlign: "center",
-                  color: "#dc4c3a"
-                }}
-              >
-                Your voucher is valid till {exchangeOfferCoupon.validity}
-              </h2>
-            </div>
-          ) : null}
+          <div style={{ padding: "20px" }}>
+            <h2
+              style={{
+                marginBottom: "25px",
+                textAlign: "center",
+                fontSize: "28px"
+              }}
+            >
+              THANK YOU FOR REGISTERING IN OUR EXCHANGE PROGRAM.
+            </h2>
+            <h2 style={{ marginBottom: "25px", textAlign: "center" }}>
+              Your voucher code has been sent on your registered email ID and
+              mobile number
+            </h2>
+            <p
+              style={{
+                marginBottom: "25px",
+                textAlign: "center",
+                fontSize: "20px"
+              }}
+            >
+              Visit the nearest HomeTown store and use your exchange voucher
+              code to redeem your EXCHANGE VOUCHER against our new collection of
+              furniture, mattress, homeware, decor, furnishings and much more…
+            </p>
+            <h2
+              style={{
+                marginBottom: "10px",
+                textAlign: "center",
+                color: "#dc4c3a"
+              }}
+            >
+              Your voucher is valid till 21st Apr 2022
+            </h2>
+          </div>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
             <div style={{ marginBottom: "5px" }}>
               <p>
