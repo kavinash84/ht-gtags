@@ -351,6 +351,7 @@ export default class Html extends Component {
                 `
             }}
           />
+          <script src={admitad.src} async onError={admitad.onerror}></script>
         </head>
         <body>
           {/* {process.env.NODE_ENV !== 'development' && (
@@ -526,7 +527,6 @@ export default class Html extends Component {
             }}
             charSet="UTF-8"
           />
-          <script src={admitad.src} async onError={admitad.onerror}></script>
           <script dangerouslySetInnerHTML={{ __html: admitadSetCookie }} />
         </body>
       </html>

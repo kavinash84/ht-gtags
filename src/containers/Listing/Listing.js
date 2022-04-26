@@ -1,25 +1,25 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { withRouter } from 'react-router';
-import Helmet from 'react-helmet';
-import { connect } from 'react-redux';
-import { getSKUList } from 'selectors/wishlist';
-import { getCartListSKU } from 'selectors/cart';
-import { storesList as getStaticData } from 'selectors/homepage';
-import { setReloadListing } from 'redux/modules/products';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { withRouter } from "react-router";
+import Helmet from "react-helmet";
+import { connect } from "react-redux";
+import { getSKUList } from "selectors/wishlist";
+import { getCartListSKU } from "selectors/cart";
+import { storesList as getStaticData } from "selectors/homepage";
+import { setReloadListing } from "redux/modules/products";
 
-import Box from 'hometown-components-dev/lib/BoxHtV1';
-import ListingContainer from 'components/Listing';
-import BestOfferBanners from 'components/Listing/BestOfferBanners';
-import Footer from 'components/Footer';
-import Header from 'components/Header';
-import SeoContent from 'components/SeoContent';
-import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
-import Body from 'hometown-components-dev/lib/BodyHtV1';
-import Container from 'hometown-components-dev/lib/ContainerHtV1';
-import Row from 'hometown-components-dev/lib/RowHtV1';
-import Col from 'hometown-components-dev/lib/ColHtV1';
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Box from "hometown-components-dev/lib/BoxHtV1";
+import ListingContainer from "components/Listing";
+import BestOfferBanners from "components/Listing/BestOfferBanners";
+import Footer from "components/Footer";
+import Header from "components/Header";
+import SeoContent from "components/SeoContent";
+import Wrapper from "hometown-components-dev/lib/WrapperHtV1";
+import Body from "hometown-components-dev/lib/BodyHtV1";
+import Container from "hometown-components-dev/lib/ContainerHtV1";
+import Row from "hometown-components-dev/lib/RowHtV1";
+import Col from "hometown-components-dev/lib/ColHtV1";
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
 
 import {
   getProducts,
@@ -30,17 +30,17 @@ import {
   getSEOInfo,
   getl4,
   getCMSJson
-} from 'selectors/products';
-import { SITE_URL } from 'helpers/Constants';
-import CANONICALS from 'data/canonical';
+} from "selectors/products";
+import { SITE_URL } from "helpers/Constants";
+import CANONICALS from "data/canonical";
 // import { listingBestOffers, listingBestOffersPath } from 'data/best-offers';
 
 const btnStyle = {
-  backgroundColor: 'transparent',
-  padding: '0px',
-  margin: '0px',
-  outline: 'none',
-  border: 'none'
+  backgroundColor: "transparent",
+  padding: "0px",
+  margin: "0px",
+  outline: "none",
+  border: "none"
 };
 
 const getFaqs = faqs => {
@@ -51,15 +51,15 @@ const getFaqs = faqs => {
     // console.log(faq.ans);
     if (faq) {
       return {
-        '@type': 'Question',
+        "@type": "Question",
         name: ques,
         acceptedAnswer: {
-          '@type': 'Answer',
+          "@type": "Answer",
           text: faq.ans
         }
       };
     }
-    return '';
+    return "";
   });
   return JSON.stringify(seoFaq);
 };
@@ -136,24 +136,24 @@ export default class Listing extends Component {
     // loaded: true,
     // shimmer: false,
     products: [],
-    categoryName: '',
-    category: '',
-    productCount: '',
+    categoryName: "",
+    category: "",
+    productCount: "",
     wishListedSKUs: [],
     wishListData: [],
     loadingList: [],
     filters: [],
     appliedFilters: [],
     metadata: null,
-    pincode: '',
-    sortBy: '',
+    pincode: "",
+    sortBy: "",
     isLoggedIn: false,
     seoInfo: {},
     cmsJson: {},
     breadCrumbs: [],
     currentPage: 1,
     categoryBar: [],
-    selectedPincode: '',
+    selectedPincode: "",
     cartSKUs: [],
     reloadListing: false,
     offer: {},
@@ -179,17 +179,17 @@ export default class Listing extends Component {
 
   scrollDown = () => {
     this.listingRef.current.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start'
+      behavior: "smooth",
+      block: "start"
     });
   };
 
   renderOffers = offer => (
     <div
       style={{
-        display: 'flex',
-        justifyContent: 'space-between',
-        width: '90%'
+        display: "flex",
+        justifyContent: "space-between",
+        width: "90%"
       }}
     >
       <Col
@@ -197,12 +197,12 @@ export default class Listing extends Component {
         // width="30%"
         textAlign="center"
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
           flex: 1,
-          borderRight: 'whiteMedium'
+          borderRight: "whiteMedium"
         }}
       >
         {/* <Text variant="textLight" color="white">
@@ -210,10 +210,10 @@ export default class Listing extends Component {
           </Text> */}
         <a href={offer.offer.link}>
           <Box variant="textLight" color="white" py={2}>
-            {(offer.offer.name && offer.offer.name.split('|')[0]) || ''}
+            {(offer.offer.name && offer.offer.name.split("|")[0]) || ""}
           </Box>
           <Heading variant="heading.medium" color="white" py={2}>
-            {(offer.offer.name && offer.offer.name.split('|')[1]) || ''}
+            {(offer.offer.name && offer.offer.name.split("|")[1]) || ""}
           </Heading>
         </a>
         {/* <Heading fontSize={16} color="white">
@@ -225,27 +225,27 @@ export default class Listing extends Component {
         // width="30%"
         textAlign="center"
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
           flex: 1,
-          borderRight: 'whiteMedium'
+          borderRight: "whiteMedium"
         }}
       >
         {/* <Text variant="textLight" color="white">
             {item.offer.name || ''}
           </Text> */}
         <Box variant="textLight" color="white" py={2}>
-          {(offer.coupon.name && offer.coupon.name.split('|')[0]) || ''}
+          {(offer.coupon.name && offer.coupon.name.split("|")[0]) || ""}
         </Box>
-        {offer.coupon.name.split('|')[1] && (
+        {offer.coupon.name.split("|")[1] && (
           <Heading variant="heading.medium" color="white" py={2}>
-            Upto {offer.coupon.name.split('|')[1] || ''}
+            Upto {offer.coupon.name.split("|")[1] || ""}
           </Heading>
         )}
         <Heading variant="heading.medium" color="white" py={2}>
-          Coupon Code: {(offer.coupon.code && offer.coupon.code) || ''}
+          Coupon Code: {(offer.coupon.code && offer.coupon.code) || ""}
         </Heading>
         {/* <Heading fontSize={16} color="white">
             {item.extra_offer.name || ''}
@@ -256,10 +256,10 @@ export default class Listing extends Component {
         // width="30%"
         textAlign="center"
         sx={{
-          display: 'flex',
-          flexDirection: 'column',
-          justifyContent: 'center',
-          alignItems: 'center',
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
           flex: 1
         }}
       >
@@ -268,7 +268,7 @@ export default class Listing extends Component {
           </Text> */}
         <a href={offer.extra_offer.link}>
           <Heading variant="heading.medium" color="white" py={2}>
-            {offer.extra_offer.name || ''}
+            {offer.extra_offer.name || ""}
           </Heading>
         </a>
         {/* <Heading fontSize={16} color="white">
@@ -315,11 +315,11 @@ export default class Listing extends Component {
     const {
       location: { search, pathname }
     } = history;
-    if (search !== '') {
-      [, page] = search.replace('?', '').split('page=');
+    if (search !== "") {
+      [, page] = search.replace("?", "").split("page=");
     } else page = currentPage;
-    const previousPage = !page || Number(page) === 1 ? '' : `?page=${page - 1}`;
-    const NextPage = !page ? '?page=2' : `?page=${Number(page) + 1}`;
+    const previousPage = !page || Number(page) === 1 ? "" : `?page=${page - 1}`;
+    const NextPage = !page ? "?page=2" : `?page=${Number(page) + 1}`;
     // const showBestOffers = listingBestOffersPath.some(arr => arr === pathname);
     // let banners = [];
     // if (showBestOffers) banners = listingBestOffers[0][pathname].images;
@@ -330,7 +330,10 @@ export default class Listing extends Component {
         <Helmet>
           <title>{seoInfo && seoInfo.page_title}</title>
           <meta name="keywords" content={seoInfo && seoInfo.meta_keywords} />
-          <meta name="description" content={seoInfo && seoInfo.meta_description} />
+          <meta
+            name="description"
+            content={seoInfo && seoInfo.meta_description}
+          />
           {cmsJson && cmsJson.length ? (
             <script type="application/ld+json">
               {`
@@ -342,14 +345,36 @@ export default class Listing extends Component {
             `}
             </script>
           ) : (
-            ''
+            ""
           )}
-          {CANONICALS[pathname] && <link rel="canonical" href={`${SITE_URL}${CANONICALS[pathname]}`} />}
-          {previousPage !== '' && Number(page) !== 2 && (
+          {CANONICALS[pathname] && (
+            <link rel="canonical" href={`${SITE_URL}${CANONICALS[pathname]}`} />
+          )}
+          {previousPage !== "" && Number(page) !== 2 && (
             <link rel="prev" href={`${SITE_URL}${pathname}${previousPage}`} />
           )}
-          {Number(page) === 2 && <link rel="prev" href={`${SITE_URL}${pathname}`} />}
-          {productCount / 32 / Number(page) > 1 && <link rel="next" href={`${SITE_URL}${pathname}${NextPage}`} />}
+          {Number(page) === 2 && (
+            <link rel="prev" href={`${SITE_URL}${pathname}`} />
+          )}
+          {productCount / 32 / Number(page) > 1 && (
+            <link rel="next" href={`${SITE_URL}${pathname}${NextPage}`} />
+          )}
+
+          {/* <!-- Meta Pixel Code --> */}
+          <script>
+            {` !function(f,b,e,v,n,t,s)
+               {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+               n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+               if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+               n.queue=[];t=b.createElement(e);t.async=!0;
+               t.src=v;s=b.getElementsByTagName(e)[0];
+               s.parentNode.insertBefore(t,s)}(window, document,'script',
+               'https://connect.facebook.net/en_US/fbevents.js');
+               fbq('init', '1024172491523922');
+               fbq('track', 'ViewContent'); 
+            `}
+          </script>
+          {/* <!-- End Meta Pixel Code --> */}
         </Helmet>
         <Body>
           <Header />
@@ -357,14 +382,20 @@ export default class Listing extends Component {
           {offer && offer.data && offer.data.coupon && !offer.data.error && (
             <Box bg="heading" pt={30} pb={20}>
               <Container>
-                <Row justifyContent="center">{this.renderOffers(offer.data || [])}</Row>
+                <Row justifyContent="center">
+                  {this.renderOffers(offer.data || [])}
+                </Row>
               </Container>
             </Box>
           )}
 
           {/* Listing page best offer banners */}
           <Box sx={btnStyle}>
-            <BestOfferBanners bannerData={bannerData} history={history} onImageClick={this.scrollDown} />
+            <BestOfferBanners
+              bannerData={bannerData}
+              history={history}
+              onImageClick={this.scrollDown}
+            />
           </Box>
           <Box>
             <div ref={this.listingRef}>
@@ -395,11 +426,10 @@ export default class Listing extends Component {
               />
             </div>
 
-           
             <div>
-            <div id="unbxd_category_top_sellers"></div>
+              <div id="unbxd_category_top_sellers"></div>
             </div>
-            
+
             {seoInfo && seoInfo.seo_text && (
               <SeoContent>
                 <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />

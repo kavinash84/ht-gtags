@@ -107,10 +107,10 @@ class LandingPage extends Component {
                 </li>
                 <li>
                   <p>
-                    Visit the nearest HomeTown store and use your exchange
-                    voucher code to redeem your EXCHANGE VOUCHER against our new
-                    collection of furniture, mattress, homeware, decor,
-                    furnishings and much more…
+                    Visit the nearest HomeTown store or shop online at
+                    hometown.in to redeem your exchange voucher code on a wide
+                    range of furniture, mattress, homeware, decor, furnishings
+                    and much more…
                   </p>
                 </li>
               </ul>

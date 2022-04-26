@@ -11,6 +11,12 @@ export default class ExchangeOfferContainer extends Component {
   static propTypes = {
     history: PropTypes.object.isRequired
   };
+
+  componentDidMount() {
+    const { history } = this.props;
+    history.push("/");
+  }
+
   render() {
     // console.log(this.props.modularkitchen);
     const { history } = this.props;
