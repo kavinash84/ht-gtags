@@ -204,7 +204,7 @@ class Footer extends React.Component {
                   />
                 </Ul>
               </Box>
-              <Box>
+              {/* <Box>
                 <Heading variant="footerTitle">ABOUT US</Heading>
                 <Ul>
                   <FooterMenuLink to="/who-we-are" title="Who We Are" />
@@ -219,7 +219,7 @@ class Footer extends React.Component {
                   </Li>
                   <FooterMenuLink to="/contact-us" title="Contact Us" />
                 </Ul>
-              </Box>
+              </Box> */}
             </Col>
             <Col width={[1, 2 / 3, 2 / 12]}>
               <Box mb={24}>
@@ -264,9 +264,9 @@ class Footer extends React.Component {
                       rel="noreferrer noopener"
                       target="_blank"
                     >
-                      <Text variant="footerLink" fontSize={16}>
+                      {/* <Text variant="footerLink" fontSize={16}>
                         <CallIcon mr={10} /> 1800-210-0004
-                      </Text>
+                      </Text> */}
                     </a>
                   </Li>
                   <Li>
