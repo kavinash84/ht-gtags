@@ -60,6 +60,14 @@ export default function gaMiddleware() {
         //   console.log(`unbxd - window.unbxd.handleUserSwitch(); invoked on -${type}`);
         // }
         if (
+          (type === "login/LOGIN_SUCCESS" || type === "login/LOGOUT_SUCCESS") &&
+          window &&
+          window.webengage
+        ) {
+          // console.log("webengage.user.login");
+          // window.webengage.user.login("xyz123");
+        }
+        if (
           (type === "cart/ADD_TO_CART_SUCCESS" ||
             type === "cart/UPDATE_CART_SUCCESS" ||
             type === "cart/REMOVE_FROM_CART_SUCCESS") &&
