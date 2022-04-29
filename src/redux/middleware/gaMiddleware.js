@@ -619,7 +619,7 @@ export default function gaMiddleware() {
                   return {
                     id: item.package_id,
                     name: item.package_name,
-                    package_name_reference: item.package_name,
+                    dimension11: item.package_name,
                     quantity: 1,
                     variant: "",
                     category: "",
