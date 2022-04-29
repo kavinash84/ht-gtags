@@ -97,7 +97,8 @@ class HomeContainer extends Component {
               <Image
                 mt="50px"
                 mb="30px"
-                src={secondbanner.image}
+                data-src={secondbanner.image}
+                alt="secondbanner"
                 style={{
                   zIndex: "10px"
                 }}
@@ -248,7 +249,7 @@ class HomeContainer extends Component {
               </HeadingHtV1>
               <Image
                 mt="30px"
-                src={bestSeat.image}
+                data-src={bestSeat.image}
                 style={{
                   width: "92%",
                   alignItems: "center",
@@ -304,7 +305,7 @@ class HomeContainer extends Component {
                 >
                   <Image
                     // style={{ width: "97%" }}
-                    src={val.image}
+                    data-src={val.image}
                     alt="IndoorFountain"
                   />
                 </Link>
@@ -399,7 +400,7 @@ class HomeContainer extends Component {
                   zIndex: "10"
                 }}
               >
-                <Image src={gifting.image1} />
+                <Image data-src={gifting.image1} />
               </Link>
               <Link
                 onClick={() => {
@@ -416,7 +417,7 @@ class HomeContainer extends Component {
                   zIndex: "10"
                 }}
               >
-                <Image src={gifting.image2} />
+                <Image data-src={gifting.image2} />
               </Link>
             </div>
           </div>
@@ -471,7 +472,7 @@ class HomeContainer extends Component {
               </HeadingHtV1>
               <Image
                 mt="30px"
-                src={togetherInMoment.image}
+                data-src={togetherInMoment.image}
                 style={{
                   width: "90%",
                   alignItems: "center",
@@ -513,7 +514,7 @@ class HomeContainer extends Component {
 
                       zIndex: "10"
                     }}
-                    src={TheWayWeAreEntertainingNow.image1}
+                    data-src={TheWayWeAreEntertainingNow.image1}
                   />
                 </div>
 
@@ -578,7 +579,7 @@ class HomeContainer extends Component {
                       zIndex: "10",
                       height: "75%"
                     }}
-                    src={TheWayWeAreEntertainingNow.image2}
+                    data-src={TheWayWeAreEntertainingNow.image2}
                   />
                 </div>
               </div>
@@ -740,7 +741,7 @@ class HomeContainer extends Component {
                       zIndex: "10"
                     }}
                   >
-                    <Image src={wfhAreBack.data[0].image1} />
+                    <Image data-src={wfhAreBack.data[0].image1} />
                     <div
                       style={{
                         background: "#000",
@@ -781,7 +782,7 @@ class HomeContainer extends Component {
                       zIndex: "10"
                     }}
                   >
-                    <Image src={wfhAreBack.data[1].image2} />
+                    <Image data-src={wfhAreBack.data[1].image2} />
                     <div
                       style={{
                         background: "#000",
@@ -839,7 +840,7 @@ class HomeContainer extends Component {
             >
               <Image
                 mt="10px"
-                src={trendsWeLove1.data[0].image1}
+                data-src={trendsWeLove1.data[0].image1}
                 style={{
                   width: "75%",
 
@@ -857,7 +858,7 @@ class HomeContainer extends Component {
             >
               <Image
                 mt="60px"
-                src={trendsWeLove1.data[1].image2}
+                data-src={trendsWeLove1.data[1].image2}
                 style={{
                   width: "75%",
 
@@ -875,7 +876,7 @@ class HomeContainer extends Component {
             >
               <Image
                 mt="60px"
-                src={trendsWeLove1.data[2].image3}
+                data-src={trendsWeLove1.data[2].image3}
                 style={{
                   width: "75%",
 
@@ -893,7 +894,7 @@ class HomeContainer extends Component {
             >
               <Image
                 mt="60px"
-                src={trendsWeLove1.data[3].image4}
+                data-src={trendsWeLove1.data[3].image4}
                 style={{
                   width: "75%",
 
@@ -950,7 +951,7 @@ class HomeContainer extends Component {
               </HeadingHtV1>
               <Image
                 mt="30px"
-                src={forYourMasterSuite.image}
+                data-src={forYourMasterSuite.image}
                 style={{
                   width: "90%",
                   alignItems: "center",
@@ -1015,7 +1016,7 @@ class HomeContainer extends Component {
               </HeadingHtV1>
               <Image
                 mt="30px"
-                src={ourBeddingFavourites.image}
+                data-src={ourBeddingFavourites.image}
                 style={{
                   width: "90%",
                   alignItems: "center",
@@ -1075,7 +1076,7 @@ class HomeContainer extends Component {
 
             {/* <Link to="/furniture/bedroom-furniture"> */}
             <Image
-              src={forBetterSleep.image}
+              data-src={forBetterSleep.image}
               alt="ForABetterSleep"
               style={{
                 width: "90%",
@@ -1105,7 +1106,7 @@ class HomeContainer extends Component {
                     to={forBetterSleep.data[0].url_key}
                   >
                     <Image
-                      src={forBetterSleep.data[0].image}
+                      data-src={forBetterSleep.data[0].image}
                       alt="ForABetterSleep01"
                     />
                     <div
@@ -1137,7 +1138,7 @@ class HomeContainer extends Component {
                     to={forBetterSleep.data[1].url_key}
                   >
                     <Image
-                      src={forBetterSleep.data[1].image}
+                      data-src={forBetterSleep.data[1].image}
                       alt="ForABetterSleep02"
                     />
                     <div
@@ -1168,7 +1169,7 @@ class HomeContainer extends Component {
                     to={forBetterSleep.data[2].url_key}
                   >
                     <Image
-                      src={forBetterSleep.data[2].image}
+                      data-src={forBetterSleep.data[2].image}
                       alt="ForABetterSleep03"
                     />
                     <div
@@ -1199,7 +1200,7 @@ class HomeContainer extends Component {
                     to={forBetterSleep.data[3].url_key}
                   >
                     <Image
-                      src={forBetterSleep.data[3].image}
+                      data-src={forBetterSleep.data[3].image}
                       alt="ForABetterSleep04"
                     />
                     <div
@@ -1300,7 +1301,7 @@ class HomeContainer extends Component {
               >
                 <Image
                   mt="30px"
-                  src={customiseYourHome.image1}
+                  data-src={customiseYourHome.image1}
                   style={{
                     width: "80%",
                     alignItems: "center",
@@ -1322,7 +1323,7 @@ class HomeContainer extends Component {
               >
                 <Image
                   mt="30px"
-                  src={customiseYourHome.image2}
+                  data-src={customiseYourHome.image2}
                   style={{
                     width: "80%",
                     alignItems: "center",

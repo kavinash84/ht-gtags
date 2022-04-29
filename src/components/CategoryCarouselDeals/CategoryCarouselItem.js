@@ -61,7 +61,7 @@ const CategoryItem = ({
           {image ? (
             <div style={{ position: "relative" }}>
               <Image
-                src={image}
+                data-src={image}
                 alt={name}
                 height="auto"
                 width="100%"

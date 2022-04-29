@@ -33,7 +33,7 @@ class CategoryBlock extends React.Component {
           >
             <Img
               border="none"
-              src={src}
+              data-src={src}
               alt={title}
               m={5}
               height="auto"
