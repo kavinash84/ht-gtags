@@ -47,6 +47,7 @@ const formatPrice = price => {
   isLoggedIn: userLogin.isLoggedIn,
   openPLPModal: lackpackages.openPLPModal,
   updated: lackpackages.updated,
+  error: lackpackages.error,
   movetoCart: lackpackages.movetoCart,
   proceedLoader: lackpackages.proceedLoader,
   sessionId: app.sessionId,
@@ -113,12 +114,25 @@ export default class PackageCatalog extends Component {
       router
     } = this.props;
     const { selected } = this.state;
+    // const postData = {
+    //   new_skus: selected,
+    //   old_skus: oldList,
+    //   fk_cart_rule: currentPackage,
+    //   pincode: selectedPincode,
+    //   session_id: sessionId
+    // };
+    const skus = {};
+    if (Array.isArray(selected) && selected.length) {
+      selected.map(item => {
+        skus[item.simple_sku] = selected.filter(
+          it => it.simple_sku === item.simple_sku
+        ).length;
+      });
+    }
     const postData = {
-      new_skus: selected,
-      old_skus: oldList,
-      fk_cart_rule: currentPackage,
+      packageId: currentPackage,
       pincode: selectedPincode,
-      session_id: sessionId
+      skus: skus
     };
     if (isLoggedIn) {
       dispatch(savePackageCatalog(postData));
@@ -157,16 +171,27 @@ export default class PackageCatalog extends Component {
       oldList
     } = this.props;
     const { selected } = this.state;
+    const skus = {};
+    if (Array.isArray(selected) && selected.length) {
+      selected.map(item => {
+        skus[item.simple_sku] = selected.filter(
+          it => it.simple_sku === item.simple_sku
+        ).length;
+      });
+    }
     const postData = {
-      new_skus: selected,
-      old_skus: oldList,
-      fk_cart_rule: currentPackage,
+      // new_skus: selected,
+      // old_skus: oldList,
+      // fk_cart_rule: currentPackage,
+      // pincode: selectedPincode,
+      // session_id: sessionId
+      packageId: currentPackage,
       pincode: selectedPincode,
-      session_id: sessionId
+      skus: skus
     };
     this.setState({ priceWarningModal: false, cartWarningModal: false });
     if (this.checkPriceStatus(packageCatalog)) {
-      dispatch(proceedPackageCatalog({ ...postData, fk_cart_rule: "" }));
+      dispatch(proceedPackageCatalog({ ...postData, packageId: "" }));
     } else if (this.checkDelivarableStatus(packageCatalog)) {
       dispatch(proceedPackageCatalog(postData));
     } else {
@@ -311,7 +336,8 @@ export default class PackageCatalog extends Component {
       packageCatalog,
       proceedLoader,
       cartUpdating,
-      seoInfo
+      seoInfo,
+      error
     } = this.props;
     return (
       <div className="wrapper">
@@ -322,342 +348,381 @@ export default class PackageCatalog extends Component {
             content={seoInfo && seoInfo.meta_description}
           />
         </Helmet>
-        <div className={styles.PackageCatalogContainer}>
-          {/* <ReviewMenu backBtn={true} menuIcon={false} /> */}
-          <div
-            className={BreadCrumpstyles.BreadCrumb_wrapper2}
-            style={{ marginTop: "0" }}
-          >
-            <PackageBreadCrumb isPacakge={true} />
-          </div>
-          {/* <Section mb="0px" p="0px" pr="0px" pl="0px">
-            <Container type="container" pr="0px" pl="0px">
-              <DeliveryAddress />
-            </Container>
-          </Section> */}
-          <div
-            style={{
-              display: "flex",
-              width: "100%",
-              backgroundColor: "#FFF8F4"
-            }}
-          >
-            <Section
-              p="0"
-              m="0"
-              style={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "40%",
-                marginLeft: "10%",
-                marginBottom: "40px",
-                marginTop: "20px"
-              }}
-            >
-              {/* <MainFurnitureSlider data={carosalData} mb="0" /> */}
-              <img
-                src={packageCatalog.images}
-                alt="Banner"
-                style={{ width: "100%" }}
-              />
-            </Section>
-            <Section
-              style={{ padding: "0px 50px", zIndex: 1, marginTop: "20px" }}
-              className={styles.PackageCatalog_info_container}
-              mb="0"
-            >
+        {packageCatalog && packageCatalog.categories ? (
+          <React.Fragment>
+            <div className={styles.PackageCatalogContainer}>
               <div
-                style={{
-                  color: "#323131",
-                  fontSize: "28px",
-                  fontWeight: 600,
-                  marginBottom: "20px"
-                }}
+                className={BreadCrumpstyles.BreadCrumb_wrapper2}
+                style={{ marginTop: "0" }}
               >
-                {packageCatalog.title}
+                <PackageBreadCrumb isPacakge={true} />
               </div>
               <div
                 style={{
-                  color: "#323131",
-                  fontSize: "18px",
-                  fontWeight: 600,
-                  marginBottom: "20px"
+                  display: "flex",
+                  width: "100%",
+                  backgroundColor: "#FFF8F4"
                 }}
               >
-                {packageCatalog.subtitle}
-              </div>
-              <div
-                style={{
-                  color: "#E9916B",
-                  fontSize: "22px",
-                  fontWeight: 600,
-                  margin: "10px 0px"
-                }}
-              >
-                ₹{packageCatalog.price}{" "}
-                <span
+                <Section
+                  p="0"
+                  m="0"
                   style={{
-                    color: "#999999",
-                    fontSize: "18px"
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    width: "40%",
+                    marginLeft: "10%",
+                    marginBottom: "40px",
+                    marginTop: "20px"
                   }}
                 >
-                  (inclusive of taxes)
-                </span>
-              </div>
-              <div>
-                {Array.isArray(packageCatalog.emiOptions) &&
-                  packageCatalog.emiOptions.length && (
-                    <div>
-                      <div
-                        style={{
-                          color: "#605F5F",
-                          fontSize: "18px",
-                          fontWeight: 600,
-                          marginTop: "15px"
-                        }}
-                      >
-                        Emi Options
-                      </div>
-                      <div
-                        style={{
-                          marginTop: "10px",
-                          fontSize: "15px",
-                          color: "#605F5F",
-                          maxHeight: "50px",
-                          overflow: "auto"
-                        }}
-                      >
-                        {packageCatalog.emiOptions.map((item, i) => {
-                          if (!i) return <div>{item.mobile}</div>;
-                        })}
-                      </div>
-                    </div>
-                  )}
-              </div>
-              {Array.isArray(packageCatalog.emiOptions) &&
-                packageCatalog.emiOptions.length && (
-                  <div style={{ marginTop: "25px" }}>
+                  <img
+                    src={packageCatalog.images}
+                    alt="Banner"
+                    style={{ width: "100%" }}
+                  />
+                </Section>
+                <Section
+                  style={{ padding: "0px 50px", zIndex: 1, marginTop: "20px" }}
+                  className={styles.PackageCatalog_info_container}
+                  mb="0"
+                >
+                  <div
+                    style={{
+                      color: "#323131",
+                      fontSize: "28px",
+                      fontWeight: 600,
+                      marginBottom: "20px"
+                    }}
+                  >
+                    {packageCatalog.title}
+                  </div>
+                  <div
+                    style={{
+                      color: "#323131",
+                      fontSize: "18px",
+                      fontWeight: 600,
+                      marginBottom: "20px"
+                    }}
+                  >
+                    {packageCatalog.subtitle}
+                  </div>
+                  <div
+                    style={{
+                      color: "#E9916B",
+                      fontSize: "22px",
+                      fontWeight: 600,
+                      margin: "10px 0px"
+                    }}
+                  >
+                    ₹{packageCatalog.price}{" "}
                     <span
                       style={{
-                        color: "#605F5F",
-                        fontSize: "15px",
-                        cursor: "pointer"
+                        color: "#999999",
+                        fontSize: "18px"
                       }}
-                      onClick={this.handleModal}
                     >
-                      More info {`>`}
+                      (inclusive of taxes)
                     </span>
                   </div>
-                )}
-            </Section>
-          </div>
-          {packageCatalog.categories.map((catItem, i) => (
-            <Catagories
-              cat={catItem}
-              index={i}
-              handlePlpModal={this.handlePlpModal}
-            />
-          ))}
-        </div>
-        <div className={styles.package_bottom_fixed}>
-          <div style={{ marginLeft: "10%", padding: "40px 10px 40px" }}>
-            <span>{this.state.totalSelected}</span>/{packageCatalog.totalQty}{" "}
-            Items Selected
-          </div>
-          <div className={styles.buttons_container}>
-            <button
-              disabled={!this.state.totalSelected}
-              className={styles.saveBtn}
-              onClick={this.handleSave}
-              style={{
-                opacity: !this.state.totalSelected ? "0.5" : "1",
-                cursor: "pointer"
+                  <div>
+                    {Array.isArray(packageCatalog.emiOptions) &&
+                      packageCatalog.emiOptions.length && (
+                        <div>
+                          <div
+                            style={{
+                              color: "#605F5F",
+                              fontSize: "18px",
+                              fontWeight: 600,
+                              marginTop: "15px"
+                            }}
+                          >
+                            Emi Options
+                          </div>
+                          <div
+                            style={{
+                              marginTop: "10px",
+                              fontSize: "15px",
+                              color: "#605F5F",
+                              maxHeight: "50px",
+                              overflow: "auto"
+                            }}
+                          >
+                            {packageCatalog.emiOptions.map((item, i) => {
+                              if (!i) return <div>{item.mobile}</div>;
+                            })}
+                          </div>
+                        </div>
+                      )}
+                  </div>
+                  {Array.isArray(packageCatalog.emiOptions) &&
+                    packageCatalog.emiOptions.length && (
+                      <div style={{ marginTop: "25px" }}>
+                        <span
+                          style={{
+                            color: "#605F5F",
+                            fontSize: "15px",
+                            cursor: "pointer"
+                          }}
+                          onClick={this.handleModal}
+                        >
+                          More info {`>`}
+                        </span>
+                      </div>
+                    )}
+                </Section>
+              </div>
+              {packageCatalog.categories.map((catItem, i) => (
+                <Catagories
+                  cat={catItem}
+                  index={i}
+                  handlePlpModal={this.handlePlpModal}
+                />
+              ))}
+            </div>
+            <div className={styles.package_bottom_fixed}>
+              <div style={{ marginLeft: "10%", padding: "40px 10px 40px" }}>
+                <span>{this.state.totalSelected}</span>/
+                {packageCatalog.totalQty} Items Selected
+              </div>
+              <div className={styles.buttons_container}>
+                <button
+                  disabled={!this.state.totalSelected}
+                  className={styles.saveBtn}
+                  onClick={this.handleSave}
+                  style={{
+                    opacity: !this.state.totalSelected ? "0.5" : "1",
+                    cursor: "pointer"
+                  }}
+                >
+                  Save
+                </button>
+                <button
+                  className={styles.proceedBtn}
+                  disabled={
+                    this.state.totalSelected !== packageCatalog.totalQty ||
+                    proceedLoader
+                      ? true
+                      : false
+                  }
+                  onClick={this.handlePreProceed}
+                  style={{
+                    // background: "#D5D9D7",
+                    opacity:
+                      this.state.totalSelected !== packageCatalog.totalQty
+                        ? "1.5"
+                        : "2",
+                    cursor: "pointer",
+                    backgroundColor:
+                      this.state.totalSelected !== packageCatalog.totalQty
+                        ? "#F2F2F2"
+                        : "#ea9671"
+                  }}
+                >
+                  {proceedLoader ? "Loading..." : "Proceed"}
+                </button>
+              </div>
+            </div>
+            <ResponsiveModal
+              classNames={{
+                overlay: "PackageListingOverlay",
+                modal: "PackageListingModal"
               }}
+              onCloseModal={this.handlePlpModal}
+              open={this.props.openPLPModal}
             >
-              Save
-            </button>
-            <button
-              className={styles.proceedBtn}
-              disabled={
-                this.state.totalSelected !== packageCatalog.totalQty ||
-                proceedLoader
-                  ? true
-                  : false
-              }
-              onClick={this.handlePreProceed}
-              style={{
-                // background: "#D5D9D7",
-                opacity:
-                  this.state.totalSelected !== packageCatalog.totalQty
-                    ? "1.5"
-                    : "2",
-                cursor: "pointer",
-                backgroundColor:
-                  this.state.totalSelected !== packageCatalog.totalQty
-                    ? "#F2F2F2"
-                    : "#ea9671"
+              <ProductsList handlePlpModal={this.handlePlpModal} />
+            </ResponsiveModal>
+            <ResponsiveModal
+              classNames={{ modal: "PackageModal" }}
+              onCloseModal={this.handleModal}
+              open={this.state.openModal}
+            >
+              <div
+                style={{
+                  background: "#F5EEEE",
+                  height: "50px",
+                  borderTopLeftRadius: "20px",
+                  borderTopRightRadius: "20px"
+                }}
+              />
+              <div
+                style={{
+                  padding: "25px 20px",
+                  fontSize: "16px",
+                  color: "#000000",
+                  height: "50vh",
+                  overflow: "auto",
+                  marginBottom: "25px"
+                }}
+              >
+                {/* {packageCatalog.description} */}
+                {packageCatalog.emiOptions.map(item => (
+                  <div>{item.mobile}</div>
+                ))}
+              </div>
+            </ResponsiveModal>
+            <ResponsiveModal
+              classNames={{
+                overlay: "PackageListingOverlay",
+                modal: "PackageDisplayModal"
               }}
+              onCloseModal={this.handleProdModal}
+              open={openProdModal}
             >
-              {proceedLoader ? "Loading..." : "Proceed"}
-            </button>
+              <PackagePDP />
+            </ResponsiveModal>
+            <ResponsiveModal
+              classNames={{ modal: "PackageModal" }}
+              onCloseModal={this.handlePriceWarnModal}
+              open={this.state.priceWarningModal}
+            >
+              <div
+                style={{
+                  background: "#F5EEEE",
+                  height: "50px",
+                  borderTopLeftRadius: "20px",
+                  borderTopRightRadius: "20px"
+                }}
+              />
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  width: "100%"
+                }}
+              >
+                <p
+                  style={{
+                    color: "#000000",
+                    fontSize: "22px",
+                    fontWeight: 600,
+                    textAlign: "center",
+                    margin: "20px 0px",
+                    width: "60%"
+                  }}
+                >
+                  {`The selected items in this package is less than ${packageCatalog.price}. Please replace few items to make it more than ${packageCatalog.price} Or click on Proceed to add products indivitually.`}
+                </p>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-around",
+                  alignItems: "center",
+                  marginBottom: "20px"
+                }}
+              >
+                <button
+                  className={styles.packageWarningBtns}
+                  style={{ background: "#D5D9D7" }}
+                  onClick={this.handlePriceWarnModal}
+                >
+                  Cancel
+                </button>
+                <button
+                  className={styles.packageWarningBtns}
+                  onClick={this.handleProceed}
+                >
+                  Proceed
+                </button>
+              </div>
+            </ResponsiveModal>
+            <ResponsiveModal
+              classNames={{ modal: "PackageModal" }}
+              onCloseModal={this.handleCartWarnModal}
+              open={this.state.cartWarningModal}
+            >
+              <div
+                style={{
+                  background: "#F5EEEE",
+                  height: "50px",
+                  borderTopLeftRadius: "20px",
+                  borderTopRightRadius: "20px"
+                }}
+              />
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  width: "100%"
+                }}
+              >
+                <span
+                  style={{
+                    color: "#000000",
+                    fontSize: "22px",
+                    fontWeight: 600,
+                    textAlign: "center",
+                    margin: "20px 0px",
+                    width: "60%"
+                  }}
+                >
+                  There is Already A package in your cart, please delete the
+                  package and comeback.
+                </span>
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "space-around",
+                  alignItems: "center",
+                  marginBottom: "20px"
+                }}
+              >
+                <button
+                  className={styles.packageWarningBtns}
+                  style={{ background: "#D5D9D7" }}
+                  onClick={this.handleCartWarnModal}
+                >
+                  Cancel
+                </button>
+                <button
+                  className={styles.packageWarningBtns}
+                  onClick={this.handleDeletePackage}
+                  // disabled={cartUpdating}
+                >
+                  Go To Cart
+                </button>
+              </div>
+            </ResponsiveModal>
+          </React.Fragment>
+        ) : (
+          <div className={styles.PackageCatalogContainer}>
+            <div
+              className={BreadCrumpstyles.BreadCrumb_wrapper2}
+              style={{ marginTop: "0" }}
+            >
+              <PackageBreadCrumb isPacakge={true} />
+            </div>
+            {error && error.error_message ? (
+              <div
+                style={{
+                  textAlign: "center",
+                  padding: "40px 20px",
+                  fontSize: "18px",
+                  fontWeight: 600,
+                  color: "red"
+                }}
+              >
+                {error.error_message}
+              </div>
+            ) : (
+              <div
+                style={{
+                  textAlign: "center",
+                  padding: "40px 20px",
+                  fontSize: "18px",
+                  fontWeight: 600,
+                  color: "red"
+                }}
+              >
+                Oops something went wrong..!
+              </div>
+            )}
           </div>
-        </div>
-        <ResponsiveModal
-          classNames={{
-            overlay: "PackageListingOverlay",
-            modal: "PackageListingModal"
-          }}
-          onCloseModal={this.handlePlpModal}
-          open={this.props.openPLPModal}
-        >
-          <ProductsList handlePlpModal={this.handlePlpModal} />
-        </ResponsiveModal>
-        <ResponsiveModal
-          classNames={{ modal: "PackageModal" }}
-          onCloseModal={this.handleModal}
-          open={this.state.openModal}
-        >
-          <div
-            style={{
-              background: "#F5EEEE",
-              height: "50px",
-              borderTopLeftRadius: "20px",
-              borderTopRightRadius: "20px"
-            }}
-          />
-          <div
-            style={{
-              padding: "25px 20px",
-              fontSize: "16px",
-              color: "#000000",
-              height: "50vh",
-              overflow: "auto",
-              marginBottom: "25px"
-            }}
-          >
-            {/* {packageCatalog.description} */}
-            {packageCatalog.emiOptions.map(item => (
-              <div>{item.mobile}</div>
-            ))}
-          </div>
-        </ResponsiveModal>
-        <ResponsiveModal
-          classNames={{
-            overlay: "PackageListingOverlay",
-            modal: "PackageDisplayModal"
-          }}
-          onCloseModal={this.handleProdModal}
-          open={openProdModal}
-        >
-          <PackagePDP />
-        </ResponsiveModal>
-        <ResponsiveModal
-          classNames={{ modal: "PackageModal" }}
-          onCloseModal={this.handlePriceWarnModal}
-          open={this.state.priceWarningModal}
-        >
-          <div
-            style={{
-              background: "#F5EEEE",
-              height: "50px",
-              borderTopLeftRadius: "20px",
-              borderTopRightRadius: "20px"
-            }}
-          />
-          <div
-            style={{ display: "flex", justifyContent: "center", width: "100%" }}
-          >
-            <p
-              style={{
-                color: "#000000",
-                fontSize: "22px",
-                fontWeight: 600,
-                textAlign: "center",
-                margin: "20px 0px",
-                width: "60%"
-              }}
-            >
-              {`The selected items in this package is less than ${packageCatalog.price}. Please replace few items to make it more than ${packageCatalog.price} Or click on Proceed to add products indivitually.`}
-            </p>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-around",
-              alignItems: "center",
-              marginBottom: "20px"
-            }}
-          >
-            <button
-              className={styles.packageWarningBtns}
-              style={{ background: "#D5D9D7" }}
-              onClick={this.handlePriceWarnModal}
-            >
-              Cancel
-            </button>
-            <button
-              className={styles.packageWarningBtns}
-              onClick={this.handleProceed}
-            >
-              Proceed
-            </button>
-          </div>
-        </ResponsiveModal>
-        <ResponsiveModal
-          classNames={{ modal: "PackageModal" }}
-          onCloseModal={this.handleCartWarnModal}
-          open={this.state.cartWarningModal}
-        >
-          <div
-            style={{
-              background: "#F5EEEE",
-              height: "50px",
-              borderTopLeftRadius: "20px",
-              borderTopRightRadius: "20px"
-            }}
-          />
-          <div
-            style={{ display: "flex", justifyContent: "center", width: "100%" }}
-          >
-            <span
-              style={{
-                color: "#000000",
-                fontSize: "22px",
-                fontWeight: 600,
-                textAlign: "center",
-                margin: "20px 0px",
-                width: "60%"
-              }}
-            >
-              There is Already A package in your cart, please delete the package
-              and comeback.
-            </span>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "space-around",
-              alignItems: "center",
-              marginBottom: "20px"
-            }}
-          >
-            <button
-              className={styles.packageWarningBtns}
-              style={{ background: "#D5D9D7" }}
-              onClick={this.handleCartWarnModal}
-            >
-              Cancel
-            </button>
-            <button
-              className={styles.packageWarningBtns}
-              onClick={this.handleDeletePackage}
-              // disabled={cartUpdating}
-            >
-              Go To Cart
-            </button>
-          </div>
-        </ResponsiveModal>
+        )}
       </div>
     );
   }

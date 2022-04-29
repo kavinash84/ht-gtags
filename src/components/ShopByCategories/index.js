@@ -28,9 +28,9 @@ import CategoryBlock from "./CategoryBlock";
 // const shopByCat12 = require("../../../static/new-home/shopbycat12.png");
 
 const ShopByCategories = ({ shopByCategories }) => {
-  {
-    console.log("shopByCategories", shopByCategories);
-  }
+  // {
+  //   console.log("shopByCategories", shopByCategories);
+  // }
   return (
     <div
       p="16px 20px"

@@ -112,11 +112,10 @@ export default class SelectedItems extends Component {
                           display: "flex",
                           justifyContent: "space-between",
                           alignItems: "center",
-                          marginTop:"5px"
+                          marginTop: "5px"
                         }}
                       >
                         <span>By Hometown</span>
-                
                       </div>
                       <div
                         style={{
@@ -126,36 +125,47 @@ export default class SelectedItems extends Component {
                           marginTop: "5px"
                         }}
                       >
-                      <div>
-                      <span style={{fontSize: "18px "}}>Qty: 1</span>
-                      </div>
-                      <div>
-                        <button
-                          onClick={() => {
-                            const { dispatch } = this.context.store;
-                            dispatch(selectSkuForPlp(item.simpleSku));
-                            dispatch(togglePLPModal(true));
-                          }}
-                          style={{padding:"14px 35px", fontSize:"18px", cursor: "pointer"}}
-                        >
-                          <Link
-                            to={`/package-catalog/${packageId}`}
-                            style={{ color: "white" }}
+                        <div>
+                          <span style={{ fontSize: "18px " }}>
+                            Qty: {item.qty}
+                          </span>
+                        </div>
+                        <div>
+                          <button
+                            onClick={() => {
+                              const { dispatch } = this.context.store;
+                              dispatch(selectSkuForPlp(item.simpleSku));
+                              dispatch(togglePLPModal(true));
+                            }}
+                            style={{
+                              padding: "14px 35px",
+                              fontSize: "18px",
+                              cursor: "pointer"
+                            }}
                           >
-                            Replace
-                          </Link>
-                        </button>
-                        <span
-                          style={{ color: "#E9916B", fontSize: "15px" , marginLeft:"10px", cursor: "pointer"}}
-                          onClick={() => {
-                            const { dispatch } = this.context.store;
-                            const { openProdModal } = this.props;
-                            dispatch(toggleProdModal(!openProdModal));
-                            dispatch(setPdpFromCart(item.simpleSku));
-                          }}
-                        >
-                          More Info {`>`}
-                        </span>
+                            <Link
+                              to={`/package-catalog/${packageId}`}
+                              style={{ color: "white" }}
+                            >
+                              Replace
+                            </Link>
+                          </button>
+                          <span
+                            style={{
+                              color: "#E9916B",
+                              fontSize: "15px",
+                              marginLeft: "10px",
+                              cursor: "pointer"
+                            }}
+                            onClick={() => {
+                              const { dispatch } = this.context.store;
+                              const { openProdModal } = this.props;
+                              dispatch(toggleProdModal(!openProdModal));
+                              dispatch(setPdpFromCart(item.simpleSku));
+                            }}
+                          >
+                            More Info {`>`}
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -228,29 +238,41 @@ export default class SelectedItems extends Component {
                               marginTop: "5px"
                             }}
                           >
-                          <div>
-                          <span style={{fontSize: "18px",
-                              color: "#999999",}}>Qty: 1</span>
-                          </div>
-                          <div>
-                            <button
-                              onClick={() => this.props.handlePlpModal(index)}
-                              style={{padding:"14px 35px", fontSize:"18px", cursor: "pointer"}}
-                            >
-                              Replace
-                            </button>
-                            <span
-                              style={{ color: "#E9916B", fontSize: "15px" , marginLeft: "10px", cursor: "pointer"}}
-                              onClick={() => {
-                                if (!isSudoCart)
-                                  this.handleProdModal({
-                                    catIndex: index,
-                                    prodIndex: i
-                                  });
-                              }}
-                            >
-                              More Info {`>`}
-                            </span>
+                            <div>
+                              <span
+                                style={{ fontSize: "18px", color: "#999999" }}
+                              >
+                                Qty: {item.qty}
+                              </span>
+                            </div>
+                            <div>
+                              <button
+                                onClick={() => this.props.handlePlpModal(index)}
+                                style={{
+                                  padding: "14px 35px",
+                                  fontSize: "18px",
+                                  cursor: "pointer"
+                                }}
+                              >
+                                Replace
+                              </button>
+                              <span
+                                style={{
+                                  color: "#E9916B",
+                                  fontSize: "15px",
+                                  marginLeft: "10px",
+                                  cursor: "pointer"
+                                }}
+                                onClick={() => {
+                                  if (!isSudoCart)
+                                    this.handleProdModal({
+                                      catIndex: index,
+                                      prodIndex: i
+                                    });
+                                }}
+                              >
+                                More Info {`>`}
+                              </span>
                             </div>
                           </div>
                         </div>

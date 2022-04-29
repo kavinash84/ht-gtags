@@ -206,12 +206,12 @@ export default class CartContainer extends Component {
 
   // checkForEmiEligibility = total => {
   //   const { emiPopUpShown } = this.state;
-  //   // console.log('checkForEmiEligibility function', total, emiPopUpShown);
+  // console.log('checkForEmiEligibility function', total, emiPopUpShown);
 
   //   if (total >= 20000 && !emiPopUpShown) {
   //     this.setState({
   //       open: true,
-  //       responsiveModalContent: "emiModal",
+  //       responsiveModalContent: 'emiModal',
   //       emiPopUpShown: true
   //     });
   //   }
@@ -244,7 +244,7 @@ export default class CartContainer extends Component {
   //   }
   //   this.setState({
   //     open: !open,
-  //     responsiveModalContent: open ? null : "emiModal"
+  //     responsiveModalContent: open ? null : 'emiModal'
   //   });
   // };
   webToChat = () => {
@@ -305,7 +305,7 @@ export default class CartContainer extends Component {
         </Helmet>
         <Body>
           {/* Header */}
-          <Header />
+          {/* <Header /> */}
 
           {/* {loading && !loaded && <CartShimmer />} */}
           {initialLoading ? (
@@ -348,12 +348,12 @@ export default class CartContainer extends Component {
           ) : null}
           {!loading && results && results.length !== 0 ? (
             <Box className="asdfgh">
-              {outOfStockList && outOfStockList.length > 0 && (
+              {/* {outOfStockList && outOfStockList.length > 0 && (
                 <Notifications
                   msg="One or more items in your cart are out of stock. Please remove to continue"
                   type="error"
                 />
-              )}
+              )} */}
               <Cart
                 demoProductsBanner={demoProductsBanner(results)}
                 results={results}
@@ -401,15 +401,13 @@ export default class CartContainer extends Component {
                 />
               </Box>
             ) : null}
-            </ResponsiveModal>
-
-            {/* {responsiveModalContent === "emiModal" ? ( */}
-              {/* <Box> */}
-                {/* {total > bflMinAmount ? <BflPopMessage /> : <HdfcPopMessage />} */}
-                {/* <HdfcPopMessage />
-              </Box>
+          </ResponsiveModal>
+          {/* {responsiveModalContent === 'emiModal' ? (
+              <Box> */}
+          {/* {total > bflMinAmount ? <BflPopMessage /> : <HdfcPopMessage />} */}
+          {/* <HdfcPopMessage /> */}
+          {/* </Box>
             ) : null} */}
-
 
           {/* Footer */}
           <Footer />
