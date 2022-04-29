@@ -80,10 +80,7 @@ export default function reducer(state = initialState, action = {}) {
 const setAppAuth = ({ client }) => async response => {
   const { csrfToken, session } = response;
   if (window && window.webengage) {
-    console.log("webengage.user.login");
-    window.webengage.user.login("9SBOkLVMWvPX"); //9SBOkLVMWvPX is the unique user identifier being used here
-    window.webengage.user.setAttribute("we_email", "john@doe.com");
-    window.webengage.user.setAttribute("we_birth_date", "1986-08-19");
+    window.webengage.user.login(session);
   }
   await client.setCSRFToken(csrfToken);
   await client.setSessionId(session);

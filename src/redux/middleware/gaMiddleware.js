@@ -59,13 +59,12 @@ export default function gaMiddleware() {
         //   window.unbxd.handleUserSwitch();
         //   console.log(`unbxd - window.unbxd.handleUserSwitch(); invoked on -${type}`);
         // }
-        if (
-          (type === "login/LOGIN_SUCCESS" || type === "login/LOGOUT_SUCCESS") &&
-          window &&
-          window.webengage
-        ) {
-          // console.log("webengage.user.login");
-          // window.webengage.user.login("xyz123");
+        if (type === "profile/LOAD_SUCCESS" && window && window.webengage) {
+          const {
+            result: { email, dob }
+          } = action;
+          window.webengage.user.setAttribute("we_email", email);
+          window.webengage.user.setAttribute("we_birth_date", dob);
         }
         if (
           (type === "cart/ADD_TO_CART_SUCCESS" ||
@@ -344,6 +343,15 @@ export default function gaMiddleware() {
             category_details: categoryDetails
           } = product.product_info;
           const category = categoryDetails ? categoryDetails.join("/") : null;
+
+          if (window && window.webengage) {
+            console.log("webengage.track", window.webengage);
+            window.webengage.track("Added To Cart", {
+              "Product ID": configId,
+              Price: netprice
+            });
+          }
+
           window.dataLayer.push(
             {
               event: "addToCart",
