@@ -79,9 +79,6 @@ export default function reducer(state = initialState, action = {}) {
 
 const setAppAuth = ({ client }) => async response => {
   const { csrfToken, session } = response;
-  if (window && window.webengage) {
-    window.webengage.user.login(session);
-  }
   await client.setCSRFToken(csrfToken);
   await client.setSessionId(session);
 };
