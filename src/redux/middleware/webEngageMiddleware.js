@@ -1,3 +1,5 @@
+import moment from "moment";
+
 export default function webEngageMiddleware() {
   return ({ getState }) => next => action => {
     if (__CLIENT__) {
@@ -31,7 +33,10 @@ export default function webEngageMiddleware() {
             result: { email, dob }
           } = action;
           window.webengage.user.setAttribute("we_email", email);
-          window.webengage.user.setAttribute("we_birth_date", dob);
+          window.webengage.user.setAttribute(
+            "we_birth_date",
+            moment(dob).format("YYYY-MM-DD")
+          );
         }
 
         // //   add to cart
