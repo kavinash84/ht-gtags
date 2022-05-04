@@ -27,7 +27,7 @@ export default function webEngageMiddleware() {
         //   user track
         if (type === "profile/LOAD_SUCCESS") {
           const {
-            result: { email, dob, id_customer, mobile }
+            result: { email, dob, id_customer, mobile, full_name }
           } = action;
           console.log(dob, mobile, "dob");
           window.webengage.user.login(id_customer);
@@ -37,6 +37,7 @@ export default function webEngageMiddleware() {
             moment(dob).format("YYYY-MM-DD")
           );
           window.webengage.user.setAttribute("we_phone", mobile);
+          window.webengage.user.setAttribute("we_first_name", full_name);
         }
 
         //   user log out
