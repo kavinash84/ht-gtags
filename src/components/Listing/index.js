@@ -84,7 +84,6 @@ class Listing extends React.Component {
   }
   componentDidMount() {
     const {
-      categoryName,
       setPincodeToStore,
       setPincodeFilterToStore,
       breadCrumbs,
@@ -96,10 +95,10 @@ class Listing extends React.Component {
     const { dispatch } = this.context.store;
     dispatch(
       viewSubCategory({
-        varient: "",
         path: pathname,
-        category: categoryName,
-        sub_category: ""
+        category:
+          (breadCrumbs && breadCrumbs.length && breadCrumbs[0].name) || "",
+        sub_category: breadCrumbs && breadCrumbs.length && breadCrumbs[1].name
       })
     );
     if (window && breadCrumbs && pathname.indexOf("search") === -1) {
