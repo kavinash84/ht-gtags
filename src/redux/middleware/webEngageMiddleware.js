@@ -9,15 +9,12 @@ export default function webEngageMiddleware() {
         //   location: { pathname }
         // } = getState().router;
         //   user login
-        if (type === "app/LOAD_SUCCESS") {
-          window.webengage.user.login(action.result.session);
-        }
-        if (type === "login/LOGIN_SUCCESS") {
-          const { userLogin } = getState();
-          window.webengage.track("User Login Mode", {
-            mode: userLogin.loginType
-          });
-        }
+        // if (type === "login/LOGIN_SUCCESS") {
+        //   const { userLogin } = getState();
+        //   window.webengage.track("User Login Mode", {
+        //     mode: userLogin.loginType
+        //   });
+        // }
 
         // //   user sign-up
         // if (type === "signUp/SIGNUP_SUCCESS") {
@@ -30,13 +27,21 @@ export default function webEngageMiddleware() {
         //   user track
         if (type === "profile/LOAD_SUCCESS") {
           const {
-            result: { email, dob }
+            result: { email, dob, id_customer, mobile }
           } = action;
+          console.log(dob, mobile, "dob");
+          window.webengage.user.login(id_customer);
           window.webengage.user.setAttribute("we_email", email);
           window.webengage.user.setAttribute(
             "we_birth_date",
             moment(dob).format("YYYY-MM-DD")
           );
+          window.webengage.user.setAttribute("we_phone", mobile);
+        }
+
+        //   user log out
+        if (type === "login/LOGOUT_SUCCESS") {
+          window.webengage.user.logout();
         }
 
         // //   add to cart
