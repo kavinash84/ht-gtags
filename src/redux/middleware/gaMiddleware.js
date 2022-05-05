@@ -625,7 +625,7 @@ export default function gaMiddleware() {
                     quantity: 1,
                     variant: "",
                     category: "",
-                    price: item.package_discount,
+                    price: item.package_amount,
                     brand: "HomeTown"
                   };
                 });
