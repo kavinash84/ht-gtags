@@ -21,7 +21,7 @@ class SeeAndExperience extends React.Component {
           }}
         >
           <Image
-            src={seeandexperience.image}
+            data-src={seeandexperience.image}
             width="60%"
             style={{ objectFit: "cover" }}
           />

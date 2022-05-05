@@ -43,7 +43,7 @@ export default class Arrivals extends Component {
           }}
         >
           <Div >
-            <Image src={newArrivals.image} alt="arrival" style={{ width: "85%", marginLeft: "7.5%" }}/>
+            <Image data-src={newArrivals.image} alt="arrival" style={{ width: "85%", marginLeft: "7.5%" }}/>
           </Div>
         </Link>
       </Div>

@@ -30,7 +30,7 @@ const DBItem = ({ component, data }) => {
             >
               <div>
                 <img
-                  src={data.image}
+                  data-src={data.image}
                   alt={data.title}
                   style={{
                     height: "auto",
@@ -95,7 +95,7 @@ const DBItem = ({ component, data }) => {
             <Link to={data.url_key}>
               <div>
                 <img
-                  src={data.image}
+                  data-src={data.image}
                   alt={data.title}
                   style={{
                     height: "auto",

@@ -55,7 +55,7 @@ class Outdoor extends React.Component {
             <Row justifyContent="center" style={{ width: '100%', margin: 'auto' }}>
             <Div style={{ width: '35%', margin: '30px 20px 10px' }}>
               <Link to={url_key1}>
-              <Image src={image1} alt="outdoor" m={5} height="400px" width="100%" />
+              <Image data-src={image1} alt="outdoor" m={5} height="400px" width="100%" />
               <Text
                 fontSize="22px"
                 color="label"
@@ -68,7 +68,7 @@ class Outdoor extends React.Component {
             </Div>
             <Div style={{ width: '35%', margin: '30px 25px 10px' }}>
               <Link to={url_key2}>
-              <Image src={image2} alt="outdoor" m={5} height="400px" width="100%" />
+              <Image data-src={image2} alt="outdoor" m={5} height="400px" width="100%" />
               <Text
                 fontSize="20px"
                 color="label"

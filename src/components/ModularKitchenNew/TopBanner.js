@@ -20,7 +20,7 @@ class TopBanner extends React.Component {
     return (
       <Box className={styles.main}>
         <Image
-          src={topBanner.img}
+          data-src={topBanner.img}
           alt="topbanner"
           width="100%"
           height="650px"

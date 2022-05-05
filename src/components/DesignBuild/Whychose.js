@@ -39,7 +39,7 @@ class WhyChose extends React.Component {
         </Box>
         <Box mt="20px" className={styles.pos}>
           <Image
-            src={whyChooseUs.image}
+            data-src={whyChooseUs.image}
             alt="topbanner"
             width="100%"
             height="550px"

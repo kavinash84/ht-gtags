@@ -25,7 +25,7 @@ class RoomsWeTransform extends React.Component {
             <Box style={{ width: "40%", margin: "30px 10px 10px" }}>
               {/* <Link to={slide.url_key}> */}
               <Image
-                src={slide.imgSrc}
+                data-src={slide.imgSrc}
                 alt={slide.title}
                 m={5}
                 height="350px"

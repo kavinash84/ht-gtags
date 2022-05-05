@@ -66,7 +66,7 @@ class Steps extends React.Component {
                 >
                   <div style={{ display: "flex" }}>
                     <img
-                      src={blink}
+                      data-src={blink}
                       style={{
                         width: "20px",
                         height: "20px",

@@ -62,7 +62,7 @@ export default class ShopByCategory extends Component {
                   }}
                 >
                   <Image
-                    src={slide.imgSrc}
+                    data-src={slide.imgSrc}
                     alt={slide.title}
                     m={5}
                     height="auto"
