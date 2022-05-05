@@ -590,30 +590,32 @@ export default function gaMiddleware() {
               // });
               // groupedProducts = Object.values(groupedProducts);
               // console.log({ groupedProducts });
-              let cartList = products.map(x => {
-                const {
-                  // product_info: { product_id },
-                  sku,
-                  name,
-                  qty,
-                  price,
-                  brand,
-                  categories,
-                  details: {
-                    attributes: { color }
-                  }
-                } = x;
-                skus.push(sku);
-                return {
-                  id: sku,
-                  name,
-                  quantity: qty,
-                  variant: color,
-                  category: categories ? categories.split("|").join("/") : "",
-                  price,
-                  brand
-                };
-              });
+              let cartList = products
+                .filter(item => item.package === false)
+                .map(x => {
+                  const {
+                    // product_info: { product_id },
+                    sku,
+                    name,
+                    qty,
+                    price,
+                    brand,
+                    categories,
+                    details: {
+                      attributes: { color }
+                    }
+                  } = x;
+                  skus.push(sku);
+                  return {
+                    id: sku,
+                    name,
+                    quantity: qty,
+                    variant: color,
+                    category: categories ? categories.split("|").join("/") : "",
+                    price,
+                    brand
+                  };
+                });
               if (Object.keys(packages).length !== 0) {
                 const packageItems = Object.values(packages).map(item => {
                   return {
