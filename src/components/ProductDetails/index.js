@@ -861,7 +861,7 @@ class ProductDetails extends React.Component {
               `}
             </script>
             {/* <!-- Meta Pixel Code --> */}
-            <script>
+            {/* <script>
               {` !function(f,b,e,v,n,t,s)
                {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
                n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -873,7 +873,7 @@ class ProductDetails extends React.Component {
                fbq('init', '1024172491523922');
                fbq('track', 'ViewContent'); 
             `}
-            </script>
+            </script> */}
             {/* <!-- End Meta Pixel Code --> */}
           </Helmet>
           <Container>
