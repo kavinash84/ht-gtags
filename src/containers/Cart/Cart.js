@@ -34,6 +34,7 @@ import ResponsiveModal from "components/Modal";
 import Notifications from "components/Notifications";
 import Empty from "./Empty";
 import UnbxdRecommendedForYou from "../../components/Unbxd/unbxdRecommendedForYou";
+import { WEViewCart } from "../../redux/modules/cart";
 
 /**
  * Icons / Images
@@ -176,6 +177,11 @@ export default class CartContainer extends Component {
     // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ popUpTimeoutId });
     // this.checkForEmiEligibility(total);
+    const { dispatch } = this.context.store;
+    const { results } = this.props;
+    if (results && results.length) {
+      dispatch(WEViewCart());
+    }
   }
   componentWillReceiveProps(nextProps) {
     const {
@@ -401,15 +407,14 @@ export default class CartContainer extends Component {
                 />
               </Box>
             ) : null}
-            </ResponsiveModal>
+          </ResponsiveModal>
 
-            {/* {responsiveModalContent === "emiModal" ? ( */}
-              {/* <Box> */}
-                {/* {total > bflMinAmount ? <BflPopMessage /> : <HdfcPopMessage />} */}
-                {/* <HdfcPopMessage />
+          {/* {responsiveModalContent === "emiModal" ? ( */}
+          {/* <Box> */}
+          {/* {total > bflMinAmount ? <BflPopMessage /> : <HdfcPopMessage />} */}
+          {/* <HdfcPopMessage />
               </Box>
             ) : null} */}
-
 
           {/* Footer */}
           <Footer />

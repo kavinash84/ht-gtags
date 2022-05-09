@@ -36,6 +36,8 @@ const UPDATE_CART_SUMMARY_AFTER_COUPON =
 
 const CLEAR_CART = "cart/CLEAR_CART";
 
+const WE_VIEW_CART = "cart/WE_VIEW_CART";
+
 const TOGGLE_COUPON_LIST = "cart/TOGGLE_COUPON_LIST";
 const HIDE_COUPON_LIST = "cart/HIDE_COUPON_LIST";
 
@@ -609,6 +611,10 @@ export const resetCheck = () => ({
 
 export const clearCart = () => ({
   type: CLEAR_CART
+});
+
+export const WEViewCart = () => ({
+  type: WE_VIEW_CART
 });
 
 export const toggleCouponList = () => ({

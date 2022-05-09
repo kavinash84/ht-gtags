@@ -98,7 +98,8 @@ class Listing extends React.Component {
         path: pathname,
         category:
           (breadCrumbs && breadCrumbs.length && breadCrumbs[0].name) || "",
-        sub_category: breadCrumbs && breadCrumbs.length && breadCrumbs[1].name
+        sub_category:
+          (breadCrumbs && breadCrumbs.length && breadCrumbs[1].name) || ""
       })
     );
     if (window && breadCrumbs && pathname.indexOf("search") === -1) {

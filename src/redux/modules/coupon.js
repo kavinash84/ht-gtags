@@ -129,7 +129,7 @@ export const applyCoupon = (coupon, sessionId, pincode) => dispatch =>
         dispatch(updateCartSummary(response.summary));
         return response;
       } catch (error) {
-        triggerCouponFailToWE(coupon);
+        dispatch(triggerCouponFailToWE(coupon));
         throw error;
       }
     }
