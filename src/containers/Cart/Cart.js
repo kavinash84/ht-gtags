@@ -36,6 +36,7 @@ import ResponsiveModal from "components/Modal";
 import Notifications from "components/Notifications";
 import EmptyNew from "./EmptyNew";
 import UnbxdRecommendedForYou from "../../components/Unbxd/unbxdRecommendedForYou";
+import HappyToHelp from "../../components/Cart/HappyToHelp";
 
 /**
  * Icons / Images
@@ -111,7 +112,7 @@ const HdfcPopMessage = () => (
 @connect(
   ({
     cart,
-    cart: { cartChecked, summary, error, loading, loaded, initialLoading },
+    cart: { cartChecked, summary, error, loading, loaded, initialLoading, contact },
     webtochat: { dismiss, cartTimeout },
     paymentoptions
   }) => ({
@@ -119,6 +120,7 @@ const HdfcPopMessage = () => (
     outOfStockList: getStockOutProducts(cart),
     isCartChecked: cartChecked,
     summary,
+    contact,
     error,
     initialLoading,
     loading,
@@ -136,6 +138,7 @@ export default class CartContainer extends Component {
   static propTypes = {
     results: PropTypes.array,
     summary: PropTypes.object,
+    contact: PropTypes.object,
     isCartChecked: PropTypes.bool,
     outOfStockList: PropTypes.array,
     history: PropTypes.object.isRequired,
@@ -153,6 +156,7 @@ export default class CartContainer extends Component {
   static defaultProps = {
     results: [],
     summary: null,
+    contact: null,
     isCartChecked: false,
     outOfStockList: [],
     loading: false,
@@ -184,7 +188,8 @@ export default class CartContainer extends Component {
       isCartChecked,
       history,
       resetCheckKey,
-      summary: { total }
+      summary: { total },
+      contact
     } = this.props;
     const {
       summary: { total: nextPropsTotal }
@@ -265,6 +270,7 @@ export default class CartContainer extends Component {
     const {
       results,
       summary,
+      contact,
       summary: { total },
       loading,
       initialLoading,
@@ -349,6 +355,9 @@ export default class CartContainer extends Component {
                 />
               </EmptyNew>
             </Section>
+            <div style={{marginTop:'80px'}}>
+            <HappyToHelp data={contact} />
+            </div>
             </div>
           ) : null}
           {!loading && results && results.length !== 0 ? (
