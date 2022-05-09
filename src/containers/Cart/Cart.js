@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Helmet from "react-helmet";
 
+import CartBreadCumb from 'components/Cart/breadDumb';
+
 /**
  * Modules / Selectors
  */
@@ -32,13 +34,13 @@ import CartShimmer from "components/Cart/CartShimmer";
 import PinCode from "components/PinCode";
 import ResponsiveModal from "components/Modal";
 import Notifications from "components/Notifications";
-import Empty from "./Empty";
+import EmptyNew from "./EmptyNew";
 import UnbxdRecommendedForYou from "../../components/Unbxd/unbxdRecommendedForYou";
 
 /**
  * Icons / Images
  */
-const CartEmptyIcon = require("../../../static/emptyCart.png");
+const wheeling_cart = require("../../../static/cart/wheeling_cart.svg");
 const PincodeModalIcon = require("../../../static/map-placeholder.svg");
 const BajajFinance = require("../../../static/bajaj-finance.png");
 
@@ -323,13 +325,15 @@ export default class CartContainer extends Component {
               Please Wait...
             </div>
           ) : results && results.length === 0 ? (
+            <div>
+            <CartBreadCumb />
             <Section
               display="flex"
               padding="0.625rem"
               paddingTop="1.25rem"
               mb={0}
             >
-              <Empty
+              <EmptyNew
                 title="Your Cart is Empty!"
                 subTitle="Looks like you haven’t made your choice yet."
                 btnName="Shop Now"
@@ -338,13 +342,14 @@ export default class CartContainer extends Component {
                 p="10"
               >
                 <Image
-                  src={CartEmptyIcon}
+                  src={wheeling_cart}
                   width="initial"
                   m="auto"
                   alt="Sorry no results found"
                 />
-              </Empty>
+              </EmptyNew>
             </Section>
+            </div>
           ) : null}
           {!loading && results && results.length !== 0 ? (
             <Box className="asdfgh">
