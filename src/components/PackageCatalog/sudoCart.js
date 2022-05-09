@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { formatPackageItems } from "helpers/cartFormateres";
 import PropTypes from "prop-types";
 import SelectedItems from "./selectedProds";
 
@@ -8,6 +9,7 @@ const styles = require("./index.scss");
 @connect(({ pincode, lackpackages, cart }) => ({
   selectedPincode: pincode.selectedPincode,
   sudoCartid: lackpackages.sudoCart,
+  cartData: cart.data,
   sudoCartItems: cart.packageItems
 }))
 export default class SudoCart extends Component {
@@ -17,11 +19,20 @@ export default class SudoCart extends Component {
     store: PropTypes.object.isRequired
   };
 
+  getProductsLength = prodsArr => {
+    let count = 0;
+    prodsArr.map(item => {
+      count = count + item.qty;
+    });
+    return count;
+  };
+
   render() {
-    const { sudoCartid, sudoCartItems } = this.props;
-    const prodArr = sudoCartItems.filter(
-      item => item.fk_cart_rule === sudoCartid
+    const { sudoCartid, sudoCartItems, cartData } = this.props;
+    const foundItem = cartData.find(
+      item => item.product_info.packageId === sudoCartid
     );
+    const prodArr = foundItem ? formatPackageItems(foundItem.packageItems) : [];
     return (
       <div style={{ background: "#FFF8F4" }}>
         <div
@@ -35,7 +46,7 @@ export default class SudoCart extends Component {
             zIndex: 2
           }}
         >
-          {prodArr.length} Products Included
+          {this.getProductsLength(prodArr)} Products Included
         </div>
         <div
           style={{

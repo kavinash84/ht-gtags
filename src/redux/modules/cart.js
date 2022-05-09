@@ -2,8 +2,11 @@ import {
   ADDTOCARTCOMBINED as ADDTOCARTCOMBINED_API,
   ADDTOCART as ADDTOCART_API,
   SYNCCART as SYNCCART_API,
-  CHECKCART as CHECKCART_API
+  CHECKCART as CHECKCART_API,
+  ADD_GIFT_WRAP as ADD_GIFT_WRAP_API,
+  GET_CONTACT
 } from "helpers/apiUrls";
+import { formatToArray, formatCartSummary } from "helpers/cartFormateres";
 import { PINCODE } from "../../helpers/Constants";
 
 const LOAD_CART = "cart/LOAD_CART";
@@ -15,6 +18,7 @@ const ADD_TO_CART_FAIL = "cart/ADD_TO_CART_FAIL";
 const ADD_TO_CART_COMBINED = "cart/ADD_TO_CART_COMBINED";
 const ADD_TO_CART_COMBINED_SUCCESS = "cart/ADD_TO_CART_COMBINED_SUCCESS";
 const ADD_TO_CART_COMBINED_FAIL = "cart/ADD_TO_CART_COMBINED_FAIL";
+const UPDATE_CART_AFTERCOUPON = "cart/UPDATE_CART_AFTERCOUPON";
 const UPDATE_CART = "cart/UPDATE_CART";
 const UPDATE_CART_SUCCESS = "cart/UPDATE_CART_SUCCESS";
 const UPDATE_CART_FAIL = "cart/UPDATE_CART_FAIL";
@@ -30,9 +34,20 @@ const CHECKCART_FAIL = "cart/CHECKCART_FAIL";
 const RESET_CART_CHECK = "cart/RESET_CART_CHECK";
 const SET_CURRENT_KEY = "cart/SET_CURRENT_KEY";
 const SET_QUANTITY_FLAG = "cart/SET_QUANTITY_FLAG";
+const CHECK_GIFTWRAP = "cart/CHECK_GIFTWRAP";
+const CHECK_GIFTWRAP_SUCCESS = "cart/CHECK_GIFTWRAP_SUCCESS";
+const CHECK_GIFTWRAP_FAIL = "cart/CHECK_GIFTWRAP_FAIL";
+
+const LOAD_CART_GIFTWRAP = "cart/LOAD_CART_GIFTWRAP";
+const LOAD_CART_GIFTWRAP_SUCCESS = "cart/LOAD_CART_GIFTWRAP_SUCCESS";
+const LOAD_CART_GIFTWRAP_FAIL = "cart/LOAD_CART_GIFTWRAP_FAIL";
 
 const UPDATE_CART_SUMMARY_AFTER_COUPON =
   "cart/UPDATE_CART_SUMMARY_AFTER_COUPON";
+
+const LOAD_CART_CONTACT = "cart/LOAD_CART_CONTACT";
+const LOAD_CART_CONTACT_SUCCESS = "cart/LOAD_CART_CONTACT_SUCCESS";
+const LOAD_CART_CONTACT_FAIL = "cart/LOAD_CART_CONTACT_FAIL";
 
 const CLEAR_CART = "cart/CLEAR_CART";
 
@@ -41,114 +56,12 @@ const WE_VIEW_CART = "cart/WE_VIEW_CART";
 const TOGGLE_COUPON_LIST = "cart/TOGGLE_COUPON_LIST";
 const HIDE_COUPON_LIST = "cart/HIDE_COUPON_LIST";
 
-const formatCartData = data => {
-  if (Array.isArray(data)) {
-    let arr = data.map(item => {
-      if (item.product_info.packageId) {
-        return item;
-      } else {
-        return {
-          ...item,
-          product_info: {
-            ...item.product_info,
-            stock: item.stock,
-            image: item.image,
-            unit_price: parseInt(item.product_info.price),
-            net_price: parseInt(item.product_info.special_price)
-          }
-        };
-      }
-    });
-    return arr;
-  }
-  return [];
-};
-
-const checkForPackages = cartData => {
-  if (Array.isArray(cartData.packages)) {
-    return cartData.cart;
-  } else if (cartData.packages && Object.keys(cartData.packages).length === 0) {
-    return cartData.cart;
-  } else {
-    let arrayOfObj = Object.values(cartData.packages).map(item => {
-      return {
-        configurable_sku: "",
-        created_at: "",
-        fk_customer: null,
-        id_customer_cart: item.id_customer_cart,
-        is_bogo: 0,
-        is_display: 1,
-        product_info: {
-          assembly_service: false,
-          cart_rule_discount: item.cart_rule_discount,
-          cart_rule_display_names: [],
-          category_details: [],
-          color: "",
-          color_family: "",
-          coupon_discount: item.coupon_discount,
-          delivery_time_text: item.delivery_time_text,
-          demo_product: false,
-          discount: item.discount,
-          gift_wrap: 0,
-          giftimageset: "",
-          image: `${item.images[0]}.jpg`,
-          is_available: item.is_available,
-          is_deliverable: item.is_deliverable,
-          is_freebie: "",
-          max_display_stock: "",
-          name: item.packageName,
-          net_price: item.subTotal,
-          offer_message: "",
-          packageId: item.packageId,
-          product_id: item.packageId,
-          shipping_time_text: item.shipping_time_text,
-          special_price: item.specialPrice,
-          stock: item.stock,
-          unit_price: item.unit_price,
-          url: ""
-        },
-        qty: 1,
-        session_id: "",
-        shipping_charges: 0,
-        simple_sku: "",
-        simpleSkus: item.simpleSkus,
-        updated_at: ""
-      };
-    });
-    return [...cartData.cart, ...arrayOfObj];
-  }
-};
-
-const formatPackageItems = packageData => {
-  if (Array.isArray(packageData.packageItems)) {
-    return [];
-  } else if (
-    packageData.packageItems &&
-    Object.keys(packageData.packageItems).length === 0
-  ) {
-    return [];
-  } else {
-    let arrayOfObj = Object.values(packageData.packageItems);
-    return arrayOfObj;
-  }
-};
-
-const getCurrentPackage = data => {
-  if (Array.isArray(data.packages)) {
-    return "";
-  } else if (data.packages && Object.keys(data.packages).length === 0) {
-    return "";
-  } else {
-    let arrayOfObj = Object.keys(data.packages);
-    return arrayOfObj[0];
-  }
-};
-
 const initialState = {
   loading: false,
   initialLoading: false,
   data: [],
   summary: {},
+  contact: {},
   packageItems: [],
   currentPackage: "",
   demo_landing_page_url: "",
@@ -175,12 +88,18 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         data:
-          action.result && "cart" in action.result
-            ? checkForPackages(action.result)
+          action.result && "cartItems" in action.result
+            ? formatToArray({
+                ...action.result.cartItems,
+                ...action.result.packages
+              })
             : [],
         summary:
           action.result && "summary" in action.result
-            ? action.result.summary
+            ? formatCartSummary({
+                ...action.result.summary,
+                cartEmiDetail: action.result.cartEmiDetail
+              })
             : {},
         demo_landing_page_url:
           action.result && "demo_landing_page_url" in action.result
@@ -189,8 +108,6 @@ export default function reducer(state = initialState, action = {}) {
         loading: false,
         loaded: true,
         initialLoading: false,
-        currentPackage: getCurrentPackage(action.result),
-        packageItems: formatPackageItems(action.result),
         couponlistToggle: false
       };
     case LOAD_CART_FAIL:
@@ -198,6 +115,24 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: false,
         initialLoading: false,
+        loaded: false
+      };
+    case LOAD_CART_CONTACT:
+      return {
+        ...state,
+        loading: true
+      };
+    case LOAD_CART_CONTACT_SUCCESS:
+      return {
+        ...state,
+        contact: action.result,
+        loading: false,
+        loaded: true
+      };
+    case LOAD_CART_CONTACT_FAIL:
+      return {
+        ...state,
+        loading: false,
         loaded: false
       };
     case ADD_TO_CART:
@@ -213,23 +148,19 @@ export default function reducer(state = initialState, action = {}) {
         addedToCart: true,
         quantityChange: false,
         couponlistToggle: false,
-        // data:
-        //   action.result && "cart" in action.result
-        //     ? formatCartData(action.result.cart.cart)
-        //     : [],
         data:
-          action.result && "cart" in action.result
-            ? formatCartData(
-                checkForPackages({
-                  ...action.result.cart,
-                  packages: action.result.packages,
-                  packageItems: action.result.packageItems
-                })
-              )
+          action.result && "cartItems" in action.result
+            ? formatToArray({
+                ...action.result.cartItems,
+                ...action.result.packages
+              })
             : [],
         summary:
-          action.result && "cart" in action.result
-            ? action.result.cart.summary
+          action.result && "summary" in action.result
+            ? formatCartSummary({
+                ...action.result.summary,
+                cartEmiDetail: action.result.cartEmiDetail
+              })
             : {}
       };
     case ADD_TO_CART_FAIL:
@@ -252,12 +183,19 @@ export default function reducer(state = initialState, action = {}) {
         addedToCart: true,
         couponlistToggle: false,
         data:
-          action.result && "cart" in action.result
-            ? checkForPackages(action.result)
+          action.result && "cartItems" in action.result
+            ? formatToArray({
+                ...action.result.cartItems,
+                ...action.result.packages
+              })
             : [],
-        packageItems: formatPackageItems(action.result),
         summary:
-          action.result && "cart" in action.result ? action.result.summary : {}
+          action.result && "summary" in action.result
+            ? formatCartSummary({
+                ...action.result.summary,
+                cartEmiDetail: action.result.cartEmiDetail
+              })
+            : {}
       };
     case ADD_TO_CART_COMBINED_FAIL:
       return {
@@ -279,14 +217,19 @@ export default function reducer(state = initialState, action = {}) {
         cartUpdated: true,
         quantityChange: false,
         data:
-          action.result && "cart" in action.result
-            ? checkForPackages(action.result.cart)
+          action.result && "cartItems" in action.result
+            ? formatToArray({
+                ...action.result.cartItems,
+                ...action.result.packages
+              })
             : [],
         summary:
-          action.result && "cart" in action.result
-            ? action.result.cart.summary
+          action.result && "summary" in action.result
+            ? formatCartSummary({
+                ...action.result.summary,
+                cartEmiDetail: action.result.cartEmiDetail
+              })
             : {},
-        packageItems: formatPackageItems(action.result.cart),
         couponlistToggle: false
       };
     case UPDATE_CART_FAIL:
@@ -309,15 +252,19 @@ export default function reducer(state = initialState, action = {}) {
         cartUpdating: false,
         cartUpdated: true,
         data:
-          action.result && "cart" in action.result
-            ? checkForPackages(action.result.cart)
+          action.result && "cartItems" in action.result
+            ? formatToArray({
+                ...action.result.cartItems,
+                ...action.result.packages
+              })
             : [],
         summary:
-          action.result && "cart" in action.result
-            ? action.result.cart.summary
+          action.result && "summary" in action.result
+            ? formatCartSummary({
+                ...action.result.summary,
+                cartEmiDetail: action.result.cartEmiDetail
+              })
             : {},
-        packageItems: formatPackageItems(action.result.cart),
-        currentPackage: getCurrentPackage(action.result.cart),
         couponlistToggle: false
       };
     case REMOVE_FROM_CART_FAIL:
@@ -338,13 +285,18 @@ export default function reducer(state = initialState, action = {}) {
         cartSyncing: false,
         cartSynced: true,
         data:
-          action.result && "cart" in action.result
-            ? checkForPackages(action.result)
+          action.result && "cartItems" in action.result
+            ? formatToArray({
+                ...action.result.cartItems,
+                ...action.result.packages
+              })
             : [],
-        packageItems: formatPackageItems(action.result),
         summary:
           action.result && "summary" in action.result
-            ? action.result.summary
+            ? formatCartSummary({
+                ...action.result.summary,
+                cartEmiDetail: action.result.cartEmiDetail
+              })
             : {}
       };
     case SYNCING_CART_FAIL:
@@ -373,6 +325,35 @@ export default function reducer(state = initialState, action = {}) {
         checkingCart: false,
         cartChecked: false
       };
+    case CHECK_GIFTWRAP:
+      return {
+        ...state,
+        // loading: true
+      };
+    case CHECK_GIFTWRAP_SUCCESS:
+      return {
+        ...state,
+        data:
+          action.result && "cartItems" in action.result
+            ? formatToArray({
+                ...action.result.cartItems,
+                ...action.result.packages
+              })
+            : [],
+        summary:
+          action.result && "summary" in action.result
+            ? formatCartSummary({
+                ...action.result.summary,
+                cartEmiDetail: action.result.cartEmiDetail
+              })
+            : {}
+      };
+    case CHECK_GIFTWRAP_FAIL:
+      return {
+        ...state,
+        loading: false,
+        loaded: true
+      };
     case RESET_CART_CHECK:
       return {
         ...state,
@@ -381,7 +362,20 @@ export default function reducer(state = initialState, action = {}) {
     case UPDATE_CART_SUMMARY_AFTER_COUPON:
       return {
         ...state,
-        summary: action.summary
+        summary: formatCartSummary({
+          ...action.summary,
+          cartEmiDetail: action.cartEmiDetail
+        })
+      };
+    case UPDATE_CART_AFTERCOUPON:
+      return {
+        ...state,
+        data:
+          action.result && "cart" in action.result
+            ? checkForPackages(action.result.cart)
+            : [],
+        loading: false,
+        loaded: true
       };
     case SET_CURRENT_KEY:
       return {
@@ -419,21 +413,12 @@ const setCurrentKey = key => ({
   type: SET_CURRENT_KEY,
   payLoad: key
 });
-const setAppAuth = ({ client }) => async response => {
-  const { csrfToken, session } = response;
-  if (csrfToken && session) {
-    await client.setCSRFToken(csrfToken);
-    await client.setSessionId(session);
-  }
-};
+
 export const loadCart = (session, pincode) => ({
   types: [LOAD_CART, LOAD_CART_SUCCESS, LOAD_CART_FAIL],
   promise: async ({ client }) => {
     try {
-      const response = await client.get(
-        `${ADDTOCART_API}/${session}/${pincode}`
-      );
-      await setAppAuth({ client })(response);
+      const response = await client.get(`${ADDTOCART_API}?pincode=${pincode}`);
       return response;
     } catch (error) {
       throw error;
@@ -458,12 +443,10 @@ export const addToCart = (
         const postData = {
           configurable_sku: sku,
           simple_sku: simpleSku,
-          session_id: session,
           pincode,
           qty: quantity
         };
         const response = await client.post(ADDTOCART_API, postData);
-        // console.log('response check', response);
         return response;
       } catch (error) {
         throw error;
@@ -528,7 +511,6 @@ export const updateCart = (
         const postData = {
           configurable_sku: sku,
           simple_sku: simpleSku,
-          session_id: session,
           pincode,
           qty
         };
@@ -556,10 +538,13 @@ export const removeFromCart = (
     types: [REMOVE_FROM_CART, REMOVE_FROM_CART_SUCCESS, REMOVE_FROM_CART_FAIL],
     promise: async ({ client }) => {
       try {
-        console.log(cartId, "cart cat");
-        const response = await client.delete(`${ADDTOCART_API}/${pincode}`, {
-          data: cartId
-        });
+        const response = cartId.hasOwnProperty("packageId")
+          ? await client.delete(`${ADDTOCART_API}/delete-package`, {
+              data: cartId
+            })
+          : await client.delete(ADDTOCART_API, {
+              data: cartId
+            });
 
         return response;
       } catch (error) {
@@ -575,10 +560,9 @@ export const synCart = (sessionId, pincode = PINCODE) => ({
   types: [SYNCING_CART, SYNCING_CART_SUCCESS, SYNCING_CART_FAIL],
   promise: async ({ client }) => {
     try {
-      const response = await client.put(
-        `${SYNCCART_API}/${sessionId}/${pincode}`,
-        {}
-      );
+      const response = await client.put(SYNCCART_API, {
+        pincode: pincode
+      });
       return response;
     } catch (error) {
       throw error;
@@ -600,9 +584,28 @@ export const checkCart = sessionId => ({
   }
 });
 
+export const checkGiftWrap = value => ({
+  types: [CHECK_GIFTWRAP, CHECK_GIFTWRAP_SUCCESS, CHECK_GIFTWRAP_FAIL],
+  promise: async ({ client }) => {
+    try {
+      const response = await client.post(`${ADD_GIFT_WRAP_API}`, {
+        isGiftWrapRequired: value
+      });
+      return response;
+    } catch (error) {
+      throw error;
+    }
+  }
+});
+
 export const updateCartSummary = summary => ({
   type: UPDATE_CART_SUMMARY_AFTER_COUPON,
   summary
+});
+
+export const loadCartAfterCouponApplied = result => ({
+  type: UPDATE_CART_AFTERCOUPON,
+  result
 });
 
 export const resetCheck = () => ({
@@ -626,4 +629,9 @@ export const hideCouponList = () => ({
 export const setQuantityFlag = value => ({
   type: SET_QUANTITY_FLAG,
   value
+});
+
+export const getCartContactDetails = () => ({
+  types: [LOAD_CART_CONTACT, LOAD_CART_CONTACT_SUCCESS, LOAD_CART_CONTACT_FAIL],
+  promise: ({ client }) => client.get(GET_CONTACT)
 });

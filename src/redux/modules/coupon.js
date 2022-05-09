@@ -9,8 +9,6 @@ const APPLY_COUPON = "coupon/APPLY_COUPON";
 const APPLY_COUPON_SUCCESS = "coupon/APPLY_COUPON_SUCCESS";
 const APPLY_COUPON_FAIL = "coupon/APPLY_COUPON_FAIL";
 
-const APPLY_COUPON_FAIL_WE = "coupon/APPLY_COUPON_FAIL_WE";
-
 const REMOVE_COUPON = "coupon/REMOVE_COUPON";
 const REMOVE_COUPON_SUCCESS = "coupon/REMOVE_COUPON_SUCCESS";
 const REMOVE_COUPON_FAIL = "coupon/REMOVE_COUPON_FAIL";
@@ -124,7 +122,7 @@ export const applyCoupon = (coupon, sessionId, pincode) => dispatch =>
     types: [APPLY_COUPON, APPLY_COUPON_SUCCESS, APPLY_COUPON_FAIL],
     promise: async ({ client }) => {
       try {
-        const postData = { coupon, session_id: sessionId, pincode };
+        const postData = { coupon: coupon.toUpperCase() };
         const response = await client.post(COUPON_API, postData);
         dispatch(updateCartSummary(response.summary));
         return response;
@@ -140,7 +138,7 @@ export const removeCoupon = (coupon, sessionId, pincode) => dispatch =>
     types: [REMOVE_COUPON, REMOVE_COUPON_SUCCESS, REMOVE_COUPON_FAIL],
     promise: async ({ client }) => {
       try {
-        const postData = { coupon, session_id: sessionId, pincode };
+        const postData = { coupon };
         const response = await client.delete(COUPON_API, { data: postData });
         dispatch(updateCartSummary(response.summary));
         return response;
@@ -152,5 +150,5 @@ export const removeCoupon = (coupon, sessionId, pincode) => dispatch =>
 
 export const loadCoupons = (sessionId, pincode = "110004") => ({
   types: [LOAD_COUPONS, LOAD_COUPONS_SUCCESS, LOAD_COUPONS_FAIL],
-  promise: ({ client }) => client.get(`${COUPON_API}s/${sessionId}/${pincode}`)
+  promise: ({ client }) => client.get(`${COUPON_API}s`)
 });
