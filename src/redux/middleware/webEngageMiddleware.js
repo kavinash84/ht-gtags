@@ -5,9 +5,9 @@ export default function webEngageMiddleware() {
     if (__CLIENT__) {
       const { type } = action;
       if (window && window.webengage) {
-        // const {
-        //   location: { pathname }
-        // } = getState().router;
+        const {
+          location: { pathname }
+        } = getState().router;
         //   user login
         if (type === "login/LOGIN_SUCCESS") {
           const { result } = action;
@@ -194,6 +194,41 @@ export default function webEngageMiddleware() {
             MRP: price,
             OfferPrice: special_price
           });
+
+          // update wishList
+
+          const { data } = getState().wishlist;
+          if (Array.isArray(data)) {
+            const data2 = [...data, action.result];
+
+            window.webengage.track("Update Wishlist", {
+              category: data2.map(
+                item =>
+                  item.product_info.data.google_product_category ||
+                  item.product_info.data.category_names
+              ),
+              color: data2.map(item => item.product_info.data.color),
+              name: data2.map(item => item.product_info.data.name),
+              discountPercent: data2.map(item => item.product_info.saving),
+              sub_category: data2.map(
+                item => item.product_info.data.category_type
+              ),
+              deliveryText: data2.map(
+                item => item.wishlist_info.delivery_details[0].value || ""
+              ),
+              brand: data2.map(item => item.product_info.data.brand),
+              sku: data2.map(item => item.product_info.data.sku),
+              stockStatus: data2.map(item =>
+                item.product_info.soldout ? "Outofstock" : "Instock"
+              ),
+              currencyCode: "INR",
+              MRP: data2.map(item => item.product_info.data.price),
+              OfferPrice: data2.map(
+                item => item.product_info.data.special_price
+              ),
+              itemCount: data2.length
+            });
+          }
         }
 
         // remove from wishlist
@@ -241,6 +276,60 @@ export default function webEngageMiddleware() {
             MRP: price,
             OfferPrice: special_price
           });
+
+          // update wishList
+
+          const { data: data3 } = getState().wishlist;
+          if (Array.isArray(data3)) {
+            const data2 = data3.filter(
+              item => String(item.wishlist_info.id_customer_wishlist) !== id
+            );
+            if (data2.length) {
+              window.webengage.track("Update Wishlist", {
+                category: data2.map(
+                  item =>
+                    item.product_info.data.google_product_category ||
+                    item.product_info.data.category_names
+                ),
+                color: data2.map(item => item.product_info.data.color),
+                name: data2.map(item => item.product_info.data.name),
+                discountPercent: data2.map(item => item.product_info.saving),
+                sub_category: data2.map(
+                  item => item.product_info.data.category_type
+                ),
+                deliveryText: data2.map(
+                  item => item.wishlist_info.delivery_details[0].value || ""
+                ),
+                brand: data2.map(item => item.product_info.data.brand),
+                sku: data2.map(item => item.product_info.data.sku),
+                stockStatus: data2.map(item =>
+                  item.product_info.soldout ? "Outofstock" : "Instock"
+                ),
+                currencyCode: "INR",
+                MRP: data2.map(item => item.product_info.data.price),
+                OfferPrice: data2.map(
+                  item => item.product_info.data.special_price
+                ),
+                itemCount: data2.length
+              });
+            } else {
+              window.webengage.track("Update Wishlist", {
+                category: [],
+                color: [],
+                name: [],
+                discountPercent: [],
+                sub_category: [],
+                deliveryText: [],
+                brand: [],
+                sku: [],
+                stockStatus: [],
+                currencyCode: "",
+                MRP: [],
+                OfferPrice: [],
+                itemCount: 0
+              });
+            }
+          }
         }
 
         //   add to cart
@@ -368,6 +457,277 @@ export default function webEngageMiddleware() {
           window.webengage.track("Applay Coupon Fail", {
             couponName: action.payLoad
           });
+        }
+
+        //   checkout started
+        if (type === "cart/CHECKCART") {
+          const { data, summary } = getState().cart;
+          if (data && Array.isArray(data) && data.length) {
+            window.webengage.track("Checkout Started", {
+              SKUs: data.map(item => item.simple_sku) || [],
+              brands: data.map(item => item.product_info.brand) || [],
+              MRPs: data.map(item => item.product_info.unit_price) || [],
+              names: data.map(item => item.product_info.name) || [],
+              quantities: data.map(item => item.qty) || [],
+              orderAmount: summary.total,
+              total_priceItems: data.length
+            });
+          }
+        }
+
+        //   checkout complete
+        if (
+          type === "PUSH_TO_DATALAYER" &&
+          pathname &&
+          pathname === "/payment-success"
+        ) {
+          const { data } = getState().paymentstatus;
+          if (data && Array.isArray(data) && data.length) {
+            const {
+              cart_products: products = {},
+              net_order_amount,
+              mrp_total,
+              shipping_charges,
+              savings,
+              packages = {},
+              payment_method,
+              payment_method_type,
+              order_no,
+              coupon_code,
+              customer_type,
+              discount_coupon_value,
+              unbxd_data: unbxdData = {}
+            } = data;
+
+            if (products && products.length) {
+              let cartList = products
+                .filter(item => item.package === false)
+                .map(x => {
+                  const {
+                    sku,
+                    name,
+                    qty,
+                    price,
+                    brand,
+                    categories,
+                    details: {
+                      attributes: { color }
+                    }
+                  } = x;
+                  return {
+                    id: sku,
+                    name,
+                    quantity: qty,
+                    variant: color,
+                    category: categories ? categories.split("|").join("/") : "",
+                    price,
+                    brand
+                  };
+                });
+              if (Object.keys(packages).length !== 0) {
+                const packageItems = Object.values(packages).map(item => {
+                  return {
+                    id: item.package_id,
+                    name: item.package_name,
+                    quantity: 1,
+                    variant: "package",
+                    category: "package",
+                    price: item.package_amount,
+                    brand: "HomeTown"
+                  };
+                });
+                cartList = [...cartList, ...packageItems];
+              }
+
+              window.webengage.track("Payment Success", {
+                pageTitle: "Payment",
+                subtotal_price: mrp_total,
+                orderAmount: net_order_amount,
+                paymentMode: payment_method_type
+              });
+              window.webengage.track("Checkout Completed", {
+                SKUs: cartList.map(item => item.id) || [],
+                brands: cartList.map(item => item.brand) || [],
+                price: cartList.map(item => item.price) || [],
+                names: cartList.map(item => item.name) || [],
+                quantities: cartList.map(item => item.quantity) || [],
+                itemCount: cartList.length,
+                mrp: mrp_total,
+                orderAmount: net_order_amount,
+                promoCodeDiscount: discount_coupon_value,
+                currencyCode: "INR",
+                discount: savings,
+                category: cartList.map(item => item.category) || [],
+                orderid: order_no
+              });
+            }
+          }
+        }
+
+        //   payment failure
+        if (pathname && pathname === "/payment-failed") {
+          // const { data, summary } = getState().cart;
+          // if (data && Array.isArray(data) && data.length) {
+          window.webengage.track("Payment Failure", {
+            Reason: "Some thing went wrong"
+          });
+          // }
+        }
+
+        // update profile
+        if (type === "profile/UPDATE_PROFILE_SUCCESS") {
+          const {
+            result: { email, city }
+          } = action;
+          window.webengage.track("Update Profile", {
+            email: email,
+            address: city
+          });
+        }
+
+        // update shipping address
+        if (type === "myaddress/UPDATE_ADDRESS_SUCCESS") {
+          const {
+            result: { address1, address2, address3, city, country, state }
+          } = action;
+          window.webengage.track("Update Shipping Address", {
+            addressLine1: address1 || "",
+            addressLine2: address2 || "",
+            // addressLine3: address3 || "",
+            city: city || "",
+            country: country || "",
+            state: state || ""
+          });
+        }
+
+        // submit lead
+        if (type === "services/LOAD_SUCCESS") {
+          const {
+            result: { city, email, mobile, name, state }
+          } = action;
+          if (name && email && mobile && city && state) {
+            window.webengage.track("Submit Lead", {
+              name: name,
+              email: email,
+              phone: mobile,
+              city: city,
+              state: state
+            });
+          }
+
+          // Subscribe Newsletter
+          if (Object.keys(action.result).length <= 2) {
+            window.webengage.track("Subscribe Newsletter", {
+              email: email
+            });
+          }
+        }
+
+        // visit store
+        if (type === "loadStores/SET_SELECTED_STORE") {
+          const {
+            storeDetails: { city, store, event, category }
+          } = action;
+          if (store && city) {
+            window.webengage.track("Store Viewed", {
+              store: store,
+              city: city
+            });
+          }
+        }
+
+        // track order
+        if (type === "tracking/LOAD_SUCCESS") {
+          const {
+            result: { orderrNumber }
+          } = action;
+          window.webengage.track("Track Your order", {
+            order_id: orderrNumber
+          });
+        }
+
+        // contact us
+        if (type === "services/WE_CONTACTUS") {
+          const {
+            data: { email, name, mobile }
+          } = getState().profile;
+          if (email && name && mobile) {
+            window.webengage.track("Contact Us", {
+              email,
+              name,
+              mobile
+            });
+          }
+        }
+
+        // Banner clicked
+        if (type === "hompageCategories/WE_BANNER_IMPRESSION") {
+          const { payLoad } = action;
+          window.webengage.track("Banner Clicked", payLoad);
+        }
+
+        // add review
+        if (type === "reviews/ADD_REVIEW_SUCCESS") {
+          const { simpleSku, productDescription } = getState().productdetails;
+          if (
+            simpleSku &&
+            productDescription &&
+            Object.keys(productDescription).length
+          ) {
+            const {
+              attributes: { main_material },
+              meta: { category_details, brand, name, category_type }
+            } = productDescription;
+            const category =
+              category_details && category_details.length
+                ? category_details
+                    .filter(x => x !== null)
+                    .map(item => item.url_key)
+                    .join("/")
+                : "";
+            window.webengage.track("Add Review", {
+              ProductID: simpleSku,
+              ProductName: name,
+              ProductCategory: category || "",
+              ProductSubCategory: category_type || "",
+              Brand: brand,
+              ProductMainMaterial: main_material || ""
+              // Primary Material Subtype:"",
+            });
+          }
+        }
+
+        // load more reviews
+        if (type === "reviews/LOAD_REVIEW_LIST_SUCCESS") {
+          const { simpleSku, productDescription } = getState().productdetails;
+          const { pageNo } = getState().reviews;
+          if (
+            simpleSku &&
+            productDescription &&
+            Object.keys(productDescription).length &&
+            pageNo !== null
+          ) {
+            const {
+              attributes: { main_material },
+              meta: { category_details, brand, name, category_type }
+            } = productDescription;
+            const category =
+              category_details && category_details.length
+                ? category_details
+                    .filter(x => x !== null)
+                    .map(item => item.url_key)
+                    .join("/")
+                : "";
+            window.webengage.track("Load More Review", {
+              ProductID: simpleSku,
+              ProductName: name,
+              ProductCategory: category || "",
+              ProductSubCategory: category_type || "",
+              Brand: brand,
+              ProductMainMaterial: main_material || ""
+              // Primary Material Subtype:"",
+            });
+          }
         }
       }
     }

@@ -29,6 +29,7 @@ import Row from "hometown-components-dev/lib/RowHtV1";
 import Section from "hometown-components-dev/lib/SectionHtV1";
 import Text from "hometown-components-dev/lib/TextHtV1";
 import Ul from "hometown-components-dev/lib/UlHtV1";
+import { weContactUs } from "../../redux/modules/services";
 
 /**
  * Icons
@@ -79,6 +80,10 @@ class Footer extends React.Component {
     emailError: false,
     emailErrorMessage: "Please Enter a Valid Email",
     already: false
+  };
+
+  static contextTypes = {
+    store: PropTypes.object.isRequired
   };
 
   // componentDidMount() {
@@ -274,6 +279,10 @@ class Footer extends React.Component {
                       href="mailto:care@hometown.in"
                       rel="noreferrer noopener"
                       target="_blank"
+                      onClick={() => {
+                        const { dispatch } = this.context.store;
+                        dispatch(weContactUs());
+                      }}
                     >
                       <Text variant="footerLink" fontSize={16}>
                         <EmailIcon mr={10} />
