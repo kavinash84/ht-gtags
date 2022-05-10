@@ -45,47 +45,6 @@ export default function webEngageMiddleware() {
           window.webengage.user.logout();
         }
 
-        // //   add to cart
-        // if (type === "cart/ADD_TO_CART_SUCCESS") {
-        //   const {
-        //     result: { qty },
-        //     configId
-        //   } = action;
-        //   const [product] =
-        //     action.result &&
-        //     action.result.cart.cart.filter(
-        //       item => item.id_customer_cart === idcustomerCart
-        //     );
-        //   const {
-        //     name,
-        //     net_price: netprice,
-        //     color,
-        //     brand,
-        //     category_details: categoryDetails
-        //   } = product.product_info;
-        //   const category = categoryDetails ? categoryDetails.join("/") : null;
-        //   if (window && window.webengage) {
-        //     window.webengage.track("Added To Cart", {
-        //       category: category,
-        //       path: "",
-        //       color: color,
-        //       stockAvailable: "",
-        //       name: name,
-        //       discountPercent: "",
-        //       sub_category: "",
-        //       deliveryText: "",
-        //       width: "",
-        //       brand: brand,
-        //       sku: configId,
-        //       stockStatus: "",
-        //       images: [],
-        //       currencyCode: "INR",
-        //       MRP: "",
-        //       OfferPrice: ""
-        //     });
-        //   }
-        // }
-
         // view catagory
         if (type === "categoryPage/SET_CURRENT_CATEGORY") {
           window.webengage.track("Category View", {
@@ -357,7 +316,7 @@ export default function webEngageMiddleware() {
               // color: "",
               stockAvailable: stock,
               name: name,
-              discountPercent: discount_percent,
+              discountPercent: parseInt(discount_percent) || 0,
               // sub_category: "",
               deliveryText: delivery_date_text,
               // width: "",
@@ -366,7 +325,7 @@ export default function webEngageMiddleware() {
               stockStatus: !stock ? "Outofstock" : "Instock",
               images: [image_url],
               currencyCode: "INR",
-              MRP: max_retail_price,
+              MRP: parseInt(max_retail_price) || 0,
               SellingPrice: selling_price
             });
           }
