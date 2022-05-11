@@ -657,14 +657,12 @@ export default function webEngageMiddleware() {
         }
 
         // load more reviews
-        if (type === "reviews/LOAD_REVIEW_LIST_SUCCESS") {
+        if (type === "reviews/WE_LOAD_MORE_REVIEWS") {
           const { simpleSku, productDescription } = getState().productdetails;
-          const { pageNo } = getState().reviews;
           if (
             simpleSku &&
             productDescription &&
-            Object.keys(productDescription).length &&
-            pageNo !== null
+            Object.keys(productDescription).length
           ) {
             const {
               attributes: { main_material },

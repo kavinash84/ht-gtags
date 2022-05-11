@@ -104,6 +104,7 @@ import Specs from "./Specs/specs";
 import BaughtTogether from "./baughtTogether";
 import MoreOption from "./moreOption";
 import { weProductViewTrack } from "../../redux/modules/productdetails";
+import { weLoadMoreReviews } from "../../redux/modules/reviews";
 
 /**
  * Images / Icons
@@ -502,6 +503,8 @@ class ProductDetails extends React.Component {
   };
   showMoreReviews = () => {
     const { showReviews } = this.state;
+    const { dispatch } = this.context.store;
+    dispatch(weLoadMoreReviews());
     this.setState({ showReviews: showReviews + 4 });
   };
   handleSelectQty = qty => {
