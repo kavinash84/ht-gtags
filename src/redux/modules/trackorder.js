@@ -1,16 +1,16 @@
-import { ORDERS_STATUS_API } from 'helpers/apiUrls';
+import { ORDERS_STATUS_API } from "helpers/apiUrls";
 
-const LOAD = 'trackorder/LOAD';
-const LOAD_SUCCESS = 'trackorder/LOAD_SUCCESS';
-const LOAD_FAIL = 'trackorder/LOAD_FAIL';
-const CLOSE_STATUS_MODAL = 'tracking/CLOSE_MODAL';
+const LOAD = "trackorder/LOAD";
+const LOAD_SUCCESS = "trackorder/LOAD_SUCCESS";
+const LOAD_FAIL = "trackorder/LOAD_FAIL";
+const CLOSE_STATUS_MODAL = "tracking/CLOSE_MODAL";
 
 const initialState = {
   loading: false,
   loaded: false,
   data: {},
   error: false,
-  errorMessage: ''
+  errorMessage: ""
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -44,7 +44,7 @@ export default function reducer(state = initialState, action = {}) {
         loaded: false,
         data: {},
         error: false,
-        errorMessage: ''
+        errorMessage: ""
       };
     default:
       return state;
@@ -56,5 +56,15 @@ export const closeStatusModal = () => ({
 });
 export const trackOrder = orderid => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-  promise: ({ client }) => client.get(`${ORDERS_STATUS_API}?order=${orderid}`)
+  promise: async ({ client }) => {
+    try {
+      /* eslint-disable max-len */
+      const response = await client.get(
+        `${ORDERS_STATUS_API}?order=${orderid}`
+      );
+      return { ...response, orderrNumber: orderid };
+    } catch (error) {
+      throw error;
+    }
+  }
 });

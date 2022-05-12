@@ -436,7 +436,7 @@ export default function webEngageMiddleware() {
 
         //   checkout complete
         if (
-          type === "PUSH_TO_DATALAYER" &&
+          // type === "PUSH_TO_DATALAYER" &&
           pathname &&
           pathname === "/payment-success"
         ) {
@@ -596,7 +596,10 @@ export default function webEngageMiddleware() {
         }
 
         // track order
-        if (type === "tracking/LOAD_SUCCESS") {
+        if (
+          type === "tracking/LOAD_SUCCESS" ||
+          type === "trackorder/LOAD_SUCCESS"
+        ) {
           const {
             result: { orderrNumber }
           } = action;
