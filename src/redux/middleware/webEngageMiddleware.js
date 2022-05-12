@@ -122,7 +122,7 @@ export default function webEngageMiddleware() {
                 images,
                 data: {
                   color,
-                  google_product_category,
+                  // google_product_category,
                   category_names,
                   category_type,
                   sku,
@@ -136,7 +136,7 @@ export default function webEngageMiddleware() {
             }
           } = action;
           window.webengage.track("Add To Wishlist", {
-            category: google_product_category || category_names,
+            category: category_names,
             // path: "",
             color: color,
             // stockAvailable: "",
@@ -163,7 +163,7 @@ export default function webEngageMiddleware() {
             window.webengage.track("Update Wishlist", {
               category: data2.map(
                 item =>
-                  item.product_info.data.google_product_category ||
+                  // item.product_info.data.google_product_category ||
                   item.product_info.data.category_names
               ),
               color: data2.map(item => item.product_info.data.color),
@@ -203,7 +203,7 @@ export default function webEngageMiddleware() {
               images,
               data: {
                 color,
-                google_product_category,
+                // google_product_category,
                 category_names,
                 category_type,
                 sku,
@@ -218,7 +218,7 @@ export default function webEngageMiddleware() {
             item => String(item.wishlist_info.id_customer_wishlist) === id
           );
           window.webengage.track("Remove From Wishlist", {
-            category: google_product_category || category_names,
+            category: category_names,
             // path: "",
             color: color,
             // stockAvailable: "",
@@ -247,7 +247,7 @@ export default function webEngageMiddleware() {
               window.webengage.track("Update Wishlist", {
                 category: data2.map(
                   item =>
-                    item.product_info.data.google_product_category ||
+                    // item.product_info.data.google_product_category ||
                     item.product_info.data.category_names
                 ),
                 color: data2.map(item => item.product_info.data.color),
