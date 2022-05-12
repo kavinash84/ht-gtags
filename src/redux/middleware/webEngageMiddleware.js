@@ -436,7 +436,7 @@ export default function webEngageMiddleware() {
 
         //   checkout complete
         if (
-          // type === "PUSH_TO_DATALAYER" &&
+          type === "PUSH_TO_DATALAYER" &&
           pathname &&
           pathname === "/payment-success"
         ) {
