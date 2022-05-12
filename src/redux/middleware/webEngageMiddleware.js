@@ -400,7 +400,7 @@ export default function webEngageMiddleware() {
               total
             }
           } = action.result;
-          window.webengage.track("Applay Coupon Success", {
+          window.webengage.track("Apply Coupon Success", {
             couponName: couponCode,
             success: true,
             orderAmount: itemsTotal,
@@ -411,9 +411,9 @@ export default function webEngageMiddleware() {
           });
         }
 
-        // applay coupon failed
+        // Apply coupon failed
         if (type === "coupon/APPLY_COUPON_FAIL_WE") {
-          window.webengage.track("Applay Coupon Fail", {
+          window.webengage.track("Apply Coupon Fail", {
             couponName: action.payLoad
           });
         }
@@ -524,7 +524,7 @@ export default function webEngageMiddleware() {
         }
 
         //   payment failure
-        if (pathname && pathname === "/payment-failed") {
+        if (type === "paymentstatus/WE_PAYMENT_FAILURE") {
           // const { data, summary } = getState().cart;
           // if (data && Array.isArray(data) && data.length) {
           window.webengage.track("Payment Failure", {
@@ -647,7 +647,7 @@ export default function webEngageMiddleware() {
                     .map(item => item.url_key)
                     .join("/")
                 : "";
-            window.webengage.track("Add Review", {
+            window.webengage.track("Write Review", {
               ProductID: simpleSku,
               ProductName: name,
               ProductCategory: category || "",
