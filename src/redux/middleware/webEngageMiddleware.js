@@ -441,7 +441,7 @@ export default function webEngageMiddleware() {
           pathname === "/payment-success"
         ) {
           const { data } = getState().paymentstatus;
-          if (data && Array.isArray(data) && data.length) {
+          if (data && data !== null) {
             const {
               cart_products: products = {},
               net_order_amount,
