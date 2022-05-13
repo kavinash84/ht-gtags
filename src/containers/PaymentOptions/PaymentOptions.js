@@ -15,6 +15,7 @@ import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
  */
 import PaymentOptions from 'components/Checkout/PaymentOptions';
 import HeaderSecondary from 'components/HeaderSecondary';
+import CheckoutBreadCumb from 'components/Checkout/breadDumb';
 
 /**
  * modules / selectors / helpers
@@ -47,7 +48,8 @@ export default class PaymentOptionsContainer extends Component {
         <Helmet title="Delivery Address" />
         <Body>
           {/* HeaderSecondary */}
-          <HeaderSecondary shippingStep="active" paymentStep="active" />
+          {/* <HeaderSecondary shippingStep="active" paymentStep="active" />/ */}
+          <CheckoutBreadCumb />
           <PaymentOptions data={availableOptions} />
         </Body>
       </Wrapper>
