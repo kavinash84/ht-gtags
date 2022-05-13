@@ -114,6 +114,7 @@ export default function webEngageMiddleware() {
 
         // add to wishlist
         if (type === "wishList/ADD_TO_WISHLIST_SUCCESS") {
+          console.log(action.result);
           const {
             result: {
               product_info: {
@@ -122,7 +123,7 @@ export default function webEngageMiddleware() {
                 images,
                 data: {
                   color,
-                  // google_product_category,
+                  google_product_category,
                   category_names,
                   category_type,
                   sku,
@@ -136,7 +137,7 @@ export default function webEngageMiddleware() {
             }
           } = action;
           window.webengage.track("Add To Wishlist", {
-            category: category_names,
+            category: google_product_category || category_names,
             // path: "",
             color: color,
             // stockAvailable: "",
@@ -161,30 +162,79 @@ export default function webEngageMiddleware() {
             const data2 = [...data, action.result];
 
             window.webengage.track("Update Wishlist", {
-              category: data2.map(
-                item =>
-                  // item.product_info.data.google_product_category ||
-                  item.product_info.data.category_names
-              ),
-              color: data2.map(item => item.product_info.data.color),
-              name: data2.map(item => item.product_info.data.name),
-              discountPercent: data2.map(item => item.product_info.saving),
-              sub_category: data2.map(
-                item => item.product_info.data.category_type
-              ),
+              category: data2.map(item => {
+                if (item.product_info.soldout) {
+                  return item.product_info.category_type;
+                } else {
+                  return (
+                    item.product_info.data.google_product_category ||
+                    item.product_info.data.category_names
+                  );
+                }
+              }),
+              color: data2.map(item => {
+                if (item.product_info.soldout) {
+                  return item.product_info.color;
+                } else {
+                  return item.product_info.data.color;
+                }
+              }),
+              name: data2.map(item => {
+                if (item.product_info.soldout) {
+                  return item.product_info.name;
+                } else {
+                  return item.product_info.data.name;
+                }
+              }),
+              discountPercent: data2.map(item => {
+                if (item.product_info.soldout) {
+                  return item.product_info.discount_percent;
+                } else {
+                  return item.product_info.saving;
+                }
+              }),
+              sub_category: data2.map(item => {
+                if (item.product_info.soldout) {
+                  return "";
+                } else {
+                  return item.product_info.data.category_type;
+                }
+              }),
               deliveryText: data2.map(
                 item => item.wishlist_info.delivery_details[0].value || ""
               ),
-              brand: data2.map(item => item.product_info.data.brand),
-              sku: data2.map(item => item.product_info.data.sku),
+              brand: data2.map(item => {
+                if (item.product_info.soldout) {
+                  return "HomeTown";
+                } else {
+                  return item.product_info.data.brand;
+                }
+              }),
+              sku: data2.map(item => {
+                if (item.product_info.soldout) {
+                  return item.wishlist_info.configurable_sku;
+                } else {
+                  return item.product_info.data.sku;
+                }
+              }),
               stockStatus: data2.map(item =>
                 item.product_info.soldout ? "Outofstock" : "Instock"
               ),
               currencyCode: "INR",
-              MRP: data2.map(item => item.product_info.data.price),
-              OfferPrice: data2.map(
-                item => item.product_info.data.special_price
-              ),
+              MRP: data2.map(item => {
+                if (item.product_info.soldout) {
+                  return item.product_info.price;
+                } else {
+                  return item.product_info.data.price;
+                }
+              }),
+              OfferPrice: data2.map(item => {
+                if (item.product_info.soldout) {
+                  return item.product_info.special_price;
+                } else {
+                  return item.product_info.data.special_price;
+                }
+              }),
               itemCount: data2.length
             });
           }
@@ -196,45 +246,73 @@ export default function webEngageMiddleware() {
             result: { id }
           } = action;
           const { data } = getState().wishlist;
-          const {
-            product_info: {
-              saving,
-              soldout,
-              images,
-              data: {
-                color,
-                // google_product_category,
-                category_names,
-                category_type,
-                sku,
-                special_price,
-                brand,
-                name,
-                price
-              }
-            },
-            wishlist_info: { delivery_details }
-          } = data.find(
-            item => String(item.wishlist_info.id_customer_wishlist) === id
+
+          const product = data
+            .filter(item => item.product_info.soldout === false)
+            .find(
+              item => String(item.wishlist_info.id_customer_wishlist) === id
+            );
+          const foundOutofStockProduct =
+            data
+              .filter(item => item.product_info.soldout === true)
+              .find(
+                item => String(item.wishlist_info.id_customer_wishlist) === id
+              ) || "";
+          console.log(
+            data.filter(item => item.product_info.soldout === true),
+            foundOutofStockProduct
           );
-          window.webengage.track("Remove From Wishlist", {
-            category: category_names,
-            // path: "",
-            color: color,
-            // stockAvailable: "",
-            name: name,
-            discountPercent: saving,
-            sub_category: category_type,
-            deliveryText: delivery_details[0].value || "",
-            // width: "",
-            brand: brand,
-            sku: sku,
-            stockStatus: soldout ? "Outofstock" : "Instock",
-            images: images.map(item => item.url) || [],
-            currencyCode: "INR",
-            MRP: price,
-            OfferPrice: special_price
-          });
+          if (foundOutofStockProduct) {
+            window.webengage.track("Remove From Wishlist", {
+              category: foundOutofStockProduct.product_info.category_type || "",
+              // path: "",
+              color: foundOutofStockProduct.product_info.color || "",
+              // stockAvailable: "",
+              name: foundOutofStockProduct.product_info.name || "",
+              discountPercent:
+                foundOutofStockProduct.product_info.discount_percent || "",
+              sub_category: "",
+              deliveryText:
+                foundOutofStockProduct.wishlist_info.delivery_details[0]
+                  .value || "",
+              // width: "",
+              brand: "HomeTown",
+              sku: foundOutofStockProduct.wishlist_info.configurable_sku || "",
+              stockStatus: foundOutofStockProduct.product_info.soldout
+                ? "Outofstock"
+                : "Instock",
+              images: foundOutofStockProduct.product_info.image || "",
+              currencyCode: "INR",
+              MRP: foundOutofStockProduct.product_info.price || "",
+              OfferPrice:
+                foundOutofStockProduct.product_info.special_price || ""
+            });
+          } else {
+            window.webengage.track("Remove From Wishlist", {
+              category:
+                product.product_info.data.google_product_category ||
+                product.product_info.data.category_names ||
+                "",
+              // path: "",
+              color: product.product_info.data.color || "",
+              // stockAvailable: "",
+              name: product.product_info.data.name || "",
+              discountPercent: product.product_info.saving || "",
+              sub_category: product.product_info.data.category_type || "",
+              deliveryText:
+                product.wishlist_info.delivery_details[0].value || "",
+              // width: "",
+              brand: product.product_info.data.brand || "",
+              sku: product.product_info.data.sku,
+              stockStatus: product.product_info.soldout
+                ? "Outofstock"
+                : "Instock",
+              images: product.product_info.images.map(item => item.url) || [],
+              currencyCode: "INR",
+              MRP: product.product_info.data.price,
+              OfferPrice: product.product_info.data.special_price || ""
+            });
+          }
 
           // update wishList
 
@@ -245,30 +323,79 @@ export default function webEngageMiddleware() {
             );
             if (data2.length) {
               window.webengage.track("Update Wishlist", {
-                category: data2.map(
-                  item =>
-                    // item.product_info.data.google_product_category ||
-                    item.product_info.data.category_names
-                ),
-                color: data2.map(item => item.product_info.data.color),
-                name: data2.map(item => item.product_info.data.name),
-                discountPercent: data2.map(item => item.product_info.saving),
-                sub_category: data2.map(
-                  item => item.product_info.data.category_type
-                ),
+                category: data2.map(item => {
+                  if (item.product_info.soldout) {
+                    return item.product_info.category_type;
+                  } else {
+                    return (
+                      item.product_info.data.google_product_category ||
+                      item.product_info.data.category_names
+                    );
+                  }
+                }),
+                color: data2.map(item => {
+                  if (item.product_info.soldout) {
+                    return item.product_info.color;
+                  } else {
+                    return item.product_info.data.color;
+                  }
+                }),
+                name: data2.map(item => {
+                  if (item.product_info.soldout) {
+                    return item.product_info.name;
+                  } else {
+                    return item.product_info.data.name;
+                  }
+                }),
+                discountPercent: data2.map(item => {
+                  if (item.product_info.soldout) {
+                    return item.product_info.discount_percent;
+                  } else {
+                    return item.product_info.saving;
+                  }
+                }),
+                sub_category: data2.map(item => {
+                  if (item.product_info.soldout) {
+                    return "";
+                  } else {
+                    return item.product_info.data.category_type;
+                  }
+                }),
                 deliveryText: data2.map(
                   item => item.wishlist_info.delivery_details[0].value || ""
                 ),
-                brand: data2.map(item => item.product_info.data.brand),
-                sku: data2.map(item => item.product_info.data.sku),
+                brand: data2.map(item => {
+                  if (item.product_info.soldout) {
+                    return "HomeTown";
+                  } else {
+                    return item.product_info.data.brand;
+                  }
+                }),
+                sku: data2.map(item => {
+                  if (item.product_info.soldout) {
+                    return item.wishlist_info.configurable_sku;
+                  } else {
+                    return item.product_info.data.sku;
+                  }
+                }),
                 stockStatus: data2.map(item =>
                   item.product_info.soldout ? "Outofstock" : "Instock"
                 ),
                 currencyCode: "INR",
-                MRP: data2.map(item => item.product_info.data.price),
-                OfferPrice: data2.map(
-                  item => item.product_info.data.special_price
-                ),
+                MRP: data2.map(item => {
+                  if (item.product_info.soldout) {
+                    return item.product_info.price;
+                  } else {
+                    return item.product_info.data.price;
+                  }
+                }),
+                OfferPrice: data2.map(item => {
+                  if (item.product_info.soldout) {
+                    return item.product_info.special_price;
+                  } else {
+                    return item.product_info.data.special_price;
+                  }
+                }),
                 itemCount: data2.length
               });
             } else {

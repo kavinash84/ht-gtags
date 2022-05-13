@@ -4,6 +4,8 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Helmet from "react-helmet";
 
+import CartBreadCumb from "components/Cart/breadDumb";
+
 /**
  * Modules / Selectors
  */
@@ -32,14 +34,14 @@ import CartShimmer from "components/Cart/CartShimmer";
 import PinCode from "components/PinCode";
 import ResponsiveModal from "components/Modal";
 import Notifications from "components/Notifications";
-import Empty from "./Empty";
+import EmptyNew from "./EmptyNew";
 import UnbxdRecommendedForYou from "../../components/Unbxd/unbxdRecommendedForYou";
 import { WEViewCart } from "../../redux/modules/cart";
 
 /**
  * Icons / Images
  */
-const CartEmptyIcon = require("../../../static/emptyCart.png");
+const wheeling_cart = require("../../../static/cart/wheeling_cart.svg");
 const PincodeModalIcon = require("../../../static/map-placeholder.svg");
 const BajajFinance = require("../../../static/bajaj-finance.png");
 
@@ -110,7 +112,15 @@ const HdfcPopMessage = () => (
 @connect(
   ({
     cart,
-    cart: { cartChecked, summary, error, loading, loaded, initialLoading },
+    cart: {
+      cartChecked,
+      summary,
+      error,
+      loading,
+      loaded,
+      initialLoading,
+      contact
+    },
     webtochat: { dismiss, cartTimeout },
     paymentoptions
   }) => ({
@@ -118,6 +128,7 @@ const HdfcPopMessage = () => (
     outOfStockList: getStockOutProducts(cart),
     isCartChecked: cartChecked,
     summary,
+    contact,
     error,
     initialLoading,
     loading,
@@ -135,6 +146,7 @@ export default class CartContainer extends Component {
   static propTypes = {
     results: PropTypes.array,
     summary: PropTypes.object,
+    contact: PropTypes.object,
     isCartChecked: PropTypes.bool,
     outOfStockList: PropTypes.array,
     history: PropTypes.object.isRequired,
@@ -152,6 +164,7 @@ export default class CartContainer extends Component {
   static defaultProps = {
     results: [],
     summary: null,
+    contact: null,
     isCartChecked: false,
     outOfStockList: [],
     loading: false,
@@ -188,7 +201,8 @@ export default class CartContainer extends Component {
       isCartChecked,
       history,
       resetCheckKey,
-      summary: { total }
+      summary: { total },
+      contact
     } = this.props;
     const {
       summary: { total: nextPropsTotal }
@@ -269,6 +283,7 @@ export default class CartContainer extends Component {
     const {
       results,
       summary,
+      contact,
       summary: { total },
       loading,
       initialLoading,
@@ -329,28 +344,34 @@ export default class CartContainer extends Component {
               Please Wait...
             </div>
           ) : results && results.length === 0 ? (
-            <Section
-              display="flex"
-              padding="0.625rem"
-              paddingTop="1.25rem"
-              mb={0}
-            >
-              <Empty
-                title="Your Cart is Empty!"
-                subTitle="Looks like you haven’t made your choice yet."
-                btnName="Shop Now"
-                url="/"
-                subTitleWidth="43%"
-                p="10"
+            <div>
+              <CartBreadCumb />
+              <Section
+                display="flex"
+                padding="0.625rem"
+                paddingTop="1.25rem"
+                mb={0}
               >
-                <Image
-                  src={CartEmptyIcon}
-                  width="initial"
-                  m="auto"
-                  alt="Sorry no results found"
-                />
-              </Empty>
-            </Section>
+                <EmptyNew
+                  title="Your Cart is Empty!"
+                  subTitle="Looks like you haven’t made your choice yet."
+                  btnName="Shop Now"
+                  url="/"
+                  subTitleWidth="43%"
+                  p="10"
+                >
+                  <Image
+                    src={wheeling_cart}
+                    width="initial"
+                    m="auto"
+                    alt="Sorry no results found"
+                  />
+                </EmptyNew>
+              </Section>
+              <div style={{ marginTop: "80px" }}>
+                <HappyToHelp data={contact} />
+              </div>
+            </div>
           ) : null}
           {!loading && results && results.length !== 0 ? (
             <Box className="asdfgh">
