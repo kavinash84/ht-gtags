@@ -735,26 +735,39 @@ export default function webEngageMiddleware() {
         // update profile
         if (type === "profile/UPDATE_PROFILE_SUCCESS") {
           const {
-            result: { email, city }
+            result: { dob, contact_number, full_name }
           } = action;
-          window.webengage.track("Update Profile", {
-            email: email,
-            address: city
-          });
+          // window.webengage.track("Update Profile", {
+          //   email: email,
+          //   address: city
+          // });
+          window.webengage.user.setAttribute(
+            "we_birth_date",
+            moment(dob).format("YYYY-MM-DD")
+          );
+          window.webengage.user.setAttribute("we_phone", contact_number);
+          window.webengage.user.setAttribute("we_first_name", full_name);
         }
 
         // update shipping address
         if (type === "myaddress/UPDATE_ADDRESS_SUCCESS") {
           const {
-            result: { address1, address2, address3, city, country, state }
+            result: { address1, address2, pincode, city, country, state }
           } = action;
-          window.webengage.track("Update Shipping Address", {
-            addressLine1: address1 || "",
-            addressLine2: address2 || "",
-            // addressLine3: address3 || "",
-            city: city || "",
-            country: country || "",
-            state: state || ""
+          // window.webengage.track("Update Shipping Address", {
+          //   addressLine1: address1 || "",
+          //   addressLine2: address2 || "",
+          //   // addressLine3: address3 || "",
+          //   city: city || "",
+          //   country: country || "",
+          //   state: state || ""
+          // });
+          webengage.user.setAttribute("Address", {
+            address1: address1,
+            address2: address2,
+            City: city,
+            State: state,
+            PIN: pincode
           });
         }
 
