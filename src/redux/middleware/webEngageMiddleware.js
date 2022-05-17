@@ -741,9 +741,14 @@ export default function webEngageMiddleware() {
           //   email: email,
           //   address: city
           // });
+          console.log(
+            moment(dob, "DD-MM-YYYY").format("YYYY-MM-DD"),
+            dob,
+            "datee"
+          );
           window.webengage.user.setAttribute(
             "we_birth_date",
-            moment(dob).format("YYYY-MM-DD")
+            moment(dob, "DD-MM-YYYY").format("YYYY-MM-DD")
           );
           window.webengage.user.setAttribute("we_phone", contact_number);
           window.webengage.user.setAttribute("we_first_name", full_name);
