@@ -4,19 +4,21 @@ const environment = {
   development: {
     isProduction: false,
     assetsPath: `http://${process.env.HOST || "localhost"}:${+process.env.PORT +
-      1 || 3001}/dist/`,
-    webEngageLicenceKey: "in~~15ba205b0"
+      1 || 3001}/dist/`
   },
   production: {
     isProduction: true,
-    assetsPath: `/dist/${ver}`,
-    webEngageLicenceKey: ""
+    assetsPath: `/dist/${ver}`
   }
 }[process.env.NODE_ENV || "development"];
 
 module.exports = Object.assign(
   {
     host: process.env.HOST || "localhost",
+    webEngageLicenceKey:
+      process.env.HOST.includes("beta") || process.env.HOST.includes("stage")
+        ? "in~~15ba205b0"
+        : "",
     port: process.env.PORT,
     apiHost: process.env.APIHOST || "localhost",
     apiPort: process.env.APIPORT,
