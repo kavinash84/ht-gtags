@@ -15,10 +15,6 @@ const environment = {
 module.exports = Object.assign(
   {
     host: process.env.HOST || "localhost",
-    webEngageLicenceKey:
-      process.env.HOST.includes("beta") || process.env.HOST.includes("stage")
-        ? "in~~15ba205b0"
-        : "",
     port: process.env.PORT,
     apiHost: process.env.APIHOST || "localhost",
     apiPort: process.env.APIPORT,
