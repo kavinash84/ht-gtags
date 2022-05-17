@@ -16,11 +16,14 @@ const LOAD_EXCHANGE_OFFER = "staticPage/LOAD_EXCHANGE_OFFER";
 const LOAD_EXCHANGE_OFFER_SUCCESS = "staticPage/LOAD_EXCHANGE_OFFER_SUCCESS";
 const LOAD_EXCHANGE_OFFER_FAIL = "staticPage/LOAD_EXCHANGE_OFFER_FAIL";
 
+const EXCHANGE_OFFER_SUCCESS = "staticPage/EXCHANGE_OFFER_SUCCESS";
+
 const initialState = {
   loaded: false,
   data: [],
   warranty: "",
   exchangeOffer: "",
+  exchangeOfferCoupon: "",
   warrantyCat: ""
 };
 
@@ -102,10 +105,22 @@ export default function reducer(state = initialState, action = {}) {
         loaded: false,
         error: action.error
       };
+    case EXCHANGE_OFFER_SUCCESS:
+      return {
+        ...state,
+        loading: false,
+        loaded: true,
+        exchangeOfferCoupon: action.result
+      };
     default:
       return state;
   }
 }
+
+export const setExchangeCoupon = result => ({
+  type: EXCHANGE_OFFER_SUCCESS,
+  result
+});
 
 export const loadDesignBuildData = () => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
