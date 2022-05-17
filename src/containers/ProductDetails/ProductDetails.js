@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+import Helmet from "react-helmet";
 
 /**
  * Components
@@ -21,6 +22,11 @@ import ProductNotFound from './ProductNotFound';
   ...productdetails
 }))
 export default class ProductDetails extends Component {
+
+  state = { showScript: false };
+  componentDidMount() {
+    this.setState({ showScript: true });
+  }
   render() {
     // console.log(this.props);
     const {
@@ -29,6 +35,25 @@ export default class ProductDetails extends Component {
     return (
       <Wrapper>
         <Body>
+        <Helmet>
+            {/* <!-- Meta Pixel Code --> */}
+            {this.state.showScript && (
+              <script>
+                {` !function(f,b,e,v,n,t,s)
+               {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+               n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+               if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+               n.queue=[];t=b.createElement(e);t.async=!0;
+               t.src=v;s=b.getElementsByTagName(e)[0];
+               s.parentNode.insertBefore(t,s)}(window, document,'script',
+               'https://connect.facebook.net/en_US/fbevents.js');
+               fbq('init', '1024172491523922');
+               fbq('track', 'ViewContent'); 
+            `}
+              </script>
+            )}
+            {/* <!-- End Meta Pixel Code --> */}
+          </Helmet>
           {/* Header */}
           <Header />
 
