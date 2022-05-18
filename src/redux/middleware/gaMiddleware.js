@@ -97,8 +97,12 @@ export default function gaMiddleware() {
             window.google_tag_params.ecomm_pagetype = "home";
             window.google_tag_params.ecomm_totalvalue = "";
             window.google_tag_params.ecomm_prodid = [];
-          } else if (location === CART_URL) {
-            window.google_tag_params.ecomm_pagetype = "cart";
+          } else if (
+            location === CART_URL &&
+            window.google_tag_params &&
+            window.google_tag_params.ecomm_pagetype
+          ) {
+            window.google_tag_params.ecomm_pagetype;
             if (getState().cart.summary) {
               window.google_tag_params.ecomm_totalvalue = getState().cart.summary.total;
               window.google_tag_params.ecomm_prodid = getCartListSKU(
@@ -301,17 +305,12 @@ export default function gaMiddleware() {
           // window.dataLayer.push(eventObject);
         }
         /* Cart Tracking */
-        if (type === "cart/ADD_TO_CART_SUCCESS") {
-          const {
-            id_customer_cart: idcustomerCart,
-            cart: {
-              summary: { total }
-            }
-          } = action.result;
-          const {
-            result: { qty },
-            configId
-          } = action;
+        if (type === "cart/ADD_TO_CART_SUCCESS" && action.configId) {
+          const { configId } = action;
+          const cartItems = Object.values(action.result.cartItems);
+          const total = action.result.summary.total;
+          const product = cartItems.filter(item => item.config_id === configId);
+          const qty = product[0].qty;
           // if (!configId) {
           //   window.unbxd.addToCart(key, sku, simpleSku, pincode);
           //   console.log('unbxd addToCart callback invoked with - ', key, sku, simpleSku, pincode);
@@ -323,18 +322,14 @@ export default function gaMiddleware() {
               qty: `${qty}`
             });
           }
-          const [product] =
-            action.result &&
-            action.result.cart.cart.filter(
-              item => item.id_customer_cart === idcustomerCart
-            );
           const {
             name,
-            net_price: netprice,
+            selling_price: netprice,
             color,
             brand,
-            category_details: categoryDetails
-          } = product.product_info;
+            configurable_sku
+          } = product[0];
+          const categoryDetails = "";
           const category = categoryDetails ? categoryDetails.join("/") : null;
           window.dataLayer.push(
             {
@@ -350,7 +345,7 @@ export default function gaMiddleware() {
                       brand,
                       category,
                       list: "Listing",
-                      id: product.configurable_sku,
+                      id: configurable_sku,
                       quantity: 1
                     }
                   ]
@@ -364,17 +359,15 @@ export default function gaMiddleware() {
           );
         }
         if (type === "cart/UPDATE_CART_SUCCESS") {
-          const {
-            id_customer_cart: idcustomerCart,
-            cart: {
-              summary: { total }
-            }
-          } = action.result;
-          const {
-            result: { qty: productQty },
-            configId,
-            qty
-          } = action;
+          const { data } = getState().cart;
+          const cartItems = Object.values(action.result.cartItems);
+          const total = action.result.summary.total;
+          const productt = data.filter(
+            (item, i) =>
+              item.configurable_sku === action.result.configurable_sku
+          );
+          const productQty = productt[0].qty;
+          const { configId, qty } = action;
           if (
             window &&
             window.Unbxd &&
@@ -388,18 +381,17 @@ export default function gaMiddleware() {
               qty: `${productQty}`
             });
           }
-          const [product] =
-            action.result &&
-            action.result.cart.cart.filter(
-              item => item.id_customer_cart === idcustomerCart
-            );
+          const product = data.filter(
+            (item, i) =>
+              item.configurable_sku === action.result.configurable_sku
+          );
           const {
             name,
             net_price: netprice,
             color,
-            brand,
-            category_details: categoryDetails
-          } = product.product_info;
+            brand
+          } = product[0].product_info;
+          const categoryDetails = "";
           const category = categoryDetails ? categoryDetails.join("/") : null;
           const { updateType } = action.result;
           window.dataLayer.push(
@@ -431,11 +423,7 @@ export default function gaMiddleware() {
         }
         if (type === "cart/REMOVE_FROM_CART_SUCCESS") {
           const { data } = getState().cart;
-          const {
-            cart: {
-              summary: { total }
-            }
-          } = action.result;
+          const total = action.result.summary.total;
           const { qty, configId } = action;
           if (window && window.Unbxd && window.Unbxd.track && configId && qty) {
             window.Unbxd.track("cartRemoval", {
@@ -444,7 +432,7 @@ export default function gaMiddleware() {
             });
           }
           const [product] = data.filter(
-            item => item.id_customer_cart === Number(action.result.cartId)
+            item => item.product_info.product_id === configId
           );
           if (product) {
             const checkKey = isKeyExists(
@@ -461,10 +449,9 @@ export default function gaMiddleware() {
               brand
             } = product.product_info;
             if (action.result) {
-              window.google_tag_params.ecomm_totalvalue =
-                action.result.cart.summary.total;
+              window.google_tag_params.ecomm_totalvalue = total;
               window.google_tag_params.ecomm_prodid = getCartListSKUFromResult(
-                action.result.cart
+                data
               );
             }
             window.dataLayer.push(
@@ -582,6 +569,7 @@ export default function gaMiddleware() {
               cart_products: products = [],
               net_order_amount,
               shipping_charges,
+              packages = {},
               // transaction_id,
               order_no,
               coupon_code,
@@ -602,30 +590,47 @@ export default function gaMiddleware() {
               // });
               // groupedProducts = Object.values(groupedProducts);
               // console.log({ groupedProducts });
-              const cartList = products.map(x => {
-                const {
-                  // product_info: { product_id },
-                  sku,
-                  name,
-                  qty,
-                  price,
-                  brand,
-                  categories,
-                  details: {
-                    attributes: { color }
-                  }
-                } = x;
-                skus.push(sku);
-                return {
-                  id: sku,
-                  name,
-                  quantity: qty,
-                  variant: color,
-                  category: categories ? categories.split("|").join("/") : "",
-                  price,
-                  brand
-                };
-              });
+              let cartList = products
+                .filter(item => item.package === false)
+                .map(x => {
+                  const {
+                    // product_info: { product_id },
+                    sku,
+                    name,
+                    qty,
+                    price,
+                    brand,
+                    categories,
+                    details: {
+                      attributes: { color }
+                    }
+                  } = x;
+                  skus.push(sku);
+                  return {
+                    id: sku,
+                    name,
+                    quantity: qty,
+                    variant: color,
+                    category: categories ? categories.split("|").join("/") : "",
+                    price,
+                    brand
+                  };
+                });
+              if (Object.keys(packages).length !== 0) {
+                const packageItems = Object.values(packages).map(item => {
+                  return {
+                    id: item.package_id,
+                    name: item.package_name,
+                    dimension11: item.package_name,
+                    quantity: 1,
+                    variant: "",
+                    category: "",
+                    price: item.package_amount,
+                    brand: "HomeTown"
+                  };
+                });
+                cartList = [...cartList, ...packageItems];
+              }
               paymentObj = {
                 event: "purchase",
                 ecommerce: {
@@ -724,9 +729,9 @@ export default function gaMiddleware() {
         }
       }
       if (type === "cart/UPDATE_CART_SUCCESS") {
-        if (action.result.cart.summary) {
+        if (action.result.summary) {
           window.google_tag_params.ecomm_totalvalue =
-            action.result.cart.summary.total;
+            action.result.summary.total;
         }
       }
       if (type === "signUp/SIGNUP_SUCCESS") {

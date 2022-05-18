@@ -137,7 +137,7 @@ const AddToCart = ({
               </Button>
             ) : (
                 <Row mx={0} alignItems="center">
-                  <Box as={Link} to={CART_URL} style={{ width: "320px", marginBottom: "10px", marginTop: "10px" }}>
+                  <Box as={Link} to={CART_URL} style={{ width: "380px", marginBottom: "10px", marginTop: "10px" }}>
                     <Button
                       backgroundColor="#626463"
                       borderColor="#626463"

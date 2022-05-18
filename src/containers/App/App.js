@@ -16,7 +16,11 @@ import {
   isLoaded as isSectionLoaded,
   loadBestSellers
 } from "redux/modules/homepage";
-import { generateSession, isLoaded as isSessionSet } from "redux/modules/app";
+import {
+  generateSession,
+  setSessionIdLocally,
+  isLoaded as isSessionSet
+} from "redux/modules/app";
 import { loginUserAfterSignUp, login } from "redux/modules/login";
 import {
   loadWishlist,
@@ -49,11 +53,13 @@ const SITE_URL_MOBILE = "https://m.hometown.in";
   fetch: async ({ store: { dispatch, getState } }) => {
     const {
       pincode: { selectedPincode },
-      app: { sessionId, csrfToken }
+      app: { sessionId }
     } = getState();
     const defaultPincode = selectedPincode === "" ? PINCODE : selectedPincode;
-    if (!isSessionSet(getState()) || !sessionId || !csrfToken) {
+    if (!isSessionSet(getState()) || !sessionId) {
       await dispatch(generateSession(defaultPincode));
+    } else {
+      await dispatch(setSessionIdLocally(sessionId));
     }
     if (!isSectionLoaded(getState(), "menu")) {
       await wrapDispatch(dispatch, "menu")(loadMainMenu());
