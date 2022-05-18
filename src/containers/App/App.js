@@ -267,7 +267,7 @@ export default class App extends Component {
     if (str.includes("beta-api") || str.includes("stage-api")) {
       return "in~~15ba205b0";
     }
-    return "";
+    return "in~~71680a91";
   };
   render() {
     const {
