@@ -1,7 +1,7 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 import Helmet from "react-helmet";
-import { connect } from "react-redux";
 
 /**
  * Components
@@ -32,7 +32,7 @@ export default class ProductDetails extends Component {
     return (
       <Wrapper>
         <Body>
-          <Helmet>
+        <Helmet>
             {/* <!-- Meta Pixel Code --> */}
             {this.state.showScript && (
               <script>
