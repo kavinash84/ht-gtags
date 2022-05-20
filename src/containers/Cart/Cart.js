@@ -37,6 +37,7 @@ import Notifications from "components/Notifications";
 import EmptyNew from "./EmptyNew";
 import UnbxdRecommendedForYou from "../../components/Unbxd/unbxdRecommendedForYou";
 import { WEViewCart } from "../../redux/modules/cart";
+import HappyToHelp from "../../components/Cart/HappyToHelp";
 
 /**
  * Icons / Images
