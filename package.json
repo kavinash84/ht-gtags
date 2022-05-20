@@ -7,11 +7,7 @@
     "Ankit <ankit.patel@hometown.in>"
   ],
   "license": "MIT",
-<<<<<<< HEAD
   "version": "2.6.63",
-=======
-  "version": "2.6.62",
->>>>>>> 7c8b2fbb4dbc19244373a5878892abbad02a59b8
   "repository": {
     "type": "git",
     "url": "https://bitbucket.org/hometown-tech/frontend/"
