@@ -1,15 +1,15 @@
-import { ORDERS_TRACKING_API } from 'helpers/apiUrls';
+import { ORDERS_TRACKING_API } from "helpers/apiUrls";
 
-const LOAD = 'tracking/LOAD';
-const LOAD_SUCCESS = 'tracking/LOAD_SUCCESS';
-const LOAD_FAIL = 'tracking/LOAD_FAIL';
-const CLOSE_MODAL = 'tracking/CLOSE_MODAL';
-const SET_CURRENT_ORDER = 'tracking/SET_CURRENT_ORDER';
+const LOAD = "tracking/LOAD";
+const LOAD_SUCCESS = "tracking/LOAD_SUCCESS";
+const LOAD_FAIL = "tracking/LOAD_FAIL";
+const CLOSE_MODAL = "tracking/CLOSE_MODAL";
+const SET_CURRENT_ORDER = "tracking/SET_CURRENT_ORDER";
 
 const initialState = {
   trackingLoading: false,
   trackingLoaded: false,
-  currentOrder: '',
+  currentOrder: "",
   data: {}
 };
 
@@ -52,7 +52,17 @@ export default function reducer(state = initialState, action = {}) {
 
 export const loadOrdersTracking = orderNumber => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
-  promise: ({ client }) => client.get(`${ORDERS_TRACKING_API}?order=${orderNumber}`)
+  promise: async ({ client }) => {
+    try {
+      /* eslint-disable max-len */
+      const response = await client.get(
+        `${ORDERS_TRACKING_API}?order=${orderNumber}`
+      );
+      return { ...response, orderrNumber: orderNumber };
+    } catch (error) {
+      throw error;
+    }
+  }
 });
 export const closeModal = () => ({
   type: CLOSE_MODAL,

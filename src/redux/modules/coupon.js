@@ -112,6 +112,11 @@ export default function reducer(state = initialState, action = {}) {
   }
 }
 
+export const triggerCouponFailToWE = payload => ({
+  type: APPLY_COUPON_FAIL_WE,
+  payload
+});
+
 export const applyCoupon = (coupon, sessionId, pincode) => dispatch =>
   dispatch({
     types: [APPLY_COUPON, APPLY_COUPON_SUCCESS, APPLY_COUPON_FAIL],
@@ -122,6 +127,7 @@ export const applyCoupon = (coupon, sessionId, pincode) => dispatch =>
         dispatch(updateCartSummary(response.summary));
         return response;
       } catch (error) {
+        dispatch(triggerCouponFailToWE(coupon));
         throw error;
       }
     }

@@ -165,15 +165,12 @@ class Wishlist extends React.Component {
                   //       )
                   //     : 0
                   // }
-                  // deliveredBy={
-                  //   item.wishlist_info.delivery_details &&
-                  //   item.wishlist_info.delivery_details[0].value
-                  // }
+                  // deliveredBy=""
                   pincode={selectedPincode}
                   setProductPosition={productPosition}
                   productURL={formatProductURL(
-                    item.product_info.name,
-                    item.wishlist_info.configurable_sku
+                    item.product_info.name || "",
+                    item.wishlist_info.configurable_sku || ""
                   )}
                 />
               )}

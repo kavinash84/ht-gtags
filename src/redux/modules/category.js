@@ -5,6 +5,8 @@ const LOAD_SUCCESS = "categoryPage/LOAD_SUCCESS";
 const LOAD_FAIL = "categoryPage/LOAD_FAIL";
 const SET_CURRENT_CATEGORY = "categoryPage/SET_CURRENT_CATEGORY";
 
+const VIEW_SUB_CATEGORY = "categoryPage/VIEW_SUB_CATEGORY";
+
 const initialState = {
   loaded: false,
   currentCategory: "",
@@ -51,6 +53,11 @@ export const isLoaded = (globalState, category) =>
 
 export const setCategory = payLoad => ({
   type: SET_CURRENT_CATEGORY,
+  payLoad
+});
+
+export const viewSubCategory = payLoad => ({
+  type: VIEW_SUB_CATEGORY,
   payLoad
 });
 

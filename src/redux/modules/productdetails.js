@@ -28,6 +28,8 @@ const SET_PROUDUCT_POSITION = "products/SET_PROUDUCT_POSITION";
 
 const PRODUCT_DETAILS_TRACK = "productdetails/PRODUCT_DETAILS_TRACK";
 
+const PRODUCT_DETAILS_WE_TRACK = "productdetails/PRODUCT_DETAILS_WE_TRACK";
+
 const initialState = {
   productDescription: {},
   financeOptions: {},
@@ -212,4 +214,8 @@ export const setProductPosition = payLoad => ({
 
 export const gaTrack = () => ({
   type: PRODUCT_DETAILS_TRACK
+});
+
+export const weProductViewTrack = () => ({
+  type: PRODUCT_DETAILS_WE_TRACK
 });

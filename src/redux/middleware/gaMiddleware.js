@@ -59,6 +59,7 @@ export default function gaMiddleware() {
         //   window.unbxd.handleUserSwitch();
         //   console.log(`unbxd - window.unbxd.handleUserSwitch(); invoked on -${type}`);
         // }
+        
         if (
           (type === "cart/ADD_TO_CART_SUCCESS" ||
             type === "cart/UPDATE_CART_SUCCESS" ||
@@ -331,6 +332,7 @@ export default function gaMiddleware() {
           } = product[0];
           const categoryDetails = "";
           const category = categoryDetails ? categoryDetails.join("/") : null;
+
           window.dataLayer.push(
             {
               event: "addToCart",

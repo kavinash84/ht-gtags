@@ -11,6 +11,7 @@ import { setPincode, setPincodeFilter } from "redux/modules/pincode";
 import { setProductPosition } from "redux/modules/productdetails";
 import { toggleWishList, wishListWaitList } from "redux/modules/wishlist";
 import { formatProductURL } from "utils/helper";
+import { viewSubCategory } from "../../redux/modules/category";
 // import ScrollToTop from '../ScrollToTop';
 import BreadCrumb from "./BreadCrumb";
 import CategoryBar from "./CategoryBar";
@@ -91,6 +92,16 @@ class Listing extends React.Component {
       }
     } = this.props;
     // console.log(pathname);
+    const { dispatch } = this.context.store;
+    dispatch(
+      viewSubCategory({
+        path: pathname,
+        category:
+          (breadCrumbs && breadCrumbs.length && breadCrumbs[0].name) || "",
+        sub_category:
+          (breadCrumbs && breadCrumbs.length && breadCrumbs[1].name) || ""
+      })
+    );
     if (window && breadCrumbs && pathname.indexOf("search") === -1) {
       let url = "";
       breadCrumbs.forEach((item, i) => {

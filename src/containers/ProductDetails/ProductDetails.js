@@ -6,32 +6,29 @@ import Helmet from "react-helmet";
 /**
  * Components
  */
-import Body from 'hometown-components-dev/lib/BodyHtV1';
-import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
+import Body from "hometown-components-dev/lib/BodyHtV1";
+import Wrapper from "hometown-components-dev/lib/WrapperHtV1";
 
 /**
  * Page Components
  */
-import Footer from 'components/Footer';
-import Header from 'components/Header';
-import ProductDetailsContainer from 'components/ProductDetails';
-import ProductDetailsShimmer from 'components/ProductDetails/ProductDetailsShimmer';
-import ProductNotFound from './ProductNotFound';
+import Footer from "components/Footer";
+import Header from "components/Header";
+import ProductDetailsContainer from "components/ProductDetails";
+import ProductDetailsShimmer from "components/ProductDetails/ProductDetailsShimmer";
+import ProductNotFound from "./ProductNotFound";
 
 @connect(({ productdetails }) => ({
   ...productdetails
 }))
 export default class ProductDetails extends Component {
-
   state = { showScript: false };
   componentDidMount() {
     this.setState({ showScript: true });
   }
   render() {
     // console.log(this.props);
-    const {
-      loading, loaded, history, productDescription
-    } = this.props;
+    const { loading, loaded, history, productDescription } = this.props;
     return (
       <Wrapper>
         <Body>
@@ -59,10 +56,16 @@ export default class ProductDetails extends Component {
 
           {/* PDP Content */}
           {loading && !loaded && <ProductDetailsShimmer />}
-          {!loading && loaded && productDescription && !productDescription.error_message && (
-            <ProductDetailsContainer history={history} />
-          )}
-          {!loading && loaded && productDescription && productDescription.error_message && <ProductNotFound />}
+          {!loading &&
+            loaded &&
+            productDescription &&
+            !productDescription.error_message && (
+              <ProductDetailsContainer history={history} />
+            )}
+          {!loading &&
+            loaded &&
+            productDescription &&
+            productDescription.error_message && <ProductNotFound />}
 
           {/* Footer */}
           <Footer />

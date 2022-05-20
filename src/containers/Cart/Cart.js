@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import Helmet from "react-helmet";
 
-import CartBreadCumb from 'components/Cart/breadDumb';
+import CartBreadCumb from "components/Cart/breadDumb";
 
 /**
  * Modules / Selectors
@@ -36,7 +36,7 @@ import ResponsiveModal from "components/Modal";
 import Notifications from "components/Notifications";
 import EmptyNew from "./EmptyNew";
 import UnbxdRecommendedForYou from "../../components/Unbxd/unbxdRecommendedForYou";
-import HappyToHelp from "../../components/Cart/HappyToHelp";
+import { WEViewCart } from "../../redux/modules/cart";
 
 /**
  * Icons / Images
@@ -112,7 +112,15 @@ const HdfcPopMessage = () => (
 @connect(
   ({
     cart,
-    cart: { cartChecked, summary, error, loading, loaded, initialLoading, contact },
+    cart: {
+      cartChecked,
+      summary,
+      error,
+      loading,
+      loaded,
+      initialLoading,
+      contact
+    },
     webtochat: { dismiss, cartTimeout },
     paymentoptions
   }) => ({
@@ -182,6 +190,11 @@ export default class CartContainer extends Component {
     // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ popUpTimeoutId });
     // this.checkForEmiEligibility(total);
+    const { dispatch } = this.context.store;
+    const { results } = this.props;
+    if (results && results.length) {
+      dispatch(WEViewCart());
+    }
   }
   componentWillReceiveProps(nextProps) {
     const {
@@ -332,32 +345,32 @@ export default class CartContainer extends Component {
             </div>
           ) : results && results.length === 0 ? (
             <div>
-            <CartBreadCumb />
-            <Section
-              display="flex"
-              padding="0.625rem"
-              paddingTop="1.25rem"
-              mb={0}
-            >
-              <EmptyNew
-                title="Your Cart is Empty!"
-                subTitle="Looks like you haven’t made your choice yet."
-                btnName="Shop Now"
-                url="/"
-                subTitleWidth="43%"
-                p="10"
+              <CartBreadCumb />
+              <Section
+                display="flex"
+                padding="0.625rem"
+                paddingTop="1.25rem"
+                mb={0}
               >
-                <Image
-                  src={wheeling_cart}
-                  width="initial"
-                  m="auto"
-                  alt="Sorry no results found"
-                />
-              </EmptyNew>
-            </Section>
-            <div style={{marginTop:'80px'}}>
-            <HappyToHelp data={contact} />
-            </div>
+                <EmptyNew
+                  title="Your Cart is Empty!"
+                  subTitle="Looks like you haven’t made your choice yet."
+                  btnName="Shop Now"
+                  url="/"
+                  subTitleWidth="43%"
+                  p="10"
+                >
+                  <Image
+                    src={wheeling_cart}
+                    width="initial"
+                    m="auto"
+                    alt="Sorry no results found"
+                  />
+                </EmptyNew>
+              </Section>
+              <div style={{ marginTop: "80px" }}>
+                <HappyToHelp data={contact} />
+              </div>
             </div>
           ) : null}
           {!loading && results && results.length !== 0 ? (
