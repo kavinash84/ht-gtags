@@ -52,7 +52,7 @@ export default class PaymentOptionsContainer extends Component {
     if (prevProps.paymentOptionsError !== paymentOptionsError) {
       if (paymentOptionsError === "Cart total mismatch") {
         console.log(paymentOptionsError, "paymentOptionsError");
-        history.push("/");
+        history.push("/checkout/cart");
       }
     }
   }
