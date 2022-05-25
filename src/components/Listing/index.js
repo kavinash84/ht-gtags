@@ -93,15 +93,17 @@ class Listing extends React.Component {
     } = this.props;
     // console.log(pathname);
     const { dispatch } = this.context.store;
-    dispatch(
-      viewSubCategory({
-        path: pathname,
-        category:
-          (breadCrumbs && breadCrumbs.length && breadCrumbs[0].name) || "",
-        sub_category:
-          (breadCrumbs && breadCrumbs.length && breadCrumbs[1].name) || ""
-      })
-    );
+    if (breadCrumbs.length >= 2) {
+      dispatch(
+        viewSubCategory({
+          path: pathname,
+          category:
+            (breadCrumbs && breadCrumbs.length && breadCrumbs[0].name) || "",
+          sub_category:
+            (breadCrumbs && breadCrumbs.length && breadCrumbs[1].name) || ""
+        })
+      );
+    }
     if (window && breadCrumbs && pathname.indexOf("search") === -1) {
       let url = "";
       breadCrumbs.forEach((item, i) => {
