@@ -382,21 +382,21 @@ class BulkOrder extends React.Component {
               {"CHOOSE FROM OUR WIDE RANGE OF GIFTING HOMEWARE PRODUCTS"}
             </Heading>
           </Box>
-          <Box mb={40}>
+          {/* <Box mb={40}>
             <Container pr={0} pl={0}>
               {homepageCategories.map((category, index) => {
                 const { title, id, sub_title: subTitle, values } = category;
                 if (id && (OFFER_ID === id || OFFER_ID === parseInt(id, 10))) {
                   return (
                     <LazyLoad height={200} offset={100} key={String(index)}>
-                      {/* <CategoryCarousel categoryName={title} subTitle={subTitle} data={values} id={id} /> */}
+                      <CategoryCarousel categoryName={title} subTitle={subTitle} data={values} id={id} />
                     </LazyLoad>
                   );
                 }
                 return "";
               })}
             </Container>
-          </Box>
+          </Box> */}
         </Box>
         <ResponsiveModal onCloseModal={this.handleModal} open={open}>
           <Box textAlign="center" className={styles.serviceThankYouWrapper}>
