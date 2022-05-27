@@ -60,7 +60,6 @@ export default function webEngageMiddleware() {
         // view product
         if (type === "productdetails/PRODUCT_DETAILS_WE_TRACK") {
           const { simpleSku, productDescription } = getState().productdetails;
-          console.log("productdetails/PRODUCT_DETAILS_WE_TRACK");
           if (
             simpleSku &&
             productDescription &&
@@ -73,6 +72,7 @@ export default function webEngageMiddleware() {
               pricing_details: { mrp, offer_price },
               meta: {
                 category_details,
+                category_data,
                 brand,
                 color,
                 name,
@@ -89,7 +89,10 @@ export default function webEngageMiddleware() {
                     .join("/")
                 : "";
             window.webengage.track("Product View", {
-              category: category,
+              category:
+                Array.isArray(category_data) && category_data.length
+                  ? category_data[0].name
+                  : "",
               path: category,
               color: color,
               // stockAvailable: "",
@@ -104,7 +107,7 @@ export default function webEngageMiddleware() {
               brand: brand,
               sku: simpleSku,
               // stockStatus: "",
-              images: images.map(item => item.url).join(",") || "",
+              images: images.map(item => item.url) || [],
               currencyCode: "INR",
               MRP: mrp,
               OfferPrice: offer_price
@@ -612,7 +615,7 @@ export default function webEngageMiddleware() {
         // Apply coupon failed
         if (type === "coupon/APPLY_COUPON_FAIL_WE") {
           window.webengage.track("Apply Coupon Fail", {
-            couponName: action.payLoad
+            couponName: action.payload
           });
         }
 
@@ -842,7 +845,7 @@ export default function webEngageMiddleware() {
         // Banner clicked
         if (type === "hompageCategories/WE_BANNER_IMPRESSION") {
           const { payLoad } = action;
-          window.webengage.track("Banner Clicked", payLoad);
+          window.webengage.track("Banner Clicked", { bannerName: payLoad });
         }
 
         // add review
@@ -855,19 +858,28 @@ export default function webEngageMiddleware() {
           ) {
             const {
               attributes: { main_material },
-              meta: { category_details, brand, name, category_type }
+              meta: {
+                // category_details,
+                category_data,
+                brand,
+                name,
+                category_type
+              }
             } = productDescription;
-            const category =
-              category_details && category_details.length
-                ? category_details
-                    .filter(x => x !== null)
-                    .map(item => item.url_key)
-                    .join("/")
-                : "";
+            // const category =
+            //   category_details && category_details.length
+            //     ? category_details
+            //         .filter(x => x !== null)
+            //         .map(item => item.url_key)
+            //         .join("/")
+            //     : "";
             window.webengage.track("Write Review", {
               ProductID: simpleSku,
               ProductName: name,
-              ProductCategory: category || "",
+              ProductCategory:
+                Array.isArray(category_data) && category_data.length
+                  ? category_data[0].name
+                  : "",
               ProductSubCategory: category_type || "",
               Brand: brand,
               ProductMainMaterial: main_material || ""
@@ -886,19 +898,28 @@ export default function webEngageMiddleware() {
           ) {
             const {
               attributes: { main_material },
-              meta: { category_details, brand, name, category_type }
+              meta: {
+                // category_details,
+                category_data,
+                brand,
+                name,
+                category_type
+              }
             } = productDescription;
-            const category =
-              category_details && category_details.length
-                ? category_details
-                    .filter(x => x !== null)
-                    .map(item => item.url_key)
-                    .join("/")
-                : "";
+            // const category =
+            //   category_details && category_details.length
+            //     ? category_details
+            //         .filter(x => x !== null)
+            //         .map(item => item.url_key)
+            //         .join("/")
+            //     : "";
             window.webengage.track("Load More Review", {
               ProductID: simpleSku,
               ProductName: name,
-              ProductCategory: category || "",
+              ProductCategory:
+                Array.isArray(category_data) && category_data.length
+                  ? category_data[0].name
+                  : "",
               ProductSubCategory: category_type || "",
               Brand: brand,
               ProductMainMaterial: main_material || ""
