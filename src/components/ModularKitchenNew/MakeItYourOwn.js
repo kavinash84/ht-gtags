@@ -246,7 +246,7 @@ class MakeItYourOwn extends React.Component {
             {makeItOwn.carouselData[`${makeItOwnSelect}`].images.map(
               (data, index) => (
                 <Div key={index} p="0px" pr="20px" pb="10px">
-                  <Img height="30%" src={data.image} />
+                  <Img height="30%" data-src={data.image} />
                 </Div>
               )
             )}
@@ -286,7 +286,6 @@ class MakeItYourOwn extends React.Component {
               onClick={this.props.handleModal}
               marginTop="20px"
               ta="center"
-              fontWeight="bold"
               fontSize="15px"
               fontFamily="regular"
               color="#323F38"

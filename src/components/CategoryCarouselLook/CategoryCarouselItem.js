@@ -38,7 +38,7 @@ class CategoryItem extends React.Component {
               }}
             >
               <Img
-                src={src}
+                data-src={src}
                 m={5}
                 height="auto"
                 width="93%"

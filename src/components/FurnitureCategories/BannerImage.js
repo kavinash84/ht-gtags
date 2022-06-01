@@ -5,7 +5,7 @@ const BannerImage = ({ src, alt, url_key }) => {
   return (
     <div style={{ marginTop:"80px" }}>
       <Link to={url_key}>
-        <img src={src} alt={alt} style={{ width: '100%' }} />
+        <img data-src={src} alt={alt} style={{ width: '100%' }} />
       </Link>
     </div>
   );

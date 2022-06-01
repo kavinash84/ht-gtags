@@ -47,7 +47,7 @@ class OurPartners extends React.Component {
               {partners.images.map((data, index) => (
                 <Div key={index} col="6" margin="0 10px">
                   <Img
-                    src={data.image}
+                    data-src={data.image}
                     height="70%"
                     width="70%"
                     m="auto"

@@ -92,7 +92,7 @@ export default class BankOfferes extends Component {
                       }}
                     >
                       <Image
-                        src={item.url}
+                        data-src={item.url}
                         width="100%"
                         style={{ zIndex: "10" }}
                       />

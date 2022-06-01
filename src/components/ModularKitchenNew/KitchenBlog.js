@@ -23,7 +23,7 @@ class KitchenBlog extends React.Component {
         {kitchenblog.data.map(val => (
           <div>
             <Image
-              src={val.image}
+              data-src={val.image}
               width="90%"
               height="70%"
               marginLeft="5%"

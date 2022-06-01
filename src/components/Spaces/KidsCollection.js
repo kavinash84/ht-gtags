@@ -43,7 +43,7 @@ export default class KidsCollection extends Component {
           }}
         >
           <Div mt="10px" pb="50px" >
-            <Image src={kidsCollection.image} alt="kids" style={{ width: "85%", marginLeft: "7.5%" }}/>
+            <Image data-src={kidsCollection.image} alt="kids" style={{ width: "85%", marginLeft: "7.5%" }}/>
           </Div>
         </Link>
       </Div>

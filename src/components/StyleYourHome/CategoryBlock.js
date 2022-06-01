@@ -37,7 +37,7 @@ const CategoryBlock = ({ src, to, title }) => (
         }}
       >
         <Image
-          src={src}
+          data-src={src}
           alt={title}
           height="auto"
           width="95%"

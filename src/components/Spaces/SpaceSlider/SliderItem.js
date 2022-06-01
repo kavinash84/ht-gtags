@@ -14,7 +14,7 @@ const SliderItem = ({ title, image, url, onClick, target, onImageClick }) => {
         as="a"
         onClick={onImageClick}
       >
-        <ImageHtV1 src={image} alt={title || "Banner-image"} variant="image" />
+        <ImageHtV1 data-src={image} alt={title || "Banner-image"} variant="image" />
       </CardHtV1>
     );
   } else if (target) {
@@ -27,13 +27,13 @@ const SliderItem = ({ title, image, url, onClick, target, onImageClick }) => {
         onClick={onClick}
         as="a"
       >
-        <ImageHtV1 src={image} alt={title || "Banner-image"} variant="image" />
+        <ImageHtV1 data-src={image} alt={title || "Banner-image"} variant="image" />
       </CardHtV1>
     );
   }
   return (
     <Link to={url} onClick={onClick}>
-      <ImageHtV1 src={image} alt={title || "Banner-image"} variant="image" />
+      <ImageHtV1 data-src={image} alt={title || "Banner-image"} variant="image" />
     </Link>
   );
 };

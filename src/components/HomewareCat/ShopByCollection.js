@@ -58,7 +58,7 @@ class ShopByCollection extends React.Component {
               >
                 <Image
                   // style={{ width: "97%" }}
-                  src={val.image}
+                  data-src={val.image}
                   alt="IndoorFountain"
                 />
               </Link>

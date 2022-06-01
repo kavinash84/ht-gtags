@@ -17,7 +17,7 @@ const DBItem = ({ component, data }) => {
             }}>
           <div style={{ height: "100%" }}>
             <img
-              src={data.image}
+              data-src={data.image}
               alt={data.title}
               className={styles.curosalImg}
               style={{ height: "100%", width: "100%", margin: "0 10px"}}

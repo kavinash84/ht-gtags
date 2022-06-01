@@ -47,7 +47,7 @@ class DBItem extends React.Component {
             >
               <div style={{ height: '220px' }}>
                 <img
-                  src={data.imgSrc}
+                  data-src={data.imgSrc}
                   alt={data.title}
                   className={styles.curosalImg}
                   style={{ height: '100%', width: '90%', margin: 'auto'}}
