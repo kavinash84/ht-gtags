@@ -30,7 +30,7 @@ const ColorOption = ({
         return (
           <Col height={40} width={40} px={0} mr={10} mb={10}>
             <Link
-              to={`/${urlName(item.meta.name)}/sku/${
+              to={`/${urlName(encodeURIComponent(item.meta.name))}/sku/${
                 item.groupedattributes.sku
               }`}
               key={String(index)}
