@@ -12,12 +12,6 @@ import Image from "hometown-components-dev/lib/ImageHtV1";
 import Row from "hometown-components-dev/lib/RowHtV1";
 import ImageShimmer from "hometown-components-dev/lib/ImageShimmerHtV1";
 
-const urlName = name =>
-  name
-    .split(" ")
-    .join("-")
-    .toLowerCase();
-
 const ColorOption = ({
   data,
   toggleShowMoreColorProducts,
@@ -30,9 +24,7 @@ const ColorOption = ({
         return (
           <Col height={40} width={40} px={0} mr={10} mb={10}>
             <Link
-              to={`/${urlName(item.meta.name)}/sku/${
-                item.groupedattributes.sku
-              }`}
+              to={`/${item.meta.product_link}`}
               key={String(index)}
             >
               <ImageShimmer src={`${item.swatch_image}`} height={40}>

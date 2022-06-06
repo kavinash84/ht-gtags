@@ -463,10 +463,10 @@ class FeedbackMailer extends React.Component {
                     {images[`${prod.id}-img`].imgSizeErrorMessage}
                   </Text>
                 ) : (
-                  <Text color="grey" fontSize="12px" mt="15">
-                    {'Image size sould be less than 5Mb'}
-                  </Text>
-                )}
+                    <Text color="grey" fontSize="12px" mt="15">
+                      {'Image size sould be less than 5Mb'}
+                    </Text>
+                  )}
               </Box>
             </Row>
           </Box>
@@ -481,8 +481,8 @@ class FeedbackMailer extends React.Component {
       customer,
       prodArr,
       feedback: {
- loading, formSubmit: formSubmited, error: pageLoadError, data
-}
+        loading, formSubmit: formSubmited, error: pageLoadError, data
+      }
     } = this.props;
 
     const { showMore, validFeedback } = this.state;
@@ -553,20 +553,20 @@ class FeedbackMailer extends React.Component {
                 </Box>
               </Box>
             ) : (
-              <Box
-                type="flex"
-                style={{
-                  height: 300,
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center'
-                }}
-              >
-                <Text textAlign="center" fontFamily="medium">
-                  Thank you for your feedback
+                <Box
+                  type="flex"
+                  style={{
+                    height: 300,
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                  }}
+                >
+                  <Text textAlign="center" fontFamily="medium">
+                    Thank you for your feedback
                 </Text>
-              </Box>
-            )}
+                </Box>
+              )}
 
             <Box mb="10px">
               <Row ml="0" mr="0" justifyContent="center">
@@ -588,7 +588,7 @@ class FeedbackMailer extends React.Component {
               <Text as="p" fontSize="0.875rem" lineHeight="1.6" textAlign="center" fontFamily="medium">
                 If you have any questions or issues, Please contact
                 <br />
-                18002100004(10am - 8pm) | care@hometown.in | www.hometown.in
+                08069252525(10am - 8pm) | care@hometown.in | www.hometown.in
               </Text>
             </Box>
           </Box>
