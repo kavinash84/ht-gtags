@@ -741,7 +741,7 @@ class HomeContainer extends Component {
                       zIndex: "10"
                     }}
                   >
-                    <Image data-src={wfhAreBack.data[0].image1} />
+                    <Image src={wfhAreBack.data[0].image1} />
                     <div
                       style={{
                         background: "#000",
@@ -782,7 +782,7 @@ class HomeContainer extends Component {
                       zIndex: "10"
                     }}
                   >
-                    <Image data-src={wfhAreBack.data[1].image2} />
+                    <Image src={wfhAreBack.data[1].image2} />
                     <div
                       style={{
                         background: "#000",
