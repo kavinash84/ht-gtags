@@ -21,8 +21,8 @@ const mapStateToProps = ({ trackorder }) => ({
 class TrackOrder extends Component {
   render() {
     const {
- handleSubmit, handleChange, loaded, loading, data, orderId, closeStatusModal, onChange
-} = this.props;
+      handleSubmit, handleChange, loaded, loading, data, orderId, closeStatusModal, onChange
+    } = this.props;
     const orders = data.order_items || [];
     const error = data.error || '';
     return (
@@ -61,8 +61,8 @@ class TrackOrder extends Component {
                         <Image className="spin" src={LoaderIcon} width={18} ml={4} />
                       </React.Fragment>
                     ) : (
-                      'CONFIRM'
-                    )}
+                        'CONFIRM'
+                      )}
                   </Button>
                 </Box>
               </Row>
@@ -75,7 +75,7 @@ class TrackOrder extends Component {
                     <Label fontSize={12}>
                       <b>Note :</b> Products with different delivery times may be shipped separately.
                       <br />
-                      For any queries please call 18002100004 (10AM - 8PM) or mail us at
+                      For any queries please call 08069252525 (10AM - 8PM) or mail us at
                       <a href="mailto:care@homwtown.in"> care@hometown.in</a>
                     </Label>
                   </Box>
@@ -94,18 +94,18 @@ class TrackOrder extends Component {
                 <TrackingTimeline data={orders} error={error} />
               </ResponsiveModal>
             ) : (
-              <Label fontSize="0.75rem" lh="1.8" mb="1.125rem">
-                {loaded && !onChange ? (
-                  <b style={{ color: 'red' }}>
-                    {data.status === 'canceled'
-                      ? 'This Order is Cancelled !'
-                      : error || 'Sorry, no products found, please call customer care for further assistance !'}
-                  </b>
-                ) : (
-                  ''
-                )}
-              </Label>
-            )}
+                <Label fontSize="0.75rem" lh="1.8" mb="1.125rem">
+                  {loaded && !onChange ? (
+                    <b style={{ color: 'red' }}>
+                      {data.status === 'canceled'
+                        ? 'This Order is Cancelled !'
+                        : error || 'Sorry, no products found, please call customer care for further assistance !'}
+                    </b>
+                  ) : (
+                      ''
+                    )}
+                </Label>
+              )}
           </Container>
         </Box>
       </Box>

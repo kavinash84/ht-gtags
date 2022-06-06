@@ -100,7 +100,7 @@ const Cancellation = () => (
             </TextHtV1>
             <TextHtV1 color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem" lineHeight="1.5">
               Email us at <a href="mailto:care@hometown.in">care@hometown.in</a> or call our contact center at
-              18002100004 in case of any assistance.
+              08069252525 in case of any assistance.
             </TextHtV1>
           </BoxHtV1>
         </RowHtV1>
