@@ -40,7 +40,7 @@ const faq = [
       {
         que: 'When and how can I cancel an order?',
         ans:
-          'You can cancel your order only within 24 hours of placing the order. To cancel, please Contact Us at care@hometown.in or call our contact center at 18002100004 (10 AM - 8 PM) with the order number.'
+          'You can cancel your order only within 24 hours of placing the order. To cancel, please Contact Us at care@hometown.in or call our contact center at 08069252525 (10 AM - 8 PM) with the order number.'
       }
     ]
   },
