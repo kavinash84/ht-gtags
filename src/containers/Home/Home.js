@@ -225,30 +225,78 @@ export default class Home extends Component {
             `}
           </script>
           <script type="application/ld+json">
-            {`
-            {
-              "@context": "https://schema.org",
+            {`{
+              "@context": "http://schema.org",
               "@type": "Organization",
               "name": "HomeTown",
+              "image": "https://cdn.shopify.com/s/files/1/1231/6442/files/CW_logo-03_1_240x.png?v=1624623636",
+              "@id": "support@cottonworld.net",
               "url": "https://www.hometown.in/",
-              "logo": "https://www.hometown.in/dist/2.0.1/bab5098b6c1ea32db0ed253a12fe29e3.png",
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "08069252525",
-                "contactType": "customer service",
-                "contactOption": "TollFree",
-                "areaServed": "IN",
-                "availableLanguage": "Hindi"
+              "telephone": "1800-210-0004",
+              "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Praxis Home Retail Limited (“PHRL”), (f/k/a Praxis Home Retail Private Limited), iThink Techno Campus,Jolly Board Tower D, Ground Floor",
+              "addressLocality": "Kanjurmarg (East), Mumbai",
+              "postalCode": "400042",
+              "addressCountry": "IN"
               },
               "sameAs": [
-                "https://www.facebook.com/hometown.in/",
-                "https://twitter.com/HomeTown_In/",
-                "https://www.instagram.com/hometownindia/",
-                "https://www.youtube.com/channel/UCBZGArWnKT6MYYwOsPCNjiw",
-            
+              "https://twitter.com/HomeTownLive",
+              "https://www.facebook.com/hometown",
+              "https://www.instagram.com/hometownlive/",
+              "https://in.pinterest.com/hometownblog/"
               ]
-            }  
-          `}
+            }`}
+          </script>
+          <script type="application/ld+json">
+            {`{
+      "@context":"http://schema.org",
+      "@type":"ItemList",
+      "itemListElement":[
+                 {
+         "@type": "SiteNavigationElement",
+          "position": 1,
+          "name": "Furniture",
+          "description": "Once target keywords are finalized, Puretech Team will share Meta tags",
+          "url":"https://www.hometown.in/furniture"
+        },
+       {
+          "@type": "SiteNavigationElement",
+          "position": 2,
+          "name": "Home Decor",
+          "description": "Once target keywords are finalized, Puretech Team will share Meta tags",
+          "url":"https://www.hometown.in/home-decor"
+        },
+       {
+          "@type": "SiteNavigationElement",
+          "position": 3,
+          "name": "Home Furnishing",
+          "description": "Once target keywords are finalized, Puretech Team will share Meta tags",
+          "url":"https://www.hometown.in/home-furnishings"
+        },
+            {
+          "@type": "SiteNavigationElement",
+          "position": 4,
+          "name": "Tablewear & Kitchenwear",
+          "description": "Once target keywords are finalized, Puretech Team will share Meta tags",
+          "url":"https://www.hometown.in/tableware-kitchenware"
+        },
+            {
+          "@type": "SiteNavigationElement",
+          "position": 5,
+          "name": "Modular Kitchen",
+          "description": "Once target keywords are finalized, Puretech Team will share Meta tags",
+          "url":"https://www.hometown.in/modular-kitchens"
+        },
+            {
+          "@type": "SiteNavigationElement",
+          "position": 6,
+          "name": "More",
+          "description": "Once target keywords are finalized, Puretech Team will share Meta tags",
+          "url":"Add respective dedicated URL, once they have been created"
+        }
+      ]
+    }`}
           </script>
         </Helmet>
         <Body>
