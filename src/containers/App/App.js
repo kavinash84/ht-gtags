@@ -16,7 +16,11 @@ import {
   isLoaded as isSectionLoaded,
   loadBestSellers
 } from "redux/modules/homepage";
-import { generateSession, isLoaded as isSessionSet } from "redux/modules/app";
+import {
+  generateSession,
+  setSessionIdLocally,
+  isLoaded as isSessionSet
+} from "redux/modules/app";
 import { loginUserAfterSignUp, login } from "redux/modules/login";
 import {
   loadWishlist,
@@ -49,11 +53,13 @@ const SITE_URL_MOBILE = "https://m.hometown.in";
   fetch: async ({ store: { dispatch, getState } }) => {
     const {
       pincode: { selectedPincode },
-      app: { sessionId, csrfToken }
+      app: { sessionId }
     } = getState();
     const defaultPincode = selectedPincode === "" ? PINCODE : selectedPincode;
-    if (!isSessionSet(getState()) || !sessionId || !csrfToken) {
+    if (!isSessionSet(getState()) || !sessionId) {
       await dispatch(generateSession(defaultPincode));
+    } else {
+      await dispatch(setSessionIdLocally(sessionId));
     }
     if (!isSectionLoaded(getState(), "menu")) {
       await wrapDispatch(dispatch, "menu")(loadMainMenu());
@@ -255,6 +261,14 @@ export default class App extends Component {
     }
     return url;
   };
+  getWeKey = () => {
+    console.log(config, "config");
+    let str = `${config.apiHost}` || "";
+    if (str.includes("beta-api") || str.includes("stage-api")) {
+      return "in~~15ba205b0";
+    }
+    return "in~~71680a91";
+  };
   render() {
     const {
       location,
@@ -264,6 +278,7 @@ export default class App extends Component {
     } = this.props;
     const pathname = (location && location.pathname) || "/";
     const url = this.checkIfSlash(pathname);
+
     return (
       <ThemeProvider>
         {process.env.NODE_ENV !== "development" && (
@@ -349,6 +364,12 @@ export default class App extends Component {
               src="https://libraries.unbxdapi.com/recs-sdk/v2.1.0/unbxd_recs_template_sdk_apac.js"
               async
             ></script>
+            <script id="_webengage_script_tag" type="text/javascript">
+              {`
+              var webengage;!function(w,e,b,n,g){function o(e,t){e[t[t.length-1]]=function(){r.__queue.push([t.join("."),
+              arguments])}}var i,s,r=w[b],z=" ",l="init options track screen onReady".split(z),a="feedback survey notification".split(z),c="options render clear abort".split(z),p="Open Close Submit Complete View Click".split(z),u="identify login logout setAttribute".split(z);if(!r||!r.__v){for(w[b]=r={__queue:[],__v:"6.0",user:{}},i=0;i < l.length;i++)o(r,[l[i]]);for(i=0;i < a.length;i++){for(r[a[i]]={},s=0;s < c.length;s++)o(r[a[i]],[a[i],c[s]]);for(s=0;s < p.length;s++)o(r[a[i]],[a[i],"on"+p[s]])}for(i=0;i < u.length;i++)o(r.user,["user",u[i]]);setTimeout(function(){var f=e.createElement("script"),d=e.getElementById("_webengage_script_tag");f.type="text/javascript",f.async=!0,f.src=("https:"==e.location.protocol?"https://widgets.in.webengage.com":"http://widgets.in.webengage.com")+"/js/webengage-min-v-6.0.js",d.parentNode.insertBefore(f,d)})}}(window,document,"webengage");webengage.init("${this.getWeKey()}");
+              `}
+            </script>
           </Helmet>
         )}
         <main className={styles.appContent}>

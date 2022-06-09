@@ -64,7 +64,6 @@ class NavBar extends Component {
                         variant="menuLight"
                         href={menuItem.url_key}
                         title={menuItem.name}
-                        download
                         target="_blank"
                         rel="noopener noreferrer"
                       >
@@ -215,7 +214,6 @@ class NavBar extends Component {
                               variant="menuLight"
                               href={menuItem.url_key}
                               title={menuItem.name}
-                              download
                               target="_blank"
                               rel="noopener noreferrer"
                             >

@@ -14,6 +14,8 @@ const LOAD = "hompageCategories/LOAD";
 const LOAD_SUCCESS = "hompageCategories/LOAD_SUCCESS";
 const LOAD_FAIL = "hompageCategories/LOAD_FAIL";
 
+const WE_BANNER_IMPRESSION = "hompageCategories/WE_BANNER_IMPRESSION";
+
 const initialState = {
   loaded: false,
   data: []
@@ -115,4 +117,9 @@ export const loadBestSellers = pincode => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
   promise: ({ client }) =>
     client.get(`tesla/static/homepagecoupons/best_sellers?pincode=${pincode}`)
+});
+
+export const weBannerImpression = payLoad => ({
+  type: WE_BANNER_IMPRESSION,
+  payLoad
 });

@@ -234,7 +234,7 @@ export default class Home extends Component {
               "logo": "https://www.hometown.in/dist/2.0.1/bab5098b6c1ea32db0ed253a12fe29e3.png",
               "contactPoint": {
                 "@type": "ContactPoint",
-                "telephone": "1800-210-0004",
+                "telephone": "08069252525",
                 "contactType": "customer service",
                 "contactOption": "TollFree",
                 "areaServed": "IN",

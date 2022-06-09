@@ -1,9 +1,11 @@
 // import { PAYMENT_STATUS as PAYMENT_STATUS_API } from 'helpers/apiUrls';
-import { PAYMENT_STATUS as PAYMENT_STATUS_API } from 'helpers/apiUrls';
+import { PAYMENT_STATUS as PAYMENT_STATUS_API } from "helpers/apiUrls";
 
-const LOAD = 'paymentstatus/LOAD';
-const LOAD_SUCCESS = 'paymentstatus/LOAD_SUCCESS';
-const LOAD_FAIL = 'paymentstatus/LOAD_FAIL';
+const LOAD = "paymentstatus/LOAD";
+const LOAD_SUCCESS = "paymentstatus/LOAD_SUCCESS";
+const LOAD_FAIL = "paymentstatus/LOAD_FAIL";
+
+const WE_PAYMENT_FAILURE = "paymentstatus/WE_PAYMENT_FAILURE";
 
 const initialState = {
   loading: false,
@@ -24,7 +26,7 @@ export default function reducer(state = initialState, action = {}) {
         loading: false,
         loaded: true,
         data: action.result,
-        error: (action.result && action.result.error_message) || ''
+        error: (action.result && action.result.error_message) || ""
       };
     case LOAD_FAIL:
       return {
@@ -53,4 +55,8 @@ export const load = sessionId => ({
       return error;
     }
   }
+});
+
+export const wePaymentFailure = () => ({
+  type: WE_PAYMENT_FAILURE
 });

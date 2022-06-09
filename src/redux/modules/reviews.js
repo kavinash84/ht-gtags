@@ -27,6 +27,8 @@ const LOAD_REVIEW_BANNERES_FAIL = "reviews/LOAD_REVIEW_BANNERES_FAIL";
 
 const TOGGLE_PAGE_NO = "reviews/TOGGLE_PAGE_NO";
 
+const WE_LOAD_MORE_REVIEWS = "reviews/WE_LOAD_MORE_REVIEWS";
+
 const initialState = {
   data: [],
   reviewsList: [],
@@ -256,4 +258,8 @@ export const loadReviewsBanneres = () => ({
     LOAD_REVIEW_BANNERES_FAIL
   ],
   promise: ({ client }) => client.get(REVIEWBANNERES)
+});
+
+export const weLoadMoreReviews = () => ({
+  type: WE_LOAD_MORE_REVIEWS
 });

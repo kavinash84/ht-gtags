@@ -1,19 +1,28 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
 /* ====== Components ====== */
-import Body from 'hometown-components-dev/lib/BodyHtV1';
-import Container from 'hometown-components-dev/lib/ContainerHtV1';
-import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
+import Body from "hometown-components-dev/lib/BodyHtV1";
+import Container from "hometown-components-dev/lib/ContainerHtV1";
+import Wrapper from "hometown-components-dev/lib/WrapperHtV1";
 
 /* ====== Page Components ====== */
-import Footer from 'components/Footer';
-import Header from 'components/Header';
-import PaymentFailure from 'newComponents/PaymentFailure';
-import BflPaymentFailure from 'newComponents/BflPaymentFailure';
+import Footer from "components/Footer";
+import Header from "components/Header";
+import PaymentFailure from "newComponents/PaymentFailure";
+import BflPaymentFailure from "newComponents/BflPaymentFailure";
+import { wePaymentFailure } from "../../redux/modules/paymentstatus";
 
 class PaymentFailureContainer extends Component {
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
+
+  componentDidMount() {
+    const { dispatch } = this.context.store;
+    dispatch(wePaymentFailure());
+  }
   render() {
     const {
       match: {
@@ -29,7 +38,11 @@ class PaymentFailureContainer extends Component {
 
           {/* Container */}
           <Container mt={60}>
-            {emiPaymentType === 'bfl' ? <BflPaymentFailure /> : <PaymentFailure orderId={orderId} />}
+            {emiPaymentType === "bfl" ? (
+              <BflPaymentFailure />
+            ) : (
+              <PaymentFailure orderId={orderId} />
+            )}
           </Container>
 
           {/* Footer */}
@@ -48,7 +61,7 @@ PaymentFailureContainer.propTypes = {
 };
 
 PaymentFailureContainer.defaultProps = {
-  emiPaymentType: ''
+  emiPaymentType: ""
 };
 
 PaymentFailureContainer.contextTypes = {

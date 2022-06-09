@@ -73,8 +73,8 @@ const despatchClearSelectForDemo = dispatcheroEmpty => {
 @withRouter
 @connect(
   ({
- userLogin, wishlist, cart, router, profile, app, pincode
-}) => ({
+    userLogin, wishlist, cart, router, profile, app, pincode
+  }) => ({
     isLoggedIn: userLogin.isLoggedIn,
     name: profile.data.first_name,
     wishListCount: getWishListCount(wishlist),
@@ -317,13 +317,13 @@ export default class HeaderTop extends Component {
                     <Flex mx={-5} my={-5} sx={{ flexWrap: 'wrap' }}>
                       {wishlist.data.map(item => (
                         <Box px={5} py={5}>
-                          <Image
+                          {/* <Image
                             src={`${item.product_info.images[0].url}.jpg`}
                             alt=""
                             width={64}
                             height={64}
                             sx={{ border: 'secondary' }}
-                          />
+                          /> */}
                         </Box>
                       ))}
                       {/* <Box px={5} py={5}>
@@ -467,17 +467,17 @@ export default class HeaderTop extends Component {
                             CHECKOUT NOW
                           </Button>
                         ) : (
-                          <Button
-                            disabled={this.state.containsOutOfStock}
-                            width={1}
-                            // as={Link}
-                            // onClick={() => this.checkCartBeforeCheckout(checkCart, sessionId)(addToSelectForDemo)}
-                            // to={DELIVERY_ADDRESS_URL}
-                            mb={10}
-                          >
-                            CHECKOUT NOW
-                          </Button>
-                        )}
+                            <Button
+                              disabled={this.state.containsOutOfStock}
+                              width={1}
+                              // as={Link}
+                              // onClick={() => this.checkCartBeforeCheckout(checkCart, sessionId)(addToSelectForDemo)}
+                              // to={DELIVERY_ADDRESS_URL}
+                              mb={10}
+                            >
+                              CHECKOUT NOW
+                            </Button>
+                          )}
                       </div>
                     ) : null}
                     <Button width={1} as={Link} to={CART_URL} variant="outline.primary">
@@ -538,7 +538,7 @@ HeaderTop.defaultProps = {
   cartSummary: {},
   // cart: {},
   wishlist: {},
-  logoutUser: () => {}
+  logoutUser: () => { }
 };
 
 HeaderTop.propTypes = {

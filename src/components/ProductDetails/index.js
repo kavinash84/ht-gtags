@@ -103,6 +103,8 @@ import { BackgroundMasker } from "hometown-components-dev/lib/Shimmer";
 import Specs from "./Specs/specs";
 import BaughtTogether from "./baughtTogether";
 import MoreOption from "./moreOption";
+import { weProductViewTrack } from "../../redux/modules/productdetails";
+import { weLoadMoreReviews } from "../../redux/modules/reviews";
 
 /**
  * Images / Icons
@@ -361,6 +363,7 @@ class ProductDetails extends React.Component {
     this.hashLinkScroll();
 
     dispatch(getCombinedBuy(simpleSku, selectedPincode));
+    dispatch(weProductViewTrack());
     const popUpTimeoutId = setTimeout(this.webToChat, pdpTimeout);
     // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ popUpTimeoutId });
@@ -511,6 +514,8 @@ class ProductDetails extends React.Component {
   };
   showMoreReviews = () => {
     const { showReviews } = this.state;
+    const { dispatch } = this.context.store;
+    dispatch(weLoadMoreReviews());
     this.setState({ showReviews: showReviews + 4 });
   };
   handleSelectQty = qty => {
@@ -859,7 +864,11 @@ class ProductDetails extends React.Component {
                     "@type" : "Offer",
                     "url": "${productURL || ""}",
                     "priceCurrency": "INR",
-                    "price": "${checkSpecialPrice || ""}",
+                    "price": "${
+                      Number(formatPrice(offerPrice))
+                        ? Number(formatPrice(offerPrice))
+                        : Number(specialPrice) || Number(price) || ""
+                    }",
                     "availability": "https://schema.org/InStock"
                   }
                 }

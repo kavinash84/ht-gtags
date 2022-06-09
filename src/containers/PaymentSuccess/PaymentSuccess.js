@@ -240,7 +240,8 @@ class PaymentSuccess extends Component {
         discount_coupon_value: discount,
         net_order_amount: totalAmount,
         shipping_charges: shippingCharges,
-        set_discount: setDiscount
+        set_discount: setDiscount,
+        giftwrap_amount: giftwrapAmount
       },
       response,
       isLoggedIn
@@ -495,6 +496,12 @@ class PaymentSuccess extends Component {
                         <Text>Shipping charges : </Text>
                         <Text>Rs {formatAmount(shippingCharges)}</Text>
                       </Flex>
+                      {giftwrapAmount ? (
+                        <Flex mb={20} justifyContent="space-between">
+                          <Text>Gift Wrap Fee : </Text>
+                          <Text>Rs {formatAmount(giftwrapAmount)}</Text>
+                        </Flex>
+                      ) : null}
                       <Flex mb={20} justifyContent="space-between">
                         <Text>Discount : </Text>
                         <Text>Rs {formatAmount(discount)}</Text>

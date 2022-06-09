@@ -29,6 +29,7 @@ import Row from "hometown-components-dev/lib/RowHtV1";
 import Section from "hometown-components-dev/lib/SectionHtV1";
 import Text from "hometown-components-dev/lib/TextHtV1";
 import Ul from "hometown-components-dev/lib/UlHtV1";
+import { weContactUs } from "../../redux/modules/services";
 
 /**
  * Icons
@@ -79,6 +80,10 @@ class Footer extends React.Component {
     emailError: false,
     emailErrorMessage: "Please Enter a Valid Email",
     already: false
+  };
+
+  static contextTypes = {
+    store: PropTypes.object.isRequired
   };
 
   // componentDidMount() {
@@ -204,7 +209,7 @@ class Footer extends React.Component {
                   />
                 </Ul>
               </Box>
-              <Box>
+              {/* <Box>
                 <Heading variant="footerTitle">ABOUT US</Heading>
                 <Ul>
                   <FooterMenuLink to="/who-we-are" title="Who We Are" />
@@ -219,7 +224,7 @@ class Footer extends React.Component {
                   </Li>
                   <FooterMenuLink to="/contact-us" title="Contact Us" />
                 </Ul>
-              </Box>
+              </Box> */}
             </Col>
             <Col width={[1, 2 / 3, 2 / 12]}>
               <Box mb={24}>
@@ -260,12 +265,12 @@ class Footer extends React.Component {
                 <Ul>
                   <Li>
                     <a
-                      href="tel:1800-210-0004"
+                      href="tel:08069252525"
                       rel="noreferrer noopener"
                       target="_blank"
                     >
                       <Text variant="footerLink" fontSize={16}>
-                        <CallIcon mr={10} /> 1800-210-0004
+                        <CallIcon mr={10} /> 08069252525
                       </Text>
                     </a>
                   </Li>
@@ -274,6 +279,10 @@ class Footer extends React.Component {
                       href="mailto:care@hometown.in"
                       rel="noreferrer noopener"
                       target="_blank"
+                      onClick={() => {
+                        const { dispatch } = this.context.store;
+                        dispatch(weContactUs());
+                      }}
                     >
                       <Text variant="footerLink" fontSize={16}>
                         <EmailIcon mr={10} />
@@ -345,19 +354,19 @@ class Footer extends React.Component {
                   </Row>
                 </form>
               ) : (
-                <Row>
-                  <Text
-                    color="green"
-                    fontSize="0.955rem"
-                    mt="0"
-                    mb="0"
-                    lh="2"
-                    ta="left"
-                  >
-                    You have been successfully subscribed to the Newsletter
+                  <Row>
+                    <Text
+                      color="green"
+                      fontSize="0.955rem"
+                      mt="0"
+                      mb="0"
+                      lh="2"
+                      ta="left"
+                    >
+                      You have been successfully subscribed to the Newsletter
                   </Text>
-                </Row>
-              )}
+                  </Row>
+                )}
               <Row
                 mt={15}
                 sx={{ justifyContent: "space-between" }}

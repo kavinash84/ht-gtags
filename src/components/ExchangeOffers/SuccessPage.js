@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import Helmet from "react-helmet";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import { notifSend } from "redux/modules/notifs";
 import landingMainSlider from "../../../static/success-banner.jpg";
 import mapIcon from "../../../static/map-icon.svg";
 import LandingPageLogo from "./LandingPageLogo";
@@ -9,9 +11,13 @@ import LandingPageLogo from "./LandingPageLogo";
   seoInfo:
     designbuild.exchangeOffer &&
     designbuild.exchangeOffer &&
-    designbuild.exchangeOffer.items
+    designbuild.exchangeOffer.items,
+  exchangeOfferCoupon: designbuild.exchangeOfferCoupon
 }))
 class SuccessPage extends Component {
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
   componentDidMount() {
     // if (window && window.dataLayer) {
     //   window.dataLayer.push({
@@ -24,8 +30,27 @@ class SuccessPage extends Component {
     //   window.fbq("track", "SubscribeE&U");
     // }
   }
+  copyFunction() {
+    const { dispatch } = this.context.store;
+    /* Get the text field */
+    let copyText = document.getElementById("copyField");
+
+    /* Select the text field */
+    copyText.select();
+    copyText.setSelectionRange(0, 99999); /* For mobile devices */
+
+    /* Copy the text inside the text field */
+    navigator.clipboard.writeText(copyText.value);
+    dispatch(
+      notifSend({
+        type: "success",
+        msg: "Copied!",
+        dismissAfter: 2000
+      })
+    );
+  }
   render() {
-    const { seoInfo } = this.props;
+    const { seoInfo, exchangeOfferCoupon } = this.props;
     return (
       <section>
         <Helmet title={`${(seoInfo && seoInfo.page_title) || ""}`}>
@@ -117,7 +142,7 @@ class SuccessPage extends Component {
                 color: "#dc4c3a"
               }}
             >
-              Your voucher is valid till 31st Mar'22
+              Your voucher is valid till 21st Apr 2022
             </h2>
           </div>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
