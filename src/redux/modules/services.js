@@ -1,9 +1,11 @@
-const LOAD = 'services/LOAD';
-const LOAD_SUCCESS = 'services/LOAD_SUCCESS';
-const LOAD_FAIL = 'services/LOAD_FAIL';
-const GET = 'services/GET';
-const GET_SUCCESS = 'services/GET_SUCCESS';
-const GET_FAIL = 'services/GET_FAIL';
+const LOAD = "services/LOAD";
+const LOAD_SUCCESS = "services/LOAD_SUCCESS";
+const LOAD_FAIL = "services/LOAD_FAIL";
+const GET = "services/GET";
+const GET_SUCCESS = "services/GET_SUCCESS";
+const GET_FAIL = "services/GET_FAIL";
+
+const WE_CONTACTUS = "services/WE_CONTACTUS";
 
 const initialState = {};
 
@@ -75,7 +77,8 @@ export default function reducer(state = initialState, action = {}) {
 export const isLoaded = (globalState, formType) =>
   globalState.services[formType] && globalState.services[formType].loaded;
 
-export const gotData = (globalState, formType) => globalState.services[formType] && globalState.services[formType].got;
+export const gotData = (globalState, formType) =>
+  globalState.services[formType] && globalState.services[formType].got;
 
 export const sendData = (API, data, formType) => ({
   types: [LOAD, LOAD_SUCCESS, LOAD_FAIL],
@@ -101,4 +104,8 @@ export const getData = (API, formType) => ({
     }
   },
   formType
+});
+
+export const weContactUs = () => ({
+  type: WE_CONTACTUS
 });

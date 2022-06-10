@@ -33,7 +33,7 @@ const ContactUs = () => (
               Kanjurmarg (East), Mumbai 400042
             </TextHtV1>
             <TextHtV1 color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
-              Phone number: <a href="tel:18002100004">18002100004</a> (10 AM - 8 PM)
+              Phone number: <a href="tel:08069252525">08069252525</a> (10 AM - 8 PM)
               <br />
               Email: <a href="mailto:care@hometown.in">care@hometown.in</a>
             </TextHtV1>

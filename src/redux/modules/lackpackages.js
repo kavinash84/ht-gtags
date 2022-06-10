@@ -159,6 +159,7 @@ export default function reducer(state = initialState, action = {}) {
         ...state,
         loading: true,
         movetoCart: false,
+        package_catalog: "",
         oldList: []
       };
     case LOAD_PACKAGE_CATALOG_SUCCESS:
@@ -365,10 +366,11 @@ export const proceedPackageCatalog = postData => ({
   ],
   promise: async ({ client }) => {
     try {
-      const response = await client.post(
-        `tesla/cart/add-to-cart-multi`,
-        postData
-      );
+      const response = postData.packageId
+        ? await client.post(`tesla/cart/add-package`, postData)
+        : await client.post(`tesla/cart/add-to-cart-multi`, {
+            skus: postData.skus
+          });
       return response;
     } catch (error) {
       throw error;

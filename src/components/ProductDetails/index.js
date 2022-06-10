@@ -103,6 +103,8 @@ import { BackgroundMasker } from "hometown-components-dev/lib/Shimmer";
 import Specs from "./Specs/specs";
 import BaughtTogether from "./baughtTogether";
 import MoreOption from "./moreOption";
+import { weProductViewTrack } from "../../redux/modules/productdetails";
+import { weLoadMoreReviews } from "../../redux/modules/reviews";
 
 /**
  * Images / Icons
@@ -358,6 +360,7 @@ class ProductDetails extends React.Component {
     this.hashLinkScroll();
 
     dispatch(getCombinedBuy(simpleSku, selectedPincode));
+    dispatch(weProductViewTrack());
     const popUpTimeoutId = setTimeout(this.webToChat, pdpTimeout);
     // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ popUpTimeoutId });
@@ -500,6 +503,8 @@ class ProductDetails extends React.Component {
   };
   showMoreReviews = () => {
     const { showReviews } = this.state;
+    const { dispatch } = this.context.store;
+    dispatch(weLoadMoreReviews());
     this.setState({ showReviews: showReviews + 4 });
   };
   handleSelectQty = qty => {
@@ -832,10 +837,11 @@ class ProductDetails extends React.Component {
                   "@type" : "Product",
                   "url": "${productURL || ""}",
                   "name" : "${name.replace(/['"]+/g, "")}",
-                  "image" : ${images && images.length && images[0].url
-                  ? `["${images[0].url}.jpg"]`
-                  : []
-                },
+                  "image" : ${
+                    images && images.length && images[0].url
+                      ? `["${images[0].url}.jpg"]`
+                      : []
+                  },
                   "description" : "${productDescription.replace(/['"]+/g, "")}",
                   "sku": "${sku || ""}",
                   "brand" : {
@@ -959,13 +965,14 @@ class ProductDetails extends React.Component {
                           href="#combined_buy_offers"
                           style={{ color: "#F15A22" }}
                         >
-                          {`See ${combinedbuy.length} Combined ${combinedbuy.length > 1 ? "Offers" : "Offer"
-                            }`}
+                          {`See ${combinedbuy.length} Combined ${
+                            combinedbuy.length > 1 ? "Offers" : "Offer"
+                          }`}
                         </a>
                       </Button>
                     ) : (
-                        ""
-                      )}
+                      ""
+                    )}
                     <Div m="0px">
                       {formatPrice(csp) < formatPrice(mrp) ? (
                         <Text
@@ -1001,43 +1008,43 @@ class ProductDetails extends React.Component {
                                 </Text>
                               </Text>
                             ) : (
-                                <Text
-                                  // mt="0px"
-                                  color="#999999"
-                                  fontSize="1.1rem"
-                                  pl="5px"
-                                  fontWeight="bold"
-                                  textDecoration="line-through"
-                                  display="inline-block"
-                                  style={{ textDecoration: "none" }}
-                                >
-                                  MRP (Inclusive of all taxes)
-                                </Text>
-                              )}
+                              <Text
+                                // mt="0px"
+                                color="#999999"
+                                fontSize="1.1rem"
+                                pl="5px"
+                                fontWeight="bold"
+                                textDecoration="line-through"
+                                display="inline-block"
+                                style={{ textDecoration: "none" }}
+                              >
+                                MRP (Inclusive of all taxes)
+                              </Text>
+                            )}
                           </span>
                         </Text>
                       ) : (
+                        <Text
+                          color="#E9916B"
+                          fontSize="1.2rem"
+                          fontWeight="bold"
+                          height="35px"
+                        >
+                          ₹{mrp}{" "}
                           <Text
-                            color="#E9916B"
-                            fontSize="1.2rem"
+                            // mt="0px"
+                            color="#999999"
+                            fontSize="1.1rem"
+                            pl="5px"
                             fontWeight="bold"
-                            height="35px"
+                            textDecoration="line-through"
+                            display="inline-block"
+                            style={{ textDecoration: "none" }}
                           >
-                            ₹{mrp}{" "}
-                            <Text
-                              // mt="0px"
-                              color="#999999"
-                              fontSize="1.1rem"
-                              pl="5px"
-                              fontWeight="bold"
-                              textDecoration="line-through"
-                              display="inline-block"
-                              style={{ textDecoration: "none" }}
-                            >
-                              MRP (Inclusive of all taxes)
+                            MRP (Inclusive of all taxes)
                           </Text>
-                          </Text>
-                        )}
+                        </Text>
+                      )}
                       {couponCode ? (
                         // {!!isOfferExist && price !== discPrice &&
                         <Div>
@@ -1139,18 +1146,17 @@ class ProductDetails extends React.Component {
                       simples[simpleSku].meta.quantity &&
                       parseInt(simples[simpleSku].meta.quantity, 10) > 0
                     ) ? (
-                        <div
-                          style={{
-
-                            color: "#f98d29",
-                            fontSize: "16px",
-                            fontWeight: "bold",
-                            marginBottom: "20px"
-                          }}
-                        >
-                          Out of Stock
-                        </div>
-                      ) : null}
+                      <div
+                        style={{
+                          color: "#f98d29",
+                          fontSize: "16px",
+                          fontWeight: "bold",
+                          marginBottom: "20px"
+                        }}
+                      >
+                        Out of Stock
+                      </div>
+                    ) : null}
                     {/* banner */}
                     {offerImage && offerImageRedirect && (
                       <a rel="noopener noreferrer" href={offerImageRedirect}>
@@ -1192,26 +1198,26 @@ class ProductDetails extends React.Component {
                   simples[simpleSku].meta.quantity &&
                   parseInt(simples[simpleSku].meta.quantity, 10) > 0
                 ) ? null : (
-                    <ServiceDetails
-                      deliverBy={
-                        (deliveryInfo &&
-                          deliveryInfo[0] &&
-                          deliveryInfo[0].value) ||
-                        (deliveryDetails[0] &&
-                          deliveryDetails[0] &&
-                          deliveryDetails[0].value) ||
-                        ""
-                      }
-                      // emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
-                      shipping={checkSpecialPrice}
-                      // isEmiAvailable={isEmiAvailable}
-                      pincode={pincode.selectedPincode}
-                      loading={deliveryDateLoading}
-                      shippingCharge={meta.shipping_charge}
-                    >
-                      <Pincode key="pincode" />
-                    </ServiceDetails>
-                  )}
+                  <ServiceDetails
+                    deliverBy={
+                      (deliveryInfo &&
+                        deliveryInfo[0] &&
+                        deliveryInfo[0].value) ||
+                      (deliveryDetails[0] &&
+                        deliveryDetails[0] &&
+                        deliveryDetails[0].value) ||
+                      ""
+                    }
+                    // emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
+                    shipping={checkSpecialPrice}
+                    // isEmiAvailable={isEmiAvailable}
+                    pincode={pincode.selectedPincode}
+                    loading={deliveryDateLoading}
+                    shippingCharge={meta.shipping_charge}
+                  >
+                    <Pincode key="pincode" />
+                  </ServiceDetails>
+                )}
 
                 {/* Add to cart and Buy now buttons */}
                 <Div>
@@ -1245,52 +1251,52 @@ class ProductDetails extends React.Component {
                       simples[simpleSku].meta.quantity &&
                       parseInt(simples[simpleSku].meta.quantity, 10) > 0
                     ) ? null : (
+                      <Row
+                        ml="0px"
+                        mr="0px"
+                        height="45px"
+                        style={{ width: "30%" }}
+                        justifyContent="flex-end"
+                      >
                         <Row
                           ml="0px"
                           mr="0px"
-                          height="45px"
-                          style={{ width: "30%" }}
-                          justifyContent="flex-end"
+                          justifyContent="center"
+                          style={{
+                            alignItems: "center",
+                            width: "80%",
+                            border: "1px solid #E9916B",
+                            borderRadius: "5px"
+                          }}
                         >
-                          <Row
-                            ml="0px"
-                            mr="0px"
-                            justifyContent="center"
-                            style={{
-                              alignItems: "center",
-                              width: "80%",
-                              border: "1px solid #E9916B",
-                              borderRadius: "5px"
-                            }}
+                          <Button
+                            backgroundColor="#fff"
+                            color="#000"
+                            width="30%"
+                            pl="0.5rem"
+                            pr="0.5rem"
+                            style={{ border: "none" }}
+                            onClick={() => this.handleQty("decrement")}
                           >
-                            <Button
-                              backgroundColor="#fff"
-                              color="#000"
-                              width="30%"
-                              pl="0.5rem"
-                              pr="0.5rem"
-                              style={{ border: "none" }}
-                              onClick={() => this.handleQty("decrement")}
-                            >
-                              -
+                            -
                           </Button>
-                            <Div style={{ width: "30%", textAlign: "center" }}>
-                              {prodQty}
-                            </Div>
-                            <Button
-                              backgroundColor="#fff"
-                              color="#000"
-                              width="30%"
-                              pl="0.5rem"
-                              pr="0.5rem"
-                              style={{ border: "none" }}
-                              onClick={() => this.handleQty("increment")}
-                            >
-                              +
+                          <Div style={{ width: "30%", textAlign: "center" }}>
+                            {prodQty}
+                          </Div>
+                          <Button
+                            backgroundColor="#fff"
+                            color="#000"
+                            width="30%"
+                            pl="0.5rem"
+                            pr="0.5rem"
+                            style={{ border: "none" }}
+                            onClick={() => this.handleQty("increment")}
+                          >
+                            +
                           </Button>
-                          </Row>
                         </Row>
-                      )}
+                      </Row>
+                    )}
                     <AddToCart
                       skuItem={skuItem}
                       quantityChange={quantityChange}
@@ -1310,58 +1316,58 @@ class ProductDetails extends React.Component {
                       simples[simpleSku].meta.quantity &&
                       parseInt(simples[simpleSku].meta.quantity, 10) > 0
                     ) ? null : (
+                      <Row
+                        ml="0px"
+                        mr="0px"
+                        style={{ width: "30%" }}
+                        justifyContent="flex-end"
+                      >
                         <Row
                           ml="0px"
                           mr="0px"
-                          style={{ width: "30%" }}
-                          justifyContent="flex-end"
+                          justifyContent="center"
+                          backgroundColor="#fff"
+                          style={{
+                            alignItems: "center",
+                            width: "80%",
+                            height: "45px",
+                            marginTop: "5px",
+                            border: "1px solid #515151",
+                            borderRadius: "5px"
+                          }}
                         >
-                          <Row
-                            ml="0px"
-                            mr="0px"
-                            justifyContent="center"
-                            backgroundColor="#fff"
+                          <button
                             style={{
-                              alignItems: "center",
-                              width: "80%",
-                              height: "45px",
-                              marginTop: "5px",
-                              border: "1px solid #515151",
-                              borderRadius: "5px"
+                              padding: "0",
+                              border: "none",
+                              backgroundColor: "#ffffff"
                             }}
-                          >
-                            <button
-                              style={{
-                                padding: "0",
-                                border: "none",
-                                backgroundColor: "#ffffff"
-                              }}
-                              onClick={onClickWishList(
-                                sku,
-                                wishListData,
-                                wishlistToggle,
-                                isLoggedIn,
-                                this.handleLoginModal,
-                                addToWaitList,
-                                simpleSku,
-                                pincode.selectedPincode
-                              )}
+                            onClick={onClickWishList(
+                              sku,
+                              wishListData,
+                              wishlistToggle,
+                              isLoggedIn,
+                              this.handleLoginModal,
+                              addToWaitList,
+                              simpleSku,
+                              pincode.selectedPincode
+                            )}
                             // isWishList={isInWishList(wishList, sku)}
                             // wishlistLoading={isInWishList(loadingList, sku)}
-                            >
-                              <Img
-                                src={
-                                  isInWishList(wishList, sku)
-                                    ? WishlistIconSelect
-                                    : WishlistIcon
-                                }
-                                alt="wishlist icon"
-                                width="24px"
-                              />
-                            </button>
-                          </Row>
+                          >
+                            <Img
+                              src={
+                                isInWishList(wishList, sku)
+                                  ? WishlistIconSelect
+                                  : WishlistIcon
+                              }
+                              alt="wishlist icon"
+                              width="24px"
+                            />
+                          </button>
                         </Row>
-                      )}
+                      </Row>
+                    )}
                   </Row>
                 </Div>
                 {/* share product */}
@@ -1438,11 +1444,11 @@ class ProductDetails extends React.Component {
                             style={{ marginLeft: "10px" }}
                           />
                         ) : (
-                            <Image
-                              src={DownArrow}
-                              style={{ marginLeft: "10px" }}
-                            />
-                          )}
+                          <Image
+                            src={DownArrow}
+                            style={{ marginLeft: "10px" }}
+                          />
+                        )}
                       </TotalReviewDisplay>
                     </div>
                   </div>

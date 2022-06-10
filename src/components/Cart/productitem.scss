@@ -1,0 +1,96 @@
+.productItemContainer {
+  width: 100%;
+  background-color: #fff8f4;
+  padding: 15px;
+  border-radius: 5px;
+  position: relative;
+  .product_line {
+    display: flex;
+    margin-bottom: 15px;
+    background-color: #fff8f4;
+    .productImage {
+      // max-width: 100px;
+      // max-height: 100px;
+      background-color: #fff8f4;
+      width: 30%;
+      height: auto;
+    }
+    .productrightline {
+      margin-left: 10px;
+      width: 60%;
+      .productname {
+        font-size: 14px;
+        font-weight: 600;
+        color: black;
+      }
+      .productsubname {
+        color: #999999;
+        font-size: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 10px;
+      }
+    }
+  }
+  .productdetails {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-bottom: 15px;
+  
+  }
+}
+.checkbox_container {
+  display: block;
+  position: relative;
+  padding-left: 30px;
+  padding-top: 3px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  color: #999999;
+  font-size: 12px;
+}
+
+/* Hide the browser's default checkbox */
+.checkbox_container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 20px;
+  width: 20px;
+  background-color: #ffffff;
+  border: 1px solid #c3c2c9;
+  border-radius: 4px;
+}
+
+/* When the checkbox is checked, add a blue background */
+.checkbox_container input:checked ~ .checkmark {
+  background-color: #f47020;
+}
+
+.qtybtn {
+  border: 1px solid #f47020;
+  border-radius: 5px;
+  padding: 8px 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 70px;
+  margin-right: 20px;
+  margin-top: -15px;
+}

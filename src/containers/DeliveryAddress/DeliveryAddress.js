@@ -14,9 +14,10 @@ import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
  * Page Components
  */
 import DeliveryAddress from 'components/Checkout/DeliveryAddress';
-import HeaderSecondary from 'components/HeaderSecondary';
-import Footer from 'components/Footer';
 
+
+// import CartBreadCumb from "../../components/Cart/breadDumb"
+// import HappyToHelp from "../../components/Cart/HappyToHelp"
 /**
  * modules / selectors / helpers
  */
@@ -24,9 +25,10 @@ import { loadMyAddress } from 'redux/modules/myaddress';
 import { getCartList } from 'selectors/cart';
 import { CART_URL } from 'helpers/Constants';
 
-@connect(({ cart, userLogin }) => ({
+@connect(({ cart, userLogin, address }) => ({
   cart: getCartList(cart),
-  isLoggedIn: userLogin.isLoggedIn
+  isLoggedIn: userLogin.isLoggedIn,
+  addNewAddress: address.addNewAddress
 }))
 @withRouter
 export default class DeliveryAddressContainer extends Component {
@@ -46,15 +48,20 @@ export default class DeliveryAddressContainer extends Component {
     }
   }
   render() {
+    const { addNewAddress } = this.props;
     return (
       <Wrapper>
+
         <Helmet title="Delivery Address" />
-        <Body>
-          {/* HeaderSecondary */}
-          <HeaderSecondary />
-          <DeliveryAddress />
-          <Footer />
-        </Body>
+        {!addNewAddress && (
+          <Body>
+            {/* HeaderSecondary */}
+            {/* <CartBreadCumb /> */}
+            <DeliveryAddress />
+            {/* <HappyToHelp /> */}
+          </Body>
+        )}
+
       </Wrapper>
     );
   }

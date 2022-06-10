@@ -7,6 +7,7 @@ import SliderItem from "./SlideItems";
 import SlickSlider from "../SlickSlider";
 import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
 import "./ShopNewArrivalSlider.css";
+import { weBannerImpression } from "../../redux/modules/homepage";
 
 const LeftArrow = require("../../../static/new-home/roundedArrowLeft.svg");
 const RightArrow = require("../../../static/new-home/roundedArrowRight.svg");
@@ -60,6 +61,7 @@ class MainSliderTwo extends Component {
       secondmainbanner,
       triggerSlideChange,
       triggerSlideClick,
+      weBannerImpression,
       reference,
       newSettings,
       onImageClick
@@ -100,7 +102,10 @@ class MainSliderTwo extends Component {
                 target={slide.target || ""}
                 image={slide.image}
                 url={slide.url_key}
-                onClick={() => triggerSlideClick(index)}
+                onClick={() => {
+                  weBannerImpression(slide.weData);
+                  triggerSlideClick(index);
+                }}
                 onImageClick={onImageClick}
               />
             </BoxHtV1>
@@ -122,6 +127,7 @@ MainSliderTwo.propTypes = {
   data: PropTypes.array,
   triggerSlideChange: PropTypes.func.isRequired,
   triggerSlideClick: PropTypes.func.isRequired,
+  weBannerImpression: PropTypes.func.isRequired,
   reference: PropTypes.object,
   newSettings: PropTypes.object,
   onImageClick: PropTypes.func
@@ -129,5 +135,6 @@ MainSliderTwo.propTypes = {
 
 export default connect(null, {
   triggerSlideChange: triggerImpression,
-  triggerSlideClick: triggerClick
+  triggerSlideClick: triggerClick,
+  weBannerImpression: weBannerImpression
 })(MainSliderTwo);
