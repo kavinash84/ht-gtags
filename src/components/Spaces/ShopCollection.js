@@ -47,7 +47,7 @@ export default class ShopByCollection extends Component {
               }}
             >
               <Div mt="40px" >
-                <Image data-src={slide.imgSrc} alt="collection" style={{ width: "85%", marginLeft: "7.5%" }}/>
+                <Image data-src={slide.imgSrc} src={`${slide.imgSrc}?blur=30`} alt="collection" style={{ width: "85%", marginLeft: "7.5%" }}/>
               </Div>
             </Link>
           ))}

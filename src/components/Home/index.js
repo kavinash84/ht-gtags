@@ -98,6 +98,7 @@ class HomeContainer extends Component {
                 mt="50px"
                 mb="30px"
                 data-src={secondbanner.image}
+                src={`${secondbanner.image}?blur=30`}
                 alt="secondbanner"
                 style={{
                   zIndex: "10px"
@@ -250,6 +251,7 @@ class HomeContainer extends Component {
               <Image
                 mt="30px"
                 data-src={bestSeat.image}
+                src={`${bestSeat.image}?blur=30`}
                 style={{
                   width: "92%",
                   alignItems: "center",
@@ -306,6 +308,7 @@ class HomeContainer extends Component {
                   <Image
                     // style={{ width: "97%" }}
                     data-src={val.image}
+                    src={`${val.image}?blur=30`}
                     alt="IndoorFountain"
                   />
                 </Link>
@@ -400,7 +403,7 @@ class HomeContainer extends Component {
                   zIndex: "10"
                 }}
               >
-                <Image data-src={gifting.image1} />
+                <Image data-src={gifting.image1} src={`${gifting.image1}?blur=30`} />
               </Link>
               <Link
                 onClick={() => {
@@ -417,7 +420,7 @@ class HomeContainer extends Component {
                   zIndex: "10"
                 }}
               >
-                <Image data-src={gifting.image2} />
+                <Image data-src={gifting.image2} src={`${gifting.image2}?blur=30`} />
               </Link>
             </div>
           </div>
@@ -473,6 +476,7 @@ class HomeContainer extends Component {
               <Image
                 mt="30px"
                 data-src={togetherInMoment.image}
+                src={`${togetherInMoment.image}?blur=30`}
                 style={{
                   width: "90%",
                   alignItems: "center",
@@ -515,6 +519,7 @@ class HomeContainer extends Component {
                       zIndex: "10"
                     }}
                     data-src={TheWayWeAreEntertainingNow.image1}
+                    src={`${TheWayWeAreEntertainingNow.image1}?blur=30`}
                   />
                 </div>
 
@@ -580,6 +585,7 @@ class HomeContainer extends Component {
                       height: "75%"
                     }}
                     data-src={TheWayWeAreEntertainingNow.image2}
+                    src={`${TheWayWeAreEntertainingNow.image2}?blur=30`}
                   />
                 </div>
               </div>
@@ -841,6 +847,7 @@ class HomeContainer extends Component {
               <Image
                 mt="10px"
                 data-src={trendsWeLove1.data[0].image1}
+                src={`${trendsWeLove1.data[0].image1}?blur=30`}
                 style={{
                   width: "75%",
 
@@ -859,6 +866,7 @@ class HomeContainer extends Component {
               <Image
                 mt="60px"
                 data-src={trendsWeLove1.data[1].image2}
+                src={`${trendsWeLove1.data[1].image2}?blur=30`}
                 style={{
                   width: "75%",
 
@@ -877,6 +885,7 @@ class HomeContainer extends Component {
               <Image
                 mt="60px"
                 data-src={trendsWeLove1.data[2].image3}
+                src={`${trendsWeLove1.data[2].image3}?blur=30`}
                 style={{
                   width: "75%",
 
@@ -895,6 +904,7 @@ class HomeContainer extends Component {
               <Image
                 mt="60px"
                 data-src={trendsWeLove1.data[3].image4}
+                src={`${trendsWeLove1.data[3].image4}?blur=30`}
                 style={{
                   width: "75%",
 
@@ -952,6 +962,7 @@ class HomeContainer extends Component {
               <Image
                 mt="30px"
                 data-src={forYourMasterSuite.image}
+                src={`${forYourMasterSuite.image}?blur=30`}
                 style={{
                   width: "90%",
                   alignItems: "center",
@@ -1017,6 +1028,7 @@ class HomeContainer extends Component {
               <Image
                 mt="30px"
                 data-src={ourBeddingFavourites.image}
+                src={`${ourBeddingFavourites.image}?blur=30`}
                 style={{
                   width: "90%",
                   alignItems: "center",
@@ -1077,6 +1089,7 @@ class HomeContainer extends Component {
             {/* <Link to="/furniture/bedroom-furniture"> */}
             <Image
               data-src={forBetterSleep.image}
+              src={`${forBetterSleep.image}?blur=30`}
               alt="ForABetterSleep"
               style={{
                 width: "90%",
@@ -1107,6 +1120,7 @@ class HomeContainer extends Component {
                   >
                     <Image
                       data-src={forBetterSleep.data[0].image}
+                      src={`${forBetterSleep.data[0].image}?blur=30`}
                       alt="ForABetterSleep01"
                     />
                     <div
@@ -1139,6 +1153,7 @@ class HomeContainer extends Component {
                   >
                     <Image
                       data-src={forBetterSleep.data[1].image}
+                      src={`${forBetterSleep.data[1].image}?blur=30`}
                       alt="ForABetterSleep02"
                     />
                     <div
@@ -1170,6 +1185,7 @@ class HomeContainer extends Component {
                   >
                     <Image
                       data-src={forBetterSleep.data[2].image}
+                      src={`${forBetterSleep.data[2].image}?blur=30`}
                       alt="ForABetterSleep03"
                     />
                     <div
@@ -1201,6 +1217,7 @@ class HomeContainer extends Component {
                   >
                     <Image
                       data-src={forBetterSleep.data[3].image}
+                      src={`${forBetterSleep.data[3].image}?blur=30`}
                       alt="ForABetterSleep04"
                     />
                     <div
@@ -1302,6 +1319,7 @@ class HomeContainer extends Component {
                 <Image
                   mt="30px"
                   data-src={customiseYourHome.image1}
+                  src={`${customiseYourHome.image1}?blur=30`}
                   style={{
                     width: "80%",
                     alignItems: "center",
@@ -1324,6 +1342,7 @@ class HomeContainer extends Component {
                 <Image
                   mt="30px"
                   data-src={customiseYourHome.image2}
+                  src={`${customiseYourHome.image2}?blur=30`}
                   style={{
                     width: "80%",
                     alignItems: "center",

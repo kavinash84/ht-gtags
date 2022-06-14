@@ -44,7 +44,7 @@ class RoomsWeTransform extends React.Component {
           {SpacesWeTransform.values.map(slide => (
             <Box style={{ width: '40%', margin: '30px 10px 10px' }}>
               {/* <Link to={slide.url_key}> */}
-              <Image data-src={slide.imgSrc} alt={slide.title} m={5} height="350px" width="100%" style={{objectFit: 'cover'}}/>
+              <Image data-src={slide.imgSrc} src={`${slide.imgSrc}?blur=30`} alt={slide.title} m={5} height="350px" width="100%" style={{objectFit: 'cover'}}/>
               <Text
                 fontSize="30px"
                 color="label"

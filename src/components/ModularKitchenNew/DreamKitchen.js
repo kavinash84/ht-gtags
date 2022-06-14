@@ -15,6 +15,7 @@ class DreamKitchen extends React.Component {
         <Img
           onClick={this.props.handleModal}
           data-src={beginJourney.image}
+          src={`${beginJourney.image}?blur=30`}
           alt={beginJourney.title}
         />
       </Div>

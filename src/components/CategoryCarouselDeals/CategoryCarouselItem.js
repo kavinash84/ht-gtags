@@ -62,6 +62,7 @@ const CategoryItem = ({
             <div style={{ position: "relative" }}>
               <Image
                 data-src={image}
+                src={`${image}?blur=30`}
                 alt={name}
                 height="auto"
                 width="100%"

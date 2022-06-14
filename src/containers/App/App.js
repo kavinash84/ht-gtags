@@ -367,7 +367,7 @@ export default class App extends Component {
               `}
             </script>
             <script type="text/javascript">
-            {`window.GUMLET_CONFIG = {
+              {`window.GUMLET_CONFIG = {
         hosts: [{
             current: "www.hometown.in",
             gumlet: "hometown.gumlet.io"
@@ -376,7 +376,7 @@ export default class App extends Component {
     };
     (function(){d=document;s=d.createElement("script");s.src="https://cdn.gumlet.com/gumlet.js/2.1/gumlet.min.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
     `}
-          </script>
+            </script>
           </Helmet>
         )}
         <main className={styles.appContent}>

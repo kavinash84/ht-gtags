@@ -31,18 +31,18 @@ class ServicesWeOffer extends React.Component {
           }}
         >
           {ServicesOffer.title}
-         
+
         </Box>
         <Text
-                style={{fontSize: "19px", color: "#888888", marginBottom: "20px", width: "70%", textAlign: 'center', marginLeft: '15%', marginTop: '30px' }}
-                >
-                {ServicesOffer.subtitle}
-                </Text>
+          style={{ fontSize: "19px", color: "#888888", marginBottom: "20px", width: "70%", textAlign: 'center', marginLeft: '15%', marginTop: '30px' }}
+        >
+          {ServicesOffer.subtitle}
+        </Text>
         <Row justifyContent="center" style={{ width: '100%', margin: 'auto' }}>
           {ServicesOffer.values.map(slide => (
             <Box style={{ width: '25%', margin: '25px 18px 50px' }}>
               {/* <Link to={slide.url_key}> */}
-              <Image data-src={slide.imgSrc} alt={slide.title} m={5} height="100%" width="100%" />
+              <Image data-src={slide.imgSrc} src={`${slide.imgSrc}?blur=30`} alt={slide.title} m={5} height="100%" width="100%" />
               <Text
                 fontSize="26px"
                 color="label"
@@ -55,7 +55,7 @@ class ServicesWeOffer extends React.Component {
             </Box>
           ))}
           <Button
-          onClick={this.props.handleModal}
+            onClick={this.props.handleModal}
             style={{
               width: '350px',
               height: '50px',
@@ -63,8 +63,8 @@ class ServicesWeOffer extends React.Component {
               color: '#F47020',
               border: '1px solid #F47020',
               borderRadius: '5px',
-              margin:'50px auto 0',
-              textTransform:'none'
+              margin: '50px auto 0',
+              textTransform: 'none'
             }}
           >
             Speak To Our Designer

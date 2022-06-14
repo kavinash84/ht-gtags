@@ -23,13 +23,14 @@ class TopBanner extends React.Component {
       <Box className={styles.main}>
         <Image
           data-src={topBanner.img}
+          src={`${topBanner.img}?blur=30`}
           alt="topbanner"
           width="100%"
           height="650px"
           style={{ objectFit: 'cover' }}
         />
         <Box style={{ height: '70%', width: '300px', backgroundColor: 'white' }} className={styles.sub}>
-          <Image src={topBanner.image} alt="topbanner" style={{ objectFit: 'cover', width: '85%', marginLeft: '7.5%' }} />
+          <Image data-src={topBanner.image} src={`${topBanner.image}?blur=30`} alt="topbanner" style={{ objectFit: 'cover', width: '85%', marginLeft: '7.5%' }} />
           <Text
             style={{
               color: '#666666',

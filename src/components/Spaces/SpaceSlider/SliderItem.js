@@ -14,7 +14,7 @@ const SliderItem = ({ title, image, url, onClick, target, onImageClick }) => {
         as="a"
         onClick={onImageClick}
       >
-        <ImageHtV1 data-src={image} alt={title || "Banner-image"} variant="image" />
+        <ImageHtV1 data-src={image} src={`${image}?blur=30`} alt={title || "Banner-image"} variant="image" />
       </CardHtV1>
     );
   } else if (target) {

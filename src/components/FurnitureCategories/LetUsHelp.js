@@ -39,7 +39,7 @@ class LetUsHelpYou extends React.Component {
                onClick={() => {
               sessionStorage.setItem("HomeInteriorscrollPosition", window.pageYOffset);
             }}>
-              <Image data-src={slide.image} alt={slide.title} m={5} height="240px" width="100%" />
+              <Image data-src={slide.image} src={`${slide.image}?blur=30`} alt={slide.title} m={5} height="240px" width="100%" />
               <Text
                 fontSize="20px"
                 color="label"

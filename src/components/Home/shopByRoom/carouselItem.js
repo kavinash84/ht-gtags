@@ -45,6 +45,8 @@ class DBItem extends React.Component {
             <div style={{ height: "400px" }}>
               <img
                 data-src={data.image}
+                src={`${data.image}?blur=30`}
+                onTouchStartCapture
                 alt={data.image}
                 className={styles.curosalImg}
                 style={{

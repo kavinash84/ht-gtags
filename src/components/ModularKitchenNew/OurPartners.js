@@ -48,6 +48,7 @@ class OurPartners extends React.Component {
                 <Div key={index} col="6" margin="0 10px">
                   <Img
                     data-src={data.image}
+                    src={`${data.image}?blur=30`}
                     height="70%"
                     width="70%"
                     m="auto"

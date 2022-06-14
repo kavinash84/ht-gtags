@@ -24,6 +24,7 @@ class KitchenBlog extends React.Component {
           <div>
             <Image
               data-src={val.image}
+              src={`${val.image}?blur=30`}
               width="90%"
               height="70%"
               marginLeft="5%"

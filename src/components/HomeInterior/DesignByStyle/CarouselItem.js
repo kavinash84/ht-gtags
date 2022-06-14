@@ -31,6 +31,7 @@ const DBItem = ({ component, data }) => {
               <div style={{ height: '350px' }}>
                 <img
                   data-src={data.imgSrc}
+                  src={`${data.imgSrc}?blur=30`}
                   alt={data.title}
                   className={styles.curosalImg}
                   style={{ height: '100%', width: '100%', margin: 'auto'}}

@@ -34,6 +34,7 @@ class CategoryBlock extends React.Component {
             <Img
               border="none"
               data-src={src}
+              src={`${src}?blur=30`}
               alt={title}
               m={5}
               height="auto"

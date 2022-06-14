@@ -26,6 +26,7 @@ class RoomsWeTransform extends React.Component {
               {/* <Link to={slide.url_key}> */}
               <Image
                 data-src={slide.imgSrc}
+                src={`${slide.imgSrc}?blur=30`}
                 alt={slide.title}
                 m={5}
                 height="350px"
