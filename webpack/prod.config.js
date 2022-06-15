@@ -238,10 +238,7 @@ module.exports = {
     new SWPrecacheWebpackPlugin({
       cacheId: "hometown.in",
       filename: "../service-worker.js",
-      importScripts: [
-        "https://cdn.onesignal.com/sdks/OneSignalSDKWorker.js",
-        "https://widgets.in.webengage.com/js/service-worker.js"
-      ],
+      importScripts: ["https://widgets.in.webengage.com/js/service-worker.js"],
       maximumFileSizeToCacheInBytes: 8388608,
 
       // Ensure all our static, local assets are cached.

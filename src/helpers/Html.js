@@ -1,11 +1,10 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import serialize from 'serialize-javascript';
-import Helmet from 'react-helmet';
-import config from 'config';
-import { newRelic, admitad, admitadSetCookie } from 'utils/tracking';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import serialize from "serialize-javascript";
+import Helmet from "react-helmet";
+import config from "config";
+import { newRelic, admitad, admitadSetCookie } from "utils/tracking";
 
-const ONESIGNALID = 'b2f22db2-b562-4530-8888-516550bfbe6d';
 // const { version } = require('../../package.json');
 
 /**
@@ -35,60 +34,76 @@ export default class Html extends Component {
   static defaultProps = {
     assets: {},
     bundles: [],
-    content: '',
+    content: "",
     styleTags: []
   };
 
   render() {
-    const {
- assets, store, content, bundles, styleTags
-} = this.props;
+    const { assets, store, content, bundles, styleTags } = this.props;
     let SF_CHAT = {
-      url: 'https://praxisretail.my.salesforce.com',
-      liveAgentUrl: 'https://praxisretail.secure.force.com/LiveAgent',
-      version: '00D7F000006O16S',
-      baseLiveAgentContentURL: 'https://c.la2-c2-ukb.salesforceliveagent.com/content',
-      deploymentId: '5727F0000009ARB',
-      buttonId: '5732y000000PHDP',
-      baseLiveAgentURL: 'https://d.la2-c2-ukb.salesforceliveagent.com/chat',
-      eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I7F0000004DjiUAE_16c51bfeb82',
-      jsUrl: 'https://praxisretail.my.salesforce.com/embeddedservice/5.0/esw.min.js'
+      url: "https://praxisretail.my.salesforce.com",
+      liveAgentUrl: "https://praxisretail.secure.force.com/LiveAgent",
+      version: "00D7F000006O16S",
+      baseLiveAgentContentURL:
+        "https://c.la2-c2-ukb.salesforceliveagent.com/content",
+      deploymentId: "5727F0000009ARB",
+      buttonId: "5732y000000PHDP",
+      baseLiveAgentURL: "https://d.la2-c2-ukb.salesforceliveagent.com/chat",
+      eswLiveAgentDevName:
+        "EmbeddedServiceLiveAgent_Parent04I7F0000004DjiUAE_16c51bfeb82",
+      jsUrl:
+        "https://praxisretail.my.salesforce.com/embeddedservice/5.0/esw.min.js"
     };
 
-    if (process.env.SF_ENV && process.env.SF_ENV !== 'production') {
+    if (process.env.SF_ENV && process.env.SF_ENV !== "production") {
       SF_CHAT = {
-        url: 'https://praxisretail--produat.my.salesforce.com',
-        liveAgentUrl: 'https://produat-praxisretail.cs6.force.com/LiveAgent',
-        version: '00DN0000000FXR7',
-        baseLiveAgentContentURL: 'https://c.la1-c1cs-hnd.salesforceliveagent.com/content',
-        deploymentId: '5727F0000009ARB',
-        buttonId: '573N000000000sa',
-        baseLiveAgentURL: 'https://d.la1-c1cs-hnd.salesforceliveagent.com/chat',
-        eswLiveAgentDevName: 'EmbeddedServiceLiveAgent_Parent04I7F0000004DjiUAE_16c51bfeb82',
-        jsUrl: 'https://praxisretail--produat.my.salesforce.com/embeddedservice/5.0/esw.min.js'
+        url: "https://praxisretail--produat.my.salesforce.com",
+        liveAgentUrl: "https://produat-praxisretail.cs6.force.com/LiveAgent",
+        version: "00DN0000000FXR7",
+        baseLiveAgentContentURL:
+          "https://c.la1-c1cs-hnd.salesforceliveagent.com/content",
+        deploymentId: "5727F0000009ARB",
+        buttonId: "573N000000000sa",
+        baseLiveAgentURL: "https://d.la1-c1cs-hnd.salesforceliveagent.com/chat",
+        eswLiveAgentDevName:
+          "EmbeddedServiceLiveAgent_Parent04I7F0000004DjiUAE_16c51bfeb82",
+        jsUrl:
+          "https://praxisretail--produat.my.salesforce.com/embeddedservice/5.0/esw.min.js"
       };
     }
     let unbxdScripts = {};
-    if (process.env.UNBXD && process.env.UNBXD === 'production') {
+    if (process.env.UNBXD && process.env.UNBXD === "production") {
       unbxdScripts = {
-        autosuggestJs: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_autosuggest.js',
-        autosuggestCss: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_autosuggest.css',
-        searchJs: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_search.js',
-        searchCss: 'https://libraries.unbxdapi.com/prod-hometown808961566375586_search.css'
+        autosuggestJs:
+          "https://libraries.unbxdapi.com/prod-hometown808961566375586_autosuggest.js",
+        autosuggestCss:
+          "https://libraries.unbxdapi.com/prod-hometown808961566375586_autosuggest.css",
+        searchJs:
+          "https://libraries.unbxdapi.com/prod-hometown808961566375586_search.js",
+        searchCss:
+          "https://libraries.unbxdapi.com/prod-hometown808961566375586_search.css"
       };
-    } else if (process.env.UNBXD && process.env.UNBXD === 'beta') {
+    } else if (process.env.UNBXD && process.env.UNBXD === "beta") {
       unbxdScripts = {
-        autosuggestJs: 'https://sandbox.unbxd.io/dev-hometown808961566375617_autosuggest.js',
-        autosuggestCss: 'https://sandbox.unbxd.io/dev-hometown808961566375617_autosuggest.css',
-        searchJs: 'https://sandbox.unbxd.io/dev-hometown808961566375617_search.js',
-        searchCss: 'https://sandbox.unbxd.io/dev-hometown808961566375617_search.css'
+        autosuggestJs:
+          "https://sandbox.unbxd.io/dev-hometown808961566375617_autosuggest.js",
+        autosuggestCss:
+          "https://sandbox.unbxd.io/dev-hometown808961566375617_autosuggest.css",
+        searchJs:
+          "https://sandbox.unbxd.io/dev-hometown808961566375617_search.js",
+        searchCss:
+          "https://sandbox.unbxd.io/dev-hometown808961566375617_search.css"
       };
     } else {
       unbxdScripts = {
-        autosuggestJs: 'https://sandbox.unbxd.io/stage-hometown808961566375562_autosuggest.js',
-        autosuggestCss: 'https://sandbox.unbxd.io/stage-hometown808961566375562_autosuggest.css',
-        searchJs: 'https://sandbox.unbxd.io/stage-hometown808961566375562_search.js',
-        searchCss: 'https://sandbox.unbxd.io/stage-hometown808961566375562_search.css'
+        autosuggestJs:
+          "https://sandbox.unbxd.io/stage-hometown808961566375562_autosuggest.js",
+        autosuggestCss:
+          "https://sandbox.unbxd.io/stage-hometown808961566375562_autosuggest.css",
+        searchJs:
+          "https://sandbox.unbxd.io/stage-hometown808961566375562_search.js",
+        searchCss:
+          "https://sandbox.unbxd.io/stage-hometown808961566375562_search.css"
       };
     }
     const head = Helmet.renderStatic();
@@ -105,33 +120,89 @@ export default class Html extends Component {
           <link rel="shortcut icon" href="/favicon.ico" />
           <meta charSet="utf-8" />
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />
-          <meta name="viewport" content="width=device-width, initial-scale=1 minimum-scale=1" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1 minimum-scale=1"
+          />
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="application-name" content="HomeTown Web" />
           <meta name="apple-mobile-web-app-status-bar-style" content="black" />
           <meta name="apple-mobile-web-app-title" content="HomeTown Web" />
           <meta name="theme-color" content="#3677dd" />
-          <meta name="facebook-domain-verification" content="zcpr8ig8hh8z1idybyhitvi7j4nic4" />
+          <meta
+            name="facebook-domain-verification"
+            content="zcpr8ig8hh8z1idybyhitvi7j4nic4"
+          />
           <link rel="manifest" href="/manifest.json" />
           {/* eslint-disable */}
-          <link rel="preconnect" href="https://connect.facebook.net" crossOrigin="" />
-          <link rel="preconnect" href="https://bid.g.doubleclick.net" crossOrigin="" />
-          <link rel="preconnect" href="https://googleads.g.doubleclick.net" crossOrigin="" />
-          <link rel="preconnect" href="https://api.hometown.in" crossOrigin="" />
-          <link rel="preconnect" href="https://www.google-analytics.com" crossOrigin="" />
-          <link rel="preconnect" href="https://www.googleadservices.com" crossOrigin="" />
-          <link rel="preconnect" href="https://www.googletagmanager.com" crossOrigin="" />
+          <link
+            rel="preconnect"
+            href="https://connect.facebook.net"
+            crossOrigin=""
+          />
+          <link
+            rel="preconnect"
+            href="https://bid.g.doubleclick.net"
+            crossOrigin=""
+          />
+          <link
+            rel="preconnect"
+            href="https://googleads.g.doubleclick.net"
+            crossOrigin=""
+          />
+          <link
+            rel="preconnect"
+            href="https://api.hometown.in"
+            crossOrigin=""
+          />
+          <link
+            rel="preconnect"
+            href="https://www.google-analytics.com"
+            crossOrigin=""
+          />
+          <link
+            rel="preconnect"
+            href="https://www.googleadservices.com"
+            crossOrigin=""
+          />
+          <link
+            rel="preconnect"
+            href="https://www.googletagmanager.com"
+            crossOrigin=""
+          />
           <link rel="preconnect" href="https://www.google.com" crossOrigin="" />
-          <link rel="preconnect" href="https://www.google.co.in" crossOrigin="" />
-          <link rel="preconnect" href="https://cdn.onesignal.com" crossOrigin="" />
-          <link rel="preconnect" href="https://onesignal.com" crossOrigin="" />
-          <link rel="preconnect" href="https://service.force.com" crossOrigin="" />
-          <link rel="preconnect" href="https://c.la1-c1-hnd.salesforceliveagent.com" crossOrigin="" />
-          <link rel="preconnect" href="https://d.la1-c1-hnd.salesforceliveagent.com" crossOrigin="" />
+          <link
+            rel="preconnect"
+            href="https://www.google.co.in"
+            crossOrigin=""
+          />
+          <link
+            rel="preconnect"
+            href="https://service.force.com"
+            crossOrigin=""
+          />
+          <link
+            rel="preconnect"
+            href="https://c.la1-c1-hnd.salesforceliveagent.com"
+            crossOrigin=""
+          />
+          <link
+            rel="preconnect"
+            href="https://d.la1-c1-hnd.salesforceliveagent.com"
+            crossOrigin=""
+          />
           <link rel="preconnect" href="https://bat.bing.com" crossOrigin="" />
-          <link rel="preconnect" href="https://static.criteo.net" crossOrigin="" />
-          <link rel="preconnect" href="http://static.criteo.net" crossOrigin="" />
+          <link
+            rel="preconnect"
+            href="https://static.criteo.net"
+            crossOrigin=""
+          />
+          <link
+            rel="preconnect"
+            href="http://static.criteo.net"
+            crossOrigin=""
+          />
           <link rel="preconnect" href="http://m.hometown.in" crossOrigin="" />
           {/* eslint-disable */}
           {styleTags}
@@ -150,9 +221,13 @@ export default class Html extends Component {
 
           {/* (will be present only in development mode) */}
           {assets.styles && Object.keys(assets.styles).length === 0 ? (
-            <style dangerouslySetInnerHTML={{ __html: '#content{display:none}' }} />
+            <style
+              dangerouslySetInnerHTML={{ __html: "#content{display:none}" }}
+            />
           ) : null}
-          {process.env.NODE_ENV !== 'development' && <script dangerouslySetInnerHTML={{ __html: newRelic }} />}
+          {process.env.NODE_ENV !== "development" && (
+            <script dangerouslySetInnerHTML={{ __html: newRelic }} />
+          )}
           <style
             dangerouslySetInnerHTML={{
               __html: `
@@ -367,10 +442,22 @@ export default class Html extends Component {
           )} */}
           <div id="content" dangerouslySetInnerHTML={{ __html: content }} />
           <script src={unbxdScripts.autosuggestJs} async="" />
-          <link rel="stylesheet" type="text/css" href={unbxdScripts.autosuggestCss} />
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href={unbxdScripts.autosuggestCss}
+          />
           <script src={unbxdScripts.searchJs} />
-          <link rel="stylesheet" type="text/css" href={unbxdScripts.searchCss} />
-          <script type="text/javascript" async="" src="https://d21gpk1vhmjuf5.cloudfront.net/embed.js" />
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href={unbxdScripts.searchCss}
+          />
+          <script
+            type="text/javascript"
+            async=""
+            src="https://d21gpk1vhmjuf5.cloudfront.net/embed.js"
+          />
           <script
             type="text/javascript"
             async=""
@@ -384,19 +471,36 @@ export default class Html extends Component {
               charSet="UTF-8"
             />
           )}
-          {__DLLS__ && <script key="dlls__vendor" src="/dist/dlls/dll__vendor.js" charSet="UTF-8" />}
-          {assets.javascript && <script src={assets.javascript.main} charSet="UTF-8" />}
-          {bundles.map(bundle => bundle && <script src={config.assetsPath + bundle.file} key={bundle.id} />)}
+          {__DLLS__ && (
+            <script
+              key="dlls__vendor"
+              src="/dist/dlls/dll__vendor.js"
+              charSet="UTF-8"
+            />
+          )}
+          {assets.javascript && (
+            <script src={assets.javascript.main} charSet="UTF-8" />
+          )}
+          {bundles.map(
+            bundle =>
+              bundle && (
+                <script src={config.assetsPath + bundle.file} key={bundle.id} />
+              )
+          )}
 
           {/* (will be present only in development mode) */}
           {assets.styles && Object.keys(assets.styles).length === 0 ? (
             <script
               dangerouslySetInnerHTML={{
-                __html: 'document.getElementById("content").style.display="block";'
+                __html:
+                  'document.getElementById("content").style.display="block";'
               }}
             />
           ) : null}
-          <script type="text/javascript" src="https://service.force.com/embeddedservice/5.0/esw.min.js" />
+          <script
+            type="text/javascript"
+            src="https://service.force.com/embeddedservice/5.0/esw.min.js"
+          />
           <script
             type="text/javascript"
             src="https://c.la1-c1-hnd.salesforceliveagent.com/content/g/js/47.0/deployment.js"
@@ -510,20 +614,6 @@ export default class Html extends Component {
               } else {
                 initESW('https://service.force.com');
               }`
-            }}
-            charSet="UTF-8"
-          />
-          <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async="" />
-          <script
-            dangerouslySetInnerHTML={{
-              __html: `
-                var OneSignal = window.OneSignal || [];
-                OneSignal.push(function() {
-                  OneSignal.init({
-                    appId: '${ONESIGNALID}',
-                  });
-                })
-              `
             }}
             charSet="UTF-8"
           />
