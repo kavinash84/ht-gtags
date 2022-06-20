@@ -19,7 +19,7 @@ import {
   isLoaded as isStoresLoaded
 } from "redux/modules/listingbanners";
 import { PINCODE } from "helpers/Constants";
-import { isLandingPage } from "../../redux/modules/landing";
+import { isLandingPage } from "../../redux/modules/app";
 
 const hooks = {
   fetch: async ({ store: { dispatch, getState }, params, location }) => {

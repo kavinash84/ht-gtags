@@ -178,6 +178,11 @@ export default class Listing extends Component {
     }
   }
 
+  componentDidMount() {
+    const { dispatch } = this.context.store;
+    dispatch(isLandingPage(true));
+  }
+
   componentWillUnmount() {
     const { dispatch } = this.context.store;
     dispatch(isLandingPage(false));
