@@ -203,10 +203,10 @@ export default class Home extends Component {
     return (
       /* eslint-disable max-len */
       <Wrapper>
-        <Helmet title="Online Furniture Shopping, Buy Decor Items in India - HomeTown.in">
+        <Helmet title="Online Furniture Stores: Buy Home Decor, Furnishing, Tableware & Kitchenware Online at HomeTown">
           <meta
             name="description"
-            content="HomeTown - Shop online for Furniture, Home Decor, Furnishings, Kitchenware, Dining Products at best prices from HomeTown.in. Get best furniture and home decor products ☆Upto 40% Off, ☆Fast Shipping, ☆High Quality, ☆Premium, ☆Luxury furniture to beautify your ☆bedroom, ☆kitchen, ☆dining room, ☆living and ☆outdoor space ☆Original ☆0% EMI ☆Free Assembly ☆Safe Shipping."
+            content="Buy premium quality home furniture at HomeTown, India's largest online furniture store. Give your house a makeover with variety of home decor, furnishing & kitchenware items. Shop now!"
           />
           <meta name="keywords" content="furniture, home-decor" />
           <meta name="robots" content="index, follow" />
