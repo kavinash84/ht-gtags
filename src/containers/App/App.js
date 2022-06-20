@@ -123,7 +123,8 @@ const SITE_URL_MOBILE = "https://m.hometown.in";
     notifs: state.notifs,
     profile: state.profile,
     cartSynced: state.cart.cartSynced,
-    webtochat: state.webtochat
+    webtochat: state.webtochat,
+    isPLPLanding: state.app.isPLPLanding
   }),
   {
     toggleWebToChat: togglePopUp,
@@ -274,7 +275,8 @@ export default class App extends Component {
       location,
       route,
       notifs,
-      webtochat: { visible }
+      webtochat: { visible },
+      isPLPLanding
     } = this.props;
     const pathname = (location && location.pathname) || "/";
     const url = this.checkIfSlash(pathname);
@@ -366,17 +368,13 @@ export default class App extends Component {
               arguments])}}var i,s,r=w[b],z=" ",l="init options track screen onReady".split(z),a="feedback survey notification".split(z),c="options render clear abort".split(z),p="Open Close Submit Complete View Click".split(z),u="identify login logout setAttribute".split(z);if(!r||!r.__v){for(w[b]=r={__queue:[],__v:"6.0",user:{}},i=0;i < l.length;i++)o(r,[l[i]]);for(i=0;i < a.length;i++){for(r[a[i]]={},s=0;s < c.length;s++)o(r[a[i]],[a[i],c[s]]);for(s=0;s < p.length;s++)o(r[a[i]],[a[i],"on"+p[s]])}for(i=0;i < u.length;i++)o(r.user,["user",u[i]]);setTimeout(function(){var f=e.createElement("script"),d=e.getElementById("_webengage_script_tag");f.type="text/javascript",f.async=!0,f.src=("https:"==e.location.protocol?"https://widgets.in.webengage.com":"http://widgets.in.webengage.com")+"/js/webengage-min-v-6.0.js",d.parentNode.insertBefore(f,d)})}}(window,document,"webengage");webengage.init("${this.getWeKey()}");
               `}
             </script>
-            <script type="text/javascript">
-              {`window.GUMLET_CONFIG = {
-        hosts: [{
-            current: "www.hometown.in",
-            gumlet: "hometown.gumlet.io"
-        }],
-        lazy_load: true
-    };
-    (function(){d=document;s=d.createElement("script");s.src="https://cdn.gumlet.com/gumlet.js/2.1/gumlet.min.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
-    `}
-            </script>
+            {isPLPLanding && (
+              <script
+                id="gumletScriptID"
+                src="https://cdn.gumlet.com/gumlet.js/2.1/gumlet.min.js"
+                async=""
+              ></script>
+            )}
           </Helmet>
         )}
         <main className={styles.appContent}>

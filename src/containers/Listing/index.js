@@ -1,7 +1,7 @@
-import HomeTownLoader from 'containers/Loader';
-import { provideHooks } from 'redial';
-import { encodeCategory } from 'utils/helper';
-import { setCurrentPage, resetPagination } from 'redux/modules/pagination';
+import HomeTownLoader from "containers/Loader";
+import { provideHooks } from "redial";
+import { encodeCategory } from "utils/helper";
+import { setCurrentPage, resetPagination } from "redux/modules/pagination";
 import {
   // isLoaded as isInitialListLoaded,
   setCategoryQuery,
@@ -12,13 +12,23 @@ import {
   setFilter,
   gaTrack as listingLoadTrack,
   setReloadListing
-} from 'redux/modules/products';
-import { getOfferStrip } from 'redux/modules/offer';
-import { load as loadListingBanners, isLoaded as isStoresLoaded } from 'redux/modules/listingbanners';
-import { PINCODE } from 'helpers/Constants';
+} from "redux/modules/products";
+import { getOfferStrip } from "redux/modules/offer";
+import {
+  load as loadListingBanners,
+  isLoaded as isStoresLoaded
+} from "redux/modules/listingbanners";
+import { PINCODE } from "helpers/Constants";
+import { isLandingPage } from "../../redux/modules/landing";
 
 const hooks = {
   fetch: async ({ store: { dispatch, getState }, params, location }) => {
+    if (document.getElementById("gumletScriptID") && window) {
+      await dispatch(isLandingPage(true));
+      await document.getElementById("gumletScriptID").setAttribute("src", "");
+      await delete window.gumlet;
+      document.location.reload();
+    }
     const {
       pincode: { selectedPincode },
       // pagination: { page },
@@ -28,25 +38,25 @@ const hooks = {
     let query;
     let filters;
     let loadResults;
-    const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
+    const pincode = selectedPincode === "" ? PINCODE : selectedPincode;
     const { search } = location;
-    const urlCategoryArr = location.pathname.split('/');
+    const urlCategoryArr = location.pathname.split("/");
     const urlCategory = urlCategoryArr[`${urlCategoryArr.length - 1}`]
       ? urlCategoryArr[`${urlCategoryArr.length - 1}`]
       : urlCategoryArr[`${urlCategoryArr.length - 2}`];
     // console.log(urlCategoryArr, urlCategory, 'url check');
-    const getPage = search.split('page=')[1];
+    const getPage = search.split("page=")[1];
     const currentPage = getPage || 1;
-    if (location.pathname === '/search') {
+    if (location.pathname === "/search") {
       /* eslint prefer-destructuring: ["error", {AssignmentExpression: {array: false}}] */
       let searchquery;
-      [, searchquery] = location.search.split('q=');
+      [, searchquery] = location.search.split("q=");
       if (searchquery) {
-        [searchquery] = searchquery.split('filters=');
-        [searchquery] = searchquery.split('&');
+        [searchquery] = searchquery.split("filters=");
+        [searchquery] = searchquery.split("&");
       }
-      query = encodeCategory({ category: 'search' });
-      [, filters] = location.search.split('filters=');
+      query = encodeCategory({ category: "search" });
+      [, filters] = location.search.split("filters=");
       loadResults = applyFilter({
         searchquery,
         query,
@@ -56,7 +66,7 @@ const hooks = {
       });
     } else {
       query = encodeCategory(params);
-      [, filters] = location.search.split('filters=');
+      [, filters] = location.search.split("filters=");
       loadResults = applyFilter({
         query,
         pincode,
@@ -76,7 +86,7 @@ const hooks = {
     await dispatch(clearPreviousList());
     await dispatch(setCurrentPage(currentPage));
     await dispatch(clearPreviousSort());
-    if (location.pathname !== '/search') {
+    if (location.pathname !== "/search") {
       await dispatch(loadResults).catch(() => null);
     } else {
       await dispatch(setReloadListing(true));
@@ -101,7 +111,7 @@ const hooks = {
 };
 
 const Listing = HomeTownLoader({
-  loader: () => import('./Listing' /* webpackChunkName: 'Listing' */)
+  loader: () => import("./Listing" /* webpackChunkName: 'Listing' */)
 });
 
 export default provideHooks(hooks)(Listing);
