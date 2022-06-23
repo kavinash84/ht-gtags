@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 import ResponsiveModal from "components/Modal";
 import Section from "hometown-components-dev/lib/SectionHtV1";
 import Container from "hometown-components-dev/lib/ContainerHtV1";
@@ -11,6 +12,8 @@ import SlickSlider from "../SlickSlider";
 import DeliveryAddress from "./deliveryAddress";
 import PackagePincode from "./packagePincode";
 import PackageBreadCrumb from "./packageBreadcrumb";
+
+import { loadPackagesSeo } from "redux/modules/lackpackages";
 
 const BreadCrumpstyles = require("./breadcrumb.scss");
 const styles = require("./index.scss");
@@ -69,6 +72,10 @@ export default class OneLacPackage extends Component {
     slected: ""
   };
 
+  static contextTypes = {
+    store: PropTypes.object.isRequired
+  };
+
   handleTab = i => {
     this.setState({ activeTab: i });
   };
@@ -109,6 +116,9 @@ export default class OneLacPackage extends Component {
     if (Number.isInteger(found)) {
       this.setState({ activeTab: found });
     }
+
+    const { dispatch } = this.context.store;
+    dispatch(loadPackagesSeo());
   }
 
   render() {

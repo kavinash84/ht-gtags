@@ -317,19 +317,6 @@ export default class App extends Component {
                     };
                   `}
             </script>
-            <script type="application/ld+json">
-              {`
-                "@context": "https://schema.org/",
-                "@type": "WebSite",
-                "name": "HomeTown",
-                "url": "https://www.hometown.in/",
-                "potentialAction": {
-                  "@type": "SearchAction",
-                  "target": "https://www.hometown.in/search?q={search_term_string}",
-                  "query-input": "required name=search_term_string"
-                }
-              `}
-            </script>
             {/* <!-- Meta Pixel Code --> */}
             <script type="text/javascript">
               {`
