@@ -10,6 +10,7 @@ const SliderItem = ({ image, url, onClick, target, onImageClick }) => {
       <Link
         onClick={() => {
           sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+          onClick();
         }}
         to={url}
       >
@@ -28,6 +29,7 @@ const SliderItem = ({ image, url, onClick, target, onImageClick }) => {
       <Link
         onClick={() => {
           sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+          onClick();
         }}
         to={url}
       >
@@ -46,6 +48,7 @@ const SliderItem = ({ image, url, onClick, target, onImageClick }) => {
     <Link
       onClick={() => {
         sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
+        onClick();
       }}
       to={url}
     >

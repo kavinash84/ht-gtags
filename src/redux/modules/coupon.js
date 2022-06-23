@@ -13,6 +13,8 @@ const REMOVE_COUPON = "coupon/REMOVE_COUPON";
 const REMOVE_COUPON_SUCCESS = "coupon/REMOVE_COUPON_SUCCESS";
 const REMOVE_COUPON_FAIL = "coupon/REMOVE_COUPON_FAIL";
 
+const APPLY_COUPON_FAIL_WE = "coupon/APPLY_COUPON_FAIL_WE";
+
 const initialState = {
   loaded: false,
   loading: false,

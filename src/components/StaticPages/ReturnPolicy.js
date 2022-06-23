@@ -31,7 +31,7 @@ const ReturnPolicy = () => (
               In the unlikely event that any product you have ordered from us is not received in good condition, is
               damaged or defective, or if product delivered is different from what you had ordered, you must
               notwithstanding your warranty rights, immediately lodge a complaint with HomeTown on its Customer care
-              help line at 18002100004, and refuse to accept the delivery. You must also contact us immediately, so
+              help line at 08069252525, and refuse to accept the delivery. You must also contact us immediately, so
               that, we may assert our rights, if any, vis-a-vis the shipping agent. Hidden defects must again not
               withstanding any warranty rights be reported to us immediately on detection, so that any warranty claims
               against upstream suppliers can be asserted. You may return the product unused, and in the same (unused)
@@ -127,7 +127,7 @@ const ReturnPolicy = () => (
             </TextHtV1>
             <TextHtV1 color="rgba(0,0,0,0.7)" fontSize="0.875rem" mb="1rem">
               Email us at <a href="mailto:care@hometown.in">care@hometown.in</a> or call our contact center at
-              18002100004 in case of any assistance.
+              08069252525 in case of any assistance.
             </TextHtV1>
           </BoxHtV1>
         </RowHtV1>
