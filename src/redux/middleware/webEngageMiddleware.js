@@ -90,15 +90,18 @@ export default function webEngageMiddleware() {
                 : "";
             window.webengage.track("Product View", {
               category:
-                Array.isArray(category_data) && category_data.length
-                  ? category_data[0].name
+                Array.isArray(category_details) && category_details.length
+                  ? category_details[0].name
                   : "",
               path: category,
               color: color,
               // stockAvailable: "",
               name: name,
               discountPercent: max_saving_percentage,
-              sub_category: category_type,
+              sub_category:
+                Array.isArray(category_details) && category_details.length > 1
+                  ? category_details[1].name
+                  : "",
               deliveryText:
                 delivery_details &&
                 delivery_details.length &&
@@ -133,20 +136,30 @@ export default function webEngageMiddleware() {
                   special_price,
                   brand,
                   name,
-                  price
+                  price,
+                  category_data
                 }
               },
               wishlist_info: { delivery_details }
             }
           } = action;
           window.webengage.track("Add To Wishlist", {
-            category: google_product_category || category_names,
+            category:
+              Array.isArray(category_data) && category_data.length
+                ? category_data[0].name
+                : "",
             // path: "",
             color: color,
             // stockAvailable: "",
             name: name,
             discountPercent: saving,
-            sub_category: category_type,
+            sub_category:
+              Array.isArray(category_data) &&
+              category_data.length &&
+              Array.isArray(category_data[0].children) &&
+              category_data[0].children.length
+                ? category_data[0].children[0].name
+                : "",
             deliveryText: delivery_details[0].value || "",
             // width: "",
             brand: brand,
