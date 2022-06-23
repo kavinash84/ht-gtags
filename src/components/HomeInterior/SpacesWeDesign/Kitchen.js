@@ -40,7 +40,7 @@ export default class Kitchen extends Component {
         }}
       >
        <Div style={{ width:"90%", marginLeft:"5%" }}>
-         <Image src={kitchen.image}/>
+         <Image data-src={kitchen.image}/>
        </Div>
        <Div>
          <Heading

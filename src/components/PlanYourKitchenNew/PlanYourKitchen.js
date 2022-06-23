@@ -133,7 +133,8 @@ class StepsToPlanYourKitchen extends React.Component {
           </Div>
           <div style={{ position: "relative", top: "0" }}>
             <Img
-              src={stepOne.image}
+              data-src={stepOne.image}
+              src={`${stepOne.image}?blur=30`}
               alt="Determine your need"
               style={{ width: "100%" }}
               zIndex="10"
@@ -167,7 +168,8 @@ class StepsToPlanYourKitchen extends React.Component {
                         height: "auto",
                         display: "block"
                       }}
-                      src={data.icon}
+                      data-src={data.icon}
+                      src={`${data.icon}?blur=30`}
                       alt={data.title}
                     />
                   </Div>
@@ -263,7 +265,8 @@ class StepsToPlanYourKitchen extends React.Component {
               <Img
                 m="auto"
                 mb="20px"
-                src={stepTwo.principleOne.image}
+                data-src={stepTwo.principleOne.image}
+                src={`${stepTwo.principleOne.image}?blur=30`}
                 alt="5 zone principle"
               />
               <Text
@@ -292,7 +295,8 @@ class StepsToPlanYourKitchen extends React.Component {
               <Img
                 m="auto"
                 mb="20px"
-                src={stepTwo.principleTwo.image}
+                data-src={stepTwo.principleTwo.image}
+                src={`${stepTwo.principleTwo.image}?blur=30`}
                 alt="3C principle"
               />
               <Text
@@ -339,7 +343,7 @@ class StepsToPlanYourKitchen extends React.Component {
                     <Div width="95%" pr="30px" key={index} height="560px">
                       <Div pt="10px">
                         <Div>
-                          <Img mb="10px" src={data.image} alt={data.title} />
+                          <Img mb="10px" data-src={data.image} src={`${data.image}?blur=30`} alt={data.title} />
                         </Div>
 
                         <div
@@ -468,7 +472,7 @@ class StepsToPlanYourKitchen extends React.Component {
                 <Div pr="30px" key={index}>
                   <Div pt="10px">
                     <Div>
-                      <Img mb="10px" src={data.image} alt={data.title} />
+                      <Img mb="10px" data-src={data.image} src={`${data.image}?blur=30`} alt={data.title} />
                     </Div>
 
                     <Text
@@ -537,7 +541,7 @@ class StepsToPlanYourKitchen extends React.Component {
                   <Div pr="30px" key={index}>
                     <Div pt="10px">
                       <Div>
-                        <Img mb="10px" src={data.image} alt={data.title} />
+                        <Img mb="10px" data-src={data.image} src={`${data.image}?blur=30`} alt={data.title} />
                       </Div>
 
                       <Text
@@ -636,7 +640,8 @@ class StepsToPlanYourKitchen extends React.Component {
                 height="100%"
               >
                 <Img
-                  src={stepFour.data.imageOne.image}
+                  data-src={stepFour.data.imageOne.image}
+                  src={`${stepFour.data.imageOne.image}?blur=30`}
                   alt="hello"
                   width="90%"
                   height="auto"
@@ -659,7 +664,8 @@ class StepsToPlanYourKitchen extends React.Component {
                 height="100%"
               >
                 <Img
-                  src={stepFour.data.imageTwo.image}
+                  data-src={stepFour.data.imageTwo.image}
+                  src={`${stepFour.data.imageTwo.image}?blur=30`}
                   alt="hello"
                   width="90%"
                   height="auto"
@@ -681,7 +687,8 @@ class StepsToPlanYourKitchen extends React.Component {
                 height="100%"
               >
                 <Img
-                  src={stepFour.data.imageThree.image}
+                  data-src={stepFour.data.imageThree.image}
+                  src={`${stepFour.data.imageThree.image}?blur=30`}
                   alt="hello"
                   width="90%"
                   height="auto"
@@ -704,7 +711,8 @@ class StepsToPlanYourKitchen extends React.Component {
                 height="100%"
               >
                 <Img
-                  src={stepFour.data.imageFour.image}
+                  data-src={stepFour.data.imageFour.image}
+                  src={`${stepFour.data.imageFour.image}?blur=30`}
                   alt="hello"
                   width="90%"
                   height="auto"
@@ -736,7 +744,8 @@ class StepsToPlanYourKitchen extends React.Component {
                 height="100%"
               >
                 <Img
-                  src={stepFour.data.imageFive.image}
+                  data-src={stepFour.data.imageFive.image}
+                  src={`${stepFour.data.imageFive.image}?blur=30`}
                   alt="hello"
                   width="90%"
                   height="auto"
@@ -759,7 +768,8 @@ class StepsToPlanYourKitchen extends React.Component {
                 height="100%"
               >
                 <Img
-                  src={stepFour.data.imageSix.image}
+                  data-src={stepFour.data.imageSix.image}
+                  src={`${stepFour.data.imageSix.image}?blur=30`}
                   alt="hello"
                   width="90%"
                   height="auto"
@@ -781,7 +791,8 @@ class StepsToPlanYourKitchen extends React.Component {
                 height="100%"
               >
                 <Img
-                  src={stepFour.data.imageSeven.image}
+                  data-src={stepFour.data.imageSeven.image}
+                  src={`${stepFour.data.imageSeven.image}?blur=30`}
                   alt="hello"
                   width="90%"
                   height="auto"
@@ -804,7 +815,8 @@ class StepsToPlanYourKitchen extends React.Component {
                 height="100%"
               >
                 <Img
-                  src={stepFour.data.imageEight.image}
+                  data-src={stepFour.data.imageEight.image}
+                  src={`${stepFour.data.imageEight.image}?blur=30`}
                   alt="hello"
                   width="90%"
                   height="auto"
@@ -906,7 +918,7 @@ class StepsToPlanYourKitchen extends React.Component {
                 <Div pr="30px" key={index}>
                   <Div pt="1px">
                     <Div>
-                      <Img mb="10px" src={data.image} alt={data.title} />
+                      <Img mb="10px" data-src={data.image} src={`${data.image}?blur=30`} alt={data.title} />
                     </Div>
 
                     <Text
@@ -972,7 +984,7 @@ class StepsToPlanYourKitchen extends React.Component {
                   <Div pr="30px" key={index}>
                     <Div pt="10px">
                       <Div>
-                        <Img mb="50px" src={data.image} alt={data.title} />
+                        <Img mb="50px" data-src={data.image} src={`${data.image}?blur=30`} alt={data.title} />
                       </Div>
                     </Div>
                   </Div>
@@ -1031,7 +1043,7 @@ class StepsToPlanYourKitchen extends React.Component {
             </Text>
           </Div>
           <Div>
-            <Img src={stepSix.image} alt="top banner" height="auto" />
+            <Img data-src={stepSix.image} src={`${stepSix.image}?blur=30`} alt="top banner" height="auto" />
           </Div>
         </Div>
         {/* step 7 */}
@@ -1096,7 +1108,8 @@ class StepsToPlanYourKitchen extends React.Component {
                 height="100%"
               >
                 <Img
-                  src={stepSeven.dataOne.imageOne.image}
+                  data-src={stepSeven.dataOne.imageOne.image}
+                  src={`${stepSeven.dataOne.imageOne.image}?blur=30`}
                   alt="hello"
                   width="90%"
                   height="auto"
@@ -1119,7 +1132,8 @@ class StepsToPlanYourKitchen extends React.Component {
                 height="100%"
               >
                 <Img
-                  src={stepSeven.dataOne.imageTwo.image}
+                  data-src={stepSeven.dataOne.imageTwo.image}
+                  src={`${stepSeven.dataOne.imageTwo.image}?blur=30`}
                   alt="hello"
                   width="90%"
                   height="auto"
@@ -1141,7 +1155,8 @@ class StepsToPlanYourKitchen extends React.Component {
                 height="100%"
               >
                 <Img
-                  src={stepSeven.dataOne.imageThree.image}
+                  data-src={stepSeven.dataOne.imageThree.image}
+                  src={`${stepSeven.dataOne.imageThree.image}?blur=30`}
                   alt="hello"
                   width="90%"
                   height="auto"
@@ -1166,7 +1181,8 @@ class StepsToPlanYourKitchen extends React.Component {
                 height="100%"
               >
                 <Img
-                  src={stepSeven.dataOne.imageFour.image}
+                  data-src={stepSeven.dataOne.imageFour.image}
+                  src={`${stepSeven.dataOne.imageFour.image}?blur=30`}
                   alt="hello"
                   width="90%"
                   height="auto"
@@ -1188,7 +1204,8 @@ class StepsToPlanYourKitchen extends React.Component {
                 height="100%"
               >
                 <Img
-                  src={stepSeven.dataOne.imageFive.image}
+                  data-src={stepSeven.dataOne.imageFive.image}
+                  src={`${stepSeven.dataOne.imageFive.image}?blur=30`}
                   alt="hello"
                   width="90%"
                   height="auto"
@@ -1211,7 +1228,8 @@ class StepsToPlanYourKitchen extends React.Component {
                 height="100%"
               >
                 <Img
-                  src={stepSeven.dataOne.imageSix.image}
+                  data-src={stepSeven.dataOne.imageSix.image}
+                  src={`${stepSeven.dataOne.imageSix.image}?blur=30`}
                   alt="hello"
                   width="90%"
                   height="auto"
@@ -1263,7 +1281,7 @@ class StepsToPlanYourKitchen extends React.Component {
                   <Div pr="30px" key={index}>
                     <Div pt="10px">
                       <Div>
-                        <Img mb="10px" src={data.image} alt={data.title} />
+                        <Img mb="10px" data-src={data.image} src={`${data.image}?blur=30`} alt={data.title} />
                       </Div>
 
                       <Text
@@ -1355,7 +1373,8 @@ class StepsToPlanYourKitchen extends React.Component {
                 height="100%"
               >
                 <Img
-                  src={stepEight.data.imageOne.image}
+                  data-src={stepEight.data.imageOne.image}
+                  src={`${stepEight.data.imageOne.image}?blur=30`}
                   alt="hello"
                   width="90%"
                   height="auto"
@@ -1378,7 +1397,8 @@ class StepsToPlanYourKitchen extends React.Component {
                 height="100%"
               >
                 <Img
-                  src={stepEight.data.imageTwo.image}
+                  data-src={stepEight.data.imageTwo.image}
+                  src={`${stepEight.data.imageTwo.image}?blur=30`}
                   alt="hello"
                   width="90%"
                   height="auto"
@@ -1400,7 +1420,8 @@ class StepsToPlanYourKitchen extends React.Component {
                 height="100%"
               >
                 <Img
-                  src={stepEight.data.imageThree.image}
+                  data-src={stepEight.data.imageThree.image}
+                  src={`${stepEight.data.imageThree.image}?blur=30`}
                   alt="hello"
                   width="90%"
                   height="auto"
@@ -1425,7 +1446,8 @@ class StepsToPlanYourKitchen extends React.Component {
                 height="100%"
               >
                 <Img
-                  src={stepEight.data.imageFour.image}
+                  data-src={stepEight.data.imageFour.image}
+                  src={`${stepEight.data.imageFour.image}?blur=30`}
                   alt="hello"
                   width="90%"
                   height="auto"
@@ -1447,7 +1469,8 @@ class StepsToPlanYourKitchen extends React.Component {
                 height="100%"
               >
                 <Img
-                  src={stepEight.data.imageFive.image}
+                  data-src={stepEight.data.imageFive.image}
+                  src={`${stepEight.data.imageFive.image}?blur=30`}
                   alt="hello"
                   width="90%"
                   height="auto"
@@ -1470,7 +1493,8 @@ class StepsToPlanYourKitchen extends React.Component {
                 height="100%"
               >
                 <Img
-                  src={stepEight.data.imageSix.image}
+                  data-src={stepEight.data.imageSix.image}
+                  src={`${stepEight.data.imageSix.image}?blur=30`}
                   alt="hello"
                   width="90%"
                   height="auto"

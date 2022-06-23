@@ -50,7 +50,8 @@ class DBItem extends React.Component {
               >
                 <div>
                   <img
-                    src={data.imgSrc}
+                    data-src={data.imgSrc}
+                    src={`${data.imgSrc}?blur=30`}
                     alt="offers"
                     style={{
                       height: "auto",

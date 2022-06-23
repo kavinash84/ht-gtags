@@ -17,7 +17,7 @@ class Steps extends React.Component {
         const { newWardrobe } = this.props;
         return (
          <Box style={{width: '100%', marginTop: '70px', position: 'relative'}}>
-             <Image src={newWardrobe.image} style={{width: '85%',height:'80%', minHeight: '80%'}}/>
+             <Image data-src={newWardrobe.image} src={`${newWardrobe.image}?blur=30`} style={{width: '85%',height:'80%', minHeight: '80%'}}/>
              <Box style={{ display: 'flex' }}>
           <Box
             m="auto"
