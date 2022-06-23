@@ -61,6 +61,7 @@ class KitchenExperts extends React.Component {
       <div>
         <Box className={styles.main} style={{ marginTop: "60px" }}>
           <Image
+            data-src={speakourkitchenexperts.image}
             src={speakourkitchenexperts.image}
             alt="topbanner"
             width="80%"
@@ -90,7 +91,7 @@ class KitchenExperts extends React.Component {
                 <Box style={{ width: "100%" }}>
                   <Flex>
                     <img
-                      src="https://www.hometown.in/media/cms/D/Top-Image-Living1.jpg"
+                      data-src="https://www.hometown.in/media/cms/D/Top-Image-Living1.jpg"
                       style={{
                         width: "50%",
                         height: "90vh",

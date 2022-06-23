@@ -30,7 +30,8 @@ const DBItem = ({ component, data }) => {
             >
               <div>
                 <img
-                  src={data.image}
+                  data-src={data.image}
+                  src={`${data.image}?blur=30`}
                   alt={data.title}
                   style={{
                     height: "auto",

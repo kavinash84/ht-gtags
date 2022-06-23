@@ -14,7 +14,8 @@ class DreamKitchen extends React.Component {
       <Div marginTop="50px" style={{ cursor: "pointer" }}>
         <Img
           onClick={this.props.handleModal}
-          src={beginJourney.image}
+          data-src={beginJourney.image}
+          src={`${beginJourney.image}?blur=30`}
           alt={beginJourney.title}
         />
       </Div>

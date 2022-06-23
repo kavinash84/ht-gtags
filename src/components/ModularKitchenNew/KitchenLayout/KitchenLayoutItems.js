@@ -45,7 +45,7 @@ class KitchenLayoutItems extends React.Component {
             alt="topbanner"
             width="100%"
             height="650px"
-            src={image}
+            data-src={image}
             style={{
               objectFit: "cover"
             }}
