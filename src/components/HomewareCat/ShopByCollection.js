@@ -57,7 +57,7 @@ class ShopByCollection extends React.Component {
                 to={val.url_key}
               >
                 <Image
-                  // style={{ width: "97%" }}
+                  style={{ width: "90%" , marginLeft: "5%"}}
                   src={val.image}
                   alt="IndoorFountain"
                 />

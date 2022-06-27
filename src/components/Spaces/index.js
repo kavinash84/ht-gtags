@@ -38,7 +38,7 @@ class SpacesContainer extends React.Component {
               }}
             >
               <Div mt="40px" >
-                <Image src={slide.imgSrc} alt="general" style={{ width: "85%", marginLeft: "7.5%" }}/>
+                <Image data-src={slide.imgSrc} src={`${slide.imgSrc}?blur=30`} alt="general" style={{ width: "85%", marginLeft: "7.5%" }}/>
               </Div>
             </Link>
           ))}

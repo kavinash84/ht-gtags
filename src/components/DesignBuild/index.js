@@ -141,7 +141,7 @@ class DesignBuildContainer extends React.Component {
         <Div mt="70px">
           <Flex>
             <Image
-              src="https://www.hometown.in/media/cms/designbuild/speaktoExperts.png"
+              data-src="https://www.hometown.in/media/cms/designbuild/speaktoExperts.png"
               style={{ width: "50%", height: "700px" }}
             />
             <Div

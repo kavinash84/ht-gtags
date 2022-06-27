@@ -62,7 +62,7 @@ class StepsToYourHome extends React.Component {
       <Div mt="70px">
         <Flex>
           <Image
-            src={stepsToDreamhome.image}
+            data-src={stepsToDreamhome.image}
             style={{ width: "55%", height: "750px" }}
           />
           <Div

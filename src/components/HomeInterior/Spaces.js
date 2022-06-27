@@ -12,31 +12,31 @@ import Button from 'hometown-components-dev/lib/ButtonHtV1';
 @connect(({ homeinterior }) => ({
     homeinterior,
     spaces: homeinterior.data.items.text.spaces
-  }))
+}))
 
 class SpacesWeDesign extends React.Component {
-    render() { 
-        const { spaces }  = this.props;
+    render() {
+        const { spaces } = this.props;
         return (
             <Box mt="90px">
-                <Heading 
-                 style={{
-            fontSize: '40px',
-            fontWeight: 600,
-            marginBottom: '5px',
-            color: 'black',
-            textAlign: 'center'
-          }}>
-                {spaces.title}
+                <Heading
+                    style={{
+                        fontSize: '40px',
+                        fontWeight: 600,
+                        marginBottom: '5px',
+                        color: 'black',
+                        textAlign: 'center'
+                    }}>
+                    {spaces.title}
                 </Heading>
                 <Text
-                style={{fontSize: "20px", color: "#888888", marginBottom: "10px", width: "70%", textAlign: 'center', marginLeft: '15%', marginTop: '30px', lineHeight: '30px'}}
+                    style={{ fontSize: "20px", color: "#888888", marginBottom: "10px", width: "70%", textAlign: 'center', marginLeft: '15%', marginTop: '30px', lineHeight: '30px' }}
                 >
-               {spaces.subtitle}
+                    {spaces.subtitle}
                 </Text>
             </Box>
         );
     }
 }
- 
+
 export default SpacesWeDesign;

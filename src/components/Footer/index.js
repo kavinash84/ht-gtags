@@ -262,7 +262,12 @@ class Footer extends React.Component {
             <Col width={[1, 2 / 3, 3 / 12]}>
               <Box mb={24}>
                 <Heading variant="footerTitle">CONTACT US</Heading>
-                <Ul>
+                <Ul
+                  onClick={() => {
+                    const { dispatch } = this.context.store;
+                    dispatch(weContactUs());
+                  }}
+                >
                   <Li>
                     <a
                       href="tel:08069252525"
@@ -279,10 +284,6 @@ class Footer extends React.Component {
                       href="mailto:care@hometown.in"
                       rel="noreferrer noopener"
                       target="_blank"
-                      onClick={() => {
-                        const { dispatch } = this.context.store;
-                        dispatch(weContactUs());
-                      }}
                     >
                       <Text variant="footerLink" fontSize={16}>
                         <EmailIcon mr={10} />
@@ -354,19 +355,19 @@ class Footer extends React.Component {
                   </Row>
                 </form>
               ) : (
-                  <Row>
-                    <Text
-                      color="green"
-                      fontSize="0.955rem"
-                      mt="0"
-                      mb="0"
-                      lh="2"
-                      ta="left"
-                    >
-                      You have been successfully subscribed to the Newsletter
+                <Row>
+                  <Text
+                    color="green"
+                    fontSize="0.955rem"
+                    mt="0"
+                    mb="0"
+                    lh="2"
+                    ta="left"
+                  >
+                    You have been successfully subscribed to the Newsletter
                   </Text>
-                  </Row>
-                )}
+                </Row>
+              )}
               <Row
                 mt={15}
                 sx={{ justifyContent: "space-between" }}

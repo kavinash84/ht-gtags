@@ -24,7 +24,7 @@ const DBItem = ({ component, data }) => {
             <div className={styles.shadow}  style={{width: '100%',height: '400px' , backgroundColor:'white'}}>
               <Row style={{position:'relative'}} col="12">
               <Div col="6">
-              <img src={data.imgSrc} style={{width:'65%', height:'480px', marginTop:'-40px', marginLeft:'100px'}}/>
+              <img data-src={data.imgSrc} src={`${data.imgSrc}?blur=30`} style={{width:'65%', height:'480px', marginTop:'-40px', marginLeft:'100px'}}/>
               </Div>
               <Div col="6" style={{position:'absolute', left:'570px', top:'80px', textAlign: 'left'}} className={styles.background}>
                    <Text style={{width:'65%', fontSize:'18px', fontWeight:'bold', lineHeight:'32px'}}>{data.description}</Text>
