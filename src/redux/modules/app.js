@@ -10,7 +10,7 @@ const SET_ORDER_ID = "app/SET_ORDER_ID";
 const SET_WALLET_NAME = "app/SET_WALLET";
 const PAYMENT_LOADED = "app/PAYMENT_LOADED";
 const EMI_PAYMENT_TYPE = "app/EMI_PAYMENT_TYPE";
-const IS_LANDING_PAGE = "app/IS_LANDING_PAGE";
+
 const initialState = {
   loaded: false,
   sessionId: "",
@@ -18,7 +18,6 @@ const initialState = {
   orderId: "",
   walletName: "",
   walletType: {},
-  isPLPLanding: false,
   paymentLoaded: false,
   emiPaymentType: ""
 };
@@ -73,11 +72,6 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...state,
         emiPaymentType: action.name
-      };
-    case IS_LANDING_PAGE:
-      return {
-        ...state,
-        isPLPLanding: action.status
       };
     default:
       return state;
@@ -164,7 +158,3 @@ export const setSessionIdLocally = id => ({
   }
 });
 
-export const isLandingPage = status => ({
-  type: IS_LANDING_PAGE,
-  status
-});
