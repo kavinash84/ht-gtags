@@ -6,8 +6,8 @@ const getChannelForAdmitAd = name => {
   let channel;
   if (!source) {
     channel = "na";
-  } else if (source) {
-    channel = source;
+  } else if (source && window && window.deduplication_cookie_value) {
+    if (source != window.deduplication_cookie_value) channel = source;
   } else {
     channel = "adm";
   }
