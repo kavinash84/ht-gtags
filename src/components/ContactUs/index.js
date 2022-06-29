@@ -1,18 +1,18 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import ContainerHtV1 from 'hometown-components-dev/lib/ContainerHtV1';
-import RowHtV1 from 'hometown-components-dev/lib/RowHtV1';
-import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
-import SectionHtV1 from 'hometown-components-dev/lib/SectionHtV1';
-import HeadingHtV1 from 'hometown-components-dev/lib/HeadingHtV1';
-import TextHtV1 from 'hometown-components-dev/lib/TextHtV1';
-import ImageHtV1 from 'hometown-components-dev/lib/ImageHtV1';
-import LabelHtV1 from 'hometown-components-dev/lib/LabelHtV1';
+import React from "react";
+import { Link } from "react-router-dom";
+import ContainerHtV1 from "hometown-components-dev/lib/ContainerHtV1";
+import RowHtV1 from "hometown-components-dev/lib/RowHtV1";
+import BoxHtV1 from "hometown-components-dev/lib/BoxHtV1";
+import SectionHtV1 from "hometown-components-dev/lib/SectionHtV1";
+import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
+import TextHtV1 from "hometown-components-dev/lib/TextHtV1";
+import ImageHtV1 from "hometown-components-dev/lib/ImageHtV1";
+import LabelHtV1 from "hometown-components-dev/lib/LabelHtV1";
 // import TitleBar from 'components/TitleBar';
 
-const phoneIcon = require('../../../static/phone-icon-primary.svg');
-const mailIcon = require('../../../static/email-primary.svg');
-const mapIcon = require('../../../static/map-icon-primary.svg');
+const phoneIcon = require("../../../static/phone-icon-primary.svg");
+const mailIcon = require("../../../static/email-primary.svg");
+const mapIcon = require("../../../static/map-icon-primary.svg");
 
 const ContactUs = () => (
   <BoxHtV1 type="block">
@@ -23,7 +23,7 @@ const ContactUs = () => (
       mb="0"
       bg="sectionBgDark"
       sx={{
-        boxShadow: '0px 1px 6px 0px rgba(0,0,0,0.20)'
+        boxShadow: "0px 1px 6px 0px rgba(0,0,0,0.20)"
       }}
     >
       <ContainerHtV1 type="container" pr="1.5rem" pl="1.5rem">
@@ -34,16 +34,28 @@ const ContactUs = () => (
           mt="1em"
           p="1.25rem"
           sx={{
-            boxShadow: '1px 2px 5px 0px rgba(0,0,0,0.1)'
+            boxShadow: "1px 2px 5px 0px rgba(0,0,0,0.1)"
           }}
         >
           <BoxHtV1>
-            <HeadingHtV1 as="h1" mt="0" color="textDark" fontSize="0.875rem" fontFamily="medium" lineHeight="1.5">
+            <HeadingHtV1
+              as="h1"
+              mt="0"
+              color="textDark"
+              fontSize="0.875rem"
+              fontFamily="medium"
+              lineHeight="1.5"
+            >
               HOMETOWN CARE
             </HeadingHtV1>
-            <TextHtV1 color="#8d8d8d" fontSize="0.75rem" mb="0" lineHeight="1.5">
-              We would love to hear from you! Reach out to us through any of the modes below, and we shall respond at
-              the earliest.
+            <TextHtV1
+              color="#8d8d8d"
+              fontSize="0.75rem"
+              mb="0"
+              lineHeight="1.5"
+            >
+              We would love to hear from you! Reach out to us through any of the
+              modes below, and we shall respond at the earliest.
             </TextHtV1>
           </BoxHtV1>
         </SectionHtV1>
@@ -56,14 +68,33 @@ const ContactUs = () => (
                 mt="1em"
                 p="1.25rem"
                 sx={{
-                  boxShadow: '1px 2px 5px 0px rgba(0,0,0,0.1)'
+                  boxShadow: "1px 2px 5px 0px rgba(0,0,0,0.1)"
                 }}
               >
-                <HeadingHtV1 mt="0" mb="0" color="primary" fontSize="1.125rem" fontFamily="medium">
-                  <ImageHtV1 display="inline-block" va="bottom" mr="0.3125rem" src={mapIcon} alt="Phone" width="22px" />
+                <HeadingHtV1
+                  mt="0"
+                  mb="0"
+                  color="primary"
+                  fontSize="1.125rem"
+                  fontFamily="medium"
+                >
+                  <ImageHtV1
+                    display="inline-block"
+                    va="bottom"
+                    mr="0.3125rem"
+                    src={mapIcon}
+                    alt="Phone"
+                    width="22px"
+                  />
                   Registered and Corporate Office :
                 </HeadingHtV1>
-                <TextHtV1 color="#8d8d8d" fontSize="0.875rem" mb="0" mt="0.625rem" lineHeight="1.5">
+                <TextHtV1
+                  color="#8d8d8d"
+                  fontSize="0.875rem"
+                  mb="0"
+                  mt="0.625rem"
+                  lineHeight="1.5"
+                >
                   Praxis Home Retail Limited (“PHRL”),
                   <br />
                   (f/k/a Praxis Home Retail Private Limited),
@@ -83,10 +114,16 @@ const ContactUs = () => (
                 mt="1em"
                 p="1.25rem"
                 sx={{
-                  boxShadow: '1px 2px 5px 0px rgba(0,0,0,0.1)'
+                  boxShadow: "1px 2px 5px 0px rgba(0,0,0,0.1)"
                 }}
               >
-                <HeadingHtV1 mt="0" mb="0" color="primary" fontSize="1.125rem" fontFamily="medium">
+                <HeadingHtV1
+                  mt="0"
+                  mb="0"
+                  color="primary"
+                  fontSize="1.125rem"
+                  fontFamily="medium"
+                >
                   <ImageHtV1
                     display="inline-block"
                     va="bottom"
@@ -97,9 +134,15 @@ const ContactUs = () => (
                   />
                   Call Us
                 </HeadingHtV1>
-                <TextHtV1 color="#8d8d8d" fontSize="0.875rem" mb="0" mt="0.625rem" lineHeight="1.5">
+                <TextHtV1
+                  color="#8d8d8d"
+                  fontSize="0.875rem"
+                  mb="0"
+                  mt="0.625rem"
+                  lineHeight="1.5"
+                >
                   TollFree – 08069252525 <br />
-                  10.00 a.m. to 7.00 p.m., 365days
+                  10.00 a.m. to 8.00 p.m., 365days
                 </TextHtV1>
               </SectionHtV1>
               <SectionHtV1
@@ -108,10 +151,16 @@ const ContactUs = () => (
                 mt="1em"
                 p="1.25rem"
                 sx={{
-                  boxShadow: '1px 2px 5px 0px rgba(0,0,0,0.1)'
+                  boxShadow: "1px 2px 5px 0px rgba(0,0,0,0.1)"
                 }}
               >
-                <HeadingHtV1 mt="0" mb="0" color="primary" fontSize="1.125rem" fontFamily="medium">
+                <HeadingHtV1
+                  mt="0"
+                  mb="0"
+                  color="primary"
+                  fontSize="1.125rem"
+                  fontFamily="medium"
+                >
                   <ImageHtV1
                     display="inline-block"
                     va="bottom"
@@ -122,10 +171,16 @@ const ContactUs = () => (
                   />
                   E-mail Us
                 </HeadingHtV1>
-                <TextHtV1 color="#8d8d8d" fontSize="0.875rem" mb="0" mt="0.625rem" lineHeight="1.5">
+                <TextHtV1
+                  color="#8d8d8d"
+                  fontSize="0.875rem"
+                  mb="0"
+                  mt="0.625rem"
+                  lineHeight="1.5"
+                >
                   <a href="mailto:Care@hometown.in" color="textDark">
                     Care@hometown.in
-                  </a>{' '}
+                  </a>{" "}
                   <br />
                   We shall respond in 24working hours.
                 </TextHtV1>
@@ -138,7 +193,7 @@ const ContactUs = () => (
                 mt="1em"
                 p="1.25rem 1.5rem"
                 sx={{
-                  boxShadow: '1px 2px 5px 0px rgba(0,0,0,0.1)'
+                  boxShadow: "1px 2px 5px 0px rgba(0,0,0,0.1)"
                 }}
               >
                 <RowHtV1 display="block">
@@ -167,9 +222,18 @@ const ContactUs = () => (
                     </Link>
                   </BoxHtV1> */}
                   <BoxHtV1 pl="0.75rem" pr="0.75rem" p="0.3125rem">
-                    <Link to="/grievance" className="text-primary" color="textDark">
+                    <Link
+                      to="/grievance"
+                      className="text-primary"
+                      color="textDark"
+                    >
                       GRIEVANCE
-                      <LabelHtV1 color="#757575" fontSize="1rem" va="top" ml="0.625rem">
+                      <LabelHtV1
+                        color="#757575"
+                        fontSize="1rem"
+                        va="top"
+                        ml="0.625rem"
+                      >
                         ❯
                       </LabelHtV1>
                     </Link>
