@@ -280,6 +280,15 @@ class Footer extends React.Component {
                     </a>
                   </Li>
                   <Li>
+                    <Text
+                      variant="footerLink"
+                      fontSize={16}
+                      style={{ paddingLeft: "25px" }}
+                    >
+                      10.00 a.m. to 8.00 p.m., 365days
+                    </Text>
+                  </Li>
+                  <Li>
                     <a
                       href="mailto:care@hometown.in"
                       rel="noreferrer noopener"
