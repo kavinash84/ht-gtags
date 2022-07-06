@@ -39,7 +39,8 @@ class ShopMattress extends React.Component {
 
               <Link to={url_key}>
             <Image
-              src={image}
+              data-src={image}
+              src={`${image}?blur=30`}
               alt="ForABetterSleep"
               style={{
                 width: "80%",

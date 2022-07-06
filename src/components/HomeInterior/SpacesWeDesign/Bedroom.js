@@ -40,7 +40,7 @@ export default class Bedroom extends Component {
         }}
       >
        <Div style={{ width:"90%", marginLeft:"5%" }}>
-         <Image src={bedRoom.image}/>
+         <Image data-src={bedRoom.image}/>
        </Div>
        <Div>
          <Heading

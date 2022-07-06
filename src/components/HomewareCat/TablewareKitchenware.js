@@ -4,6 +4,7 @@ import Row from "hometown-components-dev/lib/Row";
 import Div from "hometown-components-dev/lib/Div";
 import Section from "hometown-components-dev/lib/Section";
 import { connect } from "react-redux";
+import NewUnboxBestSeller from "components/NewUnboxWidges/bestSeller";
 import MainFurnitureSlider from "../FurnitureCategories/MainFurnitureSlider";
 import ShopByCategory from "./ShopByCategory/ShopByCategory";
 import ShopByCollection from "./ShopByCollection";
@@ -81,6 +82,14 @@ class TablewareKitchenware extends React.Component {
                 )}
               </div>
             ))}
+          <NewUnboxBestSeller
+            pageInfo={{
+              pageType: "CATEGORY",
+              catlevel1Name: "tableware",
+              catlevel2Name: "crockery",
+              catlevel3Name: "dinner-sets"
+            }}
+          />
         </div>
       </Section>
     );

@@ -203,10 +203,10 @@ export default class Home extends Component {
     return (
       /* eslint-disable max-len */
       <Wrapper>
-        <Helmet title="Online Furniture Shopping, Buy Decor Items in India - HomeTown.in">
+        <Helmet title="Online Furniture Stores: Buy Home Decor, Furnishing, Tableware & Kitchenware Online at HomeTown">
           <meta
             name="description"
-            content="HomeTown - Shop online for Furniture, Home Decor, Furnishings, Kitchenware, Dining Products at best prices from HomeTown.in. Get best furniture and home decor products ☆Upto 40% Off, ☆Fast Shipping, ☆High Quality, ☆Premium, ☆Luxury furniture to beautify your ☆bedroom, ☆kitchen, ☆dining room, ☆living and ☆outdoor space ☆Original ☆0% EMI ☆Free Assembly ☆Safe Shipping."
+            content="Buy premium quality home furniture at HomeTown, India's largest online furniture store. Give your house a makeover with variety of home decor, furnishing & kitchenware items. Shop now!"
           />
           <meta name="keywords" content="furniture, home-decor" />
           <meta name="robots" content="index, follow" />
@@ -225,30 +225,86 @@ export default class Home extends Component {
             `}
           </script>
           <script type="application/ld+json">
-            {`
-            {
-              "@context": "https://schema.org",
+            {`{
+              "@context": "http://schema.org",
               "@type": "Organization",
               "name": "HomeTown",
+              "image": "https://cdn.shopify.com/s/files/1/1231/6442/files/CW_logo-03_1_240x.png?v=1624623636",
+              "@id": "support@cottonworld.net",
               "url": "https://www.hometown.in/",
-              "logo": "https://www.hometown.in/dist/2.0.1/bab5098b6c1ea32db0ed253a12fe29e3.png",
-              "contactPoint": {
-                "@type": "ContactPoint",
-                "telephone": "08069252525",
-                "contactType": "customer service",
-                "contactOption": "TollFree",
-                "areaServed": "IN",
-                "availableLanguage": "Hindi"
+              "telephone": "1800-210-0004",
+              "address": {
+              "@type": "PostalAddress",
+              "streetAddress": "Praxis Home Retail Limited (“PHRL”), (f/k/a Praxis Home Retail Private Limited), iThink Techno Campus,Jolly Board Tower D, Ground Floor",
+              "addressLocality": "Kanjurmarg (East), Mumbai",
+              "postalCode": "400042",
+              "addressCountry": "IN"
               },
               "sameAs": [
-                "https://www.facebook.com/hometown.in/",
-                "https://twitter.com/HomeTown_In/",
-                "https://www.instagram.com/hometownindia/",
-                "https://www.youtube.com/channel/UCBZGArWnKT6MYYwOsPCNjiw",
-            
+              "https://twitter.com/HomeTownLive",
+              "https://www.facebook.com/hometown",
+              "https://www.instagram.com/hometownlive/",
+              "https://in.pinterest.com/hometownblog/"
               ]
-            }  
-          `}
+            }`}
+          </script>
+          <script type="application/ld+json">
+            {`{
+      "@context":"http://schema.org",
+      "@type":"ItemList",
+      "itemListElement":[
+                                 {
+         "@type": "SiteNavigationElement",
+          "position": 1,
+          "name": "Online Exclusive",
+          "description": "Get Best Furniture Deals online on items for Sale at Upto 60% Off. Choose from a wide range of best deal furniture and best furniture deals online on wide range of products on HomeTown in India at the best prices ✔Fast Shipping, ✔High Quality ✔0% EMI ✔Free Assembly",
+          "url":"https://www.hometown.in/hot-deals"
+        },
+{
+         "@type": "SiteNavigationElement",
+          "position": 2,
+          "name": "Home Packages",
+          "description": "Get Best Deals on Customized Home Furniture Packages Online. Select from ⭐Full Home ⭐Living and Dining Room ⭐Bedroom Furniture Packages Basis Your Need & Budget At Best Prices From HomeTown.",
+          "url":"https://www.hometown.in/packages"
+        },
+{
+         "@type": "SiteNavigationElement",
+          "position": 3,
+          "name": "Furniture",
+          "description": "Furniture: Buy Wooden Furniture Online at upto 60% OFF. Explore wide range of furniture designs for ⭐Latest Bedroom Furniture ⭐Living Room Furniture & more at HomeTown ✔Free Installation ✔Easy EMI ✔Free Shipping",
+          "url":"https://www.hometown.in/furniture"
+        },
+       {
+          "@type": "SiteNavigationElement",
+          "position": 4,
+          "name": "Home Decor",
+          "description": "Home Decor: Buy Home Decoration items & Accessories Online in India. Choose from a wide range of ✯Paintings ✯Photo Frames ✯Clocks ✯Indoor Plants ✯Wall Hangings ✯Lamps & more at HomeTown. ✔Exclusive Designs ✔Easy Finance ✔Free Assembly",
+          "url":"https://www.hometown.in/home-decor"
+        },
+       {
+          "@type": "SiteNavigationElement",
+          "position": 5,
+          "name": "Home Furnishing",
+          "description": "Furnishings: Grab the Best Deal on Home Furnishing Items Online @ Upto 50% OFF. Shop from a wide range of ⭐Curtains ⭐Mats ⭐Blankets ⭐Pillows ⭐Bathroom Accessories from HomeTown ✔Free Shipping ✔Easy EMI",
+          "url":"https://www.hometown.in/home-furnishings"
+        },
+            {
+          "@type": "SiteNavigationElement",
+          "position": 6,
+          "name": "Tableware & Kitchenware",
+          "description": "Kitchen Items: Buy Tableware and Kitchenware products online @ upto 50% OFF. Choose from ⭐Dinner Sets ⭐Crockery ⭐Induction Cooktops ⭐Kitchen Appliances & more online at best prices from HomeTown. ✔Easy Returns ✔Easy EMI",
+          "url":"https://www.hometown.in/tableware-kitchenware"
+        },
+            {
+          "@type": "SiteNavigationElement",
+          "position": 7,
+          "name": "Modular Kitchen",
+          "description": "HomeTown provides personalised modular kitchen design services for small modular kitchen, L Shaped, U Shaped & more. Shop from a wide range of latest modular kitchen design at best price.",
+          "url":"https://www.hometown.in/modular-kitchens"
+        }
+      ]
+    }
+`}
           </script>
         </Helmet>
         <Body>

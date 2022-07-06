@@ -28,7 +28,8 @@ const DBItem = ({ component, data }) => {
           <Row style={{ position: "relative" }} col="12">
             <Div col="6">
               <img
-                src={data.imgSrc}
+                data-src={data.imgSrc}
+                src={`${data.imgSrc}?blur=30`}
                 style={{
                   width: "65%",
                   height: "480px",

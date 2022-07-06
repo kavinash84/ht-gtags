@@ -19,7 +19,7 @@ const MainSliderItem = ({
         as="a"
         onClick={onImageClick}
       >
-        <ImageHtV1 src={image} alt={title || "Banner-image"} variant="image" />
+        <ImageHtV1 data-src={image} src={`${image}?blur=30`} alt={title || "Banner-image"} variant="image" />
       </CardHtV1>
     );
   } else if (target) {
@@ -32,13 +32,13 @@ const MainSliderItem = ({
         onClick={onClick}
         as="a"
       >
-        <ImageHtV1 src={image} alt={title || "Banner-image"} variant="image" />
+        <ImageHtV1 data-src={image} src={`${image}?blur=30`} alt={title || "Banner-image"} variant="image" />
       </CardHtV1>
     );
   }
   return (
     <Link to={url} onClick={onClick}>
-      <ImageHtV1 src={image} alt={title || "Banner-image"} variant="image" />
+      <ImageHtV1 data-src={image} src={`${image}?blur=30`} alt={title || "Banner-image"} variant="image" />
     </Link>
   );
 };

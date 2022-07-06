@@ -34,6 +34,7 @@ import {
 } from "selectors/products";
 import { SITE_URL } from "helpers/Constants";
 import CANONICALS from "data/canonical";
+import { isLandingPage } from "../../redux/modules/app";
 // import { listingBestOffers, listingBestOffersPath } from 'data/best-offers';
 
 const btnStyle = {
@@ -176,6 +177,16 @@ export default class Listing extends Component {
       dispatch(setReloadListing(true));
       history.push(`${pathname}${search}`);
     }
+  }
+
+  componentDidMount() {
+    const { dispatch } = this.context.store;
+    dispatch(isLandingPage(true));
+  }
+
+  componentWillUnmount() {
+    const { dispatch } = this.context.store;
+    dispatch(isLandingPage(false));
   }
 
   scrollDown = () => {

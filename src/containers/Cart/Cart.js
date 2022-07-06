@@ -35,6 +35,7 @@ import PinCode from "components/PinCode";
 import ResponsiveModal from "components/Modal";
 // import Notifications from "components/Notifications";
 // import Empty from "./Empty";
+import NewUnboxRecentlyViewed from "../../components/NewUnboxWidges/recentlyViewed";
 import EmptyNew from "./EmptyNew";
 // import UnbxdRecommendedForYou from "../../components/Unbxd/unbxdRecommendedForYou";
 import { WEViewCart } from "../../redux/modules/cart";
@@ -435,6 +436,12 @@ export default class CartContainer extends Component {
             ) : null} */}
 
           {/* Footer */}
+          <NewUnboxRecentlyViewed
+            pageInfo={{
+              pageType: "PRODUCT",
+              productIds: [""]
+            }}
+          />
           <Footer />
         </Body>
       </Wrapper>

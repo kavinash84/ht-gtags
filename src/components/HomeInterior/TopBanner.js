@@ -16,13 +16,14 @@ const styles = require('./HomeInterior.scss');
 }))
 
 class TopBanner extends React.Component {
- 
+
   render() {
-    const { topBanner }  = this.props;
+    const { topBanner } = this.props;
     return (
       <Box className={styles.main}>
         <Image
-          src={topBanner.img}
+          data-src={topBanner.img}
+          src={`${topBanner.img}?blur=30`}
           alt="topbanner"
           width="100%"
           height="650px"
@@ -40,7 +41,7 @@ class TopBanner extends React.Component {
               backgroundColor: '#F8F2F2'
             }}
           >
- Home Interiors
+            Home Interiors
           </Text>
           <Heading
             style={{
@@ -51,7 +52,7 @@ class TopBanner extends React.Component {
               lineHeight: '30px'
             }}
           >
- at Home<span style={{color: '#F15922'}}>Town</span>
+            at Home<span style={{ color: '#F15922' }}>Town</span>
           </Heading>
           <Text
             style={{
@@ -62,10 +63,10 @@ class TopBanner extends React.Component {
               lineHeight: '30px'
             }}
           >
-{topBanner.description}
+            {topBanner.description}
           </Text>
           <Button
-          onClick={this.props.handleModal}
+            onClick={this.props.handleModal}
             style={{
               width: '60%',
               height: '50px',
@@ -74,7 +75,7 @@ class TopBanner extends React.Component {
               border: '1px solid #F47020',
               marginLeft: '20%',
               borderRadius: '5px',
-              textTransform:'none'
+              textTransform: 'none'
             }}
           >
             Book a Consultation

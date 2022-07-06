@@ -823,6 +823,9 @@ class ProductDetails extends React.Component {
     const weightedRating = this.getWeightedAverageRatings();
     const isFurnitureStripe = categories.split("|").includes("131");
     const uspWarranty = `${warrantyPeriod} Warranty`;
+
+    const reviewItems = (filterChanged ? reviewDataSet : reviews.data) || [];
+
     return (
       <div>
         <Box pt={30}>
@@ -860,6 +863,11 @@ class ProductDetails extends React.Component {
                     "name" : "HomeTown",
                     "logo" : "https://www.hometown.in/media/cms/icon/10f08290963c2827c55880f5f82bcc5b.png"
                   },
+                  "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "${weightedRating}",
+                    "reviewCount": "${reviewItems.length||0}"
+                  },          
                   "offers" : {
                     "@type" : "Offer",
                     "url": "${productURL || ""}",

@@ -45,7 +45,7 @@ class BeginJourney extends React.Component {
               </Button>
             </Flex>
           </Box>
-          <Image src={beginJourney.imageSrc}
+          <Image data-src={beginJourney.imageSrc} src={`${beginJourney.imageSrc}?blur=30`}
             style={{
               width: '30%',
               height: '520px',
