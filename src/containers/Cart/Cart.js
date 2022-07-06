@@ -391,6 +391,12 @@ export default class CartContainer extends Component {
                 outOfStockList={outOfStockList}
                 handlePincodeModal={this.handlePincodeModal}
               />
+              <NewUnboxRecentlyViewed
+                pageInfo={{
+                  pageType: "PRODUCT",
+                  productIds: [""]
+                }}
+              />
             </Box>
           ) : (
             loading && <CartShimmer />
@@ -436,12 +442,6 @@ export default class CartContainer extends Component {
             ) : null} */}
 
           {/* Footer */}
-          <NewUnboxRecentlyViewed
-            pageInfo={{
-              pageType: "PRODUCT",
-              productIds: [""]
-            }}
-          />
           <Footer />
         </Body>
       </Wrapper>
