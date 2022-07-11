@@ -9,7 +9,7 @@ export default class NewUnboxRecentlyViewed extends Component {
   componentDidMount() {
     if (window && window._unbxd_getRecommendations) {
       const { session, pageInfo } = this.props;
-      beforeTemplateRenderer = function(templateData) {
+      var beforeTemplateRenderer = function(templateData) {
         var modifyTemplateData = function(data) {
           if (!data || !data.recommendations) {
             return;
@@ -52,7 +52,7 @@ export default class NewUnboxRecentlyViewed extends Component {
         "beforeTemplateRender",
         beforeTemplateRenderer
       );
-      
+
       window._unbxd_getRecommendations({
         widgets: {
           widget1: {

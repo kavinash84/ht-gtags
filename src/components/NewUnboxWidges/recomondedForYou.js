@@ -10,7 +10,7 @@ export default class NewUnboxRecomondedForYou extends Component {
     if (window && window._unbxd_getRecommendations) {
       console.log(Cookies.get("unbxd.userId"), "UnboxUid");
       const { session, pageInfo } = this.props;
-      beforeTemplateRenderer = function(templateData) {
+      var beforeTemplateRenderer = function(templateData) {
         var modifyTemplateData = function(data) {
           if (!data || !data.recommendations) {
             return;
