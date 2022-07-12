@@ -15,7 +15,7 @@ export default class NewUnboxBestSeller extends Component {
             return;
           }
 
-          var sliderWidth = jQuery("._unbxd_recs-slider-container").width();
+          var sliderWidth = jQuery(". unbxd-recs-container").width();
           var sliderOffset = 10;
           var productTileGap = 50;
 
@@ -78,6 +78,10 @@ export default class NewUnboxBestSeller extends Component {
     }
   }
   render() {
-    return <div id="unbxd_best_sellers"> </div>;
+    return (
+      <div id="unbxd_best_sellers" className="unbxd-recs-container">
+        {" "}
+      </div>
+    );
   }
 }

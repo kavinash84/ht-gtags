@@ -15,7 +15,7 @@ export default class NewUnboxRecomondRecentlyViewed extends Component {
             return;
           }
 
-          var sliderWidth = jQuery("._unbxd_recs-slider-container").width();
+          var sliderWidth = jQuery(". unbxd-recs-container").width();
           var sliderOffset = 10;
           var productTileGap = 50;
 
@@ -73,8 +73,12 @@ export default class NewUnboxRecomondRecentlyViewed extends Component {
   render() {
     return (
       <React.Fragment>
-        <div id="unbxd_recommended_for_you"> </div>
-        <div id="unbxd_recently_viewed"> </div>
+        <div id="unbxd_recommended_for_you" className="unbxd-recs-container">
+          {" "}
+        </div>
+        <div id="unbxd_recently_viewed" className="unbxd-recs-container">
+          {" "}
+        </div>
       </React.Fragment>
     );
   }
