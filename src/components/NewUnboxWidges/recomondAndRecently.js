@@ -15,10 +15,30 @@ export default class NewUnboxRecomondRecentlyViewed extends Component {
             return;
           }
 
-          var sliderWidth = jQuery(". unbxd-recs-container").width();
+          var getSliderWidth = function() {
+            if (
+              jQuery("#unbxd_recommended_for_you") &&
+              jQuery("#unbxd_recommended_for_you").length
+            ) {
+              return jQuery("#unbxd_recommended_for_you").width();
+            } else if (
+              jQuery("#unbxd_recently_viewed") &&
+              jQuery("#unbxd_recently_viewed").length
+            ) {
+              return jQuery("#unbxd_recently_viewed").width();
+            } else if (
+              jQuery("#unbxd_best_sellers") &&
+              jQuery("#unbxd_best_sellers").length
+            ) {
+              return jQuery("#unbxd_best_sellers").width();
+            }
+          };
+
+          var sliderWidth = getSliderWidth();
           var sliderOffset = 10;
           var productTileGap = 50;
 
+          console.log(sliderWidth);
           var recsBoxSize = sliderWidth / 4 - sliderOffset - productTileGap;
 
           var getImageSuffix = function() {
@@ -29,6 +49,7 @@ export default class NewUnboxRecomondRecentlyViewed extends Component {
               "&height=" +
               recsBoxSize +
               "&mode=fill";
+
             return imageSuffix;
           };
 
@@ -73,12 +94,8 @@ export default class NewUnboxRecomondRecentlyViewed extends Component {
   render() {
     return (
       <React.Fragment>
-        <div id="unbxd_recommended_for_you" className="unbxd-recs-container">
-          {" "}
-        </div>
-        <div id="unbxd_recently_viewed" className="unbxd-recs-container">
-          {" "}
-        </div>
+        <div id="unbxd_recommended_for_you"> </div>
+        <div id="unbxd_recently_viewed"> </div>
       </React.Fragment>
     );
   }

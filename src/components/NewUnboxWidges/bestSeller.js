@@ -15,10 +15,30 @@ export default class NewUnboxBestSeller extends Component {
             return;
           }
 
-          var sliderWidth = jQuery(". unbxd-recs-container").width();
+          var getSliderWidth = function() {
+            if (
+              jQuery("#unbxd_recommended_for_you") &&
+              jQuery("#unbxd_recommended_for_you").length
+            ) {
+              return jQuery("#unbxd_recommended_for_you").width();
+            } else if (
+              jQuery("#unbxd_recently_viewed") &&
+              jQuery("#unbxd_recently_viewed").length
+            ) {
+              return jQuery("#unbxd_recently_viewed").width();
+            } else if (
+              jQuery("#unbxd_best_sellers") &&
+              jQuery("#unbxd_best_sellers").length
+            ) {
+              return jQuery("#unbxd_best_sellers").width();
+            }
+          };
+
+          var sliderWidth = getSliderWidth();
           var sliderOffset = 10;
           var productTileGap = 50;
 
+          console.log(sliderWidth);
           var recsBoxSize = sliderWidth / 4 - sliderOffset - productTileGap;
 
           var getImageSuffix = function() {
@@ -29,6 +49,7 @@ export default class NewUnboxBestSeller extends Component {
               "&height=" +
               recsBoxSize +
               "&mode=fill";
+
             return imageSuffix;
           };
 
@@ -78,10 +99,6 @@ export default class NewUnboxBestSeller extends Component {
     }
   }
   render() {
-    return (
-      <div id="unbxd_best_sellers" className="unbxd-recs-container">
-        {" "}
-      </div>
-    );
+    return <div id="unbxd_best_sellers"> </div>;
   }
 }
