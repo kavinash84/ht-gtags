@@ -37,9 +37,9 @@ export default class NewUnboxBestSeller extends Component {
           var sliderWidth = getSliderWidth();
           var sliderOffset = 10;
           var productTileGap = 50;
-
-          console.log(sliderWidth);
-          var recsBoxSize = sliderWidth / 4 - sliderOffset - productTileGap;
+          var slidesToShow = 4;
+          var recsBoxSize =
+            sliderWidth / slidesToShow - sliderOffset - productTileGap;
 
           var getImageSuffix = function() {
             var imageSuffix =
