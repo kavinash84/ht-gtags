@@ -37,7 +37,7 @@ export default function admitadMiddleware() {
           if (data) {
             const {
               order_no: orderNo,
-              net_order_amount: newOrderAmount
+              sub_total_amount: newOrderAmount
             } = data;
 
             const orderedItem = [];
