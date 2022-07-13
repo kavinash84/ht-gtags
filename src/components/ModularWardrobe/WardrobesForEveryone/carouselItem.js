@@ -13,7 +13,8 @@ const DBItem = ({ component, data }) => {
         <div className={styles.link}>
           <div>
             <img
-              src={data.imgSrc}
+              data-src={data.imgSrc}
+              src={`${data.imgSrc}?blur=30`}
               alt={data.title}
               className={styles.curosalImg}
               style={{ height: "100%", width: "100%", margin: "0 10px"}}

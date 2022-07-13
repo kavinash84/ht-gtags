@@ -17,7 +17,8 @@ class Steps extends React.Component {
     return (
       <Box style={{ width: "100%", marginTop: "70px", position: "relative" }}>
         <Image
-          src={stepsToDreamhome.image}
+          data-src={stepsToDreamhome.image}
+          src={`${stepsToDreamhome.image}?blur=30`}
           style={{ width: "85%", height: "80%", minHeight: "80%" }}
         />
         <Box style={{ display: "flex" }}>
