@@ -359,7 +359,7 @@ export default class App extends Component {
                `}
             </script>
             <script
-              src="https://libraries.unbxdapi.com/recs-sdk/v2.1.0/unbxd_recs_template_sdk_apac.js"
+              src="https://libraries.unbxdapi.com/recs-sdk/v2.2.0/unbxd_recs_template_sdk_apac.js"
               async
             ></script>
             <script id="_webengage_script_tag" type="text/javascript">
