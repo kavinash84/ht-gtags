@@ -5,8 +5,8 @@ import Image from 'hometown-components-dev/lib/ImageHtV1';
 // import BoxHtV1 from 'hometown-components-dev/lib/BoxHtV1';
 import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
 
-const getLowResolution = url => url.replace('-zoom.jpg', '-product_500.jpg');
-const getHighResolution = url => url.replace('.jpg', '-zoom.jpg');
+const getLowResolution = url => url.replace('-zoom.jpg', '.jpg?mode=fill&h=576');
+const getHighResolution = url => url.replace('.jpg', '.jpg?mode=fill&h=576');
 
 const CategoryItem = ({ image, name }) => (
   <ImageShimmer src={getHighResolution(image)} height={[300, 300, 400, 545]} overflow="hidden">
