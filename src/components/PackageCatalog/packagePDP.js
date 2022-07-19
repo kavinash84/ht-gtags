@@ -23,18 +23,16 @@ const formatPrice = price => {
   return Number(price);
 };
 
-@connect(
-  ({ userLogin, lackpackages, paymentoptions, pincode, emioptions }) => ({
-    openProdModal: lackpackages.openProdModal,
-    pdpFromCart: lackpackages.pdpFromCart,
-    packageCatalog: lackpackages.package_catalog,
-    pdpIndexes: lackpackages.pdpIndexes,
-    loading: lackpackages.loading,
-    bflMinAmount: paymentoptions.bflMinAmount,
-    emidata: emioptions.data,
-    pincode
-  })
-)
+@connect(({ userLogin, lackpackages, paymentoptions, pincode }) => ({
+  openProdModal: lackpackages.openProdModal,
+  pdpFromCart: lackpackages.pdpFromCart,
+  packageCatalog: lackpackages.package_catalog,
+  pdpIndexes: lackpackages.pdpIndexes,
+  loading: lackpackages.loading,
+  bflMinAmount: paymentoptions.bflMinAmount,
+  emidata: { emi: [], noCostEmi: [] },
+  pincode
+}))
 export default class PackagePDP extends Component {
   state = { showmore: true, prodDetail: true };
 
@@ -114,29 +112,38 @@ export default class PackagePDP extends Component {
     const isEmiAvailable = Number(checkSpecialPrice) >= EMI_THRESHOLD;
     const isFurniture = categories.split("|").includes("131");
 
-    const carosalData = images.map( item=> {
+    const carosalData = images.map(item => {
       return {
         url: `${item.url}`,
-        title: '',
-        id_catalog_product_image:item.image
+        title: "",
+        id_catalog_product_image: item.image
       };
     });
-    console.log(carosalData, 'data')
+    console.log(carosalData, "data");
     return (
       <div className={styles.package_pdp_container}>
         {packageCatalog.categories && (
           <React.Fragment>
-            <div style={{display:'flex', width: '100%'}}>
-              <div style={{width:'50%', marginLeft: '3%'}}>
+            <div style={{ display: "flex", width: "100%" }}>
+              <div style={{ width: "50%", marginLeft: "3%" }}>
                 <Section p="0" m="0">
                   <PackageDetailSlider data={carosalData} />
                 </Section>
               </div>
-              <div style={{width:'50%', marginLeft:'1%', marginRight:'5%'}}>
+              <div
+                style={{ width: "50%", marginLeft: "1%", marginRight: "5%" }}
+              >
                 <Section p="10px 20px" mb="0">
                   <div style={{ padding: "25px 0px 20px 0px" }}>
-                    <h3 style={{ lineHeight: "30px"}} className={styles.prod_title}>{name}</h3>
-                    <div style={{ fontWeight: 600 , marginTop: "10px" }}>By {brand}</div>
+                    <h3
+                      style={{ lineHeight: "30px" }}
+                      className={styles.prod_title}
+                    >
+                      {name}
+                    </h3>
+                    <div style={{ fontWeight: 600, marginTop: "10px" }}>
+                      By {brand}
+                    </div>
                   </div>
                   {formatPrice(csp) < formatPrice(mrp) ? (
                     <Text

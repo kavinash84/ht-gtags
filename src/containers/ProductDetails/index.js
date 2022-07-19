@@ -3,10 +3,8 @@ import { provideHooks } from "redial";
 import {
   loadProductDescription,
   gaTrack as productLoadGaTrack,
-  loadBoughtTogether,
   getfinanceOptions
 } from "redux/modules/productdetails";
-import { loadEmiOptions } from "redux/modules/emioptions";
 import { setRecentlyViewed } from "redux/modules/recentlyviewed";
 import { loadReview } from "redux/modules/reviews";
 import { PINCODE } from "../../helpers/Constants";
@@ -25,15 +23,11 @@ const hooks = {
   },
   defer: ({ store: { dispatch, getState }, params }) => {
     const {
-      pincode: { selectedPincode },
       productdetails: { productDescription }
     } = getState();
     if (productDescription && !productDescription.error_message) {
-      const pincode = selectedPincode || PINCODE;
       dispatch(loadReview(params.skuId));
       dispatch(setRecentlyViewed(params.skuId));
-      dispatch(loadEmiOptions(params.skuId, pincode));
-      dispatch(loadBoughtTogether(params.skuId));
     }
   },
   done: ({ store: { dispatch } }) => dispatch(productLoadGaTrack())

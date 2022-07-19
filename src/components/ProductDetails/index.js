@@ -199,7 +199,10 @@ const mapStateToProps = ({
   pincode,
   combinedbuy: combinedbuy.results,
   deliveryDateLoading: productdetails.deliveryDateLoading,
-  boughtTogether: productdetails.boughtTogether,
+  boughtTogether:
+    (productdetails.productDescription &&
+      productdetails.productDescription.boughtTogether) ||
+    [],
   relatedproductsList:
     (productdetails.productDescription &&
       productdetails.productDescription.related_products) ||
@@ -209,7 +212,10 @@ const mapStateToProps = ({
       productdetails.productDescription.color_products) ||
     [],
   deliveryInfo: productdetails.deliveryDetails,
-  emidata: emioptions.data,
+  emidata:
+    (productdetails.productDescription &&
+      productdetails.productDescription.emi_data) ||
+    [],
   wishList: getSKUList(wishlist),
   wishListData: wishlist.data,
   isLoggedIn: userLogin.isLoggedIn,

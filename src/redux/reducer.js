@@ -31,7 +31,6 @@ import mycases from "./modules/mycases";
 import paymentstatus from "./modules/paymentstatus";
 import recentlyviewed from "./modules/recentlyviewed";
 import storelocator from "./modules/storelocator";
-import emioptions from "./modules/emioptions";
 import notifs from "./modules/notifs";
 import address from "./modules/address";
 import analytics from "./modules/analytics";
@@ -101,7 +100,6 @@ export default function createReducers(asyncReducers) {
     paymentstatus,
     recentlyviewed,
     storelocator,
-    emioptions,
     notifs,
     address,
     analytics,
