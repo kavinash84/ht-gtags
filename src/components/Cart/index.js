@@ -222,7 +222,7 @@ class Cart extends React.Component {
                               }
                             >
                               <ImageShimmer
-                                src={item.product_info.image}
+                                src={`${item.product_info.image}?mode=fill`}
                                 height="100%"
                                 sx={{
                                   boxShadow: "0 1px 2px 0 #0000033"
