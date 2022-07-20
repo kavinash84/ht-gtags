@@ -51,7 +51,7 @@ export default class ProductDetailSlider extends Component {
             }}
           >
             {data.map(slide => (
-              <CarouselItem key={slide.id_catalog_product_image} image={`${slide.url}.jpg`} name={title} />
+              <CarouselItem key={slide.id_catalog_product_image} image={`${slide.url}.jpg`} name={title}/>
             ))}
           </Slider>
           <Slider
