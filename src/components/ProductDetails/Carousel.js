@@ -39,7 +39,7 @@ export default class ProductDetailSlider extends Component {
     return (
       <Row>
         <Col width="100%" height="100%">
-          <img className="hide" itemProp="image" src={(data && `${data[0].url}-zoom.jpg`) || ''} alt={title} />
+          <img className="hide" itemProp="image" src={(data && `${data[0].url}.jpg`) || ''} alt={title} />
           <Slider
             asNavFor={this.state.nav2}
             ref={slider => (this.slider1 = slider)}
@@ -73,7 +73,7 @@ export default class ProductDetailSlider extends Component {
             {data.map(slide => (
               <Box className={styles.pdpThumbSliderItem} key={slide.id_catalog_product_image}>
                 <ImageShimmer src={`${slide.url}.jpg?mode=fill&h=100`} width="100px" height="100px">
-                  {imageURL => <Image alt={title} src={imageURL} />}
+                  {imageURL => <Image alt={title} data-src={imageURL} />}
                 </ImageShimmer>
               </Box>
             ))}
