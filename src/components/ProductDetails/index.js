@@ -215,7 +215,7 @@ const mapStateToProps = ({
   emidata:
     (productdetails.productDescription &&
       productdetails.productDescription.emi_data) ||
-    [],
+      { emi: [], noCostEmi: [] },
   wishList: getSKUList(wishlist),
   wishListData: wishlist.data,
   isLoggedIn: userLogin.isLoggedIn,
