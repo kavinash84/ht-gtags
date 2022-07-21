@@ -21,7 +21,7 @@ const ProductSummaryList = ({ productItem, qty, itemInfo }) => (
             <Box variant="col-4" pr={0} pl={0}>
               <Image
                 width={1}
-                src={productItem.image || ''}
+                src={`${productItem.image}?mode=fill` || ''} 
                 alt=""
                 sx={{
                   boxShadow: 'productThumb'

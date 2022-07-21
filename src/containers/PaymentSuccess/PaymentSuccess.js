@@ -442,7 +442,7 @@ class PaymentSuccess extends Component {
                         >
                           <Image
                             width={1}
-                            src={`${product.image}-top_sel_160.jpg`}
+                            src={`${product.image}.jpg?mode=fill&h=160`}
                             alt=""
                             sx={{ boxShadow: "productThumb" }}
                           />
