@@ -1,14 +1,15 @@
 import React, { Component } from "react";
-import Div from "hometown-components-dev/lib/BoxHtV1";
+import Wrapper from "hometown-components-dev/lib/WrapperHtV1";
 import BlogComp from "../../components/BlogComp/BlogComp";
-// import WarrantyComp from "components/WarrantyComp";
+import Header from "components/Header";
 
 export default class Blogs extends Component {
-    render() {
-        return (
-            <Div>
-                <BlogComp/>
-            </Div>
-        );
-    }
+  render() {
+    return (
+      <Wrapper>
+        <Header />
+        <BlogComp />
+      </Wrapper>
+    );
+  }
 }
