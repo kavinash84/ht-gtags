@@ -36,13 +36,13 @@ const CategoryItem = ({ image, name, id }) => {
                 largeImage: {
                   src: imageURL,
                   alt: name,
-                  width: 800,
-                  height: 800
+                  width: 1100,
+                  height: 1100
                 },
                 enlargedImagePortalId: "portal",
                 enlargedImageContainerDimensions: {
-                  width: "50%",
-                  height: "50%"
+                  width: "105%",
+                  height: "100%"
                 },
                 enlargedImageContainerClassName: "enlarge"
               }}
