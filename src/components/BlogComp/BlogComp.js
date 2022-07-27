@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import MainSliderTwo from "components/mainSlider2";
+import { Link } from "react-router-dom";
 import PackageBreadCrumb from "./blogsBreadcrumb";
 import { getBlogsCatData } from "../../redux/modules/blogs";
 const NextArrow = require("../../../static/blogsNextArrow.svg");
@@ -85,19 +86,24 @@ class BlogComp extends React.Component {
           <div className={styles.posts}>
             {catagoryPosts.length
               ? catagoryPosts.map(item => (
-                  <div className={styles.post}>
-                    <div className={styles.image_container}>
-                      <img className={styles.image} src={item.banner_image} />
+                  <Link
+                    to={`/blogs/${item.post_key}`}
+                    style={{ width: "33.33%" }}
+                  >
+                    <div className={styles.post}>
+                      <div className={styles.image_container}>
+                        <img className={styles.image} src={item.banner_image} />
+                      </div>
+                      <div className={styles.title}>{item.post_title}</div>
+                      <div className={styles.date}>{item.date}</div>
                     </div>
-                    <div className={styles.title}>{item.post_title}</div>
-                    <div className={styles.date}>{item.date}</div>
-                  </div>
+                  </Link>
                 ))
               : null}
           </div>
           <div className={styles.showMoreContainer}>
-            {this.state.showMore ? null : (
-              <div onClick={() => handleShowMore()}>
+            {showMore ? null : (
+              <div onClick={() => this.handleShowMore()}>
                 <span>SHOW MORE</span>
                 <img src={NextArrow} />
               </div>
