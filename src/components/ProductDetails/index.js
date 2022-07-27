@@ -53,7 +53,7 @@ import Img from "hometown-components-dev/lib/ImageHtV1";
  * Page Components
  */
 import ColorOption from "./ColorOption";
-import ProductCarousel from "components/ProductCarousel";
+// import ProductCarousel from "components/ProductCarousel";
 import ResponsiveModal from "components/Modal";
 import ResponsiveVideoModal from "components/Modal/ResponsiveVideoModal";
 import Reviews from "./ReviewsHtV1";
@@ -204,18 +204,16 @@ const mapStateToProps = ({
       productdetails.productDescription.boughtTogether) ||
     [],
   relatedproductsList:
-    (productdetails.productDescription &&
-      productdetails.productDescription.related_products) ||
+    // (productdetails.productDescription &&
+    //   productdetails.productDescription.related_products) ||
     [],
   colorproducts:
     (productdetails.productDescription &&
       productdetails.productDescription.color_products) ||
     [],
   deliveryInfo: productdetails.deliveryDetails,
-  emidata:
-    (productdetails.productDescription &&
-      productdetails.productDescription.emi_data) ||
-      { emi: [], noCostEmi: [] },
+  emidata: (productdetails.productDescription &&
+    productdetails.productDescription.emi_data) || { emi: [], noCostEmi: [] },
   wishList: getSKUList(wishlist),
   wishListData: wishlist.data,
   isLoggedIn: userLogin.isLoggedIn,
@@ -596,7 +594,7 @@ class ProductDetails extends React.Component {
       // session,
       reviews,
       // isSoldOut,
-      relatedproductsList,
+      // relatedproductsList,
       boughtTogether,
       deliveryInfo,
       emidata,
@@ -1493,15 +1491,17 @@ class ProductDetails extends React.Component {
               </Col>
             </Row>
             {/* bought together */}
-            <LazyLoad height={150}>
-              <BaughtTogether prodQty={prodQty} />
-            </LazyLoad>
+            {boughtTogether && boughtTogether.length ? (
+              <LazyLoad height={150}>
+                <BaughtTogether prodQty={prodQty} />
+              </LazyLoad>
+            ) : null}
 
             {/* Complete the look */}
             <UnbxdCompleteTheLook configId={configId} />
 
             {/* Related Products List */}
-            {relatedproductsList.length > 0 && (
+            {/* {relatedproductsList.length > 0 && (
               <Row py={36}>
                 <ProductCarousel
                   paddingTop="2.5rem"
@@ -1510,7 +1510,7 @@ class ProductDetails extends React.Component {
                   length={relatedproductsList.length}
                 />
               </Row>
-            )}
+            )} */}
 
             {/* Login modal */}
             <ResponsiveModal
