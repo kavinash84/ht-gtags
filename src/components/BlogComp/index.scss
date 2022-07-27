@@ -46,7 +46,7 @@
         .title {
           margin: 10px 0px;
           color: #323f38;
-          font-size: 20px;
+          font-size: 22px;
         }
         .date {
           color: #323f38;
@@ -68,6 +68,42 @@
         margin-left: 10px;
         width: 25px;
         cursor: pointer;
+      }
+    }
+  }
+
+  .postBanner {
+    background: #fff8f4;
+    width: 100%;
+    padding: 2% 11%;
+    z-index: -1;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+  .descriptionContainer {
+    padding: 0% 16%;
+    .description {
+      box-shadow: 0px 3px 6px #00000029;
+      padding: 30px 40px;
+      z-index: 1;
+      margin-top: -80px;
+      background-color: white;
+      position: absolute;
+      width: 68%;
+      .title {
+        text-align: center;
+        font-weight: 600;
+        font-size: 20px;
+        color: #323131;
+        margin-bottom: 15px;
+      }
+      .date {
+        text-align: center;
+        color: #323f38;
+        font-size: 14px;
+        margin-bottom: 20px;
       }
     }
   }

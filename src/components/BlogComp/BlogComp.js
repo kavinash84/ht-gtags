@@ -46,7 +46,7 @@ class BlogComp extends React.Component {
   handleTabChange = id => {
     const { dispatch } = this.context.store;
     dispatch(getBlogsCatData(id));
-    this.setState({ activeTab: id });
+    this.setState({ activeTab: id, showMore: false });
   };
 
   handleShowMore = () => {
