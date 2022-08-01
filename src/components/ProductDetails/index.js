@@ -855,7 +855,7 @@ class ProductDetails extends React.Component {
                   "aggregateRating": {
                     "@type": "AggregateRating",
                     "ratingValue": "${weightedRating}",
-                    "reviewCount": "${reviewItems.length||0}"
+                    "reviewCount": "${reviewItems.length || 0}"
                   },          
                   "offers" : {
                     "@type" : "Offer",
@@ -1605,9 +1605,11 @@ class ProductDetails extends React.Component {
               </Col>
             </Row>
             {/* bought together */}
-            <LazyLoad height={150}>
-              <BaughtTogether prodQty={prodQty} />
-            </LazyLoad>
+            {boughtTogether && boughtTogether.length ? (
+              <LazyLoad height={150}>
+                <BaughtTogether prodQty={prodQty} />
+              </LazyLoad>
+            ) : null}
 
             {/* Complete the look */}
             <UnbxdCompleteTheLook configId={configId} />
