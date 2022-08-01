@@ -53,6 +53,13 @@ class BlogComp extends React.Component {
     this.setState({ showMore: !this.state.showMore });
   };
 
+  componentDidMount() {
+    const { homeData } = this.props;
+    if (homeData.category_list.length) {
+      this.handleTabChange(homeData.category_list[0].key);
+    }
+  }
+
   render() {
     const { activeTab, showMore } = this.state;
     const { homeData, currentCatData } = this.props;
@@ -102,12 +109,12 @@ class BlogComp extends React.Component {
               : null}
           </div>
           <div className={styles.showMoreContainer}>
-            {showMore ? null : (
+            {catagoryPosts && catagoryPosts.length > 9 && !showMore ? (
               <div onClick={() => this.handleShowMore()}>
                 <span>SHOW MORE</span>
                 <img src={NextArrow} />
               </div>
-            )}
+            ) : null}
           </div>
         </div>
       </div>
