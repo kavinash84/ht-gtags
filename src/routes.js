@@ -261,8 +261,8 @@ const routes = [
         exact: true,
         component: PackageCatalog
       },
-      { path: "/blogs", exact: true, component: BlogsContainer },
-      { path: "/blogs/:key", exact: true, component: BlogContainer },
+      { path: "/newBlogs", exact: true, component: BlogsContainer },
+      { path: "/newBlogs/:key", exact: true, component: BlogContainer },
       { component: NotFound }
     ]
   }
