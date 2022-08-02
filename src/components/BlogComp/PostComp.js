@@ -26,6 +26,7 @@ class PostComp extends React.Component {
               <div className={styles.description}>
                 <div className={styles.title}>{postData.post_title}</div>
                 <div className={styles.date}>{postData.created_at}</div>
+                <div dangerouslySetInnerHTML={{ __html: postData.post_desc }} />
               </div>
             </div>
           </div>

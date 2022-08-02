@@ -94,7 +94,7 @@ class BlogComp extends React.Component {
             {catagoryPosts.length
               ? catagoryPosts.map(item => (
                   <Link
-                    to={`/blogs/${item.post_key}`}
+                    to={`/newblogs/${item.post_key}`}
                     style={{ width: "33.33%" }}
                   >
                     <div className={styles.post}>
