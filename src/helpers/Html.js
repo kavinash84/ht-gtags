@@ -427,6 +427,43 @@ export default class Html extends Component {
             }}
           />
           <script src={admitad.src} async onError={admitad.onerror}></script>
+          <script type="text/javascript">
+            {`	// name of the cookie that stores the source
+	// change if you have another name
+	var cookie_name = 'deduplication_cookie';
+	// cookie lifetime
+	var days_to_store = 90;
+	// expected deduplication_cookie value for Admitad
+	var deduplication_cookie_value = 'admitad';
+	// name of GET parameter for deduplication
+	// change if you have another name
+	var channel_name = 'utm_source';
+	// a function to get the source from the GET parameter
+	getSourceParamFromUri = function () {
+		var pattern = channel_name + '=([^&]+)';
+		var re = new RegExp(pattern);
+		return (re.exec(document.location.search) || [])[1] || '';
+	};
+	// a function to get the source from the cookie named cookie_name
+	getSourceCookie = function () {
+		var matches = document.cookie.match(new RegExp(
+			'(?:^|; )' + cookie_name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)'
+		));
+		return matches ? decodeURIComponent(matches[1]) : undefined;
+	};
+	// a function to set the source in the cookie named cookie_name
+	setSourceCookie = function () {
+		var param = getSourceParamFromUri();
+		if (!param) { return; }
+		var period = days_to_store * 60 * 60 * 24 * 1000;	// in seconds
+		var expiresDate = new Date((period) + +new Date);
+		var cookieString = cookie_name + '=' + param + '; path=/; expires=' + expiresDate.toGMTString();
+		document.cookie = cookieString;
+		document.cookie = cookieString + '; domain=.' + location.host;
+	};
+	// set cookie
+	setSourceCookie();`}
+          </script>
         </head>
         <body>
           {/* {process.env.NODE_ENV !== 'development' && (
