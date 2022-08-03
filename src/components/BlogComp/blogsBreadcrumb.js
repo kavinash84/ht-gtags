@@ -16,7 +16,7 @@ const PackageBreadCrumb = ({ blogsTitle }) => {
       </div>
       <ul className={styles.breadCrumbListMain}>
         <li>
-          <Link to={`/blogs`}>
+          <Link to={`/blog`}>
             <span style={{ color: "#F47020", marginBottom: "2px" }}>Blogs</span>
           </Link>
         </li>
