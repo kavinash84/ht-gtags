@@ -99,7 +99,7 @@ class BlogComp extends React.Component {
                   >
                     <div className={styles.post}>
                       <div className={styles.image_container}>
-                        <img className={styles.image} src={item.banner_image} />
+                        <img className={styles.image} src={item.main_image} />
                       </div>
                       <div className={styles.title}>{item.post_title}</div>
                       <div className={styles.date}>{item.date}</div>
