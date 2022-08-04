@@ -12,11 +12,9 @@ import { loadEmiOptions } from "redux/modules/emioptions";
 import { setRecentlyViewed } from "redux/modules/recentlyviewed";
 import { loadReview } from "redux/modules/reviews";
 import { PINCODE } from "../../helpers/Constants";
-import { isLandingPage } from "../../redux/modules/app";
 
 const hooks = {
   fetch: async ({ store: { dispatch, getState }, params }) => {
-    dispatch(isLandingPage(false));
     const {
       productdetails: { currentsku },
       pincode: { selectedPincode }
