@@ -885,7 +885,7 @@ class ProductDetails extends React.Component {
                 <Box style={{ position: "sticky", top: "0", left: "0" }}>
                   {/* Product Slider */}
                   {images && (
-                    <ProductDetailsCarousel youtubeid={youtubeid} data={images} title={meta.name} />
+                    <ProductDetailsCarousel youtube={youtubeid} data={images} title={meta.name} />
                   )}
 
                   {/* Wishlist Button */}

@@ -33,8 +33,8 @@ export default class ProductDetailSlider extends Component {
   }
 
   render() {
-    const { data, title, youtubeid } = this.props;
-    const formatedData = data && [...data, { youtubeid: 'youtubeid' }] || []
+    const { data, title, youtube } = this.props;
+    const formatedData = youtube ? data && [...data, { youtubeid: youtube }] || [] : [...data]
     const styles = require('./Carousel.scss');
 
     return (
@@ -53,9 +53,9 @@ export default class ProductDetailSlider extends Component {
           >
             {formatedData.map(slide => (
               <div>
-                {slide.hasOwnProperty('youtubeid') ? (
-                  <video width="100%" height="500px" controls >
-                    <source src={youtubeid} type="video/mp4" />
+                {slide.hasOwnProperty('youtubeid') && slide.youtubeid ? (
+                  <video width="100%" height="500px" controls autoplay>
+                    <source src={slide.youtubeid} type="video/mp4" />
                   </video>
                 ) :
                   <CarouselItem key={slide.id_catalog_product_image} image={`${slide.url}.jpg`} name={title} />
@@ -79,10 +79,10 @@ export default class ProductDetailSlider extends Component {
           >
             {formatedData.map(slide => (
               <Box className={styles.pdpThumbSliderItem} key={slide.id_catalog_product_image}>
-                {slide.hasOwnProperty('youtubeid') ? (
+                {slide.hasOwnProperty('youtubeid') && slide.youtubeid ? (
                   <video width="100px" height="100px" >
-                  <source src={youtubeid} type="video/mp4" />
-                </video>
+                    <source src={slide.youtubeid} type="video/mp4" />
+                  </video>
                 ) : (
                   <ImageShimmer src={`${slide.url}.jpg?mode=fill&h=100`} width="100px" height="100px">
                     {imageURL => <Image alt={title} data-src={imageURL} />}
