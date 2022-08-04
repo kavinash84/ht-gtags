@@ -54,7 +54,7 @@ export default class ProductDetailSlider extends Component {
             {formatedData.map(slide => (
               <div>
                 {slide.hasOwnProperty('youtubeid') && slide.youtubeid ? (
-                  <video width="100%" height="500px" controls autoplay>
+                  <video width="100%" height="500px" style={{ backgroundColor: 'black' }} controls loop autoPlay muted>
                     <source src={slide.youtubeid} type="video/mp4" />
                   </video>
                 ) :
@@ -80,7 +80,7 @@ export default class ProductDetailSlider extends Component {
             {formatedData.map(slide => (
               <Box className={styles.pdpThumbSliderItem} key={slide.id_catalog_product_image}>
                 {slide.hasOwnProperty('youtubeid') && slide.youtubeid ? (
-                  <video width="100px" height="100px" >
+                  <video width="100px" height="100px"  style={{ backgroundColor: 'black' }}  >
                     <source src={slide.youtubeid} type="video/mp4" />
                   </video>
                 ) : (
