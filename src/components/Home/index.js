@@ -876,7 +876,7 @@ class HomeContainer extends Component {
                 }}
               />
             </Link>
-            <Link
+            {/* <Link
               onClick={() => {
                 sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
               }}
@@ -894,8 +894,8 @@ class HomeContainer extends Component {
                   marginRight: "12.5%"
                 }}
               />
-            </Link>
-            <Link
+            </Link> */}
+            {/* <Link
               onClick={() => {
                 sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
               }}
@@ -913,7 +913,7 @@ class HomeContainer extends Component {
                   marginRight: "12.5%"
                 }}
               />
-            </Link>
+            </Link> */}
           </div>
         </LazyLoad>
 
