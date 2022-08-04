@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import MainSliderTwo from "components/mainSlider2";
@@ -9,6 +10,22 @@ const NextArrow = require("../../../static/blogsNextArrow.svg");
 
 const BreadCrumpstyles = require("./breadcrumb.scss");
 const styles = require("./index.scss");
+
+const validateDate = d => {
+  if (Object.prototype.toString.call(d) === "[object Date]") {
+    // it is a date
+    if (isNaN(d)) {
+      // d.getTime() or d.valueOf() will also work
+      // date object is not valid
+      return false;
+    } else {
+      // date object is valid
+      return true;
+    }
+  } else {
+    return false;
+  }
+};
 
 const formatToCarosalData = data => {
   let arr = { data: [] };
@@ -102,7 +119,11 @@ class BlogComp extends React.Component {
                         <img className={styles.image} src={item.main_image} />
                       </div>
                       <div className={styles.title}>{item.post_title}</div>
-                      <div className={styles.date}>{item.date}</div>
+                      <div className={styles.date}>
+                        {validateDate(item.date)
+                          ? moment(item.date).format("Do MMMM YYYY")
+                          : null}
+                      </div>
                     </div>
                   </Link>
                 ))
