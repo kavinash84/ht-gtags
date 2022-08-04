@@ -771,7 +771,8 @@ class ProductDetails extends React.Component {
       shipping_charge: shippingCharge,
       warranty_period: warrantyPeriod = 0,
       fk_catalog_supplier: fkCatalogSupplier = null,
-      categories
+      categories,
+      youtubeid
     } = meta;
     const {
       mrp,
@@ -884,7 +885,7 @@ class ProductDetails extends React.Component {
                 <Box style={{ position: "sticky", top: "0", left: "0" }}>
                   {/* Product Slider */}
                   {images && (
-                    <ProductDetailsCarousel data={images} title={meta.name} />
+                    <ProductDetailsCarousel youtubeid={youtubeid} data={images} title={meta.name} />
                   )}
 
                   {/* Wishlist Button */}

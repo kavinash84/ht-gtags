@@ -33,18 +33,14 @@ export default class ProductDetailSlider extends Component {
   }
 
   render() {
-    const { data, title } = this.props;
-    const styles = require("./Carousel.scss");
+    const { data, title, youtubeid } = this.props;
+    const formatedData = data && [...data, { youtubeid: 'youtubeid' }] || []
+    const styles = require('./Carousel.scss');
 
     return (
       <Row>
         <Col width="100%" height="100%">
-          <img
-            className="hide"
-            itemProp="image"
-            src={(data && `${data[0].url}.jpg`) || ""}
-            alt={title}
-          />
+          <img className="hide" itemProp="image" src={(formatedData && `${formatedData[0].url}.jpg`) || ''} alt={title} />
           <Slider
             asNavFor={this.state.nav2}
             ref={slider => (this.slider1 = slider)}
@@ -55,19 +51,20 @@ export default class ProductDetailSlider extends Component {
               console.log("after in slider1", currentSlide);
             }}
           >
-            {data.map((slide, i) => (
-              <CarouselItem
-                key={slide.id_catalog_product_image}
-                image={`${slide.url}.jpg`}
-                name={title}
-                id={i}
-              />
-            ))}
+            {formatedData.map(slide => (
+              <div>
+                {slide.hasOwnProperty('youtubeid') ? (
+                  <video width="100%" height="500px" controls >
+                    <source src={youtubeid} type="video/mp4" />
+                  </video>
+                ) :
+                  <CarouselItem key={slide.id_catalog_product_image} image={`${slide.url}.jpg`} name={title} />
+                }</div>))}
           </Slider>
           <Slider
             asNavFor={this.state.nav1}
             ref={slider => (this.slider2 = slider)}
-            slidesToShow={showSlides(data)}
+            slidesToShow={showSlides(formatedData)}
             swipeToSlide
             focusOnSelect
             className="pdpThumbSlider"
@@ -80,18 +77,17 @@ export default class ProductDetailSlider extends Component {
               console.log("after in slider2", currentSlide);
             }}
           >
-            {data.map(slide => (
-              <Box
-                className={styles.pdpThumbSliderItem}
-                key={slide.id_catalog_product_image}
-              >
-                <ImageShimmer
-                  src={`${slide.url}.jpg?mode=fill&h=100`}
-                  width="100px"
-                  height="100px"
-                >
-                  {imageURL => <Image alt={title} data-src={imageURL} />}
-                </ImageShimmer>
+            {formatedData.map(slide => (
+              <Box className={styles.pdpThumbSliderItem} key={slide.id_catalog_product_image}>
+                {slide.hasOwnProperty('youtubeid') ? (
+                  <video width="100px" height="100px" >
+                  <source src={youtubeid} type="video/mp4" />
+                </video>
+                ) : (
+                  <ImageShimmer src={`${slide.url}.jpg?mode=fill&h=100`} width="100px" height="100px">
+                    {imageURL => <Image alt={title} data-src={imageURL} />}
+                  </ImageShimmer>
+                )}
               </Box>
             ))}
           </Slider>
@@ -102,11 +98,11 @@ export default class ProductDetailSlider extends Component {
 }
 
 ProductDetailSlider.defaultProps = {
-  data: [],
-  title: ""
+  formatedData: [],
+  title: ''
 };
 
 ProductDetailSlider.propTypes = {
-  data: PropTypes.array,
+  formatedData: PropTypes.array,
   title: PropTypes.string
 };
