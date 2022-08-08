@@ -11,22 +11,6 @@ const NextArrow = require("../../../static/blogsNextArrow.svg");
 const BreadCrumpstyles = require("./breadcrumb.scss");
 const styles = require("./index.scss");
 
-const validateDate = d => {
-  if (Object.prototype.toString.call(d) === "[object Date]") {
-    // it is a date
-    if (isNaN(d)) {
-      // d.getTime() or d.valueOf() will also work
-      // date object is not valid
-      return false;
-    } else {
-      // date object is valid
-      return true;
-    }
-  } else {
-    return false;
-  }
-};
-
 const formatToCarosalData = data => {
   let arr = { data: [] };
   if (Array.isArray(data) && data.length) {
@@ -37,7 +21,7 @@ const formatToCarosalData = data => {
         description: item.title,
         image: item.image,
         type: "webview_layout",
-        url_key: "/blogs",
+        url_key: "/blog",
         weData: item.title,
         meta: {
           name: item.title,
@@ -120,9 +104,7 @@ class BlogComp extends React.Component {
                       </div>
                       <div className={styles.title}>{item.post_title}</div>
                       <div className={styles.date}>
-                        {validateDate(item.date)
-                          ? moment(item.date).format("Do MMMM YYYY")
-                          : null}
+                        {moment(item.date).format("Do MMMM YYYY")}
                       </div>
                     </div>
                   </Link>

@@ -6,22 +6,6 @@ import PackageBreadCrumb from "./blogsBreadcrumb";
 const BreadCrumpstyles = require("./breadcrumb.scss");
 const styles = require("./index.scss");
 
-const validateDate = d => {
-  if (Object.prototype.toString.call(d) === "[object Date]") {
-    // it is a date
-    if (isNaN(d)) {
-      // d.getTime() or d.valueOf() will also work
-      // date object is not valid
-      return false;
-    } else {
-      // date object is valid
-      return true;
-    }
-  } else {
-    return false;
-  }
-};
-
 @connect(({ blogs }) => ({
   currentPostData: blogs.currentPostData
 }))
@@ -43,9 +27,7 @@ class PostComp extends React.Component {
               <div className={styles.description}>
                 <div className={styles.title}>{postData.post_title}</div>
                 <div className={styles.date}>
-                  {validateDate(item.created_at)
-                    ? moment(item.created_at).format("Do MMMM YYYY")
-                    : null}
+                  {moment(item.created_at).format("Do MMMM YYYY")}
                 </div>
                 <div dangerouslySetInnerHTML={{ __html: postData.post_desc }} />
               </div>
