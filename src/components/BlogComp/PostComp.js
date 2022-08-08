@@ -27,7 +27,7 @@ class PostComp extends React.Component {
               <div className={styles.description}>
                 <div className={styles.title}>{postData.post_title}</div>
                 <div className={styles.date}>
-                  {moment(item.created_at).format("Do MMMM YYYY")}
+                  {moment(postData.created_at).format("Do MMMM YYYY")}
                 </div>
                 <div dangerouslySetInnerHTML={{ __html: postData.post_desc }} />
               </div>
