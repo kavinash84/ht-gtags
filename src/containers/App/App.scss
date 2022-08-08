@@ -941,14 +941,14 @@
     .enlarge {
       position: absolute;
       left: 0%;
-      top: 3rem;
+      top: 0rem;
       right: 0;
       bottom: 0;
       z-index: 100;
       border: 1px solid #ddd;
     }
     img {
-      max-width: 800px !important;
+      // max-width: 800px !important;
     }
   }
 
