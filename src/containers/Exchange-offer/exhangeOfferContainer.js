@@ -31,7 +31,6 @@ export default class ExchangeOfferContainer extends Component {
   }
 
   render() {
-    // console.log(this.props.modularkitchen);
     const { history } = this.props;
     return (
       <div className="wrapper">

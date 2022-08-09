@@ -104,7 +104,6 @@ class MyOrderContainer extends Component {
       orderStatus: { value: orderStatus }
     } = this.state;
     const { contactNumber } = this.props;
-    // console.log(`${startDate}${endDate}${orderStatus}`);
     this.props.loadMyOrders(contactNumber, startDate, endDate);
   };
   render() {

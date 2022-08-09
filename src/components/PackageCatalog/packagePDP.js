@@ -56,7 +56,6 @@ export default class PackagePDP extends Component {
         }
       });
     });
-    console.log(found);
     return found;
   };
 
@@ -119,7 +118,6 @@ export default class PackagePDP extends Component {
         id_catalog_product_image: item.image
       };
     });
-    console.log(carosalData, "data");
     return (
       <div className={styles.package_pdp_container}>
         {packageCatalog.categories && (

@@ -143,7 +143,6 @@ class DeliveryAddress extends Component {
     }
     if (nextProps.showAddAddress !== showAddAddress) {
       if (!showAddAddress) {
-        console.log("called...1");
         dispatch(AddNewAddress(false));
       }
     }

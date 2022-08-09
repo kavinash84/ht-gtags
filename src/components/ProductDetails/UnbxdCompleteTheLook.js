@@ -11,14 +11,11 @@ export default class UnbxdCompleteTheLook extends Component {
     }
   }
   setUnbxdPid() {
-    console.log('setUnbxdPid function triggered');
     const { configId } = this.props;
-    console.log('setting pid for UnbxdWidgetsConf');
     window.UnbxdWidgetsConf = {
       pid: configId
     };
     if (window.refreshWidgets) {
-      console.log('refreshWidgets function triggered');
       window.refreshWidgets();
     }
   }

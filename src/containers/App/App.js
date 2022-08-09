@@ -239,7 +239,6 @@ export default class App extends Component {
     }
     if (this.props.cartSynced !== prevProps.cartSynced) {
       window.unbxd.handleUserSwitch();
-      console.log("unbxd - window.unbxd.handleUserSwitch(); invoked on sync");
     }
   }
   getSelectedPincode = () => {
@@ -262,7 +261,6 @@ export default class App extends Component {
     return url;
   };
   getWeKey = () => {
-    console.log(config, "config");
     let str = `${config.apiHost}` || "";
     if (str.includes("beta-api") || str.includes("stage-api")) {
       return "in~~15ba205b0";

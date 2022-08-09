@@ -363,7 +363,6 @@ export default function userMiddleware() {
         );
         break;
       case "cases/LOAD_SUCCESS":
-        // console.log(action);
         const {
           result: { success, errors }
         } = action;
@@ -388,7 +387,6 @@ export default function userMiddleware() {
       // Landing page
       case "landing/LANDING_SUBMIT_SUCCESS":
         const landingPageResult = action.result;
-        // console.log(action);
         if (landingPageResult.error === "") {
           dispatch(
             notifSend({

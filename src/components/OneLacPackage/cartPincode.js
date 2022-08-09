@@ -45,7 +45,6 @@ class CartPincode extends React.Component {
     }
   }
   render() {
-    // console.log(document.getElementById('pincode_input').value, 'pincode_input');
     const { setPincodeOrCityQuery, setPincode, pincodeQuery, load, loading, loaded, results, showResults } = this.props;
     return (
       <Div className={styles.pincode} pt="0" pb="0.3125rem">

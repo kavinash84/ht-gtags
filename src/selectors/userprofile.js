@@ -21,6 +21,5 @@ export const getFuturePayProfile = createSelector([getUser], futurePay =>
     });
 
 export const getTransactionHistory = createSelector([futurePayTransaction], transaction => {
-  console.log('transaction inside selectors', transaction);
   return transaction || [];
 });

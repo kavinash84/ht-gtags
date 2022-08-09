@@ -49,7 +49,6 @@ class BajajFinance extends Component {
   }
 
   openBflModal = () => {
-    console.log('openBflModal function triggered');
     const {
       submitPaymentDetails,
       session,
@@ -68,7 +67,6 @@ class BajajFinance extends Component {
       let { countDown } = this.state;
       countDown -= 1;
 
-      console.log('Countdown value', countDown, countDownId);
       if (countDown === 0) {
         this.closeBflModal();
         emiType('bfl');

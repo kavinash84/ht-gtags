@@ -35,7 +35,6 @@ let selectedSku = '';
 
 const onClick = (key, skuId, simpleSku, session, pincode, configId, quantity) => dispatcher => e => {
   selectedSku = skuId;
-  console.log(key, skuId, simpleSku, session, pincode, configId, quantity, 'bug fix');
   e.preventDefault();
   dispatcher(key, skuId, simpleSku, session, pincode, configId, quantity);
 };

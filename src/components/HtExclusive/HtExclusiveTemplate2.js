@@ -19,7 +19,6 @@ function HtExclusiveTemplate2({ data }) {
   const {
  mainTitle, subTitle, banner, imageCollection, link
 } = data;
-  console.log('data', data);
   return (
     <Box>
       <CategoryHeader mainTitle={mainTitle} subTitle={subTitle} link={link} />

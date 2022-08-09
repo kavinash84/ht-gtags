@@ -173,7 +173,6 @@ export default class WriteReview extends Component {
     }
   };
   handleFileUpload = e => {
-    console.log(e.target.files, "files");
     if (e.target.files.length) {
       this.setState({ addImg: e.target.files, addImgError: false });
     } else {
@@ -184,7 +183,6 @@ export default class WriteReview extends Component {
     }
   };
   handleGetDetails = () => {
-    console.log("clicked");
     const { dispatch } = this.context.store;
     dispatch(loadProductsListForReview(this.state.mobile));
     this.setState({ getDetailsHit: false });
@@ -226,7 +224,6 @@ export default class WriteReview extends Component {
       //  ||
       // addImgError
     ) {
-      console.log("error");
       this.setState({
         nameError,
         mobileError,
@@ -240,7 +237,6 @@ export default class WriteReview extends Component {
       });
     } else {
       const { dispatch } = this.context.store;
-      console.log("noerror", this.state.addImg[0], this.state.addImg.length);
       let formdata = new FormData();
       formdata.append("name", this.state.name);
       formdata.append("rating", this.state.ratings);
@@ -266,7 +262,6 @@ export default class WriteReview extends Component {
 
       dispatch(addCustomerReview(this.state.product, formdata));
     }
-    console.log("noerror");
   };
   componentWillReceiveProps(nextProps) {
     if (
@@ -327,7 +322,6 @@ export default class WriteReview extends Component {
       productsLoader,
       productsToBeReviewed
     } = this.props;
-    console.log(stores, "stores");
     return (
       <Section p="0" mb="0" style={{ padding: "0% 7%" }}>
         <Div className={styles.writeReviewContainer}>

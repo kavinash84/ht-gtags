@@ -87,7 +87,6 @@ class StoresCarousel extends Component {
       // afterChange: this.nextClick
     };
     const { cities, stores2, gaVisitEvent } = this.props;
-    console.log(this.state.activeSlide, "activeSlide");
     return (
       <Section p="0" pt="1rem" pb="0" mb="0" className="storeCarousel">
         <Container pr="0" pl="0" bg="">

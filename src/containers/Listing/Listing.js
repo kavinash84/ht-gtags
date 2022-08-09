@@ -45,10 +45,7 @@ const btnStyle = {
 
 const getFaqs = faqs => {
   const seoFaq = JSON.parse(faqs).map(faq => {
-    // console.log(faq, 'QA check');
-    // console.log(Object.values(faq)[0]);
     const ques = Object.values(faq)[0];
-    // console.log(faq.ans);
     if (faq) {
       return {
         "@type": "Question",
@@ -323,7 +320,6 @@ export default class Listing extends Component {
     // const showBestOffers = listingBestOffersPath.some(arr => arr === pathname);
     // let banners = [];
     // if (showBestOffers) banners = listingBestOffers[0][pathname].images;
-    // console.log('listingBestOffers[pathname]', listingBestOffers[0][pathname]);
     /* eslint-disable react/no-danger */
     return (
       <Wrapper>
