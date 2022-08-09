@@ -184,7 +184,6 @@ const mapStateToProps = ({
   productdetails,
   pincode,
   reviews,
-  emioptions,
   wishlist,
   userLogin,
   combinedbuy,
@@ -687,7 +686,7 @@ class ProductDetails extends React.Component {
     const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
     const offerImageRedirect =
       simples[simpleSku].groupedattributes.offer_image_click_url || null;
-    const { showmore, showmorecolorproducts } = this.state;
+    const { showmorecolorproducts } = this.state;
     // const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
     const {
       main_material: material,
@@ -770,6 +769,7 @@ class ProductDetails extends React.Component {
                 <BreadCrumb breadcrumbs={breadcrumbs} />
               </Col>
             </Row>
+            <LazyLoad height={936}>
             <Row mb={40}>
               {/* Left Column */}
               <Col width={[6, 2 / 12, 5 / 12, 6 / 12]} pr={30}>
@@ -1491,15 +1491,18 @@ class ProductDetails extends React.Component {
                 </div>
               </Col>
             </Row>
+            </LazyLoad>
             {/* bought together */}
             {boughtTogether && boughtTogether.length ? (
-              <LazyLoad height={150}>
+              <LazyLoad height={545}>
                 <BaughtTogether prodQty={prodQty} />
               </LazyLoad>
             ) : null}
 
             {/* Complete the look */}
+            <LazyLoad height={150}>
             <UnbxdCompleteTheLook configId={configId} />
+            </LazyLoad>
 
             {/* Related Products List */}
             {/* {relatedproductsList.length > 0 && (
