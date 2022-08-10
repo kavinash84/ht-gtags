@@ -1,5 +1,6 @@
 import React from "react";
 import moment from "moment";
+import Helmet from "react-helmet";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import MainSliderTwo from "components/mainSlider2";
@@ -69,6 +70,7 @@ class BlogComp extends React.Component {
       : currentCatData.length && currentCatData.filter((item, i) => i <= 8);
     return (
       <div className={styles.blogs_main}>
+        <Helmet title="Blogs" />
         <div className={BreadCrumpstyles.BreadCrumb_wrapper2}>
           <PackageBreadCrumb />
         </div>
@@ -104,7 +106,7 @@ class BlogComp extends React.Component {
                       </div>
                       <div className={styles.title}>{item.post_title}</div>
                       <div className={styles.date}>
-                        {moment(item.date).format("Do MMMM YYYY")}
+                        {moment(item.date, "DD/MM/YYYY").format("Do MMMM YYYY")}
                       </div>
                     </div>
                   </Link>

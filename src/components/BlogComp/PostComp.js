@@ -1,5 +1,6 @@
 import React from "react";
 import moment from "moment";
+import Helmet from "react-helmet";
 import { connect } from "react-redux";
 import PackageBreadCrumb from "./blogsBreadcrumb";
 
@@ -15,6 +16,7 @@ class PostComp extends React.Component {
     const postData = currentPostData[0] || "";
     return (
       <div className={styles.blogs_main}>
+        <Helmet title="Blogs" />
         <div className={BreadCrumpstyles.BreadCrumb_wrapper2}>
           <PackageBreadCrumb blogsTitle={postData.post_title} />
         </div>
