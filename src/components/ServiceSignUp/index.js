@@ -161,7 +161,6 @@ class ServiceSignUpModal extends Component {
     const correctIcon = require('../../../static/correct.svg');
     const refreshIcon = require('../../../static/refresh-primary.svg');
     const { loading, loaded } = this.props;
-    // console.log(loading);
     const {
       nameError,
       nameErrorMessage,

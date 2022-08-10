@@ -45,10 +45,8 @@ export default class ProductDetailSlider extends Component {
             asNavFor={this.state.nav2}
             ref={slider => (this.slider1 = slider)}
             beforeChange={(currentSlide, nextSlide) => {
-              console.log("before in slider1", currentSlide, nextSlide);
             }}
             afterChange={currentSlide => {
-              console.log("after in slider1", currentSlide);
             }}
           >
             {formatedData.map(slide => (
@@ -71,10 +69,8 @@ export default class ProductDetailSlider extends Component {
             centerPadding="30px"
             variableWidth={true}
             beforeChange={(currentSlide, nextSlide) => {
-              console.log("before in slider2", currentSlide, nextSlide);
             }}
             afterChange={currentSlide => {
-              console.log("after in slider2", currentSlide);
             }}
           >
             {formatedData.map(slide => (

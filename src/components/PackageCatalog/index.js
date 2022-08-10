@@ -151,7 +151,6 @@ export default class PackageCatalog extends Component {
 
   handlePreProceed = () => {
     const { packageCatalog, cartPackage, currentPackage } = this.props;
-    console.log(cartPackage, currentPackage);
     if (this.checkPriceStatus(packageCatalog)) {
       this.setState({ priceWarningModal: true });
     } else if (cartPackage !== "" && cartPackage !== currentPackage) {
@@ -326,7 +325,6 @@ export default class PackageCatalog extends Component {
         }
       }
     });
-    console.log(total);
     return total <= parseInt(data.price) ? true : false;
   };
 

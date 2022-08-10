@@ -278,7 +278,6 @@ module.exports = {
       const versionPath = path.join(__dirname, "..");
       fs.writeFile(`${versionPath}/version.json`, JSON.stringify(data), err => {
         if (err) throw err;
-        console.log(`VERSION RELEASE : ${version}`);
       });
     })
   ]

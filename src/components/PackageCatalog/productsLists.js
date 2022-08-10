@@ -114,7 +114,6 @@ export default class ProductsList extends Component {
       });
       if (!isNaN(foundIndex) && packageCatalog.categories[foundIndex]) {
         const { dispatch } = this.context.store;
-        console.log(foundIndex, "foundIndex");
         dispatch(setReplaceIndex(foundIndex));
         dispatch(selectSkuForPlp(""));
         this.setState({

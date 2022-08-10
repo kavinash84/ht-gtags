@@ -192,7 +192,6 @@ export const getTransactionHistory = data => ({
       const response = await client.post(TRANSACTION_HISTORY_API, postData);
       return response;
     } catch (error) {
-      console.log('Logged In Profile Reducer catch', error);
       throw error;
     }
   }

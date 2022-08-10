@@ -231,7 +231,6 @@ export const login = data => ({
       const skipOtpValidation = data.skipOtpValidation
         ? data.skipOtpValidation
         : false;
-      console.log({ skipBirthdateCheck });
       const postData = `${username}&password=${password}${dob}&skipBirthdateCheck=${skipBirthdateCheck}&skipOtpValidation=${skipOtpValidation}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}${mobile}${name}${email}`;
       const response = await client.post(LOGIN_API, postData);
       setToken({ client })(response);

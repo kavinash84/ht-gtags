@@ -119,7 +119,6 @@ class FeedbackMailer extends React.Component {
         showMore: !this.state.showMore
       },
       () => {
-        // console.log(this.state.showMore, 'showMore');
         this.setState({
           products: this.state.showMore ? prodArr : prodArr.slice(0, 2)
         });

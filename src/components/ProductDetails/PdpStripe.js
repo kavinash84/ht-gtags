@@ -28,7 +28,6 @@ const Stripes = ({
   freeInstallation,
   isFurnitureStripe
 }) => (
-    // console.log('fkCatalogSupplier brand', fkCatalogSupplier, brand);
     // const isFurnitureCategory = fkCatalogSupplier === '38';
     // const noQuestionsAsked = isFurnitureCategory && brand === 'HomeTown';
     <Box>

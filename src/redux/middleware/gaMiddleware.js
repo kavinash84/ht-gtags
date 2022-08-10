@@ -29,7 +29,6 @@ export default function gaMiddleware() {
         // ) {
         //   const { sku, simpleSku } = action;
         //   window.unbxd.toggleWishList(sku, simpleSku);
-        //   console.log('unbxd toggleWishList callback invoked with - ', sku, simpleSku);
         // }
         // if (type === 'categoryPage/LOAD_SUCCESS') {
         //   const {
@@ -49,15 +48,12 @@ export default function gaMiddleware() {
           if (unbxd) {
             if (window && !!window.unbxd && !!window.unbxd.toggleWishList) {
               window.unbxd.toggleWishList(sku, simpleSku);
-              // console.log('unbxd toggleWishList callback invoked with - ', sku, simpleSku);
             } else {
-              // console.log('error in calling unbxd toggleWishList callback !');
             }
           }
         }
         // if ((type === 'login/LOGIN_SUCCESS' || type === 'login/LOGOUT_SUCCESS') && window && window.unbxd) {
         //   window.unbxd.handleUserSwitch();
-        //   console.log(`unbxd - window.unbxd.handleUserSwitch(); invoked on -${type}`);
         // }
         
         if (
@@ -68,7 +64,6 @@ export default function gaMiddleware() {
           window.unbxd
         ) {
           window.unbxd.renderCartItemsonSRP();
-          // console.log(`unbxd - window.unbxd.renderCartItemsonSRP(); invoked on -${type}`);
         }
         if (
           (type === "wishList/ADD_TO_WISHLIST_SUCCESS" ||
@@ -77,7 +72,6 @@ export default function gaMiddleware() {
           window.unbxd
         ) {
           window.unbxd.renderWishListItemsOnSRP();
-          // console.log(`unbxd - window.unbxd.renderWishListItemsOnSRP() invoked on -${type}`);
         }
         if (type === "@@router/LOCATION_CHANGE") {
           const {
@@ -314,7 +308,6 @@ export default function gaMiddleware() {
           const qty = product[0].qty;
           // if (!configId) {
           //   window.unbxd.addToCart(key, sku, simpleSku, pincode);
-          //   console.log('unbxd addToCart callback invoked with - ', key, sku, simpleSku, pincode);
           // }
           if (window && window.Unbxd && window.Unbxd.track && configId && qty) {
             window.Unbxd.track("addToCart", {
@@ -591,7 +584,6 @@ export default function gaMiddleware() {
               //   }
               // });
               // groupedProducts = Object.values(groupedProducts);
-              // console.log({ groupedProducts });
               let cartList = products
                 .filter(item => item.package === false)
                 .map(x => {
@@ -661,7 +653,6 @@ export default function gaMiddleware() {
               event: "buyer_type",
               type: cust_type
             });
-            // console.log(window && window.Unbxd && window.Unbxd.track && unbxdData.length);
             if (
               window &&
               window.Unbxd &&
@@ -798,7 +789,6 @@ export default function gaMiddleware() {
             qty: "1"
           });
         });
-        // console.log('Analytics for combined', unbxdData);
         window.dataLayer.push(
           {
             event: "Combo_offer",

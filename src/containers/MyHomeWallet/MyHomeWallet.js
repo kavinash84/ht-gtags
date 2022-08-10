@@ -168,7 +168,6 @@ export class MyHomeWallet extends Component {
       city,
       gender
     };
-    console.log(postData, 'postData');
     dispatch(updateUserProfile(postData));
     if (!isInvalid) {
       this.setState(
