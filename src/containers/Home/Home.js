@@ -111,10 +111,10 @@ export default class Home extends Component {
     cityErrorMessage: "Please select your nearest city"
   };
   componentDidMount() {
-    const { isLoggedIn } = this.props;
-    if (!isLoggedIn && !(cookie.get("PROMO_SIGNUP") === "AVOID")) {
-      this.signupmodalreference = setTimeout(() => this.handleModal(), 45000);
-    }
+    // const { isLoggedIn } = this.props;
+    // if (!isLoggedIn && !(cookie.get("PROMO_SIGNUP") === "AVOID")) {
+    //   this.signupmodalreference = setTimeout(() => this.handleModal(), 45000);
+    // }
   }
   componentWillReceiveProps(nextProps) {
     if (
@@ -198,7 +198,7 @@ export default class Home extends Component {
       shopTheRoom,
       easyFinance
     } = homepagecmsdata;
-    
+
     return (
       /* eslint-disable max-len */
       <Wrapper>
