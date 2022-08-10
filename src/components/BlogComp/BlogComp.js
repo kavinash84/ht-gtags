@@ -112,7 +112,7 @@ class BlogComp extends React.Component {
               : null}
           </div>
           <div className={styles.showMoreContainer}>
-            {catagoryPosts && catagoryPosts.length > 9 && !showMore ? (
+            {currentCatData && currentCatData.length > 9 && !showMore ? (
               <div onClick={() => this.handleShowMore()}>
                 <span>SHOW MORE</span>
                 <img src={NextArrow} />
