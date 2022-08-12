@@ -82,15 +82,16 @@ class BlogComp extends React.Component {
 
         <div className={styles.cataagoryContainer}>
           <ul className={styles.catagoryList}>
-            {homeData.category_list.length &&
-              homeData.category_list.map(item => (
-                <li
-                  className={activeTab === item.key ? styles.activeTab : ""}
-                  onClick={() => this.handleTabChange(item.key)}
-                >
-                  {item.name}
-                </li>
-              ))}
+            {homeData.category_list.length
+              ? homeData.category_list.map(item => (
+                  <li
+                    className={activeTab === item.key ? styles.activeTab : ""}
+                    onClick={() => this.handleTabChange(item.key)}
+                  >
+                    {item.name}
+                  </li>
+                ))
+              : null}
           </ul>
 
           <div className={styles.posts}>
