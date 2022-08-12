@@ -228,7 +228,7 @@ const mapStateToProps = ({
 });
 
 @withRouter
-class ProductDetails extends React.Component {
+class ProductDetails extends React.PureComponent {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };

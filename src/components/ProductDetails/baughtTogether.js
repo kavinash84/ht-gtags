@@ -371,7 +371,8 @@ class BaughtTogether extends React.Component {
                             }}
                           >
                             <Img
-                              src={`${product.image}.jpg`}
+                              data-src={`${product.image}.jpg`}
+                              src={`${product.image}.jpg?blur=30`}
                               alt="BT!"
                               height="100%"
                               width="auto"
@@ -391,7 +392,8 @@ class BaughtTogether extends React.Component {
                           >
                             <Link to={prod.link}>
                               <Img
-                                src={prod.image}
+                                data-src={prod.image}
+                                src={`${prod.image}?blur=30`}
                                 alt="BT!"
                                 height="100%"
                                 width="auto"
