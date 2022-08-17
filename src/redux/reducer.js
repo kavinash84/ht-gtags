@@ -49,6 +49,7 @@ import designbuild from "./modules/designbuild";
 import spaces from "./modules/spaces";
 import planyourkitchen from "./modules/planyourkitchen";
 import lackpackages from "./modules/lackpackages";
+import gifting from "./modules/gifting";
 
 export default function createReducers(asyncReducers) {
   return {
@@ -117,6 +118,7 @@ export default function createReducers(asyncReducers) {
     designbuild,
     modularkitchen,
     spaces,
+    gifting,
     // planyourkitchen,
     planyourkitchen,
     lackpackages,

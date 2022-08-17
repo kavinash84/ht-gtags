@@ -145,3 +145,6 @@ export const PLANYOURKITCHEN_NEW = "tesla/static/planyour_kitchen_desktop_v1";
 
 /*cart contact*/
 export const GET_CONTACT = "tesla/static/cart_contact_cms2";
+
+/* Gifting */
+export const GET_GIFTING = "tesla/static/gifting";
