@@ -72,13 +72,13 @@ import Pincode from "./Pincode";
 import ProductDetailsCarousel from "./Carousel";
 import Video from "./Video";
 import ReviewFilter from "./ReviewFilter";
-import UnbxdCompleteTheLook from "./UnbxdCompleteTheLook";
 import Stripes from "./PdpStripe";
 import Specs from "./Specs/specs";
 import BaughtTogether from "./baughtTogether";
 import MoreOption from "./moreOption";
 import { weProductViewTrack } from "../../redux/modules/productdetails";
 import { weLoadMoreReviews } from "../../redux/modules/reviews";
+import NewUnboxRecomondRecentlyViewed from "../NewUnboxWidges/recomondAndRecently";
 
 /**
  * Images / Icons
@@ -773,130 +773,148 @@ class ProductDetails extends React.PureComponent {
               </Col>
             </Row>
             <LazyLoad height={936}>
-            <Row mb={40}>
-              {/* Left Column */}
-              <Col width={[6, 2 / 12, 5 / 12, 6 / 12]} pr={30}>
-                <Box style={{ position: "sticky", top: "0", left: "0" }}>
-                  {/* Product Slider */}
-                  {images && (
-                    <ProductDetailsCarousel youtube={youtubeid} data={images} title={meta.name} />
-                  )}
-
-                  {/* Wishlist Button */}
-                </Box>
-              </Col>
-              {/* Right Column */}
-              <Col width={[1, 6 / 12, 6 / 12, 6 / 12]}>
-                <div
-                  id="portal"
-                  className="portal"
-                  style={{ position: "sticky", top: "0" }}
-                />
-
-                {/* Product title  */}
-                <HeadingTitlePrice name={name} brand={brand} />
-
-                {/* color option */}
-                <Row
-                  display="block"
-                  mt="0"
-                  mb="0"
-                  mr="1rem"
-                  ml="1rem"
-                  style={{ width: "100%" }}
-                >
-                  <div style={{ width: "50%" }}>
-                    <Section mt="10px" mb="0.3125rem" p="0">
-                      {colorproducts.length > 0 && (
-                        <Box pb={15}>
-                          <ColorOption
-                            data={colorproducts}
-                            currentImage={swatchImage}
-                            showmorecolorproducts={showmorecolorproducts}
-                            toggleShowMoreColorProducts={
-                              this.toggleShowMoreColorProducts
-                            }
-                          />
-                        </Box>
-                      )}
-                    </Section>
-                  </div>
-                  {boughtTogether && boughtTogether.length ? (
-                    <LazyLoad height={150}>
-                      <Div
-                        mt="1rem"
-                        mb="1rem"
-                        style={{
-                          width: "50%",
-                          display: "flex",
-                          justifyContent: "flex-end"
-                        }}
-                      >
-                        <Button
-                          style={{
-                            width: "75%",
-                            padding: " 10px",
-                            color: "#323131",
-                            fontSize: "16px",
-                            border: "1px solid #707070",
-                            borderRadius: "4px",
-                            backgroundColor: "#fff",
-                            textTransform: "capitalize"
-                          }}
-                          onClick={() => this.handleBTModel(true)}
-                        >
-                          More options
-                          <Image
-                            src={DownArrow}
-                            style={{ marginLeft: "10px" }}
-                          />
-                        </Button>
-                      </Div>
-                    </LazyLoad>
-                  ) : null}
-
-                  {/* Product price */}
-                  <Box mb={20} mt={10} width="100%">
-                    {combinedbuy.length ? (
-                      <Button
-                        variant="link"
-                        fontFamily="medium"
-                        fontSize={18}
-                        mb={15}
-                      >
-                        <a
-                          href="#combined_buy_offers"
-                          style={{ color: "#F15A22" }}
-                        >
-                          {`See ${combinedbuy.length} Combined ${
-                            combinedbuy.length > 1 ? "Offers" : "Offer"
-                          }`}
-                        </a>
-                      </Button>
-                    ) : (
-                      ""
+              <Row mb={40}>
+                {/* Left Column */}
+                <Col width={[6, 2 / 12, 5 / 12, 6 / 12]} pr={30}>
+                  <Box style={{ position: "sticky", top: "0", left: "0" }}>
+                    {/* Product Slider */}
+                    {images && (
+                      <ProductDetailsCarousel
+                        youtube={youtubeid}
+                        data={images}
+                        title={meta.name}
+                      />
                     )}
-                    <Div m="0px">
-                      {formatPrice(csp) < formatPrice(mrp) ? (
-                        <Text
-                          mt="0px"
-                          color="#E9916B"
-                          fontSize="1.1rem"
-                          fontWeight="bold"
-                          height="35px"
+
+                    {/* Wishlist Button */}
+                  </Box>
+                </Col>
+                {/* Right Column */}
+                <Col width={[1, 6 / 12, 6 / 12, 6 / 12]}>
+                  <div
+                    id="portal"
+                    className="portal"
+                    style={{ position: "sticky", top: "0" }}
+                  />
+
+                  {/* Product title  */}
+                  <HeadingTitlePrice name={name} brand={brand} />
+
+                  {/* color option */}
+                  <Row
+                    display="block"
+                    mt="0"
+                    mb="0"
+                    mr="1rem"
+                    ml="1rem"
+                    style={{ width: "100%" }}
+                  >
+                    <div style={{ width: "50%" }}>
+                      <Section mt="10px" mb="0.3125rem" p="0">
+                        {colorproducts.length > 0 && (
+                          <Box pb={15}>
+                            <ColorOption
+                              data={colorproducts}
+                              currentImage={swatchImage}
+                              showmorecolorproducts={showmorecolorproducts}
+                              toggleShowMoreColorProducts={
+                                this.toggleShowMoreColorProducts
+                              }
+                            />
+                          </Box>
+                        )}
+                      </Section>
+                    </div>
+                    {boughtTogether && boughtTogether.length ? (
+                      <LazyLoad height={150}>
+                        <Div
+                          mt="1rem"
+                          mb="1rem"
+                          style={{
+                            width: "50%",
+                            display: "flex",
+                            justifyContent: "flex-end"
+                          }}
                         >
-                          {formatPrice(csp) !== 0 ? `₹${csp}` : `₹${mrp}`}
-                          <span>
-                            {formatPrice(csp) !== 0 ? (
-                              <Text
-                                ml="10px"
-                                fontSize="1.1rem"
-                                color="#999999"
-                                fontWeight="bold"
-                                textDecoration="line-through"
-                                display="inline-block"
-                              >
-                                <del> ₹{mrp} </del>
+                          <Button
+                            style={{
+                              width: "75%",
+                              padding: " 10px",
+                              color: "#323131",
+                              fontSize: "16px",
+                              border: "1px solid #707070",
+                              borderRadius: "4px",
+                              backgroundColor: "#fff",
+                              textTransform: "capitalize"
+                            }}
+                            onClick={() => this.handleBTModel(true)}
+                          >
+                            More options
+                            <Image
+                              src={DownArrow}
+                              style={{ marginLeft: "10px" }}
+                            />
+                          </Button>
+                        </Div>
+                      </LazyLoad>
+                    ) : null}
+
+                    {/* Product price */}
+                    <Box mb={20} mt={10} width="100%">
+                      {combinedbuy.length ? (
+                        <Button
+                          variant="link"
+                          fontFamily="medium"
+                          fontSize={18}
+                          mb={15}
+                        >
+                          <a
+                            href="#combined_buy_offers"
+                            style={{ color: "#F15A22" }}
+                          >
+                            {`See ${combinedbuy.length} Combined ${
+                              combinedbuy.length > 1 ? "Offers" : "Offer"
+                            }`}
+                          </a>
+                        </Button>
+                      ) : (
+                        ""
+                      )}
+                      <Div m="0px">
+                        {formatPrice(csp) < formatPrice(mrp) ? (
+                          <Text
+                            mt="0px"
+                            color="#E9916B"
+                            fontSize="1.1rem"
+                            fontWeight="bold"
+                            height="35px"
+                          >
+                            {formatPrice(csp) !== 0 ? `₹${csp}` : `₹${mrp}`}
+                            <span>
+                              {formatPrice(csp) !== 0 ? (
+                                <Text
+                                  ml="10px"
+                                  fontSize="1.1rem"
+                                  color="#999999"
+                                  fontWeight="bold"
+                                  textDecoration="line-through"
+                                  display="inline-block"
+                                >
+                                  <del> ₹{mrp} </del>
+                                  <Text
+                                    // mt="0px"
+                                    color="#999999"
+                                    fontSize="1.1rem"
+                                    pl="5px"
+                                    fontWeight="bold"
+                                    textDecoration="line-through"
+                                    display="inline-block"
+                                    style={{ textDecoration: "none" }}
+                                  >
+                                    MRP(Inclusive of all taxes)
+                                  </Text>
+                                </Text>
+                              ) : (
                                 <Text
                                   // mt="0px"
                                   color="#999999"
@@ -907,518 +925,497 @@ class ProductDetails extends React.PureComponent {
                                   display="inline-block"
                                   style={{ textDecoration: "none" }}
                                 >
-                                  MRP(Inclusive of all taxes)
+                                  MRP (Inclusive of all taxes)
                                 </Text>
-                              </Text>
-                            ) : (
-                              <Text
-                                // mt="0px"
-                                color="#999999"
-                                fontSize="1.1rem"
-                                pl="5px"
-                                fontWeight="bold"
-                                textDecoration="line-through"
-                                display="inline-block"
-                                style={{ textDecoration: "none" }}
-                              >
-                                MRP (Inclusive of all taxes)
-                              </Text>
-                            )}
-                          </span>
-                        </Text>
-                      ) : (
-                        <Text
-                          color="#E9916B"
-                          fontSize="1.2rem"
-                          fontWeight="bold"
-                          height="35px"
-                        >
-                          ₹{mrp}{" "}
-                          <Text
-                            // mt="0px"
-                            color="#999999"
-                            fontSize="1.1rem"
-                            pl="5px"
-                            fontWeight="bold"
-                            textDecoration="line-through"
-                            display="inline-block"
-                            style={{ textDecoration: "none" }}
-                          >
-                            MRP (Inclusive of all taxes)
-                          </Text>
-                        </Text>
-                      )}
-                      {couponCode ? (
-                        <Div>
-                          <Div>
-                            <Heading
-                              itemProp="offers"
-                              itemScope
-                              itemType="http://schema.org/Offer"
-                              ellipsis={false}
-                              display="flex"
-                              pt="5px"
-                              pb="2px"
-                              mt="0"
-                              mb="0.5rem"
-                            >
-                              <Div style={{ width: "34%" }}>
-                                <span
-                                  style={{
-                                    color: "#E9916B",
-                                    fontSize: "1.3rem"
-                                  }}
-                                  itemProp="priceCurrency"
-                                  content="INR"
-                                >
-                                  Offer Price :
-                                </span>
-                              </Div>
-                              <Div style={{ width: "calc(100% - 100px)" }}>
-                                <span
-                                  style={{
-                                    color: "#E9916B",
-                                    fontSize: "1.3rem"
-                                  }}
-                                  itemProp="price"
-                                  content={formatAmount(checkSpecialPrice)}
-                                >
-                                  ₹{offerPrice}
-                                </span>
-                              </Div>
-                            </Heading>
-                          </Div>
-                        </Div>
-                      ) : null}
-                      <Div>
-                        {couponCode ? (
-                          <Text
-                            mt="0px"
-                            mb="0px"
-                            color="#626463"
-                            fontSize="16px"
-                          >
-                            {discountType === "fixed"
-                              ? `Price inclusive of Extra ₹${limitedTimeCouponDiscount} OFF, Use Coupon`
-                              : `Price inclusive of Extra ${offerDiscountPercentage}% OFF, Use Coupon`}
-                            <span
-                              style={{
-                                fontSize: "14px",
-                                color: "#E9916B",
-                                marginLeft: "5px",
-                                textTransform: "uppercase"
-                              }}
-                            >
-                              {couponCode}
+                              )}
                             </span>
                           </Text>
-                        ) : null}
-                        <div ht_wallet_cashback={ht_wallet_cashback}>
-                          {ht_wallet_cashback ? (
-                            <div
-                              style={{
-                                color: "#E9916B",
-                                fontSize: "16px",
-                                marginBottom: "10px",
-                                marginTop: "10px"
-                              }}
-                            >
-                              {` Extra ${Math.round(
-                                ht_wallet_cashback
-                              )}% HT wallet cashback`}
-                            </div>
-                          ) : null}
-                        </div>
-                        {totalSavings !== "0" ? (
-                          <Text
-                            mt="0px"
-                            color="#626463"
-                            fontSize="16px"
-                            marginTop="5px"
-                            marginBottom="20px"
-                          >
-                            Total Savings ₹ {totalSavings} (
-                            {totalDiscountPercentage}% OFF)
-                          </Text>
-                        ) : null}
-                      </Div>
-                    </Div>
-                    {/* out of stock text */}
-                    {!(
-                      simples[simpleSku].meta.quantity &&
-                      parseInt(simples[simpleSku].meta.quantity, 10) > 0
-                    ) ? (
-                      <div
-                        style={{
-                          color: "#f98d29",
-                          fontSize: "16px",
-                          fontWeight: "bold",
-                          marginBottom: "20px"
-                        }}
-                      >
-                        Out of Stock
-                      </div>
-                    ) : null}
-                    {/* banner */}
-                    {offerImage && offerImageRedirect && (
-                      <a rel="noopener noreferrer" href={offerImageRedirect}>
-                        <Image src={offerImage} alt="" width="100%" />
-                      </a>
-                    )}
-                    {offerImage && !offerImageRedirect && (
-                      <Image src={offerImage} alt="" width="100%" />
-                    )}
-                  </Box>
-                  <Box style={{ width: "100%" }}>
-                    <EmiOptions data={financeOption} />
-                  </Box>
-                </Row>
-
-                {/* PDP Strip Icons */}
-                <Stripes
-                  emi={formatAmount(calculateLowestEmi(emidata, price))}
-                  isEmiAvailable={isEmiAvailable}
-                  warrantyPeriod={warrantyPeriod}
-                  fkCatalogSupplier={fkCatalogSupplier}
-                  brand={brand}
-                  freeVisit={freeVisit}
-                  freeInstallation={freeInstallation}
-                  isFurnitureStripe={isFurnitureStripe}
-                >
-                  <EmiModal
-                    price={formatAmount(checkSpecialPrice)}
-                    data={emidata}
-                    key="emi"
-                    specialPrice={checkSpecialPrice}
-                    bflMinAmount={bflMinAmount}
-                  />
-                </Stripes>
-                {/* discount text */}
-
-                {/* Pincode */}
-                {!(
-                  simples[simpleSku].meta.quantity &&
-                  parseInt(simples[simpleSku].meta.quantity, 10) > 0
-                ) ? null : (
-                  <ServiceDetails
-                    deliverBy={
-                      (deliveryInfo &&
-                        deliveryInfo[0] &&
-                        deliveryInfo[0].value) ||
-                      (deliveryDetails[0] &&
-                        deliveryDetails[0] &&
-                        deliveryDetails[0].value) ||
-                      ""
-                    }
-                    shipping={checkSpecialPrice}
-                    pincode={pincode.selectedPincode}
-                    loading={deliveryDateLoading}
-                    shippingCharge={meta.shipping_charge}
-                  >
-                    <Pincode key="pincode" />
-                  </ServiceDetails>
-                )}
-
-                {/* Add to cart and Buy now buttons */}
-                <Div>
-                  <Row
-                    ml="0rem"
-                    mr="0rem"
-                    mb="0rem"
-                    justifyContent="space-between"
-                    style={{
-                      marginBottom: "30px",
-                      width: "100%",
-                      zIndex: "1000",
-                      backgroundColor: "white"
-                    }}
-                  >
-                    <BuyNow
-                      quantity={this.state.prodQty || 1}
-                      simpleSku={simpleSku}
-                      sku={sku}
-                      size="block"
-                      btnType="primary"
-                      isSoldOut={
-                        !(
-                          simples[simpleSku].meta.quantity &&
-                          parseInt(simples[simpleSku].meta.quantity, 10) > 0
-                        )
-                      }
-                    />
-
-                    {!(
-                      simples[simpleSku].meta.quantity &&
-                      parseInt(simples[simpleSku].meta.quantity, 10) > 0
-                    ) ? null : (
-                      <Row
-                        ml="0px"
-                        mr="0px"
-                        height="45px"
-                        style={{ width: "30%" }}
-                        justifyContent="flex-end"
-                      >
-                        <Row
-                          ml="0px"
-                          mr="0px"
-                          justifyContent="center"
-                          style={{
-                            alignItems: "center",
-                            width: "80%",
-                            border: "1px solid #E9916B",
-                            borderRadius: "5px"
-                          }}
-                        >
-                          <Button
-                            backgroundColor="#fff"
-                            color="#000"
-                            width="30%"
-                            pl="0.5rem"
-                            pr="0.5rem"
-                            style={{ border: "none" }}
-                            onClick={() => this.handleQty("decrement")}
-                          >
-                            -
-                          </Button>
-                          <Div style={{ width: "30%", textAlign: "center" }}>
-                            {prodQty}
-                          </Div>
-                          <Button
-                            backgroundColor="#fff"
-                            color="#000"
-                            width="30%"
-                            pl="0.5rem"
-                            pr="0.5rem"
-                            style={{ border: "none" }}
-                            onClick={() => this.handleQty("increment")}
-                          >
-                            +
-                          </Button>
-                        </Row>
-                      </Row>
-                    )}
-                    <AddToCart
-                      skuItem={skuItem}
-                      quantityChange={quantityChange}
-                      quantity={this.state.prodQty || 1}
-                      simpleSku={simpleSku}
-                      sku={sku}
-                      configId={configId}
-                      itemId={sku}
-                      isSoldOut={
-                        !(
-                          simples[simpleSku].meta.quantity &&
-                          parseInt(simples[simpleSku].meta.quantity, 10) > 0
-                        )
-                      }
-                    />
-                    {!(
-                      simples[simpleSku].meta.quantity &&
-                      parseInt(simples[simpleSku].meta.quantity, 10) > 0
-                    ) ? null : (
-                      <Row
-                        ml="0px"
-                        mr="0px"
-                        style={{ width: "30%" }}
-                        justifyContent="flex-end"
-                      >
-                        <Row
-                          ml="0px"
-                          mr="0px"
-                          justifyContent="center"
-                          backgroundColor="#fff"
-                          style={{
-                            alignItems: "center",
-                            width: "80%",
-                            height: "45px",
-                            marginTop: "5px",
-                            border: "1px solid #515151",
-                            borderRadius: "5px"
-                          }}
-                        >
-                          <button
-                            style={{
-                              padding: "0",
-                              border: "none",
-                              backgroundColor: "#ffffff"
-                            }}
-                            onClick={onClickWishList(
-                              sku,
-                              wishListData,
-                              wishlistToggle,
-                              isLoggedIn,
-                              this.handleLoginModal,
-                              addToWaitList,
-                              simpleSku,
-                              pincode.selectedPincode
-                            )}
-                          >
-                            <Img
-                              src={
-                                isInWishList(wishList, sku)
-                                  ? WishlistIconSelect
-                                  : WishlistIcon
-                              }
-                              alt="wishlist icon"
-                              width="24px"
-                            />
-                          </button>
-                        </Row>
-                      </Row>
-                    )}
-                  </Row>
-                </Div>
-                {/* share product */}
-                <Div>
-                  <Div
-                    style={{
-                      display: "flex",
-                      justifyContent: "flex-start",
-                      alignItems: "center",
-                      marginBottom: "20px",
-                      cursor: "pointer"
-                    }}
-                  >
-                    <Img
-                      src={ShareIcon}
-                      height="22px"
-                      width="auto"
-                      style={{ display: "inline-block" }}
-                    />
-                    <Text ml="0.5rem" onClick={this.handleShareBar}>
-                      Share this product
-                    </Text>
-                  </Div>
-                  {displayShareBar ? (
-                    <ShareBar
-                      title={name}
-                      url={productURL}
-                      mt="10px"
-                      mb="30px"
-                    />
-                  ) : null}
-                </Div>
-                <div>
-                  <Specs
-                    desc={description || ""}
-                    specs={groupedAttributes}
-                    prodDetail={true}
-                    pincode={pincode.selectedPincode}
-                  />
-
-                  <div
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      background: "#f5f5f5",
-                      width: "100%",
-                      height: "50px",
-                      color: "rgba(0,0,0,0.6)",
-                      border: "1px solid #d4d4d4",
-                      borderBottom: !this.state.showReviews
-                        ? "1px solid #d4d4d4"
-                        : "none",
-                      padding: "15px 20px",
-                      cursor: "pointer",
-                      fontSize: " 0.875rem"
-                    }}
-                    onClick={() => {
-                      this.setState({ showReviews: !this.state.showReviews });
-                    }}
-                  >
-                    <h4 style={{ color: "rgba(0, 0, 0, 0.65)" }}>Reviews </h4>
-
-                    <div>
-                      <TotalReviewDisplay
-                        ratings={weightedRating}
-                        reviews={reviewsData.length}
-                        count={5}
-                        style={{ marginTop: "10px" }}
-                      >
-                        {this.state.showReviews ? (
-                          <Image
-                            src={DownArrow}
-                            style={{ marginLeft: "10px" }}
-                          />
                         ) : (
-                          <Image
-                            src={DownArrow}
-                            style={{ marginLeft: "10px" }}
-                          />
+                          <Text
+                            color="#E9916B"
+                            fontSize="1.2rem"
+                            fontWeight="bold"
+                            height="35px"
+                          >
+                            ₹{mrp}{" "}
+                            <Text
+                              // mt="0px"
+                              color="#999999"
+                              fontSize="1.1rem"
+                              pl="5px"
+                              fontWeight="bold"
+                              textDecoration="line-through"
+                              display="inline-block"
+                              style={{ textDecoration: "none" }}
+                            >
+                              MRP (Inclusive of all taxes)
+                            </Text>
+                          </Text>
                         )}
-                      </TotalReviewDisplay>
-                    </div>
-                  </div>
-                  {this.state.showReviews ? (
-                    <div
+                        {couponCode ? (
+                          <Div>
+                            <Div>
+                              <Heading
+                                itemProp="offers"
+                                itemScope
+                                itemType="http://schema.org/Offer"
+                                ellipsis={false}
+                                display="flex"
+                                pt="5px"
+                                pb="2px"
+                                mt="0"
+                                mb="0.5rem"
+                              >
+                                <Div style={{ width: "34%" }}>
+                                  <span
+                                    style={{
+                                      color: "#E9916B",
+                                      fontSize: "1.3rem"
+                                    }}
+                                    itemProp="priceCurrency"
+                                    content="INR"
+                                  >
+                                    Offer Price :
+                                  </span>
+                                </Div>
+                                <Div style={{ width: "calc(100% - 100px)" }}>
+                                  <span
+                                    style={{
+                                      color: "#E9916B",
+                                      fontSize: "1.3rem"
+                                    }}
+                                    itemProp="price"
+                                    content={formatAmount(checkSpecialPrice)}
+                                  >
+                                    ₹{offerPrice}
+                                  </span>
+                                </Div>
+                              </Heading>
+                            </Div>
+                          </Div>
+                        ) : null}
+                        <Div>
+                          {couponCode ? (
+                            <Text
+                              mt="0px"
+                              mb="0px"
+                              color="#626463"
+                              fontSize="16px"
+                            >
+                              {discountType === "fixed"
+                                ? `Price inclusive of Extra ₹${limitedTimeCouponDiscount} OFF, Use Coupon`
+                                : `Price inclusive of Extra ${offerDiscountPercentage}% OFF, Use Coupon`}
+                              <span
+                                style={{
+                                  fontSize: "14px",
+                                  color: "#E9916B",
+                                  marginLeft: "5px",
+                                  textTransform: "uppercase"
+                                }}
+                              >
+                                {couponCode}
+                              </span>
+                            </Text>
+                          ) : null}
+                          <div ht_wallet_cashback={ht_wallet_cashback}>
+                            {ht_wallet_cashback ? (
+                              <div
+                                style={{
+                                  color: "#E9916B",
+                                  fontSize: "16px",
+                                  marginBottom: "10px",
+                                  marginTop: "10px"
+                                }}
+                              >
+                                {` Extra ${Math.round(
+                                  ht_wallet_cashback
+                                )}% HT wallet cashback`}
+                              </div>
+                            ) : null}
+                          </div>
+                          {totalSavings !== "0" ? (
+                            <Text
+                              mt="0px"
+                              color="#626463"
+                              fontSize="16px"
+                              marginTop="5px"
+                              marginBottom="20px"
+                            >
+                              Total Savings ₹ {totalSavings} (
+                              {totalDiscountPercentage}% OFF)
+                            </Text>
+                          ) : null}
+                        </Div>
+                      </Div>
+                      {/* out of stock text */}
+                      {!(
+                        simples[simpleSku].meta.quantity &&
+                        parseInt(simples[simpleSku].meta.quantity, 10) > 0
+                      ) ? (
+                        <div
+                          style={{
+                            color: "#f98d29",
+                            fontSize: "16px",
+                            fontWeight: "bold",
+                            marginBottom: "20px"
+                          }}
+                        >
+                          Out of Stock
+                        </div>
+                      ) : null}
+                      {/* banner */}
+                      {offerImage && offerImageRedirect && (
+                        <a rel="noopener noreferrer" href={offerImageRedirect}>
+                          <Image src={offerImage} alt="" width="100%" />
+                        </a>
+                      )}
+                      {offerImage && !offerImageRedirect && (
+                        <Image src={offerImage} alt="" width="100%" />
+                      )}
+                    </Box>
+                    <Box style={{ width: "100%" }}>
+                      <EmiOptions data={financeOption} />
+                    </Box>
+                  </Row>
+
+                  {/* PDP Strip Icons */}
+                  <Stripes
+                    emi={formatAmount(calculateLowestEmi(emidata, price))}
+                    isEmiAvailable={isEmiAvailable}
+                    warrantyPeriod={warrantyPeriod}
+                    fkCatalogSupplier={fkCatalogSupplier}
+                    brand={brand}
+                    freeVisit={freeVisit}
+                    freeInstallation={freeInstallation}
+                    isFurnitureStripe={isFurnitureStripe}
+                  >
+                    <EmiModal
+                      price={formatAmount(checkSpecialPrice)}
+                      data={emidata}
+                      key="emi"
+                      specialPrice={checkSpecialPrice}
+                      bflMinAmount={bflMinAmount}
+                    />
+                  </Stripes>
+                  {/* discount text */}
+
+                  {/* Pincode */}
+                  {!(
+                    simples[simpleSku].meta.quantity &&
+                    parseInt(simples[simpleSku].meta.quantity, 10) > 0
+                  ) ? null : (
+                    <ServiceDetails
+                      deliverBy={
+                        (deliveryInfo &&
+                          deliveryInfo[0] &&
+                          deliveryInfo[0].value) ||
+                        (deliveryDetails[0] &&
+                          deliveryDetails[0] &&
+                          deliveryDetails[0].value) ||
+                        ""
+                      }
+                      shipping={checkSpecialPrice}
+                      pincode={pincode.selectedPincode}
+                      loading={deliveryDateLoading}
+                      shippingCharge={meta.shipping_charge}
+                    >
+                      <Pincode key="pincode" />
+                    </ServiceDetails>
+                  )}
+
+                  {/* Add to cart and Buy now buttons */}
+                  <Div>
+                    <Row
+                      ml="0rem"
+                      mr="0rem"
+                      mb="0rem"
+                      justifyContent="space-between"
                       style={{
-                        background: "#f5f5f5",
+                        marginBottom: "30px",
                         width: "100%",
-                        border: "1px solid #d4d4d4",
-                        borderTop: "none",
-                        padding: "0px 20px 15px"
+                        zIndex: "1000",
+                        backgroundColor: "white"
                       }}
                     >
-                      <Box
-                        id="review-section"
-                        pt={30}
-                        className={styles.reviewSection}
-                      >
-                        <div ref={this.reviewRef}>
-                          <Box width={1}>
-                            <form onSubmit={this.handleSubmit}>
-                              <Box>
-                                <h5
-                                  style={{
-                                    color: "rgba(0,0,0,0.6)",
-                                    margin: "0px 0px 10px"
-                                  }}
-                                >
-                                  Write a Review
-                                </h5>
+                      <BuyNow
+                        quantity={this.state.prodQty || 1}
+                        simpleSku={simpleSku}
+                        sku={sku}
+                        size="block"
+                        btnType="primary"
+                        isSoldOut={
+                          !(
+                            simples[simpleSku].meta.quantity &&
+                            parseInt(simples[simpleSku].meta.quantity, 10) > 0
+                          )
+                        }
+                      />
 
+                      {!(
+                        simples[simpleSku].meta.quantity &&
+                        parseInt(simples[simpleSku].meta.quantity, 10) > 0
+                      ) ? null : (
+                        <Row
+                          ml="0px"
+                          mr="0px"
+                          height="45px"
+                          style={{ width: "30%" }}
+                          justifyContent="flex-end"
+                        >
+                          <Row
+                            ml="0px"
+                            mr="0px"
+                            justifyContent="center"
+                            style={{
+                              alignItems: "center",
+                              width: "80%",
+                              border: "1px solid #E9916B",
+                              borderRadius: "5px"
+                            }}
+                          >
+                            <Button
+                              backgroundColor="#fff"
+                              color="#000"
+                              width="30%"
+                              pl="0.5rem"
+                              pr="0.5rem"
+                              style={{ border: "none" }}
+                              onClick={() => this.handleQty("decrement")}
+                            >
+                              -
+                            </Button>
+                            <Div style={{ width: "30%", textAlign: "center" }}>
+                              {prodQty}
+                            </Div>
+                            <Button
+                              backgroundColor="#fff"
+                              color="#000"
+                              width="30%"
+                              pl="0.5rem"
+                              pr="0.5rem"
+                              style={{ border: "none" }}
+                              onClick={() => this.handleQty("increment")}
+                            >
+                              +
+                            </Button>
+                          </Row>
+                        </Row>
+                      )}
+                      <AddToCart
+                        skuItem={skuItem}
+                        quantityChange={quantityChange}
+                        quantity={this.state.prodQty || 1}
+                        simpleSku={simpleSku}
+                        sku={sku}
+                        configId={configId}
+                        itemId={sku}
+                        isSoldOut={
+                          !(
+                            simples[simpleSku].meta.quantity &&
+                            parseInt(simples[simpleSku].meta.quantity, 10) > 0
+                          )
+                        }
+                      />
+                      {!(
+                        simples[simpleSku].meta.quantity &&
+                        parseInt(simples[simpleSku].meta.quantity, 10) > 0
+                      ) ? null : (
+                        <Row
+                          ml="0px"
+                          mr="0px"
+                          style={{ width: "30%" }}
+                          justifyContent="flex-end"
+                        >
+                          <Row
+                            ml="0px"
+                            mr="0px"
+                            justifyContent="center"
+                            backgroundColor="#fff"
+                            style={{
+                              alignItems: "center",
+                              width: "80%",
+                              height: "45px",
+                              marginTop: "5px",
+                              border: "1px solid #515151",
+                              borderRadius: "5px"
+                            }}
+                          >
+                            <button
+                              style={{
+                                padding: "0",
+                                border: "none",
+                                backgroundColor: "#ffffff"
+                              }}
+                              onClick={onClickWishList(
+                                sku,
+                                wishListData,
+                                wishlistToggle,
+                                isLoggedIn,
+                                this.handleLoginModal,
+                                addToWaitList,
+                                simpleSku,
+                                pincode.selectedPincode
+                              )}
+                            >
+                              <Img
+                                src={
+                                  isInWishList(wishList, sku)
+                                    ? WishlistIconSelect
+                                    : WishlistIcon
+                                }
+                                alt="wishlist icon"
+                                width="24px"
+                              />
+                            </button>
+                          </Row>
+                        </Row>
+                      )}
+                    </Row>
+                  </Div>
+                  {/* share product */}
+                  <Div>
+                    <Div
+                      style={{
+                        display: "flex",
+                        justifyContent: "flex-start",
+                        alignItems: "center",
+                        marginBottom: "20px",
+                        cursor: "pointer"
+                      }}
+                    >
+                      <Img
+                        src={ShareIcon}
+                        height="22px"
+                        width="auto"
+                        style={{ display: "inline-block" }}
+                      />
+                      <Text ml="0.5rem" onClick={this.handleShareBar}>
+                        Share this product
+                      </Text>
+                    </Div>
+                    {displayShareBar ? (
+                      <ShareBar
+                        title={name}
+                        url={productURL}
+                        mt="10px"
+                        mb="30px"
+                      />
+                    ) : null}
+                  </Div>
+                  <div>
+                    <Specs
+                      desc={description || ""}
+                      specs={groupedAttributes}
+                      prodDetail={true}
+                      pincode={pincode.selectedPincode}
+                    />
+
+                    <div
+                      style={{
+                        display: "flex",
+                        justifyContent: "space-between",
+                        alignItems: "center",
+                        background: "#f5f5f5",
+                        width: "100%",
+                        height: "50px",
+                        color: "rgba(0,0,0,0.6)",
+                        border: "1px solid #d4d4d4",
+                        borderBottom: !this.state.showReviews
+                          ? "1px solid #d4d4d4"
+                          : "none",
+                        padding: "15px 20px",
+                        cursor: "pointer",
+                        fontSize: " 0.875rem"
+                      }}
+                      onClick={() => {
+                        this.setState({ showReviews: !this.state.showReviews });
+                      }}
+                    >
+                      <h4 style={{ color: "rgba(0, 0, 0, 0.65)" }}>Reviews </h4>
+
+                      <div>
+                        <TotalReviewDisplay
+                          ratings={weightedRating}
+                          reviews={reviewsData.length}
+                          count={5}
+                          style={{ marginTop: "10px" }}
+                        >
+                          {this.state.showReviews ? (
+                            <Image
+                              src={DownArrow}
+                              style={{ marginLeft: "10px" }}
+                            />
+                          ) : (
+                            <Image
+                              src={DownArrow}
+                              style={{ marginLeft: "10px" }}
+                            />
+                          )}
+                        </TotalReviewDisplay>
+                      </div>
+                    </div>
+                    {this.state.showReviews ? (
+                      <div
+                        style={{
+                          background: "#f5f5f5",
+                          width: "100%",
+                          border: "1px solid #d4d4d4",
+                          borderTop: "none",
+                          padding: "0px 20px 15px"
+                        }}
+                      >
+                        <Box
+                          id="review-section"
+                          pt={30}
+                          className={styles.reviewSection}
+                        >
+                          <div ref={this.reviewRef}>
+                            <Box width={1}>
+                              <form onSubmit={this.handleSubmit}>
                                 <Box>
-                                  <FormInput
-                                    type="text"
-                                    placeholder="Name"
-                                    name="name"
-                                    value={this.state.name}
-                                    feedBackError={nameError}
-                                    feedBackMessage={nameErrorMessage}
-                                    onChange={this.handleChange}
+                                  <h5
                                     style={{
-                                      border: "1px solid #E3E3E3",
-                                      fontSize: "12px",
-                                      borderRadius: "5px"
+                                      color: "rgba(0,0,0,0.6)",
+                                      margin: "0px 0px 10px"
                                     }}
-                                  />
-                                </Box>
-                                <Box marginBottom="0.3125rem">
-                                  <FormInput
-                                    type="textarea"
-                                    name="review"
-                                    placeholder="Review"
-                                    value={review}
-                                    feedBackError={reviewError}
-                                    feedBackMessage={reviewErrorMessage}
-                                    onChange={this.handleChange}
-                                    rows="3"
-                                    height={100}
-                                    style={{
-                                      border: "1px solid #E3E3E3",
-                                      fontSize: "12px",
-                                      borderRadius: "5px"
-                                    }}
-                                  />
-                                </Box>
-                                <div
-                                  style={{
-                                    display: "flex",
-                                    justifyContent: "space-between",
-                                    alignItems: "center"
-                                  }}
-                                >
+                                  >
+                                    Write a Review
+                                  </h5>
+
+                                  <Box>
+                                    <FormInput
+                                      type="text"
+                                      placeholder="Name"
+                                      name="name"
+                                      value={this.state.name}
+                                      feedBackError={nameError}
+                                      feedBackMessage={nameErrorMessage}
+                                      onChange={this.handleChange}
+                                      style={{
+                                        border: "1px solid #E3E3E3",
+                                        fontSize: "12px",
+                                        borderRadius: "5px"
+                                      }}
+                                    />
+                                  </Box>
+                                  <Box marginBottom="0.3125rem">
+                                    <FormInput
+                                      type="textarea"
+                                      name="review"
+                                      placeholder="Review"
+                                      value={review}
+                                      feedBackError={reviewError}
+                                      feedBackMessage={reviewErrorMessage}
+                                      onChange={this.handleChange}
+                                      rows="3"
+                                      height={100}
+                                      style={{
+                                        border: "1px solid #E3E3E3",
+                                        fontSize: "12px",
+                                        borderRadius: "5px"
+                                      }}
+                                    />
+                                  </Box>
                                   <div
                                     style={{
                                       display: "flex",
@@ -1426,74 +1423,81 @@ class ProductDetails extends React.PureComponent {
                                       alignItems: "center"
                                     }}
                                   >
-                                    <Label
+                                    <div
                                       style={{
-                                        fontSize: "14px",
-                                        marginLeft: "15px"
+                                        display: "flex",
+                                        justifyContent: "space-between",
+                                        alignItems: "center"
                                       }}
-                                      mr={10}
                                     >
-                                      Rating
-                                    </Label>
-                                    <ReactStars
-                                      count={5}
-                                      onChange={this.ratingChanged}
-                                      size={25}
-                                      value={this.state.rating}
-                                      half={false}
-                                      color2="#222222"
-                                    />
+                                      <Label
+                                        style={{
+                                          fontSize: "14px",
+                                          marginLeft: "15px"
+                                        }}
+                                        mr={10}
+                                      >
+                                        Rating
+                                      </Label>
+                                      <ReactStars
+                                        count={5}
+                                        onChange={this.ratingChanged}
+                                        size={25}
+                                        value={this.state.rating}
+                                        half={false}
+                                        color2="#222222"
+                                      />
+                                    </div>
+                                    <Box>
+                                      <Button
+                                        backgroundColor="#E9916B"
+                                        type="submit"
+                                        btnType="primary"
+                                        size="large"
+                                        fontFamily="regular"
+                                        fontSize="0.875em"
+                                        height="42px"
+                                        lh="2"
+                                        style={{
+                                          width: "130px",
+                                          borderRadius: "5px"
+                                        }}
+                                      >
+                                        SUBMIT
+                                      </Button>
+                                    </Box>
                                   </div>
-                                  <Box>
-                                    <Button
-                                      backgroundColor="#E9916B"
-                                      type="submit"
-                                      btnType="primary"
-                                      size="large"
-                                      fontFamily="regular"
-                                      fontSize="0.875em"
-                                      height="42px"
-                                      lh="2"
-                                      style={{
-                                        width: "130px",
-                                        borderRadius: "5px"
-                                      }}
-                                    >
-                                      SUBMIT
-                                    </Button>
-                                  </Box>
-                                </div>
-                              </Box>
-                            </form>
-                            <ReviewDisplay
-                              ratings={weightedRating}
-                              reviews={reviewsData.length}
-                              count={5}
-                              style={{ marginTop: "10px" }}
-                            >
-                              {reviewsData.length > 0 && (
-                                <ReviewFilter
-                                  selectedFilterProp={selectedFilter}
-                                  onFilterChange={this.onFilterChange}
-                                />
-                              )}
-                            </ReviewDisplay>
-                          </Box>
-                        </div>
-                        <Reviews
-                          variant="col-12"
-                          reviewItems={
-                            filterChanged ? reviewDataSet : reviews.data
-                          }
-                          showReviews={showReviews}
-                          showMoreReviews={this.showMoreReviews}
-                        />
-                      </Box>
-                    </div>
-                  ) : null}
-                </div>
-              </Col>
-            </Row>
+                                </Box>
+                              </form>
+                              <ReviewDisplay
+                                ratings={weightedRating}
+                                reviews={reviewsData.length}
+                                count={5}
+                                style={{ marginTop: "10px" }}
+                              >
+                                {reviewsData.length > 0 && (
+                                  <ReviewFilter
+                                    selectedFilterProp={selectedFilter}
+                                    onFilterChange={this.onFilterChange}
+                                  />
+                                )}
+                              </ReviewDisplay>
+                            </Box>
+                          </div>
+                          <Reviews
+                            variant="col-12"
+                            reviewItems={
+                              filterChanged ? reviewDataSet : reviews.data
+                            }
+                            showReviews={showReviews}
+                            showMoreReviews={this.showMoreReviews}
+                          />
+                        </Box>
+                      </div>
+                    ) : null}
+                  </div>
+                </Col>
+              </Row>
             </LazyLoad>
             {/* bought together */}
             {boughtTogether && boughtTogether.length ? (
@@ -1502,10 +1506,13 @@ class ProductDetails extends React.PureComponent {
               </LazyLoad>
             ) : null}
 
-            {/* Complete the look */}
-            <LazyLoad height={150}>
-            <UnbxdCompleteTheLook configId={configId} />
-            </LazyLoad>
+            {/* Recommend for you */}
+            <NewUnboxRecomondRecentlyViewed
+              pageInfo={{
+                pageType: "PRODUCT",
+                productIds: [configId || ""]
+              }}
+            />
 
             {/* Related Products List */}
             {/* {relatedproductsList.length > 0 && (
