@@ -63,8 +63,6 @@ app.get('/', (req, res, next) => {
   const { redirect } = req.query;
   if (redirect) {
     const targetUrl = Url.parse(redirect);
-    console.log('req.hostname: [%s]', req.hostname);
-    console.log('url.host: [%s]', targetUrl.host);
     if (!WHITELIST_TO_REDIRECT.has(targetUrl.host)) {
       return next(new Error('Open redirect attack detected'));
     }

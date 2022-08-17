@@ -37,7 +37,6 @@
      var data = this.responseText;
      var apiResponse = JSON.parse(this.responseText)
      var datajson =  apiResponse && apiResponse.filter(menu => menu.visibility === 'on');
-     // console.log(datajson);
 
      var dataContainer = document.getElementById('sitemapData');
      var sitemapData = '';
@@ -75,7 +74,6 @@
      }
 
      dataContainer.innerHTML += sitemapData;
-     // console.log(sitemapData);
    }
   });
 

@@ -91,7 +91,6 @@ class Listing extends React.Component {
         location: { pathname, state = {} }
       }
     } = this.props;
-    // console.log(pathname);
     const { dispatch } = this.context.store;
     if (breadCrumbs.length >= 2) {
       dispatch(
@@ -114,7 +113,6 @@ class Listing extends React.Component {
         }
       });
       window.unbxd_category = url || "None";
-      // console.log(`unbxd_category - did mount- url- ${url}`);
     } else {
       // eslint-disable-next-line react/no-did-mount-set-state
       this.setState({
@@ -134,7 +132,6 @@ class Listing extends React.Component {
       // window.unbxd_fun();
       if (window.renderListing) {
         window.renderListing(true, state);
-        // console.log('window.renderListing(true); invoked in initial listing page ---------');
       }
     }
     if (window && window.Unbxd && window.Unbxd.experiences) {
@@ -178,7 +175,6 @@ class Listing extends React.Component {
       }
       const { dispatch } = this.context.store;
       await dispatch(setReloadListing(false));
-      // console.log(state, state.path);
       if (state && state.path) {
         window.renderListing(false, state);
       }
@@ -253,16 +249,13 @@ class Listing extends React.Component {
         .then(() => {
           if (window && !!window.unbxd && !!window.unbxd.toggleWishList) {
             window.unbxd.toggleWishList(sku, simpleSku);
-            // console.log('unbxd toggleWishList callback invoked with - ', sku, simpleSku);
           }
         })
         .catch(() => {
-          // console.log('unbxd toggleWishList callback failed !');
         });
     } else {
       // if (window && !!window.unbxd && !!window.unbxd.toggleWishList) {
       //   window.unbxd.toggleWishList(sku, simpleSku);
-      //   console.log('unbxd toggleWishList callback invoked with - ', sku, simpleSku);
       // }
       addToWaitList(sku, simpleSku, selectedPincode, true);
       this.handleLoginModal();
@@ -287,7 +280,6 @@ class Listing extends React.Component {
       .then(() => {
         if (window && !!window.unbxd && !!window.unbxd.addToCart) {
           window.unbxd.addToCart(key, skuId, simpleSku, pincode);
-          // console.log('unbxd addToCart callback invoked with - ', key, skuId, simpleSku, pincode);
         }
       })
       .catch(() => {
@@ -321,7 +313,6 @@ class Listing extends React.Component {
     } = this.props;
     const { display } = this.state;
     // const uniqueFilters = {};
-    // console.log(display);
     return (
       <Box>
         {/* <BestOfferBanners bannerData={bannerData} history={history} /> */}

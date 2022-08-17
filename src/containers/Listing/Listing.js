@@ -34,7 +34,6 @@ import {
 } from "selectors/products";
 import { SITE_URL } from "helpers/Constants";
 import CANONICALS from "data/canonical";
-import { isLandingPage } from "../../redux/modules/app";
 // import { listingBestOffers, listingBestOffersPath } from 'data/best-offers';
 
 const btnStyle = {
@@ -47,10 +46,7 @@ const btnStyle = {
 
 const getFaqs = faqs => {
   const seoFaq = JSON.parse(faqs).map(faq => {
-    // console.log(faq, 'QA check');
-    // console.log(Object.values(faq)[0]);
     const ques = Object.values(faq)[0];
-    // console.log(faq.ans);
     if (faq) {
       return {
         "@type": "Question",
@@ -177,16 +173,6 @@ export default class Listing extends Component {
       dispatch(setReloadListing(true));
       history.push(`${pathname}${search}`);
     }
-  }
-
-  componentDidMount() {
-    const { dispatch } = this.context.store;
-    dispatch(isLandingPage(true));
-  }
-
-  componentWillUnmount() {
-    const { dispatch } = this.context.store;
-    dispatch(isLandingPage(false));
   }
 
   scrollDown = () => {
@@ -335,17 +321,6 @@ export default class Listing extends Component {
     // const showBestOffers = listingBestOffersPath.some(arr => arr === pathname);
     // let banners = [];
     // if (showBestOffers) banners = listingBestOffers[0][pathname].images;
-    // console.log('listingBestOffers[pathname]', listingBestOffers[0][pathname]);
-    const obj = {
-      pageType: "CATEGORY"
-      // catlevel1Name: "furniture",
-      // catlevel2Name: "living-room-furniture",
-      // catlevel3Name: "sofas"
-    };
-    if (breadCrumbs && Array.isArray(breadCrumbs))
-      breadCrumbs.map((item, i) => {
-        obj[`catlevel${i + 1}Name`] = `${item.url_key}`.split("/")[i];
-      });
     /* eslint-disable react/no-danger */
     return (
       <Wrapper>

@@ -36,7 +36,6 @@ export class Menu extends Component {
   componentDidMount() {
     const { history } = this.props;
     // window.unbxd_autosuggest_fun();
-    // console.log('window.unbxd_autosuggest_fun() in search page called---------');
     window.HTCATEGORY = {};
     window.HTCATEGORY.navigateToCategory = navigateToCategory(history);
   }

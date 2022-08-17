@@ -67,7 +67,6 @@ class MakeItYourOwn extends React.Component {
   };
   makeItOwnSelecter = e => {
     e.preventDefault();
-    // console.log(e.target.value, 'event');
   };
 
   handleScript = () => {

@@ -37,10 +37,7 @@ const styles = require("./Category.scss");
 
 const getFaqs = faqs => {
   const seoFaq = JSON.parse(faqs).map(faq => {
-    // console.log(faq, 'QA check');
-    // console.log(Object.values(faq)[0]);
     const ques = Object.values(faq)[0];
-    // console.log(faq.ans);
     if (faq) {
       return {
         "@type": "Question",

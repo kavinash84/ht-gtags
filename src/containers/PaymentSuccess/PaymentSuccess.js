@@ -90,7 +90,6 @@ class PaymentSuccess extends Component {
   componentDidUpdate = prevProps => {
     const { isLoggedIn } = this.props;
     if (prevProps.isLoggedIn !== isLoggedIn && !isLoggedIn) {
-      // console.log('redirect check');
       // return history.push('/');
       // eslint-disable-next-line react/no-did-update-set-state
       this.setState({
@@ -133,7 +132,6 @@ class PaymentSuccess extends Component {
   };
 
   onSubmitSetPassword = e => {
-    // console.log('check set password');
     e.preventDefault();
     const {
       confirmPassword,
@@ -144,23 +142,11 @@ class PaymentSuccess extends Component {
       confirmPasswordErrorMessage
     } = this.state;
     const { customerId } = this.props;
-    // console.log('customerId check', customerId);
     // const checkOldPwd = isBlank(oldPwd) || oldPwdError;
     const checkPassword = isBlank(password) || passwordError;
     const checkConfirmPassword =
       isBlank(confirmPassword) || confirmPasswordError;
-    // console.log(
-    //   'parameter check',
-    //   password,
-    //   checkPassword,
-    //   passwordError,
-    //   confirmPassword,
-    //   confirmPasswordError,
-    //   checkConfirmPassword,
-    //   checkPassword
-    // );
     if (password !== confirmPassword) {
-      // console.log('password is not same');
       return this.setState({
         confirmPasswordError: true,
         confirmPasswordErrorMessage: "Confirm Password doesn't match"
@@ -168,7 +154,6 @@ class PaymentSuccess extends Component {
     }
 
     if (checkConfirmPassword || checkPassword) {
-      // console.log('password is same');
       return this.setState({
         // oldPwdError: checkOldPwd,
         // oldPwdErrorMessage: checkOldPwd ? "Old Password can't be blank" : '',
@@ -183,7 +168,6 @@ class PaymentSuccess extends Component {
       });
     }
     const { dispatch } = this.context.store;
-    // console.log('before dispatch');
     dispatch(
       setUserPassword({
         password,
@@ -195,14 +179,11 @@ class PaymentSuccess extends Component {
         customerId
       })
     );
-    // console.log('after dispatch');
-    // console.log('before set state');
     this.setState({
       password: "",
       // oldPwd: '',
       confirmPassword: ""
     });
-    // console.log('after set state');
   };
 
   groupSimilarProducts = () => {
@@ -442,7 +423,8 @@ class PaymentSuccess extends Component {
                         >
                           <Image
                             width={1}
-                            src={`${product.image}-top_sel_160.jpg`}
+                            data-src={`${product.image}.jpg?mode=fill&h=160`}
+                            src={`${product.image}?blur=30`}
                             alt=""
                             sx={{ boxShadow: "productThumb" }}
                           />

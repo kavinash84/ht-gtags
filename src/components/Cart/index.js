@@ -231,7 +231,8 @@ class Cart extends React.Component {
                                 {imageURL => (
                                   <Image
                                     width={1}
-                                    src={imageURL}
+                                    data-src={`${imageURL}?mode=fill&h=160`}
+                                    src={`${imageURL}?blur=30`}
                                     alt=""
                                     sx={{
                                       boxShadow: "productThumb"

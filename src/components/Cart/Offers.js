@@ -10,7 +10,6 @@ class Offers extends React.Component {
   render() {
     const { cartEmiDetails } = this.props;
     const { showMore } = this.state;
-    console.log(cartEmiDetails, 'cartEmiDetails');
     return (
       <div style={{ background: 'white', borderBottomLeftRadius: '3px', borderBottomRightRadius: '3px' }}>
         {Array.isArray(cartEmiDetails.cart_emi_detail) && (

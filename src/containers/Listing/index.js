@@ -19,16 +19,9 @@ import {
   isLoaded as isStoresLoaded
 } from "redux/modules/listingbanners";
 import { PINCODE } from "helpers/Constants";
-import { isLandingPage } from "../../redux/modules/app";
 
 const hooks = {
   fetch: async ({ store: { dispatch, getState }, params, location }) => {
-    if (document.getElementById("gumletScriptID") && window) {
-      await dispatch(isLandingPage(true));
-      await document.getElementById("gumletScriptID").setAttribute("src", "");
-      await delete window.gumlet;
-      document.location.reload();
-    }
     const {
       pincode: { selectedPincode },
       // pagination: { page },
@@ -44,7 +37,6 @@ const hooks = {
     const urlCategory = urlCategoryArr[`${urlCategoryArr.length - 1}`]
       ? urlCategoryArr[`${urlCategoryArr.length - 1}`]
       : urlCategoryArr[`${urlCategoryArr.length - 2}`];
-    // console.log(urlCategoryArr, urlCategory, 'url check');
     const getPage = search.split("page=")[1];
     const currentPage = getPage || 1;
     if (location.pathname === "/search") {

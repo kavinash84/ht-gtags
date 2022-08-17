@@ -43,8 +43,6 @@ const onSuccess = (dispatcher, session, phone) => result => {
 };
 
 const onError = error => e => {
-  console.log('Error occuried');
-  console.log(error, e);
 };
 
 const mapDispatchToProps = dispatch =>

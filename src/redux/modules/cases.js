@@ -85,7 +85,6 @@ export const sendData = (API, data, formType) => ({
       const response = await client.post(API, data);
       return response;
     } catch (error) {
-      // console.log(error);
       throw error;
     }
   },
