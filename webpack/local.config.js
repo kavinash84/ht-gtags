@@ -257,7 +257,6 @@ module.exports = {
           JSON.stringify(data),
           (err) => {
           if (err) throw err;
-          console.log(`VERSION RELEASE : ${version}`);
         });
       }),
   ]

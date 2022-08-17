@@ -21,10 +21,7 @@ const getFaqs = faqs => {
     arr = [...arr, ...item.data];
   });
   const seoFaq = arr.map(faq => {
-    // console.log(faq, 'QA check');
-    // console.log(Object.values(faq)[0]);
     const ques = Object.values(faq)[0];
-    // console.log(faq.ans);
     if (faq) {
       return {
         "@type": "Question",

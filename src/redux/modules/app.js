@@ -82,7 +82,6 @@ const setAppAuth = ({ client }) => async response => {
   const { session } = response;
   // await client.setCSRFToken(csrfToken);
   await client.setSessionId(session);
-  console.log(session, "setAppAuth");
 };
 
 export const isLoaded = globalState =>
@@ -95,11 +94,8 @@ export const generateSession = (pincode = PINCODE) => ({
       const response = { session: await generateSessionId(26) };
       await setAppAuth({ client })(response);
       // setSessionIdLocally(response.session);
-      console.log(response, "generateSession");
       return response;
     } catch (error) {
-      // console.log(error);
-      // console.log('Unable to generate session');
       return error;
     }
   }
@@ -150,7 +146,6 @@ export const setSessionIdLocally = id => ({
     try {
       const response = { session: id };
       await setAppAuth({ client })(response);
-      console.log(response, "generateSession");
       return response;
     } catch (error) {
       return error;

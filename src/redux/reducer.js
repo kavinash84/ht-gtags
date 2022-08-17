@@ -25,15 +25,12 @@ import tracking from "./modules/tracking";
 import pagination from "./modules/pagination";
 import paymentoptions from "./modules/paymentoptions";
 import checkout from "./modules/checkout";
-import colorproducts from "./modules/colorproducts";
 import coupon from "./modules/coupon";
 import myaddress from "./modules/myaddress";
 import mycases from "./modules/mycases";
-import relatedproducts from "./modules/relatedproducts";
 import paymentstatus from "./modules/paymentstatus";
 import recentlyviewed from "./modules/recentlyviewed";
 import storelocator from "./modules/storelocator";
-import emioptions from "./modules/emioptions";
 import notifs from "./modules/notifs";
 import address from "./modules/address";
 import analytics from "./modules/analytics";
@@ -98,15 +95,12 @@ export default function createReducers(asyncReducers) {
     pagination,
     paymentoptions,
     checkout,
-    colorproducts,
     coupon,
     myaddress,
-    relatedproducts,
     combinedbuy,
     paymentstatus,
     recentlyviewed,
     storelocator,
-    emioptions,
     notifs,
     address,
     analytics,

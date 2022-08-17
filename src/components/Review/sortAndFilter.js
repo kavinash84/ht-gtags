@@ -9,11 +9,9 @@ export default class SortAndFilter extends Component {
     super(props);
   }
   onChangeFilter = e => {
-    console.log(e.target.value);
     this.props.applyFilter(e.target.value);
   };
   onChangeSort = e => {
-    console.log(e.target.value);
     this.props.applySort(e.target.value);
   };
   render() {

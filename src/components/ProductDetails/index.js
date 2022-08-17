@@ -3,11 +3,9 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import Helmet from "react-helmet";
-import Select from "react-select";
 import ReactStars from "react-stars";
 import { withRouter } from "react-router";
 import LazyLoad from "react-lazyload";
-import { Link } from "react-router-dom";
 
 /**
  * Modules / Utils / Reducers
@@ -19,14 +17,7 @@ import { getCombinedBuy } from "redux/modules/combinedbuy";
 import { addToCartCombined, setQuantityFlag } from "redux/modules/cart";
 import { formatAmount } from "utils/formatters";
 import { EMI_THRESHOLD } from "helpers/Constants";
-import {
-  calculateLowestEmi,
-  getVideoID,
-  formatProductURL,
-  calculateTotalSavings,
-  calculateDiscount,
-  calculateSavings
-} from "utils/helper";
+import { calculateLowestEmi, getVideoID, formatProductURL } from "utils/helper";
 import {
   productPageTitle,
   productMetaDescription,
@@ -49,7 +40,6 @@ import Div from "hometown-components-dev/lib/BoxHtV1";
 import Button from "hometown-components-dev/lib/ButtonHtV1";
 import Col from "hometown-components-dev/lib/ColHtV1";
 import Container from "hometown-components-dev/lib/ContainerHtV1";
-import Flex from "hometown-components-dev/lib/FlexHtV1";
 import Heading from "hometown-components-dev/lib/HeadingHtV1";
 import Image from "hometown-components-dev/lib/ImageHtV1";
 import Text from "hometown-components-dev/lib/TextHtV1";
@@ -62,26 +52,15 @@ import Img from "hometown-components-dev/lib/ImageHtV1";
 /**
  * Page Components
  */
-// import Section from 'hometown-components-dev/lib/SectionHtV1';
-// import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
-// import AddReview from 'hometown-components-dev/lib/ReviewsHtV1/WriteReview';
 import ColorOption from "./ColorOption";
-import CombinedBuy from "components/CombinedBuy";
-import ProductDesc from "./Specs/productDesc";
-import ProductCarousel from "components/ProductCarousel";
+// import ProductCarousel from "components/ProductCarousel";
 import ResponsiveModal from "components/Modal";
 import ResponsiveVideoModal from "components/Modal/ResponsiveVideoModal";
 import Reviews from "./ReviewsHtV1";
 import ReviewDisplay from "./ReviewDisplay";
 import TotalReviewDisplay from "./TotalReviewDisplay";
 import ServiceDetails from "hometown-components-dev/lib/ProductDetailsHtV1/ServiceDetails";
-// import EmiOptions from 'hometown-components-dev/lib/ProductDetailsHtV1/EmiOptions';
-// import ShareBar from 'components/ShareBar';
-import TitlePrice from "./TitlePrice";
 import HeadingTitlePrice from "./HeadingTitlePrice";
-import WishListButton from "hometown-components-dev/lib/WishlistButtonHtV1";
-// import Section from 'hometown-components-dev/lib/SectionHtV1';
-// import UnbxdRecentlyViewed from 'components/UnbxdRecentlyViewed/UnbxdRecentlyViewed';
 import LoginModal from "containers/Login/LoginForm";
 import AddToCart from "./pdpAddToCart";
 import BreadCrumb from "./BreadCrumb";
@@ -94,12 +73,7 @@ import ProductDetailsCarousel from "./Carousel";
 import Video from "./Video";
 import ReviewFilter from "./ReviewFilter";
 import UnbxdCompleteTheLook from "./UnbxdCompleteTheLook";
-import FreebieProduct from "./FreebieProduct";
 import Stripes from "./PdpStripe";
-const ShareIcon = require("../../../static/pdp-icons/share.png");
-import demoIcon from "../../../static/play-button.svg";
-import { BackgroundMasker } from "hometown-components-dev/lib/Shimmer";
-
 import Specs from "./Specs/specs";
 import BaughtTogether from "./baughtTogether";
 import MoreOption from "./moreOption";
@@ -109,45 +83,15 @@ import { weLoadMoreReviews } from "../../redux/modules/reviews";
 /**
  * Images / Icons
  */
-const freeShippingIcon = require("../../../static/free-shipping.svg");
-const warrentyIcon = require("../../../static/warrenty.svg");
-const emiIcon = require("../../../static/emi.svg");
+const ShareIcon = require("../../../static/pdp-icons/share.png");
 const CloseIcon = require("../../../static/close-icon.svg");
 const WishlistIcon = require("../../../static/pdp-icons/wishlist.png");
 const WishlistIconSelect = require("../../../static/pdp-icons/wishlistSelect.png");
-const fbIcon = require("../../../static/fb-pdp.svg");
-const email = require("../../../static/email-pdp.svg");
-const pinIcon = require("../../../static/pinterest-pdp.svg");
 const DownArrow = require("../../../static/pdp-icons/down-arrow.svg");
-
-const LeftArrow = require("../../../static/new-home/roundedArrowLeft.svg");
-const RightArrow = require("../../../static/new-home/roundedArrowRight.svg");
 /**
  * styles
  */
 const styles = require("./productIndex.scss");
-
-const qtyOptions = sku => {
-  if (sku.meta) {
-    let qty = sku.meta.quantity;
-    const options = [];
-    if (qty > 5) qty = 5;
-
-    for (let i = 1; i <= qty; i += 1) {
-      options.push({ value: i, label: i });
-    }
-    return options;
-  }
-};
-
-const customStyles = {
-  control: () => ({
-    width: "75px",
-    display: "flex",
-    borderRadius: "2px",
-    border: "1px solid rgba(0, 0, 0, 0.25)"
-  })
-};
 
 /**
  * Common Components
@@ -169,7 +113,7 @@ const DescriptionButton = props => (
   </Col>
 );
 
-const SocialButton = props => <Button variant="link" mr={15} {...props} />;
+// const SocialButton = props => <Button variant="link" mr={15} {...props} />;
 
 const UspCol = ({ src, text, ...props }) => (
   <Col {...props}>
@@ -235,25 +179,11 @@ const mapDispatchToProps = dispatch =>
     dispatch
   );
 
-const getProductsList = products => {
-  const items = [];
-  products.forEach(item => {
-    const { set_qty: qty = 0 } = item;
-    for (let i = 0; i < qty; i += 1) {
-      items.push(item);
-    }
-  });
-  return items;
-};
-
 const mapStateToProps = ({
   app: { sessionId },
   productdetails,
   pincode,
   reviews,
-  colorproducts,
-  relatedproducts,
-  emioptions,
   wishlist,
   userLogin,
   combinedbuy,
@@ -268,11 +198,21 @@ const mapStateToProps = ({
   pincode,
   combinedbuy: combinedbuy.results,
   deliveryDateLoading: productdetails.deliveryDateLoading,
-  boughtTogether: productdetails.boughtTogether,
-  colorproducts: colorproducts.list,
-  relatedproductsList: relatedproducts.data,
+  boughtTogether:
+    (productdetails.productDescription &&
+      productdetails.productDescription.boughtTogether) ||
+    [],
+  relatedproductsList:
+    // (productdetails.productDescription &&
+    //   productdetails.productDescription.related_products) ||
+    [],
+  colorproducts:
+    (productdetails.productDescription &&
+      productdetails.productDescription.color_products) ||
+    [],
   deliveryInfo: productdetails.deliveryDetails,
-  emidata: emioptions.data,
+  emidata: (productdetails.productDescription &&
+    productdetails.productDescription.emi_data) || { emi: [], noCostEmi: [] },
   wishList: getSKUList(wishlist),
   wishListData: wishlist.data,
   isLoggedIn: userLogin.isLoggedIn,
@@ -287,18 +227,8 @@ const mapStateToProps = ({
   bflMinAmount: paymentoptions.bflMinAmount
 });
 
-const getSelectedColor = colors => {
-  let activeColorName = "";
-  colors.forEach(color => {
-    if (color.activeColor === true) {
-      activeColorName = color.meta.color_family;
-    }
-  });
-  return activeColorName;
-};
-
 @withRouter
-class ProductDetails extends React.Component {
+class ProductDetails extends React.PureComponent {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
@@ -340,13 +270,6 @@ class ProductDetails extends React.Component {
     this.reviewRef = React.createRef();
   }
 
-  // onOpenPdpModal = () => {
-  //   this.setState({ open: true });
-  // };
-  // onClosePdpModal = () => {
-  //   this.setState({ open: false });
-  // };
-
   componentDidMount() {
     const { dispatch } = this.context.store;
     const {
@@ -365,19 +288,6 @@ class ProductDetails extends React.Component {
     // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ popUpTimeoutId });
   }
-  // componentWillReceiveProps(nextProps) {
-  //   const { colorproducts } = this.props;
-
-  //   if (nextProps.isLoggedIn) {
-  //     this.setState({
-  //       openLogin: false
-  //     });
-  //   }
-  //   if (nextProps.colorproducts !== colorproducts) {
-  //     this.addProductToColorProduct(nextProps.colorproducts);
-  //   }
-  //   this.isFurnitureTrue();
-  // }
   componentWillUnmount() {
     const { toggleWebToChat } = this.props;
     const { popUpTimeoutId } = this.state;
@@ -421,12 +331,6 @@ class ProductDetails extends React.Component {
       // window.scroll(0, this.reviewsRef.current.offsetTop);
     }
   };
-  // setDescriptionActive = product => {
-  //   const {
-  //     attributes: { description }
-  //   } = product;
-  //   this.setState({ activeDescription: description });
-  // };
   getWeightedAverageRatings = () => {
     const {
       reviews: { data = [] }
@@ -452,7 +356,6 @@ class ProductDetails extends React.Component {
     return Number(ans);
   };
   webToChat = () => {
-    // const { dispatch } = this.context.store;
     const { toggleWebToChat, dismiss } = this.props;
 
     const {
@@ -469,17 +372,6 @@ class ProductDetails extends React.Component {
     const { dispatch } = this.context.store;
     dispatch(addReview(sku, data));
   };
-  // addProductToColorProduct = colorproducts => {
-  //   const { product } = this.props;
-  //   if (colorproducts.length > 0) {
-  //     colorproducts = colorproducts.map(arr => ({
-  //       ...arr,
-  //       activeColor: false
-  //     }));
-  //     colorproducts.push({ ...product, activeColor: true });
-  //     this.setState({ colorproducts });
-  //   }
-  // };
   toggleShowMore = () => {
     this.setState({
       showmore: !this.state.showmore
@@ -536,7 +428,6 @@ class ProductDetails extends React.Component {
             behavior: "smooth",
             block: "nearest"
           });
-          // this.reviewRef.current.focus();
         }
       }
     );
@@ -648,7 +539,6 @@ class ProductDetails extends React.Component {
             inline: "nearest"
           });
       }, 3000);
-      // console.log(id, tabElement[`${id}`], "id for tabElement");
       this.setState({
         activeSpec: tabElement[`${id}`].tableName,
         activeDescription: tabElement[`${id}`].tabComponent
@@ -700,10 +590,10 @@ class ProductDetails extends React.Component {
       product,
       pincode,
       colorproducts,
-      session,
+      // session,
       reviews,
-      isSoldOut,
-      relatedproductsList,
+      // isSoldOut,
+      // relatedproductsList,
       boughtTogether,
       deliveryInfo,
       emidata,
@@ -717,7 +607,7 @@ class ProductDetails extends React.Component {
       gattributes,
       breadcrumbs,
       combinedbuy,
-      loadingList,
+      // loadingList,
       quantityChange,
       skuItem,
       bflMinAmount,
@@ -725,16 +615,16 @@ class ProductDetails extends React.Component {
     } = this.props;
 
     const {
-      activeSpec,
+      // activeSpec,
       showReviews,
-      productQty,
+      // productQty,
       // colorproducts,
       selectedFilter,
       filterChanged,
-      activeDescription,
+      // activeDescription,
       reviewDataSet,
-      showmorecolorproductsCount,
-      addreview,
+      // showmorecolorproductsCount,
+      // addreview,
       nameError,
       nameErrorMessage,
       reviewError,
@@ -796,7 +686,7 @@ class ProductDetails extends React.Component {
     const offerImage = simples[simpleSku].groupedattributes.offer_image || null;
     const offerImageRedirect =
       simples[simpleSku].groupedattributes.offer_image_click_url || null;
-    const { showmore, showmorecolorproducts } = this.state;
+    const { showmorecolorproducts } = this.state;
     // const isEmiAvailable = Number(checkSpecialPrice) >= 3000;
     const {
       main_material: material,
@@ -812,7 +702,7 @@ class ProductDetails extends React.Component {
     );
     const weightedRating = this.getWeightedAverageRatings();
     const isFurnitureStripe = categories.split("|").includes("131");
-    const uspWarranty = `${warrantyPeriod} Warranty`;
+    // const uspWarranty = `${warrantyPeriod} Warranty`;
 
     const reviewItems = (filterChanged ? reviewDataSet : reviews.data) || [];
 
@@ -879,6 +769,7 @@ class ProductDetails extends React.Component {
                 <BreadCrumb breadcrumbs={breadcrumbs} />
               </Col>
             </Row>
+            <LazyLoad height={936}>
             <Row mb={40}>
               {/* Left Column */}
               <Col width={[6, 2 / 12, 5 / 12, 6 / 12]} pr={30}>
@@ -1055,7 +946,6 @@ class ProductDetails extends React.Component {
                         </Text>
                       )}
                       {couponCode ? (
-                        // {!!isOfferExist && price !== discPrice &&
                         <Div>
                           <Div>
                             <Heading
@@ -1217,9 +1107,7 @@ class ProductDetails extends React.Component {
                         deliveryDetails[0].value) ||
                       ""
                     }
-                    // emiStarting={formatAmount(calculateLowestEmi(emidata, price))}
                     shipping={checkSpecialPrice}
-                    // isEmiAvailable={isEmiAvailable}
                     pincode={pincode.selectedPincode}
                     loading={deliveryDateLoading}
                     shippingCharge={meta.shipping_charge}
@@ -1361,8 +1249,6 @@ class ProductDetails extends React.Component {
                               simpleSku,
                               pincode.selectedPincode
                             )}
-                            // isWishList={isInWishList(wishList, sku)}
-                            // wishlistLoading={isInWishList(loadingList, sku)}
                           >
                             <Img
                               src={
@@ -1605,18 +1491,21 @@ class ProductDetails extends React.Component {
                 </div>
               </Col>
             </Row>
+            </LazyLoad>
             {/* bought together */}
             {boughtTogether && boughtTogether.length ? (
-              <LazyLoad height={150}>
+              <LazyLoad height={545}>
                 <BaughtTogether prodQty={prodQty} />
               </LazyLoad>
             ) : null}
 
             {/* Complete the look */}
+            <LazyLoad height={150}>
             <UnbxdCompleteTheLook configId={configId} />
+            </LazyLoad>
 
             {/* Related Products List */}
-            {relatedproductsList.length > 0 && (
+            {/* {relatedproductsList.length > 0 && (
               <Row py={36}>
                 <ProductCarousel
                   paddingTop="2.5rem"
@@ -1625,12 +1514,7 @@ class ProductDetails extends React.Component {
                   length={relatedproductsList.length}
                 />
               </Row>
-            )}
-
-            {/* Unbxd Recently Viewed */}
-            {/* <Section>
-              <UnbxdRecentlyViewed />
-            </Section> */}
+            )} */}
 
             {/* Login modal */}
             <ResponsiveModal
@@ -1729,8 +1613,6 @@ ProductDetails.defaultProps = {
   quantityChange: false,
   skuItem: {},
   session: ""
-  // catalogId: '',
-  // onClickSubmit: () => {}
 };
 DescriptionButton.defaultProps = {
   tab: ""
@@ -1758,7 +1640,6 @@ ProductDetails.propTypes = {
   isLoggedIn: PropTypes.bool.isRequired,
   wishlistToggle: PropTypes.func.isRequired,
   addToWaitList: PropTypes.func.isRequired,
-  // toggleReviewBox: PropTypes.func.isRequired,
   updateQuantityFlag: PropTypes.func.isRequired,
   deliveryDateLoading: PropTypes.bool,
   breadcrumbs: PropTypes.array.isRequired,
@@ -1771,6 +1652,5 @@ ProductDetails.propTypes = {
   session: PropTypes.string,
   bflMinAmount: PropTypes.number.isRequired,
   onClickSubmit: PropTypes.func.isRequired
-  // catalogId: PropTypes.any
 };
 export default connect(mapStateToProps, mapDispatchToProps)(ProductDetails);

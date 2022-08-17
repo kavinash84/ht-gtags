@@ -51,7 +51,6 @@ export default class PaymentOptionsContainer extends Component {
     const { paymentOptionsError, history } = this.props;
     if (prevProps.paymentOptionsError !== paymentOptionsError) {
       if (paymentOptionsError === "Cart total mismatch") {
-        console.log(paymentOptionsError, "paymentOptionsError");
         history.push(CART_URL);
       }
     }

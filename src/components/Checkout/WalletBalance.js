@@ -140,7 +140,6 @@ class WalletBalance extends Component {
       futurePayAmount,
       isPayFromHtWallet
     } = this.props;
-    console.log(balance, 'balance');
     return (
       <Div pl="5%">
         <Text ta="center" color="#323131" mb={20} fontSize="1.2rem">

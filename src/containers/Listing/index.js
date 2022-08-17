@@ -37,7 +37,6 @@ const hooks = {
     const urlCategory = urlCategoryArr[`${urlCategoryArr.length - 1}`]
       ? urlCategoryArr[`${urlCategoryArr.length - 1}`]
       : urlCategoryArr[`${urlCategoryArr.length - 2}`];
-    // console.log(urlCategoryArr, urlCategory, 'url check');
     const getPage = search.split("page=")[1];
     const currentPage = getPage || 1;
     if (location.pathname === "/search") {

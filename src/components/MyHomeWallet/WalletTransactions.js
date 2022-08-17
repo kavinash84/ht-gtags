@@ -109,7 +109,6 @@ export class WalletTransactions extends Component {
   render() {
     const { transactionHistory: history, hasMoreTrans } = this.props;
     const { toDate, fromDate, pageNo } = this.state;
-    console.log({ history });
     return (
       <div>
         <Row justifyContent="space-between" mb="1.5rem" ml="0" mr="0">

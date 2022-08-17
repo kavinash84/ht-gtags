@@ -1,7 +1,6 @@
 import {
   PRODUCT_DETAIL,
   PRODUCT_DELIVERY_DETAILS,
-  BOUGHT_TOGETHER,
   PRODUCT_FINANCE_OPTIONS
 } from "helpers/apiUrls";
 
@@ -21,9 +20,6 @@ const GET_FINANCE_OPTIONS_SUCCESS =
   "productdetails/GET_FINANCE_OPTIONS_SUCCESS";
 const GET_FINANCE_OPTIONS_FAIL = "productdetails/GET_FINANCE_OPTIONS_FAIL";
 
-const LOAD_BOUGHT_TOGETHER = "productdetails/LOAD_BOUGHT_TOGETHER";
-const LOAD_BOUGHT_TOGETHER_SUCCESS = "productdetails/LOAD_BOUGHT_TOGETHER_FAIL";
-const LOAD_BOUGHT_TOGETHER_FAIL = "productdetails/LOAD_BOUGHT_TOGETHER_FAIL";
 const SET_PROUDUCT_POSITION = "products/SET_PROUDUCT_POSITION";
 
 const PRODUCT_DETAILS_TRACK = "productdetails/PRODUCT_DETAILS_TRACK";
@@ -60,26 +56,6 @@ export default function reducer(state = initialState, action = {}) {
         deliveryDetails: null
       };
     case LOAD_PRODUCT_DESCRIPTION_FAIL:
-      return {
-        ...state,
-        loading: false,
-        loaded: false,
-        error: action.error
-      };
-    case LOAD_BOUGHT_TOGETHER:
-      return {
-        ...state,
-        loading: true,
-        loaded: false
-      };
-    case LOAD_BOUGHT_TOGETHER_SUCCESS:
-      return {
-        ...state,
-        loading: false,
-        loaded: true,
-        boughtTogether: action.result
-      };
-    case LOAD_BOUGHT_TOGETHER_FAIL:
       return {
         ...state,
         loading: false,
@@ -170,25 +146,6 @@ export const getDelieveryInfo = (simpleSku, pincode) => ({
       return error;
     }
   }
-});
-export const loadBoughtTogether = sku => ({
-  types: [
-    LOAD_BOUGHT_TOGETHER,
-    LOAD_BOUGHT_TOGETHER_SUCCESS,
-    LOAD_BOUGHT_TOGETHER_FAIL
-  ],
-  promise: async ({ client }) => {
-    try {
-      const postData = {
-        sku: sku
-      };
-      const response = await client.post(BOUGHT_TOGETHER, postData);
-      return response;
-    } catch (error) {
-      return error;
-    }
-  },
-  sku
 });
 
 export const getfinanceOptions = () => ({
