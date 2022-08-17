@@ -49,7 +49,7 @@ export const formatToArray = data => {
           is_deliverable: item.is_deliverable,
           assembly_service: false,
           couponDiscount: 0,
-          demo_product: false,
+          demo_product: item.demo_product,
           offer_message: false
         }
       };
@@ -97,7 +97,7 @@ export const formatToArray = data => {
         is_deliverable: item.is_deliverable,
         assembly_service: false,
         couponDiscount: 0,
-        demo_product: false,
+        demo_product: item.demo_product,
         offer_message: false
       }
     };

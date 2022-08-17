@@ -251,7 +251,6 @@ export const validateName = fullName => {
 // };
 
 export const validateDob = dob => {
-  // console.log(moment().isSameOrBefore(moment(dob)), 'moment(dob).isSameOrBefore(moment())');
   if (!dob) {
     return {
       msg: "Date of Birth Cannot be Left Empty !",
@@ -268,7 +267,6 @@ export const validateDob = dob => {
 };
 
 export const validateFuturePay = (balance, cartValue) => {
-  console.log("validateFuturePay", balance, cartValue);
   // If balance is greater than available balance
 
   if (balance > cartValue) {

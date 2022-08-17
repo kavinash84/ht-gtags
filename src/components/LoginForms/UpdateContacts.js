@@ -33,8 +33,6 @@ const LoginModal = props => {
     onChangePhone
   } = props;
   const isValid = () => {
-    console.log('firstName && firstNameError', firstNameError);
-    console.log('lastName && lastNameError', lastNameError);
     if (firstNameError) return false;
     if (lastNameError) return false;
     if (phoneError) return false;
@@ -45,8 +43,6 @@ const LoginModal = props => {
   };
 
   // const onError = error => e => {
-  //   console.log('Error occuried');
-  //   console.log(error, e);
   // };
 
   // const onSuccess = (dispatcher, session, phone) => result => {
@@ -104,7 +100,6 @@ const LoginModal = props => {
           clientId="663311547699-jersj1hfflbl8gfukgsuvug8u1gc88nm.apps.googleusercontent.com"
           onSuccess={() => {
             const username = `${firstName} ${lastName}`;
-            console.log(!isValid(), session, phone, username);
             loginViaLogin({}, session, phone, username);
           }}
           onFailure={onError}
@@ -114,7 +109,6 @@ const LoginModal = props => {
           className="google-login-btn"
           onClick={() => {
             const username = `${firstName} ${lastName}`;
-            console.log(!isValid(), session, phone, username);
             loginViaLogin({}, session, phone, username);
           }}
         >

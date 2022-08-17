@@ -41,7 +41,6 @@ class ApplyGiftWrapper extends React.Component {
     if (prevProps.products !== products) {
       const found =
         products.find(element => element.product_info.gift_wrap === 1) || "";
-      console.log(found, "found");
       if (found) {
         this.setState({ shouldShow: true });
       } else {

@@ -42,7 +42,6 @@ export default class ReviewComponentsContainer extends Component {
     // if (Array.isArray(ReviewsData.length)) {
     if (ReviewsData.length === 0) {
       const data = `pageNo=${pageNo}&pageSize=${pageSize}`;
-      console.log(ReviewsData, "ReviewsData");
       dispatch(loadReviewsList(data));
     }
     // }

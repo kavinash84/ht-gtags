@@ -21,7 +21,6 @@ export default class DashboardHeader extends Component {
   };
   render() {
     const { first_name: name } = this.props.profile;
-    // console.log(this.props, 'props inside Header');
     return (
       <Row width={1} sx={{ borderBottom: 'divider' }} mx={0}>
         <Heading fontSize={20} pb={10}>

@@ -2,7 +2,6 @@ import cookie from "js-cookie";
 
 const getChannelForAdmitAd = name => {
   const source = cookie.get(name);
-  console.log("cookie source here", source);
   let channel;
   if (!source) {
     channel = "na";
@@ -22,14 +21,11 @@ export default function admitadMiddleware() {
         const {
           location: { pathname }
         } = window;
-        // console.log(type, pathname);
-        // console.log('type === PUSH_TO_DATALAYER', type === 'PUSH_TO_DATALAYER');
         if (
           type === "PUSH_TO_DATALAYER" &&
           pathname &&
           pathname === "/payment-success"
         ) {
-          console.log("inside if /payment-success", window.ADMITAD);
           const {
             paymentstatus: { data }
           } = getState();
@@ -54,12 +50,10 @@ export default function admitadMiddleware() {
             });
 
             const channel = getChannelForAdmitAd("source");
-            // console.log('Create orderItem for ADMITAD', orderedItem);
             if (
               window.ADMITAD.Invoice &&
               window.ADMITAD.Invoice.referencesOrder
             ) {
-              // console.log('inside if object exist for admitad and invoice', window.ADMITAD);
               window.ADMITAD.Invoice.referencesOrder =
                 window.ADMITAD.Invoice.referencesOrder || [];
               window.ADMITAD.Invoice.referencesOrder.push({
@@ -68,10 +62,6 @@ export default function admitadMiddleware() {
               });
               window.ADMITAD.Invoice.broker = channel;
               window.ADMITAD.Invoice.category = "1";
-              console.log(
-                "ADMITAD window variable successfully added",
-                window.ADMITAD
-              );
             }
           }
         }
