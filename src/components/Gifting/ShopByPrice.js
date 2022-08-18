@@ -1,88 +1,79 @@
-import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
 import Div from "hometown-components-dev/lib/BoxHtV1";
-import Text from 'hometown-components-dev/lib/TextHtV1';
+import Text from "hometown-components-dev/lib/TextHtV1";
 
-const styles = require('./style.scss');
+const styles = require("./style.scss");
 
 export class ShopByPrice extends Component {
+  componentDidMount() {
+    this.handleScrollPosition();
+  }
 
-    componentDidMount() {
-        this.handleScrollPosition();
+  handleScrollPosition = () => {
+    const scrollPosition = sessionStorage.getItem("scrollPosition");
+    if (scrollPosition) {
+      window.scrollTo(0, parseInt(scrollPosition));
+      setTimeout(function() {
+        sessionStorage.removeItem("scrollPosition");
+      }, 2000);
     }
+  };
 
-    handleScrollPosition = () => {
-        const scrollPosition = sessionStorage.getItem('scrollPosition');
-        if (scrollPosition) {
-          window.scrollTo(0, parseInt(scrollPosition));
-          setTimeout(function() {
-            sessionStorage.removeItem('scrollPosition');
-          }, 2000);
-        }
-    };
+  handleClick = () => {
+    sessionStorage.setItem("scrollPosition", window.pageYOffset);
+  };
 
-    handleClick = () => {
-        sessionStorage.setItem("scrollPosition", window.pageYOffset);
-    };
-
-    render() {
-        const {
-            shopByPrice
-        } = this.props;
-        return (
-            <div>
-                <Div className={styles.shopByPrice} mt="1rem" pt="1rem" pb="2rem">
-                    <Heading mb="10px" ta="center" color="#323131" fontSize="22px" fontFamily="regular">
-                        {shopByPrice.title}
-                    </Heading>
-                    <div style={{ width: '30px', borderTop: '2px solid #323131', margin: 'auto' }}></div>
-                    <Div className={styles.flex}>
-                        <Link to={shopByPrice.texts[0].link} onClick={this.handleClick}>
-                            <Div className={styles.priceBlock}>
-                                <Text ta="center" fontSize="14px" mb="0px" color="#323131" style={{ fontWeight: 'bold'}}>{shopByPrice.description}</Text>
-                                <Text ta="center" fontSize="14px" mt="0px" color="#323131" style={{ fontWeight: 'bold'}}>{shopByPrice.texts[0].value}</Text>
-                            </Div>
-                        </Link>
-                        <Link to={shopByPrice.texts[1].link} onClick={this.handleClick}>
-                            <Div className={styles.priceBlock}>
-                                <Text ta="center" fontSize="14px" mb="0px" color="#323131" style={{ fontWeight: 'bold'}}>{shopByPrice.description}</Text>
-                                <Text ta="center" fontSize="14px" mt="0px" color="#323131" style={{ fontWeight: 'bold'}}>{shopByPrice.texts[1].value}</Text>
-                            </Div>
-                        </Link>
-                    </Div>
-                    <Div className={styles.flex}>
-                        <Link to={shopByPrice.texts[2].link} onClick={this.handleClick}>
-                            <Div className={styles.priceBlock}>
-                                <Text ta="center" fontSize="14px" mb="0px" color="#323131" style={{ fontWeight: 'bold'}}>{shopByPrice.description}</Text>
-                                <Text ta="center" fontSize="14px" mt="0px" color="#323131" style={{ fontWeight: 'bold'}}>{shopByPrice.texts[2].value}</Text>
-                            </Div>
-                        </Link>
-                        <Link to={shopByPrice.texts[3].link} onClick={this.handleClick}>
-                            <Div className={styles.priceBlock}>
-                                <Text ta="center" fontSize="14px" mb="0px" color="#323131" style={{ fontWeight: 'bold'}}>{shopByPrice.description}</Text>
-                                <Text ta="center" fontSize="14px" mt="0px" color="#323131" style={{ fontWeight: 'bold'}}>{shopByPrice.texts[3].value}</Text>
-                            </Div>
-                        </Link>
-                    </Div>
-                    <Div className={styles.flex}>
-                        <Link to={shopByPrice.texts[4].link} onClick={this.handleClick}>
-                            <Div className={styles.priceBlock}>
-                                <Text ta="center" fontSize="14px" mb="0px" color="#323131" style={{ fontWeight: 'bold'}}>{shopByPrice.description}</Text>
-                                <Text ta="center" fontSize="14px" mt="0px" color="#323131" style={{ fontWeight: 'bold'}}>{shopByPrice.texts[4].value}</Text>
-                            </Div>
-                        </Link>
-                        <Link to={shopByPrice.texts[5].link} onClick={this.handleClick}>
-                            <Div className={styles.priceBlock}>
-                                <Text ta="center" fontSize="14px" mb="0px" color="#323131" style={{ fontWeight: 'bold'}}>{shopByPrice.description}</Text>
-                                <Text ta="center" fontSize="14px" mt="0px" color="#323131" style={{ fontWeight: 'bold'}}>{shopByPrice.texts[5].value}</Text>
-                            </Div>
-                        </Link>
-                    </Div>
-                </Div>
-            </div>
-        )
-    }
+  render() {
+    const { shopByPrice } = this.props;
+    return (
+      <Div className={styles.shopByPrice} mt="1rem" pt="1rem" pb="2rem">
+        <div className={styles.titleCard}>
+          <div>
+            <p>{shopByPrice.title}</p>
+            <div
+              style={{
+                width: "30px",
+                borderTop: "2px solid #323131",
+                margin: "auto"
+              }}
+            ></div>
+          </div>
+        </div>
+        <div className={styles.priceCardsContainer}>
+          {shopByPrice.texts.map(item => (
+            <Link
+              to={item.link}
+              onClick={this.handleClick}
+              style={{ width: "30%" }}
+            >
+              <Div className={styles.priceBlock}>
+                <Text
+                  ta="center"
+                  fontSize="14px"
+                  mb="5px"
+                  color="#323131"
+                  style={{ fontWeight: "bold" }}
+                >
+                  {shopByPrice.description}
+                </Text>
+                <Text
+                  ta="center"
+                  fontSize="14px"
+                  mt="0px"
+                  color="#323131"
+                  style={{ fontWeight: "bold" }}
+                >
+                  {item.value}
+                </Text>
+              </Div>
+            </Link>
+          ))}
+        </div>
+      </Div>
+    );
+  }
 }
 
-export default ShopByPrice
+export default ShopByPrice;

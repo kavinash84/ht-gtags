@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Div from "hometown-components-dev/lib/BoxHtV1";
 import { Link } from "react-router-dom";
 import Image from "hometown-components-dev/lib/ImageHtV1";
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
 
 const styles = require("./style.scss");
 
@@ -29,45 +29,38 @@ export class CarouselData extends Component {
     const { index, elem } = this.props;
 
     return (
-      <div>
-        <Div
-          key={index}
-          p="2rem"
-          pl="1rem"
-          pr="1rem"
-          pb="1rem"
-          className={styles.cardContainer}
-        >
-          <Link to={elem.link} onClick={this.handleClick}>
-            <Div
-              className={styles.card}
-              style={{
-                paddingBottom: "1rem",
-                boxShadow: "0px 0px 10px 6px #00000029"
-              }}
-            >
-              <Image data-src={elem.image} alt={elem.title} />
-              <Div pl="10px">
-                <Heading fontSize="19px" color="#666666" ta="left" mb="0px">
-                  {elem.title}
-                </Heading>
-                {/* <Text color="#888888" fontSize="12px">
-                                    {elem.description}
-                                </Text> */}
-                {/* <Link to={elem.link} onClick={onClick}>
-                                    <Text ta="left" mb="0px" mt="0px" className={styles.shopNow} style={{
-                                        color: 'orangered',
-                                        fontWeight: 'bold',
-                                        textAlign: 'left'
-                                    }}>
-                                    Shop now
-                                    </Text>
-                                </Link> */}
-              </Div>
+      <Div
+        key={index}
+        p="2rem"
+        pl="1rem"
+        pr="1rem"
+        pb="1rem"
+        className={styles.cardContainer}
+      >
+        <Link to={elem.link} onClick={this.handleClick}>
+          <Div
+            className={styles.card}
+            style={{
+              paddingBottom: "1rem",
+              boxShadow: "0px 0px 10px 6px #00000029"
+            }}
+          >
+            <Image data-src={elem.image} alt={elem.title} />
+            <Div pl="10px" className={styles.cardTitle}>
+              <p
+                fontSize="19px"
+                color="#666666"
+                ta="left"
+                mb="0px"
+                className={styles.title}
+              >
+                {elem.title}
+              </p>
+              <p className={styles.shopNow}>SHOP NOW</p>
             </Div>
-          </Link>
-        </Div>
-      </div>
+          </Div>
+        </Link>
+      </Div>
     );
   }
 }

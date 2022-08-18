@@ -30,22 +30,16 @@ export class GiftsByOccasionTwo extends Component {
     return (
       <Div className={styles.giftsByOccasionTwo} mt="1.5rem">
         <div className={styles.titleCard}>
-          <Heading
-            mb="10px"
-            ta="center"
-            color="#323131"
-            fontSize="22px"
-            fontFamily="regular"
-          >
-            {giftsByOccasionTwo.title}
-          </Heading>
-          <div
-            style={{
-              width: "30px",
-              borderTop: "2px solid #323131",
-              margin: "auto"
-            }}
-          />
+          <div>
+            <p>{giftsByOccasionTwo.title}</p>
+            <div
+              style={{
+                width: "30px",
+                borderTop: "2px solid #323131",
+                margin: "auto"
+              }}
+            ></div>
+          </div>
         </div>
         <div className={styles.carouselbg}>
           <Div className={styles.carousel}>

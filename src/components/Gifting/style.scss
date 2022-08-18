@@ -1,26 +1,81 @@
 .giftingComp {
+  .titleCard {
+    display: flex;
+    justify-content: center;
+    p {
+      font-weight: 600;
+      font-size: 22px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+  }
   .carouselbg {
     background: white;
     .carousel {
       background: white;
-      .titleCard {
-        display: flex;
-        justify-content: center;
-        p {
-          font-weight: 600;
-          font-size: 22px;
-          text-align: center;
-          margin-bottom: 10px;
+      width: 86%;
+      margin-left: 6.5%;
+      padding-top: 30px;
+      .cardContainer {
+        .card {
+          .cardTitle {
+            .title {
+              color: #222222;
+              font-weight: 600;
+              font-size: 20px;
+              padding: 15px 0px;
+            }
+            .shopNow {
+              color: orangered;
+              font-weight: bold;
+              text-align: left;
+              font-size: 12px;
+            }
+          }
         }
       }
     }
   }
 
-  // .shopNow {
-  //   color: orangered;
-  //   font-weight: bold;
-  //   text-align: left;
-  // }
+  .shopByPriceBg {
+    background-color: #fff8f4;
+    .shopByPrice {
+      width: 86%;
+      margin-left: 6.5%;
+      padding-top: 30px;
+      .priceCardsContainer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        width: 100%;
+        padding-top: 20px;
+        .priceBlock {
+          width: 100%;
+          background-color: #ffffff;
+          box-shadow: 0px 3px 6px #00000029;
+          padding: 60px;
+          margin-bottom: 30px;
+          text-align: center;
+        }
+      }
+    }
+  }
+  .giftsByOccasionTwo,
+  .OurTopGiftPicks {
+    padding-top: 30px;
+  }
+  .giftsByCategoryContainer {
+    padding-top: 30px;
+    width: 86%;
+    margin-left: 6.5%;
+    padding-top: 30px;
+    .giftsByCategory {
+      display: flex;
+      width: 100%;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+  }
 
   // .carouselbg {
   //   background-color: #f9f9f9;
@@ -29,10 +84,6 @@
   // .card {
   //   padding-bottom: 1rem;
   //   box-shadow: 0px 0px 10px 6px #00000029;
-  // }
-
-  // .shopByPrice {
-  //   background-color: #fff8f4;
   // }
 
   // .flex {
@@ -52,12 +103,5 @@
   //   display: flex;
   //   justify-content: space-between;
   //   align-items: center;
-  // }
-
-  // .priceBlock {
-  //   // width: 40% !important;
-  //   background-color: #ffffff;
-  //   box-shadow: 0px 3px 6px #00000029;
-  //   padding: 0.5rem 2rem;
   // }
 }

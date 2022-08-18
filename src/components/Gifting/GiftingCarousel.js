@@ -5,10 +5,13 @@ import SlickSlider from "../SlickSlider";
 import "./Slider.css";
 import CarouselData from "./CarouselData";
 
+const nextArrow = require("../../../static/new-home/roundedArrowRight.svg");
+const previousArrow = require("../../../static/new-home/roundedArrowLeft.svg");
+
 const styles = require("./style.scss");
 
-const adjustSlidesNew = length => ({
-  slidesToShow: length > 1 ? 1.4 : length,
+const adjustSlidesNew = () => ({
+  slidesToShow: 3,
   slidesToScroll: 1,
   infinite: false,
   autoplay: false,
@@ -21,6 +24,34 @@ const adjustSlidesNew = length => ({
     ></div>
   )
 });
+
+function SampleNextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <React.Fragment>
+      <img
+        className={className}
+        src={nextArrow}
+        onClick={onClick}
+        style={{ ...style, width: "15px" }}
+      />
+    </React.Fragment>
+  );
+}
+
+function SamplePrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <React.Fragment>
+      <img
+        className={className}
+        src={previousArrow}
+        onClick={onClick}
+        style={{ ...style, width: "15px" }}
+      />
+    </React.Fragment>
+  );
+}
 
 function GiftingCarousel({ categoryName, data, onClick }) {
   return (
@@ -38,7 +69,13 @@ function GiftingCarousel({ categoryName, data, onClick }) {
         </div>
       </div>
       <Div className="carousel-one offset" mt="0rem">
-        <SlickSlider settings={adjustSlidesNew(8)}>
+        <SlickSlider
+          settings={{
+            ...adjustSlidesNew(),
+            nextArrow: <SampleNextArrow />,
+            prevArrow: <SamplePrevArrow />
+          }}
+        >
           {data.values.map((elem, index) => (
             <CarouselData elem={elem} index={index} />
           ))}

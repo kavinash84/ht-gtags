@@ -49,7 +49,7 @@ export default class Gifting extends Component {
             />
           </Div>
         </div>
-        {/* <div>
+        <div className={styles.shopByPriceBg}>
           <ShopByPrice shopByPrice={shopByPrice} />
         </div>
         <div>
@@ -60,7 +60,7 @@ export default class Gifting extends Component {
         </div>
         <div>
           <GiftsByCategory giftsByCategory={giftsByCategory} />
-        </div> */}
+        </div>
       </div>
     );
   }
