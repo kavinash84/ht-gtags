@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom';
-import Heading from 'hometown-components/lib/Heading';
-import Div from 'hometown-components/lib/Div';
-import Img from 'hometown-components/lib/Img';
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
+import Div from "hometown-components-dev/lib/BoxHtV1";
+import Image from "hometown-components-dev/lib/ImageHtV1";
 
 const styles = require('./style.scss');
 
@@ -40,7 +40,7 @@ export class OurTopGiftPicks extends Component {
                     {OurTopGiftPicks.data.map((img, index) => (
                         <Div key={index} mt={index === 0 ? "1rem" : "2.5rem"}>
                             <Link to={img.link} onClick={this.handleClick}>
-                                <Img data-src={img.image} alt="Top Gift Picks" />
+                                <Image data-src={img.image} alt="Top Gift Picks" />
                             </Link>    
                         </Div>    
                     ))}

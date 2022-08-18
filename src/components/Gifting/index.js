@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import Button from "hometown-components/lib/Buttons";
-import Img from "hometown-components/lib/Img";
-import Div from "hometown-components/lib/Div";
-import Heading from "hometown-components/lib/Heading";
+import Button from "hometown-components-dev/lib/ButtonHtV1";
+import Image from "hometown-components-dev/lib/ImageHtV1";
+import Div from "hometown-components-dev/lib/BoxHtV1";
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
 import GiftingCarousel from "./GiftingCarousel";
 import ShopByPrice from "./ShopByPrice";
 import OurTopGiftPicks from "./OurTopGiftPicks";
@@ -29,51 +29,10 @@ export default class Gifting extends Component {
       giftsByCategory
     } = giftingData;
     return (
-      <div>
-        <div>
-          <Div className={styles.topBanner}>
-            <Img src={topBanner.image} />
-            <Heading
-              className={styles.topbannerText}
-              style={{
-                position: "absolute",
-                top: "50%",
-                fontSize: "50px",
-                textAlign: "center",
-                width: "100%",
-                color: "#ffffff",
-                padding: "0px 3.5rem",
-                whiteSpace: "normal",
-                lineHeight: "45px",
-                height: "100px",
-                textShadow: "0px 3px 6px #00000098"
-              }}
-            >
-              {topBanner.title}
-            </Heading>
-            {topBanner.link ? (
-              <Link to={topBanner.link}>
-                <Button
-                  className={styles.topbannerBtn}
-                  style={{
-                    display: "block",
-                    position: "absolute",
-                    top: "80%",
-                    backgroundColor: "white",
-                    left: "50%",
-                    transform: "translate(-50%, 0%)",
-                    color: "black",
-                    padding: "5px 2.1rem",
-                    fontWeight: "bold",
-                    fontSize: "0.9rem"
-                  }}
-                >
-                  SHOP NOW
-                </Button>
-              </Link>
-            ) : null}
-          </Div>
-        </div>
+      <div className={styles.giftingComp}>
+        <Div className={styles.topBanner}>
+          <Image src={topBanner.image} />
+        </Div>
         <div className={styles.carouselbg}>
           <Div className={styles.carousel}>
             <GiftingCarousel
@@ -82,11 +41,15 @@ export default class Gifting extends Component {
               onClick={this.handleClick}
             />
           </Div>
-          {/* <Div className={styles.carousel}>
-                        <GiftingCarousel categoryName={giftsByRecipient.title} data={giftsByRecipient} onClick={this.handleClick}/>
-                    </Div> */}
+          <Div className={styles.carousel}>
+            <GiftingCarousel
+              categoryName={giftsByRecipient.title}
+              data={giftsByRecipient}
+              onClick={this.handleClick}
+            />
+          </Div>
         </div>
-        <div>
+        {/* <div>
           <ShopByPrice shopByPrice={shopByPrice} />
         </div>
         <div>
@@ -97,7 +60,7 @@ export default class Gifting extends Component {
         </div>
         <div>
           <GiftsByCategory giftsByCategory={giftsByCategory} />
-        </div>
+        </div> */}
       </div>
     );
   }

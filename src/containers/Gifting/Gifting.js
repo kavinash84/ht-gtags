@@ -9,7 +9,11 @@ export default class Gifting extends Component {
     return (
       <div>
         <Header />
-        <GiftingBreadCrumb />
+        <div
+          style={{ padding: "15px", background: "#fff8f4", color: "#999999" }}
+        >
+          <GiftingBreadCrumb />
+        </div>
         <GiftingComponent />
         <Footer />
       </div>

@@ -1,76 +1,63 @@
-// .topBanner {
-//   background-image: url("static/Gifting/topBanner.png");
-// }
+.giftingComp {
+  .carouselbg {
+    background: white;
+    .carousel {
+      background: white;
+      .titleCard {
+        display: flex;
+        justify-content: center;
+        p {
+          font-weight: 600;
+          font-size: 22px;
+          text-align: center;
+          margin-bottom: 10px;
+        }
+      }
+    }
+  }
 
-.topbannerText {
-  position: absolute;
-  top: 50%;
-  font-size: 50px;
-  text-align: center;
-  width: 100%;
-  color: #ffffff;
-  padding: 0px 3.5rem;
-  white-space: normal;
-  line-height: 45px;
-  height: 100px;
-  text-shadow: 0px 3px 6px #00000098;
-}
+  // .shopNow {
+  //   color: orangered;
+  //   font-weight: bold;
+  //   text-align: left;
+  // }
 
-.topbannerBtn {
-  display: block;
-  position: absolute;
-  top: 80%;
-  background-color: white;
-  /* margin: auto; */
-  left: 50%;
-  transform: translate(-50%, 0%);
-  color: black;
-  padding: 5px 2.1rem;
-  font-weight: bold;
-  font-size: 0.9rem;
-}
+  // .carouselbg {
+  //   background-color: #f9f9f9;
+  // }
 
-.shopNow {
-  color: orangered;
-  font-weight: bold;
-  text-align: left;
-}
+  // .card {
+  //   padding-bottom: 1rem;
+  //   box-shadow: 0px 0px 10px 6px #00000029;
+  // }
 
-.carouselbg {
-  background-color: #f9f9f9;
-}
+  // .shopByPrice {
+  //   background-color: #fff8f4;
+  // }
 
-.card {
-  padding-bottom: 1rem;
-  box-shadow: 0px 0px 10px 6px #00000029;
-}
+  // .flex {
+  //   display: flex !important;
+  //   justify-content: space-evenly;
+  //   align-items: center;
+  //   margin-top: 2rem;
+  // }
 
-.shopByPrice {
-  background-color: #fff8f4;
-}
+  // .flexThree {
+  //   display: flex !important;
+  //   justify-content: space-evenly;
+  //   align-items: center;
+  // }
 
-.flex {
-  display: flex !important;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-top: 2rem;
-}
+  // .flexTwo {
+  //   display: flex;
+  //   justify-content: space-between;
+  //   align-items: center;
+  // }
 
-.flexThree {
-  display: flex !important;
-  justify-content: space-evenly;
-  align-items: center;
-}
-
-.flexTwo {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.priceBlock {
-  // width: 40% !important;
-  background-color: #ffffff;
-  box-shadow: 0px 3px 6px #00000029;
-  padding: 0.5rem 2rem;
+  // .priceBlock {
+  //   // width: 40% !important;
+  //   background-color: #ffffff;
+  //   box-shadow: 0px 3px 6px #00000029;
+  //   padding: 0.5rem 2rem;
+  // }
 }

@@ -16,19 +16,12 @@ const GiftingBreadCrumb = ({ isPacakge }) => {
       </div>
       <ul className={styles.breadCrumbListMain}>
         <li>
-          <Link to={`/packages`}>
+          <Link to={`/gifting`}>
             <span style={{ color: "#F47020", marginBottom: "2px" }}>
-              Packages
+              Gifting Ideas
             </span>
           </Link>
         </li>
-        {isPacakge ? (
-          <li>
-            <span style={{ color: "#F47020", marginBottom: "2px" }}>
-              Package
-            </span>
-          </li>
-        ) : null}
       </ul>
     </div>
   );

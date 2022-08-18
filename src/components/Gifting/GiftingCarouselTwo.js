@@ -1,8 +1,7 @@
 import React from 'react';
-import Heading from 'hometown-components/lib/Heading';
-import Div from 'hometown-components/lib/Div';
-import Img from 'hometown-components/lib/Img';
-import Text from 'hometown-components/lib/Text';
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
+import Div from "hometown-components-dev/lib/BoxHtV1";
+import Text from 'hometown-components-dev/lib/TextHtV1';
 import { Link } from 'react-router-dom';
 import SlickSlider from '../SlickSlider';
 import './Slider.css';

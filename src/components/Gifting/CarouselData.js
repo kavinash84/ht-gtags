@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import Div from "hometown-components/lib/Div";
+import Div from "hometown-components-dev/lib/BoxHtV1";
 import { Link } from "react-router-dom";
-import Img from "hometown-components/lib/Img";
-import Heading from "hometown-components/lib/Heading";
+import Image from "hometown-components-dev/lib/ImageHtV1";
+import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 
 const styles = require("./style.scss");
 
@@ -46,7 +46,7 @@ export class CarouselData extends Component {
                 boxShadow: "0px 0px 10px 6px #00000029"
               }}
             >
-              <Img data-src={elem.image} alt={elem.title} />
+              <Image data-src={elem.image} alt={elem.title} />
               <Div pl="10px">
                 <Heading fontSize="19px" color="#666666" ta="left" mb="0px">
                   {elem.title}
