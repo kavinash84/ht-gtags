@@ -435,7 +435,6 @@ class DemoForm extends Component {
   //     const form = document.querySelector('.mobile_form');
   //     // form.addEventListener('submit', event => {
   //     // event.preventDefault();
-  //     console.log(form);
   //     let formData = getAllFormElements(form, requiredFeilds);
 
   //     let products = {};
@@ -488,7 +487,6 @@ class DemoForm extends Component {
   render() {
     const { landing } = this.props;
     const uiHtml = landing.data.items.text;
-    console.log(uiHtml,'uihtml')
     return (
       <React.Fragment>
        <Div style={{width:'100%'}}>

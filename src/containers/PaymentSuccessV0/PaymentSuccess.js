@@ -41,7 +41,6 @@ export default class PaymentSuccessContainer extends Component {
     isLoggedIn: false
   };
   componentDidMount() {
-    // console.log('Inside component did mount of payment success', this.props);
     const {
  error, data, history, isLoggedIn
 } = this.props;

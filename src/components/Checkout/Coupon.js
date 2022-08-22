@@ -56,7 +56,6 @@ class Coupon extends React.Component {
     if (e) {
       e.preventDefault();
     }
-    console.log(this.state.coupon);
     if (
       this.state.coupon &&
       this.state.coupon.toLocaleLowerCase() === "exchange25"

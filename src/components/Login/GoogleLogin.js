@@ -40,8 +40,6 @@ const onSuccess = (dispatcher, session, phone) => result => {
   dispatcher(result.tokenId, session, phone);
 };
 const onError = error => e => {
-  // console.log('Error occuried');
-  console.log(error, e);
 };
 
 const mapDispatchToProps = dispatch =>
@@ -78,7 +76,6 @@ class GoogleLogin extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps, 'nextProps');
     if (!this.state.mobilesubmitted && nextProps.getotpError && nextProps.getotpErrorMessage.includes('resend')) {
       this.setState({
         mobilesubmitted: true
@@ -110,7 +107,6 @@ class GoogleLogin extends Component {
     const { phone, resend, dob } = this.state;
     const checkmobile = !validateMobile(phone);
     const { session, skipBirthdateCheck } = this.props;
-    console.log(checkmobile, phone, 'check');
     if (checkmobile) {
       return this.setState({
         phoneError: true,
@@ -124,7 +120,6 @@ class GoogleLogin extends Component {
     // dispatch(getOtp(this.state.phone));
     // dispatch(linkFuturePay({ skipOtpValidation: true }));
     dispatch(this.props.loginViaLogin({}, session, phone, null, dob, skipBirthdateCheck, null, true));
-    console.log('mobile submit');
     this.setState({
       mobilesubmitted: true
     });
@@ -174,7 +169,6 @@ class GoogleLogin extends Component {
     });
   };
   onChangeDob = () => {
-    console.log('Onchange dob');
     const value = '1995-10-02';
     const checkError = !validateDob(value).error;
 

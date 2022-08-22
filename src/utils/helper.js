@@ -64,7 +64,6 @@ export const formFilterLink2 = (key, name, b64, category, value, selected, urlqu
     try {
       obj64 = JSON.parse(atob(b64));
     } catch (e) {
-      console.log(obj64);
       return obj64.category;
     }
   }

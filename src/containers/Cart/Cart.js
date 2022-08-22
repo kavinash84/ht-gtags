@@ -49,8 +49,6 @@ const BajajFinance = require("../../../static/bajaj-finance.png");
 const HdfcLogo = "https://static.hometown.in/media/cms/BankLOGO/hdfc.gif";
 
 const demoProductsBanner = cart =>
-  // console.log('demoProducts function', cart);
-  // console.log(cart.some(({ product_info: { demo_product: demoProduct } }) => demoProduct));
   cart.some(({ product_info: { demo_product: demoProduct } }) => demoProduct);
 
 const BflPopMessage = () => (
@@ -186,7 +184,6 @@ export default class CartContainer extends Component {
       summary: { total }
     } = this.props;
     window.scroll(0, 0);
-    // console.log(cartTimeout, 'cartTimeout');
     const popUpTimeoutId = setTimeout(this.webToChat, cartTimeout);
     // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ popUpTimeoutId });
@@ -218,7 +215,6 @@ export default class CartContainer extends Component {
     // }
   }
   componentWillUnmount() {
-    // console.log('componentWillUnmount function in cart');
     const { toggleWebToChat } = this.props;
     const { popUpTimeoutId } = this.state;
     clearTimeout(popUpTimeoutId);
@@ -227,7 +223,6 @@ export default class CartContainer extends Component {
 
   // checkForEmiEligibility = total => {
   //   const { emiPopUpShown } = this.state;
-  // console.log('checkForEmiEligibility function', total, emiPopUpShown);
 
   //   if (total >= 20000 && !emiPopUpShown) {
   //     this.setState({
@@ -277,7 +272,6 @@ export default class CartContainer extends Component {
         liveAgentAPI: { inviteButton: { isAvailable } = {} } = {}
       }
     } = window;
-    // console.log(isAvailable, !dismiss, 'webToChat function');
     if (isAvailable && !dismiss) toggleWebToChat(true);
   };
   render() {

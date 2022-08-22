@@ -1,20 +1,20 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Slider from 'react-slick';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import Slider from "react-slick";
 
 /**
  * Components
  */
-import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Col from 'hometown-components-dev/lib/ColHtV1';
-import Image from 'hometown-components-dev/lib/ImageHtV1';
-import ImageShimmer from 'hometown-components-dev/lib/ImageShimmerHtV1';
-import Row from 'hometown-components-dev/lib/RowHtV1';
+import Box from "hometown-components-dev/lib/BoxHtV1";
+import Col from "hometown-components-dev/lib/ColHtV1";
+import Image from "hometown-components-dev/lib/ImageHtV1";
+import ImageShimmer from "hometown-components-dev/lib/ImageShimmerHtV1";
+import Row from "hometown-components-dev/lib/RowHtV1";
 
 /**
  * Page Components
  */
-import CarouselItem from './CarouselItem';
+import CarouselItem from "./CarouselItem";
 
 const showSlides = data => (data && data.length >= 5 ? 5 : data.length || 0);
 
@@ -34,28 +34,36 @@ export default class PackageDetailSlider extends Component {
 
   render() {
     const { data, title } = this.props;
-    const styles = require('./Carousel.scss');
+    const styles = require("./Carousel.scss");
 
     return (
       <Row>
         <Col width="100%">
-          <img className="hide" itemProp="image" src={(data && `${data[0].url}-zoom.jpg`) || ''} alt={title} />
+          <img
+            className="hide"
+            itemProp="image"
+            src={(data && `${data[0].url}-zoom.jpg`) || ""}
+            alt={title}
+          />
           <Slider
             asNavFor={this.state.nav2}
             ref={slider => (this.slider1 = slider)}
-            beforeChange={(currentSlide, nextSlide) => {
-              console.log('before in slider1', currentSlide, nextSlide);
+            beforeChange={(currentSlide, nextSlide) => {}}
+            afterChange={currentSlide => {}}
+            style={{
+              width: "80%",
+              marginLeft: "10%",
+              marginTop: "30px",
+              marginBottom: "-60px"
             }}
-            afterChange={currentSlide => {
-              console.log('after in slider1', currentSlide);
-            }}
-            style={{width: '80%', marginLeft:'10%', marginTop:'30px', marginBottom:'-60px'}}
           >
             {data.map(slide => (
-              <Box  key={slide.id_catalog_product_image} style={{marginTop:'30px'}}>
-              <CarouselItem image={`${slide.url}.jpg`} name={title} />
+              <Box
+                key={slide.id_catalog_product_image}
+                style={{ marginTop: "30px" }}
+              >
+                <CarouselItem image={`${slide.url}.jpg`} name={title} />
               </Box>
-              
             ))}
           </Slider>
           <Slider
@@ -67,16 +75,19 @@ export default class PackageDetailSlider extends Component {
             className="pdpThumbSlider2"
             centerPadding="30px"
             variableWidth={true}
-            beforeChange={(currentSlide, nextSlide) => {
-              console.log('before in slider2', currentSlide, nextSlide);
-            }}
-            afterChange={currentSlide => {
-              console.log('after in slider2', currentSlide);
-            }}
+            beforeChange={(currentSlide, nextSlide) => {}}
+            afterChange={currentSlide => {}}
           >
             {data.map(slide => (
-              <Box className={styles.pdpThumbSliderItem} key={slide.id_catalog_product_image}>
-                <ImageShimmer src={`${slide.url}-top_sel_100.jpg`} width="100px" height="100px">
+              <Box
+                className={styles.pdpThumbSliderItem}
+                key={slide.id_catalog_product_image}
+              >
+                <ImageShimmer
+                  src={`${slide.url}-top_sel_100.jpg`}
+                  width="100px"
+                  height="100px"
+                >
                   {imageURL => <Image alt={title} src={imageURL} />}
                 </ImageShimmer>
               </Box>
@@ -90,7 +101,7 @@ export default class PackageDetailSlider extends Component {
 
 PackageDetailSlider.defaultProps = {
   data: [],
-  title: ''
+  title: ""
 };
 
 PackageDetailSlider.propTypes = {
