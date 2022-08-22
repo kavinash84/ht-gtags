@@ -39,7 +39,6 @@ import {
   getNotDelivered,
   getStockOutProducts
 } from "selectors/cart";
-import { getFuturePayProfile } from "selectors/userprofile";
 
 /**
  * Page Components
@@ -56,8 +55,6 @@ import PaymentMethods from "../PaymentMethods/";
 import PaymentForm from "./PaymentForm";
 import UpiForm from "./UpiForm";
 
-import WalletBalance from "./WalletBalance";
-
 // const styles = require('./Checkout.scss');
 const cartStyles = require("../Cart/Cart.scss");
 
@@ -70,8 +67,6 @@ const nextStep = (
   isCreditSelected,
   selectedGateway,
   paymentMethodDetails,
-  futurePayRedeemAmount,
-  isPayFromHtWallet,
   total
 ) => e => {
   e.preventDefault();
@@ -83,8 +78,6 @@ const nextStep = (
     isCreditSelected,
     selectedGateway,
     paymentMethodDetails,
-    futurePayRedeemAmount,
-    isPayFromHtWallet,
     total
   );
 };
@@ -97,8 +90,6 @@ const mapStateToProps = ({
   cart,
   profile
 }) => ({
-  isPayFromHtWallet: paymentoptions.isPayFromHtWallet,
-  futurePayRedeemAmount: paymentoptions.futurePayRedeemAmount,
   selectedGateway: paymentoptions.selectedGateway,
   isCreditSelected: paymentoptions.isCreditSelected,
   paymentMethodDetails: paymentoptions.paymentMethodDetails,
@@ -116,9 +107,7 @@ const mapStateToProps = ({
   session: app.sessionId,
   results: getCartList(cart),
   undelivered: getNotDelivered(cart),
-  outOfStockList: getStockOutProducts(cart),
-  futurPayProfile: getFuturePayProfile(profile),
-  futurePayError: paymentoptions.futurePayRedeemAmountError
+  outOfStockList: getStockOutProducts(cart)
 });
 
 const mapDispatchToProps = dispatch =>
@@ -184,8 +173,6 @@ class PaymentOptions extends Component {
   render() {
     const {
       data,
-      futurePayRedeemAmount,
-      isPayFromHtWallet,
       selectedGateway,
       toggleGateway,
       setPaymentDetails,
@@ -206,8 +193,7 @@ class PaymentOptions extends Component {
       error,
       summary: { total },
       // futurPayProfile,
-      isCreditSelected,
-      futurePayError
+      isCreditSelected
     } = this.props;
 
     const [netBankingData] = data.filter(
@@ -328,10 +314,7 @@ class PaymentOptions extends Component {
                 )}
               </Box>
             ))}
-            <Box mb={20}>
-              {/* <Heading variant="heading.medium">Payment Method</Heading> */}
-              <WalletBalance />
-            </Box>
+        
             <Row flexWrap="nowrap" ml={0} mr={0}>
               <Row
                 mx={0}
@@ -348,9 +331,7 @@ class PaymentOptions extends Component {
                       selectedGateway,
                       session,
                       resetEasyEmi,
-                      futurePayRedeemAmount,
-                      total,
-                      isPayFromHtWallet
+                      total
                     )}
                   </Col>
                 ))}
@@ -574,14 +555,11 @@ class PaymentOptions extends Component {
                     isCreditSelected,
                     selectedGateway,
                     paymentDetails,
-                    futurePayRedeemAmount,
-                    isPayFromHtWallet,
                     total
                   )}
                   disabled={
                     validateInput(paymentDetails) ||
                     validatePaymentDetails(paymentDetails) ||
-                    futurePayError ||
                     undelivered.length > 0 ||
                     outOfStockList.length > 0 ||
                     submitting ||
@@ -616,9 +594,7 @@ PaymentOptions.defaultProps = {
   undelivered: [],
   submitted: false,
   error: null,
-  summary: {},
-  // futurPayProfile: {},
-  futurePayError: false
+  summary: {}
 };
 
 PaymentOptions.propTypes = {
@@ -629,8 +605,6 @@ PaymentOptions.propTypes = {
   paymentLoadedStatus: PropTypes.func.isRequired,
   data: PropTypes.array,
   toggleGateway: PropTypes.func.isRequired,
-  isPayFromHtWallet: PropTypes.number.isRequired,
-  futurePayRedeemAmount: PropTypes.number.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,
   // summary: PropTypes.object,
   history: PropTypes.object,
@@ -650,9 +624,7 @@ PaymentOptions.propTypes = {
     PropTypes.object,
     PropTypes.array
   ]),
-  summary: PropTypes.object,
-  // futurPayProfile: PropTypes.object,
-  futurePayError: PropTypes.bool
+  summary: PropTypes.object
 };
 
 // const mapStateToProps = ({
