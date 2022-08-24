@@ -34,12 +34,12 @@
         width: 100%;
         padding: 10px;
         .image_container {
-          height: 300px;
+          min-height: 300px;
           display: flex;
-          // align-items: center;
+          align-items: center;
           justify-content: center;
           .image {
-            // width: 100%;
+            width: 100%;
             height: auto;
           }
         }
