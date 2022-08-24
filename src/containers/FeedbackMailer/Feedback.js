@@ -43,7 +43,8 @@ const mapStateToProps = ({ feedback }) => ({
   customer: feedback.data.customer,
   prodArr: feedback.data.orderItems,
   orderDate: feedback.data.orderDate,
-  mobile: feedback.data.mobile
+  mobile: feedback.data.mobile,
+  sapOrderNumber: feedback.data.hasOwnProperty("sapOrderNumber") ? feedback.data.sapOrderNumber : ""
 });
 const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
 
@@ -151,7 +152,7 @@ class FeedbackMailer extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     const { formData } = this.state;
-    const { customer, setFeedbackForm, mobile } = this.props;
+    const { customer, setFeedbackForm, mobile, sapOrderNumber } = this.props;
     const valid = !this.validateForm(formData);
     this.setState({
       submitClicked: true,
@@ -173,7 +174,9 @@ class FeedbackMailer extends React.Component {
       formdata.append('customerMobile', mobile);
       formdata.append('products', `${prodIds}`);
       formdata.append('customerName', customer);
-
+      if (sapOrderNumber) {
+        formdata.append('order', sapOrderNumber)
+      }
       setFeedbackForm(formdata);
     }
   };
@@ -462,10 +465,10 @@ class FeedbackMailer extends React.Component {
                     {images[`${prod.id}-img`].imgSizeErrorMessage}
                   </Text>
                 ) : (
-                    <Text color="grey" fontSize="12px" mt="15">
-                      {'Image size sould be less than 5Mb'}
-                    </Text>
-                  )}
+                  <Text color="grey" fontSize="12px" mt="15">
+                    {'Image size sould be less than 5Mb'}
+                  </Text>
+                )}
               </Box>
             </Row>
           </Box>
@@ -552,20 +555,20 @@ class FeedbackMailer extends React.Component {
                 </Box>
               </Box>
             ) : (
-                <Box
-                  type="flex"
-                  style={{
-                    height: 300,
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                  }}
-                >
-                  <Text textAlign="center" fontFamily="medium">
-                    Thank you for your feedback
+              <Box
+                type="flex"
+                style={{
+                  height: 300,
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}
+              >
+                <Text textAlign="center" fontFamily="medium">
+                  Thank you for your feedback
                 </Text>
-                </Box>
-              )}
+              </Box>
+            )}
 
             <Box mb="10px">
               <Row ml="0" mr="0" justifyContent="center">
@@ -602,7 +605,8 @@ FeedbackMailer.defaultProps = {
   customer: '',
   prodArr: [],
   orderDate: '',
-  mobile: ''
+  mobile: '',
+  sapOrderNumber:''
 };
 
 FeedbackMailer.propTypes = {
@@ -611,7 +615,8 @@ FeedbackMailer.propTypes = {
   orderDate: PropTypes.string,
   setFeedbackForm: PropTypes.func.isRequired,
   mobile: PropTypes.string,
-  feedback: PropTypes.object.isRequired
+  feedback: PropTypes.object.isRequired,
+  sapOrderNumber: PropTypes.string
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FeedbackMailer);
