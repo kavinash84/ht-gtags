@@ -31,7 +31,10 @@ export default class Gifting extends Component {
     return (
       <div className={styles.giftingComp}>
         <Div className={styles.topBanner}>
-          <Image src={topBanner.image} />
+          <Image
+            data-src={topBanner.image}
+            src={`${topBanner.image}?blur=30`}
+          />
         </Div>
         <div className={styles.carouselbg}>
           <Div className={styles.carousel}>

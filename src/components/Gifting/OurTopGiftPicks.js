@@ -43,7 +43,7 @@ export class OurTopGiftPicks extends Component {
         {OurTopGiftPicks.data.map((img, index) => (
           <Div key={index} mt={index === 0 ? "1rem" : "2.5rem"}>
             <Link to={img.link} onClick={this.handleClick}>
-              <Image data-src={img.image} alt="Top Gift Picks" />
+              <Image data-src={img.image} alt="Top Gift Picks" src={`${img.image}?blur=30`} />
             </Link>
           </Div>
         ))}

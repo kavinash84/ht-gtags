@@ -31,12 +31,20 @@ export class CarouselDataTwo extends Component {
         <Div key={index} p="1rem" pr="0rem" className={styles.cardTwo}>
           <Div mb="1rem">
             <Link to={elem.link1} onClick={this.handleClick}>
-              <Image data-src={elem.image1} alt={categoryName} />
+              <Image
+                data-src={elem.image1}
+                alt={categoryName}
+                src={`${elem.image1}?blur=30`}
+              />
             </Link>
           </Div>
           <Div>
             <Link to={elem.link2} onClick={this.handleClick}>
-              <Image data-src={elem.image2} alt={categoryName} />
+              <Image
+                data-src={elem.image2}
+                alt={categoryName}
+                src={`${elem.image2}?blur=30`}
+              />
             </Link>
           </Div>
         </Div>

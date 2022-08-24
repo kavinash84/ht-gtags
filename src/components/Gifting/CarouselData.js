@@ -45,7 +45,11 @@ export class CarouselData extends Component {
               boxShadow: "0px 0px 10px 6px #00000029"
             }}
           >
-            <Image data-src={elem.image} alt={elem.title} />
+            <Image
+              data-src={elem.image}
+              alt={elem.title}
+              src={`${elem.image}?blur=30`}
+            />
             <Div pl="10px" className={styles.cardTitle}>
               <p
                 fontSize="19px"

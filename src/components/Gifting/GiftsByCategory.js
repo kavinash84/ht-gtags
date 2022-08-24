@@ -50,7 +50,11 @@ export class GiftsByCategory extends Component {
               style={{ width: "23%" }}
             >
               <Div p="0.5rem" style={{ width: "100%", textAlign: "center" }}>
-                <Image data-src={item.image} alt={item.title} />
+                <Image
+                  data-src={item.image}
+                  alt={item.title}
+                  src={`${item.image}?blur=30`}
+                />
                 <Text ta="center" fontSize="16px" color="#222222" mt="5px">
                   {item.title}
                 </Text>

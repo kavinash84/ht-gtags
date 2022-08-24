@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Div from "hometown-components-dev/lib/BoxHtV1";
-import Heading from "hometown-components-dev/lib/HeadingHtV1";
 import GiftingCarouselTwo from "./GiftingCarouselTwo";
 
 const styles = require("./style.scss");

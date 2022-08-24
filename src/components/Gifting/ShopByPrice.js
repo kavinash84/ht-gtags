@@ -51,7 +51,7 @@ export class ShopByPrice extends Component {
               <Div className={styles.priceBlock}>
                 <Text
                   ta="center"
-                  fontSize="14px"
+                  fontSize="18px"
                   mb="5px"
                   color="#323131"
                   style={{ fontWeight: "bold" }}
@@ -60,7 +60,7 @@ export class ShopByPrice extends Component {
                 </Text>
                 <Text
                   ta="center"
-                  fontSize="14px"
+                  fontSize="18px"
                   mt="0px"
                   color="#323131"
                   style={{ fontWeight: "bold" }}
