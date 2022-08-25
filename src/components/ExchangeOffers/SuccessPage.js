@@ -3,7 +3,7 @@ import Helmet from "react-helmet";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { notifSend } from "redux/modules/notifs";
-import landingMainSlider from "../../../static/exchangeWarning/emailer-banner.jpg";
+import landingMainSlider from "../../../static/exchangeWarning/Thank-revised.jpg";
 import mapIcon from "../../../static/map-icon.svg";
 
 @connect(({ designbuild }) => ({
@@ -11,7 +11,7 @@ import mapIcon from "../../../static/map-icon.svg";
     designbuild.exchangeOffer &&
     designbuild.exchangeOffer &&
     designbuild.exchangeOffer.items,
-  exchangeOfferCoupon: designbuild.exchangeOfferCoupon
+  validity: designbuild.exchangeOfferCoupon.validity
 }))
 class SuccessPage extends Component {
   static contextTypes = {
@@ -49,7 +49,7 @@ class SuccessPage extends Component {
     );
   }
   render() {
-    const { seoInfo, exchangeOfferCoupon } = this.props;
+    const { seoInfo, validity } = this.props;
     return (
       <section>
         <Helmet title={`${(seoInfo && seoInfo.page_title) || ""}`}>
@@ -129,24 +129,25 @@ class SuccessPage extends Component {
                 fontSize: "20px"
               }}
             >
-             Redeem your exchange code at the nearest HomeTown store or online on a wide range of sofas, recliners, beds, wardrobes, dining table sets, mattress and more
+              Redeem your exchange code at the nearest HomeTown store or online on a wide range of sofas, recliners, beds, wardrobes, dining table sets, mattress and more
             </p>
             <h2
               style={{
                 marginBottom: "10px",
                 textAlign: "center",
-                color: "#dc4c3a"
+                color: "#dc4c3a",
+                marginTop: "40px",
               }}
             >
-              Your voucher is valid till 30 Sep 2022
+              Your voucher is valid till {validity}
             </h2>
           </div>
-          <div style={{ display: "flex", justifyContent: "space-between" }}>
-            <div style={{ marginBottom: "5px" }}>
+          <div style={{ display: "flex", justifyContent: "space-between" , marginTop:'40px'}}>
+            {/* <div style={{ marginBottom: "5px" }}>
               <p>
                 To know more give a missed call - <b>022-41621001</b>
               </p>
-            </div>
+            </div> */}
             <div>
               <a
                 rel="noopener noreferrer"
@@ -166,7 +167,7 @@ class SuccessPage extends Component {
                 }}
               >
                 <img src={mapIcon} alt="Store Locator" />
-                <span>Store Locator</span>
+                <span>Find a HomeTown store near you.</span>
               </a>
             </div>
             <div style={{ marginBottom: "5px" }}>
