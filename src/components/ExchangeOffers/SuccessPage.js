@@ -3,9 +3,8 @@ import Helmet from "react-helmet";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { notifSend } from "redux/modules/notifs";
-import landingMainSlider from "../../../static/success-banner.jpg";
+import landingMainSlider from "../../../static/exchangeWarning/emailer-banner.jpg";
 import mapIcon from "../../../static/map-icon.svg";
-import LandingPageLogo from "./LandingPageLogo";
 
 @connect(({ designbuild }) => ({
   seoInfo:
@@ -96,7 +95,7 @@ class SuccessPage extends Component {
             src="https://www.facebook.com/tr?id=171725297723956&ev=PageView&noscript=1"
           />
         </noscript>
-        <LandingPageLogo />
+        {/* <LandingPageLogo /> */}
         <img
           src={landingMainSlider}
           alt="banner"
@@ -104,7 +103,6 @@ class SuccessPage extends Component {
         />
         <div
           style={{
-            background: "hsl(0,0%,80%)",
             padding: "20px",
             color: "rgba(51, 51, 51, 0.85)",
             paddingBottom: "50px"
@@ -118,11 +116,11 @@ class SuccessPage extends Component {
                 fontSize: "28px"
               }}
             >
-              THANK YOU FOR REGISTERING IN OUR EXCHANGE PROGRAM.
+              THANK YOU FOR REGISTERING
             </h2>
             <h2 style={{ marginBottom: "25px", textAlign: "center" }}>
-              Your voucher code has been sent on your registered email ID and
-              mobile number
+              Your exchange voucher code has been sent on your registered email ID and
+              mobile number.
             </h2>
             <p
               style={{
@@ -131,9 +129,7 @@ class SuccessPage extends Component {
                 fontSize: "20px"
               }}
             >
-              Visit the nearest HomeTown store and use your exchange voucher
-              code to redeem your EXCHANGE VOUCHER against our new collection of
-              furniture, mattress, homeware, decor, furnishings and much more…
+             Redeem your exchange code at the nearest HomeTown store or online on a wide range of sofas, recliners, beds, wardrobes, dining table sets, mattress and more
             </p>
             <h2
               style={{
@@ -142,7 +138,7 @@ class SuccessPage extends Component {
                 color: "#dc4c3a"
               }}
             >
-              Your voucher is valid till 21st Apr 2022
+              Your voucher is valid till 30 Sep 2022
             </h2>
           </div>
           <div style={{ display: "flex", justifyContent: "space-between" }}>
