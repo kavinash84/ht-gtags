@@ -646,8 +646,7 @@ class ProductDetails extends React.PureComponent {
       bogo_bundle: bogoBundle,
       free_visit: freeVisit = "no",
       free_installation: freeInstallation = "no",
-      swatch_image: swatchImage,
-      offer_message: offerMessage
+      swatch_image: swatchImage
     } = product;
     const { description, demo_product: demoProduct = {} } = attributes;
     const simpleSku = Object.keys(simples)[0];
@@ -663,7 +662,8 @@ class ProductDetails extends React.PureComponent {
       warranty_period: warrantyPeriod = 0,
       fk_catalog_supplier: fkCatalogSupplier = null,
       categories,
-      youtubeid
+      youtubeid,
+      offer_message: offerMessage
     } = meta;
     const {
       mrp,
@@ -1015,16 +1015,7 @@ class ProductDetails extends React.PureComponent {
                               </span>
                             </Text>
                           ) : null}
-                          {offerMessage ? (
-                            <Text
-                              mt="0px"
-                              mb="0px"
-                              color="#626463"
-                              fontSize="16px"
-                            >
-                              {offerMessage}
-                            </Text>
-                          ) : null}
+
                           <div ht_wallet_cashback={ht_wallet_cashback}>
                             {ht_wallet_cashback ? (
                               <div
@@ -1051,6 +1042,16 @@ class ProductDetails extends React.PureComponent {
                             >
                               Total Savings ₹ {totalSavings} (
                               {totalDiscountPercentage}% OFF)
+                            </Text>
+                          ) : null}
+                          {offerMessage ? (
+                            <Text
+                              mt="10px"
+                              mb="0px"
+                              color="#626463"
+                              fontSize="18px"
+                            >
+                              {offerMessage}
                             </Text>
                           ) : null}
                         </Div>
