@@ -64,24 +64,24 @@ const PRODUCTS = [
     label: "Other Furniture (Plastic Table/Chair); Exchange value = 3,000"
   },
   { value: "10", label: "Mattress Cotton/Coir/foam; Exchange value = 4,000" },
-  { value: "11", label: "Spring Mattress; Exchange value = 6,000" },
-  { value: "12", label: "Bed Linen (per piece); Exchange value = 500" },
-  { value: "13", label: "Curtains (per piece); Exchange value = 500" },
-  { value: "14", label: "Pillows (per piece); Exchange value = 500" },
-  {
-    value: "15",
-    label: "Any other soft furnishings (per Kg); Exchange value = 500"
-  },
-  { value: "16", label: "Cookware; Exchange value = 500" },
-  {
-    value: "17",
-    label:
-      "Cutlery, Kitchenware, Dinnerware & tableware (per KG); Exchange value = 500"
-  },
-  {
-    value: "18",
-    label: "Cooktops, Induction Tops (per Piece); Exchange value = 1,500"
-  }
+  { value: "11", label: "Spring Mattress; Exchange value = 6,000" }
+  // { value: "12", label: "Bed Linen (per piece); Exchange value = 500" },
+  // { value: "13", label: "Curtains (per piece); Exchange value = 500" },
+  // { value: "14", label: "Pillows (per piece); Exchange value = 500" },
+  // {
+  //   value: "15",
+  //   label: "Any other soft furnishings (per Kg); Exchange value = 500"
+  // },
+  // { value: "16", label: "Cookware; Exchange value = 500" },
+  // {
+  //   value: "17",
+  //   label:
+  //     "Cutlery, Kitchenware, Dinnerware & tableware (per KG); Exchange value = 500"
+  // },
+  // {
+  //   value: "18",
+  //   label: "Cooktops, Induction Tops (per Piece); Exchange value = 1,500"
+  // }
 ];
 
 const CITIES = [

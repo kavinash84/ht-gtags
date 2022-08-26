@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import Helmet from "react-helmet";
 import SeoContent from "hometown-components-dev/lib/SeoContent";
 import Container from "hometown-components-dev/lib/ContainerHtV1";
-import landingMainSlider from "../../../static/exchange-landing-banner.jpg";
-import landingCategory from "../../../static/landing-category.jpg";
+import landingMainSlider from "../../../static/exchangeWarning/LP-banner.jpg";
+import landingCategory from "../../../static/exchangeWarning/below-banner.jpg";
 import Form from "./FormComp";
 import LeadSuccess from "./SuccessPage";
 import LandingPageLogo from "./LandingPageLogo";
@@ -71,7 +71,7 @@ class LandingPage extends Component {
           />
         </div>
         <div>
-          <div style={{ padding: "10px" }}>
+          <div style={{ padding: "40px" }}>
             <h2 style={{ color: "#dc4c3a", textAlign: "center" }}>
               REGISTER TO GET FREE EXCHANGE VOUCHERS
             </h2>
@@ -86,7 +86,7 @@ class LandingPage extends Component {
             <div
               style={{ marginBottom: "15px", width: "45%", paddingTop: "15px" }}
             >
-              <h3 style={{ marginBottom: "15px" }}>
+              <h3 style={{ marginBottom: "15px", marginLeft: '30px' }}>
                 Let old pay for the new in 3 Easy Steps!
               </h3>
               <ul
@@ -98,8 +98,7 @@ class LandingPage extends Component {
               >
                 <li style={{ marginBottom: "5%" }}>
                   <p>
-                    Upload a picture of any old furniture, mattress,
-                    furnishings, tableware and kitchenware.
+                  Upload a picture of any old sofas, recliners, beds, wardrobes, dining sets, mattress and other furniture.
                   </p>
                 </li>
                 <li style={{ marginBottom: "5%" }}>
@@ -107,10 +106,7 @@ class LandingPage extends Component {
                 </li>
                 <li>
                   <p>
-                    Visit the nearest HomeTown store or shop online at
-                    hometown.in to redeem your exchange voucher code on a wide
-                    range of furniture, mattress, homeware, decor, furnishings
-                    and much more…
+                  Visit the nearest HomeTown store or shop online at hometown.in to redeem your exchange voucher code on a wide range of sofas, recliners, beds, wardrobes, dining sets, mattress and other furniture.
                   </p>
                 </li>
               </ul>
@@ -131,11 +127,11 @@ class LandingPage extends Component {
             </div>
           </div>
         </div>
-        <div style={{ borderTop: "1px solid #595959" }}>
+        <div style={{ borderTop: "1px solid #595959", marginTop:'30px'}}>
           {/* <div className="col-12 mb-2">
             <h2 className="valueTitle">VALUE FOR YOUR OLD PRODUCTS</h2>
           </div> */}
-          <div>
+          <div style={{ marginTop: "15px" }}>
             <img
               src={landingCategory}
               alt="BottomBanner"
