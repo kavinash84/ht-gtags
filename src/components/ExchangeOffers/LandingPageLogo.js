@@ -12,7 +12,7 @@ const LandingPageLogo = () => (
   >
     <div>
       <a href="https://www.hometown.in" target="_blank">
-        <img className="img-fluid" src={logo} alt="" />
+        <img className="img-fluid" src={logo} alt="" style={{ margin: '15px 0px' }} />
       </a>
     </div>
   </div>
