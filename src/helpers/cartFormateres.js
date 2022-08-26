@@ -50,7 +50,7 @@ export const formatToArray = data => {
           assembly_service: false,
           couponDiscount: 0,
           demo_product: item.demo_product,
-          offer_message: false
+          offer_message: item.demo_product
         }
       };
     }
@@ -98,7 +98,7 @@ export const formatToArray = data => {
         assembly_service: false,
         couponDiscount: 0,
         demo_product: item.demo_product,
-        offer_message: false
+        offer_message: item.demo_product
       }
     };
   });
