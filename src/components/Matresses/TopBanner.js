@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Image from "hometown-components-dev/lib/ImageHtV1";
-import Div from "hometown-components-dev/lib/BoxHtV1";
 
 export class TopBanner extends Component {
   render() {

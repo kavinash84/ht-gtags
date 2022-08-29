@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Row from "hometown-components/lib/Row";
-import Div from "hometown-components/lib/Div";
-import Heading from "hometown-components/lib/Heading";
-import Img from "hometown-components/lib/Img";
-import Text from "hometown-components/lib/Text";
+import Row from "hometown-components-dev/lib/RowHtV1";
+import Div from "hometown-components-dev/lib/BoxHtV1";
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
+import Image from "hometown-components-dev/lib/ImageHtV1";
+import Text from "hometown-components-dev/lib/TextHtV1";
 
 export class SleepBetter extends Component {
   componentDidMount() {
@@ -79,7 +79,7 @@ export class SleepBetter extends Component {
                       alignItems: "center"
                     }}
                   >
-                    <Img src={row.image1} alt={row.name1} width="100%" />
+                    <Image src={row.image1} alt={row.name1} width="100%" />
                     <Text
                       fontSize="1rem"
                       color="#323231"
@@ -106,7 +106,7 @@ export class SleepBetter extends Component {
                       alignItems: "center"
                     }}
                   >
-                    <Img src={row.image2} alt={row.name2} width="100%" />
+                    <Image src={row.image2} alt={row.name2} width="100%" />
                     <Text
                       fontSize="1rem"
                       color="#323231"

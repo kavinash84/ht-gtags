@@ -6,9 +6,9 @@ import Div from "hometown-components-dev/lib/BoxHtV1";
 import TextCarousel from "./TextCarousel";
 import TopBanner from "./TopBanner";
 import WhyChooseUs from "./WhyChooseUs";
+import SleepBetter from "./SleepBetter";
 // import PreQualifyNow from "./PreQualify";
 // import SleepEnthusiasts from "./SleepEnthusiasts";
-// import SleepBetter from "./SleepBetter";
 // import CustomerSpeak from "./CustomerSpeak";
 // import MattressForSleep from "./MattressForSleep";
 // import MattressesVideo from "./MattressesVideo";
@@ -103,6 +103,9 @@ export class index extends Component {
         {/* Why Choose Us */}
         <WhyChooseUs data={whyChooseUs} />
 
+        {/* Sleep Better */}
+        <SleepBetter data={sleepBetter} />
+
         {/* PreQualify Section */}
         {/* <PreQualifyNow data={preQualifyNow} /> */}
 
@@ -111,9 +114,6 @@ export class index extends Component {
 
         {/* Mattress for Sleep */}
         {/* <MattressForSleep data={mattressForSleep} history={history} /> */}
-
-        {/* Sleep Better */}
-        {/* <SleepBetter data={sleepBetter} /> */}
 
         {/* Customers Speak */}
         {/* <CustomerSpeak data={customerSpeak} /> */}
