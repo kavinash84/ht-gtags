@@ -7,10 +7,10 @@ import TextCarousel from "./TextCarousel";
 import TopBanner from "./TopBanner";
 import WhyChooseUs from "./WhyChooseUs";
 import SleepBetter from "./SleepBetter";
+import MattressForSleep from "./MattressForSleep";
 // import CustomerSpeak from "./CustomerSpeak";
 // import PreQualifyNow from "./PreQualify";
 // import SleepEnthusiasts from "./SleepEnthusiasts";
-// import MattressForSleep from "./MattressForSleep";
 // import MattressesVideo from "./MattressesVideo";
 // import SleepPosition from "./SleepPosition";
 // import MattressesByBrands from "./MattressesByBrands";
@@ -110,14 +110,14 @@ export class index extends Component {
         {/* Customers Speak */}
         <CustomerStories />
 
+        {/* Mattress for Sleep */}
+        <MattressForSleep data={mattressForSleep} history={history} />
+
         {/* PreQualify Section */}
         {/* <PreQualifyNow data={preQualifyNow} /> */}
 
         {/* Sleep Enthusiasts */}
         {/* <SleepEnthusiasts data={sleepEnthusiasts} /> */}
-
-        {/* Mattress for Sleep */}
-        {/* <MattressForSleep data={mattressForSleep} history={history} /> */}
 
         {/* Mattresses Video */}
         {/* <MattressesVideo data={mattressesVideo} /> */}

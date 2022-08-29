@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import createBrowserHistory from "history/createBrowserHistory";
-import Heading from "hometown-components/lib/Heading";
-import Div from "hometown-components/lib/Div";
-import Img from "hometown-components/lib/Img";
-import Text from "hometown-components/lib/Text";
-import Buttons from "hometown-components/lib/Buttons";
+import Div from "hometown-components-dev/lib/BoxHtV1";
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
+import Image from "hometown-components-dev/lib/ImageHtV1";
+import Text from "hometown-components-dev/lib/TextHtV1";
+import Button from "hometown-components-dev/lib/ButtonHtV1";
 import ResponsiveModal from "components/Modal";
 
-const select = require("../../../static/mattresses/select.png");
+const select = require("../../../static/select.png");
 
 export class MattressForSleep extends Component {
   state = {
@@ -90,21 +90,16 @@ export class MattressForSleep extends Component {
             backgroundColor: "#EBF2F5"
           }}
         >
-          <Heading
-            mt="0.8rem"
-            fontSize="22px"
-            ta="center"
-            p="0px 3rem"
-            mb="5px"
+          <div
             style={{
-              fontWeight: "bold",
-              color: "#323231",
-              lineHeight: "36px",
-              whiteSpace: "normal"
+              textAlign: "center",
+              fontSize: "22px",
+              fontWeight: 600,
+              padding: "25px"
             }}
           >
             {data.title}
-          </Heading>
+          </div>
           <div
             style={{
               width: "25px",
@@ -113,7 +108,7 @@ export class MattressForSleep extends Component {
             }}
           ></div>
           <Div p="0px 2rem" mt="1rem" onClick={() => this.handleQuizModal()}>
-            <Img src={data.image} alt={data.title} width="100%" />
+            <Image src={data.image} alt={data.title} width="100%" />
           </Div>
         </Div>
         <ResponsiveModal
@@ -222,13 +217,13 @@ export class MattressForSleep extends Component {
                         })
                       }
                     >
-                      <Img
+                      <Image
                         src={data.quiz.size.values.image1}
                         alt={data.quiz.size.values.name1}
                       />
                       <Text ta="center">{data.quiz.size.values.name1}</Text>
                       {size === data.quiz.size.values.name1 ? (
-                        <Img
+                        <Image
                           src={select}
                           alt="select icon"
                           style={{
@@ -262,13 +257,13 @@ export class MattressForSleep extends Component {
                         })
                       }
                     >
-                      <Img
+                      <Image
                         src={data.quiz.size.values.image2}
                         alt={data.quiz.size.values.name2}
                       />
                       <Text ta="center">{data.quiz.size.values.name2}</Text>
                       {size === data.quiz.size.values.name2 ? (
-                        <Img
+                        <Image
                           src={select}
                           alt="select icon"
                           style={{
@@ -308,13 +303,13 @@ export class MattressForSleep extends Component {
                         })
                       }
                     >
-                      <Img
+                      <Image
                         src={data.quiz.size.values.image3}
                         alt={data.quiz.size.values.name3}
                       />
                       <Text ta="center">{data.quiz.size.values.name3}</Text>
                       {size === data.quiz.size.values.name3 ? (
-                        <Img
+                        <Image
                           src={select}
                           alt="select icon"
                           style={{
@@ -348,13 +343,13 @@ export class MattressForSleep extends Component {
                         })
                       }
                     >
-                      <Img
+                      <Image
                         src={data.quiz.size.values.image4}
                         alt={data.quiz.size.values.name4}
                       />
                       <Text ta="center">{data.quiz.size.values.name4}</Text>
                       {size === data.quiz.size.values.name4 ? (
-                        <Img
+                        <Image
                           src={select}
                           alt="select icon"
                           style={{
@@ -374,7 +369,7 @@ export class MattressForSleep extends Component {
                     justifyContent: "center"
                   }}
                 >
-                  <Buttons
+                  <Button
                     style={{
                       borderColor: "orangered",
                       color: "orangered",
@@ -388,7 +383,7 @@ export class MattressForSleep extends Component {
                     }
                   >
                     Next
-                  </Buttons>
+                  </Button>
                 </Div>
               </Div>
             )}
@@ -503,14 +498,14 @@ export class MattressForSleep extends Component {
                         })
                       }
                     >
-                      <Img
+                      <Image
                         src={data.quiz.position.values.image1}
                         alt={data.quiz.size.values.name1}
                         width="100%"
                       />
                       <Text ta="center">{data.quiz.position.values.name1}</Text>
                       {position === data.quiz.position.values.name1 ? (
-                        <Img
+                        <Image
                           src={select}
                           alt="select icon"
                           style={{
@@ -543,14 +538,14 @@ export class MattressForSleep extends Component {
                         })
                       }
                     >
-                      <Img
+                      <Image
                         src={data.quiz.position.values.image2}
                         alt={data.quiz.size.values.name2}
                         width="100%"
                       />
                       <Text ta="center">{data.quiz.position.values.name2}</Text>
                       {position === data.quiz.position.values.name2 ? (
-                        <Img
+                        <Image
                           src={select}
                           alt="select icon"
                           style={{
@@ -589,14 +584,14 @@ export class MattressForSleep extends Component {
                         })
                       }
                     >
-                      <Img
+                      <Image
                         src={data.quiz.position.values.image3}
                         alt={data.quiz.size.values.name3}
                         width="100%"
                       />
                       <Text ta="center">{data.quiz.position.values.name3}</Text>
                       {position === data.quiz.position.values.name3 ? (
-                        <Img
+                        <Image
                           src={select}
                           alt="select icon"
                           style={{
@@ -629,14 +624,14 @@ export class MattressForSleep extends Component {
                         })
                       }
                     >
-                      <Img
+                      <Image
                         src={data.quiz.position.values.image4}
                         alt={data.quiz.size.values.name4}
                         width="100%"
                       />
                       <Text>{data.quiz.position.values.name4}</Text>
                       {position === data.quiz.position.values.name4 ? (
-                        <Img
+                        <Image
                           src={select}
                           alt="select icon"
                           style={{
@@ -656,7 +651,7 @@ export class MattressForSleep extends Component {
                     justifyContent: "center"
                   }}
                 >
-                  <Buttons
+                  <Button
                     style={{
                       borderColor: "orangered",
                       color: "orangered",
@@ -670,7 +665,7 @@ export class MattressForSleep extends Component {
                     }
                   >
                     Next
-                  </Buttons>
+                  </Button>
                 </Div>
               </Div>
             )}
@@ -786,14 +781,14 @@ export class MattressForSleep extends Component {
                         })
                       }
                     >
-                      <Img
+                      <Image
                         src={data.quiz.feel.values.image1}
                         alt={data.quiz.size.values.name1}
                         width="100%"
                       />
                       <Text ta="center">{data.quiz.feel.values.name1}</Text>
                       {feel === data.quiz.feel.values.name1 ? (
-                        <Img
+                        <Image
                           src={select}
                           alt="select icon"
                           style={{
@@ -827,14 +822,14 @@ export class MattressForSleep extends Component {
                         })
                       }
                     >
-                      <Img
+                      <Image
                         src={data.quiz.feel.values.image2}
                         alt={data.quiz.size.values.name2}
                         width="100%"
                       />
                       <Text ta="center">{data.quiz.feel.values.name2}</Text>
                       {feel === data.quiz.feel.values.name2 ? (
-                        <Img
+                        <Image
                           src={select}
                           alt="select icon"
                           style={{
@@ -878,14 +873,14 @@ export class MattressForSleep extends Component {
                         })
                       }
                     >
-                      <Img
+                      <Image
                         src={data.quiz.feel.values.image3}
                         alt={data.quiz.size.values.name3}
                         width="100%"
                       />
                       <Text ta="center">{data.quiz.feel.values.name3}</Text>
                       {feel === data.quiz.feel.values.name3 ? (
-                        <Img
+                        <Image
                           src={select}
                           alt="select icon"
                           style={{
@@ -919,14 +914,14 @@ export class MattressForSleep extends Component {
                         })
                       }
                     >
-                      <Img
+                      <Image
                         src={data.quiz.feel.values.image4}
                         alt={data.quiz.size.values.name4}
                         width="100%"
                       />
                       <Text ta="center">{data.quiz.feel.values.name4}</Text>
                       {feel === data.quiz.feel.values.name4 ? (
-                        <Img
+                        <Image
                           src={select}
                           alt="select icon"
                           style={{
@@ -946,7 +941,7 @@ export class MattressForSleep extends Component {
                     justifyContent: "center"
                   }}
                 >
-                  <Buttons
+                  <Button
                     style={{
                       borderColor: "orangered",
                       color: "orangered",
@@ -994,7 +989,7 @@ export class MattressForSleep extends Component {
                     }}
                   >
                     Submit
-                  </Buttons>
+                  </Button>
                 </Div>
               </Div>
             )}
