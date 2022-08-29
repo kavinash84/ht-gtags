@@ -31,45 +31,35 @@ export class SleepBetter extends Component {
       <Div
         mt="2rem"
         style={{
-          backgroundColor: "#F3EFE7"
+          backgroundColor: "#F3EFE7",
+          padding: "0% 7%"
         }}
       >
-        <Heading
-          fontSize="22px"
-          ta="center"
-          p="0px 3rem"
-          mb="5px"
+        <div
           style={{
-            fontWeight: "bold",
-            color: "#323231",
-            lineHeight: "36px",
-            whiteSpace: "normal"
+            textAlign: "center",
+            fontSize: "22px",
+            fontWeight: 600,
+            padding: "25px"
           }}
         >
           {data.title}
-        </Heading>
-        <div
+        </div>
+        <Row
+          mr="0px"
+          ml="0px"
+          mt="1rem"
           style={{
-            width: "25px",
-            borderTop: "2px solid #323231",
-            margin: "auto"
+            justifyContent: "space-between",
+            alignItems: "center",
+            flexWrap: "wrap"
           }}
-        ></div>
-        {data.collection.length
-          ? data.collection.map((row, index) => (
-              <Row
-                key={index}
-                mr="0px"
-                ml="0px"
-                mt="1rem"
-                style={{
-                  justifyContent: "center",
-                  alignItems: "center"
-                }}
-              >
+        >
+          {data.collection.length
+            ? data.collection.map((row, index) => (
                 <Link
                   to={row.link1}
-                  style={{ width: "40%", marginRight: "10px" }}
+                  style={{ width: "30%" }}
                   onClick={this.handleClick}
                 >
                   <Div
@@ -87,43 +77,18 @@ export class SleepBetter extends Component {
                         whiteSpace: "nowrap",
                         textOverflow: "ellipsis",
                         width: "98%",
-                        overflow: "hidden"
+                        overflow: "hidden",
+                        textAlign: "center",
+                        padding: "15px"
                       }}
                     >
                       {row.name1}
                     </Text>
                   </Div>
                 </Link>
-                <Link
-                  to={row.link2}
-                  style={{ width: "40%" }}
-                  onClick={this.handleClick}
-                >
-                  <Div
-                    style={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center"
-                    }}
-                  >
-                    <Image src={row.image2} alt={row.name2} width="100%" />
-                    <Text
-                      fontSize="1rem"
-                      color="#323231"
-                      style={{
-                        whiteSpace: "nowrap",
-                        textOverflow: "ellipsis",
-                        width: "98%",
-                        overflow: "hidden"
-                      }}
-                    >
-                      {row.name2}
-                    </Text>
-                  </Div>
-                </Link>
-              </Row>
-            ))
-          : null}
+              ))
+            : null}
+        </Row>
       </Div>
     );
   }

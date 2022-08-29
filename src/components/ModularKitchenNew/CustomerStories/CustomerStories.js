@@ -3,8 +3,6 @@ import Div from "hometown-components-dev/lib/BoxHtV1";
 import { connect } from "react-redux";
 import DBCarousel from "./DBCarousel";
 
-const styles = require("../ModularKitchen.scss");
-
 const adjustSlides = length => ({
   slidesToShow: 1,
   slidesToScroll: 1,
@@ -20,9 +18,11 @@ const adjustSlides = length => ({
   )
 });
 
-@connect(({ modularkitchen }) => ({
+@connect(({ modularkitchen, mattresses }) => ({
   modularkitchen,
-  customerStories: modularkitchen.data.items.text.customerStories
+  customerStories: modularkitchen.data.items
+    ? modularkitchen.data.items.text.customerStories
+    : mattresses.data.items.text.customerSpeak
 }))
 export default class CustomerStories extends Component {
   render() {

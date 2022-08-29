@@ -7,9 +7,9 @@ import TextCarousel from "./TextCarousel";
 import TopBanner from "./TopBanner";
 import WhyChooseUs from "./WhyChooseUs";
 import SleepBetter from "./SleepBetter";
+// import CustomerSpeak from "./CustomerSpeak";
 // import PreQualifyNow from "./PreQualify";
 // import SleepEnthusiasts from "./SleepEnthusiasts";
-// import CustomerSpeak from "./CustomerSpeak";
 // import MattressForSleep from "./MattressForSleep";
 // import MattressesVideo from "./MattressesVideo";
 // import SleepPosition from "./SleepPosition";
@@ -27,6 +27,7 @@ import SleepBetter from "./SleepBetter";
 // import BuildyourBedroom from "./BuildyourBedroom";
 import Faqs from "./Faqs";
 import SecondTopBannere from "./SecondTopBannere";
+import CustomerStories from "../ModularKitchenNew/CustomerStories/CustomerStories";
 
 @connect(({ mattresses }) => ({
   mattresses: mattresses.data.items.text,
@@ -106,6 +107,9 @@ export class index extends Component {
         {/* Sleep Better */}
         <SleepBetter data={sleepBetter} />
 
+        {/* Customers Speak */}
+        <CustomerStories />
+
         {/* PreQualify Section */}
         {/* <PreQualifyNow data={preQualifyNow} /> */}
 
@@ -114,9 +118,6 @@ export class index extends Component {
 
         {/* Mattress for Sleep */}
         {/* <MattressForSleep data={mattressForSleep} history={history} /> */}
-
-        {/* Customers Speak */}
-        {/* <CustomerSpeak data={customerSpeak} /> */}
 
         {/* Mattresses Video */}
         {/* <MattressesVideo data={mattressesVideo} /> */}
