@@ -9,7 +9,7 @@ import { applyCoupon, removeCoupon, loadCoupons } from "redux/modules/coupon";
 import { formatAmount } from "utils/formatters";
 import Notifs from "../../components/Notifs";
 import ResponsiveModal from "components/Modal";
-import ExchangeWarning from '../Checkout/ExchangeWarning';
+import ExchangeWarning from "../Checkout/ExchangeWarning";
 
 @connect(({ pincode, app, coupon, cart, notifs }) => ({
   pincode: pincode.selectedPincode,
@@ -45,7 +45,8 @@ class Coupon extends Component {
     const { dispatch } = this.context.store;
     if (
       this.state.coupon &&
-      this.state.coupon.toLocaleLowerCase() === "exchange25"
+      (this.state.coupon.toLocaleLowerCase() === "exchange25" ||
+        this.state.coupon.toLocaleLowerCase() === "exchange12.5")
     ) {
       this.setState({ open: true });
     } else {
@@ -188,11 +189,7 @@ class Coupon extends Component {
           height="calc(100vh - 94px)"
           of="auto"
         >
-          <div
-            pr="0.5rem"
-            pl="0.5rem"
-            style={{ marginTop: "20px" }}
-          >
+          <div pr="0.5rem" pl="0.5rem" style={{ marginTop: "20px" }}>
             {coupons.length > 0 && (
               <Div>
                 <Label
@@ -200,7 +197,11 @@ class Coupon extends Component {
                   display="block"
                   mt="0px"
                   mb="10px"
-                  style={{ color: "black", fontSize: "14px", marginLeft: "80px" }}
+                  style={{
+                    color: "black",
+                    fontSize: "14px",
+                    marginLeft: "80px"
+                  }}
                 >
                   Available Coupons
                 </Label>
@@ -254,7 +255,7 @@ class Coupon extends Component {
                                     }}
                                   >
                                     {item.couponCode.toLowerCase() ===
-                                      appliedCoupon.toLowerCase()
+                                    appliedCoupon.toLowerCase()
                                       ? "Applied"
                                       : "Apply"}
                                   </div>
@@ -284,10 +285,11 @@ class Coupon extends Component {
                           <ul className={styles.unapplicableCoupons}>
                             {unapplicablecoupons.map(item => (
                               <li
-                                className={`${item.couponCode === appliedCoupon
+                                className={`${
+                                  item.couponCode === appliedCoupon
                                     ? styles.active
                                     : ""
-                                  }`}
+                                }`}
                                 key={item.couponCode}
                               >
                                 <div className={styles.couponWrapper}>
@@ -361,7 +363,6 @@ class Coupon extends Component {
             />
           </ResponsiveModal>
         </div>
-
       </Div>
     );
   }
