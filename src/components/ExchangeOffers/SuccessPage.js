@@ -86,6 +86,29 @@ class SuccessPage extends Component {
              fbq('track', 'Lead'); 
             `}
           </script>
+
+          {/* Meta Pixel Code  */}
+          <script>
+            {`
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1024172491523922');
+fbq('track', 'Lead');
+`}
+          </script>
+          <noscript>
+            {`<img height="1" width="1" style="display:none"
+src=https://www.facebook.com/tr?id=1024172491523922&ev=Lead&noscript=1
+/>
+`}</noscript>
+          {/* <!-- End Meta Pixel Code --> */}
+
         </Helmet>
         <noscript>
           <img
@@ -148,10 +171,12 @@ class SuccessPage extends Component {
                 rel="noopener noreferrer"
                 target="_blank"
                 href="https://www.hometown.in/?utm_source=Landing-Page&utm_medium=Thank-You&utm_campaign=Exchange"
-                textDecoration= "underline"
-                color="black"
+                style={{
+                  textDecoration: "underline",
+                  color: "rgba(51, 51, 51, 0.85)"
+                }}
               >
-               Click here to redeem code online on hometown.in
+                Click here to redeem code online on hometown.in
               </a>
             </h2>
 
