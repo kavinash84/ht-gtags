@@ -142,7 +142,21 @@ class SuccessPage extends Component {
               Your voucher is valid till {validity}
             </h2>
           </div>
-          <div style={{ display: "flex", justifyContent: "space-between" , marginTop:'40px'}}>
+          <div style={{ marginBottom: "5px" }}>
+            <h2 style={{ textAlign: "center" }}>
+              <a
+                rel="noopener noreferrer"
+                target="_blank"
+                href="https://www.hometown.in/?utm_source=Landing-Page&utm_medium=Thank-You&utm_campaign=Exchange"
+                textDecoration= "underline"
+                color="black"
+              >
+               Click here to redeem code online on hometown.in
+              </a>
+            </h2>
+
+          </div>
+          <div style={{ display: "flex", justifyContent: "space-between", marginTop: '40px' }}>
             {/* <div style={{ marginBottom: "5px" }}>
               <p>
                 To know more give a missed call - <b>022-41621001</b>
