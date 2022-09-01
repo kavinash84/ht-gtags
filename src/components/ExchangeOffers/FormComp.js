@@ -108,7 +108,9 @@ const CITIES = [
   { value: "Pune", label: "Pune" },
   { value: "Nagpur", label: "Nagpur" },
   { value: "Nashik", label: "Nashik" },
-  { value: "Aurangabad", label: "Aurangabad" }
+  { value: "Aurangabad", label: "Aurangabad" },
+  { value: "Kakinada ", label: "Kakinada " },
+  { value: "Vijaywada ", label: "Vijaywada " }
 ];
 
 const initialState = {
