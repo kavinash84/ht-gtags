@@ -77,120 +77,236 @@ export class MattressForSleep extends Component {
     else return position;
   };
 
+  getButton = () => {
+    const { quizSlide, size, position, feel } = this.state;
+    return (
+      <Div
+        style={{
+          display: "flex",
+          justifyContent: "center"
+        }}
+      >
+        <Button
+          style={{
+            border: "1px solid orangered",
+            color: "orangered",
+            padding: "0.5rem 4rem",
+            backgroundColor: "white",
+            borderRadius: "4px"
+          }}
+          disabled={
+            quizSlide === "size"
+              ? !size
+              : quizSlide === "position"
+              ? !position
+              : !feel
+          }
+          onClick={() => {
+            if (quizSlide === "feel") {
+              if (this.state.feel && this.state.position && this.state.size) {
+                history.push(
+                  `/furniture/mattresses${
+                    this.state.sizeUrl
+                  }?p=unbxd_category:"Furniture;furniture>Mattresses;furniture/mattresses>${
+                    this.state.size
+                  };furniture/mattresses${
+                    this.state.sizeUrl
+                  }"&pagetype=boolean&facet.multilevel=unbxd_category&filter=comfort_level_uFilter:"${
+                    this.state.feel
+                  }"&filter=sleeper_type_uFilter:"${this.getSleeperType(
+                    this.state.position,
+                    this.state.feel
+                  )}" OR sleeper_type_uFilter:"${
+                    this.state.position === "Toss & Turn"
+                      ? "Toss%20%26%20Turn"
+                      : this.state.position
+                  }"&rows=20&view=grid&start=0`
+                );
+              }
+              this.setState({
+                quizSlide: "size",
+                size: "",
+                position: "",
+                feel: "",
+                open: false
+              });
+            } else {
+              this.setState({
+                quizSlide:
+                  quizSlide === "size"
+                    ? "position"
+                    : quizSlide === "position"
+                    ? "feel"
+                    : ""
+              });
+            }
+          }}
+        >
+          {quizSlide === "feel" ? "Submit" : "Next"}
+        </Button>
+      </Div>
+    );
+  };
+
+  getHeading = () => {
+    const { data } = this.props;
+    const { quizSlide } = this.state;
+    return (
+      <div>
+        {quizSlide !== "size" ? (
+          <Div
+            style={{
+              position: "absolute",
+              top: "0",
+              zIndex: "10",
+              width: "15%"
+            }}
+            onClick={() =>
+              this.setState({
+                quizSlide: quizSlide === "position" ? "size" : "position"
+              })
+            }
+          >
+            <Text
+              ta="center"
+              fontSize="2rem"
+              mt="0px"
+              ml="0.5rem"
+              mb="0px"
+              color="black"
+            >
+              ←
+            </Text>
+          </Div>
+        ) : null}
+        <Div
+          pt="1.3rem"
+          pb="1.3rem"
+          style={{
+            backgroundColor: "#EBE6DC",
+            borderRadius: "20px 20px 0px 0px",
+            display: "flex",
+            justifyContent: "center"
+          }}
+        >
+          <ul style={{ display: "flex" }}>
+            <li style={{ display: "inline" }}>
+              <Div
+                m="5px"
+                style={{
+                  width: "10px",
+                  height: "10px",
+                  borderRadius: "50%",
+                  backgroundColor: "orangered"
+                }}
+              ></Div>
+            </li>
+            <li style={{ display: "inline" }}>
+              <Div
+                m="5px"
+                style={{
+                  width: "10px",
+                  height: "10px",
+                  borderRadius: "50%",
+                  backgroundColor: "white"
+                }}
+              ></Div>
+            </li>
+            <li style={{ display: "inline" }}>
+              <Div
+                m="5px"
+                style={{
+                  width: "10px",
+                  height: "10px",
+                  borderRadius: "50%",
+                  backgroundColor: "white"
+                }}
+              ></Div>
+            </li>
+          </ul>
+        </Div>
+        <Heading
+          mt="1rem"
+          fontSize="22px"
+          p="0px 3rem"
+          style={{
+            fontWeight: "bold",
+            color: "#000000",
+            lineHeight: "25px",
+            padding: "0px 25%",
+            textAlign: "center"
+          }}
+        >
+          {data.quiz[quizSlide].title}
+        </Heading>
+        <Text
+          fontSize="14px"
+          color="#000000"
+          p="3%"
+          style={{ textAlign: "center" }}
+        >
+          {data.quiz[quizSlide].subHeading}
+        </Text>
+      </div>
+    );
+  };
+
   render() {
     const history = createBrowserHistory({ forceRefresh: true });
     const { data } = this.props;
     const { quizSlide, size, position, feel } = this.state;
     return (
       <Div>
-        <Div
-          mt="2rem"
-          pt="1.5rem"
+        <div
           style={{
-            backgroundColor: "#EBF2F5"
+            textAlign: "center",
+            fontSize: "22px",
+            fontWeight: 600,
+            padding: "30x"
           }}
         >
-          <div
+          {data.title}
+        </div>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            width: "100%",
+            padding: "2% 7%"
+          }}
+        >
+          <div style={{ width: "64%" }}>
+            <img
+              src={data.bannerimage}
+              alt="banner image"
+              style={{ width: "100%" }}
+            />
+          </div>
+          <Div
             style={{
-              textAlign: "center",
-              fontSize: "22px",
-              fontWeight: 600,
-              padding: "25px"
+              width: "34%",
+              backgroundColor: "#EBF2F5",
+              padding: "4%"
             }}
           >
-            {data.title}
-          </div>
-          <div
-            style={{
-              width: "25px",
-              borderTop: "2px solid #323231",
-              margin: "auto"
-            }}
-          ></div>
-          <Div p="0px 2rem" mt="1rem" onClick={() => this.handleQuizModal()}>
-            <Image src={data.image} alt={data.title} width="100%" />
+            <Div
+              onClick={() => this.handleQuizModal()}
+              style={{ cursor: "pointer" }}
+            >
+              <Image src={data.image} alt={data.title} width="100%" />
+            </Div>
           </Div>
-        </Div>
+        </div>
         <ResponsiveModal
-          classNames={{ modal: "mkModal" }}
+          classNames={{ modal: "mattressModal" }}
           onCloseModal={this.handleModal}
           open={this.state.open}
         >
           <Div pb="2rem">
+            {this.getHeading()}
             {quizSlide === "size" && (
               <Div>
-                {/* <Div style={{
-                                position: 'absolute',
-                                top: '0',
-                                zIndex: '10',
-                                width: '15%'
-                            }}>
-                                <Text ta="center" fontSize="2rem" mt="0px" ml="0.5rem" mb="0px" color="black">←</Text>
-                            </Div> */}
-                <Div
-                  pt="1.3rem"
-                  pb="1.3rem"
-                  style={{
-                    backgroundColor: "#EBE6DC",
-                    borderRadius: "20px 20px 0px 0px",
-                    display: "flex",
-                    justifyContent: "center"
-                  }}
-                >
-                  <ul>
-                    <li style={{ display: "inline" }}>
-                      <Div
-                        m="5px"
-                        style={{
-                          width: "10px",
-                          height: "10px",
-                          borderRadius: "50%",
-                          backgroundColor: "orangered"
-                        }}
-                      ></Div>
-                    </li>
-                    <li style={{ display: "inline" }}>
-                      <Div
-                        m="5px"
-                        style={{
-                          width: "10px",
-                          height: "10px",
-                          borderRadius: "50%",
-                          backgroundColor: "white"
-                        }}
-                      ></Div>
-                    </li>
-                    <li style={{ display: "inline" }}>
-                      <Div
-                        m="5px"
-                        style={{
-                          width: "10px",
-                          height: "10px",
-                          borderRadius: "50%",
-                          backgroundColor: "white"
-                        }}
-                      ></Div>
-                    </li>
-                  </ul>
-                </Div>
-                <Heading
-                  mt="1rem"
-                  pt="1.5rem"
-                  fontSize="22px"
-                  ta="center"
-                  p="0px 3rem"
-                  style={{
-                    fontWeight: "bold",
-                    color: "#000000",
-                    lineHeight: "31px",
-                    whiteSpace: "normal"
-                  }}
-                >
-                  {data.quiz.size.title}
-                </Heading>
-                <Text ta="center" fontSize="14px" color="#666666">
-                  {data.quiz.size.subHeading}
-                </Text>
                 <Div
                   p="0px 2rem"
                   mb="1rem"
@@ -363,116 +479,10 @@ export class MattressForSleep extends Component {
                     </Div>
                   ) : null}
                 </Div>
-                <Div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center"
-                  }}
-                >
-                  <Button
-                    style={{
-                      borderColor: "orangered",
-                      color: "orangered",
-                      padding: "0.5rem 4rem"
-                    }}
-                    disabled={!size}
-                    onClick={() =>
-                      this.setState({
-                        quizSlide: "position"
-                      })
-                    }
-                  >
-                    Next
-                  </Button>
-                </Div>
               </Div>
             )}
             {quizSlide === "position" && (
               <Div>
-                <Div
-                  style={{
-                    position: "absolute",
-                    top: "0",
-                    zIndex: "10",
-                    width: "15%"
-                  }}
-                  onClick={() => this.setState({ quizSlide: "size" })}
-                >
-                  <Text
-                    ta="center"
-                    fontSize="2rem"
-                    mt="0px"
-                    ml="0.5rem"
-                    mb="0px"
-                    color="black"
-                  >
-                    ←
-                  </Text>
-                </Div>
-                <Div
-                  pt="1.3rem"
-                  pb="1.3rem"
-                  style={{
-                    backgroundColor: "#EBE6DC",
-                    borderRadius: "20px 20px 0px 0px",
-                    display: "flex",
-                    justifyContent: "center"
-                  }}
-                >
-                  <ul>
-                    <li style={{ display: "inline" }}>
-                      <Div
-                        m="5px"
-                        style={{
-                          width: "10px",
-                          height: "10px",
-                          borderRadius: "50%",
-                          backgroundColor: "white"
-                        }}
-                      ></Div>
-                    </li>
-                    <li style={{ display: "inline" }}>
-                      <Div
-                        m="5px"
-                        style={{
-                          width: "10px",
-                          height: "10px",
-                          borderRadius: "50%",
-                          backgroundColor: "orangered"
-                        }}
-                      ></Div>
-                    </li>
-                    <li style={{ display: "inline" }}>
-                      <Div
-                        m="5px"
-                        style={{
-                          width: "10px",
-                          height: "10px",
-                          borderRadius: "50%",
-                          backgroundColor: "white"
-                        }}
-                      ></Div>
-                    </li>
-                  </ul>
-                </Div>
-                <Heading
-                  mt="1rem"
-                  pt="1.5rem"
-                  fontSize="22px"
-                  ta="center"
-                  p="0px 3rem"
-                  style={{
-                    fontWeight: "bold",
-                    color: "#000000",
-                    lineHeight: "31px",
-                    whiteSpace: "normal"
-                  }}
-                >
-                  {data.quiz.position.title}
-                </Heading>
-                <Text ta="center" fontSize="14px" color="#666666">
-                  {data.quiz.position.subHeading}
-                </Text>
                 <Div
                   p="0px 2rem"
                   mb="1rem"
@@ -645,116 +655,10 @@ export class MattressForSleep extends Component {
                     </Div>
                   ) : null}
                 </Div>
-                <Div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center"
-                  }}
-                >
-                  <Button
-                    style={{
-                      borderColor: "orangered",
-                      color: "orangered",
-                      padding: "0.5rem 4rem"
-                    }}
-                    disabled={!position}
-                    onClick={() =>
-                      this.setState({
-                        quizSlide: "feel"
-                      })
-                    }
-                  >
-                    Next
-                  </Button>
-                </Div>
               </Div>
             )}
             {quizSlide === "feel" && (
               <Div>
-                <Div
-                  style={{
-                    position: "absolute",
-                    top: "0",
-                    zIndex: "10",
-                    width: "15%"
-                  }}
-                  onClick={() => this.setState({ quizSlide: "position" })}
-                >
-                  <Text
-                    ta="center"
-                    fontSize="2rem"
-                    mt="0px"
-                    ml="0.5rem"
-                    mb="0px"
-                    color="black"
-                  >
-                    ←
-                  </Text>
-                </Div>
-                <Div
-                  pt="1.3rem"
-                  pb="1.3rem"
-                  style={{
-                    backgroundColor: "#EBE6DC",
-                    borderRadius: "20px 20px 0px 0px",
-                    display: "flex",
-                    justifyContent: "center"
-                  }}
-                >
-                  <ul>
-                    <li style={{ display: "inline" }}>
-                      <Div
-                        m="5px"
-                        style={{
-                          width: "10px",
-                          height: "10px",
-                          borderRadius: "50%",
-                          backgroundColor: "white"
-                        }}
-                      ></Div>
-                    </li>
-                    <li style={{ display: "inline" }}>
-                      <Div
-                        m="5px"
-                        style={{
-                          width: "10px",
-                          height: "10px",
-                          borderRadius: "50%",
-                          backgroundColor: "white"
-                        }}
-                      ></Div>
-                    </li>
-                    <li style={{ display: "inline" }}>
-                      <Div
-                        m="5px"
-                        style={{
-                          width: "10px",
-                          height: "10px",
-                          borderRadius: "50%",
-                          backgroundColor: "orangered"
-                        }}
-                      ></Div>
-                    </li>
-                  </ul>
-                </Div>
-                <Heading
-                  mt="1rem"
-                  pt="1.5rem"
-                  fontSize="22px"
-                  ta="center"
-                  p="0px 3rem"
-                  style={{
-                    fontWeight: "bold",
-                    color: "#000000",
-                    lineHeight: "31px",
-                    whiteSpace: "normal"
-                  }}
-                >
-                  {data.quiz.feel.title}
-                </Heading>
-                <Text ta="center" fontSize="14px" color="#666666">
-                  {data.quiz.feel.subHeading}
-                </Text>
                 <Div
                   p="0px 2rem"
                   mb="1rem"
@@ -848,12 +752,7 @@ export class MattressForSleep extends Component {
                   mb="1rem"
                   style={{ display: "flex", justifyContent: "center" }}
                 >
-                  {/* {data.quiz.feel.values.display3 && (position === 'Side' || position === 'Back') ? ( */}
                   {data.quiz.feel.values.display3 ? (
-                    //  &&
-                    // (position === "Toss & Turn" ||
-                    //   position === "Side" ||
-                    //   position === "Back")
                     <Div
                       style={{
                         display: "flex",
@@ -893,7 +792,6 @@ export class MattressForSleep extends Component {
                       ) : null}
                     </Div>
                   ) : null}
-                  {/* {data.quiz.feel.values.name4 && position === 'Back' ? ( */}
                   {data.quiz.feel.values.name4 && position !== "Toss & Turn" ? (
                     <Div
                       style={{
@@ -935,64 +833,9 @@ export class MattressForSleep extends Component {
                     </Div>
                   ) : null}
                 </Div>
-                <Div
-                  style={{
-                    display: "flex",
-                    justifyContent: "center"
-                  }}
-                >
-                  <Button
-                    style={{
-                      borderColor: "orangered",
-                      color: "orangered",
-                      padding: "0.5rem 4rem"
-                    }}
-                    disabled={!feel}
-                    onClick={() => {
-                      if (
-                        this.state.feel &&
-                        this.state.position &&
-                        this.state.size
-                      ) {
-                        history.push(
-                          // `/furniture/mattresses?p=unbxd_category:"Furniture%3Bfurniture>Mattresses%3Bfurniture%2Fmattresses"&pagetype=boolean&facet.multilevel=unbxd_category&filter=comfort_level_uFilter:${
-                          //   this.state.feel
-                          // }&filter=sleeper_type_uFilter:${this.getSleeperType(
-                          //   this.state.position,
-                          //   this.state.feel
-                          // )}&filter=mattress_size_uFilter:${this.state.size}&rows=20&view=grid&start=0`
-                          `/furniture/mattresses${
-                            this.state.sizeUrl
-                          }?p=unbxd_category:"Furniture;furniture>Mattresses;furniture/mattresses>${
-                            this.state.size
-                          };furniture/mattresses${
-                            this.state.sizeUrl
-                          }"&pagetype=boolean&facet.multilevel=unbxd_category&filter=comfort_level_uFilter:"${
-                            this.state.feel
-                          }"&filter=sleeper_type_uFilter:"${this.getSleeperType(
-                            this.state.position,
-                            this.state.feel
-                          )}" OR sleeper_type_uFilter:"${
-                            this.state.position === "Toss & Turn"
-                              ? "Toss%20%26%20Turn"
-                              : this.state.position
-                          }"&rows=20&view=grid&start=0`
-                        );
-                      }
-                      this.setState({
-                        quizSlide: "size",
-                        size: "",
-                        position: "",
-                        feel: "",
-                        open: false
-                      });
-                    }}
-                  >
-                    Submit
-                  </Button>
-                </Div>
               </Div>
             )}
+            {this.getButton()}
           </Div>
         </ResponsiveModal>
       </Div>

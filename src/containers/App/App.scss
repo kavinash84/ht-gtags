@@ -9,7 +9,7 @@
     margin: 0 auto;
     padding: 0 15px;
   }
-  .virtualModal{
+  .virtualModal {
     padding: 0rem;
     border-radius: 0px;
   }
@@ -22,47 +22,52 @@
     border-radius: 20px;
   }
 
-  .couponmodal{
-    padding: 0rem;
+  .mattressModal {
     border-radius: 20px;
-    width:40%;
-    height:90%;
+    padding: 0px;
   }
 
-    .PackageModal {
-        padding: 0;
-        width: 50%;
-        border-radius: 20px;
-        background-color: white;
-        z-index: 1000000;
-      }
-      .PackageListingModal {
-        padding: 0;
-        width: 100%;
-        background-color: white;
-        z-index: 1000000;
-        margin-bottom: 0px;
-        max-width: 100%;
-      }
-      .PackageDisplayModal {
-        padding: 0;
-        width: 100%;
-        max-width: 100%;
-        background-color: white;
-        z-index: 1000000;
-        margin-bottom: 0px;
-        .styles_closeButton__20ID4 {
-          top: 22px;
-          z-index: 2;
-        }
-      }
-      .PackageListingOverlay {
-        padding: 0px;
-      }
-  .pdpmodal{
+  .couponmodal {
     padding: 0rem;
-    width:100%;
-    height:40%;
+    border-radius: 20px;
+    width: 40%;
+    height: 90%;
+  }
+
+  .PackageModal {
+    padding: 0;
+    width: 50%;
+    border-radius: 20px;
+    background-color: white;
+    z-index: 1000000;
+  }
+  .PackageListingModal {
+    padding: 0;
+    width: 100%;
+    background-color: white;
+    z-index: 1000000;
+    margin-bottom: 0px;
+    max-width: 100%;
+  }
+  .PackageDisplayModal {
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+    background-color: white;
+    z-index: 1000000;
+    margin-bottom: 0px;
+    .styles_closeButton__20ID4 {
+      top: 22px;
+      z-index: 2;
+    }
+  }
+  .PackageListingOverlay {
+    padding: 0px;
+  }
+  .pdpmodal {
+    padding: 0rem;
+    width: 100%;
+    height: 40%;
     max-width: 100%;
   }
 
