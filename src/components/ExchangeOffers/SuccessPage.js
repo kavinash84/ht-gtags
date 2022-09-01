@@ -118,6 +118,9 @@ src=https://www.facebook.com/tr?id=1024172491523922&ev=Lead&noscript=1
             src="https://www.facebook.com/tr?id=171725297723956&ev=PageView&noscript=1"
           />
         </noscript>
+        <noscript>
+          <img src="https://ttrk.ringocount.com/pixel?adid=621c50fcfba3a36de041935b" />
+        </noscript>
         {/* <LandingPageLogo /> */}
         <img
           src={landingMainSlider}
