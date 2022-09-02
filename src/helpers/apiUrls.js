@@ -146,5 +146,11 @@ export const PLANYOURKITCHEN_NEW = "tesla/static/planyour_kitchen_desktop_v1";
 /*cart contact*/
 export const GET_CONTACT = "tesla/static/cart_contact_cms2";
 
+/*Blogs*/
+export const HOME_BLOGS = "tesla/blog/homepage";
+export const BLOGS_CAT = "tesla/blog/category";
+export const SINGLE_BLOG = "tesla/blog/post";
+
+
 /* Gifting */
 export const GET_GIFTING = "tesla/static/gifting";
