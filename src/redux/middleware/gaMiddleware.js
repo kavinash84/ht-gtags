@@ -55,7 +55,7 @@ export default function gaMiddleware() {
         // if ((type === 'login/LOGIN_SUCCESS' || type === 'login/LOGOUT_SUCCESS') && window && window.unbxd) {
         //   window.unbxd.handleUserSwitch();
         // }
-        
+
         if (
           (type === "cart/ADD_TO_CART_SUCCESS" ||
             type === "cart/UPDATE_CART_SUCCESS" ||
@@ -526,6 +526,7 @@ export default function gaMiddleware() {
               window.Unbxd &&
               window.Unbxd.track
             ) {
+              console.log("search query from middleware", searchQuery);
               window.Unbxd.track("search", { query: searchQuery });
             }
             if (location === "/checkout/delivery-address") {
@@ -571,6 +572,7 @@ export default function gaMiddleware() {
               customer_type,
               unbxd_data: unbxdData = []
             } = data;
+            console.log(data, "payamentstatusdata");
             const skus = [];
 
             // let groupedProducts = [];

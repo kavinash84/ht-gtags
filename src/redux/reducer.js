@@ -49,6 +49,7 @@ import designbuild from "./modules/designbuild";
 import spaces from "./modules/spaces";
 import planyourkitchen from "./modules/planyourkitchen";
 import lackpackages from "./modules/lackpackages";
+import blogs from "./modules/blogs";
 
 export default function createReducers(asyncReducers) {
   return {
@@ -120,6 +121,7 @@ export default function createReducers(asyncReducers) {
     // planyourkitchen,
     planyourkitchen,
     lackpackages,
+    blogs,
     ...asyncReducers
   };
 }
