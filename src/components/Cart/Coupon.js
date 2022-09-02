@@ -2,16 +2,14 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { PropTypes } from "prop-types";
 import Div from "hometown-components-dev/lib/BoxHtV1";
-import Heading from "hometown-components-dev/lib/HeadingHtV1";
 import Button from "hometown-components-dev/lib/ButtonHtV1";
-import Container from "hometown-components-dev/lib/ContainerHtV1";
-import Section from "hometown-components-dev/lib/SectionHtV1";
-import Row from "hometown-components-dev/lib/RowHtV1";
 import Label from "hometown-components-dev/lib/LabelHtV1";
 import LocalInlineNotification from "components/LocalInlineNotification";
 import { applyCoupon, removeCoupon, loadCoupons } from "redux/modules/coupon";
 import { formatAmount } from "utils/formatters";
 import Notifs from "../../components/Notifs";
+import ResponsiveModal from "components/Modal";
+import ExchangeWarning from '../Checkout/ExchangeWarning';
 
 @connect(({ pincode, app, coupon, cart, notifs }) => ({
   pincode: pincode.selectedPincode,
@@ -29,7 +27,8 @@ class Coupon extends Component {
     store: PropTypes.object.isRequired
   };
   state = {
-    coupon: ""
+    coupon: "",
+    open: false
   };
 
   handleChange = e => {
@@ -38,10 +37,20 @@ class Coupon extends Component {
     });
   };
 
-  handleApply = () => {
+  handleApply = e => {
+    if (e) {
+      e.preventDefault();
+    }
     const { pincode, sessionId } = this.props;
     const { dispatch } = this.context.store;
-    dispatch(applyCoupon(this.state.coupon, sessionId, pincode));
+    if (
+      this.state.coupon &&
+      this.state.coupon.toLocaleLowerCase() === "exchange25"
+    ) {
+      this.setState({ open: true });
+    } else {
+      dispatch(applyCoupon(this.state.coupon, sessionId, pincode));
+    }
   };
 
   removeCoupon = coupon => {
@@ -57,6 +66,30 @@ class Coupon extends Component {
       () => this.handleApply()
     );
   };
+
+  handleModal = e => {
+    if (e) {
+      e.preventDefault();
+    }
+    this.setState({
+      open: !this.state.open
+    });
+  };
+
+  handleNo = () => {
+    this.setState({ coupon: "", open: false });
+  };
+
+  handleApplyFromModal = e => {
+    if (e) {
+      e.preventDefault();
+    }
+    const { pincode, sessionId } = this.props;
+    const { dispatch } = this.context.store;
+    dispatch(applyCoupon(this.state.coupon, sessionId, pincode));
+    this.handleModal();
+  };
+
   componentDidMount() {
     if (this.couponInput.current) {
       this.couponInput.current.focus();
@@ -167,7 +200,7 @@ class Coupon extends Component {
                   display="block"
                   mt="0px"
                   mb="10px"
-                  style={{ color: "black", fontSize: "14px" , marginLeft: "80px"}}
+                  style={{ color: "black", fontSize: "14px", marginLeft: "80px" }}
                 >
                   Available Coupons
                 </Label>
@@ -205,7 +238,7 @@ class Coupon extends Component {
                                       fontSize: "12px",
                                       fontWeight: 600,
                                       textTransform: "uppercase",
-                                      marginLeft:"80px"
+                                      marginLeft: "80px"
                                     }}
                                   >
                                     {item.couponCode}
@@ -221,7 +254,7 @@ class Coupon extends Component {
                                     }}
                                   >
                                     {item.couponCode.toLowerCase() ===
-                                    appliedCoupon.toLowerCase()
+                                      appliedCoupon.toLowerCase()
                                       ? "Applied"
                                       : "Apply"}
                                   </div>
@@ -251,11 +284,10 @@ class Coupon extends Component {
                           <ul className={styles.unapplicableCoupons}>
                             {unapplicablecoupons.map(item => (
                               <li
-                                className={`${
-                                  item.couponCode === appliedCoupon
+                                className={`${item.couponCode === appliedCoupon
                                     ? styles.active
                                     : ""
-                                }`}
+                                  }`}
                                 key={item.couponCode}
                               >
                                 <div className={styles.couponWrapper}>
@@ -318,7 +350,18 @@ class Coupon extends Component {
               </Div>
             </div>
           </div>
+          <ResponsiveModal
+            classNames={{ modal: "designbuildmodal" }}
+            onCloseModal={this.handleModal}
+            open={this.state.open}
+          >
+            <ExchangeWarning
+              handleYes={this.handleApplyFromModal}
+              handleNo={this.handleNo}
+            />
+          </ResponsiveModal>
         </div>
+
       </Div>
     );
   }
