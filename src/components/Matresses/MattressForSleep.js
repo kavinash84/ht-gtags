@@ -79,6 +79,7 @@ export class MattressForSleep extends Component {
 
   getButton = () => {
     const { quizSlide, size, position, feel } = this.state;
+    const history = createBrowserHistory({ forceRefresh: true });
     return (
       <Div
         style={{
@@ -157,9 +158,10 @@ export class MattressForSleep extends Component {
           <Div
             style={{
               position: "absolute",
-              top: "0",
+              top: "10px",
               zIndex: "10",
-              width: "15%"
+              width: "15%",
+              cursor: "pointer"
             }}
             onClick={() =>
               this.setState({
@@ -251,8 +253,50 @@ export class MattressForSleep extends Component {
     );
   };
 
+  getCard = (data, key, value) => {
+    return (
+      <Div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          border: "1px solid #707070",
+          borderRadius: "10px",
+          justifyContent: "space-between",
+          width: "250px",
+          position: "relative"
+        }}
+        pb="0px"
+        m="0px 0.5rem"
+        p="1rem 2rem"
+        onClick={() =>
+          this.setState({
+            sizeUrl: key == "size" ? data.urlName : this.state.sizeUrl,
+            [key]: data.name
+          })
+        }
+      >
+        <Image src={data.image} alt={data.name} />
+        <Text ta="center" style={{ marginTop: "10px", fontSize: "14px" }}>
+          {data.name}
+        </Text>
+        {value === data.name ? (
+          <Image
+            src={select}
+            alt="select icon"
+            style={{
+              position: "absolute",
+              top: "5px",
+              right: "5px",
+              width: "25px"
+            }}
+          />
+        ) : null}
+      </Div>
+    );
+  };
+
   render() {
-    const history = createBrowserHistory({ forceRefresh: true });
     const { data } = this.props;
     const { quizSlide, size, position, feel } = this.state;
     return (
@@ -312,172 +356,56 @@ export class MattressForSleep extends Component {
                   mb="1rem"
                   style={{ display: "flex", justifyContent: "center" }}
                 >
-                  {data.quiz.size.values.display1 ? (
-                    <Div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        border: "1px solid #707070",
-                        borderRadius: "10px",
-                        justifyContent: "space-between",
-                        width: "250px"
-                      }}
-                      pb="0px"
-                      m="0px 0.5rem"
-                      p="1rem 2rem"
-                      onClick={() =>
-                        this.setState({
-                          sizeUrl: data.quiz.size.values.urlName1,
-                          size: data.quiz.size.values.name1
-                        })
-                      }
-                    >
-                      <Image
-                        src={data.quiz.size.values.image1}
-                        alt={data.quiz.size.values.name1}
-                      />
-                      <Text ta="center">{data.quiz.size.values.name1}</Text>
-                      {size === data.quiz.size.values.name1 ? (
-                        <Image
-                          src={select}
-                          alt="select icon"
-                          style={{
-                            position: "absolute",
-                            top: "5px",
-                            right: "5px",
-                            width: "25px"
-                          }}
-                        />
-                      ) : null}
-                    </Div>
-                  ) : null}
-                  {data.quiz.size.values.display2 ? (
-                    <Div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        border: "1px solid #707070",
-                        borderRadius: "10px",
-                        justifyContent: "space-between",
-                        width: "250px"
-                      }}
-                      pb="0px"
-                      m="0px 0.5rem"
-                      p="1rem 2rem"
-                      onClick={() =>
-                        this.setState({
-                          sizeUrl: data.quiz.size.values.urlName2,
-                          size: data.quiz.size.values.name2
-                        })
-                      }
-                    >
-                      <Image
-                        src={data.quiz.size.values.image2}
-                        alt={data.quiz.size.values.name2}
-                      />
-                      <Text ta="center">{data.quiz.size.values.name2}</Text>
-                      {size === data.quiz.size.values.name2 ? (
-                        <Image
-                          src={select}
-                          alt="select icon"
-                          style={{
-                            position: "absolute",
-                            top: "5px",
-                            right: "5px",
-                            width: "25px"
-                          }}
-                        />
-                      ) : null}
-                    </Div>
-                  ) : null}
+                  {data.quiz.size.values.display1
+                    ? this.getCard(
+                        {
+                          urlName: data.quiz.size.values.urlName1,
+                          name: data.quiz.size.values.name1,
+                          image: data.quiz.size.values.image1
+                        },
+                        "size",
+                        size
+                      )
+                    : null}
+                  {data.quiz.size.values.display2
+                    ? this.getCard(
+                        {
+                          urlName: data.quiz.size.values.urlName2,
+                          name: data.quiz.size.values.name2,
+                          image: data.quiz.size.values.image2
+                        },
+                        "size",
+                        size
+                      )
+                    : null}
                 </Div>
                 <Div
                   p="0px 2rem"
                   mb="1rem"
                   style={{ display: "flex", justifyContent: "center" }}
                 >
-                  {data.quiz.size.values.display3 ? (
-                    <Div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        border: "1px solid #707070",
-                        borderRadius: "10px",
-                        justifyContent: "space-between",
-                        width: "250px"
-                      }}
-                      pb="0px"
-                      m="0px 0.5rem"
-                      p="1rem 2rem"
-                      onClick={() =>
-                        this.setState({
-                          sizeUrl: data.quiz.size.values.urlName3,
-                          size: data.quiz.size.values.name3
-                        })
-                      }
-                    >
-                      <Image
-                        src={data.quiz.size.values.image3}
-                        alt={data.quiz.size.values.name3}
-                      />
-                      <Text ta="center">{data.quiz.size.values.name3}</Text>
-                      {size === data.quiz.size.values.name3 ? (
-                        <Image
-                          src={select}
-                          alt="select icon"
-                          style={{
-                            position: "absolute",
-                            top: "5px",
-                            right: "5px",
-                            width: "25px"
-                          }}
-                        />
-                      ) : null}
-                    </Div>
-                  ) : null}
-                  {data.quiz.size.values.name4 ? (
-                    <Div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        border: "1px solid #707070",
-                        borderRadius: "10px",
-                        justifyContent: "space-between",
-                        width: "250px"
-                      }}
-                      pb="0px"
-                      m="0px 0.5rem"
-                      p="1rem 2rem"
-                      onClick={() =>
-                        this.setState({
-                          sizeUrl: data.quiz.size.values.urlName4,
-                          size: data.quiz.size.values.name4
-                        })
-                      }
-                    >
-                      <Image
-                        src={data.quiz.size.values.image4}
-                        alt={data.quiz.size.values.name4}
-                      />
-                      <Text ta="center">{data.quiz.size.values.name4}</Text>
-                      {size === data.quiz.size.values.name4 ? (
-                        <Image
-                          src={select}
-                          alt="select icon"
-                          style={{
-                            position: "absolute",
-                            top: "5px",
-                            right: "5px",
-                            width: "25px"
-                          }}
-                        />
-                      ) : null}
-                    </Div>
-                  ) : null}
+                  {data.quiz.size.values.display3
+                    ? this.getCard(
+                        {
+                          urlName: data.quiz.size.values.urlName3,
+                          name: data.quiz.size.values.name3,
+                          image: data.quiz.size.values.image3
+                        },
+                        "size",
+                        size
+                      )
+                    : null}
+                  {data.quiz.size.values.name4
+                    ? this.getCard(
+                        {
+                          urlName: data.quiz.size.values.urlName4,
+                          name: data.quiz.size.values.name4,
+                          image: data.quiz.size.values.image4
+                        },
+                        "size",
+                        size
+                      )
+                    : null}
                 </Div>
               </Div>
             )}
@@ -488,172 +416,56 @@ export class MattressForSleep extends Component {
                   mb="1rem"
                   style={{ display: "flex", justifyContent: "center" }}
                 >
-                  {data.quiz.position.values.display1 ? (
-                    <Div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        border: "1px solid #707070",
-                        borderRadius: "10px",
-                        justifyContent: "space-between",
-                        width: "50%"
-                      }}
-                      pb="0px"
-                      m="0px 0.5rem"
-                      p="1rem 2rem"
-                      onClick={() =>
-                        this.setState({
-                          position: data.quiz.position.values.name1
-                        })
-                      }
-                    >
-                      <Image
-                        src={data.quiz.position.values.image1}
-                        alt={data.quiz.size.values.name1}
-                        width="100%"
-                      />
-                      <Text ta="center">{data.quiz.position.values.name1}</Text>
-                      {position === data.quiz.position.values.name1 ? (
-                        <Image
-                          src={select}
-                          alt="select icon"
-                          style={{
-                            position: "absolute",
-                            top: "5px",
-                            right: "5px",
-                            width: "25px"
-                          }}
-                        />
-                      ) : null}
-                    </Div>
-                  ) : null}
-                  {data.quiz.position.values.display2 ? (
-                    <Div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        border: "1px solid #707070",
-                        borderRadius: "10px",
-                        justifyContent: "space-between",
-                        width: "50%"
-                      }}
-                      pb="0px"
-                      m="0px 0.5rem"
-                      p="1rem 2rem"
-                      onClick={() =>
-                        this.setState({
-                          position: data.quiz.position.values.name2
-                        })
-                      }
-                    >
-                      <Image
-                        src={data.quiz.position.values.image2}
-                        alt={data.quiz.size.values.name2}
-                        width="100%"
-                      />
-                      <Text ta="center">{data.quiz.position.values.name2}</Text>
-                      {position === data.quiz.position.values.name2 ? (
-                        <Image
-                          src={select}
-                          alt="select icon"
-                          style={{
-                            position: "absolute",
-                            top: "5px",
-                            right: "5px",
-                            width: "25px"
-                          }}
-                        />
-                      ) : null}
-                    </Div>
-                  ) : null}
+                  {data.quiz.position.values.display1
+                    ? this.getCard(
+                        {
+                          urlName: data.quiz.position.values.urlName1,
+                          name: data.quiz.position.values.name1,
+                          image: data.quiz.position.values.image1
+                        },
+                        "position",
+                        position
+                      )
+                    : null}
+                  {data.quiz.position.values.display2
+                    ? this.getCard(
+                        {
+                          urlName: data.quiz.position.values.urlName2,
+                          name: data.quiz.position.values.name2,
+                          image: data.quiz.position.values.image2
+                        },
+                        "position",
+                        position
+                      )
+                    : null}
                 </Div>
                 <Div
                   p="0px 2rem"
                   mb="1rem"
                   style={{ display: "flex", justifyContent: "center" }}
                 >
-                  {data.quiz.position.values.name3 ? (
-                    <Div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        border: "1px solid #707070",
-                        borderRadius: "10px",
-                        justifyContent: "space-between",
-                        width: "50%"
-                      }}
-                      pb="0px"
-                      m="0px 0.5rem"
-                      p="1rem 2rem"
-                      onClick={() =>
-                        this.setState({
-                          position: data.quiz.position.values.name3
-                        })
-                      }
-                    >
-                      <Image
-                        src={data.quiz.position.values.image3}
-                        alt={data.quiz.size.values.name3}
-                        width="100%"
-                      />
-                      <Text ta="center">{data.quiz.position.values.name3}</Text>
-                      {position === data.quiz.position.values.name3 ? (
-                        <Image
-                          src={select}
-                          alt="select icon"
-                          style={{
-                            position: "absolute",
-                            top: "5px",
-                            right: "5px",
-                            width: "25px"
-                          }}
-                        />
-                      ) : null}
-                    </Div>
-                  ) : null}
-                  {data.quiz.position.values.display4 ? (
-                    <Div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        border: "1px solid #707070",
-                        borderRadius: "10px",
-                        justifyContent: "space-between",
-                        width: "50%"
-                      }}
-                      pb="0px"
-                      m="0px 0.5rem"
-                      p="1rem 2rem"
-                      onClick={() =>
-                        this.setState({
-                          size: data.quiz.position.values.name1
-                        })
-                      }
-                    >
-                      <Image
-                        src={data.quiz.position.values.image4}
-                        alt={data.quiz.size.values.name4}
-                        width="100%"
-                      />
-                      <Text>{data.quiz.position.values.name4}</Text>
-                      {position === data.quiz.position.values.name4 ? (
-                        <Image
-                          src={select}
-                          alt="select icon"
-                          style={{
-                            position: "absolute",
-                            top: "5px",
-                            right: "5px",
-                            width: "25px"
-                          }}
-                        />
-                      ) : null}
-                    </Div>
-                  ) : null}
+                  {data.quiz.position.values.name3
+                    ? this.getCard(
+                        {
+                          urlName: data.quiz.position.values.urlName3,
+                          name: data.quiz.position.values.name3,
+                          image: data.quiz.position.values.image3
+                        },
+                        "position",
+                        position
+                      )
+                    : null}
+                  {data.quiz.position.values.display4
+                    ? this.getCard(
+                        {
+                          urlName: data.quiz.position.values.urlName4,
+                          name: data.quiz.position.values.name4,
+                          image: data.quiz.position.values.image4
+                        },
+                        "position",
+                        position
+                      )
+                    : null}
                 </Div>
               </Div>
             )}
@@ -665,173 +477,57 @@ export class MattressForSleep extends Component {
                   style={{ display: "flex", justifyContent: "center" }}
                 >
                   {/* {data.quiz.feel.values.display1 && position === 'Toss & Turn' ? ( */}
-                  {data.quiz.feel.values.display1 && position !== "Back" ? (
-                    <Div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        border: "1px solid #707070",
-                        borderRadius: "10px",
-                        justifyContent: "space-between",
-                        width: "50%"
-                      }}
-                      pb="0px"
-                      m="0px 0.5rem"
-                      p="1rem 2rem"
-                      onClick={() =>
-                        this.setState({
-                          feel: data.quiz.feel.values.name1
-                        })
-                      }
-                    >
-                      <Image
-                        src={data.quiz.feel.values.image1}
-                        alt={data.quiz.size.values.name1}
-                        width="100%"
-                      />
-                      <Text ta="center">{data.quiz.feel.values.name1}</Text>
-                      {feel === data.quiz.feel.values.name1 ? (
-                        <Image
-                          src={select}
-                          alt="select icon"
-                          style={{
-                            position: "absolute",
-                            top: "5px",
-                            right: "5px",
-                            width: "25px"
-                          }}
-                        />
-                      ) : null}
-                    </Div>
-                  ) : null}
+                  {data.quiz.feel.values.display1 && position !== "Back"
+                    ? this.getCard(
+                        {
+                          urlName: data.quiz.feel.values.urlName1,
+                          name: data.quiz.feel.values.name1,
+                          image: data.quiz.feel.values.image1
+                        },
+                        "feel",
+                        feel
+                      )
+                    : null}
                   {/* {data.quiz.feel.values.display2 && position === 'Toss & Turn' ? ( */}
-                  {data.quiz.feel.values.display2 && position !== "Back" ? (
-                    <Div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        border: "1px solid #707070",
-                        borderRadius: "10px",
-                        justifyContent: "space-between",
-                        width: "50%"
-                      }}
-                      pb="0px"
-                      m="0px 0.5rem"
-                      p="1rem 2rem"
-                      onClick={() =>
-                        this.setState({
-                          feel: data.quiz.feel.values.name2
-                        })
-                      }
-                    >
-                      <Image
-                        src={data.quiz.feel.values.image2}
-                        alt={data.quiz.size.values.name2}
-                        width="100%"
-                      />
-                      <Text ta="center">{data.quiz.feel.values.name2}</Text>
-                      {feel === data.quiz.feel.values.name2 ? (
-                        <Image
-                          src={select}
-                          alt="select icon"
-                          style={{
-                            position: "absolute",
-                            top: "5px",
-                            right: "5px",
-                            width: "25px"
-                          }}
-                        />
-                      ) : null}
-                    </Div>
-                  ) : null}
+                  {data.quiz.feel.values.display2 && position !== "Back"
+                    ? this.getCard(
+                        {
+                          urlName: data.quiz.feel.values.urlName2,
+                          name: data.quiz.feel.values.name2,
+                          image: data.quiz.feel.values.image2
+                        },
+                        "feel",
+                        feel
+                      )
+                    : null}
                 </Div>
                 <Div
                   p="0px 2rem"
                   mb="1rem"
                   style={{ display: "flex", justifyContent: "center" }}
                 >
-                  {data.quiz.feel.values.display3 ? (
-                    <Div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        border: "1px solid #707070",
-                        borderRadius: "10px",
-                        justifyContent: "space-between",
-                        width: "50%"
-                      }}
-                      pb="0px"
-                      m="0px 0.5rem"
-                      p="1rem 2rem"
-                      onClick={() =>
-                        this.setState({
-                          feel: data.quiz.feel.values.name3
-                        })
-                      }
-                    >
-                      <Image
-                        src={data.quiz.feel.values.image3}
-                        alt={data.quiz.size.values.name3}
-                        width="100%"
-                      />
-                      <Text ta="center">{data.quiz.feel.values.name3}</Text>
-                      {feel === data.quiz.feel.values.name3 ? (
-                        <Image
-                          src={select}
-                          alt="select icon"
-                          style={{
-                            position: "absolute",
-                            top: "5px",
-                            right: "5px",
-                            width: "25px"
-                          }}
-                        />
-                      ) : null}
-                    </Div>
-                  ) : null}
-                  {data.quiz.feel.values.name4 && position !== "Toss & Turn" ? (
-                    <Div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        alignItems: "center",
-                        border: "1px solid #707070",
-                        borderRadius: "10px",
-                        justifyContent: "space-between",
-                        width: "50%"
-                      }}
-                      pb="0px"
-                      m="0px 0.5rem"
-                      p="1rem 2rem"
-                      onClick={() =>
-                        this.setState({
-                          feel: data.quiz.feel.values.name4
-                        })
-                      }
-                    >
-                      <Image
-                        src={data.quiz.feel.values.image4}
-                        alt={data.quiz.size.values.name4}
-                        width="100%"
-                      />
-                      <Text ta="center">{data.quiz.feel.values.name4}</Text>
-                      {feel === data.quiz.feel.values.name4 ? (
-                        <Image
-                          src={select}
-                          alt="select icon"
-                          style={{
-                            position: "absolute",
-                            top: "5px",
-                            right: "5px",
-                            width: "25px"
-                          }}
-                        />
-                      ) : null}
-                    </Div>
-                  ) : null}
+                  {data.quiz.feel.values.display3
+                    ? this.getCard(
+                        {
+                          urlName: data.quiz.feel.values.urlName3,
+                          name: data.quiz.feel.values.name3,
+                          image: data.quiz.feel.values.image3
+                        },
+                        "feel",
+                        feel
+                      )
+                    : null}
+                  {data.quiz.feel.values.name4 && position !== "Toss & Turn"
+                    ? this.getCard(
+                        {
+                          urlName: data.quiz.feel.values.urlName4,
+                          name: data.quiz.feel.values.name4,
+                          image: data.quiz.feel.values.image4
+                        },
+                        "feel",
+                        feel
+                      )
+                    : null}
                 </Div>
               </Div>
             )}

@@ -8,12 +8,12 @@ import TopBanner from "./TopBanner";
 import WhyChooseUs from "./WhyChooseUs";
 import SleepBetter from "./SleepBetter";
 import MattressForSleep from "./MattressForSleep";
+import SleepPosition from "./SleepPosition";
+import MattressesByBrands from "./MattressesByBrands";
 // import CustomerSpeak from "./CustomerSpeak";
 // import PreQualifyNow from "./PreQualify";
 // import SleepEnthusiasts from "./SleepEnthusiasts";
 // import MattressesVideo from "./MattressesVideo";
-// import SleepPosition from "./SleepPosition";
-// import MattressesByBrands from "./MattressesByBrands";
 // import MattressesByMaterial from "./MattressesByMaterial";
 // import MattressesByComfort from "./MattressesByComfort";
 // import MattressesBySize from "./MattressesBySize";
@@ -113,6 +113,12 @@ export class index extends Component {
         {/* Mattress for Sleep */}
         <MattressForSleep data={mattressForSleep} history={history} />
 
+        {/* Sleep Position */}
+        <SleepPosition data={sleepPosition} />
+
+        {/* Mattress By Brands */}
+        <MattressesByBrands data={mattressesByBrand} />
+
         {/* PreQualify Section */}
         {/* <PreQualifyNow data={preQualifyNow} /> */}
 
@@ -121,12 +127,6 @@ export class index extends Component {
 
         {/* Mattresses Video */}
         {/* <MattressesVideo data={mattressesVideo} /> */}
-
-        {/* Sleep Position */}
-        {/* <SleepPosition data={sleepPosition} /> */}
-
-        {/* Mattress By Brands */}
-        {/* <MattressesByBrands data={mattressesByBrand} /> */}
 
         {/* Mattress By Material */}
         {/* <MattressesByMaterial data={mattressesByMaterial} /> */}
