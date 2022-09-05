@@ -153,4 +153,4 @@ export const SINGLE_BLOG = "tesla/blog/post";
 
 
 /* Gifting */
-export const GET_GIFTING = "tesla/static/gifting";
+export const GET_GIFTING = "tesla/static/giftingdesktop";
