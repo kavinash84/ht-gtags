@@ -45,11 +45,14 @@ export default class Gifting extends Component {
             />
           </Div>
           <Div className={styles.carousel}>
-            <GiftingCarousel
-              categoryName={giftsByRecipient.title}
-              data={giftsByRecipient}
-              onClick={this.handleClick}
-            />
+            {giftsByRecipient ? (
+              <GiftingCarousel
+                categoryName={giftsByRecipient.title}
+                data={giftsByRecipient}
+                onClick={this.handleClick}
+              />
+            ) : null}
+
           </Div>
         </div>
         <div className={styles.shopByPriceBg}>
