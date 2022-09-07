@@ -5,7 +5,7 @@ import Image from "hometown-components-dev/lib/ImageHtV1";
 import Heading from "hometown-components-dev/lib/HeadingHtV1";
 import Text from "hometown-components-dev/lib/TextHtV1";
 
-// const quotes = require("../../../static/mattresses/Quotes.png");
+const arrowForward = require("../../../static/new-home/newForwardArrow.svg");
 
 const renderComponent = (index, elem, component, handleClick) => {
   switch (component) {
@@ -55,75 +55,72 @@ const renderComponent = (index, elem, component, handleClick) => {
           </Link>
         </Div>
       );
-    case "3":
+    case "4":
       return (
         <Div key={index} p="2rem" pl="1.5rem" pr="0rem" pb="0rem">
-          <Link to={elem.link} onClick={handleClick}>
+          <Link to={elem.link || "/"} onClick={handleClick}>
             <Div
               style={{
                 paddingBottom: "1rem"
               }}
             >
               <Image src={elem.image} alt="brand logo" />
-              <Text fontSize="14px" color="#323231" ta="center" mb="0px">
+              <Heading
+                fontSize="19px"
+                style={{ color: "#323131", margin: "13px 0px" }}
+                ta="left"
+                mb="0px"
+              >
                 {elem.title}
+              </Heading>
+              <Text
+                color="#3A3A3A"
+                fontSize="14px"
+                mt="5px"
+                style={{ lineHeight: "15px" }}
+              >
+                {elem.description}
               </Text>
+              <Div style={{ display: "flex", marginTop: "15px" }}>
+                <Div
+                  style={{
+                    fontSize: "16px",
+                    color: "#3A3A3A",
+                    marginRight: "5px"
+                  }}
+                >
+                  EXPLORE
+                </Div>
+                <Image
+                  src={arrowForward}
+                  alt="arrowForward"
+                  style={{ width: "20px" }}
+                />
+              </Div>
             </Div>
           </Link>
         </Div>
       );
-    case "4":
+    case "3":
       return (
-        <Div key={index} p="0rem" pl="1.5rem" pr="0rem" pb="0rem">
-          {elem.id === "3" ? (
-            <a href="mailto: care@hometown.in">
-              <Div
-                style={{
-                  paddingBottom: "1rem"
-                }}
+        <Div key={index} p="2rem" pl="1.5rem" pr="0rem" pb="0rem">
+          <Link to={elem.link || "/"} onClick={handleClick}>
+            <Div
+              style={{
+                paddingBottom: "1rem"
+              }}
+            >
+              <Image src={elem.image} alt="brand logo" />
+              <Text
+                fontSize="16px"
+                color="#323231"
+                style={{ textAlign: "center", paddingTop: "10px" }}
+                mb="0px"
               >
-                <Div p="1rem 5rem">
-                  <Image src={elem.image} alt="brand logo" />
-                </Div>
-                <Div p="0px 0.7rem">
-                  <Heading
-                    fontSize="1.3rem"
-                    style={{ color: "#323231", textAlign: "center" }}
-                    mb="0px"
-                  >
-                    {elem.title}
-                  </Heading>
-                  <Text color="#323231" fontSize="1rem" mt="5px" ta="center">
-                    {elem.description}
-                  </Text>
-                </Div>
-              </Div>
-            </a>
-          ) : (
-            <Link to={elem.link} onClick={handleClick}>
-              <Div
-                style={{
-                  paddingBottom: "1rem"
-                }}
-              >
-                <Div p="1rem 5rem">
-                  <Image src={elem.image} alt="brand logo" />
-                </Div>
-                <Div p="0px 0.7rem">
-                  <Heading
-                    fontSize="1.3rem"
-                    style={{ color: "#323231", textAlign: "center" }}
-                    mb="0px"
-                  >
-                    {elem.title}
-                  </Heading>
-                  <Text color="#323231" fontSize="1rem" mt="5px" ta="center">
-                    {elem.description}
-                  </Text>
-                </Div>
-              </Div>
-            </Link>
-          )}
+                {elem.title}
+              </Text>
+            </Div>
+          </Link>
         </Div>
       );
     case "5":

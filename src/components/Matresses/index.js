@@ -10,21 +10,14 @@ import SleepBetter from "./SleepBetter";
 import MattressForSleep from "./MattressForSleep";
 import SleepPosition from "./SleepPosition";
 import MattressesByBrands from "./MattressesByBrands";
-// import CustomerSpeak from "./CustomerSpeak";
-// import PreQualifyNow from "./PreQualify";
-// import SleepEnthusiasts from "./SleepEnthusiasts";
-// import MattressesVideo from "./MattressesVideo";
-// import MattressesByMaterial from "./MattressesByMaterial";
-// import MattressesByComfort from "./MattressesByComfort";
-// import MattressesBySize from "./MattressesBySize";
-// import OrthopedicMattresses from "./OrthopedicMattresses";
-// import MattressesForEveryone from "./MattressesForEveryone";
-// import HelpToDecide from "./HelpToDecide";
-// import BeforeYouBuy from "./BeforeYouBuy";
-// import MattressProtectors from "./MattressProtectors";
-// import ShopPillows from "./ShopPillows";
-// import FoamPillows from "./FoamPillows";
-// import BuildyourBedroom from "./BuildyourBedroom";
+import MattressesByMaterial from "./MattressesByMaterial";
+import MattressesByComfort from "./MattressesByComfort";
+import OrthopedicMattresses from "./OrthopedicMattresses";
+import MattressesForEveryone from "./MattressesForEveryone";
+import MattressesBySize from "./MattressesBySize";
+import HelpToDecide from "./HelpToDecide";
+import BeforeYouBuy from "./BeforeYouBuy";
+import FoamPillows from "./FoamPillows";
 import Faqs from "./Faqs";
 import SecondTopBannere from "./SecondTopBannere";
 import CustomerStories from "../ModularKitchenNew/CustomerStories/CustomerStories";
@@ -119,65 +112,31 @@ export class index extends Component {
         {/* Mattress By Brands */}
         <MattressesByBrands data={mattressesByBrand} />
 
-        {/* PreQualify Section */}
-        {/* <PreQualifyNow data={preQualifyNow} /> */}
-
-        {/* Sleep Enthusiasts */}
-        {/* <SleepEnthusiasts data={sleepEnthusiasts} /> */}
-
-        {/* Mattresses Video */}
-        {/* <MattressesVideo data={mattressesVideo} /> */}
-
         {/* Mattress By Material */}
-        {/* <MattressesByMaterial data={mattressesByMaterial} /> */}
-
-        {/* Orthopedic Mattresses */}
-        {/* <OrthopedicMattresses data={orthopedicMattreses} /> */}
+        <MattressesByMaterial data={mattressesByMaterial} />
 
         {/* Mattress By Comfort */}
-        {/* <MattressesByComfort data={mattressesByComfort} /> */}
-
-        {/* Mattress Guide */}
-        {/* <MattressGuide data={mattresses.mattressesGuide} /> */}
+        <MattressesByComfort data={mattressesByComfort} />
 
         {/* Mattress By Size */}
-        {/* <MattressesBySize data={mattressesBySize} /> */}
+        <MattressesBySize data={mattressesBySize} />
+
+        {/* Orthopedic Mattresses */}
+        <OrthopedicMattresses data={orthopedicMattreses} />
 
         {/* Mattresses for Everyone */}
-        {/* <MattressesForEveryone data={mattressesForEveryone} /> */}
+        <MattressesForEveryone data={mattressesForEveryone} />
 
         {/* HelpToDecide */}
-        {/* <HelpToDecide data={helpToDecide} /> */}
+        <HelpToDecide data={helpToDecide} />
 
         {/* Before you buy */}
-        {/* <BeforeYouBuy data={beforeYouBuy} /> */}
-
-        {/* Mattress Protectors */}
-        {/* <MattressProtectors data={mattressProtectors} /> */}
-
-        {/* Shop Pillows */}
-        {/* <ShopPillows data={shopPillows} /> */}
-
-        {/* Sleep Position */}
-        {/* {Array.isArray(sleepPositiononPillow.values) ? (
-          sleepPositiononPillow.values.length ? (
-            <SleepPosition data={sleepPositiononPillow} />
-          ) : null
-        ) : null} */}
-
-        {/* Mattress By Material */}
-        {/* <MattressesByMaterial data={pillowByMaterial} /> */}
-
-        {/* Pillow Guide */}
-        {/* <PillowGuide data={mattresses.pillowGuide} /> */}
+        <BeforeYouBuy data={beforeYouBuy} />
 
         {/* Foam Pillows */}
-        {/* <FoamPillows data={foamPillows} /> */}
+        <FoamPillows data={pillowByMaterial} />
 
-        {/* Build Your Bedroom */}
-        {/* <BuildyourBedroom data={buildYourBedroom} /> */}
-
-        {/* FAQs */}
+        {/* Faqs */}
         <Faqs data={faqs} />
       </Div>
     );

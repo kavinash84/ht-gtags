@@ -1,48 +1,109 @@
-import React, { Component } from 'react';
-import Div from 'hometown-components/lib/Div';
-import Heading from 'hometown-components/lib/Heading';
-import SlickSlider from '../SlickSlider';
-import CarouselData from './CarouselData';
-import './Slider.css';
-
-const adjustSlidesNew = (length) => ({
-    slidesToShow: length > 1 ? 1.4 : length,
-    slidesToScroll: 1,
-    infinite: false,
-    autoplay: false,
-    dots: true,
-    customPaging: i => (
-      <div
-        style={{
-          borderTop: '1px solid #848C7F'
-        }}
-      ></div>
-    )
-  });
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
+import Div from "hometown-components-dev/lib/BoxHtV1";
+import Row from "hometown-components-dev/lib/RowHtV1";
+import Text from "hometown-components-dev/lib/TextHtV1";
+import Image from "hometown-components-dev/lib/ImageHtV1";
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
+import "./Slider.css";
 
 export class HelpToDecide extends Component {
-    render() {
-        const { data } = this.props;
-        return (
-            <Div mt="3rem"pt="1rem" pb="1rem" style={{ backgroundColor: '#F3EFE7'}}>
-                <Heading fontSize="22px" ta="center" p="0px 3rem" style={{
-                    fontWeight: 'bold',
-                    color:"#323231",
-                    lineHeight:"36px",
-                    whiteSpace: 'normal'
-                }}>
-                    {data.title}
-                </Heading>
-                <Div className="carousel-one offset" mt="0rem">
-                    <SlickSlider settings={adjustSlidesNew(8)}>
-                        {data.values.map((elem,index) => (
-                            <CarouselData elem={elem} index={index} component="4"/>
-                        ))}
-                    </SlickSlider>
-                </Div>
+  render() {
+    const { data } = this.props;
+    return (
+      <Div mt="3rem" pt="1rem" pb="1rem" style={{ backgroundColor: "#F3EFE7" }}>
+        <div
+          style={{
+            textAlign: "center",
+            fontSize: "22px",
+            fontWeight: 600,
+            padding: "50px 30x 30px"
+          }}
+        >
+          {data.title}
+        </div>
+        <Row
+          mr="0px"
+          ml="0px"
+          style={{
+            justifyContent: "center",
+            alignItems: "center"
+          }}
+        >
+          {data.values.map((item, index) => (
+            <Div
+              key={index}
+              p="0rem"
+              pl="1.5rem"
+              pr="0rem"
+              pb="0rem"
+              style={{ width: "30%" }}
+            >
+              {item.id === "3" ? (
+                <a href="mailto: care@hometown.in">
+                  <Div
+                    style={{
+                      paddingBottom: "1rem"
+                    }}
+                  >
+                    <Div p="1rem 5rem">
+                      <Image src={item.image} alt="brand logo" />
+                    </Div>
+                    <Div p="0px 0.7rem">
+                      <Heading
+                        fontSize="1.3rem"
+                        style={{ color: "#323231", textAlign: "center" }}
+                        mb="0px"
+                      >
+                        {item.title}
+                      </Heading>
+                      <Text
+                        color="#323231"
+                        fontSize="1rem"
+                        mt="5px"
+                        style={{ textAlign: "center" }}
+                      >
+                        {item.description}
+                      </Text>
+                    </Div>
+                  </Div>
+                </a>
+              ) : (
+                <Link to={item.link}>
+                  <Div
+                    style={{
+                      paddingBottom: "1rem"
+                    }}
+                  >
+                    <Div p="1rem 5rem">
+                      <Image src={item.image} alt="brand logo" />
+                    </Div>
+                    <Div p="0px 0.7rem">
+                      <Heading
+                        fontSize="1.3rem"
+                        style={{ color: "#323231", textAlign: "center" }}
+                        mb="0px"
+                      >
+                        {item.title}
+                      </Heading>
+                      <Text
+                        color="#323231"
+                        fontSize="1rem"
+                        mt="5px"
+                        style={{ textAlign: "center" }}
+                      >
+                        {item.description}
+                      </Text>
+                    </Div>
+                  </Div>
+                </Link>
+              )}
             </Div>
-        )
-    }
+          ))}
+        </Row>
+      </Div>
+    );
+  }
 }
 
-export default HelpToDecide
+export default HelpToDecide;

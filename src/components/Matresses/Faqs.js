@@ -8,24 +8,24 @@ export class Faqs extends Component {
   state = {
     showAns: false,
     ansNum: 0,
-    showMore: false,
+    // showMore: false,
     faqs: this.props.data.values,
     faqsFull: this.props.data.values,
     faqsShort: this.props.data.values.slice(0, 4)
   };
 
-  componentDidMount = () => {
-    this.updateFaqs();
-  };
+  // componentDidMount = () => {
+  //   this.updateFaqs();
+  // };
 
-  updateFaqs = () => {
-    this.setState(
-      {
-        faqs: this.state.faqs.slice(0, 4)
-      },
-      () => console.log("triggered")
-    );
-  };
+  // updateFaqs = () => {
+  //   this.setState(
+  //     {
+  //       faqs: this.state.faqs.slice(0, 4)
+  //     },
+  //     () => console.log("triggered")
+  //   );
+  // };
 
   handleFaq = index => {
     if (index === this.state.ansNum) {
@@ -41,27 +41,27 @@ export class Faqs extends Component {
     }
   };
 
-  handleShowMore = () => {
-    this.setState(
-      {
-        showMore: !this.state.showMore
-      },
-      () => {
-        if (this.state.showMore) {
-          this.setState({
-            faqs: this.state.faqsFull
-          });
-        } else {
-          this.setState(
-            {
-              faqs: this.state.faqsShort
-            },
-            () => console.log(this.state.faqs)
-          );
-        }
-      }
-    );
-  };
+  // handleShowMore = () => {
+  //   this.setState(
+  //     {
+  //       showMore: !this.state.showMore
+  //     },
+  //     () => {
+  //       if (this.state.showMore) {
+  //         this.setState({
+  //           faqs: this.state.faqsFull
+  //         });
+  //       } else {
+  //         this.setState(
+  //           {
+  //             faqs: this.state.faqsShort
+  //           },
+  //           () => console.log(this.state.faqs)
+  //         );
+  //       }
+  //     }
+  //   );
+  // };
 
   render() {
     const { data } = this.props;
@@ -72,20 +72,20 @@ export class Faqs extends Component {
           p="1rem 0px"
           style={{
             backgroundColor: "#69878B",
-            borderBottom: "2px solid white"
+            borderBottom: "1px solid white"
           }}
         >
           <Heading
             mt="0.5rem"
             mb="5px"
             fontSize="22px"
-            ta="center"
             p="0px 1rem"
             style={{
               fontWeight: "bold",
               color: "#FFFFFF",
               lineHeight: "36px",
-              whiteSpace: "normal"
+              whiteSpace: "normal",
+              textAlign: "center"
             }}
           >
             {data.title}
@@ -98,64 +98,72 @@ export class Faqs extends Component {
             }}
           ></div>
         </Div>
-        {faqs.length
-          ? faqs.map((elem, index) => (
-              <Div
-                key={index}
-                p="0.5rem 1.5rem"
-                pb="0px"
-                style={{
-                  backgroundColor: `${
-                    showAns && ansNum === index ? "#FFFFFF" : "#69878B"
-                  }`
-                }}
-                onClick={() => this.handleFaq(index)}
-              >
+        <Div>
+          {faqs.length
+            ? faqs.map((elem, index) => (
                 <Div
-                  pb="0.5rem"
+                  key={index}
+                  p="0.5rem 1.5rem"
+                  pb="0px"
                   style={{
-                    display: "flex",
-                    justifyContent: "space-between",
-                    alignItems: "center",
-                    borderBottom: "1px solid white"
+                    backgroundColor: `${
+                      showAns && ansNum === index ? "#FFFFFF" : "#69878B"
+                    }`,
+                    padding: "0% 7%"
                   }}
+                  onClick={() => this.handleFaq(index)}
                 >
-                  <Text
-                    fontSize="14px"
+                  <Div
+                    pb="0.5rem"
                     style={{
-                      fontWeight: "bold",
-                      color: `${
-                        showAns && ansNum === index ? "#323131" : "#FFFFFF"
-                      }`
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                      borderBottom: "1px solid white",
+                      padding: "15px 0px"
                     }}
                   >
-                    {elem.ques}
-                  </Text>
+                    <Text
+                      fontSize="14px"
+                      style={{
+                        fontWeight: "bold",
+                        color: `${
+                          showAns && ansNum === index ? "#323131" : "#FFFFFF"
+                        }`
+                      }}
+                    >
+                      {elem.ques}
+                    </Text>
+                    {showAns && ansNum === index ? (
+                      <Image
+                        src={data.arrowDown}
+                        alt="arrowDown"
+                        ml="0.4rem"
+                        width="20px"
+                      />
+                    ) : (
+                      <Image
+                        src={data.arrow}
+                        alt="arrow"
+                        width="10px"
+                        ml="0.4rem"
+                      />
+                    )}
+                  </Div>
                   {showAns && ansNum === index ? (
-                    <Image
-                      src={data.arrowDown}
-                      alt="arrowDown"
-                      ml="0.4rem"
-                      width="20px"
-                    />
-                  ) : (
-                    <Image
-                      src={data.arrow}
-                      alt="arrow"
-                      width="10px"
-                      ml="0.4rem"
-                    />
-                  )}
+                    <Text
+                      color="#999999"
+                      fontSize="14px"
+                      style={{ padding: "0px 0px 25px" }}
+                    >
+                      {elem.ans}
+                    </Text>
+                  ) : null}
                 </Div>
-                {showAns && ansNum === index ? (
-                  <Text color="#999999" fontSize="14px">
-                    {elem.ans}
-                  </Text>
-                ) : null}
-              </Div>
-            ))
-          : null}
-        {faqs.length > 3 ? (
+              ))
+            : null}
+        </Div>
+        {/* {faqs.length > 3 ? (
           <Div onClick={this.handleShowMore}>
             <Text
               ta="center"
@@ -178,7 +186,7 @@ export class Faqs extends Component {
               </span>
             </Text>
           </Div>
-        ) : null}
+        ) : null} */}
       </Div>
     );
   }
