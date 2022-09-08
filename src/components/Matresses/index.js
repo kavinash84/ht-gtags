@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import Div from "hometown-components-dev/lib/BoxHtV1";
 
 // Components
@@ -27,15 +28,10 @@ import CustomerStories from "../ModularKitchenNew/CustomerStories/CustomerStorie
   textData: mattresses.data.items.text.textMarquee.textData,
   topBanner: mattresses.data.items.text.topBanner,
   secondTopBannere: mattresses.data.items.text.secondTopBannere,
-  preQualifyNow: mattresses.data.items.text.preQualifyNow,
-  sleepEnthusiasts: mattresses.data.items.text.sleepEnthusiasts,
   whyChooseUs: mattresses.data.items.text.whyChooseUs,
   sleepBetter: mattresses.data.items.text.sleepBetter,
-  customerSpeak: mattresses.data.items.text.customerSpeak,
   mattressForSleep: mattresses.data.items.text.mattressForSleep,
-  mattressesVideo: mattresses.data.items.text.mattressesVideo,
   sleepPosition: mattresses.data.items.text.sleepPosition,
-  sleepPositiononPillow: mattresses.data.items.text.sleepPositiononPillow,
   mattressesByBrand: mattresses.data.items.text.mattressesByBrand,
   mattressesByMaterial: mattresses.data.items.text.mattressesByMaterial,
   pillowByMaterial: mattresses.data.items.text.pillowByMaterial,
@@ -44,11 +40,8 @@ import CustomerStories from "../ModularKitchenNew/CustomerStories/CustomerStorie
   orthopedicMattreses: mattresses.data.items.text.orthopedicMattreses,
   mattressesForEveryone: mattresses.data.items.text.mattressesForEveryone,
   helpToDecide: mattresses.data.items.text.helpToDecide,
-  beforeYouBuy: mattresses.data.items.text.beforeYouBuy,
-  mattressProtectors: mattresses.data.items.text.mattressProtectors,
   shopPillows: mattresses.data.items.text.shopPillows,
-  foamPillows: mattresses.data.items.text.foamPillows,
-  buildYourBedroom: mattresses.data.items.text.buildYourBedroom,
+  beforeYouBuy: mattresses.data.items.text.beforeYouBuy,
   faqs: mattresses.data.items.text.faqs
 }))
 export class index extends Component {
@@ -58,15 +51,10 @@ export class index extends Component {
       textData,
       topBanner,
       secondTopBannere,
-      preQualifyNow,
-      sleepEnthusiasts,
       whyChooseUs,
       sleepBetter,
-      customerSpeak,
       mattressForSleep,
-      mattressesVideo,
       sleepPosition,
-      sleepPositiononPillow,
       mattressesByBrand,
       mattressesByMaterial,
       pillowByMaterial,
@@ -76,10 +64,7 @@ export class index extends Component {
       mattressesForEveryone,
       helpToDecide,
       beforeYouBuy,
-      mattressProtectors,
       shopPillows,
-      foamPillows,
-      buildYourBedroom,
       faqs,
       history
     } = this.props;
@@ -101,7 +86,7 @@ export class index extends Component {
         <SleepBetter data={sleepBetter} />
 
         {/* Customers Speak */}
-        <CustomerStories />
+        <CustomerStories fromMattres={true} />
 
         {/* Mattress for Sleep */}
         <MattressForSleep data={mattressForSleep} history={history} />
@@ -132,6 +117,16 @@ export class index extends Component {
 
         {/* Before you buy */}
         <BeforeYouBuy data={beforeYouBuy} />
+
+        {/* shop pillows */}
+        {shopPillows.image ? (
+          <Link to={shopPillows.link.url || "/"}>
+            <img
+              src={shopPillows.image}
+              style={{ width: "100%", height: "auto", marginTop: "100px" }}
+            />
+          </Link>
+        ) : null}
 
         {/* Foam Pillows */}
         <FoamPillows data={pillowByMaterial} />

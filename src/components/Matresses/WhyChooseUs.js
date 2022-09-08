@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Div from "hometown-components-dev/lib/BoxHtV1";
-import Heading from "hometown-components-dev/lib/HeadingHtV1";
 import Image from "hometown-components-dev/lib/ImageHtV1";
 import Text from "hometown-components-dev/lib/TextHtV1";
 
@@ -14,7 +13,7 @@ export class WhyChooseUs extends Component {
             textAlign: "center",
             fontSize: "22px",
             fontWeight: 600,
-            padding: "25px"
+            padding: "25px 25px 35px"
           }}
         >
           {data.title}

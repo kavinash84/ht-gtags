@@ -17,7 +17,7 @@ export class HelpToDecide extends Component {
             textAlign: "center",
             fontSize: "22px",
             fontWeight: 600,
-            padding: "50px 30x 30px"
+            padding: "25px 0px 25px"
           }}
         >
           {data.title}

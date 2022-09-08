@@ -5,7 +5,7 @@ import Image from "hometown-components-dev/lib/ImageHtV1";
 import Heading from "hometown-components-dev/lib/HeadingHtV1";
 import Text from "hometown-components-dev/lib/TextHtV1";
 
-const arrowForward = require("../../../static/new-home/newForwardArrow.svg");
+// const arrowForward = require("../../../static/new-home/newForwardArrow.svg");
 
 const renderComponent = (index, elem, component, handleClick) => {
   switch (component) {
@@ -58,30 +58,30 @@ const renderComponent = (index, elem, component, handleClick) => {
     case "4":
       return (
         <Div key={index} p="2rem" pl="1.5rem" pr="0rem" pb="0rem">
-          <Link to={elem.link || "/"} onClick={handleClick}>
-            <Div
-              style={{
-                paddingBottom: "1rem"
-              }}
+          {/* <Link to={elem.link || "/"} onClick={handleClick}> */}
+          <Div
+            style={{
+              paddingBottom: "1rem"
+            }}
+          >
+            <Image src={elem.image} alt="brand logo" />
+            <Heading
+              fontSize="19px"
+              style={{ color: "#323131", margin: "13px 0px" }}
+              ta="left"
+              mb="0px"
             >
-              <Image src={elem.image} alt="brand logo" />
-              <Heading
-                fontSize="19px"
-                style={{ color: "#323131", margin: "13px 0px" }}
-                ta="left"
-                mb="0px"
-              >
-                {elem.title}
-              </Heading>
-              <Text
-                color="#3A3A3A"
-                fontSize="14px"
-                mt="5px"
-                style={{ lineHeight: "15px" }}
-              >
-                {elem.description}
-              </Text>
-              <Div style={{ display: "flex", marginTop: "15px" }}>
+              {elem.title}
+            </Heading>
+            <Text
+              color="#3A3A3A"
+              fontSize="14px"
+              mt="5px"
+              style={{ lineHeight: "15px" }}
+            >
+              {elem.description}
+            </Text>
+            {/* <Div style={{ display: "flex", marginTop: "15px" }}>
                 <Div
                   style={{
                     fontSize: "16px",
@@ -96,9 +96,9 @@ const renderComponent = (index, elem, component, handleClick) => {
                   alt="arrowForward"
                   style={{ width: "20px" }}
                 />
-              </Div>
-            </Div>
-          </Link>
+              </Div> */}
+          </Div>
+          {/* </Link> */}
         </Div>
       );
     case "3":

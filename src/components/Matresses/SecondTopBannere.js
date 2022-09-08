@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Image from "hometown-components-dev/lib/ImageHtV1";
-import Div from "hometown-components-dev/lib/BoxHtV1";
 
 export class SecondTopBannere extends Component {
   render() {
@@ -12,7 +11,7 @@ export class SecondTopBannere extends Component {
             textAlign: "center",
             fontSize: "22px",
             fontWeight: 600,
-            padding: "20x"
+            padding: "50px 50px 25px"
           }}
         >
           {data.title}

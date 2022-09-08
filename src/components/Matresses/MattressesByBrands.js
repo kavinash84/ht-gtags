@@ -61,7 +61,7 @@ export class MattressesByBrands extends Component {
             textAlign: "center",
             fontSize: "22px",
             fontWeight: 600,
-            padding: "20x"
+            padding: "0px 0px 25px"
           }}
         >
           {data.title}

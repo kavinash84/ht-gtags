@@ -29,10 +29,10 @@ export class SleepBetter extends Component {
     const { data } = this.props;
     return (
       <Div
-        mt="2rem"
+        mt="4rem"
         style={{
           backgroundColor: "#F3EFE7",
-          padding: "0% 7%"
+          padding: "1.5% 7%"
         }}
       >
         <div

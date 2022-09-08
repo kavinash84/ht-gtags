@@ -26,7 +26,7 @@ const adjustSlides = length => ({
 }))
 export default class CustomerStories extends Component {
   render() {
-    const { customerStories } = this.props;
+    const { customerStories, fromMattres } = this.props;
     return (
       <Div
         style={{
@@ -35,25 +35,38 @@ export default class CustomerStories extends Component {
           marginTop: "40px"
         }}
       >
-        <Div
-          style={{
-            fontSize: "40px",
-            fontWeight: "600",
-            marginBottom: "20px",
-            color: "black"
-          }}
-        >
-          {customerStories.title}
+        {fromMattres ? (
           <div
             style={{
-              width: "30px",
-              borderTop: "2px solid #222222",
-              margin: "auto",
-              marginTop: "15px",
-              marginBottom: "20px"
+              textAlign: "center",
+              fontSize: "22px",
+              fontWeight: 600,
+              padding: "0px 0px 25px"
             }}
-          />
-        </Div>
+          >
+            {customerStories.title}
+          </div>
+        ) : (
+          <Div
+            style={{
+              fontSize: "40px",
+              fontWeight: "600",
+              marginBottom: "20px",
+              color: "black"
+            }}
+          >
+            {customerStories.title}
+            <div
+              style={{
+                width: "30px",
+                borderTop: "2px solid #222222",
+                margin: "auto",
+                marginTop: "15px",
+                marginBottom: "20px"
+              }}
+            />
+          </Div>
+        )}
         <Div style={{ paddingBottom: "", width: "86%", marginLeft: "6.5%" }}>
           <DBCarousel
             data={customerStories.values}

@@ -37,7 +37,7 @@ export class OrthopedicMattresses extends Component {
             style={{
               position: "absolute",
               width: "100%",
-              bottom: "-2rem"
+              bottom: "-1rem"
             }}
           >
             <Text

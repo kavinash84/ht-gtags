@@ -306,7 +306,7 @@ export class MattressForSleep extends Component {
             textAlign: "center",
             fontSize: "22px",
             fontWeight: 600,
-            padding: "30x"
+            padding: "35px 0px 30px"
           }}
         >
           {data.title}
