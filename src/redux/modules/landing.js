@@ -126,8 +126,9 @@ export const getLandingCategoryData = () => ({
 export const submitOffer = (url, postData) => ({
   types: [LANDING_SUBMIT, LANDING_SUBMIT_SUCCESS, LANDING_SUBMIT_FAIL],
   promise: async ({ client }) => {
+    const header = { 'Content-Type': 'multipart/form-data' };
     try {
-      const response = await client.post(url, postData);
+      const response = await client.post(url, postData, { header });
       return response;
     } catch (error) {
       return error;

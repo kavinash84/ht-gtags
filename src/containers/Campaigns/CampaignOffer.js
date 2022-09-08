@@ -400,13 +400,18 @@ class Campaign extends Component {
             products,
             uploadImage
           };
-          bodyFormData.append('id', postData.id);
-          bodyFormData.append('offer', postData.offer);
-          bodyFormData.append('data', JSON.stringify(postData.data));
-          bodyFormData.append('products', JSON.stringify(postData.products));
-          bodyFormData.append('uploadImage', postData.uploadImage);
+          // bodyFormData.append('id', postData.id);
+          // bodyFormData.append('offer', postData.offer);
+          // bodyFormData.append('data', JSON.stringify(postData.data));
+          // bodyFormData.append('products', JSON.stringify(postData.products));
+          // bodyFormData.append('uploadImage', postData.uploadImage);
 
-          dispatch(submitOffer(api, bodyFormData));
+          // dispatch(submitOffer(api, bodyFormData));
+          Object.keys(postData).forEach(key => {
+            if (key === 'uploadImage') bodyFormData.append(key, uploadImage);
+            else bodyFormData.append(key, JSON.stringify(postData[key]));
+          });
+          dispatch(submitOffer(postApi, bodyFormData));
         } else {
           dispatch(notifSend({
               type: 'warning',
