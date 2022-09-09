@@ -2,12 +2,14 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-
-import MenuFooter from 'containers/MenuFooter';
+import Footer from "components/Footer";
+import Header from "components/Header";
 
 import { notifSend } from 'redux/modules/notifs';
 import { submitOffer } from 'redux/modules/landing';
+import { addToSelectForDemo } from 'redux/modules/selectForDemo';
 import { connect } from 'react-redux';
+
 
 import moment from 'moment';
 
@@ -18,13 +20,11 @@ const startTime = date =>
     .format('HH');
 
 const getTimeSlots = (start, end) => {
-  console.log('getTimeSlots function', start, end);
   const list = [];
   start = start < 12 ? 12 : start;
   for (let i = start; i <= end; i++) {
     list.push(String(i));
   }
-  console.log('FInal list', list);
   return list;
 };
 
@@ -49,24 +49,29 @@ const setProductCategory = (landing, selectForDemo) => {
   const {
     cateData: { skuCategories = {} }
   } = landing;
-  const category = document.getElementById('productCategory');
+  const category = document.getElementById('mobile-productCategory');
   const categorySection = document.getElementsByClassName('pc-section');
 
   if (skuCategories && category) {
-    const categoryOption = skuCategories.map(item => {
-      const value = {
-        categoryId: item.category_id,
-        categoryName: item.category_name
-      };
-      return `<option value='${JSON.stringify(value)}'>
-      ${item.category_name}</option>`;
-    });
+    const categoryOption = skuCategories.map(
+      ({ category_id: categoryId, category_name: categoryName }) =>
+        `<option value='${JSON.stringify({ categoryId, categoryName })}'>${categoryName}</option>`
+    );
+    categoryOption.unshift('<option selected disabled>Please select</option>');
     category.innerHTML = categoryOption;
 
-    if (selectForDemo.length !== 0) {
-      category.style.display = 'none';
-      categorySection[0].style.display = 'none';
-    }
+    // if (selectForDemo.length !== 0) {
+    //   category.style.display = 'none';
+    //   category.required = false;
+    //   categorySection[0].style.display = 'none';
+    // }
+
+    category.addEventListener('input', event => {
+      event.preventDefault();
+      const selected = [...category.options].filter(arr => arr.selected).length;
+      if (selected) category.options[0].selected = false;
+      else category.options[0].selected = true;
+    });
 
     multiselectCategory();
   }
@@ -80,15 +85,13 @@ const getCityFromSelectedState = (mapData, selectedState) => {
 };
 
 const setStateAndCity = stores => {
-  console.log('setStateAndCity function');
   const { items: { text } = {} } = stores;
-  const state = document.getElementById('homeState');
-  const city = document.getElementById('homeCity');
+  const state = document.getElementById('mobile-homeState');
+  const city = document.getElementById('mobile-homeCity');
 
   if (text && state) {
     let states = text.map(item => item.state);
     states = states.filter((item, pos) => states.indexOf(item) === pos);
-    console.log({ state });
     const stateOptions = states.map(arr => `<option value="${arr}">${arr}</option>`);
 
     state.innerHTML = stateOptions;
@@ -110,7 +113,17 @@ const setStateAndCity = stores => {
   }
 };
 
-const resetForm = form => {
+const prefillLoginDetails = (profileData, isLoggedIn) => {
+  if (isLoggedIn === true) {
+    const { contact_number: mobile, email, first_name: firstName, last_name: lastName } = profileData;
+    document.getElementById('mobile-firstName').value = firstName;
+    document.getElementById('mobile-lastName').value = lastName;
+    document.getElementById('mobile-mobileNo').value = mobile;
+    document.getElementById('mobile-emailId').value = email;
+  }
+};
+
+const resetForm = (form, isLoggedIn, profileData) => {
   const inputEle = document.querySelectorAll('select');
   form.reset();
   inputEle.forEach(arr => {
@@ -120,16 +133,17 @@ const resetForm = form => {
       });
     }
   });
+
+  prefillLoginDetails(profileData, isLoggedIn);
 };
 
 const setDataPicker = (currentTime = '') => {
   let options = {};
 
-  const datePicker = document.getElementById('preferredDate');
+  const datePicker = document.getElementById('mobile-preferredDate');
 
   const slotTimeLimit = moment('14:00', 'HH:mm');
 
-  console.log('Current time is after 2pm', moment().isAfter(slotTimeLimit));
   if (currentTime.isAfter(slotTimeLimit)) {
     options = {
       min: moment()
@@ -138,15 +152,13 @@ const setDataPicker = (currentTime = '') => {
       value: moment()
         .add(1, 'd')
         .format('YYYY-MM-DD'),
-      timeSlots: getTimeSlots(12, 16)
+      timeSlots: getTimeSlots(12, 15)
     };
   } else {
-    console.log('given hour', currentTime.format('HH:mm'));
-
     options = {
       min: moment().format('YYYY-MM-DD'),
       value: moment().format('YYYY-MM-DD'),
-      timeSlots: getTimeSlots(startTime(currentTime.add(1, 'h')), 16)
+      timeSlots: getTimeSlots(startTime(currentTime.add(1, 'h')), 15)
     };
   }
 
@@ -157,8 +169,7 @@ const setDataPicker = (currentTime = '') => {
 };
 
 const setPreferredTime = ({ timeSlots }) => {
-  console.log('setPreferredTime function');
-  const prefferedTime = document.getElementById('preferredTime');
+  const prefferedTime = document.getElementById('mobile-preferredTime');
 
   prefferedTime.innerHTML = timeSlots.map(arr => `<option value=${arr}:00:00>${arr}:00</option>`);
 };
@@ -168,15 +179,13 @@ const onInputDateChange = e => {
   let { value } = e.target;
   let datePickerOptions = {};
   // let { target: value } = e;
-  console.log(value);
   value = moment(value, 'YYYY-MM-DD').isBefore() ? moment() : moment(value, 'YYYY-MM-DD');
-  console.log(value.format('YYYY-MM-DD HH:mm'));
   datePickerOptions = setDataPicker(value);
   setPreferredTime(datePickerOptions);
 };
 
 const setDate = () => {
-  const datePicker = document.getElementById('preferredDate');
+  const datePicker = document.getElementById('mobile-preferredDate');
 
   let datePickerOptions = {};
   if (datePicker) {
@@ -190,8 +199,9 @@ const convertArrayToObj = arr => arr.reduce((obj, item) => ({ ...obj, [item.cate
 
 const getSelectTagValue = ({ options }) => {
   let category = [];
-  category = Array.from(options, ele => (ele.selected ? JSON.parse(ele.value) : '')).filter(arr => arr !== '');
-  console.log('Selected inputs', category);
+  category = Array.from(options, ele => (ele.selected && !ele.disabled ? JSON.parse(ele.value) : '')).filter(
+    arr => arr !== ''
+  );
   return category.length > 0 ? convertArrayToObj(category) : category;
 };
 
@@ -204,16 +214,60 @@ const getAllFormElements = ({ elements }, mandatoryFeilds) =>
     type: e.type
   }));
 
+const validatePrefferedTime = formData => {
+  const preferredTime = formData.filter(arr => arr.name === 'preferredTime')[0];
+  const preferredDate = formData.filter(arr => arr.name === 'preferredDate')[0];
+
+  if (preferredTime && preferredDate) {
+    const { value: time } = preferredTime;
+    const { value: date } = preferredDate;
+
+    const selectedDateSlot = moment(date, 'YYYY-MM-DD');
+    const selectedTimeSlot = moment(time, 'HH:mm:ss');
+
+    const isToday = selectedTimeSlot.isSameOrBefore(selectedDateSlot);
+    const currentTime = moment()
+      .startOf('hour')
+      .add(2, 'hours');
+
+    if (isToday) return false;
+
+    if (selectedTimeSlot.isBefore(currentTime)) {
+      setDate();
+      return true;
+    }
+    return false;
+  }
+};
 // eslint-disable-next-line max-len
-const validateInputs = formData =>
-  formData.filter(arr => arr.mandatory).some(arr => arr.value === '' || arr.value.length === 0);
+const validateInputs = formData => {
+  const checkPreferredTime = validatePrefferedTime(formData);
+  const checkMandatoryInputs = formData
+    .filter(arr => arr.mandatory)
+    .some(arr => arr.value === '' || arr.value.length === 0);
+
+  if (checkPreferredTime) return { error: true, message: 'Please select a different time slot' };
+  else if (checkMandatoryInputs) return { error: true, message: 'Please Fill All Details Correctly !' };
+
+  return { error: false, message: '' };
+};
+
+// const moveToFormListner = () => {
+//   const link = document.getElementById('mobile-moveToForm');
+//   if (link) {
+//     link.addEventListener('click', event => {
+//       event.preventDefault();
+//       const form = document.querySelector('.form-container').offsetTop - 50;
+//       window.scroll({ top: form, behavior: 'smooth' });
+//     });
+//   }
+// };
 
 // const getKeyName =  name =>
-@connect(({
-  landing, landing: { data }, storelocator, selectForDemo, userLogin, profile
-}) => ({
+@connect(({ landing, landing: { data, submitErrorMessage }, storelocator, selectForDemo, userLogin, profile }) => ({
   landing,
   data,
+  submitErrorMessage,
   stores: storelocator.data,
   selectForDemo: selectForDemo.data,
   loginDetails: userLogin,
@@ -223,7 +277,7 @@ class Campaign extends Component {
   static propTypes = {
     landing: PropTypes.object.isRequired,
     stores: PropTypes.object.isRequired,
-    selectForDemo: PropTypes.object.isRequired,
+    selectForDemo: PropTypes.array.isRequired,
     loginDetails: PropTypes.object.isRequired,
     profileData: PropTypes.object.isRequired,
     data: PropTypes.object.isRequired
@@ -232,6 +286,13 @@ class Campaign extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
+  constructor(props) {
+    super(props);
+    this.state = {
+      isLoggedIn: {},
+      submitErrorMessage: ''
+    };
+  }
 
   componentDidMount() {
     const {
@@ -242,9 +303,7 @@ class Campaign extends Component {
       profileData
     } = this.props;
 
-    if (isLoggedIn === true) {
-      this.prefillLoginDetails(profileData);
-    }
+    prefillLoginDetails(profileData, isLoggedIn);
 
     setProductCategory(landing, selectForDemo);
 
@@ -252,7 +311,44 @@ class Campaign extends Component {
 
     setDate();
 
-    this.formEventListener();
+    // moveToFormListner();
+
+    this.formEventListener(isLoggedIn, profileData, stores);
+  }
+
+  static getDerivedStateFromProps(nextProps, prevState) {
+    const update = {};
+    if (nextProps.loginDetails !== prevState.loginDetails) {
+      const { loginDetails: { isLoggedIn } = false } = nextProps;
+      // return { isLoggedIn };
+      update.isLoggedIn = isLoggedIn;
+    }
+    if (nextProps.submitErrorMessage !== prevState.submitErrorMessage) {
+      const { submitErrorMessage } = nextProps;
+
+      // return { submitErrorMessage };
+      update.submitErrorMessage = submitErrorMessage;
+    }
+    return Object.keys(update).length ? update : null;
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const { dispatch } = this.context.store;
+    const { isLoggedIn, submitErrorMessage } = this.state;
+    const { profileData, stores } = this.props;
+    const state = [];
+    const form = document.querySelector('form');
+
+    if (prevState.submitErrorMessage !== submitErrorMessage && submitErrorMessage === '') {
+      resetForm(form, isLoggedIn, profileData);
+      setStateAndCity(stores);
+      dispatch(addToSelectForDemo(state));
+    }
+    if (prevState.isLoggedIn !== isLoggedIn) {
+      resetForm(form, isLoggedIn, profileData);
+      setStateAndCity(stores);
+      dispatch(addToSelectForDemo(state));
+    }
   }
 
   getProductDataSet = selectForDemo =>
@@ -264,71 +360,67 @@ class Campaign extends Component {
     return '';
   };
   formEventListener = () => {
-    const { landing, selectForDemo } = this.props;
     const { dispatch } = this.context.store;
-    const postApi = JSON.parse(landing.data.items.cms_json).api;
-    const postId = landing.data.id;
-    const postOffer = landing.data.key;
-
-    const form = document.querySelector('form');
-    form.addEventListener('submit', event => {
-      event.preventDefault();
-      const requiredFeilds = JSON.parse(landing.data.items.cms_json).data;
-      const formData = getAllFormElements(form, requiredFeilds);
-
-      let mandatoryInputs = formData.filter(arr => {
-        let status = true;
-        if (arr.ele === 'BUTTON') status = false;
-        else if (arr.type === 'file') status = false;
-        return status;
-      });
-
-      let products = {};
-      const uploadImage = this.getFileUpload();
-
-      if (selectForDemo.length > 0) {
-        // eslint-disable-next-line max-len
-        mandatoryInputs = mandatoryInputs.map(arr =>
-          arr.name !== 'productCategory' ? arr : { ...arr, mandatory: false });
-        products = this.getProductDataSet(selectForDemo);
-      }
-
-      const isEmpty = validateInputs(mandatoryInputs);
-
-      if (!isEmpty) {
-        const bodyFormData = new FormData();
-        const postData = {
-          id: postId || 0,
-          offer: postOffer,
-          data: Object.assign({}, ...mandatoryInputs.map(item => ({ [item.name]: item.value }))),
-          products,
-          uploadImage
-        };
-        console.log({ postData });
-        Object.keys(postData).forEach(key => {
-          if (key === 'uploadImage') bodyFormData.append(key, uploadImage);
-          else bodyFormData.append(key, JSON.stringify(postData[key]));
-        });
-        dispatch(submitOffer(postApi, bodyFormData));
-      } else {
-        dispatch(notifSend({
-          type: 'warning',
-          msg: 'Please Fill All Details Correctly !',
-          dismissAfter: 2000
-        }));
-      }
-      resetForm(form);
-    });
-  };
-
-  prefillLoginDetails = profileData => {
     const {
-      contact_number: mobile, email, first_name: firstName, last_name: lastName
-    } = profileData;
-    document.getElementById('firstName').value = firstName;
-    document.getElementById('lastName').value = lastName;
-    document.getElementById('mobileNo').value = mobile;
-    document.getElementById('emailId').value = email;
+      landing: { data: { id: postId, key: postOffer, items: { cms_json: cms } = {} } = {} },
+      selectForDemo
+    } = this.props;
+    if (cms && postOffer) {
+      const { api, data: requiredFeilds, successMessage } = JSON.parse(cms);
+      const form = document.querySelector('.mobile_form');
+      form.addEventListener('submit', event => {
+        event.preventDefault();
+        let formData = getAllFormElements(form, requiredFeilds);
+
+        let products = {};
+        const uploadImage = this.getFileUpload();
+
+        if (selectForDemo.length > 0) {
+          // eslint-disable-next-line max-len
+          formData = formData.map(arr => (arr.name !== 'productCategory' ? arr : { ...arr, mandatory: false }));
+          products = this.getProductDataSet(selectForDemo);
+        }
+
+        const validate = validateInputs(formData);
+
+        const mandatoryInputs = formData.filter(arr => {
+          let status = true;
+          if (arr.ele === 'BUTTON') status = false;
+          else if (arr.type === 'file') status = false;
+          return status;
+        });
+        if (!validate.error) {
+          const bodyFormData = new FormData();
+          const postData = {
+            id: postId || 0,
+            offer: postOffer,
+            data: Object.assign({}, ...mandatoryInputs.map(item => ({ [item.name]: item.value }))),
+            products,
+            uploadImage
+          };
+
+          bodyFormData.append('id', postData.id);
+          bodyFormData.append('offer', postData.offer);
+          bodyFormData.append('data', JSON.stringify(postData.data));
+          bodyFormData.append('products', JSON.stringify(postData.products));
+          bodyFormData.append('uploadImage', postData.uploadImage);
+
+          dispatch(submitOffer(api, bodyFormData, successMessage));
+        } else {
+          dispatch(
+            notifSend({
+              type: 'warning',
+              msg: validate.message,
+              dismissAfter: 4000
+            })
+          );
+        }
+        setTimeout(() => {
+          const { handleModal } = this.props;
+          handleModal();
+        }, 2000);
+      });
+    }
   };
 
   render() {
@@ -336,11 +428,13 @@ class Campaign extends Component {
     const uiHtml = landing.data.items.text;
     // console.log(JSON.stringify(uiHtml));
     return (
-      <MenuFooter pageTitle="Promotions and Offers">
+      <div>
+        <Header />
         {landing !== null && (
           <Description itemProp="description" fontSize="0.875rem" dangerouslySetInnerHTML={{ __html: uiHtml }} />
         )}
-      </MenuFooter>
+        <Footer />
+      </div>
     );
   }
 }
