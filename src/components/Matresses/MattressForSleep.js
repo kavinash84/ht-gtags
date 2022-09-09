@@ -320,7 +320,7 @@ export class MattressForSleep extends Component {
             padding: "2% 7%"
           }}
         >
-          <div style={{ width: "64%" }}>
+          <div style={{ width: "61%" }}>
             <img
               src={data.bannerimage}
               alt="banner image"
@@ -329,7 +329,7 @@ export class MattressForSleep extends Component {
           </div>
           <Div
             style={{
-              width: "34%",
+              width: "37%",
               backgroundColor: "#EBF2F5",
               padding: "4%"
             }}
