@@ -39,6 +39,7 @@ import {
   getNotDelivered,
   getStockOutProducts
 } from "selectors/cart";
+import { getFuturePayProfile } from "selectors/userprofile";
 
 /**
  * Page Components
@@ -55,6 +56,8 @@ import PaymentMethods from "../PaymentMethods/";
 import PaymentForm from "./PaymentForm";
 import UpiForm from "./UpiForm";
 
+// import WalletBalance from "./WalletBalance";
+
 // const styles = require('./Checkout.scss');
 const cartStyles = require("../Cart/Cart.scss");
 
@@ -67,6 +70,8 @@ const nextStep = (
   isCreditSelected,
   selectedGateway,
   paymentMethodDetails,
+  futurePayRedeemAmount,
+  isPayFromHtWallet,
   total
 ) => e => {
   e.preventDefault();
@@ -78,6 +83,8 @@ const nextStep = (
     isCreditSelected,
     selectedGateway,
     paymentMethodDetails,
+    futurePayRedeemAmount,
+    isPayFromHtWallet,
     total
   );
 };
@@ -90,6 +97,8 @@ const mapStateToProps = ({
   cart,
   profile
 }) => ({
+  isPayFromHtWallet: paymentoptions.isPayFromHtWallet,
+  futurePayRedeemAmount: paymentoptions.futurePayRedeemAmount,
   selectedGateway: paymentoptions.selectedGateway,
   isCreditSelected: paymentoptions.isCreditSelected,
   paymentMethodDetails: paymentoptions.paymentMethodDetails,
@@ -107,7 +116,9 @@ const mapStateToProps = ({
   session: app.sessionId,
   results: getCartList(cart),
   undelivered: getNotDelivered(cart),
-  outOfStockList: getStockOutProducts(cart)
+  outOfStockList: getStockOutProducts(cart),
+  futurPayProfile: getFuturePayProfile(profile),
+  futurePayError: paymentoptions.futurePayRedeemAmountError
 });
 
 const mapDispatchToProps = dispatch =>
@@ -173,6 +184,8 @@ class PaymentOptions extends Component {
   render() {
     const {
       data,
+      futurePayRedeemAmount,
+      isPayFromHtWallet,
       selectedGateway,
       toggleGateway,
       setPaymentDetails,
@@ -193,7 +206,8 @@ class PaymentOptions extends Component {
       error,
       summary: { total },
       // futurPayProfile,
-      isCreditSelected
+      isCreditSelected,
+      futurePayError
     } = this.props;
 
     const [netBankingData] = data.filter(
@@ -211,110 +225,113 @@ class PaymentOptions extends Component {
               <Box key={String(index)}>
                 {(!item.product_info.is_deliverable ||
                   isProductOutofStock(item.configurable_sku)) && (
-                  <Row
-                    key={item.id_customer_cart}
-                    mb={16}
-                    mx={0}
-                    alignItems="center"
-                    sx={{ position: "relative" }}
-                  >
-                    <Box variant="col-2" px={0}>
-                      <ImageShimmer
-                        src={item.product_info.image}
-                        height="100%"
+                    <Row
+                      key={item.id_customer_cart}
+                      mb={16}
+                      mx={0}
+                      alignItems="center"
+                      sx={{ position: "relative" }}
+                    >
+                      <Box variant="col-2" px={0}>
+                        <ImageShimmer
+                          src={item.product_info.image}
+                          height="100%"
+                          sx={{
+                            boxShadow: "0 1px 2px 0 #0000033"
+                          }}
+                        >
+                          {imageURL => (
+                            <Image
+                              width={1}
+                              src={imageURL}
+                              alt=""
+                              sx={{
+                                boxShadow: "productThumb"
+                              }}
+                            />
+                          )}
+                        </ImageShimmer>
+                      </Box>
+                      <Box variant="col-6" pl={30} pr={0}>
+                        <Box mb={10}>
+                          <Heading
+                            color="heading"
+                            fontSize={16}
+                            lineHeight={1.4}
+                            fontWeight="normal"
+                          >
+                            {item.product_info.name}
+                          </Heading>
+                        </Box>
+                        {item.product_info.color && (
+                          <Box mb={15}>
+                            <Text color="#575757">{item.product_info.color}</Text>
+                          </Box>
+                        )}
+                        <Box>
+                          <Label color="heading" fontSize={18}>
+                            ₹{" "}
+                            {item.product_info.special_price === 0
+                              ? formatAmount(
+                                Number(item.product_info.unit_price) *
+                                Number(item.qty)
+                              )
+                              : formatAmount(
+                                Number(item.product_info.special_price) *
+                                Number(item.qty)
+                              )}
+                          </Label>
+                        </Box>
+                      </Box>
+                      <Flex
+                        width={1}
+                        justifyContent="center"
+                        alignItems="center"
+                        flexDirection="column"
                         sx={{
-                          boxShadow: "0 1px 2px 0 #0000033"
+                          position: "absolute",
+                          height: "100%",
+                          textAlign: "center",
+                          background: "rgba(0, 0, 0, 0.7)",
+                          padding: 0,
+                          zIndex: 1,
+                          left: 0,
+                          top: 0,
+                          boxShadow: "2px 2px 7px 0 rgba(0, 0, 0, 0.1)"
                         }}
                       >
-                        {imageURL => (
-                          <Image
-                            width={1}
-                            src={imageURL}
-                            alt=""
-                            sx={{
-                              boxShadow: "productThumb"
-                            }}
-                          />
-                        )}
-                      </ImageShimmer>
-                    </Box>
-                    <Box variant="col-6" pl={30} pr={0}>
-                      <Box mb={10}>
-                        <Heading
-                          color="heading"
-                          fontSize={16}
-                          lineHeight={1.4}
-                          fontWeight="normal"
-                        >
-                          {item.product_info.name}
+                        <Heading color="white" fontSize={20}>
+                          {isProductOutofStock(item.configurable_sku)
+                            ? "This product is out of stock please remove before proceed."
+                            : "Sorry, this product isn't available to selected pincode"}
                         </Heading>
-                      </Box>
-                      {item.product_info.color && (
-                        <Box mb={15}>
-                          <Text color="#575757">{item.product_info.color}</Text>
-                        </Box>
-                      )}
-                      <Box>
-                        <Label color="heading" fontSize={18}>
-                          ₹{" "}
-                          {item.product_info.special_price === 0
-                            ? formatAmount(
-                                Number(item.product_info.unit_price) *
-                                  Number(item.qty)
-                              )
-                            : formatAmount(
-                                Number(item.product_info.special_price) *
-                                  Number(item.qty)
-                              )}
-                        </Label>
-                      </Box>
-                    </Box>
-                    <Flex
-                      width={1}
-                      justifyContent="center"
-                      alignItems="center"
-                      flexDirection="column"
-                      sx={{
-                        position: "absolute",
-                        height: "100%",
-                        textAlign: "center",
-                        background: "rgba(0, 0, 0, 0.7)",
-                        padding: 0,
-                        zIndex: 1,
-                        left: 0,
-                        top: 0,
-                        boxShadow: "2px 2px 7px 0 rgba(0, 0, 0, 0.1)"
-                      }}
-                    >
-                      <Heading color="white" fontSize={20}>
-                        {isProductOutofStock(item.configurable_sku)
-                          ? "This product is out of stock please remove before proceed."
-                          : "Sorry, this product isn't available to selected pincode"}
-                      </Heading>
-                      <Flex mt={15} justifyContent="center">
-                        <Link
-                          to="/checkout/delivery-address"
-                          sx={{ cursor: "pointer" }}
-                        >
-                          <Label fontSize={16} color="primary">
-                            Edit Address{" "}
-                          </Label>
-                        </Link>
-                        <Box color="primary" mx={5}>
-                          /
-                        </Box>
-                        <Link to="/checkout/cart" sx={{ cursor: "pointer" }}>
-                          <Label fontSize={16} color="primary">
-                            Edit Cart
-                          </Label>
-                        </Link>
+                        <Flex mt={15} justifyContent="center">
+                          <Link
+                            to="/checkout/delivery-address"
+                            sx={{ cursor: "pointer" }}
+                          >
+                            <Label fontSize={16} color="primary">
+                              Edit Address{" "}
+                            </Label>
+                          </Link>
+                          <Box color="primary" mx={5}>
+                            /
+                          </Box>
+                          <Link to="/checkout/cart" sx={{ cursor: "pointer" }}>
+                            <Label fontSize={16} color="primary">
+                              Edit Cart
+                            </Label>
+                          </Link>
+                        </Flex>
                       </Flex>
-                    </Flex>
-                  </Row>
-                )}
+                    </Row>
+                  )}
               </Box>
             ))}
-        
+            {/* <Box mb={20}> */}
+            {/* <Heading variant="heading.medium">Payment Method</Heading> */}
+            {/* <WalletBalance />
+            </Box> */}
             <Row flexWrap="nowrap" ml={0} mr={0}>
               <Row
                 mx={0}
@@ -331,7 +348,9 @@ class PaymentOptions extends Component {
                       selectedGateway,
                       session,
                       resetEasyEmi,
-                      total
+                      futurePayRedeemAmount,
+                      total,
+                      isPayFromHtWallet
                     )}
                   </Col>
                 ))}
@@ -555,11 +574,14 @@ class PaymentOptions extends Component {
                     isCreditSelected,
                     selectedGateway,
                     paymentDetails,
+                    futurePayRedeemAmount,
+                    isPayFromHtWallet,
                     total
                   )}
                   disabled={
                     validateInput(paymentDetails) ||
                     validatePaymentDetails(paymentDetails) ||
+                    futurePayError ||
                     undelivered.length > 0 ||
                     outOfStockList.length > 0 ||
                     submitting ||
@@ -594,7 +616,9 @@ PaymentOptions.defaultProps = {
   undelivered: [],
   submitted: false,
   error: null,
-  summary: {}
+  summary: {},
+  // futurPayProfile: {},
+  futurePayError: false
 };
 
 PaymentOptions.propTypes = {
@@ -605,6 +629,8 @@ PaymentOptions.propTypes = {
   paymentLoadedStatus: PropTypes.func.isRequired,
   data: PropTypes.array,
   toggleGateway: PropTypes.func.isRequired,
+  isPayFromHtWallet: PropTypes.number.isRequired,
+  futurePayRedeemAmount: PropTypes.number.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,
   // summary: PropTypes.object,
   history: PropTypes.object,
@@ -624,7 +650,9 @@ PaymentOptions.propTypes = {
     PropTypes.object,
     PropTypes.array
   ]),
-  summary: PropTypes.object
+  summary: PropTypes.object,
+  // futurPayProfile: PropTypes.object,
+  futurePayError: PropTypes.bool
 };
 
 // const mapStateToProps = ({
