@@ -36,6 +36,7 @@ const formatToCarosalData = data => {
 
 @connect(({ blogs }) => ({
   homeData: blogs.homeData,
+  loading: blogs.loading,
   currentCatData: blogs.currentCatData
 }))
 class BlogComp extends React.Component {
@@ -57,14 +58,14 @@ class BlogComp extends React.Component {
 
   componentDidMount() {
     const { homeData } = this.props;
-    if (homeData.category_list.length) {
+    if (homeData.category_list && homeData.category_list.length) {
       this.handleTabChange(homeData.category_list[0].key);
     }
   }
 
   render() {
     const { activeTab, showMore } = this.state;
-    const { homeData, currentCatData } = this.props;
+    const { homeData, currentCatData, loading } = this.props;
     const catagoryPosts = showMore
       ? currentCatData
       : currentCatData.length && currentCatData.filter((item, i) => i <= 8);
@@ -82,16 +83,26 @@ class BlogComp extends React.Component {
 
         <div className={styles.cataagoryContainer}>
           <ul className={styles.catagoryList}>
-            {homeData.category_list.length
-              ? homeData.category_list.map(item => (
-                  <li
-                    className={activeTab === item.key ? styles.activeTab : ""}
-                    onClick={() => this.handleTabChange(item.key)}
-                  >
-                    {item.name}
-                  </li>
-                ))
-              : null}
+            {homeData.category_list && homeData.category_list.length ? (
+              homeData.category_list.map(item => (
+                <li
+                  className={activeTab === item.key ? styles.activeTab : ""}
+                  onClick={() => this.handleTabChange(item.key)}
+                >
+                  {item.name}
+                </li>
+              ))
+            ) : (
+              <h3
+                style={{
+                  textAlign: "center",
+                  width: "100%",
+                  background: "white"
+                }}
+              >
+                {loading ? null : "Currenlty no active articles present."}
+              </h3>
+            )}
           </ul>
 
           <div className={styles.posts}>
