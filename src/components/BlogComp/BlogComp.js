@@ -100,7 +100,9 @@ class BlogComp extends React.Component {
                   background: "white"
                 }}
               >
-                {loading ? null : "Currenlty no active articles present."}
+                {!loading && homeData.length === 0
+                  ? "Currenlty no active articles present."
+                  : null}
               </h3>
             )}
           </ul>

@@ -34,7 +34,7 @@ export default function reducer(state = initialState, action = {}) {
     case LOAD_BLOG_HOME_SUCCESS:
       return {
         ...state,
-        // loading: false,
+        loading: false,
         loaded: true,
         homeData: action.result
       };
