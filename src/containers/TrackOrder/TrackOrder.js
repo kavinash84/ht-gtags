@@ -37,7 +37,6 @@ class TrackOrder extends React.Component {
     const url = window.location || '';
     const urlArray = url.pathname ? url.pathname.split('/')[2] : '';
     const orderNum = urlArray ? urlArray.split('=')[1] : undefined;
-    console.log(orderNum, urlArray, 'orderNum');
     if (orderNum) {
       this.setStatus(orderNum);
       dispatch(trackOrder(orderNum));

@@ -27,7 +27,6 @@ export default class ProductDetails extends Component {
     this.setState({ showScript: true });
   }
   render() {
-    // console.log(this.props);
     const { loading, loaded, history, productDescription } = this.props;
     return (
       <Wrapper>

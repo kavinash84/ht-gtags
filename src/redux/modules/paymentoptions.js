@@ -330,7 +330,6 @@ const paymentObject = (
 };
 
 const getSelectedGateway = data => {
-  console.log("getSelectedGateway function", data);
   const {
     cart: {
       summary: { total }
@@ -341,7 +340,6 @@ const getSelectedGateway = data => {
 };
 
 const emiZero = result => {
-  console.log("Adding zero emi", result);
   let {
     paymentData: { paymentOSCConfig, methodPaymentGateways },
     cart: {

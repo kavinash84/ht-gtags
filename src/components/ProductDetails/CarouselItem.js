@@ -11,7 +11,6 @@ const getHighResolution = url =>
   url.replace(".jpg", ".jpg?mode=fill&h=576&w=576");
 
 const CategoryItem = ({ image, name, id }) => {
-  console.log(image, "imageURL");
   return (
     <div id={`shimmerId_${id}`}>
       <ImageShimmer

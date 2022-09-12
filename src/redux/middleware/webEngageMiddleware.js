@@ -29,7 +29,6 @@ export default function webEngageMiddleware() {
           const {
             result: { email, dob, id_customer, mobile, full_name }
           } = action;
-          console.log(dob, mobile, "dob");
           window.webengage.user.login(id_customer);
           window.webengage.user.setAttribute("we_email", email);
           window.webengage.user.setAttribute(
@@ -65,7 +64,6 @@ export default function webEngageMiddleware() {
             productDescription &&
             Object.keys(productDescription).length
           ) {
-            console.log("productdetails/PRODUCT_DETAILS_WE_TRACK");
             const {
               attributes: { product_width },
               images,
@@ -120,7 +118,6 @@ export default function webEngageMiddleware() {
 
         // add to wishlist
         if (type === "wishList/ADD_TO_WISHLIST_SUCCESS") {
-          console.log(action.result);
           const {
             result: {
               product_info: {
@@ -307,10 +304,6 @@ export default function webEngageMiddleware() {
               .find(
                 item => String(item.wishlist_info.id_customer_wishlist) === id
               ) || "";
-          console.log(
-            data.filter(item => item.product_info.soldout === true),
-            foundOutofStockProduct
-          );
           if (foundOutofStockProduct) {
             window.webengage.track("Remove From Wishlist", {
               category: foundOutofStockProduct.product_info.category_type || "",
@@ -757,11 +750,6 @@ export default function webEngageMiddleware() {
           //   email: email,
           //   address: city
           // });
-          console.log(
-            moment(dob, "DD-MM-YYYY").format("YYYY-MM-DD"),
-            dob,
-            "datee"
-          );
           window.webengage.user.setAttribute(
             "we_birth_date",
             moment(dob, "DD-MM-YYYY").format("YYYY-MM-DD")

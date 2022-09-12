@@ -421,8 +421,6 @@ class Campaign extends Component {
   render() {
     const { landing } = this.props;
     const uiHtml = landing.data.items.text;
-    // console.log(JSON.stringify(uiHtml));
-    // console.log(this.state.submitErrorMessage, 'DDDDDDDDDDDDDDDDDDDDDDDDDDDD');
     return (
       // <MenuFooter pageTitle="Promotions and Offers">
       <Wrapper>

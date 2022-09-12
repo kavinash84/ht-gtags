@@ -25,7 +25,6 @@ export default function apiClient(req) {
 
   instance.setSessionId = SessionId => {
     session = SessionId;
-    console.log(SessionId, "instance.setSessionId");
   };
 
   instance.interceptors.request.use(

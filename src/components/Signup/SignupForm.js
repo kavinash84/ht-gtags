@@ -126,7 +126,6 @@ export default class SignupFormContainer extends Component {
       passwordErrorMessage
     } = this.state;
     const { loading } = this.props;
-    console.log(this.props);
 
     return (
       <BoxHtV1>

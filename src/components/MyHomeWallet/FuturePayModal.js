@@ -98,7 +98,6 @@ export default class FuturePayModal extends React.Component {
       this.setState({ timerref });
     }
     if (this.props.setFuturePayStatus && !this.state.otpReceived) {
-      console.log(this.state.otpReceived, 'otp received');
       const {
         profile: { mobile = 0 }
       } = this.props;
@@ -187,14 +186,11 @@ export default class FuturePayModal extends React.Component {
     const newDob = moment(dob, 'DD-MM-YYYY').toDate();
     const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
     const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
-    console.log('inside yes');
     if (myAge > 10) {
       this.setState({ showConfirmationModal: false, ageError: false });
       // const { dispatch } = this.context.store;
-      console.log('otp dispatch');
       dispatch(getOtp(mobile));
     } else {
-      console.log('otp should not dispatch');
       this.setState({ ageError: true, showConfirmationModal: true });
     }
   };

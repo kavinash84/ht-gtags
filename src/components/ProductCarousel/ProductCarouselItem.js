@@ -42,7 +42,7 @@ const ProductItem = ({
       {/* <ImageShimmer src={image} height={height}> */}
       {/* {imageURL => <Image alt={name} src={imageURL} width="100%" />} */}
       {/* </ImageShimmer> */}
-      <Image alt={name} src={image} width="100%" />
+      <Image alt={name} data-src={image} src={`${image}?blur=30`} width="100%" />
       {/* <BoxHtV1>
         <Heading>{name}</Heading>
 

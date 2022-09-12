@@ -15,7 +15,6 @@ import { FeedBackMessage } from 'hometown-components/lib/Label';
 import DatePicker from 'components/Form/DatePicker';
 
 const formatDate = date => {
-  console.log({ date }, 'inside formate date');
   if (date) {
     return moment(date, 'YYYY-MM-DD').toDate();
   }
