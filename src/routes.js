@@ -96,6 +96,8 @@ import WriteReview from "./containers/WriteReview";
 import NewHomepage from "./components/NewHomepage";
 import WarrantyPage from "./containers/warranty";
 import ExchangeOffer from "./containers/Exchange-offer";
+import BlogsContainer from "./containers/BlogsContainer";
+import BlogContainer from "./containers/BlogContainer";
 
 const createRegex = data => data.join("|");
 
@@ -259,6 +261,8 @@ const routes = [
         exact: true,
         component: PackageCatalog
       },
+      { path: "/blog", exact: true, component: BlogsContainer },
+      { path: "/blog/:key", exact: true, component: BlogContainer },
       { component: NotFound }
     ]
   }
