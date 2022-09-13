@@ -287,7 +287,7 @@ export default class App extends Component {
               href={`${SITE_URL_MOBILE}${url}`}
             />
             <link rel="canonical" href={`${SITE_URL}${url}`} />
-            <script type="text/javascript">
+            <script type="text/javascript" defer>
               {`
                   var dataLayer = [];
                   (function(w, d, s, l, i) {
@@ -333,8 +333,8 @@ export default class App extends Component {
             {/* <!-- End Meta Pixel Code --> */}
             {/* <!-- Global site tag (gtag.js) - Google Ads: 845903914 --> */}
             <script
-              async
               src="https://www.googletagmanager.com/gtag/js?id=AW-845903914"
+              defer
             ></script>
             <script>
               {`

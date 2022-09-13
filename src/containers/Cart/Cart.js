@@ -306,8 +306,8 @@ export default class CartContainer extends Component {
             `}
           </script>
           <script
-            async
             src="https://www.googletagmanager.com/gtag/js?id=AW-845903914"
+            defer
           ></script>
           <script type="text/javascript">
             {`

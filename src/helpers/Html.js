@@ -109,7 +109,7 @@ export default class Html extends Component {
     const head = Helmet.renderStatic();
     /* eslint-disable */
     return (
-      <html lang="en-US">
+      <html lang="en-IN">
         <head>
           {head.base.toComponent()}
           {head.title.toComponent()}
