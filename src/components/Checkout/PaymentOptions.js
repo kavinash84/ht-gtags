@@ -57,6 +57,7 @@ import PaymentForm from "./PaymentForm";
 import UpiForm from "./UpiForm";
 
 import WalletBalance from "./WalletBalance";
+import Notification from "./Notification";
 
 // const styles = require('./Checkout.scss');
 const cartStyles = require("../Cart/Cart.scss");
@@ -331,6 +332,9 @@ class PaymentOptions extends Component {
             <Box mb={20}>
               {/* <Heading variant="heading.medium">Payment Method</Heading> */}
               <WalletBalance />
+            </Box>
+            <Box>
+            <Notification message='You are on Payment page'/>
             </Box>
             <Row flexWrap="nowrap" ml={0} mr={0}>
               <Row
