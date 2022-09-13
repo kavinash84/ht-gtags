@@ -463,11 +463,7 @@ class Cart extends React.Component {
                             )}
                             {item.product_info.offer_message ? (
                               <Box mt="1rem">
-                                <Text
-                                  color="orangered"
-                                  fontSize="1rem"
-                                  style={{ fontWeight: "bold" }}
-                                >
+                                <Text color="#F47020" fontSize="1rem">
                                   {item.product_info.offer_message}
                                 </Text>
                               </Box>
