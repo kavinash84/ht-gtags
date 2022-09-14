@@ -40,6 +40,7 @@ import FeedbackMailer from "containers/FeedbackMailer";
 import ServiceRequest from "containers/ServiceRequest";
 import CaseRequest from "containers/CaseRequest";
 import ServiceSignUpContainer from "components/ServiceSignUp";
+import Gifting from "containers/Gifting";
 
 /* user */
 import Profile from "containers/Profile";
@@ -96,6 +97,8 @@ import WriteReview from "./containers/WriteReview";
 import NewHomepage from "./components/NewHomepage";
 import WarrantyPage from "./containers/warranty";
 import ExchangeOffer from "./containers/Exchange-offer";
+import BlogsContainer from "./containers/BlogsContainer";
+import BlogContainer from "./containers/BlogContainer";
 import Mattresses from "./containers/Mattresses";
 
 const createRegex = data => data.join("|");
@@ -249,6 +252,7 @@ const routes = [
         exact: true,
         component: Listing
       },
+      { path: "/gifting", exact: true, component: Gifting },
       { path: "/reviews", exact: true, component: Review },
       { path: "/writeReview", exact: true, component: WriteReview },
       { path: "/spaces", exact: true, component: Spaces },
@@ -260,6 +264,8 @@ const routes = [
         exact: true,
         component: PackageCatalog
       },
+      { path: "/blog", exact: true, component: BlogsContainer },
+      { path: "/blog/:key", exact: true, component: BlogContainer },
       { path: "/mattresses", exact: true, component: Mattresses },
       { component: NotFound }
     ]

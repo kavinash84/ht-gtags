@@ -1,0 +1,23 @@
+.carousel-one .slick-dots {
+  /* margin-top: 15px; */
+  position: relative;
+}
+
+.carousel-one .slick-dots li {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+
+.carousel-one .slick-dots li.slick-active div {
+  border-top: 3px solid black !important;
+  margin-top: -1px;
+}
+
+/* .slick-slide:first-child + .slick-slide {
+  transform: translate3d(0%, 0px, 0px);
+} */
+
+.offset .slick-slide:first-child:not(.slick-active),
+.offset .slick-slide:first-child:not(.slick-active) ~ .slick-slide {
+  transform: translate3d(20%, 0px, 0px);
+}
