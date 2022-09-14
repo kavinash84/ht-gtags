@@ -40,6 +40,7 @@ import FeedbackMailer from "containers/FeedbackMailer";
 import ServiceRequest from "containers/ServiceRequest";
 import CaseRequest from "containers/CaseRequest";
 import ServiceSignUpContainer from "components/ServiceSignUp";
+import Gifting from "containers/Gifting";
 
 /* user */
 import Profile from "containers/Profile";
@@ -250,6 +251,7 @@ const routes = [
         exact: true,
         component: Listing
       },
+      { path: "/gifting", exact: true, component: Gifting },
       { path: "/reviews", exact: true, component: Review },
       { path: "/writeReview", exact: true, component: WriteReview },
       { path: "/spaces", exact: true, component: Spaces },
