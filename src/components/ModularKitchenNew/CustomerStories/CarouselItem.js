@@ -29,6 +29,7 @@ const DBItem = ({ component, data }) => {
             <Div col="6">
               <img
                 data-src={data.imgSrc}
+                alt="Customers story"
                 src={`${data.imgSrc}?blur=30`}
                 style={{
                   width: "65%",

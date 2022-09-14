@@ -7,57 +7,46 @@ import Row from "hometown-components-dev/lib/RowHtV1";
 // import span from 'components/span';
 import Section from "hometown-components-dev/lib/SectionHtV1";
 
+const HeadingTitlePrice = ({ name, brand }) => (
+  <Section mb="0.3125rem" p="0" mt="0">
+    <Container type="container" pr="1rem" pl="1rem">
+      <Row mr="0" ml="0" style={{ display: "block" }}>
+        <h1
+          itemProp="name"
+          style={{
+            fontFamily: "medium",
+            paddingBottom: "5px",
+            margin: "5px 0px 0px",
+            color: "#222222",
+            fontSize: "22px"
+          }}
+        >
+          {name}
+        </h1>
 
-
-
-const HeadingTitlePrice = ({
-  name,
-  brand
-
-}) => (
-    <Section mb="0.3125rem" p="0" mt="0" >
-      <Container type="container" pr="1rem" pl="1rem" >
-        <Row mr="0" ml="0" style={{ display: 'block' }} >
-          <Heading
-            itemProp="name"
-            fontSize="22px"
-            color="#222222"
-            mb="0"
-            mt="5px"
-            lh="1.7"
-            fontFamily="medium"
-            ellipsis={false}
-            pb="5px"
-          >
-            {name}
-          </Heading>
-
-          <div
-            style={{
-              fontSize: "18px",
-              color: "#323131",
-              fontFamily: "medium"
-            }}
-            itemProp="brand"
-          >
-            {brand}
-          </div>
-
-        </Row>
-      </Container>
-    </Section>
-  );
+        <div
+          style={{
+            fontSize: "18px",
+            color: "#323131",
+            fontFamily: "medium"
+          }}
+          itemProp="brand"
+        >
+          {brand}
+        </div>
+      </Row>
+    </Container>
+  </Section>
+);
 
 HeadingTitlePrice.propTypes = {
   name: PropTypes.string,
   brand: PropTypes.string
-
 };
 
 HeadingTitlePrice.defaultProps = {
   name: "",
   brand: ""
-
 };
 
 export default HeadingTitlePrice;

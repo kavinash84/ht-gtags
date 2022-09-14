@@ -245,7 +245,12 @@ class MakeItYourOwn extends React.Component {
             {makeItOwn.carouselData[`${makeItOwnSelect}`].images.map(
               (data, index) => (
                 <Div key={index} p="0px" pr="20px" pb="10px">
-                  <Img height="30%" data-src={data.image} src={`${data.image}?blur=30`}/>
+                  <Img
+                    height="30%"
+                    data-src={data.image}
+                    src={`${data.image}?blur=30`}
+                    alt="Make It Your Own"
+                  />
                 </Div>
               )
             )}
