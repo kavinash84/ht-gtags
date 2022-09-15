@@ -16,8 +16,8 @@ const Notification = ({ message }) => (
                     verticalAlign: 'middle',
                     textAlign: 'center',
                     textDecoration: 'none',
-                    height: '50px',
-                    width: '50px',
+                    height: '30px',
+                    width: '30px',
                     fontSize: '25px',
                     backgroundColor: '#FFD700'
                 }}>!</li>
