@@ -96,7 +96,8 @@ const mapStateToProps = ({
   cart: { checkingCart, cartChecked, summary },
   app: { sessionId },
   cart,
-  profile
+  profile,
+  checkout
 }) => ({
   isPayFromHtWallet: paymentoptions.isPayFromHtWallet,
   futurePayRedeemAmount: paymentoptions.futurePayRedeemAmount,
@@ -119,7 +120,8 @@ const mapStateToProps = ({
   undelivered: getNotDelivered(cart),
   outOfStockList: getStockOutProducts(cart),
   futurPayProfile: getFuturePayProfile(profile),
-  futurePayError: paymentoptions.futurePayRedeemAmountError
+  futurePayError: paymentoptions.futurePayRedeemAmountError,
+  warning:checkout.nextstep.checkout
 });
 
 const mapDispatchToProps = dispatch =>
@@ -208,7 +210,8 @@ class PaymentOptions extends Component {
       summary: { total },
       // futurPayProfile,
       isCreditSelected,
-      futurePayError
+      futurePayError,
+      warning
     } = this.props;
 
     const [netBankingData] = data.filter(
@@ -333,9 +336,12 @@ class PaymentOptions extends Component {
               {/* <Heading variant="heading.medium">Payment Method</Heading> */}
               <WalletBalance />
             </Box>
-            <Box>
-            <Notification message='You are on Payment page'/>
-            </Box>
+            {warning && (
+             <Box>
+             <Notification message='You are on Payment page'/>
+             </Box>
+            )}
+            
             <Row flexWrap="nowrap" ml={0} mr={0}>
               <Row
                 mx={0}
