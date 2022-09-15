@@ -1,18 +1,18 @@
-import React, { Component, Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { withRouter } from 'react-router';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
+import React, { Component, Fragment } from "react";
+import PropTypes from "prop-types";
+import { withRouter } from "react-router";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 /* ====== Modules ====== */
-import { logout } from 'redux/modules/login';
-import { checkCart, loadCart } from 'redux/modules/cart';
+import { logout } from "redux/modules/login";
+import { checkCart, loadCart } from "redux/modules/cart";
 // import { loadCart } from 'redux/modules/cart';
-import { addToSelectForDemo } from 'redux/modules/selectForDemo';
+import { addToSelectForDemo } from "redux/modules/selectForDemo";
 
 /* ====== selectors ====== */
-import { getCartCount } from 'selectors/cart';
-import { getWishListCount } from 'selectors/wishlist';
+import { getCartCount } from "selectors/cart";
+import { getWishListCount } from "selectors/wishlist";
 
 /* ====== Helpers ====== */
 import {
@@ -24,36 +24,36 @@ import {
   CART_URL,
   DELIVERY_ADDRESS_URL,
   PINCODE
-} from 'helpers/Constants';
+} from "helpers/Constants";
 // import { PINCODE } from 'helpers/Constants';
-import { titleCase, checkRedirection } from 'utils/helper';
+import { titleCase, checkRedirection } from "utils/helper";
 // import { formatAmount } from 'utils/formatters';
 
 /* ====== Components ====== */
-import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Button from 'hometown-components-dev/lib/ButtonHtV1';
-import CartIcon from 'hometown-components-dev/lib/Icons/CartHtV1';
-import Card from 'hometown-components-dev/lib/CardHtV1';
-import Col from 'hometown-components-dev/lib/ColHtV1';
-import Flex from 'hometown-components-dev/lib/FlexHtV1';
-import FavIcon from 'hometown-components-dev/lib/Icons/FavHtV1';
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
-import Image from 'hometown-components-dev/lib/ImageHtV1';
-import LocationIcon from 'hometown-components-dev/lib/Icons/LocationHtV1';
-import Row from 'hometown-components-dev/lib/RowHtV1';
-import UserIcon from 'hometown-components-dev/lib/Icons/UserHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
+import Box from "hometown-components-dev/lib/BoxHtV1";
+import Button from "hometown-components-dev/lib/ButtonHtV1";
+import CartIcon from "hometown-components-dev/lib/Icons/CartHtV1";
+import Card from "hometown-components-dev/lib/CardHtV1";
+import Col from "hometown-components-dev/lib/ColHtV1";
+import Flex from "hometown-components-dev/lib/FlexHtV1";
+import FavIcon from "hometown-components-dev/lib/Icons/FavHtV1";
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
+import Image from "hometown-components-dev/lib/ImageHtV1";
+import LocationIcon from "hometown-components-dev/lib/Icons/LocationHtV1";
+import Row from "hometown-components-dev/lib/RowHtV1";
+import UserIcon from "hometown-components-dev/lib/Icons/UserHtV1";
+import Text from "hometown-components-dev/lib/TextHtV1";
 
 /* ====== Page Components ====== */
-import Search from 'components/Search';
-import ResponsiveModal from 'components/Modal';
-import PinCode from 'components/PinCode';
-import LoginForm from 'components/LoginForms';
-import SignupForm from 'components/Signup/SignupForm';
-import ProductSummaryList from 'components/Checkout/ProductSummaryList';
+import Search from "components/Search";
+import ResponsiveModal from "components/Modal";
+import PinCode from "components/PinCode";
+import LoginForm from "components/LoginForms";
+import SignupForm from "components/Signup/SignupForm";
+import ProductSummaryList from "components/Checkout/ProductSummaryList";
 
-const LogoIcon = require('../../../static/logo.png');
-const PincodeModalIcon = require('../../../static/map-placeholder.svg');
+const LogoIcon = require("../../../static/logo.png");
+const PincodeModalIcon = require("../../../static/map-placeholder.svg");
 
 const onClick = history => e => {
   e.preventDefault();
@@ -72,9 +72,7 @@ const despatchClearSelectForDemo = dispatcheroEmpty => {
 
 @withRouter
 @connect(
-  ({
-    userLogin, wishlist, cart, router, profile, app, pincode
-  }) => ({
+  ({ userLogin, wishlist, cart, router, profile, app, pincode }) => ({
     isLoggedIn: userLogin.isLoggedIn,
     name: profile.data.first_name,
     wishListCount: getWishListCount(wishlist),
@@ -108,7 +106,7 @@ export default class HeaderTop extends Component {
     const { cartItems, sessionId } = this.props;
     this.containsOutOfStockFunc(cartItems);
     const { selectedPincode } = this.props;
-    const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
+    const pincode = selectedPincode === "" ? PINCODE : selectedPincode;
     this.props.loadCart(sessionId, pincode).catch(error => console.log(error));
   }
 
@@ -143,13 +141,15 @@ export default class HeaderTop extends Component {
   handleClick = URL => e => {
     e.preventDefault();
     const { history, router } = this.props;
-    history.push(`${URL}/?redirect=${checkRedirection(router.location.pathname)}`);
+    history.push(
+      `${URL}/?redirect=${checkRedirection(router.location.pathname)}`
+    );
   };
 
   checkCartBeforeCheckout = (dispatcher, session) => dispatcheroEmpty => {
     // e.preventDefault();
     const { selectedPincode } = this.props;
-    const pincode = selectedPincode === '' ? PINCODE : selectedPincode;
+    const pincode = selectedPincode === "" ? PINCODE : selectedPincode;
     this.props.loadCart(session, pincode).catch(error => console.log(error));
     dispatcher(session);
     despatchClearSelectForDemo(dispatcheroEmpty); // New
@@ -171,8 +171,9 @@ export default class HeaderTop extends Component {
       const newAmt = Math.floor(amt).toString();
       const lastThree = newAmt.substring(newAmt.length - 3);
       const otherNumbers = newAmt.substring(0, newAmt.length - 3);
-      const newlastThree = otherNumbers !== '' ? `,${lastThree}` : lastThree;
-      const res = otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + newlastThree;
+      const newlastThree = otherNumbers !== "" ? `,${lastThree}` : lastThree;
+      const res =
+        otherNumbers.replace(/\B(?=(\d{2})+(?!\d))/g, ",") + newlastThree;
       return res;
     }
   };
@@ -196,10 +197,10 @@ export default class HeaderTop extends Component {
 
     return (
       <Box>
-        <Row sx={{ alignItems: 'center' }} mx={[0, 0, 0, -16]}>
+        <Row sx={{ alignItems: "center" }} mx={[0, 0, 0, -16]}>
           <Col width={3 / 12}>
             <Link to={HOME_URL}>
-              <Image height={['auto', 'auto', 50]} src={LogoIcon} alt="Hometown" />
+              <img src={LogoIcon} alt="Hometown" />
             </Link>
           </Col>
           <Col width={5.5 / 12}>
@@ -222,28 +223,32 @@ export default class HeaderTop extends Component {
               variant="link"
               pl={20}
               sx={{
-                '+ div': {
-                  display: 'none',
-                  '&:hover': {
-                    display: 'block'
+                "+ div": {
+                  display: "none",
+                  "&:hover": {
+                    display: "block"
                   }
                 },
-                ':hover': {
-                  '& + div': {
-                    display: 'block'
+                ":hover": {
+                  "& + div": {
+                    display: "block"
                   }
                 }
               }}
             >
-              {isLoggedIn ? <Text variant="headerLabel">Hi {titleCase(name)}</Text> : <UserIcon />}
+              {isLoggedIn ? (
+                <Text variant="headerLabel">Hi {titleCase(name)}</Text>
+              ) : (
+                <UserIcon />
+              )}
             </Button>
-            <Box pt={20} sx={{ position: 'relative' }}>
+            <Box pt={20} sx={{ position: "relative" }}>
               <Card variant="card.profileMore">
                 <Box variant="card.profileMoreWrapper">
                   {!isLoggedIn && (
                     <Fragment>
                       <Button
-                        as={Link}
+                        // as={Link}
                         to={SIGNUP_URL}
                         onClick={this.handleClick(SIGNUP_URL)}
                         mb={15}
@@ -256,12 +261,12 @@ export default class HeaderTop extends Component {
                         Not a member yet?
                       </Text>
                       <Button
-                        as={Link}
+                        // as={Link}
                         variant="outline.primary"
                         to={LOGIN_URL}
                         onClick={this.handleClick(LOGIN_URL)}
                         width={175}
-                        sx={{ display: 'block' }}
+                        sx={{ display: "block" }}
                       >
                         Log In
                       </Button>
@@ -276,7 +281,7 @@ export default class HeaderTop extends Component {
                         variant="outline.primary"
                         onClick={onClickLogout(logoutUser)}
                         width={175}
-                        sx={{ display: 'block' }}
+                        sx={{ display: "block" }}
                       >
                         Logout !
                       </Button>
@@ -290,31 +295,29 @@ export default class HeaderTop extends Component {
               pl={20}
               onClick={isLoggedIn ? onClick(history) : this.onOpenLoginModal}
               sx={{
-                '+ div': {
-                  display: 'none',
-                  '&:hover': {
-                    display: 'block'
+                "+ div": {
+                  display: "none",
+                  "&:hover": {
+                    display: "block"
                   }
                 },
-                ':hover': {
-                  '& + div': {
-                    display: 'block'
+                ":hover": {
+                  "& + div": {
+                    display: "block"
                   }
                 }
               }}
             >
-              <Flex alignItems="center">
-                <FavIcon />
-                <Text variant="headerLabel" ml={5}>
-                  {isLoggedIn ? wishListCount : 0}
-                </Text>
-              </Flex>
+              <FavIcon />
+              <span style={{ marginLeft: "5px" }}>
+                {isLoggedIn ? wishListCount : 0}
+              </span>
             </Button>
-            <Box pt={20} className="cart-popover" sx={{ position: 'relative' }}>
+            <Box pt={20} className="cart-popover" sx={{ position: "relative" }}>
               <Card variant="card.profileMore" width={244}>
                 <Box variant="card.profileMoreWrapper" px={15} py={15}>
                   {wishlist && wishlist.data.length > 0 && (
-                    <Flex mx={-5} my={-5} sx={{ flexWrap: 'wrap' }}>
+                    <Flex mx={-5} my={-5} sx={{ flexWrap: "wrap" }}>
                       {wishlist.data.map(item => (
                         <Box px={5} py={5}>
                           {/* <Image
@@ -370,14 +373,19 @@ export default class HeaderTop extends Component {
                   <Flex mx={-5}>
                     <Box width={1 / 2} px={5}>
                       {!isLoggedIn && (
-                        <Button as={Link} to={LOGIN_URL} width={1}>
+                        <Button to={LOGIN_URL} width={1}>
                           SIGN IN
                         </Button>
                       )}
                     </Box>
                     <Box width={1 / 2} px={5}>
                       {isLoggedIn && (
-                        <Button as={Link} to={MY_WISHLIST_URL} variant="outline.primary" width={1}>
+                        <Button
+                          as={Link}
+                          to={MY_WISHLIST_URL}
+                          variant="outline.primary"
+                          width={1}
+                        >
                           VIEW ALL
                         </Button>
                       )}
@@ -392,15 +400,15 @@ export default class HeaderTop extends Component {
               pl={20}
               alignItems="center"
               sx={{
-                '+ div': {
-                  display: 'none',
-                  '&:hover': {
-                    display: 'block'
+                "+ div": {
+                  display: "none",
+                  "&:hover": {
+                    display: "block"
                   }
                 },
-                ':hover': {
-                  '& + div': {
-                    display: 'block'
+                ":hover": {
+                  "& + div": {
+                    display: "block"
                   }
                 }
               }}
@@ -410,9 +418,14 @@ export default class HeaderTop extends Component {
                 {cartCount}
               </Text>
             </Flex>
-            <Box pt={20} className="cart-popover" sx={{ position: 'relative' }}>
+            <Box pt={20} className="cart-popover" sx={{ position: "relative" }}>
               <Card variant="card.profileMore">
-                <Box bg="bgOffer" px={20} py={8} sx={{ fontSize: 16, color: 'white' }}>
+                <Box
+                  bg="bgOffer"
+                  px={20}
+                  py={8}
+                  sx={{ fontSize: 16, color: "white" }}
+                >
                   {cartCount} items in your cart
                 </Box>
                 <Box variant="card.profileMoreWrapper" px={0}>
@@ -422,8 +435,8 @@ export default class HeaderTop extends Component {
                     width={300}
                     maxHeight={340}
                     sx={{
-                      borderBottom: 'divider',
-                      overflow: 'auto'
+                      borderBottom: "divider",
+                      overflow: "auto"
                     }}
                   >
                     {cartItems.map(item => (
@@ -443,9 +456,15 @@ export default class HeaderTop extends Component {
                     ))}
                   </Box>
                   <Box pb={20} px={[0, 0, 16]}>
-                    <Flex width={7 / 12} justifyContent="space-between" ml="auto">
+                    <Flex
+                      width={7 / 12}
+                      justifyContent="space-between"
+                      ml="auto"
+                    >
                       <Text fontFamily="medium">Subtotal</Text>
-                      <Text fontFamily="medium">Rs. {this.formatAmount(cartSummary.total)}</Text>
+                      <Text fontFamily="medium">
+                        Rs. {this.formatAmount(cartSummary.total)}
+                      </Text>
                     </Flex>
                   </Box>
                   <Box px={16}>
@@ -467,20 +486,25 @@ export default class HeaderTop extends Component {
                             CHECKOUT NOW
                           </Button>
                         ) : (
-                            <Button
-                              disabled={this.state.containsOutOfStock}
-                              width={1}
-                              // as={Link}
-                              // onClick={() => this.checkCartBeforeCheckout(checkCart, sessionId)(addToSelectForDemo)}
-                              // to={DELIVERY_ADDRESS_URL}
-                              mb={10}
-                            >
-                              CHECKOUT NOW
-                            </Button>
-                          )}
+                          <Button
+                            disabled={this.state.containsOutOfStock}
+                            width={1}
+                            // as={Link}
+                            // onClick={() => this.checkCartBeforeCheckout(checkCart, sessionId)(addToSelectForDemo)}
+                            // to={DELIVERY_ADDRESS_URL}
+                            mb={10}
+                          >
+                            CHECKOUT NOW
+                          </Button>
+                        )}
                       </div>
                     ) : null}
-                    <Button width={1} as={Link} to={CART_URL} variant="outline.primary">
+                    <Button
+                      width={1}
+                      as={Link}
+                      to={CART_URL}
+                      variant="outline.primary"
+                    >
                       VIEW CART
                     </Button>
                   </Box>
@@ -492,12 +516,18 @@ export default class HeaderTop extends Component {
 
         {/* Pincode Modal */}
         <ResponsiveModal
-          classNames={{ modal: 'pincodeModal' }}
+          classNames={{ modal: "pincodeModal" }}
           onCloseModal={this.onClosePincodeModal}
           open={this.state.openPincode}
         >
           <Box textAlign="center">
-            <Image width="100px" m="auto" mb="1.5rem" src={PincodeModalIcon} alt="Pincode" />
+            <Image
+              width="100px"
+              m="auto"
+              mb="1.5rem"
+              src={PincodeModalIcon}
+              alt="Pincode"
+            />
             <Heading fontSize={20} lineHeight={1.3} mb="1rem">
               Please enter your Pincode to serve you better
             </Heading>
@@ -516,7 +546,7 @@ export default class HeaderTop extends Component {
 
         {/* Signup Modal */}
         <ResponsiveModal
-          classNames={{ modal: 'signupModal' }}
+          classNames={{ modal: "signupModal" }}
           onCloseModal={this.onCloseSignupModal}
           open={this.state.openSignup}
         >
@@ -531,14 +561,14 @@ HeaderTop.defaultProps = {
   wishListCount: 0,
   cartCount: 0,
   isLoggedIn: false,
-  name: '',
+  name: "",
   history: {},
   router: {},
   cartItems: [],
   cartSummary: {},
   // cart: {},
   wishlist: {},
-  logoutUser: () => { }
+  logoutUser: () => {}
 };
 
 HeaderTop.propTypes = {

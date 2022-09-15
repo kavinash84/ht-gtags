@@ -111,6 +111,7 @@ export default class Html extends Component {
     return (
       <html lang="en-IN">
         <head>
+          <meta charSet="utf-8" />
           {head.base.toComponent()}
           {head.title.toComponent()}
           {head.meta.toComponent()}
@@ -118,7 +119,6 @@ export default class Html extends Component {
           {head.script.toComponent()}
 
           <link rel="shortcut icon" href="/favicon.ico" />
-          <meta charSet="utf-8" />
           <meta httpEquiv="x-ua-compatible" content="ie=edge" />
           <meta
             name="viewport"
@@ -212,10 +212,10 @@ export default class Html extends Component {
               <link
                 href={assets.styles[style]}
                 key={style}
-                media="screen, projection"
+                media="screen"
                 rel="stylesheet"
                 type="text/css"
-                charSet="UTF-8"
+                // charSet="UTF-8"
               />
             ))}
 

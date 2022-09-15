@@ -1,86 +1,116 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Hometown - Sitemap</title>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <head>
+    <title>Hometown - Sitemap</title>
+    <!-- Required meta tags -->
+    <!-- <meta charset="utf-8"> -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
 
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-  <link rel="stylesheet" href="sitemap.css">
-</head>
-<body>
-<div class="wrapper pb-5">
-  <div class="container sitemap-wrapper">
-    <div class="row mb-3 ml-xs-0">
-      <div class="col-12 col-sm-12 p-0">
-        <nav class="navbar navbar-light px-0">
-          <a class="navbar-brand" href="https://hometown.in">
-            <img src="logo.png" height="40px" alt="logo">
-          </a>
-        </nav>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="sitemap.css" />
+  </head>
+  <body>
+    <div class="wrapper pb-5">
+      <div class="container sitemap-wrapper">
+        <div class="row mb-3 ml-xs-0">
+          <div class="col-12 col-sm-12 p-0">
+            <nav class="navbar navbar-light px-0">
+              <a class="navbar-brand" href="https://hometown.in">
+                <img src="logo.png" height="40px" alt="logo" />
+              </a>
+            </nav>
+          </div>
+        </div>
+        <div id="sitemapData"></div>
       </div>
     </div>
-    <div id="sitemapData"></div>
-  </div>
-</div>
 
-<!-- <script src="assets/js/jquery-3.1.0.js"></script> -->
-<script type="text/javascript">
-  var data = null;
+    <!-- <script src="assets/js/jquery-3.1.0.js"></script> -->
+    <script type="text/javascript">
+      var data = null;
 
-  var xhr = new XMLHttpRequest();
-  xhr.withCredentials = true;
+      var xhr = new XMLHttpRequest();
+      xhr.withCredentials = true;
 
-  xhr.addEventListener("readystatechange", function () {
-   if (this.readyState === 4) {
-     var data = this.responseText;
-     var apiResponse = JSON.parse(this.responseText)
-     var datajson =  apiResponse && apiResponse.filter(menu => menu.visibility === 'on');
+      xhr.addEventListener("readystatechange", function() {
+        if (this.readyState === 4) {
+          var data = this.responseText;
+          var apiResponse = JSON.parse(this.responseText);
+          var datajson =
+            apiResponse && apiResponse.filter(menu => menu.visibility === "on");
 
-     var dataContainer = document.getElementById('sitemapData');
-     var sitemapData = '';
+          var dataContainer = document.getElementById("sitemapData");
+          var sitemapData = "";
 
-     for (var l1 = 0; l1 < datajson.length; l1++) {
-       var level1 = datajson[l1];
-       if(level1 !== undefined) {
-         sitemapData += '<div class="row sitemap-block-wrapper">';
-         sitemapData += '<div class="col-12 col-sm-12"><h1><a href="https://www.hometown.in/'+level1['url_key']+'">'+level1['name']+'</a></h1></div>';
-       }
-       var level2 = level1['children'] && level1['children'].filter(menu => menu.visibility === 'on');
+          for (var l1 = 0; l1 < datajson.length; l1++) {
+            var level1 = datajson[l1];
+            if (level1 !== undefined) {
+              sitemapData += '<div class="row sitemap-block-wrapper">';
+              sitemapData +=
+                '<div class="col-12 col-sm-12"><h1><a href="https://www.hometown.in/' +
+                level1["url_key"] +
+                '">' +
+                level1["name"] +
+                "</a></h1></div>";
+            }
+            var level2 =
+              level1["children"] &&
+              level1["children"].filter(menu => menu.visibility === "on");
 
-       if(level2 !== undefined) {
-         for (var l2 = 0; l2 < level2.length; l2++) {
-           var level2Data = level2[l2];
-           sitemapData += '<div class="col-12 col-sm-3">';
-           sitemapData += '<ul class="level-2">';
-           sitemapData += '<li><h2><a href="https://www.hometown.in/'+level2Data['url_key']+'">'+level2Data['name']+'</a></h2></li>';
+            if (level2 !== undefined) {
+              for (var l2 = 0; l2 < level2.length; l2++) {
+                var level2Data = level2[l2];
+                sitemapData += '<div class="col-12 col-sm-3">';
+                sitemapData += '<ul class="level-2">';
+                sitemapData +=
+                  '<li><h2><a href="https://www.hometown.in/' +
+                  level2Data["url_key"] +
+                  '">' +
+                  level2Data["name"] +
+                  "</a></h2></li>";
 
-           sitemapData += '<ul class="level-3">';
-              var level3 =  level2Data['children'] && level2Data['children'].filter(menu => menu.visibility === 'on');
-              if(level3 !== undefined) {
-                for (var l3 = 0; l3 < level3.length; l3++) {
-                  var level3Data = level3[l3];
-                  sitemapData += '<li><h4><a href="https://www.hometown.in/'+level3Data['url_key']+'">'+level3Data['name']+'</a></h4></li>';
+                sitemapData += '<ul class="level-3">';
+                var level3 =
+                  level2Data["children"] &&
+                  level2Data["children"].filter(
+                    menu => menu.visibility === "on"
+                  );
+                if (level3 !== undefined) {
+                  for (var l3 = 0; l3 < level3.length; l3++) {
+                    var level3Data = level3[l3];
+                    sitemapData +=
+                      '<li><h4><a href="https://www.hometown.in/' +
+                      level3Data["url_key"] +
+                      '">' +
+                      level3Data["name"] +
+                      "</a></h4></li>";
+                  }
                 }
+                sitemapData += "</ul>";
+
+                sitemapData += "</ul>";
+                sitemapData += "</div>";
               }
-           sitemapData += '</ul>';
+            }
+            sitemapData += "</div>";
+          }
 
-           sitemapData += '</ul>';
-           sitemapData += '</div>';
-         }
-       }
-       sitemapData += '</div>';
-     }
+          dataContainer.innerHTML += sitemapData;
+        }
+      });
 
-     dataContainer.innerHTML += sitemapData;
-   }
-  });
-
-  xhr.open("GET", "https://api.hometown.in/api/tesla/categories");
-  xhr.setRequestHeader("X-SESSION-ID", "enorlbg3n3qukpp4omhcfj8ql4");
-  xhr.setRequestHeader("Cache-Control", "no-cache");
-  xhr.send(data);
-</script>
-</body>
+      xhr.open("GET", "https://api.hometown.in/api/tesla/categories");
+      xhr.setRequestHeader("X-SESSION-ID", "enorlbg3n3qukpp4omhcfj8ql4");
+      xhr.setRequestHeader("Cache-Control", "no-cache");
+      xhr.send(data);
+    </script>
+  </body>
 </html>
