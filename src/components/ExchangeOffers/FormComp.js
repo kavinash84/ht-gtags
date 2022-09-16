@@ -855,6 +855,7 @@ export default class ContactUs extends Component {
                 <h6>
                   <span>
                     <a
+                      rel="noopener"
                       target="_blank"
                       href="https://hometown.in/store-locator"
                       className="alert-link"

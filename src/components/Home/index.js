@@ -403,7 +403,10 @@ class HomeContainer extends Component {
                   zIndex: "10"
                 }}
               >
-                <Image data-src={gifting.image1} src={`${gifting.image1}?blur=30`} />
+                <Image
+                  data-src={gifting.image1}
+                  src={`${gifting.image1}?blur=30`}
+                />
               </Link>
               <Link
                 onClick={() => {
@@ -420,7 +423,10 @@ class HomeContainer extends Component {
                   zIndex: "10"
                 }}
               >
-                <Image data-src={gifting.image2} src={`${gifting.image2}?blur=30`} />
+                <Image
+                  data-src={gifting.image2}
+                  src={`${gifting.image2}?blur=30`}
+                />
               </Link>
             </div>
           </div>
@@ -1313,7 +1319,8 @@ class HomeContainer extends Component {
                 }}
                 to={customiseYourHome.url_key1}
                 className="customise"
-                target="_blank0"
+                target="_blank"
+                rel="noopener"
               >
                 <Image
                   mt="30px"
@@ -1336,7 +1343,8 @@ class HomeContainer extends Component {
                   );
                 }}
                 to={customiseYourHome.url_key2}
-                target="_blank1"
+                target="_blank"
+                rel="noopener"
               >
                 <Image
                   mt="30px"

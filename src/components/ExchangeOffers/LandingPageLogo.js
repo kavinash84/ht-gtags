@@ -11,7 +11,7 @@ const LandingPageLogo = () => (
     }}
   >
     <div>
-      <a href="https://www.hometown.in" target="_blank">
+      <a href="https://www.hometown.in" target="_blank" rel="noopener">
         <img
           className="img-fluid"
           src={logo}

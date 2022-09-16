@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 // import { connect } from 'react-redux';
 // import Text from 'hometown-components-dev/lib/TextHtV1';
 // import PropTypes from 'prop-types';
@@ -39,7 +39,7 @@ class FlipBook extends Component {
               title={found.name}
               download
               target="_blank"
-              rel="noopener noreferrer"
+              rel="noopener"
             >
               Please click here to download the Catalogue
             </Text>

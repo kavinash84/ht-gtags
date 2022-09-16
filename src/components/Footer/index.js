@@ -216,7 +216,7 @@ class Footer extends React.Component {
                   <Li>
                     <a
                       href="https://www.praxisretail.in/careers.html"
-                      rel="noreferrer noopener"
+                      rel="noopener"
                       target="_blank"
                     >
                       <Text variant="footerLink">Careers</Text>
@@ -231,11 +231,7 @@ class Footer extends React.Component {
                 <Heading variant="footerTitle">USEFUL LINKS</Heading>
                 <Ul>
                   <Li>
-                    <a
-                      href="/sitemap.html"
-                      rel="noreferrer noopener"
-                      target="_blank"
-                    >
+                    <a href="/sitemap.html" rel="noopener" target="_blank">
                       <Text variant="footerLink">Sitemap</Text>
                     </a>
                   </Li>
@@ -246,12 +242,12 @@ class Footer extends React.Component {
                 {/* <Heading variant="footerTitle">CATALOG</Heading>
                 <Ul>
                   <Li>
-                    <a href="/" rel="noreferrer noopener" target="_blank">
+                    <a href="/" rel="noopener" target="_blank">
                       <Text variant="footerLink">Catalog Request</Text>
                     </a>
                   </Li>
                   <Li>
-                    <a href="/" rel="noreferrer noopener" target="_blank">
+                    <a href="/" rel="noopener" target="_blank">
                       <Text variant="footerLink">eCatalogs</Text>
                     </a>
                   </Li>
@@ -269,11 +265,7 @@ class Footer extends React.Component {
                   }}
                 >
                   <Li>
-                    <a
-                      href="tel:08069252525"
-                      rel="noreferrer noopener"
-                      target="_blank"
-                    >
+                    <a href="tel:08069252525" rel="noopener" target="_blank">
                       <Text variant="footerLink" fontSize={16}>
                         <CallIcon mr={10} /> 08069252525
                       </Text>
@@ -291,7 +283,7 @@ class Footer extends React.Component {
                   <Li>
                     <a
                       href="mailto:care@hometown.in"
-                      rel="noreferrer noopener"
+                      rel="noopener"
                       target="_blank"
                     >
                       <Text variant="footerLink" fontSize={16}>
@@ -314,7 +306,7 @@ class Footer extends React.Component {
                 <Heading variant="footerTitle">OUR APP</Heading>
                 <a
                   target="_blank"
-                  rel="noopener noreferrer"
+                  rel="noopener"
                   href="https://play.google.com/store/apps/details?id=com.fabfurnish.android"
                 >
                   <Image

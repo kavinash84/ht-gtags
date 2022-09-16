@@ -55,7 +55,12 @@ class NavBar extends Component {
                 {menuItem.url_key.startsWith("http") ? (
                   <Box>
                     {menuItem.name === "Festive Catalog" ? (
-                      <Text as={Link} to="/flipBook" target="_blank">
+                      <Text
+                        as={Link}
+                        to="/flipBook"
+                        target="_blank"
+                        rel="noopener"
+                      >
                         {menuItem.name}
                       </Text>
                     ) : (
@@ -65,7 +70,7 @@ class NavBar extends Component {
                         href={menuItem.url_key}
                         title={menuItem.name}
                         target="_blank"
-                        rel="noopener noreferrer"
+                        rel="noopener"
                       >
                         {menuItem.name}
                       </Text>
@@ -205,6 +210,7 @@ class NavBar extends Component {
                               as={Link}
                               to="/flipBook"
                               target="_blank"
+                              rel="noopener"
                             >
                               {menuItem.name}
                             </Text>
@@ -215,7 +221,7 @@ class NavBar extends Component {
                               href={menuItem.url_key}
                               title={menuItem.name}
                               target="_blank"
-                              rel="noopener noreferrer"
+                              rel="noopener"
                             >
                               {menuItem.name}
                             </Text>

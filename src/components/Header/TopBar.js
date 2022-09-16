@@ -25,7 +25,7 @@ const TopBar = () => (
         </Link>
         <a
           href="https://blog.hometown.in"
-          rel="noreferrer noopener"
+          rel="noopener"
           target="_blank"
         >
           <Text variant="heading.small" style={{ color: "white" }}>

@@ -1,32 +1,32 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
 /**
  * formatters
  */
-import { formatAmount } from 'utils/formatters';
+import { formatAmount } from "utils/formatters";
 
 /**
  * Components
  */
-import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Button from 'hometown-components-dev/lib/ButtonHtV1';
-import Col from 'hometown-components-dev/lib/ColHtV1';
-import Flex from 'hometown-components-dev/lib/FlexHtV1';
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
-import Image from 'hometown-components-dev/lib/ImageHtV1';
-import Row from 'hometown-components-dev/lib/RowHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
-import Coupon from '../Checkout/Coupon';
-import AcceptedPaymentOptions from '../AcceptedPaymentOptions';
+import Box from "hometown-components-dev/lib/BoxHtV1";
+import Button from "hometown-components-dev/lib/ButtonHtV1";
+import Col from "hometown-components-dev/lib/ColHtV1";
+import Flex from "hometown-components-dev/lib/FlexHtV1";
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
+import Image from "hometown-components-dev/lib/ImageHtV1";
+import Row from "hometown-components-dev/lib/RowHtV1";
+import Text from "hometown-components-dev/lib/TextHtV1";
+import Coupon from "../Checkout/Coupon";
+import AcceptedPaymentOptions from "../AcceptedPaymentOptions";
 /**
  * Icons
  */
-const checkoutIcon = require('../../../static/checkout.svg');
+const checkoutIcon = require("../../../static/checkout.svg");
 
-const styles = require('../Checkout/OrderSummary.scss');
+const styles = require("../Checkout/OrderSummary.scss");
 
-const demoBanner = require('../../../static/campaign/select-for-demo-mini-banner.jpg');
+const demoBanner = require("../../../static/campaign/select-for-demo-mini-banner.jpg");
 
 const OrderSummary = ({
   itemsTotal,
@@ -50,7 +50,7 @@ const OrderSummary = ({
       <Box
         pb={10}
         sx={{
-          borderBottom: 'divider'
+          borderBottom: "divider"
         }}
       >
         <Heading
@@ -70,9 +70,16 @@ const OrderSummary = ({
     </Box>
 
     {selectedForDemo && (
-      <Row ml="0" mr="0" mb="1rem" alignItems="center" flexWrap="no-wrap" width="100%">
+      <Row
+        ml="0"
+        mr="0"
+        mb="1rem"
+        alignItems="center"
+        flexWrap="no-wrap"
+        width="100%"
+      >
         <Box>
-          <a href={landingPageLink} rel="noreferrer" target="_blank">
+          <a href={landingPageLink} rel="noopener" target="_blank">
             <Image src={demoBanner} alt="" />
           </a>
         </Box>
@@ -89,7 +96,7 @@ const OrderSummary = ({
       </Flex>
       <Flex mb={[10, 10, 20]} justifyContent="space-between">
         <Text>Shipping</Text>
-        <Text>{shipping === 0 ? 'Free' : `Rs. ${shipping}`}</Text>
+        <Text>{shipping === 0 ? "Free" : `Rs. ${shipping}`}</Text>
       </Flex>
       {discount > 0 && (
         <Flex mb={[10, 10, 20]} justifyContent="space-between">
@@ -105,7 +112,13 @@ const OrderSummary = ({
       )}
       <Row m="0" py="1em" className={styles.totalWrapper}>
         <Box variant="col-6" p="0">
-          <Text color="menuItem" mb="0" fontSize={[16, 16, 18]} fontWeight="600" fontFamily="light">
+          <Text
+            color="menuItem"
+            mb="0"
+            fontSize={[16, 16, 18]}
+            fontWeight="600"
+            fontFamily="light"
+          >
             Total Price
           </Text>
         </Box>
@@ -129,10 +142,15 @@ const OrderSummary = ({
         height="auto"
         onClick={onClick}
         hide={hidebutton}
-        disabled={loadingnextstep || isSubmitted || (outOfStockList && outOfStockList.length > 0) || disabled}
+        disabled={
+          loadingnextstep ||
+          isSubmitted ||
+          (outOfStockList && outOfStockList.length > 0) ||
+          disabled
+        }
       >
         <Image src={checkoutIcon} alt="Delete" height="20px" mr="0.625rem" />
-        {loadingnextstep || isSubmitted ? 'Please wait...' : btnText}
+        {loadingnextstep || isSubmitted ? "Please wait..." : btnText}
       </Button>
     </Box>
   </Row>
@@ -145,9 +163,9 @@ OrderSummary.defaultProps = {
   outOfStockList: [],
   disabled: false,
   discount: 0,
-  btnText: 'Place Order',
+  btnText: "Place Order",
   setDiscount: 0,
-  landingPageLink: '',
+  landingPageLink: "",
   selectedForDemo: false
 };
 
