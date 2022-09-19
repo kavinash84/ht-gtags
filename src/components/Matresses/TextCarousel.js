@@ -9,7 +9,10 @@ export class TextCarousel extends Component {
     const { textData } = this.props;
     return (
       <Div m="0px" mb="0px">
-        <SlickSlider mb="0px">
+        <SlickSlider
+          mb="0px"
+          settings={{ autoplay: true, autoplaySpeed: 3000 }}
+        >
           {textData.map(slide => (
             <div className={styles.example1}>
               <h3>{slide.text}</h3>
