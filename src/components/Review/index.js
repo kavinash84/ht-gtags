@@ -9,9 +9,8 @@ import Reviews from "./Reviews";
 import SortAndFilter from "./sortAndFilter";
 import { loadReviewsList, togglePageNumber } from "../../redux/modules/reviews";
 
-const arrowForward = require("../../../static/Review/ReviewBanner.png");
+// const arrowForward = require("../../../static/Review/ReviewBanner.png");
 
-const styles = require("./BreadCrumb.scss");
 const styles2 = require("./index.scss");
 
 @connect(({ reviews }) => ({
