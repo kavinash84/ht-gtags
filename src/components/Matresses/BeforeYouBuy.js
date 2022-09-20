@@ -57,12 +57,20 @@ export class BeforeYouBuy extends Component {
         <div
           style={{
             textAlign: "center",
-            fontSize: "22px",
+            fontSize: "25px",
             fontWeight: 600,
             padding: "0px 0px 25px"
           }}
         >
           {data.title}
+          <div
+            style={{
+              width: "30px",
+              borderTop: "2px solid #222222",
+              margin: "auto",
+              marginTop: "15px"
+            }}
+          />
         </div>
         <Div className="carousel-one offset" mt="0rem">
           <SlickSlider

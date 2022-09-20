@@ -58,7 +58,7 @@ export class SleepPosition extends Component {
         <div
           style={{
             textAlign: "center",
-            fontSize: "22px",
+            fontSize: "25px",
             fontWeight: 600,
             padding: "20x"
           }}

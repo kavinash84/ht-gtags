@@ -20,7 +20,6 @@ export class MattressForSleep extends Component {
   };
 
   handleQuizModal = () => {
-    this.handleClick();
     this.setState({
       open: true
     });
@@ -34,24 +33,6 @@ export class MattressForSleep extends Component {
       feel: "",
       quizSlide: "size"
     });
-  };
-
-  componentDidMount() {
-    this.handleScrollPosition();
-  }
-
-  handleScrollPosition = () => {
-    const scrollPosition = sessionStorage.getItem("scrollPosition");
-    if (scrollPosition) {
-      window.scrollTo(0, parseInt(scrollPosition));
-      setTimeout(function() {
-        sessionStorage.removeItem("scrollPosition");
-      }, 500);
-    }
-  };
-
-  handleClick = () => {
-    sessionStorage.setItem("scrollPosition", window.pageYOffset);
   };
 
   getSleeperType = (position, support) => {
@@ -192,39 +173,19 @@ export class MattressForSleep extends Component {
           }}
         >
           <ul style={{ display: "flex" }}>
-            <li style={{ display: "inline" }}>
-              <Div
-                m="5px"
-                style={{
-                  width: "10px",
-                  height: "10px",
-                  borderRadius: "50%",
-                  backgroundColor: "orangered"
-                }}
-              ></Div>
-            </li>
-            <li style={{ display: "inline" }}>
-              <Div
-                m="5px"
-                style={{
-                  width: "10px",
-                  height: "10px",
-                  borderRadius: "50%",
-                  backgroundColor: "white"
-                }}
-              ></Div>
-            </li>
-            <li style={{ display: "inline" }}>
-              <Div
-                m="5px"
-                style={{
-                  width: "10px",
-                  height: "10px",
-                  borderRadius: "50%",
-                  backgroundColor: "white"
-                }}
-              ></Div>
-            </li>
+            {["size", "position", "feel"].map(item => (
+              <li style={{ display: "inline" }}>
+                <Div
+                  m="5px"
+                  style={{
+                    width: "10px",
+                    height: "10px",
+                    borderRadius: "50%",
+                    backgroundColor: quizSlide === item ? "orangered" : "white"
+                  }}
+                ></Div>
+              </li>
+            ))}
           </ul>
         </Div>
         <Heading

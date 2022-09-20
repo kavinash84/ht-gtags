@@ -83,7 +83,7 @@ export class index extends Component {
         <WhyChooseUs data={whyChooseUs} />
 
         {/* Sleep Better */}
-        <SleepBetter data={sleepBetter} />
+        <SleepBetter data={sleepBetter} history={history} />
 
         {/* Customers Speak */}
         <CustomerStories fromMattres={true} />

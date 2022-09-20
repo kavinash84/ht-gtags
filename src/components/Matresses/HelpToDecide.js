@@ -15,12 +15,20 @@ export class HelpToDecide extends Component {
         <div
           style={{
             textAlign: "center",
-            fontSize: "22px",
+            fontSize: "25px",
             fontWeight: 600,
             padding: "25px 0px 25px"
           }}
         >
           {data.title}
+          <div
+            style={{
+              width: "30px",
+              borderTop: "2px solid #222222",
+              margin: "auto",
+              marginTop: "15px"
+            }}
+          />
         </div>
         <Row
           mr="0px"

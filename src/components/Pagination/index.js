@@ -20,7 +20,7 @@ export default class Pagination extends Component {
     if (pageno === pagenumber) {
       return;
     }
-    if (window) window.scrollTo(0, 0);
+    // if (window) window.scrollTo(0, 0);
 
     const [, b64] = history.location.search.split('?filters=');
 

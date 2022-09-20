@@ -11,7 +11,7 @@ export class WhyChooseUs extends Component {
         <div
           style={{
             textAlign: "center",
-            fontSize: "22px",
+            fontSize: "25px",
             fontWeight: 600,
             padding: "25px 25px 35px"
           }}

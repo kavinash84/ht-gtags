@@ -5,24 +5,6 @@ import Row from "hometown-components-dev/lib/RowHtV1";
 import Text from "hometown-components-dev/lib/TextHtV1";
 import Image from "hometown-components-dev/lib/ImageHtV1";
 export class MattressesByComfort extends Component {
-  componentDidMount() {
-    this.handleScrollPosition();
-  }
-
-  handleScrollPosition = () => {
-    const scrollPosition = sessionStorage.getItem("scrollPosition");
-    if (scrollPosition) {
-      window.scrollTo(0, parseInt(scrollPosition));
-      setTimeout(function() {
-        sessionStorage.removeItem("scrollPosition");
-      }, 500);
-    }
-  };
-
-  handleClick = () => {
-    sessionStorage.setItem("scrollPosition", window.pageYOffset);
-  };
-
   render() {
     const { data } = this.props;
     return (
@@ -30,7 +12,7 @@ export class MattressesByComfort extends Component {
         <div
           style={{
             textAlign: "center",
-            fontSize: "22px",
+            fontSize: "25px",
             fontWeight: 600,
             padding: "0px 0px 25px"
           }}
@@ -44,11 +26,7 @@ export class MattressesByComfort extends Component {
           }}
         >
           {data.values.map((elem, index) => (
-            <Link
-              to={elem.link}
-              style={{ margin: "0px 0.5rem", width: "17%" }}
-              onClick={this.handleClick}
-            >
+            <Link to={elem.link} style={{ margin: "0px 0.5rem", width: "17%" }}>
               <Div style={{ width: "100%" }}>
                 <Div
                   key={index}

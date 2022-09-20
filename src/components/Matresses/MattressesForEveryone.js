@@ -6,24 +6,6 @@ import Text from "hometown-components-dev/lib/TextHtV1";
 import Image from "hometown-components-dev/lib/ImageHtV1";
 
 export class MattressesForEveryone extends Component {
-  componentDidMount() {
-    this.handleScrollPosition();
-  }
-
-  handleScrollPosition = () => {
-    const scrollPosition = sessionStorage.getItem("scrollPosition");
-    if (scrollPosition) {
-      window.scrollTo(0, parseInt(scrollPosition));
-      setTimeout(function() {
-        sessionStorage.removeItem("scrollPosition");
-      }, 1000);
-    }
-  };
-
-  handleClick = () => {
-    sessionStorage.setItem("scrollPosition", window.pageYOffset);
-  };
-
   render() {
     const { data } = this.props;
     return (
@@ -31,12 +13,20 @@ export class MattressesForEveryone extends Component {
         <div
           style={{
             textAlign: "center",
-            fontSize: "22px",
+            fontSize: "25px",
             fontWeight: 600,
             padding: "0px 0px 25px"
           }}
         >
           {data.title}
+          <div
+            style={{
+              width: "30px",
+              borderTop: "2px solid #222222",
+              margin: "auto",
+              marginTop: "15px"
+            }}
+          />
         </div>
         <Row
           mr="0px"
@@ -52,7 +42,6 @@ export class MattressesForEveryone extends Component {
                 <Link
                   to={row.link || "/"}
                   style={{ width: "20%", marginRight: "10px" }}
-                  onClick={this.handleClick}
                 >
                   <Div
                     style={{

@@ -49,23 +49,6 @@ function SamplePrevArrow(props) {
   );
 }
 export class FoamPillows extends Component {
-  componentDidMount() {
-    this.handleScrollPosition();
-  }
-
-  handleScrollPosition = () => {
-    const scrollPosition = sessionStorage.getItem("scrollPosition");
-    if (scrollPosition) {
-      window.scrollTo(0, parseInt(scrollPosition));
-      setTimeout(function() {
-        sessionStorage.removeItem("scrollPosition");
-      }, 500);
-    }
-  };
-
-  handleClick = () => {
-    sessionStorage.setItem("scrollPosition", window.pageYOffset);
-  };
   render() {
     const { data } = this.props;
     return (
@@ -73,7 +56,7 @@ export class FoamPillows extends Component {
         <div
           style={{
             textAlign: "center",
-            fontSize: "22px",
+            fontSize: "25px",
             fontWeight: 600,
             padding: "0px 0px 25px"
           }}

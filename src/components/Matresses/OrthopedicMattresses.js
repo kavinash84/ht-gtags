@@ -5,33 +5,11 @@ import Text from "hometown-components-dev/lib/TextHtV1";
 import Image from "hometown-components-dev/lib/ImageHtV1";
 
 export class OrthopedicMattresses extends Component {
-  componentDidMount() {
-    this.handleScrollPosition();
-  }
-
-  handleScrollPosition = () => {
-    const scrollPosition = sessionStorage.getItem("scrollPosition");
-    if (scrollPosition) {
-      window.scrollTo(0, parseInt(scrollPosition));
-      setTimeout(function() {
-        sessionStorage.removeItem("scrollPosition");
-      }, 500);
-    }
-  };
-
-  handleClick = () => {
-    sessionStorage.setItem("scrollPosition", window.pageYOffset);
-  };
-
   render() {
     const { data } = this.props;
     return (
       <Div mt="2rem" style={{ padding: "2% 0%" }}>
-        <Link
-          to={data.link}
-          onClick={this.handleClick}
-          style={{ position: "relative" }}
-        >
+        <Link to={data.link} style={{ position: "relative" }}>
           <Image src={data.image} alt={data.title} width="100%" />
           <Div
             style={{

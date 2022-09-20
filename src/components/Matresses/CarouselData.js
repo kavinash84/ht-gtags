@@ -7,12 +7,12 @@ import Text from "hometown-components-dev/lib/TextHtV1";
 
 // const arrowForward = require("../../../static/new-home/newForwardArrow.svg");
 
-const renderComponent = (index, elem, component, handleClick) => {
+const renderComponent = (index, elem, component) => {
   switch (component) {
     case "1":
       return (
         <Div key={index} p="2rem" pl="1rem" pr="1rem" pb="0rem">
-          <Link to={elem.link} onClick={handleClick}>
+          <Link to={elem.link}>
             <Div
               style={{
                 paddingBottom: "1rem"
@@ -44,7 +44,7 @@ const renderComponent = (index, elem, component, handleClick) => {
     case "2":
       return (
         <Div key={index} p="2rem" pl="1rem" pr="0.5rem" pb="0rem">
-          <Link to={elem.link} onClick={handleClick}>
+          <Link to={elem.link}>
             <Div
               style={{
                 paddingBottom: "1rem"
@@ -58,7 +58,7 @@ const renderComponent = (index, elem, component, handleClick) => {
     case "4":
       return (
         <Div key={index} p="2rem" pl="1.5rem" pr="0rem" pb="0rem">
-          {/* <Link to={elem.link || "/"} onClick={handleClick}> */}
+          {/* <Link to={elem.link || "/"}> */}
           <Div
             style={{
               paddingBottom: "1rem"
@@ -104,7 +104,7 @@ const renderComponent = (index, elem, component, handleClick) => {
     case "3":
       return (
         <Div key={index} p="2rem" pl="1.5rem" pr="0rem" pb="0rem">
-          <Link to={elem.link || "/"} onClick={handleClick}>
+          <Link to={elem.link || "/"}>
             <Div
               style={{
                 paddingBottom: "1rem"
@@ -126,7 +126,7 @@ const renderComponent = (index, elem, component, handleClick) => {
     case "5":
       return (
         <Div key={index} mt="1rem" p="0rem" pl="1.5rem" pr="0rem" pb="0rem">
-          <Link to={elem.link} onClick={handleClick}>
+          <Link to={elem.link}>
             <Div
               style={{
                 paddingBottom: "1rem"
@@ -164,7 +164,6 @@ const renderComponent = (index, elem, component, handleClick) => {
                 backgroundColor: "rgba(254, 247, 230, 0.8)",
                 padding: "0px 1rem"
               }}
-              onClick={handleClick}
             >
               <Text
                 fontSize="0.8rem"
@@ -220,30 +219,10 @@ const renderComponent = (index, elem, component, handleClick) => {
 };
 
 export class CarouselData extends Component {
-  componentDidMount() {
-    this.handleScrollPosition();
-  }
-
-  handleScrollPosition = () => {
-    const scrollPosition = sessionStorage.getItem("scrollPosition");
-    if (scrollPosition) {
-      window.scrollTo(0, parseInt(scrollPosition));
-      setTimeout(function() {
-        sessionStorage.removeItem("scrollPosition");
-      }, 500);
-    }
-  };
-
-  handleClick = () => {
-    sessionStorage.setItem("scrollPosition", window.pageYOffset);
-  };
-
   render() {
     const { index, elem, component } = this.props;
 
-    return (
-      <div>{renderComponent(index, elem, component, this.handleClick)}</div>
-    );
+    return <div>{renderComponent(index, elem, component)}</div>;
   }
 }
 

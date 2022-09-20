@@ -109,7 +109,8 @@ export class Faqs extends Component {
                     backgroundColor: `${
                       showAns && ansNum === index ? "#FFFFFF" : "#69878B"
                     }`,
-                    padding: "0% 7%"
+                    padding: "0% 7%",
+                    cursor: "pointer"
                   }}
                   onClick={() => this.handleFaq(index)}
                 >

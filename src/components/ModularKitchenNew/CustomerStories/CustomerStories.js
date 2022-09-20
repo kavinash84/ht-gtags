@@ -35,38 +35,38 @@ export default class CustomerStories extends Component {
           marginTop: "40px"
         }}
       >
-        {fromMattres ? (
+        {/* {fromMattres ? (
           <div
             style={{
               textAlign: "center",
-              fontSize: "22px",
+              fontSize: "25px",
               fontWeight: 600,
               padding: "0px 0px 25px"
             }}
           >
             {customerStories.title}
           </div>
-        ) : (
-          <Div
+        ) : ( */}
+        <Div
+          style={{
+            fontSize: "40px",
+            fontWeight: "600",
+            marginBottom: "20px",
+            color: "black"
+          }}
+        >
+          {customerStories.title}
+          <div
             style={{
-              fontSize: "40px",
-              fontWeight: "600",
-              marginBottom: "20px",
-              color: "black"
+              width: "30px",
+              borderTop: "2px solid #222222",
+              margin: "auto",
+              marginTop: "15px",
+              marginBottom: "20px"
             }}
-          >
-            {customerStories.title}
-            <div
-              style={{
-                width: "30px",
-                borderTop: "2px solid #222222",
-                margin: "auto",
-                marginTop: "15px",
-                marginBottom: "20px"
-              }}
-            />
-          </Div>
-        )}
+          />
+        </Div>
+        {/* )} */}
         <Div style={{ paddingBottom: "", width: "86%", marginLeft: "6.5%" }}>
           <DBCarousel
             data={customerStories.values}
