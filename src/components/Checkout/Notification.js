@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from "react-router-dom";
 
 const Notification = ({ message }) => (
     <div style={{
         backgroundColor: 'black',
-        width: '90%', borderRadius: '10px', margin: '30px 0px'
+        width: '100%', borderRadius: '10px', margin: '30px 0px'
     }}>
         <div style={{ display: 'flex', alignItems: 'center', padding: '10px 20px' }}>
             <ul style={{ listStyle: 'none' }}>
@@ -26,7 +27,7 @@ const Notification = ({ message }) => (
                 marginLeft: '15px',
                 color: 'white'
             }}>
-                {message}
+                {message}  &nbsp; <Link to='my-orders'>My orders</Link>
             </div>
         </div>
     </div>

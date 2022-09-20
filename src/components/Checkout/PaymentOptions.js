@@ -121,7 +121,7 @@ const mapStateToProps = ({
   outOfStockList: getStockOutProducts(cart),
   futurPayProfile: getFuturePayProfile(profile),
   futurePayError: paymentoptions.futurePayRedeemAmountError,
-  warning: checkout.nextstep.warning
+  warningFlag: checkout.nextstep.warningFlag
 });
 
 const mapDispatchToProps = dispatch =>
@@ -211,7 +211,7 @@ class PaymentOptions extends Component {
       // futurPayProfile,
       isCreditSelected,
       futurePayError,
-      warning
+      warningFlag
     } = this.props;
 
     const [netBankingData] = data.filter(
@@ -337,15 +337,18 @@ class PaymentOptions extends Component {
               <WalletBalance />
             </Box>
 
+
             {
-              warning && (
+              warningFlag === 1 ? (
                 <Box>
-                  <Notification message={warning} />
+                  <Notification message='You have an Order pending for payment, Please wait for the payment confirmation.' />
                 </Box>
-              )
+              ) : warningFlag === 2 ? (
+                <Box>
+                  <Notification message='You have already bought some of current cart products in last order.' />
+                </Box>
+              ) : null
             }
-
-
 
             <Row flexWrap="nowrap" ml={0} mr={0}>
               <Row
@@ -634,7 +637,7 @@ PaymentOptions.defaultProps = {
   summary: {},
   // futurPayProfile: {},
   futurePayError: false,
-  warning: ''
+  warningFlag: ''
 };
 
 PaymentOptions.propTypes = {
@@ -669,7 +672,7 @@ PaymentOptions.propTypes = {
   summary: PropTypes.object,
   // futurPayProfile: PropTypes.object,
   futurePayError: PropTypes.bool,
-  warning: PropTypes.string,
+  warningFlag: PropTypes.string,
 };
 
 // const mapStateToProps = ({
