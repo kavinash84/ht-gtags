@@ -18,7 +18,7 @@ const Notification = ({ message }) => (
                     textAlign: 'center',
                     textDecoration: 'none',
                     height: '30px',
-                    width: '30px',
+                    width: '35px',
                     fontSize: '25px',
                     backgroundColor: '#FFD700'
                 }}>!</li>
@@ -27,7 +27,7 @@ const Notification = ({ message }) => (
                 marginLeft: '15px',
                 color: 'white'
             }}>
-                {message}  &nbsp; <Link to='my-orders'>My orders</Link>
+                {message}  <Link to='/my-orders'>Click here to check your orders.</Link>
             </div>
         </div>
     </div>
