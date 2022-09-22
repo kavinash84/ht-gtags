@@ -56,7 +56,7 @@ import PaymentMethods from "../PaymentMethods/";
 import PaymentForm from "./PaymentForm";
 import UpiForm from "./UpiForm";
 
-import WalletBalance from "./WalletBalance";
+// import WalletBalance from "./WalletBalance";
 import Notification from "./Notification";
 
 // const styles = require('./Checkout.scss');
@@ -331,10 +331,10 @@ class PaymentOptions extends Component {
                   )}
               </Box>
             ))}
-            <Box mb={20}>
+            {/* <Box mb={20}> */}
               {/* <Heading variant="heading.medium">Payment Method</Heading> */}
-              <WalletBalance />
-            </Box>
+              {/* <WalletBalance /> */}
+            {/* </Box> */}
 
 
             {
