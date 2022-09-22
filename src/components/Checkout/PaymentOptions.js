@@ -39,7 +39,7 @@ import {
   getNotDelivered,
   getStockOutProducts
 } from "selectors/cart";
-import { getFuturePayProfile } from "selectors/userprofile";
+// import { getFuturePayProfile } from "selectors/userprofile";
 
 /**
  * Page Components
@@ -71,8 +71,8 @@ const nextStep = (
   isCreditSelected,
   selectedGateway,
   paymentMethodDetails,
-  futurePayRedeemAmount,
-  isPayFromHtWallet,
+  // futurePayRedeemAmount,
+  // isPayFromHtWallet,
   total
 ) => e => {
   e.preventDefault();
@@ -84,8 +84,8 @@ const nextStep = (
     isCreditSelected,
     selectedGateway,
     paymentMethodDetails,
-    futurePayRedeemAmount,
-    isPayFromHtWallet,
+    // futurePayRedeemAmount,
+    // isPayFromHtWallet,
     total
   );
 };
@@ -99,8 +99,8 @@ const mapStateToProps = ({
   profile,
   checkout
 }) => ({
-  isPayFromHtWallet: paymentoptions.isPayFromHtWallet,
-  futurePayRedeemAmount: paymentoptions.futurePayRedeemAmount,
+  // isPayFromHtWallet: paymentoptions.isPayFromHtWallet,
+  // futurePayRedeemAmount: paymentoptions.futurePayRedeemAmount,
   selectedGateway: paymentoptions.selectedGateway,
   isCreditSelected: paymentoptions.isCreditSelected,
   paymentMethodDetails: paymentoptions.paymentMethodDetails,
@@ -187,8 +187,8 @@ class PaymentOptions extends Component {
   render() {
     const {
       data,
-      futurePayRedeemAmount,
-      isPayFromHtWallet,
+      // futurePayRedeemAmount,
+      // isPayFromHtWallet,
       selectedGateway,
       toggleGateway,
       setPaymentDetails,
@@ -210,7 +210,6 @@ class PaymentOptions extends Component {
       summary: { total },
       // futurPayProfile,
       isCreditSelected,
-      futurePayError,
       warningFlag
     } = this.props;
 
@@ -349,7 +348,6 @@ class PaymentOptions extends Component {
                 </Box>
               ) : null
             }
-
             <Row flexWrap="nowrap" ml={0} mr={0}>
               <Row
                 mx={0}
@@ -366,9 +364,9 @@ class PaymentOptions extends Component {
                       selectedGateway,
                       session,
                       resetEasyEmi,
-                      futurePayRedeemAmount,
-                      total,
-                      isPayFromHtWallet
+                      // futurePayRedeemAmount,
+                      total
+                      // isPayFromHtWallet
                     )}
                   </Col>
                 ))}
@@ -592,14 +590,14 @@ class PaymentOptions extends Component {
                     isCreditSelected,
                     selectedGateway,
                     paymentDetails,
-                    futurePayRedeemAmount,
-                    isPayFromHtWallet,
+                    // futurePayRedeemAmount,
+                    // isPayFromHtWallet,
                     total
                   )}
                   disabled={
                     validateInput(paymentDetails) ||
                     validatePaymentDetails(paymentDetails) ||
-                    futurePayError ||
+                    // futurePayError ||
                     undelivered.length > 0 ||
                     outOfStockList.length > 0 ||
                     submitting ||
@@ -635,8 +633,6 @@ PaymentOptions.defaultProps = {
   submitted: false,
   error: null,
   summary: {},
-  // futurPayProfile: {},
-  futurePayError: false,
   warningFlag: ''
 };
 
@@ -648,8 +644,8 @@ PaymentOptions.propTypes = {
   paymentLoadedStatus: PropTypes.func.isRequired,
   data: PropTypes.array,
   toggleGateway: PropTypes.func.isRequired,
-  isPayFromHtWallet: PropTypes.number.isRequired,
-  futurePayRedeemAmount: PropTypes.number.isRequired,
+  // isPayFromHtWallet: PropTypes.number.isRequired,
+  // futurePayRedeemAmount: PropTypes.number.isRequired,
   setPaymentDetails: PropTypes.func.isRequired,
   // summary: PropTypes.object,
   history: PropTypes.object,
@@ -671,7 +667,6 @@ PaymentOptions.propTypes = {
   ]),
   summary: PropTypes.object,
   // futurPayProfile: PropTypes.object,
-  futurePayError: PropTypes.bool,
   warningFlag: PropTypes.string,
 };
 
