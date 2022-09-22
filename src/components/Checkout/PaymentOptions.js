@@ -119,8 +119,8 @@ const mapStateToProps = ({
   results: getCartList(cart),
   undelivered: getNotDelivered(cart),
   outOfStockList: getStockOutProducts(cart),
-  futurPayProfile: getFuturePayProfile(profile),
-  futurePayError: paymentoptions.futurePayRedeemAmountError,
+  // futurPayProfile: getFuturePayProfile(profile),
+  // futurePayError: paymentoptions.futurePayRedeemAmountError,
   warningFlag: checkout.nextstep.warningFlag
 });
 
