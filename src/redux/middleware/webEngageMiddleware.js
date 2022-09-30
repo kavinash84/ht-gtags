@@ -509,7 +509,8 @@ export default function webEngageMiddleware() {
               sku,
               image_url,
               max_retail_price,
-              selling_price
+              selling_price,
+              online_exclusive
             } = item;
             return {
               // category: "",
@@ -527,7 +528,8 @@ export default function webEngageMiddleware() {
               images: [image_url],
               currencyCode: "INR",
               MRP: parseInt(max_retail_price) || 0,
-              SellingPrice: selling_price
+              SellingPrice: selling_price,
+              online_exclusive
             };
           });
 
