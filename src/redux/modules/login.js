@@ -230,7 +230,7 @@ export const login = data => ({
       const skipOtpValidation = data.skipOtpValidation
         ? data.skipOtpValidation
         : false;
-      const postData = `${username}&password=${password}$&skipOtpValidation=${skipOtpValidation}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}${mobile}${name}${email}`;
+      const postData = `${username}&password=${password}&skipOtpValidation=${skipOtpValidation}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}${mobile}${name}${email}`;
       const response = await client.post(LOGIN_API, postData);
       setToken({ client })(response);
       return { ...response, loginMode: type };
