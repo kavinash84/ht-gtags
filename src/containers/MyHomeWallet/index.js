@@ -1,17 +1,17 @@
-import HomeTownLoader from 'containers/Loader';
-import { provideHooks } from 'redial';
-import { loadUserProfile, isLoaded as isUserProfileLoaded } from 'redux/modules/profile';
+// import HomeTownLoader from 'containers/Loader';
+// import { provideHooks } from 'redial';
+// import { loadUserProfile, isLoaded as isUserProfileLoaded } from 'redux/modules/profile';
 
-const hooks = {
-  fetch: async ({ store: { dispatch, getState } }) => {
-    if (!isUserProfileLoaded(getState())) {
-      await dispatch(loadUserProfile()).catch(error => console.log(error));
-    }
-  }
-};
+// const hooks = {
+//   fetch: async ({ store: { dispatch, getState } }) => {
+//     if (!isUserProfileLoaded(getState())) {
+//       await dispatch(loadUserProfile()).catch(error => console.log(error));
+//     }
+//   }
+// };
 
-const Profile = HomeTownLoader({
-  loader: () => import('./MyHomeWallet' /* webpackChunkName: 'MyHomeWallet' */)
-});
+// const Profile = HomeTownLoader({
+//   loader: () => import('./MyHomeWallet' /* webpackChunkName: 'MyHomeWallet' */)
+// });
 
-export default provideHooks(hooks)(Profile);
+// export default provideHooks(hooks)(Profile);

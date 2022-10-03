@@ -42,7 +42,7 @@ import LoginViaOtp from 'components/LoginForms/LoginViaOtp';
 import SignUpForm from 'hometown-components-dev/lib/FormsHtV1/SignUpFormHtV1';
 
 import './Signdatepicker.css';
-import CreateWalletModal from './createWalletModal';
+// import CreateWalletModal from './createWalletModal';
 import { validateName } from '../../utils/validation';
 
 const OTPIcon = require('../../../static/otp.svg');
@@ -74,38 +74,38 @@ const showDateField = (dob, onChange, dobError, dobErrorMessage) => (
 @connect(({ userSignUp, app, userLogin }) => ({
   // loading: userSignUp.loading,
   session: app.sessionId,
-  signUpResponse: userSignUp,
-  askContact: userLogin.askContact,
-  askBirthDate: userLogin.askBirthDate,
-  askName: userLogin.askName,
-  loginType: userLogin.loginType,
-  loading: userLogin.loading,
-  loggingIn: userLogin.loggingIn
+  // signUpResponse: userSignUp,
+  // askContact: userLogin.askContact,
+  // askBirthDate: userLogin.askBirthDate,
+  // askName: userLogin.askName,
+  // loginType: userLogin.loginType,
+  loading: userLogin.loading
+  // loggingIn: userLogin.loggingIn
 }))
 @withRouter
 export default class SignupFormContainer extends Component {
   static propTypes = {
     session: PropTypes.string.isRequired,
     // loading: PropTypes.bool,
-    signUpResponse: PropTypes.object.isRequired,
-    askContact: PropTypes.bool,
-    askBirthDate: PropTypes.bool,
-    askName: PropTypes.bool,
-    loginType: PropTypes.string,
-    loading: PropTypes.bool,
-    loggingIn: PropTypes.bool
+    // signUpResponse: PropTypes.object.isRequired,
+    // askContact: PropTypes.bool,
+    // askBirthDate: PropTypes.bool,
+    // askName: PropTypes.bool,
+    // loginType: PropTypes.string,
+    loading: PropTypes.bool
+    // loggingIn: PropTypes.bool
   };
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
   static defaultProps = {
     // loading: false,
-    askContact: false,
-    askBirthDate: false,
-    askName: false,
-    loginType: '',
-    loading: false,
-    loggingIn: false
+    // askContact: false,
+    // askBirthDate: false,
+    // askName: false,
+    // loginType: '',
+    loading: false
+    // loggingIn: false
   };
   constructor() {
     super();
@@ -131,8 +131,8 @@ export default class SignupFormContainer extends Component {
       city: '',
       cityError: false,
       cityErrorMessage: 'global err message',
-      policyAccepted: false,
-      showModal: false
+      policyAccepted: false
+      // showModal: false
     };
   }
   onChangeEmail = e => {
@@ -215,7 +215,14 @@ export default class SignupFormContainer extends Component {
   onChangePolicy = () => {
     this.setState({ policyAccepted: !this.state.policyAccepted });
   };
-  onSubmitSignup = otp => {
+
+  onSubmitSignup = e => {
+    e.preventDefault();
+    const {
+      target: { action }
+    } = e;
+    const isRedirect = action ? action.indexOf('redirect') !== -1 : false;
+    const signupOrigin = isRedirect ? 'Top Nav' : 'Pop-up';
     const {
       name,
       email,
@@ -244,63 +251,97 @@ export default class SignupFormContainer extends Component {
         dobError: checkDob
       });
     }
-    const dobValue = moment(dob).format('YYYY-MM-DD');
-    let data = {};
-    if (otp) {
-      data = {
-        ...this.state,
-        dob: dobValue,
-        otp
-      };
-    } else {
-      data = {
-        ...this.state,
-        dob: dobValue
-      };
-    }
     const { dispatch } = this.context.store;
     const { session } = this.props;
-    dispatch(signUp(data, session));
+    dispatch(signUp(this.state, session, signupOrigin));
   };
 
-  preOnsubmitSignup = e => {
-    e.preventDefault();
-    const {
- name, email, password, phone, dob
-} = this.state;
-    const checkName = validateName(name).error;
-    const checkEmail = !validateEmail(email);
-    const checkPhone = !validateMobile(phone);
-    const checkPassword = validatePassword(password);
-    const checkDob = validateDob(dob);
+  // onSubmitSignup = otp => {
+  //   const {
+  //     name,
+  //     email,
+  //     password,
+  //     phone,
+  //     city,
+  //     dob
+  //     //  gender,
+  //   } = this.state;
+  //   const checkName = isEmpty(name) || checkSpecialChar(name);
+  //   const checkEmail = !validateEmail(email);
+  //   const checkPhone = isEmpty(phone) || !validateMobile(phone);
+  //   const checkPassword = validatePassword(password);
+  //   const checkCity = checkSpecialChar(city);
+  //   const checkDob = validateDob(dob);
+  //   if (checkName || checkEmail || checkPassword.error || checkPhone || checkDob) {
+  //     return this.setState({
+  //       nameError: checkName,
+  //       nameErrorMessage: checkSpecialChar(name)
+  //         ? 'Numbers and special characters are not allowed !'
+  //         : 'Name Cannot be Left Empty !',
+  //       emailError: checkEmail,
+  //       phoneError: checkPhone,
+  //       passwordError: checkPassword.error,
+  //       cityError: checkCity,
+  //       dobError: checkDob
+  //     });
+  //   }
+  //   const dobValue = moment(dob).format('YYYY-MM-DD');
+  //   let data = {};
+  //   if (otp) {
+  //     data = {
+  //       ...this.state,
+  //       dob: dobValue,
+  //       otp
+  //     };
+  //   } else {
+  //     data = {
+  //       ...this.state,
+  //       dob: dobValue
+  //     };
+  //   }
+  //   const { dispatch } = this.context.store;
+  //   const { session } = this.props;
+  //   dispatch(signUp(data, session));
+  // };
 
-    if (checkName || checkEmail || checkPassword.error || checkPhone || checkDob) {
-      return this.setState({
-        nameError: checkName,
-        emailError: checkEmail,
-        phoneError: checkPhone,
-        passwordError: checkPassword.error,
-        nameErrorMessage: validateName(name).msg,
-        dobError: checkDob
-      });
-    }
-    const myBirthday = moment(dob, 'DD-MM-YYYY').toDate();
-    const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
-    const myAge = Math.floor((Date.now(currentDate) - myBirthday) / 31557600000);
-    if (myAge > 10) {
-      this.handleModal();
-    } else {
-      this.onSubmitSignup();
-    }
-  };
+  //   preOnsubmitSignup = e => {
+  //     e.preventDefault();
+  //     const {
+  //  name, email, password, phone, dob
+  // } = this.state;
+  //     const checkName = validateName(name).error;
+  //     const checkEmail = !validateEmail(email);
+  //     const checkPhone = !validateMobile(phone);
+  //     const checkPassword = validatePassword(password);
+  //     const checkDob = validateDob(dob);
 
-  handleModal = () => {
-    this.setState({ showModal: !this.state.showModal });
-  };
+  //     if (checkName || checkEmail || checkPassword.error || checkPhone || checkDob) {
+  //       return this.setState({
+  //         nameError: checkName,
+  //         emailError: checkEmail,
+  //         phoneError: checkPhone,
+  //         passwordError: checkPassword.error,
+  //         nameErrorMessage: validateName(name).msg,
+  //         dobError: checkDob
+  //       });
+  //     }
+  //     const myBirthday = moment(dob, 'DD-MM-YYYY').toDate();
+  //     const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
+  //     const myAge = Math.floor((Date.now(currentDate) - myBirthday) / 31557600000);
+  //     if (myAge > 10) {
+  //       this.handleModal();
+  //     } else {
+  //       this.onSubmitSignup();
+  //     }
+  //   };
 
-  handleYes = otp => {
-    this.onSubmitSignup(otp);
-  };
+  //   handleModal = () => {
+  //     this.setState({ showModal: !this.state.showModal });
+  //   };
+
+  //   handleYes = otp => {
+  //     this.onSubmitSignup(otp);
+  //   };
 
   toggleLoginForm = () => {
     this.setState({
@@ -336,8 +377,8 @@ export default class SignupFormContainer extends Component {
       policyAccepted
     } = this.state;
     const {
- loading, signUpResponse, askContact, askBirthDate, askName, loginType, loggingIn
-} = this.props;
+      loading, signUpResponse, askContact, askBirthDate, askName, loginType, loggingIn
+    } = this.props;
     return (
       <Row>
         <Col variant="col-4">
@@ -429,7 +470,7 @@ export default class SignupFormContainer extends Component {
                 onChangePassword={this.onChangePassword}
                 passwordFeedBackError={passwordError}
                 passwordFeedBackMessage={passwordErrorMessage}
-                onSubmitSignup={this.preOnsubmitSignup}
+                onSubmitSignup={this.onSubmitSignup}
                 signUpResponse={signUpResponse}
                 loginUrl={LOGIN_URL}
                 phonemandatory
@@ -450,19 +491,19 @@ export default class SignupFormContainer extends Component {
                 onChangePolicy={this.onChangePolicy}
                 policyAccepted={policyAccepted}
                 loading={loading}
-                // date={<DatePicker/>}
-                // date={showDateField(dob, this.onChangeDob)}
+              // date={<DatePicker/>}
+              // date={showDateField(dob, this.onChangeDob)}
               />
             </Col>
           </Row>
         </Box>
-        <CreateWalletModal
+        {/* <CreateWalletModal
           showModal={this.state.showModal}
           handleModal={this.handleModal}
           handleNo={this.onSubmitSignup}
           handleYes={this.handleYes}
           mobile={phone}
-        />
+        /> */}
       </Row>
     );
   }
