@@ -35,7 +35,7 @@ const initialState = {
   loggingOut: false,
   isLoggedOut: false,
   askContact: false,
-  askBirthDate: false,
+  // askBirthDate: false,
   askName: false,
   otp: "",
   error: false,
@@ -43,8 +43,8 @@ const initialState = {
   loginType: "",
   loginMode: "Email",
   tokenData: {},
-  askEmail: false,
-  skipBirthdateCheck: false
+  askEmail: false
+  // skipBirthdateCheck: false
 };
 
 export default function reducer(state = initialState, action = {}) {
@@ -80,12 +80,11 @@ export default function reducer(state = initialState, action = {}) {
         askContact: action.error.askContact || false,
         askName: action.error.askName || false,
         askEmail: action.error.askEmail || false,
-        askBirthDate: action.error.askBirthDate || false,
+        // askBirthDate: action.error.askBirthDate || false,
         loginType: action.error.loginType || "",
         tokenData:
           (action.error.askContact ||
-            action.error.askName ||
-            action.error.askBirthDate) &&
+            action.error.askName) &&
           action.error.tokenData
             ? action.error.tokenData
             : {}
@@ -180,11 +179,11 @@ export default function reducer(state = initialState, action = {}) {
       return {
         ...initialState
       };
-    case BIRTH_DATE_CHECK:
-      return {
-        ...state,
-        skipBirthdateCheck: action.status
-      };
+    // case BIRTH_DATE_CHECK:
+    //   return {
+    //     ...state,
+    //     skipBirthdateCheck: action.status
+    //   };
     default:
       return state;
   }
@@ -222,16 +221,16 @@ export const login = data => ({
       const mobile = data.otp ? "" : `&mobile=${data.phone}`;
       const name = data.name ? `&full_name=${data.name}` : "";
       // const postData = `${username}&password=${password}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}${mobile}${name}`;
-      const dob = data.dob ? `&dob=${data.dob}` : "";
+      // const dob = data.dob ? `&dob=${data.dob}` : "";
       const email =
         data.email && type === "mobile" ? `&email=${data.email}` : "";
-      const skipBirthdateCheck = data.skipBirthdateCheck
-        ? data.skipBirthdateCheck
-        : false;
+      // const skipBirthdateCheck = data.skipBirthdateCheck
+      //   ? data.skipBirthdateCheck
+      //   : false;
       const skipOtpValidation = data.skipOtpValidation
         ? data.skipOtpValidation
         : false;
-      const postData = `${username}&password=${password}${dob}&skipBirthdateCheck=${skipBirthdateCheck}&skipOtpValidation=${skipOtpValidation}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}${mobile}${name}${email}`;
+      const postData = `${username}&password=${password}$&skipOtpValidation=${skipOtpValidation}&type=${type}&method=${method}&grant_type=password&client_id=${clientId}&client_secret=${clientSecret}${mobile}${name}${email}`;
       const response = await client.post(LOGIN_API, postData);
       setToken({ client })(response);
       return { ...response, loginMode: type };
@@ -252,7 +251,7 @@ export const googleLogin = (
   phone = null,
   username = null,
   dob = null,
-  skipBirthdateCheck = false,
+  // skipBirthdateCheck = false,
   otp = null,
   createWallet
 ) => (dispatch, getState) =>
@@ -263,7 +262,7 @@ export const googleLogin = (
         userLogin: { tokenData }
       } = getState();
       const data =
-        (phone || username || dob || skipBirthdateCheck) && tokenData.tokenId
+        (phone || username) && tokenData.tokenId
           ? tokenData
           : result;
       try {
@@ -282,7 +281,7 @@ export const googleLogin = (
           username,
           dob,
           CreateWallet: createWallet,
-          skipBirthdateCheck,
+          // skipBirthdateCheck,
           otp
         };
         const response = await client.post(GOOGLE_LOGIN_API, postData);
@@ -381,7 +380,7 @@ export const resendOtpfromSignUp = mobile => ({
   }
 });
 
-export const birthdateCheck = status => ({
-  type: BIRTH_DATE_CHECK,
-  status
-});
+// export const birthdateCheck = status => ({
+//   type: BIRTH_DATE_CHECK,
+//   status
+// });
