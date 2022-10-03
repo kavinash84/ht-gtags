@@ -18,23 +18,27 @@ export default class ExchangeOfferContainer extends Component {
   };
 
   componentDidMount() {
-    const { history } = this.props;
-    const { dispatch } = this.context.store;
-    history.push("/");
-    dispatch(
-      notifSend({
-        type: "warning",
-        msg: "This offer has been expired.",
-        dismissAfter: 4000
-      })
-    );
+    // const { history } = this.props;
+    // const { dispatch } = this.context.store;
+    // history.push("/");
+    // dispatch(
+    //   notifSend({
+    //     type: "warning",
+    //     msg: "This offer has been expired.",
+    //     dismissAfter: 4000
+    //   })
+    // );
   }
 
   render() {
     const { history } = this.props;
     return (
       <div className="wrapper">
-        <ExchangeOffers history={history} />
+        {/* <ExchangeOffers history={history} />
+         */}
+        <h4 style={{ color: "black", fontSize: "30px", marginTop: "40px", textAlign: "center" }}>
+          This Offer has expired
+        </h4>
       </div>
     );
   }
