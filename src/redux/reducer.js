@@ -50,6 +50,8 @@ import spaces from "./modules/spaces";
 import planyourkitchen from "./modules/planyourkitchen";
 import lackpackages from "./modules/lackpackages";
 import blogs from "./modules/blogs";
+import gifting from "./modules/gifting";
+import mattresses from "./modules/mattresses";
 
 export default function createReducers(asyncReducers) {
   return {
@@ -118,6 +120,8 @@ export default function createReducers(asyncReducers) {
     designbuild,
     modularkitchen,
     spaces,
+    gifting,
+    mattresses,
     // planyourkitchen,
     planyourkitchen,
     lackpackages,

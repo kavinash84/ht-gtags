@@ -80,7 +80,7 @@ class OrderBlock extends Component {
               Order No. {order.order_number}
             </Heading>
           </Box>
-          {show && (isBob === 0 || isBob === '0') && status !== 'canceled' ? (
+          {show && (isBob === 0 || isBob === '0') && (status !== 'canceled') && ( status !== 'payment_pending')  ? (
             <Box textAlign="right" col="6" width="49.8%">
               <Button
                 disabled={trackingLoading && currentOrder === order.order_number}

@@ -150,3 +150,11 @@ export const GET_CONTACT = "tesla/static/cart_contact_cms2";
 export const HOME_BLOGS = "tesla/blog/homepage";
 export const BLOGS_CAT = "tesla/blog/category";
 export const SINGLE_BLOG = "tesla/blog/post";
+
+
+/* Gifting */
+export const GET_GIFTING = "tesla/static/giftingdesktop";
+
+
+/* Matresses */
+export const MATTRESSES_API = "tesla/static/mattresses_desktop";
