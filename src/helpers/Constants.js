@@ -40,7 +40,8 @@ export const categoryRoutes = [
   "tableware",
   "kitchenware",
   "tableware-kitchenware",
-  "bath"
+  "bath",
+  "kids--teens"
 ];
 
 export const listingRoutes = [

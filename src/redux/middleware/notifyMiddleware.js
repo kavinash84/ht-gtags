@@ -391,7 +391,9 @@ export default function userMiddleware() {
           dispatch(
             notifSend({
               type: "success",
-              msg: "Thank you. Our sales team will connect with you.",
+              msg:
+                landingPageResult.message ||
+                "Thank you for registration. You will receive voucher via sms/ email",
               dismissAfter: 4000
             })
           );
@@ -478,7 +480,7 @@ export default function userMiddleware() {
           })
         );
         break;
-        case "lackpackages/SAVE_PACKAGE_CATALOG_SUCCESS":
+      case "lackpackages/SAVE_PACKAGE_CATALOG_SUCCESS":
         dispatch(
           notifSend({
             type: "success",
