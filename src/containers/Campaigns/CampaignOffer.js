@@ -127,20 +127,20 @@ const setStateAndCity = stores => {
   }
 };
 
-const prefillLoginDetails = (profileData, isLoggedIn) => {
-  if (isLoggedIn === true) {
-    const {
-      contact_number: mobile,
-      email,
-      first_name: firstName,
-      last_name: lastName
-    } = profileData;
-    document.getElementById("mobile-firstName").value = firstName;
-    document.getElementById("mobile-lastName").value = lastName;
-    document.getElementById("mobile-mobileNo").value = mobile;
-    document.getElementById("mobile-emailId").value = email;
-  }
-};
+// const prefillLoginDetails = (profileData, isLoggedIn) => {
+//   if (isLoggedIn === true) {
+//     const {
+//       contact_number: mobile,
+//       email,
+//       first_name: firstName,
+//       last_name: lastName
+//     } = profileData;
+//     document.getElementById("mobile-firstName").value = firstName;
+//     document.getElementById("mobile-lastName").value = lastName;
+//     document.getElementById("mobile-mobileNo").value = mobile;
+//     document.getElementById("mobile-emailId").value = email;
+//   }
+// };
 
 const resetForm = (form, isLoggedIn, profileData) => {
   const inputEle = document.querySelectorAll("select");
@@ -153,7 +153,7 @@ const resetForm = (form, isLoggedIn, profileData) => {
     }
   });
 
-  prefillLoginDetails(profileData, isLoggedIn);
+  // prefillLoginDetails(profileData, isLoggedIn);
 };
 
 const setDataPicker = (currentTime = "") => {
@@ -341,7 +341,7 @@ class Campaign extends Component {
       profileData
     } = this.props;
 
-    prefillLoginDetails(profileData, isLoggedIn);
+    // prefillLoginDetails(profileData, isLoggedIn);
 
     setProductCategory(landing, selectForDemo);
 
@@ -449,15 +449,15 @@ class Campaign extends Component {
                 {},
                 ...mandatoryInputs.map(item => ({ [item.name]: item.value }))
               ),
-              products,
-              uploadImage
+              // products,
+              // uploadImage
             };
 
             bodyFormData.append("id", postData.id);
             bodyFormData.append("offer", postData.offer);
             bodyFormData.append("data", JSON.stringify(postData.data));
-            bodyFormData.append("products", JSON.stringify(postData.products));
-            bodyFormData.append("uploadImage", postData.uploadImage);
+            // bodyFormData.append("products", JSON.stringify(postData.products));
+            // bodyFormData.append("uploadImage", postData.uploadImage);
 
             dispatch(submitOffer(api, bodyFormData, successMessage));
           } else {
