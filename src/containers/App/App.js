@@ -235,7 +235,7 @@ export default class App extends Component {
   }
   componentDidUpdate(prevProps) {
     if (this.props.location !== prevProps.location) {
-      window.scrollTo(0, 0);
+      // window.scrollTo(0, 0);
     }
     if (this.props.cartSynced !== prevProps.cartSynced) {
       window.unbxd.handleUserSwitch();

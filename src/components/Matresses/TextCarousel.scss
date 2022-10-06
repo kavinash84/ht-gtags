@@ -1,0 +1,17 @@
+.example1 {
+  height: 56px;
+  overflow: hidden;
+  position: relative;
+  background-color: #69878b;
+  display: flex !important;
+}
+.example1 h3 {
+  height: 16px;
+  margin: 0;
+  font-size: 14px;
+  border-left: 2px solid #f47020;
+  color: #ffffff;
+  text-transform: capitalize;
+  margin: auto 8%;
+  padding-left: 10px;
+}

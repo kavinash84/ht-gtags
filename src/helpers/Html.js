@@ -427,7 +427,7 @@ export default class Html extends Component {
             }}
           />
           <script src={admitad.src} async onError={admitad.onerror}></script>
-          <script type="text/javascript">
+          {/* <script type="text/javascript">
             {`	// name of the cookie that stores the source
 	// change if you have another name
 	var cookie_name = 'deduplication_cookie';
@@ -463,7 +463,7 @@ export default class Html extends Component {
 	};
 	// set cookie
 	setSourceCookie();`}
-          </script>
+          </script> */}
         </head>
         <body>
           {/* {process.env.NODE_ENV !== 'development' && (

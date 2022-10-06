@@ -665,7 +665,8 @@ class ProductDetails extends React.PureComponent {
       warranty_period: warrantyPeriod = 0,
       fk_catalog_supplier: fkCatalogSupplier = null,
       categories,
-      youtubeid
+      youtubeid,
+      offer_message: offerMessage
     } = meta;
     const {
       mrp,
@@ -1043,6 +1044,16 @@ class ProductDetails extends React.PureComponent {
                             >
                               Total Savings ₹ {totalSavings} (
                               {totalDiscountPercentage}% OFF)
+                            </Text>
+                          ) : null}
+                          {offerMessage ? (
+                            <Text
+                              mt="10px"
+                              mb="0px"
+                              color="#626463"
+                              fontSize="18px"
+                            >
+                              {offerMessage}
                             </Text>
                           ) : null}
                         </Div>

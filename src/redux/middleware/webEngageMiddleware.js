@@ -497,24 +497,22 @@ export default function webEngageMiddleware() {
 
         //   add to cart
         if (type === "cart/ADD_TO_CART_SUCCESS" && action.simpleSku) {
-          const { simpleSku } = action;
+          // const { simpleSku } = action;
           const cartItems = Object.values(action.result.cartItems);
-          const product =
-            cartItems.length &&
-            cartItems.filter(item => item.sku === simpleSku);
-          const {
-            name,
-            stock,
-            brand,
-            discount_percent,
-            delivery_date_text,
-            sku,
-            image_url,
-            max_retail_price,
-            selling_price
-          } = product[0];
-          if (window && window.webengage) {
-            window.webengage.track("Added To Cart", {
+          const products = cartItems.map(item => {
+            const {
+              name,
+              stock,
+              brand,
+              discount_percent,
+              delivery_date_text,
+              sku,
+              image_url,
+              max_retail_price,
+              selling_price,
+              online_exclusive
+            } = item;
+            return {
               // category: "",
               // path: "",
               // color: "",
@@ -530,8 +528,13 @@ export default function webEngageMiddleware() {
               images: [image_url],
               currencyCode: "INR",
               MRP: parseInt(max_retail_price) || 0,
-              SellingPrice: selling_price
-            });
+              SellingPrice: selling_price,
+              online_exclusive
+            };
+          });
+
+          if (window && window.webengage) {
+            window.webengage.track("Added To Cart", { products: products });
           }
         }
 
