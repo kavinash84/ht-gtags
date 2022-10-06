@@ -40,8 +40,7 @@ export const categoryRoutes = [
   "tableware",
   "kitchenware",
   "tableware-kitchenware",
-  "bath",
-  "kids--teens"
+  "bath"
 ];
 
 export const listingRoutes = [
@@ -57,5 +56,6 @@ export const listingRoutes = [
   "christmas-sale",
   "exchange-and-upgrade",
   "summer-stockup-sale",
-  "sale"
+  "sale",
+  "kids--teens"
 ];

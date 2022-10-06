@@ -252,16 +252,10 @@ export default class Category extends Component {
                       ))}
                   </React.Fragment>
                 ) : null}
-                {category ? (
+                {category && (
                   <Box display="inline-block" width="100%">
                     <Container>
                       <UnbxdTopSellers category={category.title} />
-                    </Container>
-                  </Box>
-                ) : (
-                  <Box display="inline-block" width="100%">
-                    <Container>
-                      <UnbxdTopSellers category="kids--teens" />
                     </Container>
                   </Box>
                 )}
