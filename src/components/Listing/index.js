@@ -134,9 +134,8 @@ class Listing extends React.Component {
         window.renderListing(true, state);
       }
     }
-    if (document && document.getElementById("dummy_focusId")) {
-      document.getElementById("dummy_focusId").scrollIntoView();
-      console.log("dummy_focusId");
+    if (window && window.Unbxd && window.Unbxd.experiences) {
+      window.Unbxd.experiences = [];
     }
   }
   componentWillReceiveProps(nextProps) {

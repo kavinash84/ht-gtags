@@ -30,6 +30,8 @@ import FurnitureContainer from "../../components/FurnitureCategories/FurnitureCo
 import HomewareContainer from "../../components/HomewareCat/HomewareContainer";
 import HomeFurnishingContainer from "../../components/HomewareCat/HomeFurnishingContainer";
 import TablewareKitchenware from "../../components/HomewareCat/TablewareKitchenware";
+import NewUnboxBestSeller from "components/NewUnboxWidges/bestSeller";
+
 const styles = require("./Category.scss");
 // import "./Category.scss";
 
@@ -250,15 +252,22 @@ export default class Category extends Component {
                           )}
                         </Section>
                       ))}
+                    {category && (
+                      <Box display="inline-block" width="100%">
+                        <Container>
+                          <NewUnboxBestSeller
+                            pageInfo={{
+                              pageType: "CATEGORY",
+                              catlevel1Name: "furniture",
+                              catlevel2Name: "living-room-furniture",
+                              catlevel3Name: "sofas"
+                            }}
+                          />
+                        </Container>
+                      </Box>
+                    )}
                   </React.Fragment>
                 ) : null}
-                {category && (
-                  <Box display="inline-block" width="100%">
-                    <Container>
-                      <UnbxdTopSellers category={category.title} />
-                    </Container>
-                  </Box>
-                )}
               </div>
             )}
             {/* SEO Content */}
