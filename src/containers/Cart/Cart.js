@@ -36,11 +36,11 @@ import PinCode from "components/PinCode";
 import ResponsiveModal from "components/Modal";
 // import Notifications from "components/Notifications";
 // import Empty from "./Empty";
-import NewUnboxRecentlyViewed from "../../components/NewUnboxWidges/recentlyViewed";
 import EmptyNew from "./EmptyNew";
 // import UnbxdRecommendedForYou from "../../components/Unbxd/unbxdRecommendedForYou";
 import { WEViewCart } from "../../redux/modules/cart";
 import HappyToHelp from "../../components/Cart/HappyToHelp";
+import NewUnboxRecomondedForYou from "../../components/NewUnboxWidges/recomondedForYou";
 
 /**
  * Icons / Images
@@ -299,6 +299,19 @@ export default class CartContainer extends Component {
     } = this.props;
     const { responsiveModalContent, open, emiPopUpShown } = this.state;
     const modalClass = emiPopUpShown ? "noCostEmiModal" : "pincodeModal";
+    const productIds =
+      Array.isArray(results) && results.length
+        ? results.map(item => {
+            if (item.product_info && item.product_info.product_id)
+              return item.product_info.product_id;
+            else return "";
+          })
+        : [];
+
+    console.log(
+      productIds.filter(item => item !== ""),
+      "results"
+    );
 
     return (
       <Wrapper>
@@ -395,10 +408,10 @@ export default class CartContainer extends Component {
                 outOfStockList={outOfStockList}
                 handlePincodeModal={this.handlePincodeModal}
               />
-              <NewUnboxRecentlyViewed
+              <NewUnboxRecomondedForYou
                 pageInfo={{
-                  pageType: "PRODUCT",
-                  productIds: [""]
+                  pageType: "CART",
+                  productIds: productIds.filter(item => item !== "")
                 }}
               />
             </Box>

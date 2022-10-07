@@ -258,9 +258,7 @@ export default class Category extends Component {
                           <NewUnboxBestSeller
                             pageInfo={{
                               pageType: "CATEGORY",
-                              catlevel1Name: "furniture",
-                              catlevel2Name: "living-room-furniture",
-                              catlevel3Name: "sofas"
+                              catlevel1Name: category.title
                             }}
                           />
                         </Container>

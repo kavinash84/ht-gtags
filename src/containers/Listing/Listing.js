@@ -328,10 +328,12 @@ export default class Listing extends Component {
       // catlevel2Name: "living-room-furniture",
       // catlevel3Name: "sofas"
     };
+
     if (breadCrumbs && Array.isArray(breadCrumbs))
       breadCrumbs.map((item, i) => {
         obj[`catlevel${i + 1}Name`] = `${item.url_key}`.split("/")[i];
       });
+    console.log(breadCrumbs, obj, "UnbxdPageInfo");
     /* eslint-disable react/no-danger */
     return (
       <Wrapper>
