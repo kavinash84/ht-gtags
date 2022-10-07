@@ -12,6 +12,7 @@ import CartBreadCumb from "components/Cart/breadDumb";
 import { resetCheck } from "redux/modules/cart";
 import { getCartList, getStockOutProducts } from "selectors/cart";
 import { togglePopUp } from "redux/modules/webtochat";
+import { formatProductURL } from "utils/helper";
 
 /**
  * Components
@@ -110,6 +111,11 @@ const HdfcPopMessage = () => (
   </Box>
 );
 
+const navigateToPDP = history => (name, sku) => {
+  const productURL = formatProductURL(name, sku);
+  history.push(productURL);
+};
+
 @connect(
   ({
     cart,
@@ -186,8 +192,10 @@ export default class CartContainer extends Component {
       history,
       summary: { total }
     } = this.props;
-    window.scroll(0, 0);
+    window.HTSEARCH = {};
     window.HTSEARCH.navigateToPDP = navigateToPDP(history);
+    window.scroll(0, 0);
+
     const popUpTimeoutId = setTimeout(this.webToChat, cartTimeout);
     // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ popUpTimeoutId });
