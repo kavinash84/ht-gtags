@@ -183,9 +183,11 @@ export default class CartContainer extends Component {
   componentDidMount() {
     const {
       cartTimeout,
+      history,
       summary: { total }
     } = this.props;
     window.scroll(0, 0);
+    window.HTSEARCH.navigateToPDP = navigateToPDP(history);
     const popUpTimeoutId = setTimeout(this.webToChat, cartTimeout);
     // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ popUpTimeoutId });
