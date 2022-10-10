@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import Row from "hometown-components-dev/lib/Row";
 import Div from "hometown-components-dev/lib/Div";
 import Section from "hometown-components-dev/lib/Section";
+import { Link } from "react-router-dom";
 import ResponsiveModal from "components/Modal";
 import { connect } from "react-redux";
 import MainFurnitureSlider from "./MainFurnitureSlider";
