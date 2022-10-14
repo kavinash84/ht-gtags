@@ -159,9 +159,7 @@ class FurnitureContainer extends React.Component {
         <NewUnboxBestSeller
           pageInfo={{
             pageType: "CATEGORY",
-            catlevel1Name: "furniture",
-            catlevel2Name: "living-room-furniture",
-            catlevel3Name: "sofas"
+            catlevel1Name: "Furniture"
           }}
         />
         {category && category.popUp && category.popUp.display ? (

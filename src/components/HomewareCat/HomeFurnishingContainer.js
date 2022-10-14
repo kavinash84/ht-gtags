@@ -94,9 +94,7 @@ class HomeFurnishingContainer extends React.Component {
         <NewUnboxBestSeller
           pageInfo={{
             pageType: "CATEGORY",
-            catlevel1Name: "home-furnishings",
-            catlevel2Name: "bedding",
-            catlevel3Name: "bed-sheets"
+            catlevel1Name: "Home Furnishings"
           }}
         />
       </Section>
