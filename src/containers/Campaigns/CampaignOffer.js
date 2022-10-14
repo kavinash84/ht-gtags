@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import styled from "styled-components";
 import Footer from "components/Footer";
 import Header from "components/Header";
+import ResponsiveModal from "components/Modal";
 
 import { notifSend } from "redux/modules/notifs";
 import { submitOffer } from "redux/modules/landing";
@@ -11,6 +12,7 @@ import { addToSelectForDemo } from "redux/modules/selectForDemo";
 import { connect } from "react-redux";
 
 import moment from "moment";
+import ThankYouPage from "./ThankYouScreen";
 
 const startTime = date =>
   date
@@ -296,7 +298,7 @@ const validateInputs = formData => {
 @connect(
   ({
     landing,
-    landing: { data, submitErrorMessage },
+    landing: { data, submitErrorMessage, successData },
     storelocator,
     selectForDemo,
     userLogin,
@@ -304,6 +306,7 @@ const validateInputs = formData => {
   }) => ({
     landing,
     data,
+    successData,
     submitErrorMessage,
     stores: storelocator.data,
     selectForDemo: selectForDemo.data,
@@ -328,7 +331,8 @@ class Campaign extends Component {
     super(props);
     this.state = {
       isLoggedIn: {},
-      submitErrorMessage: ""
+      submitErrorMessage: "",
+      isModalOpen: false
     };
   }
 
@@ -373,7 +377,7 @@ class Campaign extends Component {
   componentDidUpdate(prevProps, prevState) {
     const { dispatch } = this.context.store;
     const { isLoggedIn, submitErrorMessage } = this.state;
-    const { profileData, stores } = this.props;
+    const { profileData, stores, successData } = this.props;
     const state = [];
     const form = document.querySelector("form");
 
@@ -384,6 +388,7 @@ class Campaign extends Component {
       resetForm(form, isLoggedIn, profileData);
       setStateAndCity(stores);
       dispatch(addToSelectForDemo(state));
+      if (successData) this.setState({ isModalOpen: true });
     }
     if (prevState.isLoggedIn !== isLoggedIn) {
       resetForm(form, isLoggedIn, profileData);
@@ -448,7 +453,7 @@ class Campaign extends Component {
               data: Object.assign(
                 {},
                 ...mandatoryInputs.map(item => ({ [item.name]: item.value }))
-              ),
+              )
               // products,
               // uploadImage
             };
@@ -469,10 +474,6 @@ class Campaign extends Component {
               })
             );
           }
-          setTimeout(() => {
-            const { handleModal } = this.props;
-            handleModal();
-          }, 2000);
         });
       }
     }
@@ -492,6 +493,12 @@ class Campaign extends Component {
             dangerouslySetInnerHTML={{ __html: uiHtml }}
           />
         )}
+        <ResponsiveModal
+          onCloseModal={() => this.setState({ isModalOpen: false })}
+          open={this.state.isModalOpen}
+        >
+          <ThankYouPage uiHtml={uiHtml} />
+        </ResponsiveModal>
         <Footer />
       </div>
     );
@@ -503,6 +510,9 @@ export default Campaign;
 const Description = styled.div`
   font-size: 14px;
   line-height: 1.6;
+  #thankYouPage {
+    display: none;
+  }
   ul {
     padding-left: 20px;
     li {
