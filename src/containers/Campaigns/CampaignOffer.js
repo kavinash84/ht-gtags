@@ -388,7 +388,8 @@ class Campaign extends Component {
       resetForm(form, isLoggedIn, profileData);
       setStateAndCity(stores);
       dispatch(addToSelectForDemo(state));
-      if (successData) this.setState({ isModalOpen: true });
+      if (successData && successData.successPageHtml)
+        this.setState({ isModalOpen: true });
     }
     if (prevState.isLoggedIn !== isLoggedIn) {
       resetForm(form, isLoggedIn, profileData);
@@ -497,7 +498,7 @@ class Campaign extends Component {
           onCloseModal={() => this.setState({ isModalOpen: false })}
           open={this.state.isModalOpen}
         >
-          <ThankYouPage uiHtml={uiHtml} />
+          <ThankYouPage />
         </ResponsiveModal>
         <Footer />
       </div>
@@ -510,9 +511,6 @@ export default Campaign;
 const Description = styled.div`
   font-size: 14px;
   line-height: 1.6;
-  #thankYouPage {
-    display: none;
-  }
   ul {
     padding-left: 20px;
     li {

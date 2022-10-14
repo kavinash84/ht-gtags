@@ -6,19 +6,15 @@ import { connect } from "react-redux";
   data: landing.successData
 }))
 class ThankYouPage extends Component {
-  state = {
-    count: 1
-  };
   render() {
-    const { uiHtml, data } = this.props;
+    const { data } = this.props;
     return (
       <div>
-        Thank You!
-        {/* <Description
+        <Description
           itemProp="description"
           fontSize="0.875rem"
-          dangerouslySetInnerHTML={{ __html: uiHtml }}
-        /> */}
+          dangerouslySetInnerHTML={{ __html: data.successPageHtml }}
+        />
       </div>
     );
   }
