@@ -30,7 +30,7 @@
     "start-stage": "cross-env NODE_PATH=src UNBXD=stage NODE_ENV=production PORT=8084 SITE_URL=https://stage.hometown.in APIHOST=stage-api.hometown.in/api/ APIPORT=443 PAYMENT_URL=https://stage-alice.hometown.in/checkout/finish/payment/ BFL_PAYMENT_URL=http://stage-alice.hometown.in/checkout/finish/bflpayment/ node ./bin/server.js",
     "build-stage": "cross-env NODE_ENV=production UNBXD=stage PAYMENT_URL=https://stage-alice.hometown.in/checkout/finish/payment/ BFL_PAYMENT_URL=http://stage-alice.hometown.in/checkout/finish/bflpayment/ webpack --colors --display-error-details --config=webpack/stage.config.js",
     "dev": "concurrently --kill-others \"npm run watch-client\" \"npm run start-dev\"",
-    "start-dev": "cross-env SITE_URL=localhost:3000 NODE_PATH=src UNBXD=beta NODE_ENV=development PORT=3000 APIHOST=beta-api.hometown.in/api/ APIPORT=443 PAYMENT_URL=http://stage-alice.hometown.in/checkout/finish/payment/ BFL_PAYMENT_URL=http://stage-alice.hometown.in/checkout/finish/bflpayment/ WEBPACK_DLLS=1 node ./bin/server.js",
+    "start-dev": "cross-env SITE_URL=localhost:3000 NODE_PATH=src UNBXD=stage NODE_ENV=development PORT=3000 APIHOST=stage-api.hometown.in/api/ APIPORT=443 PAYMENT_URL=http://stage-alice.hometown.in/checkout/finish/payment/ BFL_PAYMENT_URL=http://stage-alice.hometown.in/checkout/finish/bflpayment/ WEBPACK_DLLS=1 node ./bin/server.js",
     "watch-client": "cross-env UV_THREADPOOL_SIZE=100 NODE_PATH=src UNBXD=beta NODE_ENV=development PORT=3000 WEBPACK_DLLS=1 node webpack/webpack-dev-server.js",
     "build-dlls": "webpack --colors --display-error-details --config webpack/vendor.config.js",
     "postinstall": "concurrently \"npm run build-dlls\"",

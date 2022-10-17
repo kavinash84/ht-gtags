@@ -64,6 +64,25 @@ export default class NewUnboxBestSeller extends Component {
           return { ...data, recommendations: updatedRecsData };
         };
 
+        const templateArr = templateData.recommendations;
+
+        if (templateArr && Array.isArray(templateArr) && templateArr.length) {
+          const pIds = templateArr.map(item => item.uniqueId);
+          const payload = {
+            pids_list: pIds,
+            experience_pagetype: pageInfo.pageType,
+            experience_widget:
+              templateData.analyticsData && templateData.analyticsData.widgetNum
+          };
+          const action = "experience_impression";
+          if (window.Unbxd && typeof window.Unbxd.track === "function") {
+            console.log(action, payload, "templateData");
+            window.Unbxd.track(action, payload);
+          } else {
+            console.error("unbxdAnalytics.js is not loaded!");
+          }
+        }
+
         templateData = modifyTemplateData(templateData);
 
         return templateData;
