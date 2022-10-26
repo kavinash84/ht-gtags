@@ -52,6 +52,7 @@ import lackpackages from "./modules/lackpackages";
 import blogs from "./modules/blogs";
 import gifting from "./modules/gifting";
 import mattresses from "./modules/mattresses";
+import smartsters from "./modules/smartsters";
 
 export default function createReducers(asyncReducers) {
   return {
@@ -126,6 +127,7 @@ export default function createReducers(asyncReducers) {
     planyourkitchen,
     lackpackages,
     blogs,
+    smartsters,
     ...asyncReducers
   };
 }
