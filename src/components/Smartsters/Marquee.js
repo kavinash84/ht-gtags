@@ -1,5 +1,6 @@
 import React from "react";
 import Div from "hometown-components-dev/lib/BoxHtV1";
+import '../../../static/fonts/Chillax-Semibold.ttf';
 
 const Ellipse = require('../../../static/smartsters/ellipse.png');
 
@@ -9,7 +10,7 @@ import "./Marquee.css";
 const Marquee = () => {
     return (
         <Div style={{ width: '100%', margin: '60px auto' }}>
-            <section>
+            <section className="mainSection">
                 <div className="divmain">
                     <section class="news-message">
                         <p>Ergonomic Designs</p>

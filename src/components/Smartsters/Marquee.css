@@ -1,7 +1,14 @@
-section {
+@font-face {
+  font-family: "ChillaxSemibold";
+  src: local("ChillaxSemibold"),
+    url("../../../static/fonts/Chillax-Semibold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+.mainSection {
   background-color: #F6C743;
   color: white;
-  font-family: helvetica;
+  font-family: ChillaxSemibold;
   overflow-x: hidden;
   padding: 10px 0px;
 }
