@@ -14,6 +14,7 @@ import WeBuilt from "./WeBuilt";
 @connect(({ smartsters }) => ({
     smartsters,
     topBanner: smartsters.data.items.text.topBanner,
+    signup: smartsters.data.items.text.signup,
     collection: smartsters.data.items.text.collection,
     categories: smartsters.data.items.text.categories,
     parentsPick: smartsters.data.items.text.parentsPick,
@@ -22,13 +23,13 @@ import WeBuilt from "./WeBuilt";
 
 class SmartstersContainer extends React.Component {
     render() {
-        const { topBanner, collection, parentsPick, categories, weBuilt } = this.props;
+        const { topBanner, collection, parentsPick, categories, weBuilt, signup } = this.props;
 
         return (
             <Div style={{ maxWidth: "1440px", margin: "0 auto" }}>
                 <TopBanner topBanner={topBanner} />
                 <Categories data={categories.values} />
-                <Signup />
+                <Signup signup={signup} />
                 <Marquee />
                 <Collection collection={collection} />
                 <div>
