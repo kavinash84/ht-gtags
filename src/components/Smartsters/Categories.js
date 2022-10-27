@@ -9,11 +9,11 @@ const Bedroom = require('../../../static/smartsters/bed.png');
 
 const Categories = ({ data }) => {
     return (
-        <Div style={{ width: '95%', margin: '60px auto', display: 'flex' }}>
+        <Div style={{ width: '95%', margin: '60px auto', display: 'flex' , justifyContent:'center'}}>
             {data.map(slide => (
                 <Div style={{ margin: '0px 10px' }}>
                     <Link to={slide.url_key} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                        <Image src={slide.imgSrc} alt='banner' style={{ width: '100%'}} />
+                        <Image src={slide.imgSrc} alt='banner' style={{ width: '100%', maxWidth:'180px'}} />
                         <Text>{slide.title}</Text>
                     </Link>
                 </Div>

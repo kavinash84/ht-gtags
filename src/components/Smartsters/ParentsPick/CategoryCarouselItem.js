@@ -7,18 +7,17 @@ import Text from "hometown-components-dev/lib/TextHtV1";
 import { formatAmount } from "utils/formatters";
 
 import "./CategoryCarousel.css";
-import "../Home/Slider.css";
 
-const arrowForward = require("../../../static/new-home/newForwardArrow.svg");
+// const arrowForward = require("../../../static/new-home/newForwardArrow.svg");
 
 const CategoryItem = ({
   image,
   name,
   brand,
   url,
-  offerPrice,
+  // offerPrice,
   delivery,
-  maxPrice,
+  // maxPrice,
   off,
   coupon,
   id,
@@ -29,16 +28,16 @@ const CategoryItem = ({
   couponFlag,
   percentageOff
 }) => {
-  const hasCoupon = specialPrice !== maxPrice && off && coupon;
-  const hasSpecialPrice = specialPrice && specialPrice !== maxPrice;
-  const couponValue = couponType === "fixed" ? `₹${off}` : `${off}% OFF`;
+  // const hasCoupon = specialPrice !== maxPrice && off && coupon;
+  // const hasSpecialPrice = specialPrice && specialPrice !== maxPrice;
+  // const couponValue = couponType === "fixed" ? `₹${off}` : `${off}% OFF`;
 
   return (
     <Box
       className="carousel-one"
       p="10px"
       bg="white"
-      style={{ position: "relative", borderRadius: "5px", height: "auto", boxShadow: "0px 5px 15px #00000029"}}
+      style={{ position: "relative", borderRadius: "5px", height: "auto", boxShadow: "0px 5px 15px #00000029" }}
     >
       {id === 2 ? (
         <Box
@@ -111,21 +110,19 @@ const CategoryItem = ({
           ) : null}
 
           {/* Product Price */}
-          {maxPrice && offerPrice ? (
-            <div>
-              <p className="mrpCsp">
-                {hasSpecialPrice ? (
-                  <span>
-                    <span className="csp">
-                      Price: ₹{formatAmount(specialPrice)}
-                    </span>
-                  </span>
-                ) : (
+          {/* {maxPrice && offerPrice ? ( */}
+          <div>
+            <p className="mrpCsp">
+              {/* {hasSpecialPrice ? ( */}
+              Price: ₹{formatAmount(specialPrice)}
+            </p>
+          </div>
+          {/* ) : (
                   <span>
                     <span className="mrp">₹{formatAmount(maxPrice)}</span>
                   </span>
-                )}
-                {hasSpecialPrice ? (
+                )} */}
+          {/* {hasSpecialPrice ? (
                   <span className="mrpWithCsp">₹{formatAmount(maxPrice)}</span>
                 ) : null}
                 {percentageOff ? (
@@ -135,10 +132,10 @@ const CategoryItem = ({
                 ) : null}
               </p>
             </div>
-          ) : null}
+          ) : null} */}
 
           {/* Product Coupon */}
-          {hasCoupon ? (
+          {/* {hasCoupon ? (
             <Box style={{ display: "flex", alignItems: "center" }}>
               <Box
                 style={{
@@ -162,7 +159,7 @@ const CategoryItem = ({
               height="40px"
               style={{ display: `${couponFlag ? "block" : "none"}` }}
             ></Box>
-          )}
+          )} */}
 
           {/* Product Delivery */}
           {delivery ? (
@@ -187,8 +184,8 @@ CategoryItem.defaultProps = {
   image: "",
   name: "",
   url: "",
-  offerPrice: 0,
-  maxPrice: 0,
+  // offerPrice: 0,
+  // maxPrice: 0,
   coupon: "",
   id: 0,
   toDate: "",
@@ -202,8 +199,8 @@ CategoryItem.propTypes = {
   image: PropTypes.string,
   name: PropTypes.string,
   url: PropTypes.string,
-  offerPrice: PropTypes.number,
-  maxPrice: PropTypes.number,
+  // offerPrice: PropTypes.number,
+  // maxPrice: PropTypes.number,
   coupon: PropTypes.string,
   id: PropTypes.number,
   toDate: PropTypes.string,

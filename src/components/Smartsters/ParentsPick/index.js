@@ -4,9 +4,9 @@ import Box from "hometown-components-dev/lib/BoxHtV1";
 import Heading from "hometown-components-dev/lib/HeadingHtV1";
 // import Title from "components/Title";
 import SlickSlider from "components/SlickSlider";
-import CategoryCarouselItem from "components/CategoryCarouselDeals/CategoryCarouselItem";
 
 import "./CategoryCarousel.css";
+import CategoryItem from "./CategoryCarouselItem";
 
 const LeftArrow = require("../../../../static/new-home/roundedArrowLeft.svg");
 const RightArrow = require("../../../../static/new-home/roundedArrowRight.svg");
@@ -109,13 +109,13 @@ export default class ParentsPick extends Component {
         >
           {data.map(slide => (
             <div className="card">
-              <CategoryCarouselItem
+              <CategoryItem
                 id={id}
                 image={slide.image_url}
                 name={slide.name || ""}
                 brand={slide.brand_name || ""}
-                maxPrice={slide.mrp}
-                offerPrice={slide.csp}
+                // maxPrice={slide.mrp}
+                // offerPrice={slide.csp}
                 coupon={slide.coupon_code}
                 off={slide.off}
                 percentage={slide.percentage}
