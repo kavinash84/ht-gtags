@@ -13,23 +13,27 @@ const Marquee = () => {
                 <div className="divmain">
                     <section class="news-message">
                         <p>Ergonomic Designs</p>
-                        <img src={Ellipse} alt='ellipse' style={{ paddingLeft: '20px', height: '30px', width: '50px' }} />
+                        <img src={Ellipse} alt='ellipse' style={{ paddingLeft: '15px', height: '20px', width: '35px' }} />
                         <p>Waterproof Paints</p>
-                        <img src={Ellipse} alt='ellipse' style={{ paddingLeft: '20px', height: '30px', width: '50px' }} />
-                        <p>Designed for Safety, Self-Sufficiency, Durability & Growth</p>
-                        <img src={Ellipse} alt='ellipse' style={{ paddingLeft: '20px', height: '30px', width: '50px' }} />
+                        <img src={Ellipse} alt='ellipse' style={{ paddingLeft: '15px', height: '20px', width: '35px' }} />
                         <p>Scratch-Proof Laminates</p>
-                        <img src={Ellipse} alt='ellipse' style={{ paddingLeft: '20px', height: '30px', width: '50px' }} />
+                        <img src={Ellipse} alt='ellipse' style={{ paddingLeft: '15px', height: '20px', width: '35px' }} />
+                        <p>Designed for Safety, Self-Sufficiency, Durability & Growth</p>
+                        <img src={Ellipse} alt='ellipse' style={{ paddingLeft: '15px', height: '20px', width: '35px' }} />
+                        <p>Hypo-allergenic Protection</p>
+                        <img src={Ellipse} alt='ellipse' style={{ paddingLeft: '15px', height: '20px', width: '35px' }} />
                     </section>
                     <section class="news-message">
                         <p>Ergonomic Designs</p>
-                        <img src={Ellipse} alt='ellipse' style={{ paddingLeft: '20px', height: '30px', width: '50px' }} />
+                        <img src={Ellipse} alt='ellipse' style={{ paddingLeft: '15px', height: '20px', width: '35px' }} />
                         <p>Waterproof Paints</p>
-                        <img src={Ellipse} alt='ellipse' style={{ paddingLeft: '20px', height: '30px', width: '50px' }} />
-                        <p>Designed for Safety, Self-Sufficiency, Durability & Growth</p>
-                        <img src={Ellipse} alt='ellipse' style={{ paddingLeft: '20px', height: '30px', width: '50px' }} />
+                        <img src={Ellipse} alt='ellipse' style={{ paddingLeft: '15px', height: '20px', width: '35px' }} />
                         <p>Scratch-Proof Laminates</p>
-                        <img src={Ellipse} alt='ellipse' style={{ paddingLeft: '20px', height: '30px', width: '50px' }} />
+                        <img src={Ellipse} alt='ellipse' style={{ paddingLeft: '15px', height: '20px', width: '35px' }} />
+                        <p>Designed for Safety, Self-Sufficiency, Durability & Growth</p>
+                        <img src={Ellipse} alt='ellipse' style={{ paddingLeft: '15px', height: '20px', width: '35px' }} />
+                        <p>Hypo-allergenic Protection</p>
+                        <img src={Ellipse} alt='ellipse' style={{ paddingLeft: '15px', height: '20px', width: '35px' }} />
                     </section>
                 </div>
             </section>
