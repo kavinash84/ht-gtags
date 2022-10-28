@@ -86,6 +86,9 @@ import ComboOffer from "containers/ComboOffer";
 // brand pageoffset
 import Spaces from "./containers/Spaces";
 
+// Smartsters
+import Smartsters from "./containers/Smartsters";
+
 // campaign
 // import Announcement from 'containers/Announcement';
 import Campaigns from "containers/Campaigns";
@@ -267,6 +270,7 @@ const routes = [
       { path: "/blog", exact: true, component: BlogsContainer },
       { path: "/blog/:key", exact: true, component: BlogContainer },
       { path: "/mattresses", exact: true, component: Mattresses },
+      { path: "/smartsters", exact: true, component: Smartsters },
       { component: NotFound }
     ]
   }
