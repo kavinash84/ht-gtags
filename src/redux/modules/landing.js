@@ -1,19 +1,19 @@
 import {
   LANDING_INFO as LANDING_INFO_API,
   LANDING_CATEGORY as LANDING_CATEGORY_API
-} from 'helpers/apiUrls';
+} from "helpers/apiUrls";
 
-const LANDING_INFO = 'landing/LANDING_INFO';
-const LANDING_INFO_SUCCESS = 'landing/LANDING_INFO_SUCCESS';
-const LANDING_INFO_FAIL = 'landing/LANDING_INFO_FAIL';
+const LANDING_INFO = "landing/LANDING_INFO";
+const LANDING_INFO_SUCCESS = "landing/LANDING_INFO_SUCCESS";
+const LANDING_INFO_FAIL = "landing/LANDING_INFO_FAIL";
 
-const LANDING_CATEGORY = 'landing/LANDING_CATEGORY';
-const LANDING_CATEGORY_SUCCESS = 'landing/LANDING_CATEGORY_SUCCESS';
-const LANDING_CATEGORY_FAIL = 'landing/LANDING_CATEGORY_FAIL';
+const LANDING_CATEGORY = "landing/LANDING_CATEGORY";
+const LANDING_CATEGORY_SUCCESS = "landing/LANDING_CATEGORY_SUCCESS";
+const LANDING_CATEGORY_FAIL = "landing/LANDING_CATEGORY_FAIL";
 
-const LANDING_SUBMIT = 'landing/LANDING_SUBMIT';
-const LANDING_SUBMIT_SUCCESS = 'landing/LANDING_SUBMIT_SUCCESS';
-const LANDING_SUBMIT_FAIL = 'landing/LANDING_SUBMIT_FAIL';
+const LANDING_SUBMIT = "landing/LANDING_SUBMIT";
+const LANDING_SUBMIT_SUCCESS = "landing/LANDING_SUBMIT_SUCCESS";
+const LANDING_SUBMIT_FAIL = "landing/LANDING_SUBMIT_FAIL";
 
 const initialState = {
   infoLoading: false,
@@ -22,6 +22,7 @@ const initialState = {
   infoError: false,
   cateLoading: false,
   cateLoaded: false,
+  successData: false,
   cateChecked: false,
   submitErrorMessage: null
 };
@@ -76,6 +77,7 @@ export default function reducer(state = initialState, action = {}) {
         loading: true,
         loaded: false,
         error: false,
+        successData: false,
         submitErrorMessage: null
       };
     case LANDING_SUBMIT_SUCCESS:
@@ -84,15 +86,17 @@ export default function reducer(state = initialState, action = {}) {
         loading: false,
         loaded: true,
         error: false,
-        submitErrorMessage: action.result.error || ''
+        successData: action.result,
+        submitErrorMessage: action.result.error || ""
       };
     case LANDING_SUBMIT_FAIL:
       return {
         ...state,
         loaded: true,
         loading: false,
+        successData: false,
         error: true,
-        submitErrorMessage: action.result.error || ''
+        submitErrorMessage: action.result.error || ""
       };
     default:
       return state;
@@ -126,8 +130,9 @@ export const getLandingCategoryData = () => ({
 export const submitOffer = (url, postData) => ({
   types: [LANDING_SUBMIT, LANDING_SUBMIT_SUCCESS, LANDING_SUBMIT_FAIL],
   promise: async ({ client }) => {
+    const header = { "Content-Type": "multipart/form-data" };
     try {
-      const response = await client.post(url, postData);
+      const response = await client.post(url, postData, { header });
       return response;
     } catch (error) {
       return error;

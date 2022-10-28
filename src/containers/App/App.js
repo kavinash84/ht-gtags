@@ -345,6 +345,10 @@ export default class App extends Component {
                gtag('config', 'AW-845903914'); 
                `}
             </script>
+            <script
+              src="https://libraries.unbxdapi.com/recs-sdk/v2.2.0/unbxd_recs_template_sdk_apac.js"
+              async
+            ></script>
             <script id="_webengage_script_tag" type="text/javascript">
               {`
               var webengage;!function(w,e,b,n,g){function o(e,t){e[t[t.length-1]]=function(){r.__queue.push([t.join("."),

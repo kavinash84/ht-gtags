@@ -8,7 +8,7 @@ import GoogleLoginBtn from 'react-google-login';
 import moment from 'moment';
 
 /* ====== Validations ====== */
-import { validateMobile, validateName, validateDob } from 'utils/validation';
+import { validateMobile, validateName } from 'utils/validation';
 
 /* ====== Helpers ====== */
 import { allowNChar, allowTypeOf } from 'utils/helper';
@@ -27,15 +27,15 @@ import Image from 'hometown-components-dev/lib/ImageHtV1';
 
 import UpdateName from './UpdateName';
 import UpdateContacts from './UpdateContacts';
-import UpdateDob from './UpdateDobGoogle';
-import UpdateContactAndDob from './UpdateContactAndDob';
+// import UpdateDob from './UpdateDobGoogle';
+// import UpdateContactAndDob from './UpdateContactAndDob';
 
 const LoaderIcon = require('../../../static/refresh-black.svg');
 
 const mapStateToProps = ({ app, userLogin }) => ({
   session: app.sessionId,
-  userLogin: app.userLogin,
-  skipBirthdateCheck: userLogin.skipBirthdateCheck
+  userLogin: app.userLogin
+  // skipBirthdateCheck: userLogin.skipBirthdateCheck
 });
 
 const onSuccess = (dispatcher, session, phone) => result => {
@@ -135,7 +135,7 @@ class GoogleLogin extends Component {
   onSubmitMobileAndDob = e => {
     e.preventDefault();
     const {
- phone, resend, dob, otp
+ phone, resend, otp
 } = this.state;
     const checkmobile = !validateMobile(phone);
     const { session, loginViaLogin } = this.props;
@@ -151,7 +151,7 @@ class GoogleLogin extends Component {
       return dispatch(resendOtpfromSignUp(this.state.phone));
     }
 
-    loginViaLogin({}, session, phone, null, dob, false, otp, true);
+    loginViaLogin({}, session, phone, null, false, otp, true);
     this.setState({
       mobilesubmitted: true
     });
@@ -199,21 +199,21 @@ class GoogleLogin extends Component {
       lastNameError: isInvalid
     });
   };
-  onChangeDob = value => {
-    const checkError = validateDob(value).error;
-    const newDob = moment(value, 'DD-MM-YYYY').toDate();
-    const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
-    const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
-    if (myAge > 10) {
-      this.setState({
-        dob: value,
-        dobError: checkError,
-        dobErrorMessage: validateDob(value).msg
-      });
-    } else {
-      this.setState({ dobError: true, dobErrorMessage: 'Wallet user should be atleast 10 years old' });
-    }
-  };
+  // onChangeDob = value => {
+  //   const checkError = validateDob(value).error;
+  //   const newDob = moment(value, 'DD-MM-YYYY').toDate();
+  //   const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
+  //   const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
+  //   if (myAge > 10) {
+  //     this.setState({
+  //       dob: value,
+  //       dobError: checkError,
+  //       dobErrorMessage: validateDob(value).msg
+  //     });
+  //   } else {
+  //     this.setState({ dobError: true, dobErrorMessage: 'Wallet user should be atleast 10 years old' });
+  //   }
+  // };
   onChangeOtp = e => {
     const { value } = e.target;
     if (!allowNChar(value, 6) || (!allowTypeOf(value, 'number') && value.length > 0)) {
@@ -245,10 +245,10 @@ class GoogleLogin extends Component {
     const { phone } = this.state;
     dispatch(resendOtp(phone));
   };
-  birthdateCheck = status => {
-    const { dispatch } = this.context.store;
-    dispatch(birthdateCheck(status));
-  };
+  // birthdateCheck = status => {
+  //   const { dispatch } = this.context.store;
+  //   dispatch(birthdateCheck(status));
+  // };
 
   handleModal = () => {
     this.props.clearLogin();
@@ -264,10 +264,10 @@ class GoogleLogin extends Component {
       session,
       askContact,
       askName,
-      askBirthDate,
+      // askBirthDate,
       loginType,
-      loggingIn,
-      skipBirthdateCheck
+      loggingIn
+      // skipBirthdateCheck
     } = this.props;
     const {
       // eslint-disable-next-line max-len
@@ -280,9 +280,9 @@ class GoogleLogin extends Component {
       lastName,
       lastNameError,
       lastNameErrorMessage,
-      dob,
-      dobError,
-      dobErrorMessage,
+      // dob,
+      // dobError,
+      // dobErrorMessage,
       mobilesubmitted,
       otp,
       otpError,
@@ -290,7 +290,7 @@ class GoogleLogin extends Component {
       resend,
       resendtimer
     } = this.state;
-    const open = (askContact || askName || askBirthDate) && loginType && loginType === 'google';
+    const open = (askContact || askName ) && loginType && loginType === 'google';
     return (
       <Box>
         <Box
@@ -340,35 +340,37 @@ class GoogleLogin extends Component {
               onChangePhone={this.onChangePhone}
               loginViaLogin={loginViaLogin}
             />
-          ) : askContact && askBirthDate ? (
-            <UpdateContactAndDob
-              session={session}
-              loggingIn={loggingIn}
-              phone={phone}
-              phoneError={phoneError}
-              phoneErrorMessage={phoneErrorMessage}
-              onChangePhone={this.onChangePhone}
-              dob={dob}
-              dobError={dobError}
-              dobErrorMessage={dobErrorMessage}
-              onChangeDob={this.onChangeDob}
-              onSubmitMobileNumber={this.onSubmitMobileNumber}
-              onSubmitMobileAndDob={this.onSubmitMobileAndDob}
-              mobilesubmitted={mobilesubmitted}
-              LoaderIcon={LoaderIcon}
-              skipBirthdateCheck={skipBirthdateCheck}
-              birthdateCheck={this.birthdateCheck}
-              loginViaLogin={loginViaLogin}
-              onSubmitOtp={this.onSubmitOtp}
-              onChangeOtp={this.onChangeOtp}
-              otp={otp}
-              otpError={otpError}
-              otpErrorMessage={otpErrorMessage}
-              resend={resend}
-              resendtimer={resendtimer}
-              handleResend={this.handleModal}
-            />
-          ) : askName ? (
+          ) 
+          // : askContact && askBirthDate ? (
+          //   <UpdateContactAndDob
+          //     session={session}
+          //     loggingIn={loggingIn}
+          //     phone={phone}
+          //     phoneError={phoneError}
+          //     phoneErrorMessage={phoneErrorMessage}
+          //     onChangePhone={this.onChangePhone}
+          //     dob={dob}
+          //     dobError={dobError}
+          //     dobErrorMessage={dobErrorMessage}
+          //     onChangeDob={this.onChangeDob}
+          //     onSubmitMobileNumber={this.onSubmitMobileNumber}
+          //     onSubmitMobileAndDob={this.onSubmitMobileAndDob}
+          //     mobilesubmitted={mobilesubmitted}
+          //     LoaderIcon={LoaderIcon}
+          //     skipBirthdateCheck={skipBirthdateCheck}
+          //     birthdateCheck={this.birthdateCheck}
+          //     loginViaLogin={loginViaLogin}
+          //     onSubmitOtp={this.onSubmitOtp}
+          //     onChangeOtp={this.onChangeOtp}
+          //     otp={otp}
+          //     otpError={otpError}
+          //     otpErrorMessage={otpErrorMessage}
+          //     resend={resend}
+          //     resendtimer={resendtimer}
+          //     handleResend={this.handleModal}
+          //   />
+          // ) 
+          : askName ? (
             <UpdateName
               session={session}
               loggingIn={loggingIn}
@@ -384,20 +386,22 @@ class GoogleLogin extends Component {
               loginViaLogin={loginViaLogin}
               // onSubmitForm={this.onSubmitForm}
             />
-          ) : askBirthDate ? (
-            <UpdateDob
-              session={session}
-              loggingIn={loggingIn}
-              dob={dob}
-              dobError={dobError}
-              dobErrorMessage={dobErrorMessage}
-              onChangeDob={this.onChangeDob}
-              LoaderIcon={LoaderIcon}
-              skipBirthdateCheck={skipBirthdateCheck}
-              birthdateCheck={this.birthdateCheck}
-              loginViaLogin={loginViaLogin}
-            />
-          ) : askContact ? (
+          )
+          //  : askBirthDate ? (
+          //   <UpdateDob
+          //     session={session}
+          //     loggingIn={loggingIn}
+          //     dob={dob}
+          //     dobError={dobError}
+          //     dobErrorMessage={dobErrorMessage}
+          //     onChangeDob={this.onChangeDob}
+          //     LoaderIcon={LoaderIcon}
+          //     skipBirthdateCheck={skipBirthdateCheck}
+          //     birthdateCheck={this.birthdateCheck}
+          //     loginViaLogin={loginViaLogin}
+          //   />
+          // )
+           : askContact ? (
             <Box>
               <Row>
                 <Box variant="col-12">
@@ -467,8 +471,8 @@ GoogleLogin.propTypes = {
   askName: PropTypes.bool.isRequired,
   loginType: PropTypes.string.isRequired,
   loggingIn: PropTypes.bool.isRequired,
-  askBirthDate: PropTypes.bool.isRequired,
-  skipBirthdateCheck: PropTypes.bool.isRequired,
+  // askBirthDate: PropTypes.bool.isRequired,
+  // skipBirthdateCheck: PropTypes.bool.isRequired,
   getotpError: PropTypes.bool.isRequired,
   getotpErrorMessage: PropTypes.string.isRequired,
   otpSent: PropTypes.bool.isRequired

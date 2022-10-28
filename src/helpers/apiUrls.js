@@ -154,3 +154,7 @@ export const SINGLE_BLOG = "tesla/blog/post";
 
 /* Gifting */
 export const GET_GIFTING = "tesla/static/giftingdesktop";
+
+
+/* Matresses */
+export const MATTRESSES_API = "tesla/static/mattresses_desktop";
