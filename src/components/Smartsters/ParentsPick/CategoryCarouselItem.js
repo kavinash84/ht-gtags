@@ -68,10 +68,10 @@ const CategoryItem = ({
                 m="auto"
                 style={{ border: "2px solid #FAF4F2" }}
               />
-              {id === 1 ? <div className="coupon">Ends Today</div> : null}
+              {/* {id === 1 ? <div className="coupon">Ends Today</div> : null}
               {id === 2 && coupon ? (
                 <div className="coupon">Ends on {couponEndDate}</div>
-              ) : null}
+              ) : null} */}
             </div>
           ) : null}
 
