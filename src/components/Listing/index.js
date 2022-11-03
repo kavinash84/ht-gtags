@@ -4,6 +4,7 @@ import LoginModal from "containers/Login/LoginForm";
 import Box from "hometown-components-dev/lib/BoxHtV1";
 import PropTypes from "prop-types";
 import React from "react";
+import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { addToCart } from "redux/modules/cart";
