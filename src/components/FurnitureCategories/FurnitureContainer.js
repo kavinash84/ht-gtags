@@ -24,15 +24,7 @@ import NewUnboxBestSeller from "components/NewUnboxWidges/bestSeller";
   seoInfo: data && data.seo && data.seo.items
 }))
 class FurnitureContainer extends React.Component {
-  state = {
-    openModal: true
-  };
 
-  handleModal = () => {
-    this.setState({
-      openModal: !this.state.openModal
-    });
-  };
   render() {
     const { category } = this.props;
     return (
@@ -164,28 +156,6 @@ class FurnitureContainer extends React.Component {
             catlevel3Name: "sofas"
           }}
         />
-        {category && category.popUp && category.popUp.display ? (
-          <ResponsiveModal
-            classNames={{ modal: "furntitureModal" }}
-            onCloseModal={this.handleModal}
-            open={this.state.openModal}
-          >
-            <Link to={category.popUp.url_key}>
-              {/* <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center"
-                }}
-              > */}
-              <img
-                src={category.popUp.popUpImage}
-                style={{ width: "100%", height: "auto" }}
-              />
-              {/* </div> */}
-            </Link>
-          </ResponsiveModal>
-        ) : null}
       </Section>
     );
   }
