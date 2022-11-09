@@ -54,12 +54,16 @@ export default class NewUnboxRecomondedForYou extends Component {
             return imageSuffix;
           };
 
-          var updatedRecsData = data.recommendations.map(function(product) {
+          var updatedRecsData = data.recommendations.map(function(
+            product,
+            index
+          ) {
             var imageURL = product.imageURL + getImageSuffix();
             var recsBoxWidth = recsBoxSize + "px";
             var recsBoxHeight = recsBoxSize + "px";
+            var pRank = index + 1;
 
-            return { ...product, imageURL, recsBoxWidth, recsBoxHeight };
+            return { ...product, imageURL, recsBoxWidth, recsBoxHeight, pRank };
           });
 
           return { ...data, recommendations: updatedRecsData };
