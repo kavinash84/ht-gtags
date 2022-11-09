@@ -36,9 +36,6 @@ const CloseIcon = require("../../../static/close-icon.svg");
 const navigateToPDP = history => (name, sku) => {
   const productURL = formatProductURL(name, sku);
   history.push(productURL);
-  if (window && window.Unbxd && window.Unbxd.track && sku) {
-    window.Unbxd.track("click", { pid: sku });
-  }
 };
 const navigateToSearch = history => (path, query) => {
   // const url = `search/?q=${query}`;

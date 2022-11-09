@@ -293,9 +293,6 @@ class Listing extends React.Component {
     const { history } = this.props;
     const productURL = formatProductURL(name, sku);
     history.push(productURL);
-    if (window && window.Unbxd && window.Unbxd.track && sku) {
-      window.Unbxd.track("click", { pid: sku });
-    }
   };
   gotoCart = () => {
     const { history } = this.props;

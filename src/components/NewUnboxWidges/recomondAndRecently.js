@@ -93,6 +93,8 @@ export default class NewUnboxRecomondRecentlyViewed extends Component {
         beforeTemplateRenderer
       );
 
+      console.log(pageInfo, "UnbxdPageInfo");
+
       window._unbxd_getRecommendations({
         widgets: {
           widget1: { name: "unbxd_recommended_for_you" },

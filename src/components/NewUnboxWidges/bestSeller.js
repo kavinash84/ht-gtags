@@ -92,6 +92,7 @@ export default class NewUnboxBestSeller extends Component {
         "beforeTemplateRender",
         beforeTemplateRenderer
       );
+      console.log(pageInfo, "UnbxdPageInfo");
       window._unbxd_getRecommendations({
         widgets: {
           widget1: {

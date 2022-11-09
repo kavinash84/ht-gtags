@@ -163,9 +163,12 @@ export default function gaMiddleware() {
               meta: { config_id: pid = "" }
             }
           } = action;
-          if (window && window.Unbxd && window.Unbxd.track && pid) {
-            window.Unbxd.track("product_view", { pid });
+          if (window && window.Unbxd && window.Unbxd.track && skuId) {
+            window.Unbxd.track("click", { pid: skuId });
           }
+          // if (window && window.Unbxd && window.Unbxd.track && pid) {
+          //   window.Unbxd.track("product_view", { pid });
+          // }
         }
         if (type === "productdetails/PRODUCT_DETAILS_TRACK") {
           const { position, productDescription } = getState().productdetails;

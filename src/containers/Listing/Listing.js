@@ -326,14 +326,13 @@ export default class Listing extends Component {
       pageType: "CATEGORY"
     };
 
-    if (window && window.unbxd_category && window.unbxd_category) {
+    if (window && window.unbxd_category) {
       const arr = window.unbxd_category.split(">");
       if (arr.length) {
         arr.map((item, i) => {
           obj[`catlevel${i + 1}Name`] = item;
         });
       }
-      console.log(obj, "UnbxdPageInfo");
     }
 
     /* eslint-disable react/no-danger */
@@ -439,7 +438,7 @@ export default class Listing extends Component {
             </div>
 
             <div>
-              <NewUnboxBestSeller pageInfo={obj} />
+              {obj.catlevel1Name ? <NewUnboxBestSeller pageInfo={obj} /> : null}
             </div>
 
             {seoInfo && seoInfo.seo_text && (
