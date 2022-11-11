@@ -33,9 +33,11 @@ import Header from "components/Header";
 import CartShimmer from "components/Cart/CartShimmer";
 import PinCode from "components/PinCode";
 import ResponsiveModal from "components/Modal";
-import Notifications from "components/Notifications";
+// import Notifications from "components/Notifications";
+// import Empty from "./Empty";
+import NewUnboxRecentlyViewed from "../../components/NewUnboxWidges/recentlyViewed";
 import EmptyNew from "./EmptyNew";
-import UnbxdRecommendedForYou from "../../components/Unbxd/unbxdRecommendedForYou";
+// import UnbxdRecommendedForYou from "../../components/Unbxd/unbxdRecommendedForYou";
 import { WEViewCart } from "../../redux/modules/cart";
 import HappyToHelp from "../../components/Cart/HappyToHelp";
 
@@ -383,10 +385,12 @@ export default class CartContainer extends Component {
                 outOfStockList={outOfStockList}
                 handlePincodeModal={this.handlePincodeModal}
               />
-              <Section>
-                {/* Unbxd recommended for you */}
-                <UnbxdRecommendedForYou />
-              </Section>
+              <NewUnboxRecentlyViewed
+                pageInfo={{
+                  pageType: "PRODUCT",
+                  productIds: [""]
+                }}
+              />
             </Box>
           ) : (
             loading && <CartShimmer />

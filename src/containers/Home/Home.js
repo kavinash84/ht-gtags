@@ -36,7 +36,7 @@ import MainSlider from "components/MainSlider";
 // import Title from "components/Title";
 import HomeContainer from "../../components/Home/index";
 // import Usp from "components/Home/Usp";
-import UnbxdRecentlyViewed from "components/UnbxdRecentlyViewed/UnbxdRecentlyViewed";
+import NewUnboxRecentlyViewed from "components/NewUnboxWidges/recentlyViewed";
 // import ShopByCategories from "../../components/ShopByCategories";
 
 // const sliderImage = require("../../../static/DnB.jpeg");
@@ -344,7 +344,12 @@ export default class Home extends Component {
           />
 
           <Section>
-            <UnbxdRecentlyViewed />
+            <NewUnboxRecentlyViewed
+              pageInfo={{
+                pageType: "PRODUCT",
+                productIds: [""]
+              }}
+            />
           </Section>
           {/* stores */}
           <StoresCarousel cities={cities} />

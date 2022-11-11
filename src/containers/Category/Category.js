@@ -30,6 +30,8 @@ import FurnitureContainer from "../../components/FurnitureCategories/FurnitureCo
 import HomewareContainer from "../../components/HomewareCat/HomewareContainer";
 import HomeFurnishingContainer from "../../components/HomewareCat/HomeFurnishingContainer";
 import TablewareKitchenware from "../../components/HomewareCat/TablewareKitchenware";
+import NewUnboxBestSeller from "components/NewUnboxWidges/bestSeller";
+
 const styles = require("./Category.scss");
 // import "./Category.scss";
 
@@ -225,15 +227,13 @@ export default class Category extends Component {
                     {category && <MainSlider data={category.main} />}
 
                     {/* Breadcrumb */}
-                    {category && (
-                      <TitleBar title="Home Furnishings">
-                        <BreadCrumb
-                          urlKey={currentCategory}
-                          name={pageTitle}
-                          handleCategoryClick={this.handleCategoryClick}
-                        />
-                      </TitleBar>
-                    )}
+                    <TitleBar title="Home Furnishings">
+                      <BreadCrumb
+                        urlKey={currentCategory}
+                        name={pageTitle}
+                        handleCategoryClick={this.handleCategoryClick}
+                      />
+                    </TitleBar>
 
                     {/* Category Carousel */}
                     {category &&
@@ -255,7 +255,14 @@ export default class Category extends Component {
                     {category && (
                       <Box display="inline-block" width="100%">
                         <Container>
-                          <UnbxdTopSellers category={category.title} />
+                          <NewUnboxBestSeller
+                            pageInfo={{
+                              pageType: "CATEGORY",
+                              catlevel1Name: "furniture",
+                              catlevel2Name: "living-room-furniture",
+                              catlevel3Name: "sofas"
+                            }}
+                          />
                         </Container>
                       </Box>
                     )}

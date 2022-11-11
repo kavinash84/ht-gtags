@@ -72,13 +72,13 @@ import Pincode from "./Pincode";
 import ProductDetailsCarousel from "./Carousel";
 import Video from "./Video";
 import ReviewFilter from "./ReviewFilter";
-import UnbxdCompleteTheLook from "./UnbxdCompleteTheLook";
 import Stripes from "./PdpStripe";
 import Specs from "./Specs/specs";
 import BaughtTogether from "./baughtTogether";
 import MoreOption from "./moreOption";
 import { weProductViewTrack } from "../../redux/modules/productdetails";
 import { weLoadMoreReviews } from "../../redux/modules/reviews";
+import NewUnboxRecomondRecentlyViewed from "../NewUnboxWidges/recomondAndRecently";
 
 /**
  * Images / Icons
@@ -276,7 +276,10 @@ class ProductDetails extends React.PureComponent {
       // product,
       simpleSku,
       pincode: { selectedPincode },
-      pdpTimeout
+      pdpTimeout,
+      product: {
+        meta: { config_id: pid = "" }
+      }
     } = this.props;
 
     // this.setDescriptionActive(product);
@@ -1015,7 +1018,6 @@ class ProductDetails extends React.PureComponent {
                               </span>
                             </Text>
                           ) : null}
-
                           <div ht_wallet_cashback={ht_wallet_cashback}>
                             {ht_wallet_cashback ? (
                               <div
@@ -1515,10 +1517,13 @@ class ProductDetails extends React.PureComponent {
               </LazyLoad>
             ) : null}
 
-            {/* Complete the look */}
-            <LazyLoad height={150}>
-              <UnbxdCompleteTheLook configId={configId} />
-            </LazyLoad>
+            {/* Recommend for you */}
+            <NewUnboxRecomondRecentlyViewed
+              pageInfo={{
+                pageType: "PRODUCT",
+                productIds: [configId || ""]
+              }}
+            />
 
             {/* Related Products List */}
             {/* {relatedproductsList.length > 0 && (

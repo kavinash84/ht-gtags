@@ -47,10 +47,10 @@ const EmailIcon = require('../../../static/email-primary.svg');
   loading: state.userLogin.loading,
   loggingIn: state.userLogin.loggingIn,
   askContact: state.userLogin.askContact,
-  askBirthDate: state.userLogin.askBirthDate,
+  // askBirthDate: state.userLogin.askBirthDate,
   askEmail: state.userLogin.askEmail,
   askName: state.userLogin.askName,
-  skipBirthdateCheck: state.userLogin.skipBirthdateCheck,
+  // skipBirthdateCheck: state.userLogin.skipBirthdateCheck,
   loginType: state.userLogin.loginType
 }))
 export default class LoginFormContainer extends Component {
@@ -66,12 +66,12 @@ export default class LoginFormContainer extends Component {
     loaded: PropTypes.bool,
     loggingIn: PropTypes.bool,
     askContact: PropTypes.bool,
-    askBirthDate: PropTypes.bool,
-    skipBirthdateCheck: PropTypes.bool,
+    // askBirthDate: PropTypes.bool,
+    // skipBirthdateCheck: PropTypes.bool,
     askEmail: PropTypes.bool,
-    askName: PropTypes.bool
+    askName: PropTypes.bool,
     // onChangeDob: PropTypes.func,
-    // dob: PropTypes.string,
+    dob: PropTypes.string
     // dobError: PropTypes.string,
     // dobErrorMessage: PropTypes.string
   };
@@ -86,8 +86,8 @@ export default class LoginFormContainer extends Component {
     loading: false,
     loggingIn: false,
     askContact: false,
-    askBirthDate: false,
-    skipBirthdateCheck: false,
+    // askBirthDate: false,
+    // skipBirthdateCheck: false,
     askEmail: false,
     askName: false,
     loginType: ''
@@ -109,8 +109,8 @@ export default class LoginFormContainer extends Component {
     emailError: false,
     emailErrorMessage: 'Please Enter Valid Email ',
     dob: '',
-    dobError: false,
-    dobErrorMessage: 'Enter Valid Date',
+    // dobError: false,
+    // dobErrorMessage: 'Enter Valid Date',
     mobilesubmitted: false,
     resend: false,
     password: '',
@@ -293,58 +293,58 @@ export default class LoginFormContainer extends Component {
         value[0] === '0' ? 'Mobile Number Must Not Start With 0' : 'Enter 10 Digits Valid Mobile Number'
     });
   };
-  onChangeDob = value => {
-    // const value = '1995-10-02';
-    const checkError = validateDob(value).error;
-    const newDob = moment(value, 'DD-MM-YYYY').toDate();
-    const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
-    const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
-    // this.setState({
-    //   dob: value,
-    //   dobError: checkError,
-    //   dobErrorMessage: validateDob(value).msg
-    // });
-    if (myAge > 10) {
-      this.setState({
-        dob: value,
-        dobError: checkError
-      });
-    } else {
-      this.setState({
-        dob: value,
-        dobError: true,
-        dobErrorMessage: 'Wallet user can not be less than 10 years old'
-      });
-    }
-  };
-  onSubmitDob = () => {
-    const { dob } = this.state;
-    const isInvalid = validateDob(dob).error;
-    if (isInvalid) {
-      return this.setState({
-        nameError: true,
-        nameErrorMessage: validateDob(dob).msg
-      });
-    }
-    const { dispatch } = this.context.store;
-    const data = {
-      ...this.state,
-      skipOtpValidation: true,
-      dob: moment(dob).format('YYYY-MM-DD')
-    };
-    dispatch(login(data));
-  };
-  onSkipDob = () => {
-    this.birthdateChecker(true);
-    const { dispatch } = this.context.store;
-    const data = {
-      ...this.state,
-      skipBirthdateCheck: true,
-      skipOtpValidation: true,
-      dob: ''
-    };
-    dispatch(login(data));
-  };
+  // onChangeDob = value => {
+  //   // const value = '1995-10-02';
+  //   const checkError = validateDob(value).error;
+  //   const newDob = moment(value, 'DD-MM-YYYY').toDate();
+  //   const currentDate = `${new Date().toJSON().slice(0, 10)} 01:00:00`;
+  //   const myAge = Math.floor((Date.now(currentDate) - newDob) / 31557600000);
+  //   // this.setState({
+  //   //   dob: value,
+  //   //   dobError: checkError,
+  //   //   dobErrorMessage: validateDob(value).msg
+  //   // });
+  //   if (myAge > 10) {
+  //     this.setState({
+  //       dob: value,
+  //       dobError: checkError
+  //     });
+  //   } else {
+  //     this.setState({
+  //       dob: value,
+  //       dobError: true,
+  //       dobErrorMessage: 'Wallet user can not be less than 10 years old'
+  //     });
+  //   }
+  // };
+  // onSubmitDob = () => {
+  //   const { dob } = this.state;
+  //   const isInvalid = validateDob(dob).error;
+  //   if (isInvalid) {
+  //     return this.setState({
+  //       nameError: true,
+  //       nameErrorMessage: validateDob(dob).msg
+  //     });
+  //   }
+  //   const { dispatch } = this.context.store;
+  //   const data = {
+  //     ...this.state,
+  //     skipOtpValidation: true,
+  //     dob: moment(dob).format('YYYY-MM-DD')
+  //   };
+  //   dispatch(login(data));
+  // };
+  // onSkipDob = () => {
+  //   this.birthdateChecker(true);
+  //   const { dispatch } = this.context.store;
+  //   const data = {
+  //     ...this.state,
+  //     skipBirthdateCheck: true,
+  //     skipOtpValidation: true,
+  //     dob: ''
+  //   };
+  //   dispatch(login(data));
+  // };
   onChangePassword = e => {
     const {
       target: { value }
@@ -356,18 +356,18 @@ export default class LoginFormContainer extends Component {
       passwordErrorMessage: checkError ? "Password can't be blank" : ''
     });
   };
-  onSubmitLogin = (e, skipBirthdateCheck = false) => {
+  onSubmitLogin = (e) => {
     e.preventDefault();
     const {
- email, password, phone, name, dob
+ email, password, phone, name
 } = this.state;
 
     const checkEmail = !validateEmail(email, 'Invalid Email');
     const checkMobile = phone ? !validateMobile(phone) : false;
-    const checkDob = dob ? validateDob(dob).error : false;
+    // const checkDob = dob ? validateDob(dob).error : false;
     const checkName = !isEmpty(name) ? validateName(name) : false;
     const checkPassword = isEmpty(password);
-    if (checkEmail.error || checkPassword || checkMobile || checkName || checkDob) {
+    if (checkEmail.error || checkPassword || checkMobile || checkName ) {
       return this.setState({
         nameError: checkName,
         nameErrorMessage: validateName(name).msg,
@@ -375,23 +375,23 @@ export default class LoginFormContainer extends Component {
         emailErrorMessage: checkEmail.errorMessage,
         passwordError: checkPassword,
         passwordErrorMessage: checkPassword ? "Password can't be blank" : '',
-        dobError: checkDob,
-        dobErrorMessage: checkDob ? "Date of birth can't be blank" : ''
+        // dobError: checkDob,
+        // dobErrorMessage: checkDob ? "Date of birth can't be blank" : ''
       });
     }
     const { dispatch } = this.context.store;
     const data = {
       ...this.state,
-      skipBirthdateCheck,
-      skipOtpValidation: false,
-      dob: dob ? moment(dob).format('YYYY-MM-DD') : ''
+      // skipBirthdateCheck,
+      skipOtpValidation: false
+      // dob: dob ? moment(dob).format('YYYY-MM-DD') : ''
     };
     dispatch(login(data));
   };
-  birthdateChecker = status => {
-    const { dispatch } = this.context.store;
-    dispatch(birthdateCheck(status));
-  };
+  // birthdateChecker = status => {
+  //   const { dispatch } = this.context.store;
+  //   dispatch(birthdateCheck(status));
+  // };
   toggleLoginForm = () => {
     const { dispatch } = this.context.store;
     this.setState({
@@ -416,12 +416,12 @@ export default class LoginFormContainer extends Component {
     dispatch(clearLoginState());
   };
   isValid = () => {
-    const { askContact, askName, askBirthDate } = this.props;
-    const { phone, name, dob } = this.state;
+    const { askContact, askName } = this.props;
+    const { phone, name } = this.state;
     const isInvalidPhone = askContact && !validateMobile(phone);
     const isInvalidName = askName && validateName(name).error;
-    const isInvalidDob = askBirthDate && validateDob(dob).error;
-    const disabled = isInvalidPhone || isInvalidName || isInvalidDob;
+    // const isInvalidDob = askBirthDate && validateDob(dob).error;
+    const disabled = isInvalidPhone || isInvalidName;
     return disabled;
   };
 
@@ -445,8 +445,8 @@ export default class LoginFormContainer extends Component {
       emailErrorMessage,
       resend,
       dob,
-      dobError,
-      dobErrorMessage,
+      // dobError,
+      // dobErrorMessage,
       password,
       passwordError,
       passwordErrorMessage
@@ -459,11 +459,11 @@ export default class LoginFormContainer extends Component {
       askName,
       loginType,
       askEmail,
-      askBirthDate,
-      skipBirthdateCheck,
+      // askBirthDate,
+      // skipBirthdateCheck,
       loginResponse
     } = this.props;
-    const open = (askContact || askName || askBirthDate) && loginType && loginType === 'hometown';
+    const open = (askContact || askName ) && loginType && loginType === 'hometown';
     const isValidField = this.isValid();
     return (
       <Row>
@@ -496,8 +496,8 @@ export default class LoginFormContainer extends Component {
                 <UpdateProfileModal
                   askName={askName}
                   askContact={askContact}
-                  askBirthDate={askBirthDate}
-                  skipBirthdateCheck={skipBirthdateCheck}
+                  // askBirthDate={askBirthDate}
+                  // skipBirthdateCheck={skipBirthdateCheck}
                   open={open}
                   name={name}
                   nameError={nameError}
@@ -506,8 +506,8 @@ export default class LoginFormContainer extends Component {
                   phoneError={phoneError}
                   phoneErrorMessage={phoneErrorMessage}
                   dob={dob}
-                  dobError={dobError}
-                  dobErrorMessage={dobErrorMessage}
+                  // dobError={dobError}
+                  // dobErrorMessage={dobErrorMessage}
                   isValidField={isValidField}
                   loggingIn={loggingIn}
                   LoaderIcon={LoaderIcon}
@@ -515,20 +515,20 @@ export default class LoginFormContainer extends Component {
                   onSubmitLogin={this.onSubmitLogin}
                   onChangeName={this.onChangeName}
                   onChangePhone={this.onChangePhone}
-                  onChangeDob={this.onChangeDob}
-                  birthdateCheck={this.birthdateChecker}
+                  // onChangeDob={this.onChangeDob}
+                  // birthdateCheck={this.birthdateChecker}
                 />
               </div>
             ) : (
               <LoginViaOtp
                 onChangeMobile={this.onChangeMobile}
                 onChangeOtp={this.onChangeOtp}
-                onChangeDob={this.onChangeDob}
-                onSubmitDob={this.onSubmitDob}
+                // onChangeDob={this.onChangeDob}
+                // onSubmitDob={this.onSubmitDob}
                 onSubmitMobileNumber={this.onSubmitMobileNumber}
                 onSubmitOtp={this.onSubmitOtp}
                 otp={otp}
-                onSkipDob={this.onSkipDob}
+                // onSkipDob={this.onSkipDob}
                 otpError={otpError}
                 otpErrorMessage={otpErrorMessage}
                 onChangeName={this.onChangeName}
@@ -547,8 +547,8 @@ export default class LoginFormContainer extends Component {
                 resend={resend}
                 askName={askName}
                 dob={dob}
-                dobError={dobError}
-                dobErrorMessage={dobErrorMessage}
+                // dobError={dobError}
+                // dobErrorMessage={dobErrorMessage}
                 onSubmitNameAndEmail={this.onSubmitNameAndEmail}
                 onSubmitEmail={this.onSubmitEmail}
                 email={email}
@@ -556,8 +556,8 @@ export default class LoginFormContainer extends Component {
                 emailErrorMessage={emailErrorMessage}
                 askEmail={askEmail}
                 onChangeEmail={this.onChangeEmail}
-                askBirthDate={askBirthDate}
-                skipBirthdateCheck={skipBirthdateCheck}
+                // askBirthDate={askBirthDate}
+                // skipBirthdateCheck={skipBirthdateCheck}
               />
             )}
           </Box>
@@ -596,7 +596,7 @@ export default class LoginFormContainer extends Component {
                 askName={askName}
                 loading={loading}
                 loggingIn={loggingIn}
-                askBirthDate={askBirthDate}
+                // askBirthDate={askBirthDate}
               />
             </Box>
           </Row>

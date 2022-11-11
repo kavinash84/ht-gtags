@@ -134,6 +134,9 @@ class Listing extends React.Component {
         window.renderListing(true, state);
       }
     }
+    if (window && window.Unbxd && window.Unbxd.experiences) {
+      window.Unbxd.experiences = [];
+    }
   }
   componentWillReceiveProps(nextProps) {
     if (nextProps.isLoggedIn) {
@@ -248,8 +251,7 @@ class Listing extends React.Component {
             window.unbxd.toggleWishList(sku, simpleSku);
           }
         })
-        .catch(() => {
-        });
+        .catch(() => {});
     } else {
       // if (window && !!window.unbxd && !!window.unbxd.toggleWishList) {
       //   window.unbxd.toggleWishList(sku, simpleSku);
@@ -319,10 +321,12 @@ class Listing extends React.Component {
             productCount={productCount}
             display={display}
           > */}
+
           <BreadCrumb
             categoryDetails={breadCrumbs}
             handleCategoryClick={this.handleCategoryClick}
           />
+          <div id="dummy_focusId" />
           {/* </TitleBar> */}
           <div class="unbxd-page-title">
             <div class="unbxd-page-name"></div>

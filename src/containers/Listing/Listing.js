@@ -20,6 +20,7 @@ import Container from "hometown-components-dev/lib/ContainerHtV1";
 import Row from "hometown-components-dev/lib/RowHtV1";
 import Col from "hometown-components-dev/lib/ColHtV1";
 import Heading from "hometown-components-dev/lib/HeadingHtV1";
+import NewUnboxBestSeller from "components/NewUnboxWidges/bestSeller";
 
 import {
   getProducts,
@@ -320,6 +321,17 @@ export default class Listing extends Component {
     // const showBestOffers = listingBestOffersPath.some(arr => arr === pathname);
     // let banners = [];
     // if (showBestOffers) banners = listingBestOffers[0][pathname].images;
+
+    const obj = {
+      pageType: "CATEGORY"
+      // catlevel1Name: "furniture",
+      // catlevel2Name: "living-room-furniture",
+      // catlevel3Name: "sofas"
+    };
+    if (breadCrumbs && Array.isArray(breadCrumbs))
+      breadCrumbs.map((item, i) => {
+        obj[`catlevel${i + 1}Name`] = `${item.url_key}`.split("/")[i];
+      });
     /* eslint-disable react/no-danger */
     return (
       <Wrapper>
@@ -423,7 +435,7 @@ export default class Listing extends Component {
             </div>
 
             <div>
-              <div id="unbxd_category_top_sellers"></div>
+              <NewUnboxBestSeller pageInfo={obj} />
             </div>
 
             {seoInfo && seoInfo.seo_text && (

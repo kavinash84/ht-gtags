@@ -490,10 +490,11 @@ export default class Html extends Component {
             type="text/css"
             href={unbxdScripts.searchCss}
           />
-          <script
-            type="text/javascript"
-            async=""
-            src="https://d21gpk1vhmjuf5.cloudfront.net/embed.js"
+          {/* <script type="text/javascript" async="" src="https://d21gpk1vhmjuf5.cloudfront.net/embed.js" /> */}
+          <link
+            rel="stylesheet"
+            type="text/css"
+            href={unbxdScripts.searchCss}
           />
           <script
             type="text/javascript"

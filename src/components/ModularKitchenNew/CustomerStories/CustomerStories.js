@@ -3,8 +3,6 @@ import Div from "hometown-components-dev/lib/BoxHtV1";
 import { connect } from "react-redux";
 import DBCarousel from "./DBCarousel";
 
-const styles = require("../ModularKitchen.scss");
-
 const adjustSlides = length => ({
   slidesToShow: 1,
   slidesToScroll: 1,
@@ -20,13 +18,15 @@ const adjustSlides = length => ({
   )
 });
 
-@connect(({ modularkitchen }) => ({
+@connect(({ modularkitchen, mattresses }) => ({
   modularkitchen,
-  customerStories: modularkitchen.data.items.text.customerStories
+  customerStories: modularkitchen.data.items
+    ? modularkitchen.data.items.text.customerStories
+    : mattresses.data.items.text.customerSpeak
 }))
 export default class CustomerStories extends Component {
   render() {
-    const { customerStories } = this.props;
+    const { customerStories, fromMattres } = this.props;
     return (
       <Div
         style={{
@@ -35,6 +35,18 @@ export default class CustomerStories extends Component {
           marginTop: "40px"
         }}
       >
+        {/* {fromMattres ? (
+          <div
+            style={{
+              textAlign: "center",
+              fontSize: "25px",
+              fontWeight: 600,
+              padding: "0px 0px 25px"
+            }}
+          >
+            {customerStories.title}
+          </div>
+        ) : ( */}
         <Div
           style={{
             fontSize: "40px",
@@ -54,6 +66,7 @@ export default class CustomerStories extends Component {
             }}
           />
         </Div>
+        {/* )} */}
         <Div style={{ paddingBottom: "", width: "86%", marginLeft: "6.5%" }}>
           <DBCarousel
             data={customerStories.values}
