@@ -7,6 +7,9 @@ import { getSKUList } from "selectors/wishlist";
 import { getCartListSKU } from "selectors/cart";
 import { storesList as getStaticData } from "selectors/homepage";
 import { setReloadListing } from "redux/modules/products";
+import LazyLoad from "react-lazyload";
+import { Shimmer, BackgroundMasker } from "hometown-components-dev/lib/Shimmer";
+import Div from "hometown-components-dev/lib/BoxHtV1";
 
 import Box from "hometown-components-dev/lib/BoxHtV1";
 import ListingContainer from "components/Listing";
@@ -43,6 +46,65 @@ const btnStyle = {
   outline: "none",
   border: "none"
 };
+
+const PlaceHolderShimmer = () => (
+  <Div mb="1rem">
+    <Shimmer height="168px">
+      <BackgroundMasker width="20%" height="25px" left="0" />
+      <BackgroundMasker width="20%" height="25px" right="0" />
+      <BackgroundMasker width="100%" height="10px" left="0" top="25px" />
+      <BackgroundMasker width="15px" height="153px" left="0" top="35px" />
+      <BackgroundMasker
+        width="15px"
+        height="153px"
+        left="calc(15px + 153px)"
+        top="35px"
+      />
+      <BackgroundMasker
+        width="15px"
+        height="153px"
+        left="calc(15px + 153px + 15px + 153px)"
+        top="35px"
+      />
+    </Shimmer>
+    <Shimmer height="168px">
+      <BackgroundMasker width="20%" height="25px" left="0" />
+      <BackgroundMasker width="20%" height="25px" right="0" />
+      <BackgroundMasker width="100%" height="10px" left="0" top="25px" />
+      <BackgroundMasker width="15px" height="153px" left="0" top="35px" />
+      <BackgroundMasker
+        width="15px"
+        height="153px"
+        left="calc(15px + 153px)"
+        top="35px"
+      />
+      <BackgroundMasker
+        width="15px"
+        height="153px"
+        left="calc(15px + 153px + 15px + 153px)"
+        top="35px"
+      />
+    </Shimmer>
+    <Shimmer height="168px">
+      <BackgroundMasker width="20%" height="25px" left="0" />
+      <BackgroundMasker width="20%" height="25px" right="0" />
+      <BackgroundMasker width="100%" height="10px" left="0" top="25px" />
+      <BackgroundMasker width="15px" height="153px" left="0" top="35px" />
+      <BackgroundMasker
+        width="15px"
+        height="153px"
+        left="calc(15px + 153px)"
+        top="35px"
+      />
+      <BackgroundMasker
+        width="15px"
+        height="153px"
+        left="calc(15px + 153px + 15px + 153px)"
+        top="35px"
+      />
+    </Shimmer>
+  </Div>
+);
 
 const getFaqs = faqs => {
   const seoFaq = JSON.parse(faqs).map(faq => {
@@ -156,6 +218,10 @@ export default class Listing extends Component {
     reloadListing: false,
     offer: {},
     bannerData: {}
+  };
+
+  state = {
+    pageLoading: true
   };
 
   constructor(props) {
@@ -276,6 +342,12 @@ export default class Listing extends Component {
     </div>
     // )
   );
+
+  componentDidMount() {
+    setTimeout(() => {
+      this.setState({ pageLoading: false });
+    }, 2000);
+  }
 
   render() {
     const {
@@ -398,14 +470,15 @@ export default class Listing extends Component {
           )}
 
           {/* Listing page best offer banners */}
-          <Box sx={btnStyle}>
+          {/* <Box sx={btnStyle}>
             <BestOfferBanners
               bannerData={bannerData}
               history={history}
               onImageClick={this.scrollDown}
             />
-          </Box>
+          </Box> */}
           <Box>
+            {this.state.pageLoading ? <PlaceHolderShimmer /> : <div></div>}
             <div ref={this.listingRef}>
               <ListingContainer
                 wishList={wishListedSKUs}
