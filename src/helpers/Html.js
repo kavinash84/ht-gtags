@@ -71,41 +71,7 @@ export default class Html extends Component {
           "https://praxisretail--produat.my.salesforce.com/embeddedservice/5.0/esw.min.js"
       };
     }
-    let unbxdScripts = {};
-    if (process.env.UNBXD && process.env.UNBXD === "production") {
-      unbxdScripts = {
-        autosuggestJs:
-          "https://libraries.unbxdapi.com/prod-hometown808961566375586_autosuggest.js",
-        autosuggestCss:
-          "https://libraries.unbxdapi.com/prod-hometown808961566375586_autosuggest.css",
-        searchJs:
-          "https://libraries.unbxdapi.com/prod-hometown808961566375586_search.js",
-        searchCss:
-          "https://libraries.unbxdapi.com/prod-hometown808961566375586_search.css"
-      };
-    } else if (process.env.UNBXD && process.env.UNBXD === "beta") {
-      unbxdScripts = {
-        autosuggestJs:
-          "https://sandbox.unbxd.io/dev-hometown808961566375617_autosuggest.js",
-        autosuggestCss:
-          "https://sandbox.unbxd.io/dev-hometown808961566375617_autosuggest.css",
-        searchJs:
-          "https://sandbox.unbxd.io/dev-hometown808961566375617_search.js",
-        searchCss:
-          "https://sandbox.unbxd.io/dev-hometown808961566375617_search.css"
-      };
-    } else {
-      unbxdScripts = {
-        autosuggestJs:
-          "https://sandbox.unbxd.io/stage-hometown808961566375562_autosuggest.js",
-        autosuggestCss:
-          "https://sandbox.unbxd.io/stage-hometown808961566375562_autosuggest.css",
-        searchJs:
-          "https://sandbox.unbxd.io/stage-hometown808961566375562_search.js",
-        searchCss:
-          "https://sandbox.unbxd.io/stage-hometown808961566375562_search.css"
-      };
-    }
+
     const head = Helmet.renderStatic();
     /* eslint-disable */
     return (
@@ -427,80 +393,10 @@ export default class Html extends Component {
             }}
           />
           <script src={admitad.src} async onError={admitad.onerror}></script>
-          {/* <script type="text/javascript">
-            {`	// name of the cookie that stores the source
-	// change if you have another name
-	var cookie_name = 'deduplication_cookie';
-	// cookie lifetime
-	var days_to_store = 90;
-	// expected deduplication_cookie value for Admitad
-	var deduplication_cookie_value = 'admitad';
-	// name of GET parameter for deduplication
-	// change if you have another name
-	var channel_name = 'utm_source';
-	// a function to get the source from the GET parameter
-	getSourceParamFromUri = function () {
-		var pattern = channel_name + '=([^&]+)';
-		var re = new RegExp(pattern);
-		return (re.exec(document.location.search) || [])[1] || '';
-	};
-	// a function to get the source from the cookie named cookie_name
-	getSourceCookie = function () {
-		var matches = document.cookie.match(new RegExp(
-			'(?:^|; )' + cookie_name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + '=([^;]*)'
-		));
-		return matches ? decodeURIComponent(matches[1]) : undefined;
-	};
-	// a function to set the source in the cookie named cookie_name
-	setSourceCookie = function () {
-		var param = getSourceParamFromUri();
-		if (!param) { return; }
-		var period = days_to_store * 60 * 60 * 24 * 1000;	// in seconds
-		var expiresDate = new Date((period) + +new Date);
-		var cookieString = cookie_name + '=' + param + '; path=/; expires=' + expiresDate.toGMTString();
-		document.cookie = cookieString;
-		document.cookie = cookieString + '; domain=.' + location.host;
-	};
-	// set cookie
-	setSourceCookie();`}
-          </script> */}
         </head>
         <body>
-          {/* {process.env.NODE_ENV !== 'development' && (
-            <noscript>
-              <iframe
-                src="https://www.googletagmanager.com/ns.html?id=GTM-T5VV7MZ"
-                height="0"
-                width="0"
-                style={{ display: 'none', visibility: 'hidden' }}
-                title="gaTag"
-              />
-            </noscript>
-          )} */}
           <div id="content" dangerouslySetInnerHTML={{ __html: content }} />
-          <script src={unbxdScripts.autosuggestJs} async="" />
-          <link
-            rel="stylesheet"
-            type="text/css"
-            href={unbxdScripts.autosuggestCss}
-          />
-          <script src={unbxdScripts.searchJs} />
-          <link
-            rel="stylesheet"
-            type="text/css"
-            href={unbxdScripts.searchCss}
-          />
-          {/* <script type="text/javascript" async="" src="https://d21gpk1vhmjuf5.cloudfront.net/embed.js" /> */}
-          <link
-            rel="stylesheet"
-            type="text/css"
-            href={unbxdScripts.searchCss}
-          />
-          <script
-            type="text/javascript"
-            async=""
-            src="https://d21gpk1vhmjuf5.cloudfront.net/unbxdAnalytics.js"
-          ></script>
+
           {store && (
             <script
               dangerouslySetInnerHTML={{

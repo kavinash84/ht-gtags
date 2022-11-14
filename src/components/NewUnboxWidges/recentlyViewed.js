@@ -74,22 +74,24 @@ export default class NewUnboxRecentlyViewed extends Component {
         beforeTemplateRenderer
       );
 
-      window._unbxd_getRecommendations({
-        widgets: {
-          widget1: {
-            name: "unbxd_recently_viewed"
+      if (window.UnbxdSiteName) {
+        window._unbxd_getRecommendations({
+          widgets: {
+            widget1: {
+              name: "unbxd_recently_viewed"
+            }
+          },
+          userInfo: {
+            userId: Cookies.get("unbxd.userId"),
+            siteKey: window.UnbxdSiteName,
+            apiKey: window.UnbxdApiKey
+          },
+          pageInfo: pageInfo,
+          dataParser: function(templateData) {
+            return templateData;
           }
-        },
-        userInfo: {
-          userId: Cookies.get("unbxd.userId"),
-          siteKey: window.UnbxdSiteName,
-          apiKey: window.UnbxdApiKey
-        },
-        pageInfo: pageInfo,
-        dataParser: function(templateData) {
-          return templateData;
-        }
-      });
+        });
+      }
     }
   }
   render() {

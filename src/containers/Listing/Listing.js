@@ -479,42 +479,50 @@ export default class Listing extends Component {
           </Box> */}
           <Box>
             {this.state.pageLoading ? <PlaceHolderShimmer /> : <div></div>}
-            <div ref={this.listingRef}>
-              <ListingContainer
-                wishList={wishListedSKUs}
-                wishListData={wishListData}
-                products={products}
-                categoryName={categoryName}
-                productCount={productCount}
-                category={category}
-                filters={filters}
-                sortBy={sortBy}
-                appliedFilters={appliedFilters}
-                history={history}
-                pincode={pincode}
-                isLoggedIn={isLoggedIn}
-                loadingList={loadingList}
-                metaResults={metadata}
-                categoryquery={categoryquery}
-                breadCrumbs={breadCrumbs}
-                categoryBar={categoryBar}
-                selectedPincode={selectedPincode}
-                sessionId={sessionId}
-                cartSKUs={cartSKUs}
-                reloadListing={reloadListing}
-                setReloadListing={setReloadListing}
-                bannerData={bannerData}
-              />
-            </div>
+            {this.state.pageLoading ? null : (
+              <div ref={this.listingRef}>
+                <ListingContainer
+                  wishList={wishListedSKUs}
+                  wishListData={wishListData}
+                  products={products}
+                  categoryName={categoryName}
+                  productCount={productCount}
+                  category={category}
+                  filters={filters}
+                  sortBy={sortBy}
+                  appliedFilters={appliedFilters}
+                  history={history}
+                  pincode={pincode}
+                  isLoggedIn={isLoggedIn}
+                  loadingList={loadingList}
+                  metaResults={metadata}
+                  categoryquery={categoryquery}
+                  breadCrumbs={breadCrumbs}
+                  categoryBar={categoryBar}
+                  selectedPincode={selectedPincode}
+                  sessionId={sessionId}
+                  cartSKUs={cartSKUs}
+                  reloadListing={reloadListing}
+                  setReloadListing={setReloadListing}
+                  bannerData={bannerData}
+                />
+              </div>
+            )}
 
-            <div>
-              <NewUnboxBestSeller pageInfo={obj} />
-            </div>
+            {this.state.pageLoading ? null : (
+              <div>
+                <div>
+                  <NewUnboxBestSeller pageInfo={obj} />
+                </div>
 
-            {seoInfo && seoInfo.seo_text && (
-              <SeoContent>
-                <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
-              </SeoContent>
+                {seoInfo && seoInfo.seo_text && (
+                  <SeoContent>
+                    <div
+                      dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }}
+                    />
+                  </SeoContent>
+                )}
+              </div>
             )}
           </Box>
           <Footer />
