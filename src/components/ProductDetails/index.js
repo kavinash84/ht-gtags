@@ -1518,12 +1518,14 @@ class ProductDetails extends React.PureComponent {
             ) : null}
 
             {/* Recommend for you */}
-            <NewUnboxRecomondRecentlyViewed
-              pageInfo={{
-                pageType: "PRODUCT",
-                productIds: [configId || ""]
-              }}
-            />
+            {window && window.UnbxdSiteName && (
+              <NewUnboxRecomondRecentlyViewed
+                pageInfo={{
+                  pageType: "PRODUCT",
+                  productIds: [configId || ""]
+                }}
+              />
+            )}
 
             {/* Related Products List */}
             {/* {relatedproductsList.length > 0 && (

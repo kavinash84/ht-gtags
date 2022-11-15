@@ -91,14 +91,16 @@ class HomeFurnishingContainer extends React.Component {
               </div>
             ))}
         </div>
-        <NewUnboxBestSeller
-          pageInfo={{
-            pageType: "CATEGORY",
-            catlevel1Name: "home-furnishings",
-            catlevel2Name: "bedding",
-            catlevel3Name: "bed-sheets"
-          }}
-        />
+        {window && window.UnbxdSiteName && (
+          <NewUnboxBestSeller
+            pageInfo={{
+              pageType: "CATEGORY",
+              catlevel1Name: "home-furnishings",
+              catlevel2Name: "bedding",
+              catlevel3Name: "bed-sheets"
+            }}
+          />
+        )}
       </Section>
     );
   }

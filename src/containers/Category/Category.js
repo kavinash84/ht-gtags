@@ -255,14 +255,16 @@ export default class Category extends Component {
                     {category && (
                       <Box display="inline-block" width="100%">
                         <Container>
-                          <NewUnboxBestSeller
-                            pageInfo={{
-                              pageType: "CATEGORY",
-                              catlevel1Name: "furniture",
-                              catlevel2Name: "living-room-furniture",
-                              catlevel3Name: "sofas"
-                            }}
-                          />
+                          {window && window.UnbxdSiteName && (
+                            <NewUnboxBestSeller
+                              pageInfo={{
+                                pageType: "CATEGORY",
+                                catlevel1Name: "furniture",
+                                catlevel2Name: "living-room-furniture",
+                                catlevel3Name: "sofas"
+                              }}
+                            />
+                          )}
                         </Container>
                       </Box>
                     )}

@@ -83,14 +83,16 @@ class HomewareContainer extends React.Component {
               </div>
             ))}
         </div>
-        <NewUnboxBestSeller
-          pageInfo={{
-            pageType: "CATEGORY",
-            catlevel1Name: "home-decor",
-            catlevel2Name: "idols-figurines",
-            catlevel3Name: "figurines"
-          }}
-        />
+        {window && window.UnbxdSiteName && (
+          <NewUnboxBestSeller
+            pageInfo={{
+              pageType: "CATEGORY",
+              catlevel1Name: "home-decor",
+              catlevel2Name: "idols-figurines",
+              catlevel3Name: "figurines"
+            }}
+          />
+        )}
       </Section>
     );
   }

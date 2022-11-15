@@ -385,12 +385,14 @@ export default class CartContainer extends Component {
                 outOfStockList={outOfStockList}
                 handlePincodeModal={this.handlePincodeModal}
               />
-              <NewUnboxRecentlyViewed
-                pageInfo={{
-                  pageType: "PRODUCT",
-                  productIds: [""]
-                }}
-              />
+              {window && window.UnbxdSiteName && (
+                <NewUnboxRecentlyViewed
+                  pageInfo={{
+                    pageType: "PRODUCT",
+                    productIds: [""]
+                  }}
+                />
+              )}
             </Box>
           ) : (
             loading && <CartShimmer />

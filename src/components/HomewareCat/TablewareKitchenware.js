@@ -83,14 +83,16 @@ class TablewareKitchenware extends React.Component {
               </div>
             ))}
         </div>
-        <NewUnboxBestSeller
-          pageInfo={{
-            pageType: "CATEGORY",
-            catlevel1Name: "tableware",
-            catlevel2Name: "crockery",
-            catlevel3Name: "dinner-sets"
-          }}
-        />
+        {window && window.UnbxdSiteName && (
+          <NewUnboxBestSeller
+            pageInfo={{
+              pageType: "CATEGORY",
+              catlevel1Name: "tableware",
+              catlevel2Name: "crockery",
+              catlevel3Name: "dinner-sets"
+            }}
+          />
+        )}
       </Section>
     );
   }

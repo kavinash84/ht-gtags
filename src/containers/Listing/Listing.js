@@ -511,9 +511,13 @@ export default class Listing extends Component {
 
             {this.state.pageLoading ? null : (
               <div>
-                <div>
-                  <NewUnboxBestSeller pageInfo={obj} />
-                </div>
+                {window && window.UnbxdSiteName && (
+                  <div>
+                    {window && window.UnbxdSiteName && (
+                      <NewUnboxBestSeller pageInfo={obj} />
+                    )}
+                  </div>
+                )}
 
                 {seoInfo && seoInfo.seo_text && (
                   <SeoContent>

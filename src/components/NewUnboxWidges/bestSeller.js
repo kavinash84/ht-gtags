@@ -73,31 +73,31 @@ export default class NewUnboxBestSeller extends Component {
         "beforeTemplateRender",
         beforeTemplateRenderer
       );
-      if (window.UnbxdSiteName) {
-        window._unbxd_getRecommendations({
-          widgets: {
-            widget1: {
-              name: "unbxd_best_sellers"
-            }
-          },
-          userInfo: {
-            userId: Cookies.get("unbxd.userId"),
-            siteKey: window.UnbxdSiteName,
-            apiKey: window.UnbxdApiKey
-          },
-          pageInfo: pageInfo,
-          // pageInfo: {
-          //   pageType: "CATEGORY",
-          //   catlevel1Name: "furniture",
-          //   catlevel2Name: "living-room-furniture",
-          //   catlevel3Name: "sofas",
-          //   catlevel4Name: "new sofas"
-          // },
-          dataParser: function(templateData) {
-            return templateData;
+      // if (window.UnbxdSiteName) {
+      window._unbxd_getRecommendations({
+        widgets: {
+          widget1: {
+            name: "unbxd_best_sellers"
           }
-        });
-      }
+        },
+        userInfo: {
+          userId: Cookies.get("unbxd.userId"),
+          siteKey: window.UnbxdSiteName,
+          apiKey: window.UnbxdApiKey
+        },
+        pageInfo: pageInfo,
+        // pageInfo: {
+        //   pageType: "CATEGORY",
+        //   catlevel1Name: "furniture",
+        //   catlevel2Name: "living-room-furniture",
+        //   catlevel3Name: "sofas",
+        //   catlevel4Name: "new sofas"
+        // },
+        dataParser: function(templateData) {
+          return templateData;
+        }
+      });
+      // }
     }
   }
   render() {

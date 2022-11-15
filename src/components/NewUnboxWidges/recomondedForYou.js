@@ -75,28 +75,28 @@ export default class NewUnboxRecomondedForYou extends Component {
         beforeTemplateRenderer
       );
 
-      if (window.UnbxdSiteName) {
-        window._unbxd_getRecommendations({
-          widgets: {
-            widget1: {
-              name: "unbxd_recommended_for_you"
-            }
-          },
-          userInfo: {
-            userId: Cookies.get("unbxd.userId"),
-            siteKey: window.UnbxdSiteName,
-            apiKey: window.UnbxdApiKey
-          },
-          pageInfo: pageInfo,
-          // {
-          //     pageType: 'PRODUCT',
-          //     productIds: ['uniqueId1', 'uniqueId2']
-          // },
-          dataParser: function(templateData) {
-            return templateData;
+      // if (window.UnbxdSiteName) {
+      window._unbxd_getRecommendations({
+        widgets: {
+          widget1: {
+            name: "unbxd_recommended_for_you"
           }
-        });
-      }
+        },
+        userInfo: {
+          userId: Cookies.get("unbxd.userId"),
+          siteKey: window.UnbxdSiteName,
+          apiKey: window.UnbxdApiKey
+        },
+        pageInfo: pageInfo,
+        // {
+        //     pageType: 'PRODUCT',
+        //     productIds: ['uniqueId1', 'uniqueId2']
+        // },
+        dataParser: function(templateData) {
+          return templateData;
+        }
+      });
+      // }
     }
   }
   render() {

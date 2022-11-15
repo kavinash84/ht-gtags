@@ -344,12 +344,14 @@ export default class Home extends Component {
           />
 
           <Section>
-            <NewUnboxRecentlyViewed
-              pageInfo={{
-                pageType: "PRODUCT",
-                productIds: [""]
-              }}
-            />
+            {window && window.UnbxdSiteName && (
+              <NewUnboxRecentlyViewed
+                pageInfo={{
+                  pageType: "PRODUCT",
+                  productIds: [""]
+                }}
+              />
+            )}
           </Section>
           {/* stores */}
           <StoresCarousel cities={cities} />

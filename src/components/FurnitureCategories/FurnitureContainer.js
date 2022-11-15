@@ -156,14 +156,16 @@ class FurnitureContainer extends React.Component {
               </div>
             ))}
         </div>
-        <NewUnboxBestSeller
-          pageInfo={{
-            pageType: "CATEGORY",
-            catlevel1Name: "furniture",
-            catlevel2Name: "living-room-furniture",
-            catlevel3Name: "sofas"
-          }}
-        />
+        {window && window.UnbxdSiteName && (
+          <NewUnboxBestSeller
+            pageInfo={{
+              pageType: "CATEGORY",
+              catlevel1Name: "furniture",
+              catlevel2Name: "living-room-furniture",
+              catlevel3Name: "sofas"
+            }}
+          />
+        )}
         {category && category.popUp && category.popUp.display ? (
           <ResponsiveModal
             classNames={{ modal: "furntitureModal" }}

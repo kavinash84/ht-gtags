@@ -74,23 +74,23 @@ export default class NewUnboxRecomondRecentlyViewed extends Component {
         beforeTemplateRenderer
       );
 
-      if (window.UnbxdSiteName) {
-        window._unbxd_getRecommendations({
-          widgets: {
-            widget1: { name: "unbxd_recommended_for_you" },
-            widget2: { name: "unbxd_recently_viewed" }
-          },
-          userInfo: {
-            userId: Cookies.get("unbxd.userId"),
-            siteKey: window.UnbxdSiteName,
-            apiKey: window.UnbxdApiKey
-          },
-          pageInfo: pageInfo,
-          dataParser: function(templateData) {
-            return templateData;
-          }
-        });
-      }
+      // if (window.UnbxdSiteName) {
+      window._unbxd_getRecommendations({
+        widgets: {
+          widget1: { name: "unbxd_recommended_for_you" },
+          widget2: { name: "unbxd_recently_viewed" }
+        },
+        userInfo: {
+          userId: Cookies.get("unbxd.userId"),
+          siteKey: window.UnbxdSiteName,
+          apiKey: window.UnbxdApiKey
+        },
+        pageInfo: pageInfo,
+        dataParser: function(templateData) {
+          return templateData;
+        }
+      });
+      // }
     }
   }
   render() {
