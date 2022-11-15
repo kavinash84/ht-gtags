@@ -719,7 +719,11 @@ class ProductDetails extends React.PureComponent {
               name="keywords"
               content={productMetaKeywords(productType, material)}
             />
+
             <meta name="description" content={productDescription} />
+
+            {/* facebook og start */}
+            <meta property="og:site_name" content="Hometown" />
             <meta property="og:url" content={productURL} />
             <meta property="og:type" content="website" />
             <meta property="og:title" content={name} />
@@ -728,6 +732,19 @@ class ProductDetails extends React.PureComponent {
               property="og:image"
               content={images && images.length > 0 && `${images[0].url}.jpg`}
             />
+            {/* facebook og end */}
+
+            {/* twitter card start */}
+            <meta name="twitter:card" content="summary" />
+            <meta name="twitter:site" content="Hometown" />
+            <meta name="twitter:title" content={name} />
+            <meta name="twitter:description" content={productDescription} />
+            <meta
+              name="twitter:image"
+              content={images && images.length > 0 && `${images[0].url}.jpg`}
+            />
+            {/* twitter card end */}
+
             <script type="application/ld+json">
               {`
                 {
