@@ -164,8 +164,11 @@ export default function gaMiddleware() {
             }
           } = action;
           if (window && window.Unbxd && window.Unbxd.track && pid) {
-            window.Unbxd.track("product_view", { pid });
+            window.Unbxd.track("click", { pid: pid });
           }
+          // if (window && window.Unbxd && window.Unbxd.track && pid) {
+          //   window.Unbxd.track("product_view", { pid });
+          // }
         }
         if (type === "productdetails/PRODUCT_DETAILS_TRACK") {
           const { position, productDescription } = getState().productdetails;
