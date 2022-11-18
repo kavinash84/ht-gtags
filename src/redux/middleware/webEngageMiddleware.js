@@ -35,7 +35,7 @@ export default function webEngageMiddleware() {
             "we_birth_date",
             moment(dob).format("YYYY-MM-DD")
           );
-          window.webengage.user.setAttribute("we_phone", mobile);
+          window.webengage.user.setAttribute("we_phone", `91${mobile}`);
           window.webengage.user.setAttribute("we_first_name", full_name);
         }
 
@@ -757,7 +757,7 @@ export default function webEngageMiddleware() {
             "we_birth_date",
             moment(dob, "DD-MM-YYYY").format("YYYY-MM-DD")
           );
-          window.webengage.user.setAttribute("we_phone", contact_number);
+          window.webengage.user.setAttribute("we_phone", `91${contact_number}`);
           window.webengage.user.setAttribute("we_first_name", full_name);
         }
 
