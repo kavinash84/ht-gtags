@@ -24,7 +24,7 @@ export const PAYMENT_PENDING = '/payment-pending';
 export const MK_URL = '/modular-kitchens';
 export const PYK_URL = '/plan-your-kitchen';
 
-export const PINCODE = '110001';
+export const PINCODE = '110005';
 export const EMI_THRESHOLD = 3000;
 /* Configs */
 export const clientId = 'rama';
