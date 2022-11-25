@@ -1,41 +1,41 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from "react";
+import { connect } from "react-redux";
 // import { withRouter } from 'react-router';
-import Helmet from 'react-helmet';
-import PropTypes from 'prop-types';
-import { NotFound } from 'containers';
-import Img from 'hometown-components-dev/lib/ImageHtV1';
-import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Flex from 'hometown-components-dev/lib/FlexHtV1';
-import Row from 'hometown-components-dev/lib/RowHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
-import Container from 'hometown-components-dev/lib/ContainerHtV1';
-import FormInput from 'hometown-components-dev/lib/FormsHtV1/FormInputHtV1';
-import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Helmet from "react-helmet";
+import PropTypes from "prop-types";
+import { NotFound } from "containers";
+import Img from "hometown-components-dev/lib/ImageHtV1";
+import Box from "hometown-components-dev/lib/BoxHtV1";
+import Flex from "hometown-components-dev/lib/FlexHtV1";
+import Row from "hometown-components-dev/lib/RowHtV1";
+import Text from "hometown-components-dev/lib/TextHtV1";
+import Container from "hometown-components-dev/lib/ContainerHtV1";
+import FormInput from "hometown-components-dev/lib/FormsHtV1/FormInputHtV1";
+import Button from "hometown-components-dev/lib/ButtonHtV1";
 
-import ReactStars from 'react-stars';
-import * as actionCreators from 'redux/modules/feedback';
-import { bindActionCreators } from 'redux';
+import ReactStars from "react-stars";
+import * as actionCreators from "redux/modules/feedback";
+import { bindActionCreators } from "redux";
 
-const LogoIcon = require('../../../static/logo.png');
-const fbIcon = require('../../../static/facebook.png');
-const twIcon = require('../../../static/twitter.png');
-const ytIcon = require('../../../static/youtube.png');
-const instaIcon = require('../../../static/instagram.png');
+const LogoIcon = require("../../../static/logo.png");
+const fbIcon = require("../../../static/facebook.png");
+const twIcon = require("../../../static/twitter.png");
+const ytIcon = require("../../../static/youtube.png");
+const instaIcon = require("../../../static/instagram.png");
 
 const xBtn = {
-  position: 'absolute',
-  right: '-9px',
-  top: '-9px',
-  border: '1px solid grey',
-  width: '19px',
-  fontSize: '10px',
-  fontWeight: 'bold',
-  borderRadius: '50%',
-  backgroundColor: 'rgba(182, 11, 11, 1)',
-  height: '19px',
-  margin: 'auto',
-  color: 'white'
+  position: "absolute",
+  right: "-9px",
+  top: "-9px",
+  border: "1px solid grey",
+  width: "19px",
+  fontSize: "10px",
+  fontWeight: "bold",
+  borderRadius: "50%",
+  backgroundColor: "rgba(182, 11, 11, 1)",
+  height: "19px",
+  margin: "auto",
+  color: "white"
 };
 
 const mapStateToProps = ({ feedback }) => ({
@@ -44,9 +44,12 @@ const mapStateToProps = ({ feedback }) => ({
   prodArr: feedback.data.orderItems,
   orderDate: feedback.data.orderDate,
   mobile: feedback.data.mobile,
-  sapOrderNumber: feedback.data.hasOwnProperty("sapOrderNumber") ? feedback.data.sapOrderNumber : ""
+  sapOrderNumber: feedback.data.hasOwnProperty("sapOrderNumber")
+    ? feedback.data.sapOrderNumber
+    : ""
 });
-const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators }, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ ...actionCreators }, dispatch);
 
 class FeedbackMailer extends React.Component {
   static contextTypes = {
@@ -83,23 +86,23 @@ class FeedbackMailer extends React.Component {
       val = {
         ...val,
         ratingError: true,
-        ratingErrorMessage: 'Rating is required'
+        ratingErrorMessage: "Rating is required"
       };
     } else {
-      val = { ...val, ratingError: false, ratingErrorMessage: '' };
+      val = { ...val, ratingError: false, ratingErrorMessage: "" };
     }
     if (val.rating <= 3) {
       if (!val.review) {
         val = {
           ...val,
           reviewError: true,
-          reviewErrorMessage: 'Review is required'
+          reviewErrorMessage: "Review is required"
         };
       } else {
-        val = { ...val, reviewError: false, reviewErrorMessage: '' };
+        val = { ...val, reviewError: false, reviewErrorMessage: "" };
       }
     } else {
-      val = { ...val, reviewError: false, reviewErrorMessage: '' };
+      val = { ...val, reviewError: false, reviewErrorMessage: "" };
     }
     return val;
   };
@@ -160,28 +163,44 @@ class FeedbackMailer extends React.Component {
     });
     if (valid) {
       const prodIds = Object.keys(formData).join();
+      const deliveryRating = parseInt(data.deliveryRating);
+      const installationRating = parseInt(data.installationRating);
+      const overallRating = parseInt(data.overallRating);
       const formdata = new FormData();
       Object.values(formData).forEach(data => {
         const rating = parseInt(data.rating, 10);
-        if (data.rating) formdata.append(`productRating[${data.id}]`, `${rating}`);
+        if (data.rating)
+          formdata.append(`productRating[${data.id}]`, `${rating}`);
+        if (data.deliveryRating) {
+          formdata.append(`deliveryRating[${data.id}]`, `${deliveryRating}`);
+        }
+        if (data.installationRating) {
+          formdata.append(
+            `installationRating[${data.id}]`,
+            `${installationRating}`
+          );
+        }
+        if (data.overallRating) {
+          formdata.append(`overallRating[${data.id}]`, `${overallRating}`);
+        }
         if (data.review) {
           formdata.append(`productReview[${data.id}]`, data.review);
         } else {
-          formdata.append(`productReview[${data.id}]`, '');
+          formdata.append(`productReview[${data.id}]`, "");
         }
-        if (data.image) formdata.append('uploadImage', data.image);
+        if (data.image) formdata.append("uploadImage", data.image);
       });
-      formdata.append('customerMobile', mobile);
-      formdata.append('products', `${prodIds}`);
-      formdata.append('customerName', customer);
+      formdata.append("customerMobile", mobile);
+      formdata.append("products", `${prodIds}`);
+      formdata.append("customerName", customer);
       if (sapOrderNumber) {
-        formdata.append('order', sapOrderNumber)
+        formdata.append("order", sapOrderNumber);
       }
       setFeedbackForm(formdata);
     }
   };
 
-  ratingChanged = (newRating, id, name) => {
+  ratingChanged = (newRating, id, name, ratingType) => {
     const { formData } = this.state;
     this.setState(
       {
@@ -190,7 +209,7 @@ class FeedbackMailer extends React.Component {
           [`${id}`]: {
             ...formData[`${name.id}`],
             id: name.id,
-            rating: newRating
+            [ratingType]: newRating
           }
         }
       },
@@ -260,7 +279,7 @@ class FeedbackMailer extends React.Component {
                 imagePreviewUrl: reader.result,
                 imgSizeError: false,
                 imgTypeError: false,
-                imgSizeErrorMessage: ''
+                imgSizeErrorMessage: ""
               }
             }
           },
@@ -298,7 +317,7 @@ class FeedbackMailer extends React.Component {
             imagePreviewUrl: reader.result,
             imgSizeError: false,
             imgTypeError: true,
-            imgSizeErrorMessage: 'Image type is invalid'
+            imgSizeErrorMessage: "Image type is invalid"
           }
         }
       });
@@ -311,7 +330,7 @@ class FeedbackMailer extends React.Component {
             imagePreviewUrl: reader.result,
             imgSizeError: true,
             imgTypeError: false,
-            imgSizeErrorMessage: 'Image size not within limits'
+            imgSizeErrorMessage: "Image size not within limits"
           }
         }
       });
@@ -336,7 +355,7 @@ class FeedbackMailer extends React.Component {
     //   products = prodArr;
     // }
     const renderProds = products.map(prod => (
-      <Box style={{ background: '#f0f0f0' }} p="20px" mb="10px">
+      <Box style={{ background: "#f0f0f0" }} p="20px" mb="10px">
         <Row alignItems="center" mb="20px">
           <Box variant="col-3" pl="15px" pr="15px">
             <Text fontSize="0.875rem" fontFamily="regular">
@@ -357,17 +376,33 @@ class FeedbackMailer extends React.Component {
             </Text>
           </Box>
           <Box variant="col-3" pl="0" pr="15px">
-            <FormInput bg="white" fontSize="0.875rem" fontFamily="regular" type="date" value={orderDate} disabled />
+            <FormInput
+              bg="white"
+              fontSize="0.875rem"
+              fontFamily="regular"
+              type="date"
+              value={orderDate}
+              disabled
+            />
           </Box>
-          <Flex variant="col-4" pl="15px" pr="15px" justifyContent="space-between">
+          <Flex
+            variant="col-4"
+            pl="15px"
+            pr="15px"
+            justifyContent="space-between"
+          >
             <Text fontSize="0.875rem" fontFamily="regular">
               Product Rating*
             </Text>
             <ReactStars
               count={5}
-              onChange={val => this.ratingChanged(val, prod.id, prod)}
+              onChange={val => this.ratingChanged(val, prod.id, prod, "rating")}
               size={20}
-              value={formData[`${prod.id}`] && formData[`${prod.id}`].rating ? formData[`${prod.id}`].rating : 0}
+              value={
+                formData[`${prod.id}`] && formData[`${prod.id}`].rating
+                  ? formData[`${prod.id}`].rating
+                  : 0
+              }
               half={false}
               color2="#ffd700"
             />
@@ -377,19 +412,113 @@ class FeedbackMailer extends React.Component {
               </Text>
             ) : null}
           </Flex>
+          <Flex
+            variant="col-4"
+            pl="15px"
+            pr="15px"
+            justifyContent="space-between"
+          >
+            <Text fontSize="0.875rem" fontFamily="regular">
+              Delivery Rating*
+            </Text>
+            <ReactStars
+              count={5}
+              onChange={val =>
+                this.ratingChanged(val, prod.id, prod, "deliveryRating")
+              }
+              size={20}
+              value={
+                formData[`${prod.id}`] && formData[`${prod.id}`].deliveryRating
+                  ? formData[`${prod.id}`].deliveryRating
+                  : 0
+              }
+              half={false}
+              color2="#ffd700"
+            />
+            {formData[`${prod.id}`] &&
+            formData[`${prod.id}`].deliveryRatingError ? (
+              <Text color="red" fontSize="12px">
+                {formData[`${prod.id}`].deliveryRatingErrorMessage}
+              </Text>
+            ) : null}
+          </Flex>
+          <Flex
+            variant="col-4"
+            pl="15px"
+            pr="15px"
+            justifyContent="space-between"
+          >
+            <Text fontSize="0.875rem" fontFamily="regular">
+              Installation Rating*
+            </Text>
+            <ReactStars
+              count={5}
+              onChange={val =>
+                this.ratingChanged(val, prod.id, prod, "installationRating")
+              }
+              size={20}
+              value={
+                formData[`${prod.id}`] &&
+                formData[`${prod.id}`].installationRating
+                  ? formData[`${prod.id}`].installationRating
+                  : 0
+              }
+              half={false}
+              color2="#ffd700"
+            />
+            {formData[`${prod.id}`] &&
+            formData[`${prod.id}`].installationRatingError ? (
+              <Text color="red" fontSize="12px">
+                {formData[`${prod.id}`].installationRatingErrorMessage}
+              </Text>
+            ) : null}
+          </Flex>
+          <Flex
+            variant="col-4"
+            pl="15px"
+            pr="15px"
+            justifyContent="space-between"
+          >
+            <Text fontSize="0.875rem" fontFamily="regular">
+              Overall Rating*
+            </Text>
+            <ReactStars
+              count={5}
+              onChange={val =>
+                this.ratingChanged(val, prod.id, prod, "overallRating")
+              }
+              size={20}
+              value={
+                formData[`${prod.id}`] && formData[`${prod.id}`].overallRating
+                  ? formData[`${prod.id}`].overallRating
+                  : 0
+              }
+              half={false}
+              color2="#ffd700"
+            />
+            {formData[`${prod.id}`] &&
+            formData[`${prod.id}`].overallRatingError ? (
+              <Text color="red" fontSize="12px">
+                {formData[`${prod.id}`].overallRatingErrorMessage}
+              </Text>
+            ) : null}
+          </Flex>
 
           <Box variant="col-2" pl="0" pr="15px" justifyContent="flex-start">
             <span
               style={{
-                display: 'inline-block',
+                display: "inline-block",
                 // width: '60px',
-                marginLeft: '10px',
-                position: 'relative'
+                marginLeft: "10px",
+                position: "relative"
               }}
             >
               {formData[`${prod.id}`] && formData[`${prod.id}`].image ? (
                 <div>
-                  <button style={xBtn} onClick={() => this.removeImage(prod.id, prod)}>
+                  <button
+                    style={xBtn}
+                    onClick={() => this.removeImage(prod.id, prod)}
+                  >
                     X
                   </button>
                   <img
@@ -399,7 +528,7 @@ class FeedbackMailer extends React.Component {
                         : null
                     }
                     alt=""
-                    style={{ height: '60px', width: '60px' }}
+                    style={{ height: "60px", width: "60px" }}
                   />
                 </div>
               ) : null}
@@ -416,9 +545,9 @@ class FeedbackMailer extends React.Component {
           <Box variant="col-3" pl="0" pr="15px">
             <textarea
               style={{
-                padding: '4px',
-                width: '195px',
-                outline: 'none'
+                padding: "4px",
+                width: "195px",
+                outline: "none"
               }}
               type="text"
               onChange={e => this.handleChange(e.target.value, prod)}
@@ -436,17 +565,17 @@ class FeedbackMailer extends React.Component {
                   We love to see our product in your home
                 </Text>
               </Box>
-              <Box variant="col-5" px="15px" sx={{ top: '15px' }}>
+              <Box variant="col-5" px="15px" sx={{ top: "15px" }}>
                 <label htmlFor={`file-input${prod.id}`}>
                   <span
                     style={{
-                      padding: '7px',
-                      fontFamily: 'regular',
-                      fontSize: '0.875rem',
-                      borderRadius: '5px',
-                      cursor: 'pointer',
-                      backgroundColor: '#D4D4D4',
-                      border: '1px solid grey'
+                      padding: "7px",
+                      fontFamily: "regular",
+                      fontSize: "0.875rem",
+                      borderRadius: "5px",
+                      cursor: "pointer",
+                      backgroundColor: "#D4D4D4",
+                      border: "1px solid grey"
                     }}
                   >
                     Upload image
@@ -455,18 +584,19 @@ class FeedbackMailer extends React.Component {
                 <input
                   type="file"
                   id={`file-input${prod.id}`}
-                  style={{ display: 'none' }}
+                  style={{ display: "none" }}
                   onChange={e => {
                     this.uploadImageHandler(e, prod.id, prod);
                   }}
                 />
-                {images[`${prod.id}-img`] && images[`${prod.id}-img`].imgSizeError ? (
+                {images[`${prod.id}-img`] &&
+                images[`${prod.id}-img`].imgSizeError ? (
                   <Text color="red" fontSize="12px" mt="15">
                     {images[`${prod.id}-img`].imgSizeErrorMessage}
                   </Text>
                 ) : (
                   <Text color="grey" fontSize="12px" mt="15">
-                    {'Image size sould be less than 5Mb'}
+                    {"Image size sould be less than 5Mb"}
                   </Text>
                 )}
               </Box>
@@ -483,7 +613,10 @@ class FeedbackMailer extends React.Component {
       customer,
       prodArr,
       feedback: {
-        loading, formSubmit: formSubmited, error: pageLoadError, data
+        loading,
+        formSubmit: formSubmited,
+        error: pageLoadError,
+        data
       }
     } = this.props;
 
@@ -498,23 +631,40 @@ class FeedbackMailer extends React.Component {
             variant="col-9"
             m="auto"
             style={{
-              justifyContent: 'center',
-              display: 'flex',
-              flexDirection: 'column',
-              float: 'none'
+              justifyContent: "center",
+              display: "flex",
+              flexDirection: "column",
+              float: "none"
             }}
           >
             <Box textAlign="center">
-              <Img src={LogoIcon} alt="Hometown" height="60px" width="auto" m="auto" />
+              <Img
+                src={LogoIcon}
+                alt="Hometown"
+                height="60px"
+                width="auto"
+                m="auto"
+              />
             </Box>
             {!formSubmited ? (
               <Box>
                 <Box mt="20px" mb="20px" textAlign="center">
-                  <Text fontSize="0.975rem" fontFamily="medium" textAlign="center" pb="10px">
+                  <Text
+                    fontSize="0.975rem"
+                    fontFamily="medium"
+                    textAlign="center"
+                    pb="10px"
+                  >
                     Dear {customer}
                   </Text>
-                  <Text fontSize="0.975rem" fontFamily="medium" textAlign="center" lineHeight="1.2">
-                    Thank you for making us a part of your home. We hope we have met your expectations in every sense.
+                  <Text
+                    fontSize="0.975rem"
+                    fontFamily="medium"
+                    textAlign="center"
+                    lineHeight="1.2"
+                  >
+                    Thank you for making us a part of your home. We hope we have
+                    met your expectations in every sense.
                     <br />
                     We would love to hear from you on your experience with us.
                   </Text>
@@ -524,12 +674,12 @@ class FeedbackMailer extends React.Component {
                   <Box mt="20px" textAlign="center">
                     <Button
                       type="button"
-                      style={{ background: '#000', color: '#FFF' }}
+                      style={{ background: "#000", color: "#FFF" }}
                       onClick={() => {
                         this.showMoreHandler();
                       }}
                     >
-                      {!showMore ? 'Show More' : 'Show Less'}
+                      {!showMore ? "Show More" : "Show Less"}
                     </Button>
                   </Box>
                 ) : null}
@@ -538,10 +688,10 @@ class FeedbackMailer extends React.Component {
                     <Button
                       disabled={loading || !validFeedback}
                       type="submit"
-                      style={{ background: '#000', color: '#FFF' }}
+                      style={{ background: "#000", color: "#FFF" }}
                       onClick={e => this.handleSubmit(e)}
                     >
-                      {loading ? 'Please Wait ...' : 'SUBMIT'}
+                      {loading ? "Please Wait ..." : "SUBMIT"}
                     </Button>
 
                     <Box mt="20px" textAlign="center">
@@ -559,9 +709,9 @@ class FeedbackMailer extends React.Component {
                 type="flex"
                 style={{
                   height: 300,
-                  display: 'flex',
-                  justifyContent: 'center',
-                  alignItems: 'center'
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
                 }}
               >
                 <Text textAlign="center" fontFamily="medium">
@@ -572,22 +722,50 @@ class FeedbackMailer extends React.Component {
 
             <Box mb="10px">
               <Row ml="0" mr="0" justifyContent="center">
-                <a href="https://www.facebook.com/hometown.in/" target="_blank" rel="noreferrer">
+                <a
+                  href="https://www.facebook.com/hometown.in/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <Img src={fbIcon} alt="" height="40px" ml="10px" mr="10px" />
                 </a>
-                <a href="https://twitter.com/HomeTown_In/" target="_blank" rel="noreferrer">
+                <a
+                  href="https://twitter.com/HomeTown_In/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <Img src={twIcon} alt="" height="40px" ml="10px" mr="10px" />
                 </a>
-                <a href="https://www.instagram.com/hometownindia/" target="_blank" rel="noreferrer">
-                  <Img src={instaIcon} alt="" height="40px" ml="10px" mr="10px" />
+                <a
+                  href="https://www.instagram.com/hometownindia/"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  <Img
+                    src={instaIcon}
+                    alt=""
+                    height="40px"
+                    ml="10px"
+                    mr="10px"
+                  />
                 </a>
-                <a href="https://www.youtube.com/channel/UCBZGArWnKT6MYYwOsPCNjiw" target="_blank" rel="noreferrer">
+                <a
+                  href="https://www.youtube.com/channel/UCBZGArWnKT6MYYwOsPCNjiw"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   <Img src={ytIcon} alt="" height="40px" ml="10px" mr="10px" />
                 </a>
               </Row>
             </Box>
             <Box mb="20px">
-              <Text as="p" fontSize="0.875rem" lineHeight="1.6" textAlign="center" fontFamily="medium">
+              <Text
+                as="p"
+                fontSize="0.875rem"
+                lineHeight="1.6"
+                textAlign="center"
+                fontFamily="medium"
+              >
                 If you have any questions or issues, Please contact
                 <br />
                 08069252525(10am - 8pm) | care@hometown.in | www.hometown.in
@@ -602,11 +780,11 @@ class FeedbackMailer extends React.Component {
 }
 
 FeedbackMailer.defaultProps = {
-  customer: '',
+  customer: "",
   prodArr: [],
-  orderDate: '',
-  mobile: '',
-  sapOrderNumber:''
+  orderDate: "",
+  mobile: "",
+  sapOrderNumber: ""
 };
 
 FeedbackMailer.propTypes = {
