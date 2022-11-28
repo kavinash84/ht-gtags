@@ -796,6 +796,9 @@ export default function webEngageMiddleware() {
             result: { city, email, mobile, name, state }
           } = action;
           if (name && email && mobile && city && state) {
+            window.webengage.user.setAttribute("we_email", email);
+            window.webengage.user.setAttribute("we_phone", `91${mobile}`);
+            window.webengage.user.setAttribute("we_first_name", name);
             window.webengage.track("Submit Lead", {
               name: name,
               email: email,
