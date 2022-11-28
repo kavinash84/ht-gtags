@@ -499,6 +499,7 @@ export default function webEngageMiddleware() {
         if (type === "cart/ADD_TO_CART_SUCCESS" && action.simpleSku) {
           // const { simpleSku } = action;
           const cartItems = Object.values(action.result.cartItems);
+          const onlineExclusive = false;
           const products = cartItems.map(item => {
             const {
               name,
@@ -512,6 +513,9 @@ export default function webEngageMiddleware() {
               selling_price,
               online_exclusive
             } = item;
+            if (!online_exclusive) {
+              onlineExclusive = online_exclusive;
+            }
             return {
               // category: "",
               // path: "",
@@ -534,7 +538,10 @@ export default function webEngageMiddleware() {
           });
 
           if (window && window.webengage) {
-            window.webengage.track("Added To Cart", { products: products });
+            window.webengage.track("Added To Cart", {
+              products: products,
+              online_exclusive: onlineExclusive
+            });
           }
         }
 
