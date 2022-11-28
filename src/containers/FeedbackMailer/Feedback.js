@@ -91,6 +91,45 @@ class FeedbackMailer extends React.Component {
     } else {
       val = { ...val, ratingError: false, ratingErrorMessage: "" };
     }
+    if (!val.deliveryRating) {
+      val = {
+        ...val,
+        deliveryRatingError: true,
+        deliveryRatingErrorMessage: "Delivery Rating is required"
+      };
+    } else {
+      val = {
+        ...val,
+        deliveryRatingError: false,
+        deliveryRatingErrorMessage: ""
+      };
+    }
+    if (!val.installationRating) {
+      val = {
+        ...val,
+        installationRatingError: true,
+        installationRatingErrorMessage: "Installation Rating is required"
+      };
+    } else {
+      val = {
+        ...val,
+        installationRatingError: false,
+        installationRatingErrorMessage: ""
+      };
+    }
+    if (!val.overallRating) {
+      val = {
+        ...val,
+        overallRatingError: true,
+        overallRatingErrorMessage: "Overall Rating is required"
+      };
+    } else {
+      val = {
+        ...val,
+        overallRatingError: false,
+        overallRatingErrorMessage: ""
+      };
+    }
     if (val.rating <= 3) {
       if (!val.review) {
         val = {
@@ -163,12 +202,12 @@ class FeedbackMailer extends React.Component {
     });
     if (valid) {
       const prodIds = Object.keys(formData).join();
-      const deliveryRating = parseInt(data.deliveryRating);
-      const installationRating = parseInt(data.installationRating);
-      const overallRating = parseInt(data.overallRating);
       const formdata = new FormData();
       Object.values(formData).forEach(data => {
         const rating = parseInt(data.rating, 10);
+        const deliveryRating = parseInt(data.deliveryRating);
+        const installationRating = parseInt(data.installationRating);
+        const overallRating = parseInt(data.overallRating);
         if (data.rating)
           formdata.append(`productRating[${data.id}]`, `${rating}`);
         if (data.deliveryRating) {
