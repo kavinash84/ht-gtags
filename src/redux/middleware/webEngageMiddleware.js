@@ -499,7 +499,7 @@ export default function webEngageMiddleware() {
         if (type === "cart/ADD_TO_CART_SUCCESS" && action.simpleSku) {
           // const { simpleSku } = action;
           const cartItems = Object.values(action.result.cartItems);
-          const onlineExclusive = false;
+          let onlineExclusive = false;
           const products = cartItems.map(item => {
             const {
               name,
