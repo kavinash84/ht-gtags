@@ -513,7 +513,7 @@ export default function webEngageMiddleware() {
               selling_price,
               online_exclusive
             } = item;
-            if (!online_exclusive) {
+            if (!onlineExclusive) {
               onlineExclusive = online_exclusive;
             }
             return {
