@@ -346,7 +346,7 @@ export default class Home extends Component {
           <Section>
             <NewUnboxRecentlyViewed
               pageInfo={{
-                pageType: "PRODUCT",
+                pageType: "HOME",
                 productIds: [""]
               }}
             />

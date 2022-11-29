@@ -4,6 +4,7 @@ import LoginModal from "containers/Login/LoginForm";
 import Box from "hometown-components-dev/lib/BoxHtV1";
 import PropTypes from "prop-types";
 import React from "react";
+import { Link } from 'react-router-dom';
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { addToCart } from "redux/modules/cart";
@@ -71,7 +72,14 @@ class Listing extends React.Component {
     // quickViewSku: '',
     // simpleSku: '',
     openLogin: false,
-    display: "block"
+    display: "block",
+    openModal: false
+  };
+
+  handleModal = () => {
+    this.setState({
+      openModal: false
+    });
   };
   componentWillMount() {
     // const {
@@ -136,6 +144,11 @@ class Listing extends React.Component {
     }
     if (window && window.Unbxd && window.Unbxd.experiences) {
       window.Unbxd.experiences = [];
+    }
+    if (window.unbxd_category === 'Kids') {
+      this.setState({
+        openModal: true
+      })
     }
   }
   componentWillReceiveProps(nextProps) {
@@ -251,7 +264,7 @@ class Listing extends React.Component {
             window.unbxd.toggleWishList(sku, simpleSku);
           }
         })
-        .catch(() => {});
+        .catch(() => { });
     } else {
       // if (window && !!window.unbxd && !!window.unbxd.toggleWishList) {
       //   window.unbxd.toggleWishList(sku, simpleSku);
@@ -349,6 +362,28 @@ class Listing extends React.Component {
             </Box>
           </ResponsiveModal>
         </Box>
+        {this.state.openModal ? (
+          <ResponsiveModal
+            classNames={{ modal: "furntitureModal" }}
+            onCloseModal={this.handleModal}
+            open={this.state.openModal}
+          >
+            <Link to='/offer/kidsformlanding'>
+              {/* <div
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center"
+                }}
+              > */}
+              <img
+                src='https://www.hometown.in/media/cms/campaignpages/pop-up-banner_2.jpg'
+                style={{ width: "100%", height: "auto" }}
+              />
+              {/* </div> */}
+            </Link>
+          </ResponsiveModal>
+        ) : null}
       </Box>
     );
   }

@@ -54,16 +54,39 @@ export default class NewUnboxRecomondedForYou extends Component {
             return imageSuffix;
           };
 
-          var updatedRecsData = data.recommendations.map(function(product) {
+          var updatedRecsData = data.recommendations.map(function(
+            product,
+            index
+          ) {
             var imageURL = product.imageURL + getImageSuffix();
             var recsBoxWidth = recsBoxSize + "px";
             var recsBoxHeight = recsBoxSize + "px";
+            var pRank = index + 1;
 
-            return { ...product, imageURL, recsBoxWidth, recsBoxHeight };
+            return { ...product, imageURL, recsBoxWidth, recsBoxHeight, pRank };
           });
 
           return { ...data, recommendations: updatedRecsData };
         };
+
+        const templateArr = templateData.recommendations;
+
+        if (templateArr && Array.isArray(templateArr) && templateArr.length) {
+          const pIds = templateArr.map(item => item.uniqueId);
+          const payload = {
+            pids_list: pIds,
+            experience_pagetype: pageInfo.pageType,
+            experience_widget:
+              templateData.analyticsData && templateData.analyticsData.widgetNum
+          };
+          const action = "experience_impression";
+          if (window.Unbxd && typeof window.Unbxd.track === "function") {
+            console.log(action, payload, "templateData");
+            window.Unbxd.track(action, payload);
+          } else {
+            console.error("unbxdAnalytics.js is not loaded!");
+          }
+        }
 
         templateData = modifyTemplateData(templateData);
 
@@ -74,6 +97,8 @@ export default class NewUnboxRecomondedForYou extends Component {
         "beforeTemplateRender",
         beforeTemplateRenderer
       );
+
+      console.log(pageInfo, "UnbxdPageInfo");
 
       window._unbxd_getRecommendations({
         widgets: {

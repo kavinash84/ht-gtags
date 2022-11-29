@@ -1,21 +1,21 @@
-import PropTypes from 'prop-types';
-import React from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
-import { bindActionCreators } from 'redux';
+import PropTypes from "prop-types";
+import React from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
+import { bindActionCreators } from "redux";
 /* ====== Components ====== */
-import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Button from 'hometown-components-dev/lib/ButtonHtV1';
+import Box from "hometown-components-dev/lib/BoxHtV1";
+import Button from "hometown-components-dev/lib/ButtonHtV1";
 /* ====== Modules ====== */
-import { setFilter } from 'redux/modules/products';
-import * as actionCreators from 'redux/modules/search';
-import { formatProductURL } from 'utils/helper';
+import { setFilter } from "redux/modules/products";
+import * as actionCreators from "redux/modules/search";
+import { formatProductURL } from "utils/helper";
 
 /* ====== Page Components ====== */
 
-const styles = require('./Search.scss');
-const SearchIcon = require('../../../static/search-icon.svg');
-const CloseIcon = require('../../../static/close-icon.svg');
+const styles = require("./Search.scss");
+const SearchIcon = require("../../../static/search-icon.svg");
+const CloseIcon = require("../../../static/close-icon.svg");
 
 // const onClick = setFilterState => e => {
 //   e.preventDefault();
@@ -57,7 +57,11 @@ const mapStateToProps = ({ search }) => ({
   ...search
 });
 
-const mapDispatchToProps = dispatch => bindActionCreators({ ...actionCreators, setFilterState: setFilter }, dispatch);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(
+    { ...actionCreators, setFilterState: setFilter },
+    dispatch
+  );
 
 // const getSuggestions = results => results;
 
@@ -88,7 +92,7 @@ class Search extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: ''
+      value: ""
       // suggestions: [],
       // unbxdLoaded: false
     };
@@ -144,7 +148,7 @@ class Search extends React.Component {
     // Autosuggest will pass through all these props to the input.
 
     return (
-      <Box width={1} className={styles.search} sx={{ border: 'dividerBold' }}>
+      <Box width={1} className={styles.search} sx={{ border: "dividerBold" }}>
         {/* <form onSubmit={onSubmit(searchQuery, history, hideResultsOnSubmit, results, setFilterState)}>
           <Autosuggest
             suggestions={suggestions}
@@ -180,7 +184,7 @@ class Search extends React.Component {
           className={styles.inputSearch}
           value={value}
         />
-        {searchQuery === '' ? (
+        {searchQuery === "" ? (
           <img src={SearchIcon} className={styles.searchIcon} alt="Search" />
         ) : (
           <Button
@@ -200,7 +204,7 @@ class Search extends React.Component {
 }
 
 Search.defaultProps = {
-  searchQuery: ''
+  searchQuery: ""
   // loading: false,
   // loaded: false,
   // results: []
