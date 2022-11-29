@@ -130,6 +130,51 @@ class FeedbackMailer extends React.Component {
         overallRatingErrorMessage: ""
       };
     }
+    if (val.installationRating <= 3) {
+      if (!val.installationReview) {
+        val = {
+          ...val,
+          installationReviewError: true,
+          installationReviewErrorMessage: "Installation Review is required"
+        };
+      } else {
+        val = {
+          ...val,
+          installationReviewError: false,
+          installationReviewErrorMessage: ""
+        };
+      }
+    }
+    if (val.deliveryRating <= 3) {
+      if (!val.deliveryReview) {
+        val = {
+          ...val,
+          deliveryReviewError: true,
+          deliveryReviewErrorMessage: "Delivery Review is required"
+        };
+      } else {
+        val = {
+          ...val,
+          deliveryReviewError: false,
+          deliveryReviewErrorMessage: ""
+        };
+      }
+    }
+    if (val.overallRating <= 3) {
+      if (!val.overallReview) {
+        val = {
+          ...val,
+          overallReviewError: true,
+          overallReviewErrorMessage: "Overall Review is required"
+        };
+      } else {
+        val = {
+          ...val,
+          overallReviewError: false,
+          overallReviewErrorMessage: ""
+        };
+      }
+    }
     if (val.rating <= 3) {
       if (!val.review) {
         val = {
@@ -262,7 +307,7 @@ class FeedbackMailer extends React.Component {
     );
   };
 
-  handleChange = (value, name) => {
+  handleChange = (value, name, ratingType) => {
     const { formData } = this.state;
     if (value) {
       this.setState(
@@ -272,7 +317,7 @@ class FeedbackMailer extends React.Component {
             [`${name.id}`]: {
               ...formData[`${name.id}`],
               id: name.id,
-              review: value
+              [ratingType]: value
             }
           }
         },
@@ -424,179 +469,6 @@ class FeedbackMailer extends React.Component {
               disabled
             />
           </Box>
-          <Flex
-            variant="col-4"
-            pl="15px"
-            pr="15px"
-            justifyContent="space-between"
-          >
-            <Text fontSize="0.875rem" fontFamily="regular">
-              Product Rating*
-            </Text>
-            <ReactStars
-              count={5}
-              onChange={val => this.ratingChanged(val, prod.id, prod, "rating")}
-              size={20}
-              value={
-                formData[`${prod.id}`] && formData[`${prod.id}`].rating
-                  ? formData[`${prod.id}`].rating
-                  : 0
-              }
-              half={false}
-              color2="#ffd700"
-            />
-            {formData[`${prod.id}`] && formData[`${prod.id}`].ratingError ? (
-              <Text color="red" fontSize="12px">
-                {formData[`${prod.id}`].ratingErrorMessage}
-              </Text>
-            ) : null}
-          </Flex>
-          <Flex
-            variant="col-4"
-            pl="15px"
-            pr="15px"
-            justifyContent="space-between"
-          >
-            <Text fontSize="0.875rem" fontFamily="regular">
-              Delivery Rating*
-            </Text>
-            <ReactStars
-              count={5}
-              onChange={val =>
-                this.ratingChanged(val, prod.id, prod, "deliveryRating")
-              }
-              size={20}
-              value={
-                formData[`${prod.id}`] && formData[`${prod.id}`].deliveryRating
-                  ? formData[`${prod.id}`].deliveryRating
-                  : 0
-              }
-              half={false}
-              color2="#ffd700"
-            />
-            {formData[`${prod.id}`] &&
-            formData[`${prod.id}`].deliveryRatingError ? (
-              <Text color="red" fontSize="12px">
-                {formData[`${prod.id}`].deliveryRatingErrorMessage}
-              </Text>
-            ) : null}
-          </Flex>
-          <Flex
-            variant="col-4"
-            pl="15px"
-            pr="15px"
-            justifyContent="space-between"
-          >
-            <Text fontSize="0.875rem" fontFamily="regular">
-              Installation Rating*
-            </Text>
-            <ReactStars
-              count={5}
-              onChange={val =>
-                this.ratingChanged(val, prod.id, prod, "installationRating")
-              }
-              size={20}
-              value={
-                formData[`${prod.id}`] &&
-                formData[`${prod.id}`].installationRating
-                  ? formData[`${prod.id}`].installationRating
-                  : 0
-              }
-              half={false}
-              color2="#ffd700"
-            />
-            {formData[`${prod.id}`] &&
-            formData[`${prod.id}`].installationRatingError ? (
-              <Text color="red" fontSize="12px">
-                {formData[`${prod.id}`].installationRatingErrorMessage}
-              </Text>
-            ) : null}
-          </Flex>
-          <Flex
-            variant="col-4"
-            pl="15px"
-            pr="15px"
-            justifyContent="space-between"
-          >
-            <Text fontSize="0.875rem" fontFamily="regular">
-              Overall Rating*
-            </Text>
-            <ReactStars
-              count={5}
-              onChange={val =>
-                this.ratingChanged(val, prod.id, prod, "overallRating")
-              }
-              size={20}
-              value={
-                formData[`${prod.id}`] && formData[`${prod.id}`].overallRating
-                  ? formData[`${prod.id}`].overallRating
-                  : 0
-              }
-              half={false}
-              color2="#ffd700"
-            />
-            {formData[`${prod.id}`] &&
-            formData[`${prod.id}`].overallRatingError ? (
-              <Text color="red" fontSize="12px">
-                {formData[`${prod.id}`].overallRatingErrorMessage}
-              </Text>
-            ) : null}
-          </Flex>
-
-          <Box variant="col-2" pl="0" pr="15px" justifyContent="flex-start">
-            <span
-              style={{
-                display: "inline-block",
-                // width: '60px',
-                marginLeft: "10px",
-                position: "relative"
-              }}
-            >
-              {formData[`${prod.id}`] && formData[`${prod.id}`].image ? (
-                <div>
-                  <button
-                    style={xBtn}
-                    onClick={() => this.removeImage(prod.id, prod)}
-                  >
-                    X
-                  </button>
-                  <img
-                    src={
-                      this.state.images && this.state.images[`${prod.id}-img`]
-                        ? this.state.images[`${prod.id}-img`].imagePreviewUrl
-                        : null
-                    }
-                    alt=""
-                    style={{ height: "60px", width: "60px" }}
-                  />
-                </div>
-              ) : null}
-            </span>
-          </Box>
-        </Row>
-
-        <Row alignItems="center">
-          <Box variant="col-3" pl="15px" pr="15px">
-            <Text fontSize="0.875rem" fontFamily="regular">
-              Product Review
-            </Text>
-          </Box>
-          <Box variant="col-3" pl="0" pr="15px">
-            <textarea
-              style={{
-                padding: "4px",
-                width: "195px",
-                outline: "none"
-              }}
-              type="text"
-              onChange={e => this.handleChange(e.target.value, prod)}
-            />
-            {formData[`${prod.id}`] && formData[`${prod.id}`].reviewError ? (
-              <Text color="red" fontSize="12px">
-                {formData[`${prod.id}`].reviewErrorMessage}
-              </Text>
-            ) : null}
-          </Box>
           <Box variant="col-6" pl="15px" pr="15px">
             <Row ml="0" mr="0" alignItems="center">
               <Box variant="col-7" pl="0" pr="0">
@@ -638,8 +510,246 @@ class FeedbackMailer extends React.Component {
                     {"Image size sould be less than 5Mb"}
                   </Text>
                 )}
+                <span
+                  style={{
+                    display: "inline-block",
+                    // width: '60px',
+                    marginLeft: "10px",
+                    position: "relative"
+                  }}
+                >
+                  {formData[`${prod.id}`] && formData[`${prod.id}`].image ? (
+                    <div>
+                      <button
+                        style={xBtn}
+                        onClick={() => this.removeImage(prod.id, prod)}
+                      >
+                        X
+                      </button>
+                      <img
+                        src={
+                          this.state.images &&
+                          this.state.images[`${prod.id}-img`]
+                            ? this.state.images[`${prod.id}-img`]
+                                .imagePreviewUrl
+                            : null
+                        }
+                        alt=""
+                        style={{ height: "60px", width: "60px" }}
+                      />
+                    </div>
+                  ) : null}
+                </span>
               </Box>
             </Row>
+          </Box>
+        </Row>
+
+        <Row alignItems="center">
+          <Box variant="col-3" pl="15px" pr="15px">
+            <Text fontSize="0.875rem" fontFamily="regular">
+              Product Rating*
+            </Text>
+          </Box>
+          <Box variant="col-3" pl="0" pr="15px">
+            <ReactStars
+              count={5}
+              onChange={val => this.ratingChanged(val, prod.id, prod, "rating")}
+              size={20}
+              value={
+                formData[`${prod.id}`] && formData[`${prod.id}`].rating
+                  ? formData[`${prod.id}`].rating
+                  : 0
+              }
+              half={false}
+              color2="#ffd700"
+            />
+            {formData[`${prod.id}`] && formData[`${prod.id}`].ratingError ? (
+              <Text color="red" fontSize="12px">
+                {formData[`${prod.id}`].ratingErrorMessage}
+              </Text>
+            ) : null}
+          </Box>
+          <Box variant="col-3" pl="15px" pr="15px">
+            <Text fontSize="0.875rem" fontFamily="regular">
+              Product Review
+            </Text>
+          </Box>
+          <Box variant="col-3" pl="0" pr="15px">
+            <textarea
+              style={{
+                padding: "4px",
+                width: "195px",
+                outline: "none"
+              }}
+              type="text"
+              onChange={e => this.handleChange(e.target.value, prod, "review")}
+            />
+            {formData[`${prod.id}`] && formData[`${prod.id}`].reviewError ? (
+              <Text color="red" fontSize="12px">
+                {formData[`${prod.id}`].reviewErrorMessage}
+              </Text>
+            ) : null}
+          </Box>
+        </Row>
+        <Row alignItems="center">
+          <Box variant="col-3" pl="15px" pr="15px">
+            <Text fontSize="0.875rem" fontFamily="regular">
+              Delivery Rating*
+            </Text>
+          </Box>
+          <Box variant="col-3" pl="0" pr="15px">
+            <ReactStars
+              count={5}
+              onChange={val =>
+                this.ratingChanged(val, prod.id, prod, "deliveryRating")
+              }
+              size={20}
+              value={
+                formData[`${prod.id}`] && formData[`${prod.id}`].deliveryRating
+                  ? formData[`${prod.id}`].deliveryRating
+                  : 0
+              }
+              half={false}
+              color2="#ffd700"
+            />
+            {formData[`${prod.id}`] &&
+            formData[`${prod.id}`].deliveryRatingError ? (
+              <Text color="red" fontSize="12px">
+                {formData[`${prod.id}`].deliveryRatingErrorMessage}
+              </Text>
+            ) : null}
+          </Box>
+          <Box variant="col-3" pl="15px" pr="15px">
+            <Text fontSize="0.875rem" fontFamily="regular">
+              Delivery Review
+            </Text>
+          </Box>
+          <Box variant="col-3" pl="0" pr="15px">
+            <textarea
+              style={{
+                padding: "4px",
+                width: "195px",
+                outline: "none"
+              }}
+              type="text"
+              onChange={e =>
+                this.handleChange(e.target.value, prod, "deliveryReview")
+              }
+            />
+            {formData[`${prod.id}`] &&
+            formData[`${prod.id}`].deliveryReviewError ? (
+              <Text color="red" fontSize="12px">
+                {formData[`${prod.id}`].deliveryReviewErrorMessage}
+              </Text>
+            ) : null}
+          </Box>
+        </Row>
+        <Row alignItems="center">
+          <Box variant="col-3" pl="15px" pr="15px">
+            <Text fontSize="0.875rem" fontFamily="regular">
+              Installation Rating*
+            </Text>
+          </Box>
+          <Box variant="col-3" pl="0" pr="15px">
+            <ReactStars
+              count={5}
+              onChange={val =>
+                this.ratingChanged(val, prod.id, prod, "installationRating")
+              }
+              size={20}
+              value={
+                formData[`${prod.id}`] &&
+                formData[`${prod.id}`].installationRating
+                  ? formData[`${prod.id}`].installationRating
+                  : 0
+              }
+              half={false}
+              color2="#ffd700"
+            />
+            {formData[`${prod.id}`] &&
+            formData[`${prod.id}`].installationRatingError ? (
+              <Text color="red" fontSize="12px">
+                {formData[`${prod.id}`].installationRatingErrorMessage}
+              </Text>
+            ) : null}
+          </Box>
+          <Box variant="col-3" pl="15px" pr="15px">
+            <Text fontSize="0.875rem" fontFamily="regular">
+              Installation Review
+            </Text>
+          </Box>
+          <Box variant="col-3" pl="0" pr="15px">
+            <textarea
+              style={{
+                padding: "4px",
+                width: "195px",
+                outline: "none"
+              }}
+              type="text"
+              onChange={e =>
+                this.handleChange(e.target.value, prod, "installationReview")
+              }
+            />
+            {formData[`${prod.id}`] &&
+            formData[`${prod.id}`].installationReviewError ? (
+              <Text color="red" fontSize="12px">
+                {formData[`${prod.id}`].installationReviewErrorMessage}
+              </Text>
+            ) : null}
+          </Box>
+        </Row>
+        <Row alignItems="center">
+          <Box variant="col-3" pl="15px" pr="15px">
+            <Text fontSize="0.875rem" fontFamily="regular">
+              Overall Rating*
+            </Text>
+          </Box>
+          <Box variant="col-3" pl="0" pr="15px">
+            <ReactStars
+              count={5}
+              onChange={val =>
+                this.ratingChanged(val, prod.id, prod, "overallRating")
+              }
+              size={20}
+              value={
+                formData[`${prod.id}`] && formData[`${prod.id}`].overallRating
+                  ? formData[`${prod.id}`].overallRating
+                  : 0
+              }
+              half={false}
+              color2="#ffd700"
+            />
+            {formData[`${prod.id}`] &&
+            formData[`${prod.id}`].overallRatingError ? (
+              <Text color="red" fontSize="12px">
+                {formData[`${prod.id}`].overallRatingErrorMessage}
+              </Text>
+            ) : null}
+          </Box>
+          <Box variant="col-3" pl="15px" pr="15px">
+            <Text fontSize="0.875rem" fontFamily="regular">
+              Overall Review
+            </Text>
+          </Box>
+          <Box variant="col-3" pl="0" pr="15px">
+            <textarea
+              style={{
+                padding: "4px",
+                width: "195px",
+                outline: "none"
+              }}
+              type="text"
+              onChange={e =>
+                this.handleChange(e.target.value, prod, "overallReview")
+              }
+            />
+            {formData[`${prod.id}`] &&
+            formData[`${prod.id}`].overallReviewError ? (
+              <Text color="red" fontSize="12px">
+                {formData[`${prod.id}`].overallReviewErrorMessage}
+              </Text>
+            ) : null}
           </Box>
         </Row>
       </Box>
