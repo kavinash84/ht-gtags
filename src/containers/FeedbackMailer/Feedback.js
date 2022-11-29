@@ -144,6 +144,12 @@ class FeedbackMailer extends React.Component {
           installationReviewErrorMessage: ""
         };
       }
+    } else {
+      val = {
+        ...val,
+        installationReviewError: false,
+        installationReviewErrorMessage: ""
+      };
     }
     if (val.deliveryRating <= 3) {
       if (!val.deliveryReview) {
@@ -159,6 +165,12 @@ class FeedbackMailer extends React.Component {
           deliveryReviewErrorMessage: ""
         };
       }
+    } else {
+      val = {
+        ...val,
+        deliveryReviewError: false,
+        deliveryReviewErrorMessage: ""
+      };
     }
     if (val.overallRating <= 3) {
       if (!val.overallReview) {
@@ -174,6 +186,12 @@ class FeedbackMailer extends React.Component {
           overallReviewErrorMessage: ""
         };
       }
+    } else {
+      val = {
+        ...val,
+        overallReviewError: false,
+        overallReviewErrorMessage: ""
+      };
     }
     if (val.rating <= 3) {
       if (!val.review) {
@@ -266,6 +284,18 @@ class FeedbackMailer extends React.Component {
         }
         if (data.overallRating) {
           formdata.append(`overallRating[${data.id}]`, `${overallRating}`);
+        }
+        if (data.overallReview) {
+          formdata.append(`overallReview[${data.id}]`, data.overallReview);
+        }
+        if (data.deliveryReview) {
+          formdata.append(`deliveryReview[${data.id}]`, data.deliveryReview);
+        }
+        if (data.installationReview) {
+          formdata.append(
+            `installationReview[${data.id}]`,
+            data.installationReview
+          );
         }
         if (data.review) {
           formdata.append(`productReview[${data.id}]`, data.review);
