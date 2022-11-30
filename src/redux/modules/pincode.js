@@ -144,7 +144,7 @@ export default function reducer(state = initialState, action = {}) {
       case LOGOUT_SUCCESS:
               return {
                 ...state,
-                selectedPincode: "110001",
+                selectedPincode: "110005",
                 pincodeQuery: "",
                 city: null,
                 loading: false,

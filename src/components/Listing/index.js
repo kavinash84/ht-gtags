@@ -368,7 +368,7 @@ class Listing extends React.Component {
             onCloseModal={this.handleModal}
             open={this.state.openModal}
           >
-            <Link to='/offer/kidsformlanding'>
+            <Link to='/offer/smartsters'>
               {/* <div
                 style={{
                   display: "flex",

@@ -35,7 +35,7 @@ export default function webEngageMiddleware() {
             "we_birth_date",
             moment(dob).format("YYYY-MM-DD")
           );
-          window.webengage.user.setAttribute("we_phone", mobile);
+          window.webengage.user.setAttribute("we_phone", `91${mobile}`);
           window.webengage.user.setAttribute("we_first_name", full_name);
         }
 
@@ -499,6 +499,7 @@ export default function webEngageMiddleware() {
         if (type === "cart/ADD_TO_CART_SUCCESS" && action.simpleSku) {
           // const { simpleSku } = action;
           const cartItems = Object.values(action.result.cartItems);
+          let onlineExclusive = false;
           const products = cartItems.map(item => {
             const {
               name,
@@ -512,6 +513,9 @@ export default function webEngageMiddleware() {
               selling_price,
               online_exclusive
             } = item;
+            if (!onlineExclusive) {
+              onlineExclusive = online_exclusive;
+            }
             return {
               // category: "",
               // path: "",
@@ -534,7 +538,10 @@ export default function webEngageMiddleware() {
           });
 
           if (window && window.webengage) {
-            window.webengage.track("Added To Cart", { products: products });
+            window.webengage.track("Added To Cart", {
+              products: products,
+              online_exclusive: onlineExclusive
+            });
           }
         }
 
@@ -757,7 +764,7 @@ export default function webEngageMiddleware() {
             "we_birth_date",
             moment(dob, "DD-MM-YYYY").format("YYYY-MM-DD")
           );
-          window.webengage.user.setAttribute("we_phone", contact_number);
+          window.webengage.user.setAttribute("we_phone", `91${contact_number}`);
           window.webengage.user.setAttribute("we_first_name", full_name);
         }
 
@@ -789,10 +796,13 @@ export default function webEngageMiddleware() {
             result: { city, email, mobile, name, state }
           } = action;
           if (name && email && mobile && city && state) {
+            window.webengage.user.setAttribute("we_email", email);
+            window.webengage.user.setAttribute("we_phone", `91${mobile}`);
+            window.webengage.user.setAttribute("we_first_name", name);
             window.webengage.track("Submit Lead", {
               name: name,
               email: email,
-              phone: mobile,
+              phone: `91${mobile}`,
               city: city,
               state: state
             });
