@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { NotFound } from "containers";
 import Img from "hometown-components-dev/lib/ImageHtV1";
 import Box from "hometown-components-dev/lib/BoxHtV1";
-import Flex from "hometown-components-dev/lib/FlexHtV1";
+// import Flex from "hometown-components-dev/lib/FlexHtV1";
 import Row from "hometown-components-dev/lib/RowHtV1";
 import Text from "hometown-components-dev/lib/TextHtV1";
 import Container from "hometown-components-dev/lib/ContainerHtV1";
@@ -73,13 +73,13 @@ class FeedbackMailer extends React.Component {
     this.initialRender();
   }
 
-  // componentDidUpdate() {
-  //   const { showMore } = this.state;
-  //   const { prodArr } = this.props;
-  //   this.setState({
-  //     products: !showMore ? prodArr.slice(0,2) : prodArr
-  //   })
-  // }
+  componentDidUpdate() {
+    const { showMore } = this.state;
+    const { prodArr } = this.props;
+    this.setState({
+      products: !showMore ? prodArr.slice(0, 2) : prodArr
+    });
+  }
 
   setValidErrorObject = val => {
     if (!val.rating) {
@@ -91,108 +91,108 @@ class FeedbackMailer extends React.Component {
     } else {
       val = { ...val, ratingError: false, ratingErrorMessage: "" };
     }
-    // if (!val.deliveryRating) {
-    //   val = {
-    //     ...val,
-    //     deliveryRatingError: true,
-    //     deliveryRatingErrorMessage: "Delivery Rating is required"
-    //   };
-    // } else {
-    //   val = {
-    //     ...val,
-    //     deliveryRatingError: false,
-    //     deliveryRatingErrorMessage: ""
-    //   };
-    // }
-    // if (!val.installationRating) {
-    //   val = {
-    //     ...val,
-    //     installationRatingError: true,
-    //     installationRatingErrorMessage: "Installation Rating is required"
-    //   };
-    // } else {
-    //   val = {
-    //     ...val,
-    //     installationRatingError: false,
-    //     installationRatingErrorMessage: ""
-    //   };
-    // }
-    // if (!val.overallRating) {
-    //   val = {
-    //     ...val,
-    //     overallRatingError: true,
-    //     overallRatingErrorMessage: "Overall Rating is required"
-    //   };
-    // } else {
-    //   val = {
-    //     ...val,
-    //     overallRatingError: false,
-    //     overallRatingErrorMessage: ""
-    //   };
-    // }
-    // if (val.installationRating <= 3) {
-    //   if (!val.installationReview) {
-    //     val = {
-    //       ...val,
-    //       installationReviewError: true,
-    //       installationReviewErrorMessage: "Installation Review is required"
-    //     };
-    //   } else {
-    //     val = {
-    //       ...val,
-    //       installationReviewError: false,
-    //       installationReviewErrorMessage: ""
-    //     };
-    //   }
-    // } else {
-    //   val = {
-    //     ...val,
-    //     installationReviewError: false,
-    //     installationReviewErrorMessage: ""
-    //   };
-    // }
-    // if (val.deliveryRating <= 3) {
-    //   if (!val.deliveryReview) {
-    //     val = {
-    //       ...val,
-    //       deliveryReviewError: true,
-    //       deliveryReviewErrorMessage: "Delivery Review is required"
-    //     };
-    //   } else {
-    //     val = {
-    //       ...val,
-    //       deliveryReviewError: false,
-    //       deliveryReviewErrorMessage: ""
-    //     };
-    //   }
-    // } else {
-    //   val = {
-    //     ...val,
-    //     deliveryReviewError: false,
-    //     deliveryReviewErrorMessage: ""
-    //   };
-    // }
-    // if (val.overallRating <= 3) {
-    //   if (!val.overallReview) {
-    //     val = {
-    //       ...val,
-    //       overallReviewError: true,
-    //       overallReviewErrorMessage: "Overall Review is required"
-    //     };
-    //   } else {
-    //     val = {
-    //       ...val,
-    //       overallReviewError: false,
-    //       overallReviewErrorMessage: ""
-    //     };
-    //   }
-    // } else {
-    //   val = {
-    //     ...val,
-    //     overallReviewError: false,
-    //     overallReviewErrorMessage: ""
-    //   };
-    // }
+    if (!val.deliveryRating) {
+      val = {
+        ...val,
+        deliveryRatingError: true,
+        deliveryRatingErrorMessage: "Delivery Rating is required"
+      };
+    } else {
+      val = {
+        ...val,
+        deliveryRatingError: false,
+        deliveryRatingErrorMessage: ""
+      };
+    }
+    if (!val.installationRating) {
+      val = {
+        ...val,
+        installationRatingError: true,
+        installationRatingErrorMessage: "Installation Rating is required"
+      };
+    } else {
+      val = {
+        ...val,
+        installationRatingError: false,
+        installationRatingErrorMessage: ""
+      };
+    }
+    if (!val.overallRating) {
+      val = {
+        ...val,
+        overallRatingError: true,
+        overallRatingErrorMessage: "Overall Rating is required"
+      };
+    } else {
+      val = {
+        ...val,
+        overallRatingError: false,
+        overallRatingErrorMessage: ""
+      };
+    }
+    if (val.installationRating <= 3) {
+      if (!val.installationReview) {
+        val = {
+          ...val,
+          installationReviewError: true,
+          installationReviewErrorMessage: "Installation Review is required"
+        };
+      } else {
+        val = {
+          ...val,
+          installationReviewError: false,
+          installationReviewErrorMessage: ""
+        };
+      }
+    } else {
+      val = {
+        ...val,
+        installationReviewError: false,
+        installationReviewErrorMessage: ""
+      };
+    }
+    if (val.deliveryRating <= 3) {
+      if (!val.deliveryReview) {
+        val = {
+          ...val,
+          deliveryReviewError: true,
+          deliveryReviewErrorMessage: "Delivery Review is required"
+        };
+      } else {
+        val = {
+          ...val,
+          deliveryReviewError: false,
+          deliveryReviewErrorMessage: ""
+        };
+      }
+    } else {
+      val = {
+        ...val,
+        deliveryReviewError: false,
+        deliveryReviewErrorMessage: ""
+      };
+    }
+    if (val.overallRating <= 3) {
+      if (!val.overallReview) {
+        val = {
+          ...val,
+          overallReviewError: true,
+          overallReviewErrorMessage: "Overall Review is required"
+        };
+      } else {
+        val = {
+          ...val,
+          overallReviewError: false,
+          overallReviewErrorMessage: ""
+        };
+      }
+    } else {
+      val = {
+        ...val,
+        overallReviewError: false,
+        overallReviewErrorMessage: ""
+      };
+    }
     if (val.rating <= 3) {
       if (!val.review) {
         val = {
@@ -268,35 +268,35 @@ class FeedbackMailer extends React.Component {
       const formdata = new FormData();
       Object.values(formData).forEach(data => {
         const rating = parseInt(data.rating, 10);
-        // const deliveryRating = parseInt(data.deliveryRating);
-        // const installationRating = parseInt(data.installationRating);
-        // const overallRating = parseInt(data.overallRating);
+        const deliveryRating = parseInt(data.deliveryRating);
+        const installationRating = parseInt(data.installationRating);
+        const overallRating = parseInt(data.overallRating);
         if (data.rating)
           formdata.append(`productRating[${data.id}]`, `${rating}`);
-        // if (data.deliveryRating) {
-        //   formdata.append(`deliveryRating[${data.id}]`, `${deliveryRating}`);
-        // }
-        // if (data.installationRating) {
-        //   formdata.append(
-        //     `installationRating[${data.id}]`,
-        //     `${installationRating}`
-        //   );
-        // }
-        // if (data.overallRating) {
-        //   formdata.append(`overallRating[${data.id}]`, `${overallRating}`);
-        // }
-        // if (data.overallReview) {
-        //   formdata.append(`overallReview[${data.id}]`, data.overallReview);
-        // }
-        // if (data.deliveryReview) {
-        //   formdata.append(`deliveryReview[${data.id}]`, data.deliveryReview);
-        // }
-        // if (data.installationReview) {
-        //   formdata.append(
-        //     `installationReview[${data.id}]`,
-        //     data.installationReview
-        //   );
-        // }
+        if (data.deliveryRating) {
+          formdata.append(`deliveryRating[${data.id}]`, `${deliveryRating}`);
+        }
+        if (data.installationRating) {
+          formdata.append(
+            `installationRating[${data.id}]`,
+            `${installationRating}`
+          );
+        }
+        if (data.overallRating) {
+          formdata.append(`overallRating[${data.id}]`, `${overallRating}`);
+        }
+        if (data.overallReview) {
+          formdata.append(`overallReview[${data.id}]`, data.overallReview);
+        }
+        if (data.deliveryReview) {
+          formdata.append(`deliveryReview[${data.id}]`, data.deliveryReview);
+        }
+        if (data.installationReview) {
+          formdata.append(
+            `installationReview[${data.id}]`,
+            data.installationReview
+          );
+        }
         if (data.review) {
           formdata.append(`productReview[${data.id}]`, data.review);
         } else {
@@ -622,7 +622,7 @@ class FeedbackMailer extends React.Component {
             ) : null}
           </Box>
         </Row>
-        {/* <Row alignItems="center">
+        <Row alignItems="center">
           <Box variant="col-3" pl="15px" pr="15px">
             <Text fontSize="0.875rem" fontFamily="regular">
               Delivery Rating*
@@ -674,8 +674,8 @@ class FeedbackMailer extends React.Component {
               </Text>
             ) : null}
           </Box>
-        </Row> */}
-        {/* <Row alignItems="center">
+        </Row>
+        <Row alignItems="center">
           <Box variant="col-3" pl="15px" pr="15px">
             <Text fontSize="0.875rem" fontFamily="regular">
               Installation Rating*
@@ -781,7 +781,7 @@ class FeedbackMailer extends React.Component {
               </Text>
             ) : null}
           </Box>
-        </Row> */}
+        </Row>
       </Box>
     ));
     return renderProds;
