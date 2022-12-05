@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { NotFound } from "containers";
 import Img from "hometown-components-dev/lib/ImageHtV1";
 import Box from "hometown-components-dev/lib/BoxHtV1";
-// import Flex from "hometown-components-dev/lib/FlexHtV1";
+import Flex from "hometown-components-dev/lib/FlexHtV1";
 import Row from "hometown-components-dev/lib/RowHtV1";
 import Text from "hometown-components-dev/lib/TextHtV1";
 import Container from "hometown-components-dev/lib/ContainerHtV1";
@@ -73,13 +73,13 @@ class FeedbackMailer extends React.Component {
     this.initialRender();
   }
 
-  componentDidUpdate() {
-    const { showMore } = this.state;
-    const { prodArr } = this.props;
-    this.setState({
-      products: !showMore ? prodArr.slice(0, 2) : prodArr
-    });
-  }
+  // componentDidUpdate() {
+  //   const { showMore } = this.state;
+  //   const { prodArr } = this.props;
+  //   this.setState({
+  //     products: !showMore ? prodArr.slice(0,2) : prodArr
+  //   })
+  // }
 
   setValidErrorObject = val => {
     if (!val.rating) {
