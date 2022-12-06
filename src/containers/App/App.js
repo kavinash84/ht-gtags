@@ -134,7 +134,6 @@ const SITE_URL_MOBILE = "https://m.hometown.in";
   }
 )
 export default class App extends Component {
-  state = { mounted: false };
   static propTypes = {
     route: PropTypes.objectOf(PropTypes.any).isRequired,
     location: PropTypes.objectOf(PropTypes.any).isRequired,
@@ -183,7 +182,6 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    this.setState({ mounted: true });
     const {
       login: { isLoggedIn }
     } = this.props;
@@ -276,58 +274,21 @@ export default class App extends Component {
       notifs,
       webtochat: { visible }
     } = this.props;
-    const { mounted } = this.state;
     const pathname = (location && location.pathname) || "/";
     const url = this.checkIfSlash(pathname);
 
-    let unbxdScripts = {};
-    if (process.env.UNBXD && process.env.UNBXD === "production") {
-      unbxdScripts = {
-        autosuggestJs:
-          "https://libraries.unbxdapi.com/prod-hometown808961566375586_autosuggest.js",
-        autosuggestCss:
-          "https://libraries.unbxdapi.com/prod-hometown808961566375586_autosuggest.css",
-        searchJs:
-          "https://libraries.unbxdapi.com/prod-hometown808961566375586_search.js",
-        searchCss:
-          "https://libraries.unbxdapi.com/prod-hometown808961566375586_search.css"
-      };
-    } else if (process.env.UNBXD && process.env.UNBXD === "beta") {
-      unbxdScripts = {
-        autosuggestJs:
-          "https://sandbox.unbxd.io/dev-hometown808961566375617_autosuggest.js",
-        autosuggestCss:
-          "https://sandbox.unbxd.io/dev-hometown808961566375617_autosuggest.css",
-        searchJs:
-          "https://sandbox.unbxd.io/dev-hometown808961566375617_search.js",
-        searchCss:
-          "https://sandbox.unbxd.io/dev-hometown808961566375617_search.css"
-      };
-    } else {
-      unbxdScripts = {
-        autosuggestJs:
-          "https://sandbox.unbxd.io/stage-hometown808961566375562_autosuggest.js",
-        autosuggestCss:
-          "https://sandbox.unbxd.io/stage-hometown808961566375562_autosuggest.css",
-        searchJs:
-          "https://sandbox.unbxd.io/stage-hometown808961566375562_search.js",
-        searchCss:
-          "https://sandbox.unbxd.io/stage-hometown808961566375562_search.css"
-      };
-    }
-
     return (
       <ThemeProvider>
-        {/* {process.env.NODE_ENV !== "development" && ( */}
-        <Helmet {...config.app.head}>
-          <link
-            rel="alternate"
-            media="only screen and (max-width:640px)"
-            href={`${SITE_URL_MOBILE}${url}`}
-          />
-          <link rel="canonical" href={`${SITE_URL}${url}`} />
-          <script type="text/javascript" defer>
-            {`
+        {process.env.NODE_ENV !== "development" && (
+          <Helmet {...config.app.head}>
+            <link
+              rel="alternate"
+              media="only screen and (max-width:640px)"
+              href={`${SITE_URL_MOBILE}${url}`}
+            />
+            <link rel="canonical" href={`${SITE_URL}${url}`} />
+            <script type="text/javascript">
+              {`
                   var dataLayer = [];
                   (function(w, d, s, l, i) {
                       w[l] = w[l] || [];
@@ -344,19 +305,19 @@ export default class App extends Component {
                       f.parentNode.insertBefore(j, f);
                   })(window, document, 'script', 'dataLayer', 'GTM-T5VV7MZ');
                 `}
-          </script>
-          <script type="text/javascript">
-            {`
+            </script>
+            <script type="text/javascript">
+              {`
                   var google_tag_params={
                       ecomm_pagetype: '',
                       ecomm_prodid: [],
                       ecomm_totalvalue: '',
                     };
                   `}
-          </script>
-          {/* <!-- Meta Pixel Code --> */}
-          <script type="text/javascript">
-            {`
+            </script>
+            {/* <!-- Meta Pixel Code --> */}
+            <script type="text/javascript">
+              {`
             !function(f,b,e,v,n,t,s)
              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -368,34 +329,34 @@ export default class App extends Component {
              fbq('init', '1024172491523922');
              fbq('track', 'PageView');
              `}
-          </script>
-          {/* <!-- End Meta Pixel Code --> */}
-          {/* <!-- Global site tag (gtag.js) - Google Ads: 845903914 --> */}
-          <script
-            src="https://www.googletagmanager.com/gtag/js?id=AW-845903914"
-            defer
-          ></script>
-          <script>
-            {`
+            </script>
+            {/* <!-- End Meta Pixel Code --> */}
+            {/* <!-- Global site tag (gtag.js) - Google Ads: 845903914 --> */}
+            <script
+              async
+              src="https://www.googletagmanager.com/gtag/js?id=AW-845903914"
+            ></script>
+            <script>
+              {`
                window.dataLayer = window.dataLayer || [];
                function gtag(){dataLayer.push(arguments);}
                gtag('js', new Date());
              
                gtag('config', 'AW-845903914'); 
                `}
-          </script>
-          <script
-            src="https://libraries.unbxdapi.com/recs-sdk/v2.2.0/unbxd_recs_template_sdk_apac.js"
-            async
-          ></script>
-          <script id="_webengage_script_tag" type="text/javascript">
-            {`
+            </script>
+            <script
+              src="https://libraries.unbxdapi.com/recs-sdk/v2.2.0/unbxd_recs_template_sdk_apac.js"
+              async
+            ></script>
+            <script id="_webengage_script_tag" type="text/javascript">
+              {`
               var webengage;!function(w,e,b,n,g){function o(e,t){e[t[t.length-1]]=function(){r.__queue.push([t.join("."),
               arguments])}}var i,s,r=w[b],z=" ",l="init options track screen onReady".split(z),a="feedback survey notification".split(z),c="options render clear abort".split(z),p="Open Close Submit Complete View Click".split(z),u="identify login logout setAttribute".split(z);if(!r||!r.__v){for(w[b]=r={__queue:[],__v:"6.0",user:{}},i=0;i < l.length;i++)o(r,[l[i]]);for(i=0;i < a.length;i++){for(r[a[i]]={},s=0;s < c.length;s++)o(r[a[i]],[a[i],c[s]]);for(s=0;s < p.length;s++)o(r[a[i]],[a[i],"on"+p[s]])}for(i=0;i < u.length;i++)o(r.user,["user",u[i]]);setTimeout(function(){var f=e.createElement("script"),d=e.getElementById("_webengage_script_tag");f.type="text/javascript",f.async=!0,f.src=("https:"==e.location.protocol?"https://widgets.in.webengage.com":"http://widgets.in.webengage.com")+"/js/webengage-min-v-6.0.js",d.parentNode.insertBefore(f,d)})}}(window,document,"webengage");webengage.init("${this.getWeKey()}");
               `}
-          </script>
-          <script type="text/javascript">
-            {`window.GUMLET_CONFIG = {
+            </script>
+            <script type="text/javascript">
+              {`window.GUMLET_CONFIG = {
         hosts: [{
             current: "www.hometown.in",
             gumlet: "hometown.gumlet.io"
@@ -404,43 +365,9 @@ export default class App extends Component {
     };
     (function(){d=document;s=d.createElement("script");s.src="https://cdn.gumlet.com/gumlet.js/2.1/gumlet.min.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
     `}
-          </script>
-
-          {/* Server side scripts start */}
-          {mounted && <script src={unbxdScripts.autosuggestJs} async="" />}
-          {mounted && (
-            <link
-              rel="stylesheet"
-              type="text/css"
-              href={unbxdScripts.autosuggestCss}
-            />
-          )}
-          <script src={unbxdScripts.searchJs} />
-          {mounted && (
-            <link
-              rel="stylesheet"
-              type="text/css"
-              href={unbxdScripts.searchCss}
-            />
-          )}
-          {/* <script type="text/javascript" async="" src="https://d21gpk1vhmjuf5.cloudfront.net/embed.js" /> */}
-          {mounted && (
-            <link
-              rel="stylesheet"
-              type="text/css"
-              href={unbxdScripts.searchCss}
-            />
-          )}
-          {mounted && (
-            <script
-              type="text/javascript"
-              async=""
-              src="https://d21gpk1vhmjuf5.cloudfront.net/unbxdAnalytics.js"
-            />
-          )}
-          {/* server side scripts end */}
-        </Helmet>
-        {/* )} */}
+            </script>
+          </Helmet>
+        )}
         <main className={styles.appContent}>
           <div className="container">
             <Notifs
