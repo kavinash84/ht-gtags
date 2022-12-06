@@ -110,14 +110,14 @@ src=https://www.facebook.com/tr?id=1024172491523922&ev=Lead&noscript=1
           </noscript>
           {/* <!-- End Meta Pixel Code --> */}
         </Helmet>
-        <noscript>
+        {/* <noscript>
           <img
             height="1"
             width="1"
             style="display:none"
             src="https://www.facebook.com/tr?id=171725297723956&ev=PageView&noscript=1"
           />
-        </noscript>
+        </noscript> */}
         <noscript>
           <img src="https://ttrk.ringocount.com/pixel?adid=621c50fcfba3a36de041935b" />
         </noscript>

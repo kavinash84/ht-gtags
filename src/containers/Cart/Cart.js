@@ -12,6 +12,7 @@ import CartBreadCumb from "components/Cart/breadDumb";
 import { resetCheck } from "redux/modules/cart";
 import { getCartList, getStockOutProducts } from "selectors/cart";
 import { togglePopUp } from "redux/modules/webtochat";
+import { formatProductURL } from "utils/helper";
 
 /**
  * Components
@@ -35,11 +36,11 @@ import PinCode from "components/PinCode";
 import ResponsiveModal from "components/Modal";
 // import Notifications from "components/Notifications";
 // import Empty from "./Empty";
-import NewUnboxRecentlyViewed from "../../components/NewUnboxWidges/recentlyViewed";
 import EmptyNew from "./EmptyNew";
 // import UnbxdRecommendedForYou from "../../components/Unbxd/unbxdRecommendedForYou";
 import { WEViewCart } from "../../redux/modules/cart";
 import HappyToHelp from "../../components/Cart/HappyToHelp";
+import NewUnboxRecomondedForYou from "../../components/NewUnboxWidges/recomondedForYou";
 
 /**
  * Icons / Images
@@ -109,6 +110,11 @@ const HdfcPopMessage = () => (
     </Heading>
   </Box>
 );
+
+const navigateToPDP = history => (name, sku) => {
+  const productURL = formatProductURL(name, sku);
+  history.push(productURL);
+};
 
 @connect(
   ({
@@ -183,9 +189,13 @@ export default class CartContainer extends Component {
   componentDidMount() {
     const {
       cartTimeout,
+      history,
       summary: { total }
     } = this.props;
+    window.HTSEARCH = {};
+    window.HTSEARCH.navigateToPDP = navigateToPDP(history);
     window.scroll(0, 0);
+
     const popUpTimeoutId = setTimeout(this.webToChat, cartTimeout);
     // eslint-disable-next-line react/no-did-mount-set-state
     this.setState({ popUpTimeoutId });
@@ -289,6 +299,19 @@ export default class CartContainer extends Component {
     } = this.props;
     const { responsiveModalContent, open, emiPopUpShown } = this.state;
     const modalClass = emiPopUpShown ? "noCostEmiModal" : "pincodeModal";
+    const productIds =
+      Array.isArray(results) && results.length
+        ? results.map(item => {
+            if (item.product_info && item.product_info.product_id)
+              return item.product_info.product_id;
+            else return "";
+          })
+        : [];
+
+    console.log(
+      productIds.filter(item => item !== ""),
+      "results"
+    );
 
     return (
       <Wrapper>
@@ -385,14 +408,12 @@ export default class CartContainer extends Component {
                 outOfStockList={outOfStockList}
                 handlePincodeModal={this.handlePincodeModal}
               />
-              {window && window.UnbxdSiteName && (
-                <NewUnboxRecentlyViewed
-                  pageInfo={{
-                    pageType: "PRODUCT",
-                    productIds: [""]
-                  }}
-                />
-              )}
+              <NewUnboxRecomondedForYou
+                pageInfo={{
+                  pageType: "CART",
+                  productIds: productIds.filter(item => item !== "")
+                }}
+              />
             </Box>
           ) : (
             loading && <CartShimmer />
