@@ -441,14 +441,11 @@ export default class Listing extends Component {
               {obj.catlevel1Name ? <NewUnboxBestSeller pageInfo={obj} /> : null}
             </div>
 
-                {seoInfo && seoInfo.seo_text && (
-                  <SeoContent>
-                    <div
-                      dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }}
-                    />
-                  </SeoContent>
-                )}
-              </div>
+            {seoInfo && seoInfo.seo_text && (
+              <SeoContent>
+                <div dangerouslySetInnerHTML={{ __html: seoInfo.seo_text }} />
+              </SeoContent>
+            )}
           </Box>
           <Footer />
         </Body>
