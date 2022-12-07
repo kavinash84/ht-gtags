@@ -133,9 +133,9 @@ fbq('track', 'MKlead');
           ) :
             null}
           {showScript ? (
-            <noscript><img height="1" width="1" style="display:none"
+            <noscript>{`<img height="1" width="1" style="display:none"
               src="https://www.facebook.com/tr?id=1024172491523922&ev=MKlead&noscript=1"
-            /></noscript>
+            />`}</noscript>
           ) : null}
 
           {/* End Facebook Pixel Code */}

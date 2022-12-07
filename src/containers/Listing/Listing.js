@@ -427,9 +427,10 @@ export default class Listing extends Component {
 
 
           {window.unbxd_category === 'Kids' ? (
-            <noscript><img height="1" width="1" style="display:none"
+            <noscript>{`<img height="1" width="1" style="display:none"
               src="https://www.facebook.com/tr?id=645559940467490&ev=PageView&noscript=1"
-            /></noscript>
+            />
+            `}</noscript>
           ) : null
 
           }
