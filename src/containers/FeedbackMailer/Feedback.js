@@ -613,7 +613,7 @@ class FeedbackMailer extends React.Component {
           <Row alignItems="center">
             <Box variant="col-3" pl="15px" pr="15px">
               <Text fontSize="0.875rem" fontFamily="regular">
-                Delivery Rating*
+                Rate your Delivery Experience*
               </Text>
             </Box>
             <Box variant="col-3" pl="0" pr="15px">
@@ -664,7 +664,7 @@ class FeedbackMailer extends React.Component {
           <Row alignItems="center">
             <Box variant="col-3" pl="15px" pr="15px">
               <Text fontSize="0.875rem" fontFamily="regular">
-                Installation Rating*
+                Rate your Installation Experience*
               </Text>
             </Box>
             <Box variant="col-3" pl="0" pr="15px">
@@ -718,7 +718,7 @@ class FeedbackMailer extends React.Component {
           <Row alignItems="center">
             <Box variant="col-3" pl="15px" pr="15px">
               <Text fontSize="0.875rem" fontFamily="regular">
-                Overall Rating*
+                Rate your Overall Experience*
               </Text>
             </Box>
             <Box variant="col-3" pl="0" pr="15px">

@@ -7,7 +7,7 @@ import { loadWarrantyCat } from "../../redux/modules/designbuild";
 
 const arrowForward = require("../../../static/newHomepage/newForwardArrow.svg");
 const Arrow = require("../../../static/categories/Line.svg");
-const BreadCrumpstyles = require("../Review/BreadCrumb.scss");
+// const BreadCrumpstyles = require("../Review/BreadCrumb.scss");
 
 export default class WarrantyComp extends Component {
   state = {
@@ -65,7 +65,7 @@ export default class WarrantyComp extends Component {
                   <img src={arrowForward} />
                 </span>
               </div>
-              <div
+              {/* <div
                 style={{
                   background: "#F9F9F9",
                   padding: "20px",
@@ -90,7 +90,7 @@ export default class WarrantyComp extends Component {
                 <span>
                   <img src={arrowForward} />
                 </span>
-              </div>
+              </div> */}
             </div>
             <div style={{ padding: "0px 15px 15px", width: "70%" }}>
               <div
