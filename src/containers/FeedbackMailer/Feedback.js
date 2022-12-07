@@ -181,25 +181,31 @@ class FeedbackMailer extends React.Component {
     } else {
       form["deliveryRatingError"] = false;
     }
-    // if (!otheresFormData.deliveryReview) {
-    //   form["deliveryReviewError"] = true;
-    // }
+    if (otheresFormData.deliveryRating <= 3) {
+      form["deliveryReviewError"] = true;
+    } else {
+      form["deliveryReviewError"] = false;
+    }
     if (!otheresFormData.installationRating) {
       form["installationRatingError"] = true;
     } else {
       form["installationRatingError"] = false;
     }
-    // if (!otheresFormData.installationReview) {
-    //   form["installationReviewError"] = true;
-    // }
+    if (otheresFormData.installationRating <= 3) {
+      form["installationReviewError"] = true;
+    } else {
+      form["installationReviewError"] = false;
+    }
     if (!otheresFormData.overallRating) {
       form["overallRatingError"] = true;
     } else {
       form["overallRatingError"] = false;
     }
-    // if (!otheresFormData.overallReview) {
-    //   form["overallReviewError"] = true;
-    // }
+    if (otheresFormData.overallRating <= 3) {
+      form["overallReviewError"] = true;
+    } else {
+      form["overallReviewError"] = false;
+    }
     this.setState({ otheresFormData: form });
   };
 
