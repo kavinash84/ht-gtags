@@ -181,7 +181,10 @@ class FeedbackMailer extends React.Component {
     } else {
       form["deliveryRatingError"] = false;
     }
-    if (otheresFormData.deliveryRating <= 3) {
+    if (
+      !otheresFormData.deliveryReview &&
+      otheresFormData.deliveryRating <= 3
+    ) {
       form["deliveryReviewError"] = true;
     } else {
       form["deliveryReviewError"] = false;
@@ -191,7 +194,10 @@ class FeedbackMailer extends React.Component {
     } else {
       form["installationRatingError"] = false;
     }
-    if (otheresFormData.installationRating <= 3) {
+    if (
+      !otheresFormData.installationReview &&
+      otheresFormData.installationRating <= 3
+    ) {
       form["installationReviewError"] = true;
     } else {
       form["installationReviewError"] = false;
@@ -201,7 +207,10 @@ class FeedbackMailer extends React.Component {
     } else {
       form["overallRatingError"] = false;
     }
-    if (otheresFormData.overallRating <= 3) {
+    if (
+      !otheresFormData.overallReview &&
+      otheresFormData.overallRating <= 3
+    ) {
       form["overallReviewError"] = true;
     } else {
       form["overallReviewError"] = false;
