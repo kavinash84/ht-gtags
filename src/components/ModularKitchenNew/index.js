@@ -66,11 +66,6 @@ class ModularKitchenNewContainer extends React.Component {
     this.setState({
       showScript: true
     });
-    setTimeout(() => {
-      this.setState({
-        showScript: false
-      });
-    }, 2000);
   };
   render() {
     const {
