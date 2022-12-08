@@ -71,16 +71,16 @@ class FeedbackMailer extends React.Component {
         deliveryReviewErrorMessage: "Delivery Review is required",
         installationRating: 0,
         installationRatingError: false,
-        installationRatingErrorMessage: "Delivery Rating is required",
+        installationRatingErrorMessage: "Installation Rating is required",
         installationReview: "",
         installationReviewError: false,
-        installationReviewErrorMessage: "Delivery Review is required",
+        installationReviewErrorMessage: "Installation Review is required",
         overallRating: 0,
         overallRatingError: false,
-        overallRatingErrorMessage: "Delivery Rating is required",
+        overallRatingErrorMessage: "Overall Rating is required",
         overallReview: "",
         overallReviewError: false,
-        overallReviewErrorMessage: "Delivery Review is required"
+        overallReviewErrorMessage: "Overall Review is required"
       },
       validFeedback: true,
       submitClicked: false,
@@ -207,10 +207,7 @@ class FeedbackMailer extends React.Component {
     } else {
       form["overallRatingError"] = false;
     }
-    if (
-      !otheresFormData.overallReview &&
-      otheresFormData.overallRating <= 3
-    ) {
+    if (!otheresFormData.overallReview && otheresFormData.overallRating <= 3) {
       form["overallReviewError"] = true;
     } else {
       form["overallReviewError"] = false;
