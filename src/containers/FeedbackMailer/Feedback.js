@@ -131,8 +131,14 @@ class FeedbackMailer extends React.Component {
   initialRender = () => {
     const { showMore } = this.state;
     const { prodArr } = this.props;
+    const arr = !showMore ? prodArr.slice(0, 2) : prodArr;
+    const form = {};
+    arr.map(item => {
+      form[`${item.id}`] = {};
+    });
     this.setState({
-      products: !showMore ? prodArr.slice(0, 2) : prodArr
+      products: !showMore ? prodArr.slice(0, 2) : prodArr,
+      formData: form
     });
   };
 
@@ -153,6 +159,11 @@ class FeedbackMailer extends React.Component {
 
   validateForm = form => {
     if (!Object.keys(form).length) return true;
+
+    const {
+      otheresFormData: { deliveryRating, installationRating, overallRating }
+    } = this.state;
+    if (!deliveryRating || !installationRating || !overallRating) return true;
 
     // add validation Error and Error message object
     Object.keys(form).forEach(key => {
@@ -861,7 +872,7 @@ class FeedbackMailer extends React.Component {
                 <Box mt="20px">
                   <Box textAlign="center" mb="30px">
                     <Button
-                      disabled={loading || !validFeedback}
+                      disabled={loading}
                       type="submit"
                       style={{ background: "#000", color: "#FFF" }}
                       onClick={e => this.handleSubmit(e)}
