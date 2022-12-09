@@ -160,11 +160,6 @@ class FeedbackMailer extends React.Component {
   validateForm = form => {
     if (!Object.keys(form).length) return true;
 
-    const {
-      otheresFormData: { deliveryRating, installationRating, overallRating }
-    } = this.state;
-    if (!deliveryRating || !installationRating || !overallRating) return true;
-
     // add validation Error and Error message object
     Object.keys(form).forEach(key => {
       form = {
@@ -174,7 +169,13 @@ class FeedbackMailer extends React.Component {
         }
       };
     });
+    console.log(form);
     this.setState({ formData: form });
+
+    const {
+      otheresFormData: { deliveryRating, installationRating, overallRating }
+    } = this.state;
+    if (!deliveryRating || !installationRating || !overallRating) return true;
 
     // Validate if there is any error
     return Object.keys(form).some(key => {
@@ -883,7 +884,7 @@ class FeedbackMailer extends React.Component {
                     <Box mt="20px" textAlign="center">
                       {!validFeedback && (
                         <Text textAlign="center" fontSize="14px" color="red">
-                          Please fill one form to submit your feedback
+                          Please fill the form to submit your feedback
                         </Text>
                       )}
                     </Box>
