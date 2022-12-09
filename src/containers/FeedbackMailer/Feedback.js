@@ -336,9 +336,9 @@ class FeedbackMailer extends React.Component {
         }
       },
       () => {
-        if (this.state.submitClicked) {
-          this.validateOtheresForm();
-        }
+        // if (this.state.submitClicked) {
+        this.validateOtheresForm();
+        // }
       }
     );
   };
