@@ -38,7 +38,6 @@ class HomeTownAdvantage extends React.Component {
               <text>{hometownadvantage.data[0].description1}</text>
               <text>{hometownadvantage.data[0].description2}</text>
               <p>&nbsp;</p>
-              <p>&nbsp;</p>
             </div>
             <div
               style={{ borderRight: "1px dashed #707070" }}
@@ -98,6 +97,7 @@ class HomeTownAdvantage extends React.Component {
               </text>
               <text>{hometownadvantage.data[6].description1}</text>
               <text>{hometownadvantage.data[6].description2}</text>
+              <p>&nbsp;</p>
             </div>
             <div className={styles.innerbox}>
               <text className={styles.boldtext}>
