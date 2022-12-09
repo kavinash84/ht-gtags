@@ -268,18 +268,15 @@ class FeedbackMailer extends React.Component {
       if (overallRating) {
         formdata.append(`overallRating`, `${overallRating}`);
       }
-      if (otheresFormData.overallReview) {
-        formdata.append(`overallReview`, otheresFormData.overallReview);
-      }
-      if (otheresFormData.deliveryReview) {
-        formdata.append(`deliveryReview`, otheresFormData.deliveryReview);
-      }
-      if (otheresFormData.installationReview) {
-        formdata.append(
-          `installationReview`,
-          otheresFormData.installationReview
-        );
-      }
+      // if (otheresFormData.overallReview) {
+      formdata.append(`overallReview`, otheresFormData.overallReview);
+      // }
+      // if (otheresFormData.deliveryReview) {
+      formdata.append(`deliveryReview`, otheresFormData.deliveryReview);
+      // }
+      // if (otheresFormData.installationReview) {
+      formdata.append(`installationReview`, otheresFormData.installationReview);
+      // }
       Object.values(formData).forEach(data => {
         const rating = parseInt(data.rating, 10);
 
@@ -292,6 +289,7 @@ class FeedbackMailer extends React.Component {
           formdata.append(`productReview[${data.id}]`, "");
         }
         if (data.image) formdata.append("uploadImage", data.image);
+        else formdata.append("uploadImage", "");
       });
       formdata.append("customerMobile", mobile);
       formdata.append("products", `${prodIds}`);
@@ -336,9 +334,9 @@ class FeedbackMailer extends React.Component {
         }
       },
       () => {
-        if (this.state.submitClicked) {
-          this.validateOtheresForm();
-        }
+        // if (this.state.submitClicked) {
+        this.validateOtheresForm();
+        // }
       }
     );
   };
