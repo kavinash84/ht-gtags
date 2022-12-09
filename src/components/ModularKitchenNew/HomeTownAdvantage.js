@@ -35,7 +35,8 @@ class HomeTownAdvantage extends React.Component {
               <text className={styles.boldtext}>
                 {hometownadvantage.data[0].title}
               </text>
-              <text>{hometownadvantage.data[0].description}</text>
+              <text>{hometownadvantage.data[0].description1}</text>
+              <text>{hometownadvantage.data[0].description2}</text>
               <p>&nbsp;</p>
               <p>&nbsp;</p>
             </div>
@@ -46,8 +47,8 @@ class HomeTownAdvantage extends React.Component {
               <text className={styles.boldtext}>
                 {hometownadvantage.data[1].title}
               </text>
-              <text>Design</text>
-              <text>Studios</text>
+              <text>{hometownadvantage.data[1].description1}</text>
+              <text>{hometownadvantage.data[1].description2}</text>
             </div>
             <div
               style={{ borderRight: "1px dashed #707070" }}
@@ -56,15 +57,15 @@ class HomeTownAdvantage extends React.Component {
               <text className={styles.boldtext}>
                 {hometownadvantage.data[2].title}
               </text>{" "}
-              <text>Homes</text>
-              <text>Designed</text>
+              <text>{hometownadvantage.data[2].description1}</text>
+              <text>{hometownadvantage.data[2].description2}</text>
             </div>
             <div className={styles.innerbox}>
               <text className={styles.boldtext}>
                 {hometownadvantage.data[3].title}
               </text>
-              <text>Project</text>
-              <text>Management</text>
+              <text>{hometownadvantage.data[3].description1}</text>
+              <text>{hometownadvantage.data[3].description2}</text>
             </div>
           </div>
           <div className={styles.outerbox2}>
@@ -75,8 +76,8 @@ class HomeTownAdvantage extends React.Component {
               <text className={styles.boldtext}>
                 {hometownadvantage.data[4].title}
               </text>
-              <text>In-House</text>
-              <text>Designers</text>
+              <text>{hometownadvantage.data[4].description1}</text>
+              <text>{hometownadvantage.data[4].description2}</text>
             </div>
             <div
               style={{ borderRight: "1px dashed #707070" }}
@@ -85,8 +86,8 @@ class HomeTownAdvantage extends React.Component {
               <text className={styles.boldtext}>
                 {hometownadvantage.data[5].title}
               </text>
-              <text>Empanelled</text>
-              <text>Contractors</text>
+              <text>{hometownadvantage.data[5].description1}</text>
+              <text>{hometownadvantage.data[5].description2}</text>
             </div>
             <div
               style={{ borderRight: "1px dashed #707070" }}
@@ -95,15 +96,15 @@ class HomeTownAdvantage extends React.Component {
               <text className={styles.boldtext}>
                 {hometownadvantage.data[6].title}
               </text>
-              <text>Service</text>
-              <text>Visits</text>
+              <text>{hometownadvantage.data[6].description1}</text>
+              <text>{hometownadvantage.data[6].description2}</text>
             </div>
             <div className={styles.innerbox}>
               <text className={styles.boldtext}>
                 {hometownadvantage.data[7].title}
               </text>
-              <text>Transparent</text>
-              <text>Pricing</text>
+              <text>{hometownadvantage.data[7].description1}</text>
+              <text>{hometownadvantage.data[7].description2}</text>
             </div>
           </div>
         </div>
