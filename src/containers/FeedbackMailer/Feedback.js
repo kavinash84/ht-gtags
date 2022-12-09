@@ -71,16 +71,16 @@ class FeedbackMailer extends React.Component {
         deliveryReviewErrorMessage: "Delivery Review is required",
         installationRating: 0,
         installationRatingError: false,
-        installationRatingErrorMessage: "Delivery Rating is required",
+        installationRatingErrorMessage: "Installation Rating is required",
         installationReview: "",
         installationReviewError: false,
-        installationReviewErrorMessage: "Delivery Review is required",
+        installationReviewErrorMessage: "Installation Review is required",
         overallRating: 0,
         overallRatingError: false,
-        overallRatingErrorMessage: "Delivery Rating is required",
+        overallRatingErrorMessage: "Overall Rating is required",
         overallReview: "",
         overallReviewError: false,
-        overallReviewErrorMessage: "Delivery Review is required"
+        overallReviewErrorMessage: "Overall Review is required"
       },
       validFeedback: true,
       submitClicked: false,
@@ -131,8 +131,14 @@ class FeedbackMailer extends React.Component {
   initialRender = () => {
     const { showMore } = this.state;
     const { prodArr } = this.props;
+    const arr = !showMore ? prodArr.slice(0, 2) : prodArr;
+    const form = {};
+    arr.map(item => {
+      form[`${item.id}`] = {};
+    });
     this.setState({
-      products: !showMore ? prodArr.slice(0, 2) : prodArr
+      products: !showMore ? prodArr.slice(0, 2) : prodArr,
+      formData: form
     });
   };
 
@@ -163,7 +169,13 @@ class FeedbackMailer extends React.Component {
         }
       };
     });
+    console.log(form);
     this.setState({ formData: form });
+
+    const {
+      otheresFormData: { deliveryRating, installationRating, overallRating }
+    } = this.state;
+    if (!deliveryRating || !installationRating || !overallRating) return true;
 
     // Validate if there is any error
     return Object.keys(form).some(key => {
@@ -207,10 +219,7 @@ class FeedbackMailer extends React.Component {
     } else {
       form["overallRatingError"] = false;
     }
-    if (
-      !otheresFormData.overallReview &&
-      otheresFormData.overallRating <= 3
-    ) {
+    if (!otheresFormData.overallReview && otheresFormData.overallRating <= 3) {
       form["overallReviewError"] = true;
     } else {
       form["overallReviewError"] = false;
@@ -259,18 +268,15 @@ class FeedbackMailer extends React.Component {
       if (overallRating) {
         formdata.append(`overallRating`, `${overallRating}`);
       }
-      if (otheresFormData.overallReview) {
-        formdata.append(`overallReview`, otheresFormData.overallReview);
-      }
-      if (otheresFormData.deliveryReview) {
-        formdata.append(`deliveryReview`, otheresFormData.deliveryReview);
-      }
-      if (otheresFormData.installationReview) {
-        formdata.append(
-          `installationReview`,
-          otheresFormData.installationReview
-        );
-      }
+      // if (otheresFormData.overallReview) {
+      formdata.append(`overallReview`, otheresFormData.overallReview);
+      // }
+      // if (otheresFormData.deliveryReview) {
+      formdata.append(`deliveryReview`, otheresFormData.deliveryReview);
+      // }
+      // if (otheresFormData.installationReview) {
+      formdata.append(`installationReview`, otheresFormData.installationReview);
+      // }
       Object.values(formData).forEach(data => {
         const rating = parseInt(data.rating, 10);
 
@@ -283,6 +289,7 @@ class FeedbackMailer extends React.Component {
           formdata.append(`productReview[${data.id}]`, "");
         }
         if (data.image) formdata.append("uploadImage", data.image);
+        else formdata.append("uploadImage", "");
       });
       formdata.append("customerMobile", mobile);
       formdata.append("products", `${prodIds}`);
@@ -327,9 +334,9 @@ class FeedbackMailer extends React.Component {
         }
       },
       () => {
-        if (this.state.submitClicked) {
-          this.validateOtheresForm();
-        }
+        // if (this.state.submitClicked) {
+        this.validateOtheresForm();
+        // }
       }
     );
   };
@@ -864,7 +871,7 @@ class FeedbackMailer extends React.Component {
                 <Box mt="20px">
                   <Box textAlign="center" mb="30px">
                     <Button
-                      disabled={loading || !validFeedback}
+                      disabled={loading}
                       type="submit"
                       style={{ background: "#000", color: "#FFF" }}
                       onClick={e => this.handleSubmit(e)}
@@ -875,7 +882,7 @@ class FeedbackMailer extends React.Component {
                     <Box mt="20px" textAlign="center">
                       {!validFeedback && (
                         <Text textAlign="center" fontSize="14px" color="red">
-                          Please fill one form to submit your feedback
+                          Please fill the form to submit your feedback
                         </Text>
                       )}
                     </Box>
