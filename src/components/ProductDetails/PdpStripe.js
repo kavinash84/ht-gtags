@@ -28,28 +28,28 @@ const Stripes = ({
   freeInstallation,
   isFurnitureStripe
 }) => (
-    // const isFurnitureCategory = fkCatalogSupplier === '38';
-    // const noQuestionsAsked = isFurnitureCategory && brand === 'HomeTown';
-    <Box>
-      <Flex justifyContent="flex-start" alignItems="baseline" marginLeft="10px">
-        {isEmiAvailable ? (
-          <Col variant="col-2" m="5px auto" px="0" alignItems="center">
-            <Image className={styles.pdpStripeIcons} src={Emi} />
-            <Text fontSize=" 10px" lineHeight="13px" textAlign="center" mt="5px">
-              EMI from ₹{emi}
-              <a href>{children}</a>{" "}
-            </Text>
-          </Col>
-        ) : null}
-        {warrantyPeriod && warrantyPeriod !== "None" ? (
-          <Col variant="col-2" m="5px auto" px="0" alignItems="center">
-            <Image className={styles.pdpStripeIcons} src={Warranty} />
-            <Text fontSize=" 10px" lineHeight="13px" textAlign="center" mt="5px">
-              {warrantyPeriod} Warranty
+  // const isFurnitureCategory = fkCatalogSupplier === '38';
+  // const noQuestionsAsked = isFurnitureCategory && brand === 'HomeTown';
+  <Box>
+    <Flex justifyContent="flex-start" alignItems="baseline" marginLeft="10px">
+      {isEmiAvailable ? (
+        <Col variant="col-2" m="5px auto" px="0" alignItems="center">
+          <Image className={styles.pdpStripeIcons} src={Emi} />
+          <Text fontSize=" 10px" lineHeight="13px" textAlign="center" mt="5px">
+            EMI from ₹{emi}
+            <a href>{children}</a>{" "}
           </Text>
-          </Col>
-        ) : null}
-        {/* {noQuestionsAsked ? (
+        </Col>
+      ) : null}
+      {warrantyPeriod && warrantyPeriod !== "None" ? (
+        <Col variant="col-2" m="5px auto" px="0" alignItems="center">
+          <Image className={styles.pdpStripeIcons} src={Warranty} />
+          <Text fontSize=" 10px" lineHeight="13px" textAlign="center" mt="5px">
+            {warrantyPeriod} Warranty
+          </Text>
+        </Col>
+      ) : null}
+      {/* {noQuestionsAsked ? (
           <Col variant="col-2" m="5px auto" px="0" alignItems="center">
             <Image className={styles.pdpStripeIcons} src={Noquestion} />
             <Text fontSize=" 10px" lineHeight="13px" textAlign="center">
@@ -57,33 +57,33 @@ const Stripes = ({
             </Text>
           </Col>
         ) : null} */}
-        {isFurnitureStripe ? (
-          <Col variant="col-2" m="5px auto" px="0" alignItems="center">
-            <Image className={styles.pdpStripeIcons} src={Safe} />
-            <Text fontSize=" 10px" lineHeight="13px" textAlign="center" mt="5px">
-              Free and Safe Delivery
+      {isFurnitureStripe ? (
+        <Col variant="col-2" m="5px auto" px="0" alignItems="center">
+          <Image className={styles.pdpStripeIcons} src={Safe} />
+          <Text fontSize=" 10px" lineHeight="13px" textAlign="center" mt="5px">
+            Free and Safe Delivery
           </Text>
-          </Col>
-        ) : null}
-        {freeInstallation === "Yes" ? (
-          <Col variant="col-2" m="5px auto" px="0" alignItems="center">
-            <Image className={styles.pdpStripeIcons} src={Noquestion} />
-            <Text fontSize="10px" textAlign="center" lineHeight="13px" mt="5px">
-              Free Installation
+        </Col>
+      ) : null}
+      {freeInstallation === "Yes" ? (
+        <Col variant="col-2" m="5px auto" px="0" alignItems="center">
+          <Image className={styles.pdpStripeIcons} src={Noquestion} />
+          <Text fontSize="10px" textAlign="center" lineHeight="13px" mt="5px">
+            Free Installation
           </Text>
-          </Col>
-        ) : null}
-        {freeVisit === "Yes" ? (
+        </Col>
+      ) : null}
+      {/* {freeVisit === "Yes" ? (
           <Col variant="col-2" m="5px auto" px="0" alignItems="center">
             <Image className={styles.pdpStripeIcons} src={ServiceCamp} />
             <Text fontSize=" 10px" lineHeight="13px" textAlign="center" mt="5px">
               4 Free Service Visits
           </Text>
           </Col>
-        ) : null}
-      </Flex>
-    </Box>
-  );
+        ) : null} */}
+    </Flex>
+  </Box>
+);
 Stripes.propTypes = {
   emi: PropTypes.string,
   // fkCatalogSupplier: PropTypes.number.isRequired,

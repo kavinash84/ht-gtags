@@ -62,6 +62,26 @@ class FeedbackMailer extends React.Component {
     this.state = {
       showMore: false,
       formData: {},
+      otheresFormData: {
+        deliveryRating: 0,
+        deliveryRatingError: false,
+        deliveryRatingErrorMessage: "Delivery Rating is required",
+        deliveryReview: "",
+        deliveryReviewError: false,
+        deliveryReviewErrorMessage: "Delivery Review is required",
+        installationRating: 0,
+        installationRatingError: false,
+        installationRatingErrorMessage: "Installation Rating is required",
+        installationReview: "",
+        installationReviewError: false,
+        installationReviewErrorMessage: "Installation Review is required",
+        overallRating: 0,
+        overallRatingError: false,
+        overallRatingErrorMessage: "Overall Rating is required",
+        overallReview: "",
+        overallReviewError: false,
+        overallReviewErrorMessage: "Overall Review is required"
+      },
       validFeedback: true,
       submitClicked: false,
       images: {},
@@ -91,108 +111,7 @@ class FeedbackMailer extends React.Component {
     } else {
       val = { ...val, ratingError: false, ratingErrorMessage: "" };
     }
-    // if (!val.deliveryRating) {
-    //   val = {
-    //     ...val,
-    //     deliveryRatingError: true,
-    //     deliveryRatingErrorMessage: "Delivery Rating is required"
-    //   };
-    // } else {
-    //   val = {
-    //     ...val,
-    //     deliveryRatingError: false,
-    //     deliveryRatingErrorMessage: ""
-    //   };
-    // }
-    // if (!val.installationRating) {
-    //   val = {
-    //     ...val,
-    //     installationRatingError: true,
-    //     installationRatingErrorMessage: "Installation Rating is required"
-    //   };
-    // } else {
-    //   val = {
-    //     ...val,
-    //     installationRatingError: false,
-    //     installationRatingErrorMessage: ""
-    //   };
-    // }
-    // if (!val.overallRating) {
-    //   val = {
-    //     ...val,
-    //     overallRatingError: true,
-    //     overallRatingErrorMessage: "Overall Rating is required"
-    //   };
-    // } else {
-    //   val = {
-    //     ...val,
-    //     overallRatingError: false,
-    //     overallRatingErrorMessage: ""
-    //   };
-    // }
-    // if (val.installationRating <= 3) {
-    //   if (!val.installationReview) {
-    //     val = {
-    //       ...val,
-    //       installationReviewError: true,
-    //       installationReviewErrorMessage: "Installation Review is required"
-    //     };
-    //   } else {
-    //     val = {
-    //       ...val,
-    //       installationReviewError: false,
-    //       installationReviewErrorMessage: ""
-    //     };
-    //   }
-    // } else {
-    //   val = {
-    //     ...val,
-    //     installationReviewError: false,
-    //     installationReviewErrorMessage: ""
-    //   };
-    // }
-    // if (val.deliveryRating <= 3) {
-    //   if (!val.deliveryReview) {
-    //     val = {
-    //       ...val,
-    //       deliveryReviewError: true,
-    //       deliveryReviewErrorMessage: "Delivery Review is required"
-    //     };
-    //   } else {
-    //     val = {
-    //       ...val,
-    //       deliveryReviewError: false,
-    //       deliveryReviewErrorMessage: ""
-    //     };
-    //   }
-    // } else {
-    //   val = {
-    //     ...val,
-    //     deliveryReviewError: false,
-    //     deliveryReviewErrorMessage: ""
-    //   };
-    // }
-    // if (val.overallRating <= 3) {
-    //   if (!val.overallReview) {
-    //     val = {
-    //       ...val,
-    //       overallReviewError: true,
-    //       overallReviewErrorMessage: "Overall Review is required"
-    //     };
-    //   } else {
-    //     val = {
-    //       ...val,
-    //       overallReviewError: false,
-    //       overallReviewErrorMessage: ""
-    //     };
-    //   }
-    // } else {
-    //   val = {
-    //     ...val,
-    //     overallReviewError: false,
-    //     overallReviewErrorMessage: ""
-    //   };
-    // }
+
     if (val.rating <= 3) {
       if (!val.review) {
         val = {
@@ -212,8 +131,14 @@ class FeedbackMailer extends React.Component {
   initialRender = () => {
     const { showMore } = this.state;
     const { prodArr } = this.props;
+    const arr = !showMore ? prodArr.slice(0, 2) : prodArr;
+    const form = {};
+    arr.map(item => {
+      form[`${item.id}`] = {};
+    });
     this.setState({
-      products: !showMore ? prodArr.slice(0, 2) : prodArr
+      products: !showMore ? prodArr.slice(0, 2) : prodArr,
+      formData: form
     });
   };
 
@@ -244,7 +169,13 @@ class FeedbackMailer extends React.Component {
         }
       };
     });
+    console.log(form);
     this.setState({ formData: form });
+
+    const {
+      otheresFormData: { deliveryRating, installationRating, overallRating }
+    } = this.state;
+    if (!deliveryRating || !installationRating || !overallRating) return true;
 
     // Validate if there is any error
     return Object.keys(form).some(key => {
@@ -254,55 +185,111 @@ class FeedbackMailer extends React.Component {
     });
   };
 
+  validateOtheresForm = () => {
+    const { otheresFormData } = this.state;
+    const form = { ...otheresFormData };
+    if (!otheresFormData.deliveryRating) {
+      form["deliveryRatingError"] = true;
+    } else {
+      form["deliveryRatingError"] = false;
+    }
+    if (
+      !otheresFormData.deliveryReview &&
+      otheresFormData.deliveryRating <= 3
+    ) {
+      form["deliveryReviewError"] = true;
+    } else {
+      form["deliveryReviewError"] = false;
+    }
+    if (!otheresFormData.installationRating) {
+      form["installationRatingError"] = true;
+    } else {
+      form["installationRatingError"] = false;
+    }
+    if (
+      !otheresFormData.installationReview &&
+      otheresFormData.installationRating <= 3
+    ) {
+      form["installationReviewError"] = true;
+    } else {
+      form["installationReviewError"] = false;
+    }
+    if (!otheresFormData.overallRating) {
+      form["overallRatingError"] = true;
+    } else {
+      form["overallRatingError"] = false;
+    }
+    if (!otheresFormData.overallReview && otheresFormData.overallRating <= 3) {
+      form["overallReviewError"] = true;
+    } else {
+      form["overallReviewError"] = false;
+    }
+    this.setState({ otheresFormData: form });
+  };
+
   handleSubmit = e => {
     e.preventDefault();
-    const { formData } = this.state;
+    const { formData, otheresFormData } = this.state;
+    const {
+      deliveryRatingError,
+      deliveryReviewError,
+      installationRatingError,
+      installationReviewError,
+      overallRatingError,
+      overallReviewError
+    } = otheresFormData;
     const { customer, setFeedbackForm, mobile, sapOrderNumber } = this.props;
     const valid = !this.validateForm(formData);
+    this.validateOtheresForm();
     this.setState({
       submitClicked: true,
       validFeedback: valid
     });
-    if (valid) {
+    if (
+      valid &&
+      !deliveryRatingError &&
+      !deliveryReviewError &&
+      !installationRatingError &&
+      !installationReviewError &&
+      !overallRatingError &&
+      !overallReviewError
+    ) {
       const prodIds = Object.keys(formData).join();
       const formdata = new FormData();
+      const deliveryRating = parseInt(otheresFormData.deliveryRating);
+      const installationRating = parseInt(otheresFormData.installationRating);
+      const overallRating = parseInt(otheresFormData.overallRating);
+      if (deliveryRating) {
+        formdata.append(`deliveryRating`, `${deliveryRating}`);
+      }
+      if (installationRating) {
+        formdata.append(`installationRating`, `${installationRating}`);
+      }
+      if (overallRating) {
+        formdata.append(`overallRating`, `${overallRating}`);
+      }
+      // if (otheresFormData.overallReview) {
+      formdata.append(`overallReview`, otheresFormData.overallReview);
+      // }
+      // if (otheresFormData.deliveryReview) {
+      formdata.append(`deliveryReview`, otheresFormData.deliveryReview);
+      // }
+      // if (otheresFormData.installationReview) {
+      formdata.append(`installationReview`, otheresFormData.installationReview);
+      // }
       Object.values(formData).forEach(data => {
         const rating = parseInt(data.rating, 10);
-        // const deliveryRating = parseInt(data.deliveryRating);
-        // const installationRating = parseInt(data.installationRating);
-        // const overallRating = parseInt(data.overallRating);
+
         if (data.rating)
           formdata.append(`productRating[${data.id}]`, `${rating}`);
-        // if (data.deliveryRating) {
-        //   formdata.append(`deliveryRating[${data.id}]`, `${deliveryRating}`);
-        // }
-        // if (data.installationRating) {
-        //   formdata.append(
-        //     `installationRating[${data.id}]`,
-        //     `${installationRating}`
-        //   );
-        // }
-        // if (data.overallRating) {
-        //   formdata.append(`overallRating[${data.id}]`, `${overallRating}`);
-        // }
-        // if (data.overallReview) {
-        //   formdata.append(`overallReview[${data.id}]`, data.overallReview);
-        // }
-        // if (data.deliveryReview) {
-        //   formdata.append(`deliveryReview[${data.id}]`, data.deliveryReview);
-        // }
-        // if (data.installationReview) {
-        //   formdata.append(
-        //     `installationReview[${data.id}]`,
-        //     data.installationReview
-        //   );
-        // }
+
         if (data.review) {
           formdata.append(`productReview[${data.id}]`, data.review);
         } else {
           formdata.append(`productReview[${data.id}]`, "");
         }
         if (data.image) formdata.append("uploadImage", data.image);
+        else formdata.append("uploadImage", "");
       });
       formdata.append("customerMobile", mobile);
       formdata.append("products", `${prodIds}`);
@@ -333,6 +320,23 @@ class FeedbackMailer extends React.Component {
             validFeedback: !this.validateForm(this.state.formData)
           });
         }
+      }
+    );
+  };
+
+  otheresRatingsChanged = (newRating, id) => {
+    const { otheresFormData } = this.state;
+    this.setState(
+      {
+        otheresFormData: {
+          ...otheresFormData,
+          [`${id}`]: newRating
+        }
+      },
+      () => {
+        // if (this.state.submitClicked) {
+        this.validateOtheresForm();
+        // }
       }
     );
   };
@@ -460,7 +464,7 @@ class FeedbackMailer extends React.Component {
 
   renderProducts = () => {
     const { orderDate } = this.props;
-    const { formData, images, products } = this.state;
+    const { formData, images, products, otheresFormData } = this.state;
     // let products = [];
     // if (!this.state.showMore) {
     //   // products = prodArr.slice(0, 2);
@@ -622,169 +626,171 @@ class FeedbackMailer extends React.Component {
             ) : null}
           </Box>
         </Row>
-        {/* <Row alignItems="center">
-          <Box variant="col-3" pl="15px" pr="15px">
-            <Text fontSize="0.875rem" fontFamily="regular">
-              Delivery Rating*
-            </Text>
-          </Box>
-          <Box variant="col-3" pl="0" pr="15px">
-            <ReactStars
-              count={5}
-              onChange={val =>
-                this.ratingChanged(val, prod.id, prod, "deliveryRating")
-              }
-              size={20}
-              value={
-                formData[`${prod.id}`] && formData[`${prod.id}`].deliveryRating
-                  ? formData[`${prod.id}`].deliveryRating
-                  : 0
-              }
-              half={false}
-              color2="#ffd700"
-            />
-            {formData[`${prod.id}`] &&
-            formData[`${prod.id}`].deliveryRatingError ? (
-              <Text color="red" fontSize="12px">
-                {formData[`${prod.id}`].deliveryRatingErrorMessage}
-              </Text>
-            ) : null}
-          </Box>
-          <Box variant="col-3" pl="15px" pr="15px">
-            <Text fontSize="0.875rem" fontFamily="regular">
-              Delivery Review
-            </Text>
-          </Box>
-          <Box variant="col-3" pl="0" pr="15px">
-            <textarea
-              style={{
-                padding: "4px",
-                width: "195px",
-                outline: "none"
-              }}
-              type="text"
-              onChange={e =>
-                this.handleChange(e.target.value, prod, "deliveryReview")
-              }
-            />
-            {formData[`${prod.id}`] &&
-            formData[`${prod.id}`].deliveryReviewError ? (
-              <Text color="red" fontSize="12px">
-                {formData[`${prod.id}`].deliveryReviewErrorMessage}
-              </Text>
-            ) : null}
-          </Box>
-        </Row> */}
-        {/* <Row alignItems="center">
-          <Box variant="col-3" pl="15px" pr="15px">
-            <Text fontSize="0.875rem" fontFamily="regular">
-              Installation Rating*
-            </Text>
-          </Box>
-          <Box variant="col-3" pl="0" pr="15px">
-            <ReactStars
-              count={5}
-              onChange={val =>
-                this.ratingChanged(val, prod.id, prod, "installationRating")
-              }
-              size={20}
-              value={
-                formData[`${prod.id}`] &&
-                formData[`${prod.id}`].installationRating
-                  ? formData[`${prod.id}`].installationRating
-                  : 0
-              }
-              half={false}
-              color2="#ffd700"
-            />
-            {formData[`${prod.id}`] &&
-            formData[`${prod.id}`].installationRatingError ? (
-              <Text color="red" fontSize="12px">
-                {formData[`${prod.id}`].installationRatingErrorMessage}
-              </Text>
-            ) : null}
-          </Box>
-          <Box variant="col-3" pl="15px" pr="15px">
-            <Text fontSize="0.875rem" fontFamily="regular">
-              Installation Review
-            </Text>
-          </Box>
-          <Box variant="col-3" pl="0" pr="15px">
-            <textarea
-              style={{
-                padding: "4px",
-                width: "195px",
-                outline: "none"
-              }}
-              type="text"
-              onChange={e =>
-                this.handleChange(e.target.value, prod, "installationReview")
-              }
-            />
-            {formData[`${prod.id}`] &&
-            formData[`${prod.id}`].installationReviewError ? (
-              <Text color="red" fontSize="12px">
-                {formData[`${prod.id}`].installationReviewErrorMessage}
-              </Text>
-            ) : null}
-          </Box>
-        </Row>
-        <Row alignItems="center">
-          <Box variant="col-3" pl="15px" pr="15px">
-            <Text fontSize="0.875rem" fontFamily="regular">
-              Overall Rating*
-            </Text>
-          </Box>
-          <Box variant="col-3" pl="0" pr="15px">
-            <ReactStars
-              count={5}
-              onChange={val =>
-                this.ratingChanged(val, prod.id, prod, "overallRating")
-              }
-              size={20}
-              value={
-                formData[`${prod.id}`] && formData[`${prod.id}`].overallRating
-                  ? formData[`${prod.id}`].overallRating
-                  : 0
-              }
-              half={false}
-              color2="#ffd700"
-            />
-            {formData[`${prod.id}`] &&
-            formData[`${prod.id}`].overallRatingError ? (
-              <Text color="red" fontSize="12px">
-                {formData[`${prod.id}`].overallRatingErrorMessage}
-              </Text>
-            ) : null}
-          </Box>
-          <Box variant="col-3" pl="15px" pr="15px">
-            <Text fontSize="0.875rem" fontFamily="regular">
-              Overall Review
-            </Text>
-          </Box>
-          <Box variant="col-3" pl="0" pr="15px">
-            <textarea
-              style={{
-                padding: "4px",
-                width: "195px",
-                outline: "none"
-              }}
-              type="text"
-              onChange={e =>
-                this.handleChange(e.target.value, prod, "overallReview")
-              }
-            />
-            {formData[`${prod.id}`] &&
-            formData[`${prod.id}`].overallReviewError ? (
-              <Text color="red" fontSize="12px">
-                {formData[`${prod.id}`].overallReviewErrorMessage}
-              </Text>
-            ) : null}
-          </Box>
-        </Row> */}
       </Box>
     ));
-    return renderProds;
+    return (
+      <React.Fragment>
+        {renderProds}
+        <Box style={{ background: "#f0f0f0" }} p="20px" mb="10px">
+          <Row alignItems="center">
+            <Box variant="col-3" pl="15px" pr="15px">
+              <Text fontSize="0.875rem" fontFamily="regular">
+                Rate your Delivery Experience*
+              </Text>
+            </Box>
+            <Box variant="col-3" pl="0" pr="15px">
+              <ReactStars
+                count={5}
+                onChange={val =>
+                  this.otheresRatingsChanged(val, "deliveryRating")
+                }
+                size={20}
+                value={
+                  otheresFormData[`deliveryRating`]
+                    ? otheresFormData[`deliveryRating`]
+                    : 0
+                }
+                half={false}
+                color2="#ffd700"
+              />
+              {otheresFormData.deliveryRatingError ? (
+                <Text color="red" fontSize="12px">
+                  {otheresFormData.deliveryRatingErrorMessage}
+                </Text>
+              ) : null}
+            </Box>
+            <Box variant="col-3" pl="15px" pr="15px">
+              <Text fontSize="0.875rem" fontFamily="regular">
+                Delivery Review
+              </Text>
+            </Box>
+            <Box variant="col-3" pl="0" pr="15px">
+              <textarea
+                style={{
+                  padding: "4px",
+                  width: "195px",
+                  outline: "none"
+                }}
+                type="text"
+                onChange={e =>
+                  this.otheresRatingsChanged(e.target.value, "deliveryReview")
+                }
+              />
+              {otheresFormData.deliveryReviewError ? (
+                <Text color="red" fontSize="12px">
+                  {otheresFormData.deliveryReviewErrorMessage}
+                </Text>
+              ) : null}
+            </Box>
+          </Row>
+          <Row alignItems="center">
+            <Box variant="col-3" pl="15px" pr="15px">
+              <Text fontSize="0.875rem" fontFamily="regular">
+                Rate your Installation Experience*
+              </Text>
+            </Box>
+            <Box variant="col-3" pl="0" pr="15px">
+              <ReactStars
+                count={5}
+                onChange={val =>
+                  this.otheresRatingsChanged(val, "installationRating")
+                }
+                size={20}
+                value={
+                  otheresFormData.installationRating
+                    ? otheresFormData.installationRating
+                    : 0
+                }
+                half={false}
+                color2="#ffd700"
+              />
+              {otheresFormData.installationRatingError ? (
+                <Text color="red" fontSize="12px">
+                  {otheresFormData.installationRatingErrorMessage}
+                </Text>
+              ) : null}
+            </Box>
+            <Box variant="col-3" pl="15px" pr="15px">
+              <Text fontSize="0.875rem" fontFamily="regular">
+                Installation Review
+              </Text>
+            </Box>
+            <Box variant="col-3" pl="0" pr="15px">
+              <textarea
+                style={{
+                  padding: "4px",
+                  width: "195px",
+                  outline: "none"
+                }}
+                type="text"
+                onChange={e =>
+                  this.otheresRatingsChanged(
+                    e.target.value,
+                    "installationReview"
+                  )
+                }
+              />
+              {otheresFormData.installationReviewError ? (
+                <Text color="red" fontSize="12px">
+                  {otheresFormData.installationReviewErrorMessage}
+                </Text>
+              ) : null}
+            </Box>
+          </Row>
+          <Row alignItems="center">
+            <Box variant="col-3" pl="15px" pr="15px">
+              <Text fontSize="0.875rem" fontFamily="regular">
+                Rate your Overall Experience*
+              </Text>
+            </Box>
+            <Box variant="col-3" pl="0" pr="15px">
+              <ReactStars
+                count={5}
+                onChange={val =>
+                  this.otheresRatingsChanged(val, "overallRating")
+                }
+                size={20}
+                value={
+                  otheresFormData.overallRating
+                    ? otheresFormData.overallRating
+                    : 0
+                }
+                half={false}
+                color2="#ffd700"
+              />
+              {otheresFormData.overallRatingError ? (
+                <Text color="red" fontSize="12px">
+                  {otheresFormData.overallRatingErrorMessage}
+                </Text>
+              ) : null}
+            </Box>
+            <Box variant="col-3" pl="15px" pr="15px">
+              <Text fontSize="0.875rem" fontFamily="regular">
+                Overall Review
+              </Text>
+            </Box>
+            <Box variant="col-3" pl="0" pr="15px">
+              <textarea
+                style={{
+                  padding: "4px",
+                  width: "195px",
+                  outline: "none"
+                }}
+                type="text"
+                onChange={e =>
+                  this.otheresRatingsChanged(e.target.value, "overallReview")
+                }
+              />
+              {otheresFormData.overallReviewError ? (
+                <Text color="red" fontSize="12px">
+                  {otheresFormData.overallReviewErrorMessage}
+                </Text>
+              ) : null}
+            </Box>
+          </Row>
+        </Box>
+      </React.Fragment>
+    );
   };
 
   render() {
@@ -865,7 +871,7 @@ class FeedbackMailer extends React.Component {
                 <Box mt="20px">
                   <Box textAlign="center" mb="30px">
                     <Button
-                      disabled={loading || !validFeedback}
+                      disabled={loading}
                       type="submit"
                       style={{ background: "#000", color: "#FFF" }}
                       onClick={e => this.handleSubmit(e)}
@@ -876,7 +882,7 @@ class FeedbackMailer extends React.Component {
                     <Box mt="20px" textAlign="center">
                       {!validFeedback && (
                         <Text textAlign="center" fontSize="14px" color="red">
-                          Please fill one form to submit your feedback
+                          Please fill the form to submit your feedback
                         </Text>
                       )}
                     </Box>
