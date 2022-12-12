@@ -15,6 +15,7 @@ const SliderItem = ({ image, url, onClick, target, onImageClick }) => {
       >
         <Image
           mt="15px"
+          alt="Shop our new arrival"
           data-src={image}
           src={`${image}?blur=30`}
           style={{
@@ -37,6 +38,7 @@ const SliderItem = ({ image, url, onClick, target, onImageClick }) => {
         <Image
           mt="15px"
           data-src={image}
+          alt="Shop our new arrival"
           style={{
             width: "90%",
             alignItems: "center",
@@ -57,6 +59,7 @@ const SliderItem = ({ image, url, onClick, target, onImageClick }) => {
       <Image
         mt="15px"
         src={image}
+        alt="Shop our new arrival"
         style={{
           width: "90%",
           alignItems: "center",

@@ -16,7 +16,7 @@ const ShareBar = ({ url, title, ...rest }) => (
       <li>
         <a
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noopener"
           href={`whatsapp://send?text=${url}`}
         >
           <Button
@@ -33,7 +33,7 @@ const ShareBar = ({ url, title, ...rest }) => (
       <li>
         <a
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noopener"
           href={`http://www.facebook.com/sharer.php?u=${url}`}
         >
           <Button
@@ -50,7 +50,7 @@ const ShareBar = ({ url, title, ...rest }) => (
       <li>
         <a
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noopener"
           href={`http://pinterest.com/pin/create/button/?url=${url}&description=${title}`}
         >
           <Button
@@ -67,7 +67,7 @@ const ShareBar = ({ url, title, ...rest }) => (
       <li>
         <a
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noopener"
           href={`mailto:?subject=${title}&body=${url}`}
         >
           <Button btnType="link" p="5px 3px" className={styles.button} backgroundColor="#ffffff">

@@ -65,7 +65,7 @@ export default class Reviews extends Component {
             <Div className={styles.reviewContainer}>
               {item.link && item.link.startsWith("https") ? (
                 <React.Fragment>
-                  <a href={item.link || ""} target="_blank">
+                  <a href={item.link || ""} target="_blank" rel="noopener">
                     <Div className={styles.customerName}>{item.nickname}</Div>
                     <Div className={styles.subDetails}>
                       <Div style={{ width: "80%" }}>

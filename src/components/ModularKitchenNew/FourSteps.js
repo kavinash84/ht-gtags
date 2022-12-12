@@ -20,6 +20,7 @@ class Steps extends React.Component {
           data-src={stepsToDreamhome.image}
           src={`${stepsToDreamhome.image}?blur=30`}
           style={{ width: "85%", height: "80%", minHeight: "80%" }}
+          alt="Steps to Your Kitchen"
         />
         <Box style={{ display: "flex" }}>
           <Box

@@ -516,7 +516,7 @@ class StoreLocator extends React.Component {
                               title="Hometown Store Locator Direction"
                               href={this.getURL(currentLocation, item.position)}
                               target="_blank"
-                              rel="noopener noreferrer"
+                              rel="noopener"
                             >
                               <Button
                                 variant="link"

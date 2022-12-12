@@ -106,9 +106,9 @@ fbq('track', 'Lead');
             {`<img height="1" width="1" style="display:none"
 src=https://www.facebook.com/tr?id=1024172491523922&ev=Lead&noscript=1
 />
-`}</noscript>
+`}
+          </noscript>
           {/* <!-- End Meta Pixel Code --> */}
-
         </Helmet>
         {/* <noscript>
           <img
@@ -145,8 +145,8 @@ src=https://www.facebook.com/tr?id=1024172491523922&ev=Lead&noscript=1
               THANK YOU FOR REGISTERING
             </h2>
             <h2 style={{ marginBottom: "25px", textAlign: "center" }}>
-              Your exchange voucher code has been sent on your registered email ID and
-              mobile number.
+              Your exchange voucher code has been sent on your registered email
+              ID and mobile number.
             </h2>
             <p
               style={{
@@ -155,14 +155,16 @@ src=https://www.facebook.com/tr?id=1024172491523922&ev=Lead&noscript=1
                 fontSize: "20px"
               }}
             >
-              Redeem your exchange code at the nearest HomeTown store or online on a wide range of sofas, recliners, beds, wardrobes, dining table sets, mattress and more
+              Redeem your exchange code at the nearest HomeTown store or online
+              on a wide range of sofas, recliners, beds, wardrobes, dining table
+              sets, mattress and more
             </p>
             <h2
               style={{
                 marginBottom: "10px",
                 textAlign: "center",
                 color: "#dc4c3a",
-                marginTop: "40px",
+                marginTop: "40px"
               }}
             >
               Your voucher is valid till {validity}
@@ -171,7 +173,7 @@ src=https://www.facebook.com/tr?id=1024172491523922&ev=Lead&noscript=1
           <div style={{ marginBottom: "5px" }}>
             <h2 style={{ textAlign: "center" }}>
               <a
-                rel="noopener noreferrer"
+                rel="noopener"
                 target="_blank"
                 href="https://www.hometown.in/?utm_source=Landing-Page&utm_medium=Thank-You&utm_campaign=Exchange"
                 style={{
@@ -182,9 +184,14 @@ src=https://www.facebook.com/tr?id=1024172491523922&ev=Lead&noscript=1
                 Click here to redeem code online on hometown.in
               </a>
             </h2>
-
           </div>
-          <div style={{ display: "flex", justifyContent: "space-between", marginTop: '40px' }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              marginTop: "40px"
+            }}
+          >
             {/* <div style={{ marginBottom: "5px" }}>
               <p>
                 To know more give a missed call - <b>022-41621001</b>
@@ -192,7 +199,7 @@ src=https://www.facebook.com/tr?id=1024172491523922&ev=Lead&noscript=1
             </div> */}
             <div>
               <a
-                rel="noopener noreferrer"
+                rel="noopener"
                 target="_blank"
                 onClick={() => {
                   // if (window && window.fbq) {
@@ -214,7 +221,7 @@ src=https://www.facebook.com/tr?id=1024172491523922&ev=Lead&noscript=1
             </div>
             <div style={{ marginBottom: "5px" }}>
               <a
-                rel="noopener noreferrer"
+                rel="noopener"
                 target="_blank"
                 href="https://www.hometown.in/promotions"
                 style={{ color: "rgba(51, 51, 51, 0.85)" }}

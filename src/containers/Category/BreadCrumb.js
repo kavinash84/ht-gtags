@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 
 const styles = require("./BreadCrumb.scss");
-const homelogo = require('../../../static/categories/ht-home.svg');
+const homelogo = require("../../../static/categories/ht-home.svg");
 
 const cleanTail = url => {
   if (url[url.length - 1] === "/") {
@@ -28,35 +28,39 @@ const BreadCrumb = ({ urlKey, name, handleCategoryClick }) => {
     <div className={styles.breadCrumb_container}>
       <div className={styles.homeList}>
         <Link to="/">
-          <span><img alt="Home" src={homelogo} /></span>
+          <span>
+            <img alt="Home" src={homelogo} />
+          </span>
         </Link>
       </div>
-      <ul
-        itemScope
-        itemType="http://schema.org/BreadcrumbList"
-        className={styles.breadCrumbList}
-      >
-        {/* <li key="home" itemProp="itemListElement" itemType="http://schema.org/ListItem" itemScope>
+      {link && name ? (
+        <ul
+          itemScope
+          itemType="http://schema.org/BreadcrumbList"
+          className={styles.breadCrumbList}
+        >
+          {/* <li key="home" itemProp="itemListElement" itemType="http://schema.org/ListItem" itemScope>
         <Link itemProp="item" to="/">
           <span itemProp="name">Home</span>
           <meta itemProp="position" content={1} />
         </Link>
       </li> */}
-        <li
-          itemProp="itemListElement"
-          itemType="http://schema.org/ListItem"
-          itemScope
-        >
-          <Link
-            onClick={handleCategoryClick}
-            itemProp="item"
-            to={`/${formatLink(link)}`}
+          <li
+            itemProp="itemListElement"
+            itemType="http://schema.org/ListItem"
+            itemScope
           >
-            <span itemProp="name">{name}</span>
-            <meta itemProp="position" content="1" />
-          </Link>
-        </li>
-      </ul>
+            <Link
+              onClick={handleCategoryClick}
+              itemProp="item"
+              to={`/${formatLink(link)}`}
+            >
+              <span itemProp="name">{name}</span>
+              <meta itemProp="position" content="1" />
+            </Link>
+          </li>
+        </ul>
+      ) : null}
     </div>
   );
 };

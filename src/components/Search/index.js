@@ -99,7 +99,7 @@ class Search extends React.Component {
   }
   componentDidMount() {
     const { history } = this.props;
-    window.unbxd_autosuggest_fun();
+    if (window.unbxd_autosuggest_fun) window.unbxd_autosuggest_fun();
     window.HTSEARCH = {};
     window.HTSEARCH.navigateToPDP = navigateToPDP(history);
     window.HTSEARCH.navigateToSearch = navigateToSearch(history);

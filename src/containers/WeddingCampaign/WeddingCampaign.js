@@ -1,33 +1,33 @@
-import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Row from 'hometown-components-dev/lib/RowHtV1';
-import Img from 'hometown-components-dev/lib/ImageHtV1';
-import Container from 'hometown-components-dev/lib/ContainerHtV1';
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
-import Body from 'hometown-components-dev/lib/BodyHtV1';
-import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
-import Footer from 'components/Footer';
-import Header from 'components/Header';
+import React, { Fragment } from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import Box from "hometown-components-dev/lib/BoxHtV1";
+import Row from "hometown-components-dev/lib/RowHtV1";
+import Img from "hometown-components-dev/lib/ImageHtV1";
+import Container from "hometown-components-dev/lib/ContainerHtV1";
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
+import Text from "hometown-components-dev/lib/TextHtV1";
+import Body from "hometown-components-dev/lib/BodyHtV1";
+import Wrapper from "hometown-components-dev/lib/WrapperHtV1";
+import Footer from "components/Footer";
+import Header from "components/Header";
 
-const mainBanner = require('../../../static/campaign/banner.jpg');
-const happilyEver = require('../../../static/campaign/Happily-Ever-After.png');
-const category1 = require('../../../static/campaign/Bed.jpg');
-const category2 = require('../../../static/campaign/Bedding-essentials.jpg');
-const category3 = require('../../../static/campaign/Dining-Essentials.jpg');
-const category4 = require('../../../static/campaign/Kitchen-essential.jpg');
-const category5 = require('../../../static/campaign/Bath-essentials.jpg');
-const category6 = require('../../../static/campaign/travel-essential.jpg');
-const hotDeals = require('../../../static/campaign/Hot-Deals-Dining-Set.jpg');
-const kitchenBanner = require('../../../static/campaign/Kitchen-Banner.jpg');
-const duracucineLogo = require('../../../static/campaign/duracucine-logo.png');
-const dbLogo = require('../../../static/campaign/db-logo.png');
+const mainBanner = require("../../../static/campaign/banner.jpg");
+const happilyEver = require("../../../static/campaign/Happily-Ever-After.png");
+const category1 = require("../../../static/campaign/Bed.jpg");
+const category2 = require("../../../static/campaign/Bedding-essentials.jpg");
+const category3 = require("../../../static/campaign/Dining-Essentials.jpg");
+const category4 = require("../../../static/campaign/Kitchen-essential.jpg");
+const category5 = require("../../../static/campaign/Bath-essentials.jpg");
+const category6 = require("../../../static/campaign/travel-essential.jpg");
+const hotDeals = require("../../../static/campaign/Hot-Deals-Dining-Set.jpg");
+const kitchenBanner = require("../../../static/campaign/Kitchen-Banner.jpg");
+const duracucineLogo = require("../../../static/campaign/duracucine-logo.png");
+const dbLogo = require("../../../static/campaign/db-logo.png");
 
 const ContentSection = ({ description, title }) => (
   <Fragment>
-    {(title !== '' || title !== null) && (
+    {(title !== "" || title !== null) && (
       <Heading fontSize="40px" ta="center" color="black" fontFamily="light">
         {title}
       </Heading>
@@ -35,7 +35,7 @@ const ContentSection = ({ description, title }) => (
     <Row justifyContent="center" mb="20px">
       <Box bg="black" col="1" height="1px" />
     </Row>
-    {(!description !== '' || description !== null) && (
+    {(!description !== "" || description !== null) && (
       <Text fontSize="20px" ta="center">
         {description}
       </Text>
@@ -44,8 +44,8 @@ const ContentSection = ({ description, title }) => (
 );
 
 ContentSection.defaultProps = {
-  title: '',
-  description: ''
+  title: "",
+  description: ""
 };
 
 ContentSection.propTypes = {
@@ -64,7 +64,13 @@ const WeddingCampaign = () => (
         </Box>
         <Row pb="30px">
           <Box col="7" ta="center" m="auto">
-            <Img src={happilyEver} alt="" height="200px" width="auto" m="auto" />
+            <Img
+              src={happilyEver}
+              alt=""
+              height="200px"
+              width="auto"
+              m="auto"
+            />
             {/* eslint-disable max-len */}
             <ContentSection
               title="It All Starts Here"
@@ -80,17 +86,41 @@ const WeddingCampaign = () => (
             <Heading color="#3d3d3b" fontSize="20px" mt="0" mb="20px">
               Starting at Rs. 69,900/-
             </Heading>
-            <Text ta="center" color="#434341" fontSize="18px" mb="0" fontFamily="light">
+            <Text
+              ta="center"
+              color="#434341"
+              fontSize="18px"
+              mb="0"
+              fontFamily="light"
+            >
               Style up your space into a cosy and comfortable abode
             </Text>
-            <Text ta="center" color="#434341" fontSize="18px" mt="5px" fontFamily="light">
+            <Text
+              ta="center"
+              color="#434341"
+              fontSize="18px"
+              mt="5px"
+              fontFamily="light"
+            >
               with our room combo offer on furniture
             </Text>
-            <Text ta="center" color="#434341" fontSize="18px" mt="5px" fontFamily="light">
+            <Text
+              ta="center"
+              color="#434341"
+              fontSize="18px"
+              mt="5px"
+              fontFamily="light"
+            >
               and electronics
             </Text>
             <Link to="/combo-offer">
-              <Text mt="50px" ta="center" fontSize="30px" fontFamily="light" style={{ textDecoration: 'underline' }}>
+              <Text
+                mt="50px"
+                ta="center"
+                fontSize="30px"
+                fontFamily="light"
+                style={{ textDecoration: "underline" }}
+              >
                 KNOW MORE
               </Text>
             </Link>
@@ -164,18 +194,50 @@ const WeddingCampaign = () => (
         </Row>
         <Row ml="0" mr="0" alignItems="center" bg={`url(${kitchenBanner})`}>
           <Box col="6" />
-          <Box col="6" ta="center" bg="#9d9696" pt="50px" pb="30px" style={{ width: '45%' }}>
-            <Img src={duracucineLogo} alt="" width="auto" m="auto" mb="50px" height="150px" />
-            <Text ta="center" color="white" fontSize="24px" mb="0" fontFamily="light">
+          <Box
+            col="6"
+            ta="center"
+            bg="#9d9696"
+            pt="50px"
+            pb="30px"
+            style={{ width: "45%" }}
+          >
+            <Img
+              src={duracucineLogo}
+              alt=""
+              width="auto"
+              m="auto"
+              mb="50px"
+              height="150px"
+            />
+            <Text
+              ta="center"
+              color="white"
+              fontSize="24px"
+              mb="0"
+              fontFamily="light"
+            >
               Modular Kitchens Starting
             </Text>
-            <Text ta="center" color="white" fontSize="20px" mt="5px" fontFamily="light">
+            <Text
+              ta="center"
+              color="white"
+              fontSize="20px"
+              mt="5px"
+              fontFamily="light"
+            >
               at Rs. 99,900/-
             </Text>
-            <Text ta="center" color="white" fontSize="15px" mt="30px" fontFamily="light">
+            <Text
+              ta="center"
+              color="white"
+              fontSize="15px"
+              mt="30px"
+              fontFamily="light"
+            >
               50000 CUSTOMERS | 1000 MODULES | 200 FINISHES
             </Text>
-            <Link to="/modular-kitchens/" target="_blank" rel="noopener noreferrer">
+            <Link to="/modular-kitchens/" target="_blank" rel="noopener">
               <Text
                 mt="20px"
                 mb="0"
@@ -183,7 +245,7 @@ const WeddingCampaign = () => (
                 color="white"
                 fontSize="20px"
                 fontFamily="light"
-                style={{ textDecoration: 'underline' }}
+                style={{ textDecoration: "underline" }}
               >
                 CLICK HERE
               </Text>
@@ -196,15 +258,42 @@ const WeddingCampaign = () => (
           </Box>
         </Row>
         <Row alignItems="center" bg={`url(${kitchenBanner})`}>
-          <Box col="6" ta="center" bg="#9d9696" pt="50px" pb="30px" style={{ width: '45%' }} ml="5%">
-            <Img src={dbLogo} alt="" width="auto" m="auto" mb="50px" height="150px" />
-            <Text ta="center" color="white" fontSize="20px" mb="0" fontFamily="light">
+          <Box
+            col="6"
+            ta="center"
+            bg="#9d9696"
+            pt="50px"
+            pb="30px"
+            style={{ width: "45%" }}
+            ml="5%"
+          >
+            <Img
+              src={dbLogo}
+              alt=""
+              width="auto"
+              m="auto"
+              mb="50px"
+              height="150px"
+            />
+            <Text
+              ta="center"
+              color="white"
+              fontSize="20px"
+              mb="0"
+              fontFamily="light"
+            >
               MODULAR KITCHEN | MODULAR WARDROBE
             </Text>
-            <Text ta="center" color="white" fontSize="20px" mt="5px" fontFamily="light">
+            <Text
+              ta="center"
+              color="white"
+              fontSize="20px"
+              mt="5px"
+              fontFamily="light"
+            >
               FULL HOUSE INTERIORS | PART HOUSE RENOVATION
             </Text>
-            <Link target="_blank" rel="noopener noreferrer" to="/design-build/">
+            <Link target="_blank" rel="noopener" to="/design-build/">
               <Text
                 mt="50px"
                 mb="0"
@@ -212,7 +301,7 @@ const WeddingCampaign = () => (
                 color="white"
                 fontSize="30px"
                 fontFamily="light"
-                style={{ textDecoration: 'underline' }}
+                style={{ textDecoration: "underline" }}
               >
                 CLICK HERE
               </Text>
@@ -230,42 +319,55 @@ const WeddingCampaign = () => (
               Try Different Looks for Each Rooms
             </Heading>
             <Text color="#817f7d">
-              You can give a different look for each of your rooms in the house. For example the furniture used in your
-              living room should be beautiful, elegant as well as designer. Whether it is a sofa set or a designer
-              arrangement of traditional furniture, it should enhance the look for of your living room. Similarly,
-              your bedroom furniture should be comfortable, sturdy as well as durable. It should well fit within the
-              available space in your room without cluttering or congesting it.
+              You can give a different look for each of your rooms in the house.
+              For example the furniture used in your living room should be
+              beautiful, elegant as well as designer. Whether it is a sofa set
+              or a designer arrangement of traditional furniture, it should
+              enhance the look for of your living room. Similarly, your bedroom
+              furniture should be comfortable, sturdy as well as durable. It
+              should well fit within the available space in your room without
+              cluttering or congesting it.
             </Text>
             <Text color="#817f7d">
-              The furniture should match the overall theme of your house, which could be somber or quirky. Further, for
-              a modern look, you can use a modular kitchen that beautifies the house instantly. Hometown offers a wide
-              range of furniture designs to help you get the best pick. You can also experiment with different material
-              for each rooms individually. For example you can use a Polyurethane furniture for your living room and use
-              a wooden bed in the bedroom. At hometown you can also explore outdoor furniture like swings, table and
-              recliner chair to have an private space for yourself.
+              The furniture should match the overall theme of your house, which
+              could be somber or quirky. Further, for a modern look, you can use
+              a modular kitchen that beautifies the house instantly. Hometown
+              offers a wide range of furniture designs to help you get the best
+              pick. You can also experiment with different material for each
+              rooms individually. For example you can use a Polyurethane
+              furniture for your living room and use a wooden bed in the
+              bedroom. At hometown you can also explore outdoor furniture like
+              swings, table and recliner chair to have an private space for
+              yourself.
             </Text>
 
             <Heading color="#55545b" fontSize="16px" mt="20px">
               Our Online Collection of Home Furnishing Products
             </Heading>
             <Text color="#817f7d">
-              Make the interior of your home the luxury of space with each of our online home furnishing items,
-              comprising an array of bed linen, curtains, bath linen , bedsheets, pillow covers, mats ,
-              cushions, protectors , covers and inserts, bedding , a mattress, bathroom accessories, blankets, towels,
-              curtain and other accessories. Choose from a wide range of attractive bedsheets, bed covers available at
-              HomeTown, ranging from floral to digital, check, ethnic, stripes or printed patterns to suit your
-              penchants. You can also choose from many beautiful pillow covers as well as pillows to complement the
-              shades and patterns of your bed sheets. Opt for bolster covers, chilly winter with range of quilts and
-              blankets.
+              Make the interior of your home the luxury of space with each of
+              our online home furnishing items, comprising an array of bed
+              linen, curtains, bath linen , bedsheets, pillow covers, mats ,
+              cushions, protectors , covers and inserts, bedding , a mattress,
+              bathroom accessories, blankets, towels, curtain and other
+              accessories. Choose from a wide range of attractive bedsheets, bed
+              covers available at HomeTown, ranging from floral to digital,
+              check, ethnic, stripes or printed patterns to suit your
+              penchants. You can also choose from many beautiful pillow covers
+              as well as pillows to complement the shades and patterns of your
+              bed sheets. Opt for bolster covers, chilly winter with range of
+              quilts and blankets.
             </Text>
 
             <Heading color="#55545b" fontSize="16px" mt="20px">
               Explore More at Hometown!
             </Heading>
             <Text color="#817f7d">
-              Once you get the furniture pieces you are looking for, you can further accentuate the beauty and elegance
-              of your house by adding in some home decor items like matching curtains and lamps. Hometown has a wide
-              range of home furnishing like upholstery, beddings, pillow covers and cushions. Moreover, you can also
+              Once you get the furniture pieces you are looking for, you can
+              further accentuate the beauty and elegance of your house by adding
+              in some home decor items like matching curtains and lamps.
+              Hometown has a wide range of home furnishing like upholstery,
+              beddings, pillow covers and cushions. Moreover, you can also
               explore the different kitchenware and table options.
             </Text>
           </Container>

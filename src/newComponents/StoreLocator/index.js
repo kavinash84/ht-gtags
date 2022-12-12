@@ -1,51 +1,56 @@
-import React from 'react';
-import Select from 'react-select';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import React from "react";
+import Select from "react-select";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 
 /* ====== Modules / Selectors ====== */
-import { setCurrentLocation, setError } from 'redux/modules/storelocator';
-import { notifSend } from 'redux/modules/notifs';
-import { getCurrentCity, getCurrentLocation, getDestination, getStores } from 'selectors/location';
-import { gaVisitEvent } from 'redux/modules/stores';
+import { setCurrentLocation, setError } from "redux/modules/storelocator";
+import { notifSend } from "redux/modules/notifs";
+import {
+  getCurrentCity,
+  getCurrentLocation,
+  getDestination,
+  getStores
+} from "selectors/location";
+import { gaVisitEvent } from "redux/modules/stores";
 
 /* ====== Page Components ====== */
-import Button from 'hometown-components-dev/lib/ButtonHtV1';
-import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Flex from 'hometown-components-dev/lib/FlexHtV1';
-import Col from 'hometown-components-dev/lib/ColHtV1';
-import Container from 'hometown-components-dev/lib/ContainerHtV1';
-import Heading from 'hometown-components-dev/lib/HeadingHtV1';
-import Image from 'hometown-components-dev/lib/ImageHtV1';
-import LocationIcon from 'hometown-components-dev/lib/Icons/LocationHtV1';
-import Li from 'hometown-components-dev/lib/LiHtV1';
-import LinkRedirect from 'hometown-components-dev/lib/LinkRedirectHtV1';
-import Row from 'hometown-components-dev/lib/RowHtV1';
-import Section from 'hometown-components-dev/lib/SectionHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
-import Ul from 'hometown-components-dev/lib/UlHtV1';
+import Button from "hometown-components-dev/lib/ButtonHtV1";
+import Box from "hometown-components-dev/lib/BoxHtV1";
+import Flex from "hometown-components-dev/lib/FlexHtV1";
+import Col from "hometown-components-dev/lib/ColHtV1";
+import Container from "hometown-components-dev/lib/ContainerHtV1";
+import Heading from "hometown-components-dev/lib/HeadingHtV1";
+import Image from "hometown-components-dev/lib/ImageHtV1";
+import LocationIcon from "hometown-components-dev/lib/Icons/LocationHtV1";
+import Li from "hometown-components-dev/lib/LiHtV1";
+import LinkRedirect from "hometown-components-dev/lib/LinkRedirectHtV1";
+import Row from "hometown-components-dev/lib/RowHtV1";
+import Section from "hometown-components-dev/lib/SectionHtV1";
+import Text from "hometown-components-dev/lib/TextHtV1";
+import Ul from "hometown-components-dev/lib/UlHtV1";
 
 /* ====== Page Components ====== */
-import { getDistanceBetweenPoints } from 'utils/helper';
-import Map from './Map';
+import { getDistanceBetweenPoints } from "utils/helper";
+import Map from "./Map";
 
-const LoaderIcon = require('../../../static/refresh.svg');
-const DirectionIcon = require('../../../static/direction.svg');
-const styles = require('./StoreLocator.scss');
+const LoaderIcon = require("../../../static/refresh.svg");
+const DirectionIcon = require("../../../static/direction.svg");
+const styles = require("./StoreLocator.scss");
 
 const customStyles = {
   control: () => ({
-    backgroundColor: '#6d7377',
-    borderRadius: '6px',
-    color: 'white',
-    display: 'flex'
+    backgroundColor: "#6d7377",
+    borderRadius: "6px",
+    color: "white",
+    display: "flex"
   }),
   placeholder: () => ({
-    color: 'white'
+    color: "white"
   }),
   singleValue: () => ({
-    color: 'white'
+    color: "white"
   })
 };
 
@@ -60,9 +65,7 @@ const mapDispatchToProps = dispatch =>
   );
 
 const mapStateToProps = ({
- storelocator: {
- locationData, locationLoaded, locationLoading, data
-}
+  storelocator: { locationData, locationLoaded, locationLoading, data }
 }) => ({
   city: getCurrentCity(locationData),
   location: getCurrentLocation(locationData),
@@ -83,7 +86,7 @@ class StoreLocator extends React.Component {
       open: false,
       currentList: [],
       currentState: null,
-      selectedStore: '',
+      selectedStore: "",
       nearMe: [],
       isLoading: false,
       currentLocation: {},
@@ -108,17 +111,19 @@ class StoreLocator extends React.Component {
   setError = msg => {
     const { dispatch } = this.context.store;
     this.setState({ isLoading: false }, () => {
-      dispatch(notifSend({
-          type: 'error',
+      dispatch(
+        notifSend({
+          type: "error",
           msg,
           dismissAfter: 4000
-        }));
+        })
+      );
     });
   };
   getURL = (origin, dest) => {
-    const baseUrl = 'http://maps.google.com/?';
-    const start = `saddr=${origin.lat || ''},${origin.lng || ''}`;
-    const destination = `&daddr=${dest.lat || ''},${dest.lng || ''}`;
+    const baseUrl = "http://maps.google.com/?";
+    const start = `saddr=${origin.lat || ""},${origin.lng || ""}`;
+    const destination = `&daddr=${dest.lat || ""},${dest.lng || ""}`;
     const mapURL = `${baseUrl}${start}${destination}`;
     return mapURL;
   };
@@ -140,9 +145,9 @@ class StoreLocator extends React.Component {
       const { distance = {}, duration = {} } = elements[i];
       if (distance.value && item.id && distance.value < this.GEORADIUS_ONLINE) {
         rawData[item.id] = {
-          disText: distance.text || '',
-          disValue: distance.value || '',
-          duration: duration.text || ''
+          disText: distance.text || "",
+          disValue: distance.value || "",
+          duration: duration.text || ""
         };
         rawIds.push(item.id);
       }
@@ -153,7 +158,7 @@ class StoreLocator extends React.Component {
     const currentList = [];
     stores.forEach(item => {
       //eslint-disable-line
-      const { id = '' } = item;
+      const { id = "" } = item;
       if (rawData[id]) {
         currentList.push({
           ...item,
@@ -162,8 +167,8 @@ class StoreLocator extends React.Component {
       }
     });
     currentList.sort((a, b) => {
-      const point1 = parseInt(a.disText || '', 10);
-      const point2 = parseInt(b.disText || '', 10);
+      const point1 = parseInt(a.disText || "", 10);
+      const point2 = parseInt(b.disText || "", 10);
       return point1 - point2;
     });
     let lat = 0;
@@ -199,7 +204,7 @@ class StoreLocator extends React.Component {
     });
     return stores;
   };
-  handleClick = (store = '', mapData, city = '') => {
+  handleClick = (store = "", mapData, city = "") => {
     const details = mapData.filter(item => item.store === store)[0];
     const { position } = details;
     // const { open } = this.state;
@@ -213,18 +218,18 @@ class StoreLocator extends React.Component {
     recordStoreVisit({
       city,
       store,
-      event: 'event storelocator',
-      category: 'Storelocator'
+      event: "event storelocator",
+      category: "Storelocator"
     });
   };
-  directionHandler = (store = '', city = '') => {
+  directionHandler = (store = "", city = "") => {
     const { gaVisitEvent: recordStoreVisit } = this.props;
     if (store && city) {
       recordStoreVisit({
         city,
         store,
-        event: 'event storelocator',
-        category: 'Storelocator - Location'
+        event: "event storelocator",
+        category: "Storelocator - Location"
       });
     }
   };
@@ -257,7 +262,9 @@ class StoreLocator extends React.Component {
           items: { text: list = [] }
         }
       } = this.props;
-      const currentList = list.filter(item => item.city.toUpperCase() === city.toUpperCase());
+      const currentList = list.filter(
+        item => item.city.toUpperCase() === city.toUpperCase()
+      );
       let lat = 0;
       currentList.map(item => {
         lat += item.position.lat;
@@ -280,8 +287,8 @@ class StoreLocator extends React.Component {
     }
   };
   locationSuccess = position => {
-    const lat = position.coords.latitude || '';
-    const lng = position.coords.longitude || '';
+    const lat = position.coords.latitude || "";
+    const lng = position.coords.longitude || "";
     const { data: stores } = this.props;
     // setLocation(lat, lng);
     if (lat && lng && window && window.google) {
@@ -302,21 +309,24 @@ class StoreLocator extends React.Component {
               travelMode: window.google.maps.TravelMode.DRIVING
             },
             (response, status) => {
-              if (status === 'OK') {
+              if (status === "OK") {
                 this.setState({ isLoading: false }, () => {
-                  const rows = response && response.rows ? response.rows[0] : {};
+                  const rows =
+                    response && response.rows ? response.rows[0] : {};
                   const elements = rows.elements || [];
                   this.setCurrentList(elements);
                 });
               } else {
-                this.setError('Error in getting near by stores, please try again !');
+                this.setError(
+                  "Error in getting near by stores, please try again !"
+                );
               }
             }
           );
         }
       );
     } else {
-      this.setError('Error in getting near by stores, please try again !');
+      this.setError("Error in getting near by stores, please try again !");
     }
   };
   locationError = error => {
@@ -327,10 +337,12 @@ class StoreLocator extends React.Component {
           Please provide permission by visiting Settings>location`);
         break;
       case 2:
-        this.setError('Not able to detect current location, please select from the drop down!');
+        this.setError(
+          "Not able to detect current location, please select from the drop down!"
+        );
         break;
       case 3:
-        this.setError('Location not available, please try after some time !');
+        this.setError("Location not available, please try after some time !");
         break;
       default:
     }
@@ -339,16 +351,22 @@ class StoreLocator extends React.Component {
     // const { setCurrentLocation: setLocation } = this.props;
     if (navigator.geolocation) {
       this.setState({ isLoading: true }, () => {
-        navigator.geolocation.getCurrentPosition(this.locationSuccess, this.locationError);
+        navigator.geolocation.getCurrentPosition(
+          this.locationSuccess,
+          this.locationError
+        );
       });
     } else {
-      this.setError('Unable to detect the current location !');
+      this.setError("Unable to detect the current location !");
     }
   };
   render() {
     const {
- data, locationLoaded, redirectCity, gaVisitEvent: recordStoreDirection
-} = this.props;
+      data,
+      locationLoaded,
+      redirectCity,
+      gaVisitEvent: recordStoreDirection
+    } = this.props;
     const mapData = data.items.text;
     const {
       position,
@@ -363,13 +381,19 @@ class StoreLocator extends React.Component {
     } = this.state;
     const selectedCity = currentCity;
     let stateList = mapData.map(item => item.state);
-    let cityList = mapData.filter(item => item.state === currentState).map(item => item.city);
-    const cities = Array.from(new Set(mapData.filter(item => item.city).map(item => item.city))).map(item => ({
+    let cityList = mapData
+      .filter(item => item.state === currentState)
+      .map(item => item.city);
+    const cities = Array.from(
+      new Set(mapData.filter(item => item.city).map(item => item.city))
+    ).map(item => ({
       value: item.toUpperCase(),
       label: item.toUpperCase()
     }));
     cityList = cityList.filter((item, pos) => cityList.indexOf(item) === pos);
-    stateList = stateList.filter((item, pos) => stateList.indexOf(item) === pos);
+    stateList = stateList.filter(
+      (item, pos) => stateList.indexOf(item) === pos
+    );
     //
     return (
       <Section>
@@ -378,13 +402,13 @@ class StoreLocator extends React.Component {
             <Heading
               lineHeight={1.57}
               sx={{
-                fontWeight: 'bold',
-                fontFamily: 'HelveticaNeue',
-                fontSize: '42px',
-                color: '#474747',
-                fontStretch: 'normal',
-                fontStyle: 'normal',
-                letterSpacing: '0.84px'
+                fontWeight: "bold",
+                fontFamily: "HelveticaNeue",
+                fontSize: "42px",
+                color: "#474747",
+                fontStretch: "normal",
+                fontStyle: "normal",
+                letterSpacing: "0.84px"
               }}
             >
               Locate a store
@@ -393,9 +417,9 @@ class StoreLocator extends React.Component {
           <Box className={styles.googleMapWrapper}>
             <Map
               googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-              loadingElement={<div style={{ height: '100%' }} />}
-              containerElement={<div style={{ height: '400px' }} />}
-              mapElement={<div style={{ height: '100%' }} />}
+              loadingElement={<div style={{ height: "100%" }} />}
+              containerElement={<div style={{ height: "400px" }} />}
+              mapElement={<div style={{ height: "100%" }} />}
               position={position}
               zoom={zoomlevel}
               mapData={mapData}
@@ -409,7 +433,7 @@ class StoreLocator extends React.Component {
               pt={30}
               width={450}
               sx={{
-                position: 'absolute',
+                position: "absolute",
                 left: 30,
                 top: 0
               }}
@@ -418,7 +442,7 @@ class StoreLocator extends React.Component {
                 mb={10}
                 mx={-10}
                 sx={{
-                  position: 'sticky',
+                  position: "sticky",
                   top: 0,
                   zIndex: 1
                 }}
@@ -437,13 +461,21 @@ class StoreLocator extends React.Component {
                 </Col>
                 <Col width={1 / 2} px={10}>
                   <Button
-                    sx={{ cursor: 'pointer' }}
+                    sx={{ cursor: "pointer" }}
                     onClick={e => {
                       e.preventDefault();
                       this.detectUserLocation();
                     }}
                   >
-                    {isLoading && <Image className="spin" src={LoaderIcon} display="inline" width="20px" va="sub" />}
+                    {isLoading && (
+                      <Image
+                        className="spin"
+                        src={LoaderIcon}
+                        display="inline"
+                        width="20px"
+                        va="sub"
+                      />
+                    )}
                     Locate Near Me
                   </Button>
                 </Col>
@@ -453,104 +485,124 @@ class StoreLocator extends React.Component {
                   {locationLoaded && currentList.length ? (
                     <Box
                       style={{
-                        margin: '0 0 5px 0',
-                        padding: '4px',
-                        border: '2px solid f98d2936',
-                        borderRadius: '4px',
-                        backgroundColor: '#ffa500'
+                        margin: "0 0 5px 0",
+                        padding: "4px",
+                        border: "2px solid f98d2936",
+                        borderRadius: "4px",
+                        backgroundColor: "#ffa500"
                       }}
                     >
                       <h4
                         style={{
-                          fontSize: '1rem',
+                          fontSize: "1rem",
                           margin: 0,
                           padding: 0,
-                          color: '#ffffff'
+                          color: "#ffffff"
                         }}
                       >
-                        {' '}
+                        {" "}
                         Nearest Hometown Stores
                       </h4>
                     </Box>
                   ) : (
-                    ''
+                    ""
                   )}
                   {currentList && !currentList.length ? (
                     <Box py={20}>
                       <h4
                         style={{
-                          fontSize: '1rem',
+                          fontSize: "1rem",
                           margin: 0,
                           padding: 0,
-                          color: '#ffffff'
+                          color: "#ffffff"
                         }}
                       >
-                        {' '}
-                        {'We will be in your town very soon..'}
+                        {" "}
+                        {"We will be in your town very soon.."}
                       </h4>
                     </Box>
                   ) : (
-                    ''
+                    ""
                   )}
                   {currentList.map((item, index) => (
                     <Li
                       key={String(index)}
                       py={20}
                       sx={{
-                        display: 'flex',
-                        borderBottom: '1px solid #FFF',
-                        cursor: 'pointer'
+                        display: "flex",
+                        borderBottom: "1px solid #FFF",
+                        cursor: "pointer"
                       }}
                     >
-                      <Box width="calc(100% - 134px)" onClick={() => this.handleClick(item.store, mapData, item.city)}>
+                      <Box
+                        width="calc(100% - 134px)"
+                        onClick={() =>
+                          this.handleClick(item.store, mapData, item.city)
+                        }
+                      >
                         <Heading
                           variant="profileDashBoard"
                           fontSize={17}
                           color="#FFF"
                           mb={8}
                           sx={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            fontWeight: 'bold'
+                            display: "flex",
+                            alignItems: "center",
+                            fontWeight: "bold"
                           }}
                         >
-                          <LocationIcon color="#FFF" sx={{ flexShrink: 0 }} /> {item.store.toUpperCase()}
+                          <LocationIcon color="#FFF" sx={{ flexShrink: 0 }} />{" "}
+                          {item.store.toUpperCase()}
                         </Heading>
-                        <Text color="#FFF" fontSize={14} pl={5} lineHeight={1.4}>
+                        <Text
+                          color="#FFF"
+                          fontSize={14}
+                          pl={5}
+                          lineHeight={1.4}
+                        >
                           {item.address}
                         </Text>
-                        <Flex sx={{ alignItems: 'center' }} mt={8} pl={5}>
+                        <Flex sx={{ alignItems: "center" }} mt={8} pl={5}>
                           <Text color="white" fontSize={14} mr={10}>
-                            {item.disText && item.duration ? `${item.disText || ''} | ${item.duration || ''} ` : ''}
+                            {item.disText && item.duration
+                              ? `${item.disText || ""} | ${item.duration ||
+                                  ""} `
+                              : ""}
                           </Text>
                           {item.disText && (
                             <LinkRedirect
                               title="Hometown Store Locator Direction"
                               href={this.getURL(currentLocation, item.position)}
                               target="_blank"
-                              rel="noopener noreferrer"
+                              rel="noopener"
                             >
                               <Button
                                 variant="link"
                                 color="white"
                                 sx={{
-                                  display: 'flex',
-                                  alignItems: 'center',
-                                  cursor: 'pointer'
+                                  display: "flex",
+                                  alignItems: "center",
+                                  cursor: "pointer"
                                 }}
                                 onClick={e => {
                                   e.stopPropagation();
                                   this.directionHandler(item.store, item.city);
                                 }}
                               >
-                                <Image src={DirectionIcon} mr={10} /> Get Direction
+                                <Image src={DirectionIcon} mr={10} /> Get
+                                Direction
                               </Button>
                             </LinkRedirect>
                           )}
                         </Flex>
                       </Box>
                       <Box width={110} pl={20}>
-                        <Image src={item.image_url || 'https://via.placeholder.com/110x110'} />
+                        <Image
+                          src={
+                            item.image_url ||
+                            "https://via.placeholder.com/110x110"
+                          }
+                        />
                       </Box>
                     </Li>
                   ))}
@@ -564,7 +616,7 @@ class StoreLocator extends React.Component {
   }
 }
 StoreLocator.defaultProps = {
-  redirectCity: ''
+  redirectCity: ""
 };
 StoreLocator.propTypes = {
   data: PropTypes.object.isRequired,

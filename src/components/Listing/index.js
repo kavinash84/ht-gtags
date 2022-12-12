@@ -16,7 +16,7 @@ import { viewSubCategory } from "../../redux/modules/category";
 // import ScrollToTop from '../ScrollToTop';
 import BreadCrumb from "./BreadCrumb";
 import CategoryBar from "./CategoryBar";
-import TitleBar from "./TitleBar";
+// import TitleBar from "./TitleBar";
 import UnbxdListing from "./UnbxdListing";
 
 // const sortByList = require('data/sortby');
@@ -339,8 +339,8 @@ class Listing extends React.Component {
             categoryDetails={breadCrumbs}
             handleCategoryClick={this.handleCategoryClick}
           />
-          <div id="dummy_focusId" />
           {/* </TitleBar> */}
+
           <div class="unbxd-page-title">
             <div class="unbxd-page-name"></div>
             <div class="unbxd-page-spellcheck"></div>

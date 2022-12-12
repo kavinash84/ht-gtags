@@ -120,6 +120,7 @@ export default class NewUnboxRecomondedForYou extends Component {
           return templateData;
         }
       });
+      // }
     }
   }
   render() {

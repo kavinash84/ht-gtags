@@ -30,6 +30,7 @@ class KitchenBlog extends React.Component {
               marginLeft="5%"
               marginRight="5%"
               style={{ objectFit: "cover" }}
+              alt={val.title}
             />
             <Text
               fontWeight="300"

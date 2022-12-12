@@ -1,34 +1,44 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import Image from 'hometown-components-dev/lib/ImageHtV1';
-import Box from 'hometown-components-dev/lib/BoxHtV1';
-import Row from 'hometown-components-dev/lib/RowHtV1';
-import Col from 'hometown-components-dev/lib/ColHtV1';
-import Text from 'hometown-components-dev/lib/TextHtV1';
+import React from "react";
+import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+import Image from "hometown-components-dev/lib/ImageHtV1";
+import Box from "hometown-components-dev/lib/BoxHtV1";
+import Row from "hometown-components-dev/lib/RowHtV1";
+import Col from "hometown-components-dev/lib/ColHtV1";
+import Text from "hometown-components-dev/lib/TextHtV1";
 
-import styles from './lauraAshley.scss';
+import styles from "./lauraAshley.scss";
 
-const BrandCard = ({
- imgUrl, title, content, odd, url
-}) => (
-  <Link to={url} target="_blank">
+const BrandCard = ({ imgUrl, title, content, odd, url }) => (
+  <Link to={url} target="_blank" rel="noopener">
     <Row className={styles.CollectionRow} my={10}>
-      <Col variant="col-7" className={odd ? styles.orderTwo : styles.orderOne} pl={0} pr={0}>
+      <Col
+        variant="col-7"
+        className={odd ? styles.orderTwo : styles.orderOne}
+        pl={0}
+        pr={0}
+      >
         <Box className={styles.CollectionCard}>
           <Image width="100%" src={imgUrl} alt="Card image cap" />
         </Box>
       </Col>
       <Col variant="col-5" className={odd ? styles.orderOne : styles.orderTwo}>
         <Box className={styles.CollectionCard}>
-          <Text fontSize={50} mb={10} color={'#a4b9c8'}>
+          <Text fontSize={50} mb={10} color={"#a4b9c8"}>
             {content}
           </Text>
 
-          <Text fontSize={24} pl={10} pr={10} lineHeight={1.4} letterSpacing={'0.1em'} textAlign={'center'}>
+          <Text
+            fontSize={24}
+            pl={10}
+            pr={10}
+            lineHeight={1.4}
+            letterSpacing={"0.1em"}
+            textAlign={"center"}
+          >
             {title}
           </Text>
-          <Text fontSize={24} mt={20} sx={{ textDecoration: 'underline' }}>
+          <Text fontSize={24} mt={20} sx={{ textDecoration: "underline" }}>
             SHOP {content.toUpperCase()}
           </Text>
         </Box>

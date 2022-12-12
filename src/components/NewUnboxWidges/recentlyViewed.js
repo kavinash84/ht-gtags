@@ -115,6 +115,7 @@ export default class NewUnboxRecentlyViewed extends Component {
           return templateData;
         }
       });
+      // }
     }
   }
   render() {

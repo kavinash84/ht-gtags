@@ -452,13 +452,13 @@ export default class Listing extends Component {
           )}
 
           {/* Listing page best offer banners */}
-          <Box sx={btnStyle}>
+          {/* <Box sx={btnStyle}>
             <BestOfferBanners
               bannerData={bannerData}
               history={history}
               onImageClick={this.scrollDown}
             />
-          </Box>
+          </Box> */}
           <Box>
             <div ref={this.listingRef}>
               <ListingContainer
