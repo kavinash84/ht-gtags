@@ -31,6 +31,8 @@ import Wrapper from "hometown-components-dev/lib/WrapperHtV1";
 // import OfferBanner from "components/Home/OfferBanner";
 import Footer from "components/Footer";
 import Header from "components/Header";
+import SeoContent from "hometown-components-dev/lib/SeoContent";
+import Container from "hometown-components-dev/lib/ContainerHtV1";
 // import GridView from "components/Home/GridView";
 import MainSlider from "components/MainSlider";
 // import Title from "components/Title";
@@ -98,6 +100,7 @@ const customDropdownStyles = {
     recentlyviewed: recentlyviewed.data,
     isLoggedIn: userLogin.isLoggedIn,
     homepagecmsdata: homepagecmsdata.data.items.text,
+    seoInfo: homepagecmsdata.data.items.seo_text,
     dealoftheday: dealoftheday.data,
     bestsellers: bestsellers.data
   })
@@ -166,6 +169,7 @@ export default class Home extends Component {
       homepageCategories,
       cities,
       homepagecmsdata,
+      seoInfo,
       dealoftheday,
       bestsellers
     } = this.props;
@@ -353,6 +357,16 @@ export default class Home extends Component {
           </Section>
           {/* stores */}
           <StoresCarousel cities={cities} />
+
+          {seoInfo && (
+          <SeoContent>
+            <Container>
+              <div>
+                <div dangerouslySetInnerHTML={{ __html: seoInfo }} />
+              </div>
+            </Container>
+          </SeoContent>
+        )}
 
           <Footer />
         </Body>
