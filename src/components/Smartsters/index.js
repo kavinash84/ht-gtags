@@ -9,7 +9,9 @@ import Collection from "./Collection";
 import Marquee from "./Marquee";
 import ParentsPick from "./ParentsPick";
 import WeBuilt from "./WeBuilt";
-// import { Link } from "react-router-dom";
+
+import ResponsiveModal from "components/Modal";
+import { Link } from 'react-router-dom';
 
 @connect(({ smartsters }) => ({
     smartsters,
@@ -18,12 +20,22 @@ import WeBuilt from "./WeBuilt";
     collection: smartsters.data.items.text.collection,
     categories: smartsters.data.items.text.categories,
     parentsPick: smartsters.data.items.text.parentsPick,
-    weBuilt: smartsters.data.items.text.weBuilt
+    weBuilt: smartsters.data.items.text.weBuilt,
+    popUp:smartsters.data.items.text.popUp
 }))
 
 class SmartstersContainer extends React.Component {
+    state = {
+        openModal: true
+    };
+
+    handleModal = () => {
+        this.setState({
+            openModal: !this.state.openModal
+        });
+    };
     render() {
-        const { topBanner, collection, parentsPick, categories, weBuilt, signup } = this.props;
+        const { topBanner, collection, parentsPick, categories, weBuilt, signup, popUp } = this.props;
 
         return (
             <Div style={{ maxWidth: "1440px", margin: "0 auto" }}>
@@ -41,6 +53,20 @@ class SmartstersContainer extends React.Component {
                     />
                 </div>
                 <WeBuilt weBuilt={weBuilt} />
+                {popUp && popUp.display ? (
+                    <ResponsiveModal
+                        classNames={{ modal: "furntitureModal" }}
+                        onCloseModal={this.handleModal}
+                        open={this.state.openModal}
+                    >
+                        <Link to={popUp.url_key}>
+                            <img
+                                src={popUp.popUpImage}
+                                style={{ width: "100%", height: "auto", minWidth: "200px" }}
+                            />
+                        </Link>
+                    </ResponsiveModal>
+                ) : null}
             </Div>
         );
     }
