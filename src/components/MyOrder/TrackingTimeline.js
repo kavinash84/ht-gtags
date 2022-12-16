@@ -18,14 +18,14 @@ class TrackingDetails extends Component {
     const { data, error } = this.props;
     return (
       <div className={stylesModal.trackingModal}>
-        <RowHtV1 type="block" margin="0px 0px 1rem" className={styles.blockHeading}>
+        <RowHtV1 type="block" margin="0px 0px 0px" className={styles.blockHeading}>
           <BoxHtV1 col="6" pt="5px">
             <HeadingHtV1 fontSize="1.25rem" color="textLight" mb="0px" mt="0px" fontFamily="light">
               {error ? 'Error' : 'Order Tracking'}
             </HeadingHtV1>
           </BoxHtV1>
         </RowHtV1>
-        <BoxHtV1 p="25px 25px 13px">
+        <BoxHtV1 p="0px 20px 0px">
           {error ? (
             <span style={{ color: 'red', padding: '10px' }}>{error}</span>
           ) : (
@@ -44,16 +44,17 @@ class TrackingDetails extends Component {
                   type="block"
                   ml="0"
                   mr="0"
-                  mb="1rem"
-                  pb="15px"
+                  mb="0"
+                  pt="15px"
+                  pb="30px"
                   key={String(index)}
                 >
-                  <BoxHtV1 col="1" width="8.33%" float="left">
+                  <BoxHtV1 col="1" width="5%" float="left">
                     <ImageShimmerHtV1 src={getImageURL(image, 'catalog_360')}>
                       {imageURL => <ImageHtV1 src={imageURL} alt="" width="60px" height="60px" />}
                     </ImageShimmerHtV1>
                   </BoxHtV1>
-                  <BoxHtV1 col="3" pl="10px" pr="55px" width="25%" float="left">
+                  <BoxHtV1 col="3" pl="10px" pr="0px" width="20%" float="left">
                     <TextHtV1
                       fontSize="14px"
                       mt="0"
@@ -78,10 +79,10 @@ class TrackingDetails extends Component {
                       </TextHtV1>
                     )}
                   </BoxHtV1>
-                  <BoxHtV1 col="8" width="66.66%" float="left">
+                  <BoxHtV1 col="8" width="75%" float="left" pl="10px">
                     <RowHtV1
-                      ml="-2%"
-                      mr="-7%"
+                      ml="5%"
+                      mr="-2%"
                       flexWrap="nowrap"
                       className={`${stylesModal.timeline} ${status.length === 3 ? stylesModal.homewareProduct : ''}`}
                     >
