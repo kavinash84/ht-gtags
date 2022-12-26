@@ -58,5 +58,5 @@ export const listingRoutes = [
   'summer-stockup-sale',
   'sale',
   'kids',
-  'new-arrivals'
+  'newarrivals'
 ];
