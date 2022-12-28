@@ -33,7 +33,7 @@ module.exports = Object.assign(
           {
             property: "og:image",
             content:
-              "https://www.hometown.in/images/local_v2/icons/homeTown_logo.png"
+              "https://static.hometown.in/images/local_v2/icons/homeTown_logo.png"
           },
           { property: "og:locale", content: "en_US" },
           { property: "og:title", content: "HomeTown.in" },

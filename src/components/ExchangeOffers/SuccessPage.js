@@ -3,7 +3,6 @@ import Helmet from "react-helmet";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { notifSend } from "redux/modules/notifs";
-import landingMainSlider from "../../../static/exchangeWarning/Thank-revised.jpg";
 import mapIcon from "../../../static/map-icon.svg";
 
 @connect(({ designbuild }) => ({
@@ -123,7 +122,7 @@ src=https://www.facebook.com/tr?id=1024172491523922&ev=Lead&noscript=1
         </noscript>
         {/* <LandingPageLogo /> */}
         <img
-          src={landingMainSlider}
+          src="https://static.hometown.in/media/cms/extras-desktop/Thank-revised.jpg"
           alt="banner"
           style={{ width: "100%", height: "auto" }}
         />

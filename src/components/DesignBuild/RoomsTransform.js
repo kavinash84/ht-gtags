@@ -8,7 +8,6 @@ import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 
-const imageSrc = require('../../../static/categories/dbadvantage.png');
 const styles = require('./Designbuild.scss');
 
 @connect(({ designbuild }) => ({

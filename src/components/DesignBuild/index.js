@@ -153,7 +153,7 @@ fbq('track', 'DBlead');
         <Div mt="70px">
           <Flex>
             <Image
-              data-src="https://www.hometown.in/media/cms/designbuild/speaktoExperts.png"
+              data-src="https://static.hometown.in/media/cms/designbuild/speaktoExperts.png"
               style={{ width: "50%", height: "700px" }}
             />
             <Div
@@ -224,7 +224,7 @@ fbq('track', 'DBlead');
                 <Div style={{ width: "100%" }}>
                   <Flex>
                     <img
-                      src="https://www.hometown.in/media/cms/D/Top-Image-Living1.jpg"
+                      src="https://static.hometown.in/media/cms/D/Top-Image-Living1.jpg"
                       style={{
                         width: "50%",
                         height: "90vh",

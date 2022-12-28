@@ -65,7 +65,7 @@ const EMI = ({
                 "Yes",
                 "federal"
               ].includes(bank.bank)
-                ? `https://www.hometown.in/media/cms/Bank/${bank.bank}.jpeg`
+                ? `https://static.hometown.in/media/cms/Bank/${bank.bank}.jpeg`
                 : `https://static.hometown.in/media/cms/BankLOGO/${bank.bank}.gif`
             }
             currentSelection={currentSelection}
@@ -175,7 +175,7 @@ const EMI = ({
                 "Yes",
                 "federal"
               ].includes(bank)
-                ? `https://www.hometown.in/media/cms/Bank/${bank}.jpeg`
+                ? `https://static.hometown.in/media/cms/Bank/${bank}.jpeg`
                 : `https://static.hometown.in/media/cms/BankLOGO/${bank}.gif`
             }
             currentSelection={currentSelection}

@@ -12,13 +12,8 @@ import Text from 'hometown-components-dev/lib/Text';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
 
-const mainBanner = require('../../../static/campaign/combo-offer-banner.jpg');
 const happilyEver = require('../../../static/campaign/Happily-Ever-After.png');
-const completeHomePackage = require('../../../static/campaign/complete-home-package.jpg');
-const bedRoom = require('../../../static/campaign/Bed-Room.jpg');
-const livingRoom = require('../../../static/campaign/Living-Room.jpg');
-const modularKitchen = require('../../../static/campaign/Kitchen.jpg');
-const livingDiningRoom = require('../../../static/campaign/Living-Dining-Room.jpg');
+
 
 const ContentSection = ({ description, title }) => (
   <Fragment>
@@ -77,7 +72,7 @@ const ComboOffer = () => (
       <Header />
       <Box pl="15px" pr="15px">
         <Box mb="-100px">
-          <Img src={mainBanner} alt="" />
+          <Img src="https://static.hometown.in/media/cms/extras-desktop/combo-offer-banner.jpg" alt="" />
         </Box>
         <Row pb="30px">
           <Box col="7" ta="center" m="auto">
@@ -92,31 +87,31 @@ const ComboOffer = () => (
         <Row ml="0" mr="0" mb="20px" alignItems="center">
           <Box col="12">
             <Link to="/store-locator">
-              <Img width="100%" src={completeHomePackage} />
+              <Img width="100%" src="https://static.hometown.in/media/cms/extras-desktop/complete-home-package.jpg" />
             </Link>
           </Box>
         </Row>
         <Row ml="-10px" mr="-10px">
           <Box col="6" p="10px">
             <Link to="/store-locator">
-              <Img width="100%" src={livingRoom} />
+              <Img width="100%" src="https://static.hometown.in/media/cms/extras-desktop/Living-Dining-Room.jpg" />
             </Link>
           </Box>
           <Box col="6" p="10px">
             <Link to="/store-locator">
-              <Img width="100%" src={bedRoom} />
+              <Img width="100%" src="https://static.hometown.in/media/cms/extras-desktop/Bed-Room.jpg" />
             </Link>
           </Box>
         </Row>
         <Row ml="-10px" mr="-10px" mb="20px">
           <Box col="6" p="10px">
             <Link to="/store-locator">
-              <Img width="100%" src={livingDiningRoom} />
+              <Img width="100%" src="https://static.hometown.in/media/cms/extras-desktop/Living-Dining-Room.jpg" />
             </Link>
           </Box>
           <Box col="6" p="10px">
             <Link to="/store-locator">
-              <Img width="100%" src={modularKitchen} />
+              <Img width="100%" src="https://static.hometown.in/media/cms/extras-desktop/Kitchen.jpg" />
             </Link>
           </Box>
         </Row>

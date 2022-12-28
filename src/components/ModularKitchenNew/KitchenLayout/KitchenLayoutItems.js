@@ -12,7 +12,6 @@ import Text from "hometown-components-dev/lib/TextHtV1";
 const arrowForward = require("../../../../static/new-home/newForwardArrow.svg");
 import Button from "hometown-components-dev/lib/ButtonHtV1";
 
-// const imageSrc = require("../../../static/categories/dbadvantage.png");
 // const styles = require("./HomeTownAdvantage.scss");
 
 // @connect(({ modularkitchen }) => ({

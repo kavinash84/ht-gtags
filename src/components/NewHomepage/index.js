@@ -3,8 +3,6 @@ import Footer from "components/Footer";
 import { Link } from "react-router-dom";
 
 import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
-const MakeSpaceLogo = require("../../../static/new-home/MakespaceforNewlogo.png");
-const HomeTownLogo = require("../../../static/new-home/HT-LOGO-cs2-single.png");
 class NewHomepage extends Component {
   constructor() {
     super();
@@ -53,7 +51,7 @@ class NewHomepage extends Component {
               marginTop: "1%"
             }}
           >
-            <img style={{ width: "15%", height: "auto" }} src={MakeSpaceLogo} />
+            <img style={{ width: "15%", height: "auto" }} src="https://static.hometown.in/media/cms/extras-desktop/MakespaceforNewlogo.png" />
             <Link
               onClick={() => {
                 sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
@@ -62,7 +60,7 @@ class NewHomepage extends Component {
             >
               <img
                 style={{ width: "100%", height: "100px" }}
-                src={HomeTownLogo}
+                src="https://static.hometown.in/media/cms/extras-desktop/HT-LOGO-cs2-single.png"
               />
             </Link>
           </div>
