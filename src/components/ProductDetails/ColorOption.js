@@ -36,7 +36,8 @@ const ColorOption = ({
                       borderRadius: "20px",
                       border: item.activeColor ? "50px" : "40px"
                     }}
-                    src={imageURL}
+                    data-src={imageURL}
+                    src={`${imageURL}?blur=30`}
                     alt={item.meta.name}
                     width={40}
                     height={40}
@@ -52,7 +53,7 @@ const ColorOption = ({
 );
 ColorOption.defaultProps = {
   showmorecolorproducts: true,
-  toggleShowMoreColorProducts: () => {}
+  toggleShowMoreColorProducts: () => { }
 };
 ColorOption.propTypes = {
   data: PropTypes.array.isRequired,
