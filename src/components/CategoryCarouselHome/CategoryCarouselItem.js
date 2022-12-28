@@ -9,8 +9,6 @@ import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
 
 const arrowForward = require("../../../static/new-home/newForwardArrow.svg");
 import "./CategoryCarousel.css";
-const shopByRoom01 = require("../../../static/new-home/shopbyroom01.png");
-const shopByRoom02 = require("../../../static/new-home/shopbyroom02.png");
 
 class CategoryItem extends Component {
   render() {
@@ -39,7 +37,7 @@ class CategoryItem extends Component {
         >
           <Image
             className="shopByRoom"
-            src={shopByRoom01}
+            src="https://static.hometown.in/media/cms/extras-desktop/shopbyroom01.png"
             height="auto"
             style={{ zIndex: 10 }}
           />
@@ -85,7 +83,7 @@ class CategoryItem extends Component {
         >
           <Image
             className="shopByRoom"
-            src={shopByRoom02}
+            src="https://static.hometown.in/media/cms/extras-desktop/shopbyroom02.png"
             height="auto"
             style={{ zIndex: 10 }}
           />

@@ -377,7 +377,7 @@ class Listing extends React.Component {
                 }}
               > */}
               <img
-                src='https://www.hometown.in/media/cms/campaignpages/pop-up-banner_2.jpg'
+                src='https://static.hometown.in/media/cms/campaignpages/pop-up-banner_2.jpg'
                 style={{ width: "100%", height: "auto" }}
               />
               {/* </div> */}

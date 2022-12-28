@@ -39,11 +39,7 @@ import MainSlider from "components/MainSlider";
 import HomeContainer from "../../components/Home/index";
 // import Usp from "components/Home/Usp";
 import NewUnboxRecentlyViewed from "components/NewUnboxWidges/recentlyViewed";
-// import ShopByCategories from "../../components/ShopByCategories";
 
-// const sliderImage = require("../../../static/DnB.jpeg");
-// const bannerImage = require("../../../static/modularKitchen.jpeg");
-// const designBuildLogo = require('../../static/designBuildLogo.png');
 import StoresCarousel from "components/Stores";
 
 // const OFFER_ID = 5;

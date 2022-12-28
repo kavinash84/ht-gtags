@@ -8,7 +8,7 @@ export default function Logo() {
     <Box>
       <Row justifyContent="center" py="20">
         <Image
-          src="https://www.hometown.in/media/cms/hometownnew/ht-exclusive/Logo/exclusive-logo.png"
+          src="https://static.hometown.in/media/cms/hometownnew/ht-exclusive/Logo/exclusive-logo.png"
           alt="ht-exclusive-logo"
           height="70px"
           width="270px"

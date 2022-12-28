@@ -24,7 +24,6 @@ import FormInput from "./FormInput";
 const PlusIcon = require("../../../static/Review/plusIcon.svg");
 const StarEmpty = require("../../../static/Review/starEmpty.svg");
 const StarFilled = require("../../../static/Review/starFilled.svg");
-// const ReviewBanner = require("../../../static/Review/writeReviewformImage.png");
 
 const styles = require("./writeReview.scss");
 

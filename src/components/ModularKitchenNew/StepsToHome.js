@@ -92,7 +92,7 @@ class StepsToYourHome extends React.Component {
                 <Div style={{ width: "100%" }}>
                   <Flex>
                     <img
-                      data-src="https://www.hometown.in/media/cms/D/Top-Image-Living1.jpg"
+                      data-src="https://static.hometown.in/media/cms/D/Top-Image-Living1.jpg"
                       style={{
                         width: "50%",
                         height: "90vh",

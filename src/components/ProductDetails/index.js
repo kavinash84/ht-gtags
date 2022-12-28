@@ -762,7 +762,7 @@ class ProductDetails extends React.PureComponent {
                   "brand" : {
                     "@type" : "Brand",
                     "name" : "HomeTown",
-                    "logo" : "https://www.hometown.in/media/cms/icon/10f08290963c2827c55880f5f82bcc5b.png"
+                    "logo" : "https://static.hometown.in/media/cms/icon/10f08290963c2827c55880f5f82bcc5b.png"
                   },
                   "aggregateRating": {
                     "@type": "AggregateRating",

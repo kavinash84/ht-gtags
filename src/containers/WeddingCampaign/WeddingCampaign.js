@@ -12,16 +12,10 @@ import Wrapper from "hometown-components-dev/lib/WrapperHtV1";
 import Footer from "components/Footer";
 import Header from "components/Header";
 
-const mainBanner = require("../../../static/campaign/banner.jpg");
 const happilyEver = require("../../../static/campaign/Happily-Ever-After.png");
 const category1 = require("../../../static/campaign/Bed.jpg");
-const category2 = require("../../../static/campaign/Bedding-essentials.jpg");
 const category3 = require("../../../static/campaign/Dining-Essentials.jpg");
-const category4 = require("../../../static/campaign/Kitchen-essential.jpg");
-const category5 = require("../../../static/campaign/Bath-essentials.jpg");
 const category6 = require("../../../static/campaign/travel-essential.jpg");
-const hotDeals = require("../../../static/campaign/Hot-Deals-Dining-Set.jpg");
-const kitchenBanner = require("../../../static/campaign/Kitchen-Banner.jpg");
 const duracucineLogo = require("../../../static/campaign/duracucine-logo.png");
 const dbLogo = require("../../../static/campaign/db-logo.png");
 
@@ -60,7 +54,7 @@ const WeddingCampaign = () => (
       <Header />
       <Box pl="15px" pr="15px">
         <Box mb="-100px">
-          <Img src={mainBanner} alt="" />
+          <Img src="https://static.hometown.in/media/cms/extras-desktop/banner.jpg" alt="" />
         </Box>
         <Row pb="30px">
           <Box col="7" ta="center" m="auto">
@@ -126,7 +120,7 @@ const WeddingCampaign = () => (
             </Link>
           </Box>
           <Box col="6">
-            <Img width="100%" src={hotDeals} />
+            <Img width="100%" src="https://static.hometown.in/media/cms/extras-desktop/Hot-Deals-Dining-Set.jpg" />
           </Box>
         </Row>
         <Row pb="40px" pt="30px">
@@ -148,7 +142,7 @@ const WeddingCampaign = () => (
           </Box>
           <Box col="4" p="8px">
             <Link to="/home-furnishings/bedding">
-              <Img width="100%" src={category2} />
+              <Img width="100%" src="https://static.hometown.in/media/cms/extras-desktop/Bedding-essentials.jpg" />
               <Heading ta="center" color="black" fontFamily="light">
                 BEDDING ESSENTIALS
               </Heading>
@@ -156,7 +150,7 @@ const WeddingCampaign = () => (
           </Box>
           <Box col="4" p="8px">
             <Link to="/tableware">
-              <Img width="100%" src={category3} />
+              <Img width="100%" src="https://static.hometown.in/media/cms/extras-desktop/Dining-Essentials.jpg" />
               <Heading ta="center" color="black" fontFamily="light">
                 DINNING ESSENTIALS
               </Heading>
@@ -164,7 +158,7 @@ const WeddingCampaign = () => (
           </Box>
           <Box col="4" p="8px">
             <Link to="/kitchenware">
-              <Img width="100%" src={category4} />
+              <Img width="100%" src="https://static.hometown.in/media/cms/extras-desktop/Kitchen-essential.jpg" />
               <Heading ta="center" color="black" fontFamily="light">
                 KITCHEN ESSENTIALS
               </Heading>
@@ -172,7 +166,7 @@ const WeddingCampaign = () => (
           </Box>
           <Box col="4" p="8px">
             <Link to="/home-furnishings/bath-accessory">
-              <Img width="100%" src={category5} />
+              <Img width="100%" src="https://static.hometown.in/media/cms/extras-desktop/Bath-essentials.jpg" />
               <Heading ta="center" color="black" fontFamily="light">
                 BATH ESSENTIALS
               </Heading>
@@ -192,7 +186,7 @@ const WeddingCampaign = () => (
             <ContentSection description="Customize your dream kitchen to whip up the perfect meal. Choose from over 1000 designs and finishes to turn your everyday activities like cooking and eating into a feast." />
           </Box>
         </Row>
-        <Row ml="0" mr="0" alignItems="center" bg={`url(${kitchenBanner})`}>
+        <Row ml="0" mr="0" alignItems="center" bg={`url($"https://static.hometown.in/media/cms/extras-desktop/Kitchen-Banner.jpg")`}>
           <Box col="6" />
           <Box
             col="6"
@@ -257,7 +251,7 @@ const WeddingCampaign = () => (
             <ContentSection description="Make your house into a home with expert help on interior design, home styling and end-to-end project management and execution" />
           </Box>
         </Row>
-        <Row alignItems="center" bg={`url(${kitchenBanner})`}>
+        <Row alignItems="center" bg={`url($"https://static.hometown.in/media/cms/extras-desktop/Kitchen-Banner.jpg")`}>
           <Box
             col="6"
             ta="center"

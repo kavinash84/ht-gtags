@@ -18,9 +18,6 @@ import { loadPackagesSeo } from "redux/modules/lackpackages";
 const BreadCrumpstyles = require("./breadcrumb.scss");
 const styles = require("./index.scss");
 
-const arrowForward = require("../../../static/onelacPackage/onelacTopBanner.png");
-const PackageBanner = require("../../../static/onelacPackage/onelacTopBanner.png");
-
 const nextArrow = require("../../../static/new-home/roundedArrowRight.svg");
 const previousArrow = require("../../../static/new-home/roundedArrowLeft.svg");
 
