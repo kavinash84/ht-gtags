@@ -70,7 +70,7 @@ const EmiZero = ({
                 "Yes",
                 "federal"
               ].includes(bank)
-                ? `https://www.hometown.in/media/cms/Bank/${bank}.jpeg`
+                ? `https://static.hometown.in/media/cms/Bank/${bank}.jpeg`
                 : `https://static.hometown.in/media/cms/BankLOGO/${bank}.gif`
             }
             currentSelection={currentSelection}
@@ -192,7 +192,7 @@ const EmiZero = ({
                 "Yes",
                 "federal"
               ].includes(bank)
-                ? `https://www.hometown.in/media/cms/Bank/${bank}.jpeg`
+                ? `https://static.hometown.in/media/cms/Bank/${bank}.jpeg`
                 : `https://static.hometown.in/media/cms/BankLOGO/${bank}.gif`
             }
             currentSelection={currentSelection}

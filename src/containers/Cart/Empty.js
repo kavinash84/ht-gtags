@@ -13,29 +13,29 @@ import Flex from 'hometown-components-dev/lib/FlexHtV1';
 
 // const popularCategories = [
 //   {
-//     image: 'https://www.hometown.in/media/product/14/1153/43705/1',
+//     image: 'https://static.hometown.in/media/product/14/1153/43705/1',
 //     title: 'Lorem ipsum',
-//     url_key: 'https://www.hometown.in/media/product/14/1153/43705/1'
+//     url_key: 'https://static.hometown.in/media/product/14/1153/43705/1'
 //   },
 //   {
-//     image: 'https://www.hometown.in/media/product/14/1153/43705/1',
+//     image: 'https://static.hometown.in/media/product/14/1153/43705/1',
 //     title: 'Lorem ipsum',
-//     url_key: 'https://www.hometown.in/media/product/14/1153/43705/1'
+//     url_key: 'https://static.hometown.in/media/product/14/1153/43705/1'
 //   },
 //   {
-//     image: 'https://www.hometown.in/media/product/14/1153/43705/1',
+//     image: 'https://static.hometown.in/media/product/14/1153/43705/1',
 //     title: 'Lorem ipsum',
-//     url_key: 'https://www.hometown.in/media/product/14/1153/43705/1'
+//     url_key: 'https://static.hometown.in/media/product/14/1153/43705/1'
 //   },
 //   {
-//     image: 'https://www.hometown.in/media/product/14/1153/43705/1',
+//     image: 'https://static.hometown.in/media/product/14/1153/43705/1',
 //     title: 'Lorem ipsum',
-//     url_key: 'https://www.hometown.in/media/product/14/1153/43705/1'
+//     url_key: 'https://static.hometown.in/media/product/14/1153/43705/1'
 //   },
 //   {
-//     image: 'https://www.hometown.in/media/product/14/1153/43705/1',
+//     image: 'https://static.hometown.in/media/product/14/1153/43705/1',
 //     title: 'Lorem ipsum',
-//     url_key: 'https://www.hometown.in/media/product/14/1153/43705/1'
+//     url_key: 'https://static.hometown.in/media/product/14/1153/43705/1'
 //   }
 // ];
 

@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import Helmet from "react-helmet";
 import SeoContent from "hometown-components-dev/lib/SeoContent";
 import Container from "hometown-components-dev/lib/ContainerHtV1";
-import landingMainSlider from "../../../static/exchangeWarning/LP-banner.jpg";
 import landingCategory from "../../../static/exchangeWarning/below-banner.jpg";
 import Form from "./FormComp";
 import LeadSuccess from "./SuccessPage";
@@ -65,7 +64,7 @@ class LandingPage extends Component {
         <LandingPageLogo />
         <div>
           <img
-            src={landingMainSlider}
+            src="https://static.hometown.in/media/cms/extras-desktop/LP-banner.jpg"
             alt="Banner"
             style={{ width: "100%", height: "auto" }}
           />

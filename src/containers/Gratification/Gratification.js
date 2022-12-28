@@ -54,7 +54,7 @@ const Gratification = () => (
               <Link to="/">
                 <Image
                   width={1}
-                  src="https://www.hometown.in/media/product/15/1053/1-top_sel_160.jpg"
+                  src="https://static.hometown.in/media/product/15/1053/1-top_sel_160.jpg"
                   alt=""
                   sx={{ boxShadow: 'productThumb' }}
                 />
@@ -93,7 +93,7 @@ const Gratification = () => (
               <Link to="/">
                 <Image
                   width={1}
-                  src="https://www.hometown.in/media/product/15/1053/1-top_sel_160.jpg"
+                  src="https://static.hometown.in/media/product/15/1053/1-top_sel_160.jpg"
                   alt=""
                   sx={{ boxShadow: 'productThumb' }}
                 />
@@ -132,7 +132,7 @@ const Gratification = () => (
               <Link to="/">
                 <Image
                   width={1}
-                  src="https://www.hometown.in/media/product/15/1053/1-top_sel_160.jpg"
+                  src="https://static.hometown.in/media/product/15/1053/1-top_sel_160.jpg"
                   alt=""
                   sx={{ boxShadow: 'productThumb' }}
                 />

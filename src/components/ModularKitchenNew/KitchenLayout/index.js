@@ -175,7 +175,7 @@ class KitchenLayout extends Component {
                 <BoxHtV1 style={{ width: "100%" }}>
                   <Flex>
                     <img
-                      src="https://www.hometown.in/media/cms/D/Top-Image-Living1.jpg"
+                      src="https://static.hometown.in/media/cms/D/Top-Image-Living1.jpg"
                       style={{
                         width: "50%",
                         height: "90vh",
