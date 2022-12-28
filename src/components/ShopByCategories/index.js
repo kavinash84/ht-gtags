@@ -1,6 +1,6 @@
 import React from "react";
 
-/* ====== Components ====== */";
+/* ====== Components ====== */
 import RowHtV1 from "hometown-components-dev/lib/RowHtV1";
 import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
 
