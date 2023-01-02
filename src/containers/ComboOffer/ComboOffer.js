@@ -12,8 +12,6 @@ import Text from 'hometown-components-dev/lib/Text';
 import Footer from 'components/Footer';
 import Header from 'components/Header';
 
-const happilyEver = require('../../../static/campaign/Happily-Ever-After.png');
-
 
 const ContentSection = ({ description, title }) => (
   <Fragment>
@@ -76,7 +74,7 @@ const ComboOffer = () => (
         </Box>
         <Row pb="30px">
           <Box col="7" ta="center" m="auto">
-            <Img src={happilyEver} alt="" height="200px" width="auto" m="auto" />
+            <Img src="https://static.hometown.in/media/cms/extras-desktop/Happily-Ever-After.png" alt="" height="200px" width="auto" m="auto" />
             {/* eslint-disable max-len */}
             <ContentSection
               title="Product Package Offers"

@@ -1,5 +1,4 @@
 import React from "react";
-import logo from "../../../static/logo-ht.png";
 
 const LandingPageLogo = () => (
   <div
@@ -14,7 +13,7 @@ const LandingPageLogo = () => (
       <a href="https://www.hometown.in" target="_blank" rel="noopener">
         <img
           className="img-fluid"
-          src={logo}
+          src="https://static.hometown.in/media/cms/extras-desktop/logo-ht.png"
           alt="HomeTown"
           style={{ margin: "15px 0px" }}
         />

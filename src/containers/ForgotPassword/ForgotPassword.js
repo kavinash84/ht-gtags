@@ -35,7 +35,6 @@ import { forgotPassword } from 'redux/modules/forgotpassword';
 /**
  * Icons
  */
-const ForgotPasswordImg = require('../../../static/forgot-password-icon.png');
 // const OTPIcon = require('../../../static/otp.svg');
 const EmailIcon = require('../../../static/email-primary.svg');
 
@@ -113,7 +112,7 @@ export default class ForgotPasswordContainer extends Component {
             <Box maxWidth="50%" pl={16} pr={16}>
               {loaded && !error && submitted ? (
                 <Box className={`${styles.responseBlock}`}>
-                  <Image src={ForgotPasswordImg} alt="" />
+                  <Image src="https://static.hometown.in/media/cms/extras-desktop/forgot-password-icon.png" alt="" />
                   <Row display="block" mr="0" ml="0">
                     <Box mt="0">
                       <Box className={styles.content}>

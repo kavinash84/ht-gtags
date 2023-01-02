@@ -17,8 +17,6 @@ import { allowNChar } from 'utils/helper';
 import MenuFooter from 'containers/MenuFooter';
 import ForgotPasswordModal from 'components/ForgotPasswordModal';
 
-const PasswordExpiredIcon = require('../../../static/password-expired-icon.png');
-
 @connect(({ forgotpassword }) => ({
   response: forgotpassword
 }))
@@ -185,7 +183,7 @@ export default class ResetPasswordContainer extends Component {
                   onBtnClick={this.onForgotPasswordClick}
                   bg="#fafafa"
                 >
-                  <Img src={PasswordExpiredIcon} width="initial" m="auto" alt="Password link is expired !!" />
+                  <Img src="https://static.hometown.in/media/cms/extras-desktop/password-expired-icon.png" width="initial" m="auto" alt="Password link is expired !!" />
                 </Empty>
               </Section>
             )}

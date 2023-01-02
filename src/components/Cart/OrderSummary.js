@@ -26,8 +26,6 @@ const checkoutIcon = require("../../../static/checkout.svg");
 
 const styles = require("../Checkout/OrderSummary.scss");
 
-const demoBanner = require("../../../static/campaign/select-for-demo-mini-banner.jpg");
-
 const OrderSummary = ({
   itemsTotal,
   savings,
@@ -80,7 +78,7 @@ const OrderSummary = ({
       >
         <Box>
           <a href={landingPageLink} rel="noopener" target="_blank">
-            <Image src={demoBanner} alt="" />
+            <Image src="https://static.hometown.in/media/cms/extras-desktop/select-for-demo-mini-banner.jpg" alt="" />
           </a>
         </Box>
       </Row>

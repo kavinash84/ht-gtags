@@ -12,13 +12,6 @@ import Wrapper from "hometown-components-dev/lib/WrapperHtV1";
 import Footer from "components/Footer";
 import Header from "components/Header";
 
-const happilyEver = require("../../../static/campaign/Happily-Ever-After.png");
-const category1 = require("../../../static/campaign/Bed.jpg");
-const category3 = require("../../../static/campaign/Dining-Essentials.jpg");
-const category6 = require("../../../static/campaign/travel-essential.jpg");
-const duracucineLogo = require("../../../static/campaign/duracucine-logo.png");
-const dbLogo = require("../../../static/campaign/db-logo.png");
-
 const ContentSection = ({ description, title }) => (
   <Fragment>
     {(title !== "" || title !== null) && (
@@ -59,7 +52,7 @@ const WeddingCampaign = () => (
         <Row pb="30px">
           <Box col="7" ta="center" m="auto">
             <Img
-              src={happilyEver}
+              src="https://static.hometown.in/media/cms/extras-desktop/Happily-Ever-After.png"
               alt=""
               height="200px"
               width="auto"
@@ -134,7 +127,7 @@ const WeddingCampaign = () => (
         <Row ml="-8px" mr="-8px">
           <Box col="4" p="8px">
             <Link to="/furniture">
-              <Img width="100%" src={category1} />
+              <Img width="100%" src="https://static.hometown.in/media/cms/extras-desktop/Bed.jpg" />
               <Heading ta="center" color="black" fontFamily="light">
                 FURNITURE ESSENTIALS
               </Heading>
@@ -174,7 +167,7 @@ const WeddingCampaign = () => (
           </Box>
           <Box col="4" p="8px">
             <Link to="/luggage">
-              <Img width="100%" src={category6} />
+              <Img width="100%" src="https://static.hometown.in/media/cms/extras-desktop/travel-essential.jpg" />
               <Heading ta="center" color="black" fontFamily="light">
                 TRAVEL ESSENTIALS
               </Heading>
@@ -197,7 +190,7 @@ const WeddingCampaign = () => (
             style={{ width: "45%" }}
           >
             <Img
-              src={duracucineLogo}
+              src="https://static.hometown.in/media/cms/extras-desktop/duracucine-logo.png"
               alt=""
               width="auto"
               m="auto"
@@ -262,7 +255,7 @@ const WeddingCampaign = () => (
             ml="5%"
           >
             <Img
-              src={dbLogo}
+              src="https://static.hometown.in/media/cms/extras-desktop/db-logo.png"
               alt=""
               width="auto"
               m="auto"

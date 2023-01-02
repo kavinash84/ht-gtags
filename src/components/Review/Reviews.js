@@ -11,7 +11,6 @@ const Star = require("../../../static/Review/star.svg");
 const amazon = require("../../../static/Review/amazon.svg");
 const bajaj = require("../../../static/Review/bajaj.png");
 const facebook = require("../../../static/Review/facebook.svg");
-const flipcart = require("../../../static/Review/flipcart.svg");
 const insta = require("../../../static/Review/insta.svg");
 const myntra = require("../../../static/Review/myntra.svg");
 const pepperfry = require("../../../static/Review/pepperfry.svg");
@@ -42,7 +41,7 @@ export default class Reviews extends Component {
       case "facebook":
         return <Img src={facebook} alt="Facebook" width="60px" height="60px" />;
       case "flipkart":
-        return <Img src={flipcart} alt="Flipkart" width="60px" height="60px" />;
+        return <Img src="https://static.hometown.in/media/cms/extras-desktop/flipcart.svg" alt="Flipkart" width="60px" height="60px" />;
       case "hometown":
         return <Img src="https://static.hometown.in/media/cms/extras-desktop/ht.png" alt="Hometown" width="60px" height="42px" />;
       case "myntra":

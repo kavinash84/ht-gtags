@@ -9,19 +9,6 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 import SlickSlider from '../SlickSlider';
 // import Usp from 'components/Usp';
 
-import CarouselImg1 from '../../../static/HT-Exclusive/Living Room/Sofas.png';
-import CarouselImg3 from '../../../static/HT-Exclusive/Living Room/center-tables.png';
-import CarouselImg4 from '../../../static/HT-Exclusive/Living Room/TV-Units.png';
-import CarouselImg5 from '../../../static/HT-Exclusive/Living Room/End-Tables.png';
-import CarouselImg6 from '../../../static/HT-Exclusive/Bedroom/Dressers.png';
-import CarouselImg9 from '../../../static/HT-Exclusive/Bedroom/Mattresses.png';
-import CarouselImg10 from '../../../static/HT-Exclusive/Bedroom/Armoires.png';
-import CarouselImg11 from '../../../static/HT-Exclusive/Dining Room/Consloe-Tables.png';
-import CarouselImg12 from '../../../static/HT-Exclusive/Dining Room/Dining-Chairs.png';
-import CarouselImg13 from '../../../static/HT-Exclusive/Dining Room/Dining-Tables.png';
-import CarouselImg14 from '../../../static/HT-Exclusive/Dining Room/Dining-Sets.png';
-import CarouselImg15 from '../../../static/HT-Exclusive/Dining Room/Sideboards.png';
-
 // import Heading from 'hometown-components/lib/Heading'
 
 import './HtExclusive.css';
@@ -40,7 +27,7 @@ export class HtExclusive extends Component {
     this.state = {
       carouselItem1: [
         {
-          url: CarouselImg1,
+          url: "https://static.hometown.in/media/cms/extras-desktop/Sofas.png",
           name: 'Sofas & Sectionals',
           link: '/furniture/living-room-furniture/ht-exclusive-living/sofa--sectionals'
         },
@@ -50,24 +37,24 @@ export class HtExclusive extends Component {
           link: '/furniture/living-room-furniture/accent-chairs'
         },
         {
-          url: CarouselImg3,
+          url: "https://static.hometown.in/media/cms/extras-desktop/center-tables.png",
           name: 'Coffee Tables',
           link: '/furniture/living-room-furniture/ht-exclusive-living/coffee-table'
         },
         {
-          url: CarouselImg4,
+          url: "https://static.hometown.in/media/cms/extras-desktop/TV-Units.png",
           name: 'TV Stands & Entertainment Centers',
           link: '/furniture/living-room-furniture/ht-exclusive-living/entertainment-unit'
         },
         {
-          url: CarouselImg5,
+          url: "https://static.hometown.in/media/cms/extras-desktop/End-Tables.png",
           name: 'End & Side Tables',
           link: '/furniture/living-room-furniture/ht-exclusive-living/side-table'
         }
       ],
       carouselItem2: [
         {
-          url: CarouselImg6,
+          url: "https://static.hometown.in/media/cms/extras-desktop/Dressers.png",
           name: 'Dressers',
           link: '/furniture/bedroom-furniture/ht-exclusive-bedroom/dressers'
         },
@@ -82,39 +69,39 @@ export class HtExclusive extends Component {
           link: '/furniture/bedroom-furniture/ht-exclusive-bedroom/bed'
         },
         {
-          url: CarouselImg9,
+          url: "https://static.hometown.in/media/cms/extras-desktop/Mattresses.png",
           name: 'Mattresses',
           link: '/furniture/bedroom-furniture/ht-exclusive-bedroom/bed-mattresses'
         },
         {
-          url: CarouselImg10,
+          url: "https://static.hometown.in/media/cms/extras-desktop/Armoires.png",
           name: 'Armoires',
           link: '/furniture/bedroom-furniture/ht-exclusive-bedroom/bedroom-wardrobe'
         }
       ],
       carouselItem3: [
         {
-          url: CarouselImg11,
+          url: "https://static.hometown.in/media/cms/extras-desktop/Consloe-Tables.png",
           name: 'Bar & Counter Stools',
           link: '/furniture/bar-furniture/bar-chairs-and-stools'
         },
         {
-          url: CarouselImg12,
+          url: "https://static.hometown.in/media/cms/extras-desktop/Dining-Chairs.png",
           name: 'Dining Chairs & Benches',
           link: '/furniture/dining-kitchen-furniture/ht-exclusive-dining--kitchen/dining-chair'
         },
         {
-          url: CarouselImg13,
+          url: "https://static.hometown.in/media/cms/extras-desktop/Dining-Tables.png",
           name: 'Dining Tables',
           link: '/furniture/dining-kitchen-furniture/ht-exclusive-dining--kitchen/dining-table'
         },
         {
-          url: CarouselImg14,
+          url: "https://static.hometown.in/media/cms/extras-desktop/Dining-Tables.png",
           name: 'Sideboards & Buffet Tables',
           link: '/furniture/dining-kitchen-furniture/ht-exclusive-dining--kitchen/storage-sideboard'
         },
         {
-          url: CarouselImg15,
+          url: "https://static.hometown.in/media/cms/extras-desktop/Sideboards.png",
           name: 'Bar Carts',
           link: '/furniture/bar-furniture/serving-trolleys'
         }

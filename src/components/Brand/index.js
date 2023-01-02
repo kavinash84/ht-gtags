@@ -7,8 +7,6 @@ import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 
-import BrandLogo from '../../../static/collection/LA-logo.jpg';
-
 import BrandCollection from './BrandCollection';
 import BrandCategories from './BrandCategories';
 
@@ -19,7 +17,7 @@ class Brand extends React.Component {
     bannerImageLeft: "https://static.hometown.in/media/cms/extras-desktop/1.jpg",
     bannerImageRight: "https://static.hometown.in/media/cms/extras-desktop/2.jpg",
     bannerImageCenter: "https://static.hometown.in/media/cms/extras-desktop/LA-mid-banner.jpg",
-    brandLogo: BrandLogo,
+    brandLogo: "https://static.hometown.in/media/cms/extras-desktop/LA-logo.jpg",
     CollectionData: [
       {
         content: 'Provencale',

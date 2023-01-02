@@ -4,8 +4,6 @@ import Div from "hometown-components-dev/lib/BoxHtV1";
 import { Link } from "react-router-dom";
 import Text from 'hometown-components-dev/lib/TextHtV1';
 
-const Bedroom = require('../../../static/smartsters/bed.png');
-
 
 const Categories = ({ data }) => {
     return (
