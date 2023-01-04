@@ -36,23 +36,6 @@ class KitchenExperts extends React.Component {
     });
   };
 
-  handleModalWithSave = () => {
-    this.setState({
-      openModal: false
-    });
-    setTimeout(() => {
-      this.setState({
-        open: true
-      });
-    }, 500);
-  };
-
-  handleScript = () => {
-    this.setState({
-      showScript: true
-    });
-  };
-
   render() {
     const { whyChooseUs, isLoggedIn, fullName, loading, loaded } = this.props;
     const { showScript } = this.state;
@@ -75,74 +58,9 @@ class KitchenExperts extends React.Component {
             className={styles.boxTwo}
           >
             <ModularKitchenForm
-              handleModalWithSave={this.handleModalWithSave}
-              handleScript={this.handleScript}
             />
           </Box>
         </Box>
-        <Section p="0" mb="0">
-          <Box>
-            {!loading && loaded ? (
-              <ResponsiveModal
-                classNames={{ modal: "modularKitchenModel" }}
-                onCloseModal={() => this.setState({ open: false })}
-                open={this.state.open}
-              >
-                <Box style={{ width: "100%" }}>
-                  <Flex>
-                    <img
-                      data-src="https://static.hometown.in/media/cms/D/Top-Image-Living1.jpg"
-                      style={{
-                        width: "50%",
-                        height: "90vh",
-                        borderTopLeftRadius: "20px",
-                        borderBottomLeftRadius: "20px"
-                      }}
-                    />
-                    <Box
-                      style={{
-                        width: "50%",
-                        height: "90vh",
-                        backgroundColor: "#FBF2ED",
-                        borderTopRightRadius: "20px",
-                        borderBottomRightRadius: "20px"
-                      }}
-                    >
-                      <Box p="20px 5px" mt="20px">
-                        <Box>
-                          <Heading
-                            mb="15px"
-                            mt="40%"
-                            color="#000000"
-                            fontSize="18px"
-                            fontFamily="medium"
-                            style={{
-                              whiteSpace: "normal",
-                              textAlign: "center",
-                              lineHeight: "30px"
-                            }}
-                          >
-                            Thank You For Your <br /> Interest, Our Team Will
-                            Get In Touch <br /> With You Shortly
-                          </Heading>
-                        </Box>
-                        <img
-                          src={check}
-                          style={{
-                            width: "60px",
-                            height: "60x",
-                            margin: "30px auto",
-                            display: "block"
-                          }}
-                        />
-                      </Box>
-                    </Box>
-                  </Flex>
-                </Box>
-              </ResponsiveModal>
-            ) : null}
-          </Box>
-        </Section>
       </div>
     );
   }

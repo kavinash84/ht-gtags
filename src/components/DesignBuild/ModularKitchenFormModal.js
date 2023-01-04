@@ -12,7 +12,7 @@ import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Img from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
-
+import { withRouter } from 'react-router';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 import { SERVICE_SIGNUPS, PINCODE as PINCODE_API } from 'helpers/apiUrls';
 import { sendData, getData } from 'redux/modules/services';
@@ -107,7 +107,7 @@ const setDate = () => {
   //   setPreferredTime(datePickerOptions);
   // }
 };
-
+@withRouter
 @connect(
   ({ services, designbuild }) => ({
     prefferedTime: designbuild.data.items.text.prefferedTime,
@@ -377,12 +377,9 @@ export default class ModularKitchenFormModal extends Component {
       // mkLead: 'Online consultaion',
       devicePlatform: 'msite'
     };
-    this.props.handleModalWithSave();
-    // this.setState({
-    //   open: true
-    // });
-    this.props.handleScript();
     sendFormData(SERVICE_SIGNUPS, data, 'modularkitchen');
+    const { history } = this.props;
+    history.push('/thankyou-db');
   };
 
   handleBookNow = () => {
@@ -437,112 +434,112 @@ export default class ModularKitchenFormModal extends Component {
     return (
       <div>
 
-<Div style={{width:'100%'}}>
-              <Flex>
-                  <Img src="https://static.hometown.in/media/cms/D/Top-Image-Living1.jpg" style={{width: '50%', height:'90vh', borderTopLeftRadius:'20px', borderBottomLeftRadius:'20px'}}/>
-                  <Div style={{width:'50%', height:'90vh', backgroundColor: '#FBF2ED', borderTopRightRadius:'20px', borderBottomRightRadius:'20px'}}>
-                  <Div
-          p="20px 5px"
-          mt="10px"
-        >
-            <Div>
-              <Heading
-                mb="15px"
-                mt="15%"
-                color="#000000"
-                fontSize="18px"
-                fontFamily="medium"
-                style={{ whiteSpace: 'normal', textAlign:'center', lineHeight:'25px'}}
+        <Div style={{ width: '100%' }}>
+          <Flex>
+            <Img src="https://static.hometown.in/media/cms/D/Top-Image-Living1.jpg" style={{ width: '50%', height: '90vh', borderTopLeftRadius: '20px', borderBottomLeftRadius: '20px' }} />
+            <Div style={{ width: '50%', height: '90vh', backgroundColor: '#FBF2ED', borderTopRightRadius: '20px', borderBottomRightRadius: '20px' }}>
+              <Div
+                p="20px 5px"
+                mt="10px"
               >
-                Speak To Our Interior <br />  Experts
-              </Heading>
-            </Div>
-          <Div>
-            <form onSubmit={this.onSubmitForm}>
                 <Div>
-                  <FormInputModal
-                    label=""
-                    type="text"
-                    placeholder="Name"
-                    onChange={this.onChangeName}
-                    value={name}
-                    feedBackError={nameError}
-                    feedBackMessage={nameErrorMessage}
-                   
-                  />
+                  <Heading
+                    mb="15px"
+                    mt="15%"
+                    color="#000000"
+                    fontSize="18px"
+                    fontFamily="medium"
+                    style={{ whiteSpace: 'normal', textAlign: 'center', lineHeight: '25px' }}
+                  >
+                    Speak To Our Interior <br />  Experts
+                  </Heading>
                 </Div>
                 <Div>
-                  <FormInputModal
-                    label=""
-                    type="text"
-                    placeholder="Mobile No."
-                    onChange={this.onChangePhone}
-                    value={phone}
-                    feedBackError={phoneError}
-                    feedBackMessage={phoneErrorMessage}
+                  <form onSubmit={this.onSubmitForm}>
+                    <Div>
+                      <FormInputModal
+                        label=""
+                        type="text"
+                        placeholder="Name"
+                        onChange={this.onChangeName}
+                        value={name}
+                        feedBackError={nameError}
+                        feedBackMessage={nameErrorMessage}
 
-                  />
-                </Div>
-                <Div>
-                  <FormInputModal
-                    label=""
-                    type="email"
-                    placeholder="Email ID"
-                    onChange={this.onChangeEmail}
-                    value={email}
-                    feedBackError={emailError}
-                    feedBackMessage={emailErrorMessage}
-                  />
-                </Div>
-                <Div>
-                  <FormInputModal
-                    label=""
-                    type="text"
-                    placeholder="City"
-                    onChange={this.onChangeCity}
-                    value={city}
-                    feedBackError={cityError}
-                    feedBackMessage={cityErrorMessage}
-                  />
-                </Div>
-                <Div>
-                  <div className="select-wrapper">
-                    <select
-                      onChange={this.onChangeState}
-                      placeholder="State/Region"
-                      style={{
-                        width: '70%',
-                        marginLeft: '15%',
-                        borderRadius: '5px',
-                        height: '40px',
-                        border: '1px solid #E3E3E3',
-                        padding: '0px 8px',
-                        fontSize: '14px',
-                        color: '#7E7575',
-                        marginBottom:'10px',
-                        marginTop: '0.625rem',
-                        outline: 'none',
-                        border:'none',
-                        backgroundColor: 'white'
-                      }}
-                    >
-                      <option value="State/Region" disabled selected>
-                        State/Region
-                      </option>
-                      {state.map(val => (
-                        <option key={val.id} value={val.option}>
-                          {val.option}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                  {stateError ? (
-                    <Text color="#dc3545" fontSize="13px" mt="0px" style={{marginLeft:'15%'}}>
-                      {stateErrorMessage}
-                    </Text>
-                  ) : null}
-                </Div>
-                {/* <Div col="12" pr="0px" pl="0px" className="select-wrapper-date">
+                      />
+                    </Div>
+                    <Div>
+                      <FormInputModal
+                        label=""
+                        type="text"
+                        placeholder="Mobile No."
+                        onChange={this.onChangePhone}
+                        value={phone}
+                        feedBackError={phoneError}
+                        feedBackMessage={phoneErrorMessage}
+
+                      />
+                    </Div>
+                    <Div>
+                      <FormInputModal
+                        label=""
+                        type="email"
+                        placeholder="Email ID"
+                        onChange={this.onChangeEmail}
+                        value={email}
+                        feedBackError={emailError}
+                        feedBackMessage={emailErrorMessage}
+                      />
+                    </Div>
+                    <Div>
+                      <FormInputModal
+                        label=""
+                        type="text"
+                        placeholder="City"
+                        onChange={this.onChangeCity}
+                        value={city}
+                        feedBackError={cityError}
+                        feedBackMessage={cityErrorMessage}
+                      />
+                    </Div>
+                    <Div>
+                      <div className="select-wrapper">
+                        <select
+                          onChange={this.onChangeState}
+                          placeholder="State/Region"
+                          style={{
+                            width: '70%',
+                            marginLeft: '15%',
+                            borderRadius: '5px',
+                            height: '40px',
+                            border: '1px solid #E3E3E3',
+                            padding: '0px 8px',
+                            fontSize: '14px',
+                            color: '#7E7575',
+                            marginBottom: '10px',
+                            marginTop: '0.625rem',
+                            outline: 'none',
+                            border: 'none',
+                            backgroundColor: 'white'
+                          }}
+                        >
+                          <option value="State/Region" disabled selected>
+                            State/Region
+                          </option>
+                          {state.map(val => (
+                            <option key={val.id} value={val.option}>
+                              {val.option}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      {stateError ? (
+                        <Text color="#dc3545" fontSize="13px" mt="0px" style={{ marginLeft: '15%' }}>
+                          {stateErrorMessage}
+                        </Text>
+                      ) : null}
+                    </Div>
+                    {/* <Div col="12" pr="0px" pl="0px" className="select-wrapper-date">
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                     <label
                       style={{
@@ -586,7 +583,7 @@ export default class ModularKitchenFormModal extends Component {
                     </Text>
                   ) : null}
                 </Div> */}
-                {/* <Div col="12" pr="0px" pl="0px">
+                    {/* <Div col="12" pr="0px" pl="0px">
                   <div className="select-wrapper">
                     <select
                       id="preferredTimeModal"
@@ -611,32 +608,32 @@ export default class ModularKitchenFormModal extends Component {
                     </Text>
                   ) : null}
                 </Div> */}
-                <Div col="12" style={{ display: 'flex' }}>
-                  <Button
-                    mt="25px"
-                    style={{
-                      border: '1px solid #F47020',
-                      color: '#F47020',
-                      backgroundColor: '#FFFFFF',
-                      borderRadius: '5px',
-                      textTransform:'none'
-                    }}
-                    fontFamily="regular"
-                    height="40px"
-                    m="15px auto"
-                    width="45%"
-                  >
-                    Book a Consultation
-                  </Button>
+                    <Div col="12" style={{ display: 'flex' }}>
+                      <Button
+                        mt="25px"
+                        style={{
+                          border: '1px solid #F47020',
+                          color: '#F47020',
+                          backgroundColor: '#FFFFFF',
+                          borderRadius: '5px',
+                          textTransform: 'none'
+                        }}
+                        fontFamily="regular"
+                        height="40px"
+                        m="15px auto"
+                        width="45%"
+                      >
+                        Book a Consultation
+                      </Button>
+                    </Div>
+                  </form>
                 </Div>
-            </form>
-          </Div>
-        </Div>
-                  </Div>
-              </Flex>
+              </Div>
             </Div>
+          </Flex>
+        </Div>
 
-        
+
         {/* {!loading && loaded ? (
           <ResponsiveModal
             classNames={{ modal: 'mkModal' }}
@@ -664,8 +661,8 @@ ModularKitchenFormModal.defaultProps = {
   loading: false,
   loaded: false,
   data: {},
-  loadPincodeDetails: () => {},
-  sendFormData: () => {}
+  loadPincodeDetails: () => { },
+  sendFormData: () => { }
 };
 ModularKitchenFormModal.propTypes = {
   loading: PropTypes.bool,

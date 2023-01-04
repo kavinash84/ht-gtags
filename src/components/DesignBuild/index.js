@@ -56,23 +56,6 @@ class DesignBuildContainer extends React.Component {
       openModal: !this.state.openModal
     });
   };
-
-  handleModalWithSave = () => {
-    this.setState({
-      openModal: false
-    });
-    setTimeout(() => {
-      this.setState({
-        open: true
-      });
-    }, 500);
-  };
-
-  handleScript = () => {
-    this.setState({
-      showScript: true
-    });
-  };
   render() {
     const {
       whyChooseUs,
@@ -164,8 +147,6 @@ fbq('track', 'DBlead');
               }}
             >
               <ModularKitchen
-                handleModalWithSave={this.handleModalWithSave}
-                handleScript={this.handleScript}
               />
             </Div>
           </Flex>
@@ -188,93 +169,8 @@ fbq('track', 'DBlead');
             style={{ padding: "0rem" }}
           >
             <ModularKitchenFormModal
-              handleModalWithSave={this.handleModalWithSave}
-              handleScript={this.handleScript}
             />
           </ResponsiveModal>
-          <Div>
-            {!loading && loaded ? (
-              <ResponsiveModal
-                classNames={{ modal: "designbuildmodal" }}
-                onCloseModal={() => this.setState({ open: false })}
-                open={this.state.open}
-              >
-                {/* <Div
-                  mt="50px"
-                  p="50px 15%"
-                  style={{
-                    backgroundColor: '#FFFFFF',
-                    borderBottomLeftRadius: '20px',
-                    borderBottomRightRadius: '20px'
-                  }}
-                >
-                  <Heading
-                    ta="center"
-                    fontSize="22px"
-                    mb="50px"
-                    mt="10px"
-                    color="#000000"
-                    style={{ whiteSpace: 'normal' }}
-                  >
-                    Thank you for your Interest, Our Team will get in touch with you Shortly
-                  </Heading> */}
-                {/* <Img m="0 auto 5px" width="100px" src={correctIcon} alt="Reload Page" /> */}
-                {/* </Div> */}
-
-                <Div style={{ width: "100%" }}>
-                  <Flex>
-                    <img
-                      src="https://static.hometown.in/media/cms/D/Top-Image-Living1.jpg"
-                      style={{
-                        width: "50%",
-                        height: "90vh",
-                        borderTopLeftRadius: "20px",
-                        borderBottomLeftRadius: "20px"
-                      }}
-                    />
-                    <Div
-                      style={{
-                        width: "50%",
-                        height: "90vh",
-                        backgroundColor: "#FBF2ED",
-                        borderTopRightRadius: "20px",
-                        borderBottomRightRadius: "20px"
-                      }}
-                    >
-                      <Div p="20px 5px" mt="20px">
-                        <Div>
-                          <Heading
-                            mb="15px"
-                            mt="40%"
-                            color="#000000"
-                            fontSize="18px"
-                            fontFamily="medium"
-                            style={{
-                              whiteSpace: "normal",
-                              textAlign: "center",
-                              lineHeight: "30px"
-                            }}
-                          >
-                            Thank You For Your <br /> Interest, Our Team Will
-                            Get In Touch <br /> With You Shortly
-                          </Heading>
-                        </Div>
-                        <img
-                          src={check}
-                          style={{
-                            width: "60px",
-                            height: "60x",
-                            margin: "30px auto",
-                            display: "block"
-                          }}
-                        />
-                      </Div>
-                    </Div>
-                  </Flex>
-                </Div>
-              </ResponsiveModal>
-            ) : null}
-          </Div>
         </Section>
         {/* SEO Content */}
         {seoInfo && seoInfo.seo_text && (

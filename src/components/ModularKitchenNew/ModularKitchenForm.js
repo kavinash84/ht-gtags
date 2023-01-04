@@ -10,7 +10,7 @@ import Heading from "hometown-components-dev/lib/HeadingHtV1";
 import Img from "hometown-components-dev/lib/ImageHtV1";
 import Text from "hometown-components-dev/lib/TextHtV1";
 import Button from "hometown-components-dev/lib/ButtonHtV1";
-
+import { withRouter } from 'react-router';
 import { allowNChar, allowTypeOf } from "utils/helper";
 import { SERVICE_SIGNUPS, PINCODE as PINCODE_API } from "helpers/apiUrls";
 import { sendData, getData } from "redux/modules/services";
@@ -103,7 +103,7 @@ const setDate = () => {
   //   setPreferredTime(datePickerOptions);
   // }
 };
-
+@withRouter
 @connect(
   ({ services, modularkitchen }) => ({
     prefferedTime: modularkitchen.data.items.text.prefferedTime,
@@ -370,9 +370,9 @@ export default class ModularKitchen extends Component {
     // this.setState({
     //   open: true
     // });
-    this.props.handleScript();
-    this.props.handleModalWithSave();
     sendFormData(SERVICE_SIGNUPS, data, "modularkitchen");
+    const { history } = this.props;
+    history.push('/thankyou-mk');
   };
 
   handleBookNow = () => {

@@ -32,27 +32,6 @@ class PlanYourKitchenNewContainer extends React.Component {
     });
   };
 
-  handleModalWithSave = () => {
-    this.setState({
-      openModal: false
-    });
-    setTimeout(() => {
-      this.setState({
-        open: true
-      });
-    }, 500);
-  };
-
-  handleScript = () => {
-    this.setState({
-      showScript: true
-    });
-    setTimeout(() => {
-      this.setState({
-        showScript: false
-      });
-    }, 2000);
-  };
   render() {
     const {
       whyChooseUs,
@@ -82,71 +61,9 @@ class PlanYourKitchenNewContainer extends React.Component {
             style={{ padding: "0rem" }}
           >
             <ModularKitchenFormModal
-              handleModalWithSave={this.handleModalWithSave}
-              handleScript={this.handleScript}
             />
           </ResponsiveModal>
-          <Div>
-            {!loading && loaded ? (
-              <ResponsiveModal
-                classNames={{ modal: "modularKitchenModel" }}
-                onCloseModal={() => this.setState({ open: false })}
-                open={this.state.open}
-              >
-                <Div style={{ width: "100%" }}>
-                  <Flex>
-                    <img
-                      src="https://static.hometown.in/media/cms/D/Top-Image-Living1.jpg"
-                      style={{
-                        width: "50%",
-                        height: "90vh",
-                        borderTopLeftRadius: "20px",
-                        borderBottomLeftRadius: "20px"
-                      }}
-                    />
-                    <Div
-                      style={{
-                        width: "50%",
-                        height: "90vh",
-                        backgroundColor: "#FBF2ED",
-                        borderTopRightRadius: "20px",
-                        borderBottomRightRadius: "20px"
-                      }}
-                    >
-                      <Div p="20px 5px" mt="20px">
-                        <Div>
-                          <Heading
-                            mb="15px"
-                            mt="40%"
-                            color="#000000"
-                            fontSize="18px"
-                            fontFamily="medium"
-                            style={{
-                              whiteSpace: "normal",
-                              textAlign: "center",
-                              lineHeight: "30px"
-                            }}
-                          >
-                            Thank You For Your <br /> Interest, Our Team Will
-                            Get In Touch <br /> With You Shortly
-                          </Heading>
-                        </Div>
-                        <img
-                          src={check}
-                          style={{
-                            width: "60px",
-                            height: "60x",
-                            margin: "30px auto",
-                            display: "block"
-                          }}
-                        />
-                      </Div>
-                    </Div>
-                  </Flex>
-                </Div>
-              </ResponsiveModal>
-            ) : null}
-          </Div>
+        
         </Section>
       </div>
     );
