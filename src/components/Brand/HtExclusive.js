@@ -6,6 +6,8 @@ import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Img from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 
+import { BASE_IMAGE_URL } from "helpers/Constants";
+
 import SlickSlider from '../SlickSlider';
 // import Usp from 'components/Usp';
 
@@ -45,7 +47,7 @@ export class HtExclusive extends Component {
           link: '/furniture/living-room-furniture/ht-exclusive-living/sofa--sectionals'
         },
         {
-          url: "https://static.hometown.in/media/cms/extras-desktop/chairs.png",
+          url: `${BASE_IMAGE_URL}/media/cms/extras-desktop/chairs.png`,
           name: 'Chairs',
           link: '/furniture/living-room-furniture/accent-chairs'
         },
@@ -72,12 +74,12 @@ export class HtExclusive extends Component {
           link: '/furniture/bedroom-furniture/ht-exclusive-bedroom/dressers'
         },
         {
-          url: "https://static.hometown.in/media/cms/extras-desktop/Night-Stands.png",
+          url: `${BASE_IMAGE_URL}/media/cms/extras-desktop/Night-Stands.png`,
           name: 'Nightstands',
           link: '/furniture/bedroom-furniture/ht-exclusive-bedroom/night-stand'
         },
         {
-          url: "https://static.hometown.in/media/cms/extras-desktop/Beds.png",
+          url: `${BASE_IMAGE_URL}/media/cms/extras-desktop/Beds.png`,
           name: 'Beds',
           link: '/furniture/bedroom-furniture/ht-exclusive-bedroom/bed'
         },
@@ -128,7 +130,7 @@ export class HtExclusive extends Component {
     return (
       <Container mt="0px" pl="0px" pr="0px" sx={{ maxWidth: '100% !important' }}>
         <Box>
-          <Img src="https://static.hometown.in/media/cms/extras-desktop/Banner01.jpg" alt="" width="100%" />
+          <Img src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/Banner01.jpg`} alt="" width="100%" />
         </Box>
         <Box sx={{ width: '100%' }}>
           <Text
@@ -145,7 +147,7 @@ export class HtExclusive extends Component {
             reimagining one room or your entire space, HomeTown exclusives add the perfect touch of elegance and beauty.
           </Text>
           <Link to="/furniture/living-room-furniture/ht-exclusive-living">
-            <Img src="https://static.hometown.in/media/cms/extras-desktop/Banner02.jpg" alt="" width="100%" sx={{ aspectRatio: '2.1' }} />
+            <Img src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/Banner02.jpg`} alt="" width="100%" sx={{ aspectRatio: '2.1' }} />
           </Link>
         </Box>
         <Box style={{ padding: '20px' }}>
@@ -183,7 +185,7 @@ export class HtExclusive extends Component {
         </Box>
         <Box>
           <Link to="/furniture/bedroom-furniture/ht-exclusive-bedroom">
-            <Img src="https://static.hometown.in/media/cms/extras-desktop/Banner03.jpg" alt="" width="100%" sx={{ aspectRatio: '2.1' }} />
+            <Img src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/Banner03.jpg`} alt="" width="100%" sx={{ aspectRatio: '2.1' }} />
           </Link>
         </Box>
         <Box style={{ padding: '20px' }}>
@@ -221,7 +223,7 @@ export class HtExclusive extends Component {
         </Box>
         <Box>
           <Link to="/furniture/dining-kitchen-furniture/ht-exclusive-dining--kitchen">
-            <Img src="https://static.hometown.in/media/cms/extras-desktop/Banner04.jpg" alt="" width="100%" sx={{ aspectRatio: '2.2' }} />
+            <Img src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/Banner04.jpg`} alt="" width="100%" sx={{ aspectRatio: '2.2' }} />
           </Link>
         </Box>
         <Box style={{ padding: '20px' }}>

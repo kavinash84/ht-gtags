@@ -60,6 +60,10 @@ import TrackOrder from "containers/TrackOrder";
 import PackageCatalog from "./containers/PackageCatalog";
 import oneLacPackage from "./containers/oneLacPackage";
 
+// Thank you pages
+import ThankyouMk from "./containers/ThankyouMk";
+import ThankyouDb from "./containers/ThankyouDb";
+
 /* checkout */
 import DeliveryAddress from "containers/DeliveryAddress";
 import PaymentOptions from "containers/PaymentOptions";
@@ -271,6 +275,8 @@ const routes = [
       { path: "/blog/:key", exact: true, component: BlogContainer },
       { path: "/mattresses", exact: true, component: Mattresses },
       { path: "/smartsters", exact: true, component: Smartsters },
+      { path: "/thankyou-mk", exact: true, component: ThankyouMk },
+      { path: "/thankyou-db", exact: true, component: ThankyouDb },
       { component: NotFound }
     ]
   }

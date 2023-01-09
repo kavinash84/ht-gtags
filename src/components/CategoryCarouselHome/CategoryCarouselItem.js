@@ -7,6 +7,8 @@ import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
 // import Text from 'hometown-components/lib/Text';
 // import ReactStars from "react-stars";
 
+import { BASE_IMAGE_URL } from "helpers/Constants";
+
 const arrowForward = require("../../../static/new-home/newForwardArrow.svg");
 import "./CategoryCarousel.css";
 
@@ -37,7 +39,7 @@ class CategoryItem extends Component {
         >
           <Image
             className="shopByRoom"
-            src="https://static.hometown.in/media/cms/extras-desktop/shopbyroom01.png"
+            src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/shopbyroom01.png`}
             height="auto"
             style={{ zIndex: 10 }}
           />
@@ -83,7 +85,7 @@ class CategoryItem extends Component {
         >
           <Image
             className="shopByRoom"
-            src="https://static.hometown.in/media/cms/extras-desktop/shopbyroom02.png"
+            src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/shopbyroom02.png`}
             height="auto"
             style={{ zIndex: 10 }}
           />

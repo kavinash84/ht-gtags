@@ -9,8 +9,8 @@ import Text from "hometown-components-dev/lib/TextHtV1";
 import Heading from "hometown-components-dev/lib/HeadingHtV1";
 
 import Img from "hometown-components-dev/lib/ImageHtV1";
+import { BASE_IMAGE_URL } from "helpers/Constants";
 
-const storesImg = require("../../../static/storedemoimg.jpg");
 const styles = require("./Stores.scss");
 export default class StoreDetails extends Component {
   render() {
@@ -21,7 +21,7 @@ export default class StoreDetails extends Component {
           <Container type="container" pr="0" pl="0">
             <Row display="block" mr="0" ml="0" mb="1.25rem  ">
               <Div col="12">
-                <Img src={storesImg} alt="Stores" width="100%" />
+                <Img src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/storedemoimg.jpg`} alt="Stores" width="100%" />
               </Div>
             </Row>
             <Row display="block" mr="0" ml="0">

@@ -31,6 +31,9 @@ export const clientId = 'rama';
 export const clientSecret = 'ramahometown';
 export const mapKey = 'AIzaSyB1eWfFVnqjXMWy2BCwxtnVNk5ZhFZVGS4';
 
+// images url
+export const BASE_IMAGE_URL = "https://static.hometown.in";
+
 /* Routes Config */
 export const categoryRoutes = [
   'furniture',

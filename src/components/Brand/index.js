@@ -7,101 +7,100 @@ import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 
-import BrandLogo from '../../../static/collection/LA-logo.jpg';
-
 import BrandCollection from './BrandCollection';
 import BrandCategories from './BrandCategories';
+import { BASE_IMAGE_URL } from "helpers/Constants";
 
 const styles = require('./lauraAshley.scss');
 
 class Brand extends React.Component {
   state = {
-    bannerImageLeft: "https://static.hometown.in/media/cms/extras-desktop/1.jpg",
-    bannerImageRight: "https://static.hometown.in/media/cms/extras-desktop/2.jpg",
-    bannerImageCenter: "https://static.hometown.in/media/cms/extras-desktop/LA-mid-banner.jpg",
-    brandLogo: BrandLogo,
+    bannerImageLeft: `${BASE_IMAGE_URL}/media/cms/extras-desktop/1.jpg`,
+    bannerImageRight: `${BASE_IMAGE_URL}/media/cms/extras-desktop/2.jpg`,
+    bannerImageCenter: `${BASE_IMAGE_URL}/media/cms/extras-desktop/LA-mid-banner.jpg`,
+    brandLogo: `${BASE_IMAGE_URL}/media/cms/extras-desktop/LA-logo.jpg`,
     CollectionData: [
       {
         content: 'Provencale',
         title:
           'A French country style range which looks great as a collection or used as individual pieces. Carefully constructed by skilled craftsmen and finished by hand.',
-        imgUrl: "https://static.hometown.in/media/cms/extras-desktop/Provencale.jpg",
+        imgUrl: `${BASE_IMAGE_URL}/media/cms/extras-desktop/Provencale.jpg`,
         url: '/furniture/laura-ashley/shop-by-collection/provencale'
       },
       {
         content: 'Milton',
         title:
           'Milton has a pure and timeless quality that makes it suitable for almost any living space. Made using traditional joints and craftsmenship, each piece is beautifully enhanced by a fine, oiled finish and antiqued pewter effect handles',
-        imgUrl: "https://static.hometown.in/media/cms/extras-desktop/Milton.jpg",
+        imgUrl: `${BASE_IMAGE_URL}/media/cms/extras-desktop/Milton.jpg`,
         url: '/furniture/laura-ashley/shop-by-collection/milton'
       },
       {
         content: 'Henshaw',
         title:
           'Add drama to any room with Henshaw, featuring a hand-painted black finish and distressed edges rubbed back to reveal a golden colour beneath',
-        imgUrl: 'https://static.hometown.in/media/cms/extras-desktop/Henshaw.jpg',
+        imgUrl: `${BASE_IMAGE_URL}/media/cms/extras-desktop/Henshaw.jpg`,
         url: '/furniture/laura-ashley/shop-by-collection/henshaw'
       },
       {
         content: 'Garrat',
         title:
           'Available in dark chestnut and honey, our ever popular Garrat range is stained to enhance the natural wood features, grain and colour variation. With antiqued brass effect handles and knobs, it will suit any home',
-        imgUrl: "https://static.hometown.in/media/cms/extras-desktop/Garrot.jpg",
+        imgUrl: `${BASE_IMAGE_URL}/media/cms/extras-desktop/Garrot.jpg`,
         url: '/furniture/laura-ashley/shop-by-collection/garrat'
       },
       {
         content: 'Keats',
         title:
           'The perfect balance between elegant design and traditional cabinet making, our Keats collection combines soft curves together with subtle features and details that are a true sign of quality construction',
-        imgUrl: "https://static.hometown.in/media/cms/extras-desktop/Keats.jpg",
+        imgUrl: `${BASE_IMAGE_URL}/media/cms/extras-desktop/Keats.jpg`,
         url: '/furniture/laura-ashley/shop-by-collection/keats'
       },
       {
         content: 'Dorset',
         title:
           'Classically elegant, this hand finished range features a gentle chalky finish that works perfectly with the ash tops, whilst contrast steel effect handles and hinges introduce a contemporary twist',
-        imgUrl: "https://static.hometown.in/media/cms/extras-desktop/Dorset.jpg",
+        imgUrl: `${BASE_IMAGE_URL}/media/cms/extras-desktop/Dorset.jpg`,
         url: '/furniture/laura-ashley/shop-by-collection/dorset'
       }
     ],
     brandCategories: [
       {
-        image_url: "https://static.hometown.in/media/cms/extras-desktop/Sofas.jpg",
+        image_url: `${BASE_IMAGE_URL}/media/cms/extras-desktop/Sofas.jpg`,
         name: 'Sofas',
         url: '/furniture/laura-ashley/laura-ashley-sofas'
       },
       {
-        image_url: "https://static.hometown.in/media/cms/extras-desktop/dining-set.jpg",
+        image_url: `${BASE_IMAGE_URL}/media/cms/extras-desktop/dining-set.jpg`,
         name: 'Dining Sets',
         url: '/furniture/laura-ashley/laura-ashley-dining-sets'
       },
       {
-        image_url: "https://static.hometown.in/media/cms/extras-desktop/beds.jpg",
+        image_url: `${BASE_IMAGE_URL}/media/cms/extras-desktop/beds.jpg`,
         name: 'Beds',
         url: '/furniture/laura-ashley/laura-ashley-beds'
       },
       {
-        image_url: "https://static.hometown.in/media/cms/extras-desktop/Coffeetables.jpg",
+        image_url: `${BASE_IMAGE_URL}/media/cms/extras-desktop/Coffeetables.jpg`,
         name: 'Coffee Tables & End Tables',
         url: '/furniture/laura-ashley/LA-Coffee-tables-and-end-tables-Laura-Ashley'
       },
       {
-        image_url: "https://static.hometown.in/media/cms/extras-desktop/Sideboards.jpg",
+        image_url: `${BASE_IMAGE_URL}/media/cms/extras-desktop/Sideboards.jpg`,
         name: 'Side Boards and Consoles',
         url: '/furniture/laura-ashley/sideboard-and-consoles'
       },
       {
-        image_url: "https://static.hometown.in/media/cms/extras-desktop/Wardrobes.jpg",
+        image_url: `${BASE_IMAGE_URL}/media/cms/extras-desktop/Wardrobes.jpg`,
         name: 'Wardrobe & Night Stands',
         url: '/furniture/laura-ashley/wardrobe-and-nightstand'
       },
       {
-        image_url: "https://static.hometown.in/media/cms/extras-desktop/Tableware.jpg",
+        image_url: `${BASE_IMAGE_URL}/media/cms/extras-desktop/Tableware.jpg`,
         name: 'Tableware',
         url: '/furniture/laura-ashley/Laura-Ashley-tableware'
       },
       {
-        image_url: "https://static.hometown.in/media/cms/extras-desktop/Fragrances.jpg",
+        image_url: `${BASE_IMAGE_URL}/media/cms/extras-desktop/Fragrances.jpg`,
         name: 'Fragrances',
         url: '/furniture/laura-ashley/fragrances'
       }

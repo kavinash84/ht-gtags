@@ -16,8 +16,7 @@ import { resetPassword } from 'redux/modules/forgotpassword';
 import { allowNChar } from 'utils/helper';
 import MenuFooter from 'containers/MenuFooter';
 import ForgotPasswordModal from 'components/ForgotPasswordModal';
-
-const PasswordExpiredIcon = require('../../../static/password-expired-icon.png');
+import { BASE_IMAGE_URL } from "helpers/Constants";
 
 @connect(({ forgotpassword }) => ({
   response: forgotpassword
@@ -131,7 +130,7 @@ export default class ResetPasswordContainer extends Component {
                       <Box col={6}>
                         <Box className={styles.imgWrapper}>
                           {/*eslint-disable*/}
-                          <ImageShimmer src="https://static.hometown.in/media/cms/hometownnew/compressed/forgotpassword-sidebar-bg.jpg">
+                          <ImageShimmer src={`${BASE_IMAGE_URL}/media/cms/hometownnew/compressed/forgotpassword-sidebar-bg.jpg`}>
                             {imageURL => <Img src={imageURL} alt="" height="100%" />}
                           </ImageShimmer>
                           {/* eslint-enable */}
@@ -185,7 +184,7 @@ export default class ResetPasswordContainer extends Component {
                   onBtnClick={this.onForgotPasswordClick}
                   bg="#fafafa"
                 >
-                  <Img src={PasswordExpiredIcon} width="initial" m="auto" alt="Password link is expired !!" />
+                  <Img src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/password-expired-icon.png`} width="initial" m="auto" alt="Password link is expired !!" />
                 </Empty>
               </Section>
             )}

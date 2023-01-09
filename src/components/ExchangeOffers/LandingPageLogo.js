@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../../static/logo-ht.png";
+import { BASE_IMAGE_URL } from "helpers/Constants";
 
 const LandingPageLogo = () => (
   <div
@@ -14,7 +14,7 @@ const LandingPageLogo = () => (
       <a href="https://www.hometown.in" target="_blank" rel="noopener">
         <img
           className="img-fluid"
-          src={logo}
+          src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/logo-ht.png`}
           alt="HomeTown"
           style={{ margin: "15px 0px" }}
         />

@@ -12,6 +12,8 @@ import Flex from 'hometown-components-dev/lib/FlexHtV1';
 import Div from 'hometown-components-dev/lib/BoxHtV1';
 import Img from 'hometown-components-dev/lib/ImageHtV1';
 
+import { BASE_IMAGE_URL } from "helpers/Constants";
+
 import moment from 'moment';
 
 const startTime = date =>
@@ -491,7 +493,7 @@ class DemoForm extends Component {
       <React.Fragment>
        <Div style={{width:'100%'}}>
        <Flex>
-       <Img src="https://static.hometown.in/media/cms/designbuild/speaktoExperts.png" style={{width: '50%', height:'90vh'}}/>
+       <Img src={`${BASE_IMAGE_URL}/media/cms/designbuild/speaktoExperts.png`} style={{width: '50%', height:'90vh'}}/>
        <Div style={{width:'50%', height:'90vh', backgroundColor: '#FFF8F4'}}>
        <div style={{ background: '#FFF8F4', padding: '10px 15px 0px', marginTop: '10px' }}>
           {landing !== null && (

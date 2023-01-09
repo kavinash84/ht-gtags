@@ -11,14 +11,13 @@ import ResponsiveModal from 'components/Modal';
 import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Image from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
+import { BASE_IMAGE_URL } from "helpers/Constants";
 /**
  * helpers / modules
  */
 import { LOGIN_URL } from 'helpers/Constants';
 import { validateEmail } from 'js-utility-functions';
 import { forgotPassword } from 'redux/modules/forgotpassword';
-
-const ForgotPasswordImg = require('../../../static/forgot-password-icon.png');
 
 @connect(({ forgotpassword }) => ({
   response: forgotpassword
@@ -85,7 +84,7 @@ export default class ForgotPasswordModal extends Component {
       >
         {loaded && !error && submitted ? (
           <Box sx={{ textAlign: 'center' }} py={20}>
-            <Image src={ForgotPasswordImg} alt="" height={150} mb={30} />
+            <Image src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/forgot-password-icon.png`} alt="" height={150} mb={30} />
             <Box>
               <Text mb={5}>An email has been sent to</Text>
               <Text mb={15}>

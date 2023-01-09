@@ -32,7 +32,6 @@ const StoreListItem = ({
       className={styles.storeBlock}
     >
       <Link to={url}>
-        {/* <Img src="https://static.hometown.in/media/cms/hometownv2/compressed/New-Delhi.jpg" alt="" /> */}
         <Row type="block" m="0">
           <Div>
             <Heading

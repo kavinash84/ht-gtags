@@ -10,6 +10,7 @@ import Button from "hometown-components-dev/lib/ButtonHtV1";
 import Section from "hometown-components-dev/lib/SectionHtV1";
 import StepsMain from "./StepsMain";
 import { connect } from "react-redux";
+import { BASE_IMAGE_URL } from "helpers/Constants";
 
 const styles = require("./Designbuild.scss");
 import "./Slider.css";
@@ -119,7 +120,7 @@ class StepsToYourHome extends React.Component {
                 <Div style={{ width: "100%" }}>
                   <Flex>
                     <img
-                      src="https://static.hometown.in/media/cms/D/Top-Image-Living1.jpg"
+                      src={`${BASE_IMAGE_URL}/media/cms/D/Top-Image-Living1.jpg`}
                       style={{
                         width: "50%",
                         height: "90vh",

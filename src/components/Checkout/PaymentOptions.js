@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { withRouter } from "react-router";
+import { BASE_IMAGE_URL } from "helpers/Constants";
 
 /**
  * Components
@@ -432,7 +433,7 @@ class PaymentOptions extends Component {
                         gateway={selectedGateway}
                         name="HDFB"
                         detailkey="bankCode"
-                        img="https://static.hometown.in/media/cms/BankLOGO/hdfc.gif"
+                        img={`${BASE_IMAGE_URL}/media/cms/BankLOGO/hdfc.gif`}
                         currentSelection={paymentDetails.NetBanking.bankCode}
                       />
                       <BankCard
@@ -440,7 +441,7 @@ class PaymentOptions extends Component {
                         gateway={selectedGateway}
                         name="ICIB"
                         detailkey="bankCode"
-                        img="https://static.hometown.in/media/cms/BankLOGO/icici.gif"
+                        img={`${BASE_IMAGE_URL}/media/cms/BankLOGO/icici.gif`}
                         currentSelection={paymentDetails.NetBanking.bankCode}
                       />
                       <BankCard
@@ -448,7 +449,7 @@ class PaymentOptions extends Component {
                         gateway={selectedGateway}
                         name="AXIB"
                         detailkey="bankCode"
-                        img="https://static.hometown.in/media/cms/BankLOGO/axis.gif"
+                        img={`${BASE_IMAGE_URL}/media/cms/BankLOGO/axis.gif`}
                         currentSelection={paymentDetails.NetBanking.bankCode}
                       />
                       <BankCard
@@ -456,7 +457,7 @@ class PaymentOptions extends Component {
                         gateway={selectedGateway}
                         name="SBIB"
                         detailkey="bankCode"
-                        img="https://static.hometown.in/media/cms/BankLOGO/sbi.gif"
+                        img={`${BASE_IMAGE_URL}/media/cms/BankLOGO/sbi.gif`}
                         currentSelection={paymentDetails.NetBanking.bankCode}
                       />
                     </Row>
@@ -519,7 +520,7 @@ class PaymentOptions extends Component {
                           name="Paytm"
                           detailkey="walletName"
                           currentSelection={paymentDetails.Wallet.walletName}
-                          img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/paytm.jpg"
+                          img={`${BASE_IMAGE_URL}/images/local_v2/onestepcheckout/logo/paytm.jpg`}
                         />
                       )}
                       {WalletData.isPayuWalletEnable && (
@@ -529,7 +530,7 @@ class PaymentOptions extends Component {
                           name="Payu"
                           detailkey="walletName"
                           currentSelection={paymentDetails.Wallet.walletName}
-                          img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/payu.jpg"
+                          img={`${BASE_IMAGE_URL}/images/local_v2/onestepcheckout/logo/payu.jpg`}
                         />
                       )}
                       {WalletData.isMobikwikWalletEnable && (
@@ -539,7 +540,7 @@ class PaymentOptions extends Component {
                           name="Mobikwik"
                           detailkey="walletName"
                           currentSelection={paymentDetails.Wallet.walletName}
-                          img="https://static.hometown.in/images/local_v2/onestepcheckout/logo/mobikwik.jpg"
+                          img={`${BASE_IMAGE_URL}/images/local_v2/onestepcheckout/logo/mobikwik.jpg`}
                         />
                       )}
                     </Row>

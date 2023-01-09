@@ -20,6 +20,8 @@ import Heading from "hometown-components-dev/lib/HeadingHtV1";
 import Flex from "hometown-components-dev/lib/FlexHtV1";
 import "./Slider.css";
 
+import { BASE_IMAGE_URL } from "helpers/Constants";
+
 // const Check = require("../../../static/newHomePage/check.svg");
 
 import { allowNChar, allowTypeOf } from "utils/helper";
@@ -138,7 +140,7 @@ class HomeInteriorContainer extends React.Component {
                 <Div style={{ width: "100%" }}>
                   <Flex>
                     <img
-                      src="https://static.hometown.in/media/cms/D/Top-Image-Living1.jpg"
+                      src={`${BASE_IMAGE_URL}/media/cms/D/Top-Image-Living1.jpg`}
                       style={{
                         width: "50%",
                         height: "90vh",

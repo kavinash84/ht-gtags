@@ -12,7 +12,7 @@ import Heading from "hometown-components-dev/lib/HeadingHtV1";
 import Img from "hometown-components-dev/lib/ImageHtV1";
 import Text from "hometown-components-dev/lib/TextHtV1";
 import Button from "hometown-components-dev/lib/ButtonHtV1";
-
+import { withRouter } from 'react-router';
 import { allowNChar, allowTypeOf } from "utils/helper";
 import { SERVICE_SIGNUPS, PINCODE as PINCODE_API } from "helpers/apiUrls";
 import { sendData, getData } from "redux/modules/services";
@@ -24,6 +24,7 @@ import {
   validateFullname,
   checkSpecialChar
 } from "utils/validation";
+import { BASE_IMAGE_URL } from "helpers/Constants";
 // import stores from '../../data/Stores.js';
 
 import moment from "moment";
@@ -107,7 +108,7 @@ const setDate = () => {
   //   setPreferredTime(datePickerOptions);
   // }
 };
-
+@withRouter
 @connect(
   ({ services, modularkitchen }) => ({
     prefferedTime: modularkitchen.data.items.text.prefferedTime,
@@ -404,12 +405,9 @@ export default class ModularKitchenFormModal extends Component {
       // mkLead: 'Online consultaion',
       devicePlatform: "msite"
     };
-    this.props.handleModalWithSave();
-    // this.setState({
-    //   open: true
-    // });
-    this.props.handleScript();
     sendFormData(SERVICE_SIGNUPS, data, "modularkitchen");
+    const { history } = this.props;
+    history.push('/thankyou-mk');
   };
 
   handleBookNow = () => {
@@ -478,7 +476,7 @@ export default class ModularKitchenFormModal extends Component {
         <Div style={{ width: "100%" }}>
           <Flex>
             <Img
-              src="https://static.hometown.in/media/cms/D/Top-Image-Living1.jpg"
+              src={`${BASE_IMAGE_URL}/media/cms/D/Top-Image-Living1.jpg`}
               style={{
                 width: "50%",
                 height: "90vh",
@@ -722,8 +720,8 @@ ModularKitchenFormModal.defaultProps = {
   loading: false,
   loaded: false,
   data: {},
-  loadPincodeDetails: () => {},
-  sendFormData: () => {}
+  loadPincodeDetails: () => { },
+  sendFormData: () => { }
 };
 ModularKitchenFormModal.propTypes = {
   loading: PropTypes.bool,

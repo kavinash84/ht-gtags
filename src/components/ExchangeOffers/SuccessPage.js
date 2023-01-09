@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { notifSend } from "redux/modules/notifs";
 import mapIcon from "../../../static/map-icon.svg";
+import { BASE_IMAGE_URL } from "helpers/Constants";
 
 @connect(({ designbuild }) => ({
   seoInfo:
@@ -122,7 +123,7 @@ src=https://www.facebook.com/tr?id=1024172491523922&ev=Lead&noscript=1
         </noscript>
         {/* <LandingPageLogo /> */}
         <img
-          src="https://static.hometown.in/media/cms/extras-desktop/Thank-revised.jpg"
+          src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/Thank-revised.jpg`}
           alt="banner"
           style={{ width: "100%", height: "auto" }}
         />

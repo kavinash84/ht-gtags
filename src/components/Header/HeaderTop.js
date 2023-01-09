@@ -329,44 +329,8 @@ export default class HeaderTop extends Component {
                           /> */}
                         </Box>
                       ))}
-                      {/* <Box px={5} py={5}>
-                      <Image
-                        src={`${wishlist.data[0].product_info.images[0].url}.jpg`}
-                        alt=""
-                        width={64}
-                        height={64}
-                        sx={{ border: 'secondary' }}
-                      />
-                    </Box>
-                    <Box px={5} py={5}>
-                      <Image
-                        src="https://static.hometown.in/media/product/53/1253/12483/1-top_sel_160.jpg"
-                        alt=""
-                        width={64}
-                        height={64}
-                      />
-                    </Box> */}
                     </Flex>
                   )}
-                  {/* <Flex mx={-5} my={-5} sx={{ flexWrap: 'wrap' }}>
-                    <Box px={5} py={5}>
-                      <Image
-                        src="https://static.hometown.in/media/product/53/1253/12483/1-top_sel_160.jpg"
-                        alt=""
-                        width={64}
-                        height={64}
-                        sx={{ border: 'secondary' }}
-                      />
-                    </Box>
-                    <Box px={5} py={5}>
-                      <Image
-                        src="https://static.hometown.in/media/product/53/1253/12483/1-top_sel_160.jpg"
-                        alt=""
-                        width={64}
-                        height={64}
-                      />
-                    </Box>
-                  </Flex> */}
                   <Box mt={10} mb={10}>
                     <Text sx={{ fontSize: 14 }}>Already have a list?</Text>
                   </Box>
