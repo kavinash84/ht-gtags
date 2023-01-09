@@ -11,6 +11,7 @@ import Body from "hometown-components-dev/lib/BodyHtV1";
 import Wrapper from "hometown-components-dev/lib/WrapperHtV1";
 import Footer from "components/Footer";
 import Header from "components/Header";
+import { BASE_IMAGE_URL } from "helpers/Constants";
 
 const ContentSection = ({ description, title }) => (
   <Fragment>
@@ -47,12 +48,12 @@ const WeddingCampaign = () => (
       <Header />
       <Box pl="15px" pr="15px">
         <Box mb="-100px">
-          <Img src="https://static.hometown.in/media/cms/extras-desktop/banner.jpg" alt="" />
+          <Img src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/banner.jpg`} alt="" />
         </Box>
         <Row pb="30px">
           <Box col="7" ta="center" m="auto">
             <Img
-              src="https://static.hometown.in/media/cms/extras-desktop/Happily-Ever-After.png"
+              src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/Happily-Ever-After.png`}
               alt=""
               height="200px"
               width="auto"
@@ -113,7 +114,7 @@ const WeddingCampaign = () => (
             </Link>
           </Box>
           <Box col="6">
-            <Img width="100%" src="https://static.hometown.in/media/cms/extras-desktop/Hot-Deals-Dining-Set.jpg" />
+            <Img width="100%" src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/Hot-Deals-Dining-Set.jpg`} />
           </Box>
         </Row>
         <Row pb="40px" pt="30px">
@@ -127,7 +128,7 @@ const WeddingCampaign = () => (
         <Row ml="-8px" mr="-8px">
           <Box col="4" p="8px">
             <Link to="/furniture">
-              <Img width="100%" src="https://static.hometown.in/media/cms/extras-desktop/Bed.jpg" />
+              <Img width="100%" src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/Bed.jpg`} />
               <Heading ta="center" color="black" fontFamily="light">
                 FURNITURE ESSENTIALS
               </Heading>
@@ -135,7 +136,7 @@ const WeddingCampaign = () => (
           </Box>
           <Box col="4" p="8px">
             <Link to="/home-furnishings/bedding">
-              <Img width="100%" src="https://static.hometown.in/media/cms/extras-desktop/Bedding-essentials.jpg" />
+              <Img width="100%" src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/Bedding-essentials.jpg`} />
               <Heading ta="center" color="black" fontFamily="light">
                 BEDDING ESSENTIALS
               </Heading>
@@ -143,7 +144,7 @@ const WeddingCampaign = () => (
           </Box>
           <Box col="4" p="8px">
             <Link to="/tableware">
-              <Img width="100%" src="https://static.hometown.in/media/cms/extras-desktop/Dining-Essentials.jpg" />
+              <Img width="100%" src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/Dining-Essentials.jpg`} />
               <Heading ta="center" color="black" fontFamily="light">
                 DINNING ESSENTIALS
               </Heading>
@@ -151,7 +152,7 @@ const WeddingCampaign = () => (
           </Box>
           <Box col="4" p="8px">
             <Link to="/kitchenware">
-              <Img width="100%" src="https://static.hometown.in/media/cms/extras-desktop/Kitchen-essential.jpg" />
+              <Img width="100%" src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/Kitchen-essential.jpg`} />
               <Heading ta="center" color="black" fontFamily="light">
                 KITCHEN ESSENTIALS
               </Heading>
@@ -159,7 +160,7 @@ const WeddingCampaign = () => (
           </Box>
           <Box col="4" p="8px">
             <Link to="/home-furnishings/bath-accessory">
-              <Img width="100%" src="https://static.hometown.in/media/cms/extras-desktop/Bath-essentials.jpg" />
+              <Img width="100%" src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/Bath-essentials.jpg`} />
               <Heading ta="center" color="black" fontFamily="light">
                 BATH ESSENTIALS
               </Heading>
@@ -167,7 +168,7 @@ const WeddingCampaign = () => (
           </Box>
           <Box col="4" p="8px">
             <Link to="/luggage">
-              <Img width="100%" src="https://static.hometown.in/media/cms/extras-desktop/travel-essential.jpg" />
+              <Img width="100%" src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/travel-essential.jpg`} />
               <Heading ta="center" color="black" fontFamily="light">
                 TRAVEL ESSENTIALS
               </Heading>
@@ -179,7 +180,7 @@ const WeddingCampaign = () => (
             <ContentSection description="Customize your dream kitchen to whip up the perfect meal. Choose from over 1000 designs and finishes to turn your everyday activities like cooking and eating into a feast." />
           </Box>
         </Row>
-        <Row ml="0" mr="0" alignItems="center" bg={`url($"https://static.hometown.in/media/cms/extras-desktop/Kitchen-Banner.jpg")`}>
+        <Row ml="0" mr="0" alignItems="center" bg={`url(${`${BASE_IMAGE_URL}/media/cms/extras-desktop/Kitchen-Banner.jpg`})`}>
           <Box col="6" />
           <Box
             col="6"
@@ -190,7 +191,7 @@ const WeddingCampaign = () => (
             style={{ width: "45%" }}
           >
             <Img
-              src="https://static.hometown.in/media/cms/extras-desktop/duracucine-logo.png"
+              src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/duracucine-logo.png`}
               alt=""
               width="auto"
               m="auto"
@@ -244,7 +245,7 @@ const WeddingCampaign = () => (
             <ContentSection description="Make your house into a home with expert help on interior design, home styling and end-to-end project management and execution" />
           </Box>
         </Row>
-        <Row alignItems="center" bg={`url($"https://static.hometown.in/media/cms/extras-desktop/Kitchen-Banner.jpg")`}>
+        <Row alignItems="center" bg={`url(${`${BASE_IMAGE_URL}/media/cms/extras-desktop/Kitchen-Banner.jpg`})`}>
           <Box
             col="6"
             ta="center"
@@ -255,7 +256,7 @@ const WeddingCampaign = () => (
             ml="5%"
           >
             <Img
-              src="https://static.hometown.in/media/cms/extras-desktop/db-logo.png"
+              src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/db-logo.png`}
               alt=""
               width="auto"
               m="auto"

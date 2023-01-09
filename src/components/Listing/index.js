@@ -18,6 +18,7 @@ import BreadCrumb from "./BreadCrumb";
 import CategoryBar from "./CategoryBar";
 // import TitleBar from "./TitleBar";
 import UnbxdListing from "./UnbxdListing";
+import { BASE_IMAGE_URL } from "helpers/Constants";
 
 // const sortByList = require('data/sortby');
 
@@ -377,7 +378,7 @@ class Listing extends React.Component {
                 }}
               > */}
               <img
-                src='https://static.hometown.in/media/cms/campaignpages/pop-up-banner_2.jpg'
+                src={`${BASE_IMAGE_URL}/media/cms/campaignpages/pop-up-banner_2.jpg`}
                 style={{ width: "100%", height: "auto" }}
               />
               {/* </div> */}

@@ -12,6 +12,7 @@ import Label from 'hometown-components-dev/lib/LabelHtV1';
 import Row from 'hometown-components-dev/lib/RowHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 import Wrapper from 'hometown-components-dev/lib/WrapperHtV1';
+import { BASE_IMAGE_URL } from "helpers/Constants";
 
 /* ====== Page Components ====== */
 import Footer from 'components/Footer';
@@ -54,7 +55,7 @@ const Gratification = () => (
               <Link to="/">
                 <Image
                   width={1}
-                  src="https://static.hometown.in/media/product/15/1053/1-top_sel_160.jpg"
+                  src={`${BASE_IMAGE_URL}/media/product/15/1053/1-top_sel_160.jpg`}
                   alt=""
                   sx={{ boxShadow: 'productThumb' }}
                 />
@@ -93,7 +94,7 @@ const Gratification = () => (
               <Link to="/">
                 <Image
                   width={1}
-                  src="https://static.hometown.in/media/product/15/1053/1-top_sel_160.jpg"
+                  src={`${BASE_IMAGE_URL}/media/product/15/1053/1-top_sel_160.jpg`}
                   alt=""
                   sx={{ boxShadow: 'productThumb' }}
                 />
@@ -132,7 +133,7 @@ const Gratification = () => (
               <Link to="/">
                 <Image
                   width={1}
-                  src="https://static.hometown.in/media/product/15/1053/1-top_sel_160.jpg"
+                  src={`${BASE_IMAGE_URL}/media/product/15/1053/1-top_sel_160.jpg`}
                   alt=""
                   sx={{ boxShadow: 'productThumb' }}
                 />

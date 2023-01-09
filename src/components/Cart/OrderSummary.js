@@ -19,6 +19,9 @@ import Row from "hometown-components-dev/lib/RowHtV1";
 import Text from "hometown-components-dev/lib/TextHtV1";
 import Coupon from "../Checkout/Coupon";
 import AcceptedPaymentOptions from "../AcceptedPaymentOptions";
+
+import { BASE_IMAGE_URL } from "helpers/Constants";
+
 /**
  * Icons
  */
@@ -78,7 +81,7 @@ const OrderSummary = ({
       >
         <Box>
           <a href={landingPageLink} rel="noopener" target="_blank">
-            <Image src="https://static.hometown.in/media/cms/extras-desktop/select-for-demo-mini-banner.jpg" alt="" />
+            <Image src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/select-for-demo-mini-banner.jpg`} alt="" />
           </a>
         </Box>
       </Row>

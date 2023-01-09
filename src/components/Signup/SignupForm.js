@@ -10,6 +10,8 @@ import { signUp } from 'redux/modules/signUp';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 import { LOGIN_URL } from 'helpers/Constants';
 
+import { BASE_IMAGE_URL } from "helpers/Constants";
+
 /* ====== Validations ====== */
 import { validateMobile, validatePassword, validateEmail } from 'utils/validation';
 
@@ -138,7 +140,7 @@ export default class SignupFormContainer extends Component {
         <RowHtV1>
           <ColHtV1 variant="col-6">
             <BoxHtV1>
-              <ImageShimmer src="https://static.hometown.in/media/cms/hometownnew/compressed/login.jpg" height="514px">
+              <ImageShimmer src={`${BASE_IMAGE_URL}/media/cms/hometownnew/compressed/login.jpg`} height="514px">
                 {imageURL => <ImageHtV1 src={imageURL} alt="" />}
               </ImageShimmer>
             </BoxHtV1>

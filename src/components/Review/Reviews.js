@@ -6,6 +6,7 @@ import Img from "hometown-components-dev/lib/ImageHtV1";
 import { Link } from "react-router-dom";
 import ReviewText from "./ReviewText";
 // import ReviewsData from "./ReviewsData";
+import { BASE_IMAGE_URL } from "helpers/Constants";
 
 const Star = require("../../../static/Review/star.svg");
 const amazon = require("../../../static/Review/amazon.svg");
@@ -41,9 +42,9 @@ export default class Reviews extends Component {
       case "facebook":
         return <Img src={facebook} alt="Facebook" width="60px" height="60px" />;
       case "flipkart":
-        return <Img src="https://static.hometown.in/media/cms/extras-desktop/flipcart.svg" alt="Flipkart" width="60px" height="60px" />;
+        return <Img src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/flipcart.svg`} alt="Flipkart" width="60px" height="60px" />;
       case "hometown":
-        return <Img src="https://static.hometown.in/media/cms/extras-desktop/ht.png" alt="Hometown" width="60px" height="42px" />;
+        return <Img src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/ht.png`} alt="Hometown" width="60px" height="42px" />;
       case "myntra":
         return <Img src={myntra} alt="Mayantra" width="60px" height="60px" />;
       case "pepperfry":

@@ -6,8 +6,23 @@ import Box from 'hometown-components-dev/lib/BoxHtV1';
 import Img from 'hometown-components-dev/lib/ImageHtV1';
 import Text from 'hometown-components-dev/lib/TextHtV1';
 
+import { BASE_IMAGE_URL } from "helpers/Constants";
+
 import SlickSlider from '../SlickSlider';
 // import Usp from 'components/Usp';
+
+import CarouselImg1 from '../../../static/HT-Exclusive/Living Room/Sofas.png';
+import CarouselImg3 from '../../../static/HT-Exclusive/Living Room/center-tables.png';
+import CarouselImg4 from '../../../static/HT-Exclusive/Living Room/TV-Units.png';
+import CarouselImg5 from '../../../static/HT-Exclusive/Living Room/End-Tables.png';
+import CarouselImg6 from '../../../static/HT-Exclusive/Bedroom/Dressers.png';
+import CarouselImg9 from '../../../static/HT-Exclusive/Bedroom/Mattresses.png';
+import CarouselImg10 from '../../../static/HT-Exclusive/Bedroom/Armoires.png';
+import CarouselImg11 from '../../../static/HT-Exclusive/Dining Room/Consloe-Tables.png';
+import CarouselImg12 from '../../../static/HT-Exclusive/Dining Room/Dining-Chairs.png';
+import CarouselImg13 from '../../../static/HT-Exclusive/Dining Room/Dining-Tables.png';
+import CarouselImg14 from '../../../static/HT-Exclusive/Dining Room/Dining-Sets.png';
+import CarouselImg15 from '../../../static/HT-Exclusive/Dining Room/Sideboards.png';
 
 // import Heading from 'hometown-components/lib/Heading'
 
@@ -27,81 +42,81 @@ export class HtExclusive extends Component {
     this.state = {
       carouselItem1: [
         {
-          url: "https://static.hometown.in/media/cms/extras-desktop/Sofas.png",
+          url: CarouselImg1,
           name: 'Sofas & Sectionals',
           link: '/furniture/living-room-furniture/ht-exclusive-living/sofa--sectionals'
         },
         {
-          url: "https://static.hometown.in/media/cms/extras-desktop/chairs.png",
+          url: `${BASE_IMAGE_URL}/media/cms/extras-desktop/chairs.png`,
           name: 'Chairs',
           link: '/furniture/living-room-furniture/accent-chairs'
         },
         {
-          url: "https://static.hometown.in/media/cms/extras-desktop/center-tables.png",
+          url: CarouselImg3,
           name: 'Coffee Tables',
           link: '/furniture/living-room-furniture/ht-exclusive-living/coffee-table'
         },
         {
-          url: "https://static.hometown.in/media/cms/extras-desktop/TV-Units.png",
+          url: CarouselImg4,
           name: 'TV Stands & Entertainment Centers',
           link: '/furniture/living-room-furniture/ht-exclusive-living/entertainment-unit'
         },
         {
-          url: "https://static.hometown.in/media/cms/extras-desktop/End-Tables.png",
+          url: CarouselImg5,
           name: 'End & Side Tables',
           link: '/furniture/living-room-furniture/ht-exclusive-living/side-table'
         }
       ],
       carouselItem2: [
         {
-          url: "https://static.hometown.in/media/cms/extras-desktop/Dressers.png",
+          url: CarouselImg6,
           name: 'Dressers',
           link: '/furniture/bedroom-furniture/ht-exclusive-bedroom/dressers'
         },
         {
-          url: "https://static.hometown.in/media/cms/extras-desktop/Night-Stands.png",
+          url: `${BASE_IMAGE_URL}/media/cms/extras-desktop/Night-Stands.png`,
           name: 'Nightstands',
           link: '/furniture/bedroom-furniture/ht-exclusive-bedroom/night-stand'
         },
         {
-          url: "https://static.hometown.in/media/cms/extras-desktop/Beds.png",
+          url: `${BASE_IMAGE_URL}/media/cms/extras-desktop/Beds.png`,
           name: 'Beds',
           link: '/furniture/bedroom-furniture/ht-exclusive-bedroom/bed'
         },
         {
-          url: "https://static.hometown.in/media/cms/extras-desktop/Mattresses.png",
+          url: CarouselImg9,
           name: 'Mattresses',
           link: '/furniture/bedroom-furniture/ht-exclusive-bedroom/bed-mattresses'
         },
         {
-          url: "https://static.hometown.in/media/cms/extras-desktop/Armoires.png",
+          url: CarouselImg10,
           name: 'Armoires',
           link: '/furniture/bedroom-furniture/ht-exclusive-bedroom/bedroom-wardrobe'
         }
       ],
       carouselItem3: [
         {
-          url: "https://static.hometown.in/media/cms/extras-desktop/Consloe-Tables.png",
+          url: CarouselImg11,
           name: 'Bar & Counter Stools',
           link: '/furniture/bar-furniture/bar-chairs-and-stools'
         },
         {
-          url: "https://static.hometown.in/media/cms/extras-desktop/Dining-Chairs.png",
+          url: CarouselImg12,
           name: 'Dining Chairs & Benches',
           link: '/furniture/dining-kitchen-furniture/ht-exclusive-dining--kitchen/dining-chair'
         },
         {
-          url: "https://static.hometown.in/media/cms/extras-desktop/Dining-Tables.png",
+          url: CarouselImg13,
           name: 'Dining Tables',
           link: '/furniture/dining-kitchen-furniture/ht-exclusive-dining--kitchen/dining-table'
         },
         {
-          url: "https://static.hometown.in/media/cms/extras-desktop/Dining-Tables.png",
+          url: CarouselImg14,
           name: 'Sideboards & Buffet Tables',
           link: '/furniture/dining-kitchen-furniture/ht-exclusive-dining--kitchen/storage-sideboard'
         },
         {
-          url: "https://static.hometown.in/media/cms/extras-desktop/Sideboards.png",
+          url: CarouselImg15,
           name: 'Bar Carts',
           link: '/furniture/bar-furniture/serving-trolleys'
         }
@@ -115,7 +130,7 @@ export class HtExclusive extends Component {
     return (
       <Container mt="0px" pl="0px" pr="0px" sx={{ maxWidth: '100% !important' }}>
         <Box>
-          <Img src="https://static.hometown.in/media/cms/extras-desktop/Banner01.jpg" alt="" width="100%" />
+          <Img src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/Banner01.jpg`} alt="" width="100%" />
         </Box>
         <Box sx={{ width: '100%' }}>
           <Text
@@ -132,7 +147,7 @@ export class HtExclusive extends Component {
             reimagining one room or your entire space, HomeTown exclusives add the perfect touch of elegance and beauty.
           </Text>
           <Link to="/furniture/living-room-furniture/ht-exclusive-living">
-            <Img src="https://static.hometown.in/media/cms/extras-desktop/Banner02.jpg" alt="" width="100%" sx={{ aspectRatio: '2.1' }} />
+            <Img src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/Banner02.jpg`} alt="" width="100%" sx={{ aspectRatio: '2.1' }} />
           </Link>
         </Box>
         <Box style={{ padding: '20px' }}>
@@ -170,7 +185,7 @@ export class HtExclusive extends Component {
         </Box>
         <Box>
           <Link to="/furniture/bedroom-furniture/ht-exclusive-bedroom">
-            <Img src="https://static.hometown.in/media/cms/extras-desktop/Banner03.jpg" alt="" width="100%" sx={{ aspectRatio: '2.1' }} />
+            <Img src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/Banner03.jpg`} alt="" width="100%" sx={{ aspectRatio: '2.1' }} />
           </Link>
         </Box>
         <Box style={{ padding: '20px' }}>
@@ -208,7 +223,7 @@ export class HtExclusive extends Component {
         </Box>
         <Box>
           <Link to="/furniture/dining-kitchen-furniture/ht-exclusive-dining--kitchen">
-            <Img src="https://static.hometown.in/media/cms/extras-desktop/Banner04.jpg" alt="" width="100%" sx={{ aspectRatio: '2.2' }} />
+            <Img src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/Banner04.jpg`} alt="" width="100%" sx={{ aspectRatio: '2.2' }} />
           </Link>
         </Box>
         <Box style={{ padding: '20px' }}>

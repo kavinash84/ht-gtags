@@ -16,6 +16,7 @@ import { withRouter } from 'react-router';
 import { allowNChar, allowTypeOf } from 'utils/helper';
 import { SERVICE_SIGNUPS, PINCODE as PINCODE_API } from 'helpers/apiUrls';
 import { sendData, getData } from 'redux/modules/services';
+import { BASE_IMAGE_URL } from "helpers/Constants";
 import {
   validateMobile,
   validateEmail,
@@ -436,7 +437,7 @@ export default class ModularKitchenFormModal extends Component {
 
         <Div style={{ width: '100%' }}>
           <Flex>
-            <Img src="https://static.hometown.in/media/cms/D/Top-Image-Living1.jpg" style={{ width: '50%', height: '90vh', borderTopLeftRadius: '20px', borderBottomLeftRadius: '20px' }} />
+            <Img src={`${BASE_IMAGE_URL}/media/cms/D/Top-Image-Living1.jpg`} style={{ width: '50%', height: '90vh', borderTopLeftRadius: '20px', borderBottomLeftRadius: '20px' }} />
             <Div style={{ width: '50%', height: '90vh', backgroundColor: '#FBF2ED', borderTopRightRadius: '20px', borderBottomRightRadius: '20px' }}>
               <Div
                 p="20px 5px"

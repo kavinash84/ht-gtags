@@ -12,6 +12,7 @@ import Text from 'hometown-components-dev/lib/TextHtV1';
 import Heading from 'hometown-components-dev/lib/HeadingHtV1';
 import Button from 'hometown-components-dev/lib/ButtonHtV1';
 import ResponsiveModal from 'components/Modal';
+import { BASE_IMAGE_URL } from "helpers/Constants";
 // import CategoryCarousel from 'components/CategoryCarousel';
 import { validateMobile, validateEmail, isEmpty } from 'utils/validation';
 import { allowNChar, allowTypeOf } from 'utils/helper';
@@ -180,7 +181,7 @@ class BulkOrder extends React.Component {
     } = this.state;
     const { homepageCategories = [] } = this.props;
     const {
-      banner_image_desktop: bannerImage = 'https://static.hometown.in/media/cms/hometownv2/best-sellers/111.jpg'
+      banner_image_desktop: bannerImage = `${BASE_IMAGE_URL}/media/cms/hometownv2/best-sellers/111.jpg`
     } = homepageCategories.find(obj => OFFER_ID === obj.id || OFFER_ID === parseInt(obj.id, 10));
     return (
       <Box>
@@ -317,7 +318,7 @@ class BulkOrder extends React.Component {
               <Row alignItems="center" justifyContent="center">
                 <Box px={30}>
                   <Image
-                    src="https://static.hometown.in/media/cms/hometownv2/hometownnew/cart-icon.png"
+                    src={`${BASE_IMAGE_URL}/media/cms/hometownv2/hometownnew/cart-icon.png`}
                     alt="cart-icon"
                     m="auto"
                     width="130px"
@@ -328,7 +329,7 @@ class BulkOrder extends React.Component {
                 </Box>
                 <Box px={30}>
                   <Image
-                    src="https://static.hometown.in/media/cms/hometownv2/hometownnew/price-points-icon.png"
+                    src={`${BASE_IMAGE_URL}/media/cms/hometownv2/hometownnew/price-points-icon.png`}
                     alt="price-points"
                     m="auto"
                     width="130px"
@@ -339,7 +340,7 @@ class BulkOrder extends React.Component {
                 </Box>
                 <Box px={30}>
                   <Image
-                    src="https://static.hometown.in/media/cms/hometownv2/hometownnew/quality-icon.png"
+                    src={`${BASE_IMAGE_URL}/media/cms/hometownv2/hometownnew/quality-icon.png`}
                     alt="Assured-quality"
                     m="auto"
                     width="130px"
@@ -350,7 +351,7 @@ class BulkOrder extends React.Component {
                 </Box>
                 <Box px={30}>
                   <Image
-                    src="https://static.hometown.in/media/cms/hometownv2/hometownnew/year-warranty-icon.png"
+                    src={`${BASE_IMAGE_URL}/media/cms/hometownv2/hometownnew/year-warranty-icon.png`}
                     alt="warranty"
                     m="auto"
                     width="130px"

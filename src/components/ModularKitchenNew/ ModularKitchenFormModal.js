@@ -24,6 +24,7 @@ import {
   validateFullname,
   checkSpecialChar
 } from "utils/validation";
+import { BASE_IMAGE_URL } from "helpers/Constants";
 // import stores from '../../data/Stores.js';
 
 import moment from "moment";
@@ -475,7 +476,7 @@ export default class ModularKitchenFormModal extends Component {
         <Div style={{ width: "100%" }}>
           <Flex>
             <Img
-              src="https://static.hometown.in/media/cms/D/Top-Image-Living1.jpg"
+              src={`${BASE_IMAGE_URL}/media/cms/D/Top-Image-Living1.jpg`}
               style={{
                 width: "50%",
                 height: "90vh",

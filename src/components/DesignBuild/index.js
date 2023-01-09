@@ -26,6 +26,7 @@ import Container from "hometown-components-dev/lib/ContainerHtV1";
 import ModularKitchenFormModal from "./ModularKitchenFormModal";
 import Image from "hometown-components-dev/lib/ImageHtV1";
 import ModularKitchen from "./ModularKitchenForm";
+import { BASE_IMAGE_URL } from "helpers/Constants";
 
 import "./Slider.css";
 const styles = require("./Designbuild.scss");
@@ -136,7 +137,7 @@ fbq('track', 'DBlead');
         <Div mt="70px">
           <Flex>
             <Image
-              data-src="https://static.hometown.in/media/cms/designbuild/speaktoExperts.png"
+              data-src={`${BASE_IMAGE_URL}/media/cms/designbuild/speaktoExperts.png`}
               style={{ width: "50%", height: "700px" }}
             />
             <Div

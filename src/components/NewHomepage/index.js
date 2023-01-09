@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Footer from "components/Footer";
 import { Link } from "react-router-dom";
+import { BASE_IMAGE_URL } from "helpers/Constants";
 
 import HeadingHtV1 from "hometown-components-dev/lib/HeadingHtV1";
 class NewHomepage extends Component {
@@ -51,7 +52,7 @@ class NewHomepage extends Component {
               marginTop: "1%"
             }}
           >
-            <img style={{ width: "15%", height: "auto" }} src="https://static.hometown.in/media/cms/extras-desktop/MakespaceforNewlogo.png" />
+            <img style={{ width: "15%", height: "auto" }} src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/MakespaceforNewlogo.png`} />
             <Link
               onClick={() => {
                 sessionStorage.setItem("HtscrollPosition", window.pageYOffset);
@@ -60,7 +61,7 @@ class NewHomepage extends Component {
             >
               <img
                 style={{ width: "100%", height: "100px" }}
-                src="https://static.hometown.in/media/cms/extras-desktop/HT-LOGO-cs2-single.png"
+                src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/HT-LOGO-cs2-single.png`}
               />
             </Link>
           </div>

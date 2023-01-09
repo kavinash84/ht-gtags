@@ -9,6 +9,8 @@ import Row from 'hometown-components-dev/lib/Row';
 import Text from 'hometown-components-dev/lib/Text';
 import Img from 'hometown-components-dev/lib/Img';
 
+import { BASE_IMAGE_URL } from "helpers/Constants";
+
 export default class ModularKitchen extends Component {
   render() {
     const sliderData = require('../../data/dandbSlider.js');
@@ -33,7 +35,7 @@ export default class ModularKitchen extends Component {
               <Div col="1" />
               <Div col="10">
                 <Img
-                  src="https://static.hometown.in/media/cms/Staticpage/modular-wardrobes/process.jpg"
+                  src={`${BASE_IMAGE_URL}/media/cms/Staticpage/modular-wardrobes/process.jpg`}
                   alt=""
                   m="auto"
                 />
@@ -53,21 +55,21 @@ export default class ModularKitchen extends Component {
             <Row ml="0" mr="0" mt="2rem">
               <Div col="4" pl="0.625rem" pr="0.625rem">
                 <Img
-                  src="https://static.hometown.in/media/cms/Staticpage/modular-wardrobes/hassle-free-home-interior.jpg"
+                  src={`${BASE_IMAGE_URL}/media/cms/Staticpage/modular-wardrobes/hassle-free-home-interior.jpg`}
                   alt=""
                   width="100%"
                 />
               </Div>
               <Div col="4" pl="0.625rem" pr="0.625rem">
                 <Img
-                  src="https://static.hometown.in/media/cms/Staticpage/modular-wardrobes/sofa.jpg"
+                  src={`${BASE_IMAGE_URL}/media/cms/Staticpage/modular-wardrobes/sofa.jpg`}
                   alt=""
                   width="100%"
                 />
               </Div>
               <Div col="4" pl="0.625rem" pr="0.625rem">
                 <Img
-                  src="https://static.hometown.in/media/cms/Staticpage/modular-wardrobes/room-wise-design.jpg"
+                  src={`${BASE_IMAGE_URL}/media/cms/Staticpage/modular-wardrobes/room-wise-design.jpg`}
                   alt=""
                   width="100%"
                 />
@@ -90,7 +92,7 @@ export default class ModularKitchen extends Component {
               <Div col="2" />
               <Div col="8" pl="0.625rem" pr="0.625rem">
                 <Img
-                  src="https://static.hometown.in/media/cms/Staticpage/modular-wardrobes/build-services.jpg"
+                  src={`${BASE_IMAGE_URL}/media/cms/Staticpage/modular-wardrobes/build-services.jpg`}
                   alt=""
                   width="100%"
                 />

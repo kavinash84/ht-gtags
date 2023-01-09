@@ -6,6 +6,7 @@ import Container from "hometown-components-dev/lib/ContainerHtV1";
 import Form from "./FormComp";
 import LeadSuccess from "./SuccessPage";
 import LandingPageLogo from "./LandingPageLogo";
+import { BASE_IMAGE_URL } from "helpers/Constants";
 
 @connect(({ designbuild }) => ({
   seoInfo:
@@ -63,7 +64,7 @@ class LandingPage extends Component {
         <LandingPageLogo />
         <div>
           <img
-            src="https://static.hometown.in/media/cms/extras-desktop/LP-banner.jpg"
+            src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/LP-banner.jpg`}
             alt="Banner"
             style={{ width: "100%", height: "auto" }}
           />
@@ -131,7 +132,7 @@ class LandingPage extends Component {
           </div> */}
           <div style={{ marginTop: "15px" }}>
             <img
-              src="https://static.hometown.in/media/cms/extras-desktop/below-banner.jpg"
+              src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/below-banner.jpg`}
               alt="BottomBanner"
               style={{ width: "100%", height: "auto" }}
             />

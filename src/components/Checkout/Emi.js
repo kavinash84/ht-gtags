@@ -16,6 +16,7 @@ import { getEmiBanks } from "selectors/payments";
 import BankCard from "./BankCard";
 import DebitBankCard from "./DebitBankCard";
 import CardForm from "./CardForm";
+import { BASE_IMAGE_URL } from "helpers/Constants";
 
 const mapStateToProps = ({ paymentoptions }) => ({
   selectedGateway: paymentoptions.selectedGateway,
@@ -65,8 +66,8 @@ const EMI = ({
                 "Yes",
                 "federal"
               ].includes(bank.bank)
-                ? `https://static.hometown.in/media/cms/Bank/${bank.bank}.jpeg`
-                : `https://static.hometown.in/media/cms/BankLOGO/${bank.bank}.gif`
+              ? `${BASE_IMAGE_URL}/media/cms/Bank/${bank.bank}.jpeg`
+              : `${BASE_IMAGE_URL}/media/cms/BankLOGO/${bank.bank}.gif`
             }
             currentSelection={currentSelection}
             key={bank.bank}
@@ -175,8 +176,8 @@ const EMI = ({
                 "Yes",
                 "federal"
               ].includes(bank)
-                ? `https://static.hometown.in/media/cms/Bank/${bank}.jpeg`
-                : `https://static.hometown.in/media/cms/BankLOGO/${bank}.gif`
+              ? `${BASE_IMAGE_URL}/media/cms/Bank/${bank}.jpeg`
+              : `${BASE_IMAGE_URL}/media/cms/BankLOGO/${bank}.gif`
             }
             currentSelection={currentSelection}
             key={bank}

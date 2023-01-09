@@ -1,3 +1,5 @@
+import { BASE_IMAGE_URL } from "helpers/Constants";
+
 const listingBestOffers = [
   {
     '/hot-deals/furniture-deals': {
@@ -6,7 +8,7 @@ const listingBestOffers = [
           id: 1,
           title: 'Best Offers',
           description: 'Best Offers',
-          image: require('https://static.hometown.in/media/cms/extras-desktop/best-offers-05.jpeg'),
+          image: require(`${BASE_IMAGE_URL}/media/cms/extras-desktop/best-offers-05.jpeg`),
           type: 'webview_layout',
           meta: { name: 'Best Offers', id: 'Best Offers' }
         }
@@ -18,7 +20,7 @@ const listingBestOffers = [
           id: 1,
           title: 'Best Offers',
           description: 'Best Offers',
-          image: require('https://static.hometown.in/media/cms/extras-desktop/best-offers-05.jpeg'),
+          image: require(`${BASE_IMAGE_URL}/media/cms/extras-desktop/best-offers-05.jpeg`),
           type: 'webview_layout',
           meta: { name: 'Best Offers', id: 'Best Offers' }
         }
@@ -30,7 +32,7 @@ const listingBestOffers = [
           id: 1,
           title: 'Best Offers',
           description: 'Best Offers',
-          image: require('https://static.hometown.in/media/cms/extras-desktop/best-offers-05.jpeg'),
+          image: require(`${BASE_IMAGE_URL}/media/cms/extras-desktop/best-offers-05.jpeg`),
           type: 'webview_layout',
           meta: { name: 'Best Offers', id: 'Best Offers' }
         }
@@ -42,7 +44,7 @@ const listingBestOffers = [
           id: 1,
           title: 'Best Offers',
           description: 'Best Offers',
-          image: require('https://static.hometown.in/media/cms/extras-desktop/best-offers-07.jpeg'),
+          image: require(`${BASE_IMAGE_URL}/media/cms/extras-desktop/best-offers-07.jpeg`),
           type: 'webview_layout',
           meta: { name: 'Best Offers', id: 'Best Offers' }
         }
@@ -66,7 +68,7 @@ const listingBestOffers = [
           id: 1,
           title: 'Best Offers',
           description: 'Best Offers',
-          image: require('https://static.hometown.in/media/cms/extras-desktop/best-offers-05.jpeg'),
+          image: require(`${BASE_IMAGE_URL}/media/cms/extras-desktop/best-offers-05.jpeg`),
           type: 'webview_layout',
           meta: { name: 'Best Offers', id: 'Best Offers' }
         }
@@ -78,7 +80,7 @@ const listingBestOffers = [
           id: 1,
           title: 'Best Offers',
           description: 'Best Offers',
-          image: require('https://static.hometown.in/media/cms/extras-desktop/best-offers-05.jpeg'),
+          image: require(`${BASE_IMAGE_URL}/media/cms/extras-desktop/best-offers-05.jpeg`),
           type: 'webview_layout',
           meta: { name: 'Best Offers', id: 'Best Offers' }
         }
