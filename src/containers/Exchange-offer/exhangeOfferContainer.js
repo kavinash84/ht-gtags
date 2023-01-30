@@ -19,13 +19,7 @@ export default class ExchangeOfferContainer extends Component {
 
   componentDidMount() {
     const { history } = this.props;
-    const { dispatch } = this.context.store;
     history.push('/');
-    dispatch(notifSend({
-        type: 'warning',
-        msg: 'This offer has been expired.',
-        dismissAfter: 4000
-      }));
   }
 
   render() {
