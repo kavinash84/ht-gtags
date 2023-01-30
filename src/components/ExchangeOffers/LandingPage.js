@@ -64,7 +64,7 @@ class LandingPage extends Component {
         <LandingPageLogo />
         <div>
           <img
-            src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/LP-banner.jpg`}
+            src={`${BASE_IMAGE_URL}/media/cms/banner/exchange-offer/mobile.png`}
             alt="Banner"
             style={{ width: "100%", height: "auto" }}
           />
