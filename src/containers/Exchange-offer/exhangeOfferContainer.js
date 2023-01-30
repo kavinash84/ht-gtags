@@ -1,13 +1,7 @@
 import React, { Component } from 'react';
 import ExchangeOffers from 'components/ExchangeOffers/LandingPage';
 import PropTypes from 'prop-types';
-import { notifSend } from 'redux/modules/notifs';
-// import ModularKitchenContainer from 'components/StaticPages/ModularKitchen';
-// import OtherMenuFooter from 'containers/OtherMenuFooter';
-
-// @connect(({ modularkitchen }) => ({
-//   modularkitchen
-// }))
+// import { notifSend } from 'redux/modules/notifs';
 export default class ExchangeOfferContainer extends Component {
   static propTypes = {
     history: PropTypes.object.isRequired
@@ -17,10 +11,7 @@ export default class ExchangeOfferContainer extends Component {
     store: PropTypes.object.isRequired
   };
 
-  componentDidMount() {
-    const { history } = this.props;
-    history.push('/');
-  }
+  componentDidMount() {}
 
   render() {
     const { history } = this.props;
