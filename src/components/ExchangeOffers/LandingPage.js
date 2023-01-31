@@ -97,7 +97,7 @@ class LandingPage extends Component {
               >
                 <li style={{ marginBottom: "5%" }}>
                   <p>
-                  Upload a picture of any old sofas, recliners, beds, wardrobes, dining sets, mattress and other furniture.
+                  Upload a picture of any old sofas, recliners, beds, wardrobes, dining sets, mattress and more.
                   </p>
                 </li>
                 <li style={{ marginBottom: "5%" }}>
@@ -105,7 +105,7 @@ class LandingPage extends Component {
                 </li>
                 <li>
                   <p>
-                  Visit the nearest HomeTown store or shop online at hometown.in to redeem your exchange voucher code on a wide range of sofas, recliners, beds, wardrobes, dining sets, mattress and other furniture.
+                  Visit the nearest HomeTown store or shop online at hometown.in to redeem your exchange voucher code on a wide range of furniture, mattress, homeware, decore, furnishings and much more...
                   </p>
                 </li>
               </ul>
