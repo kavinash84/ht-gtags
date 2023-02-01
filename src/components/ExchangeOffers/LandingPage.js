@@ -64,7 +64,7 @@ class LandingPage extends Component {
         <LandingPageLogo />
         <div>
           <img
-            src={`${BASE_IMAGE_URL}/media/cms/banner/exchange-offer/mobile.png`}
+            src={`${BASE_IMAGE_URL}/media/cms/banner/exchange-offer/header_banner.png`}
             alt="Banner"
             style={{ width: "100%", height: "auto" }}
           />
@@ -132,7 +132,7 @@ class LandingPage extends Component {
           </div> */}
           <div style={{ marginTop: "15px" }}>
             <img
-              src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/below-banner.jpg`}
+              src={`${BASE_IMAGE_URL}/media/cms/banner/exchange-offer/footer-banner-4.png`}
               alt="BottomBanner"
               style={{ width: "100%", height: "auto" }}
             />
