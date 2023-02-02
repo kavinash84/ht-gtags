@@ -16,7 +16,7 @@ const ModalData = [
   {
     img: BedIcon,
     title: "Beds",
-    text: ["Flat ₹30000"]
+    text: ["Any bed ₹30000"]
   },
   {
     img: WardrobeIcon,
@@ -25,8 +25,8 @@ const ModalData = [
   },
   {
     img: DiningTable,
-    title: "Dining Tables",
-    text: ["Flat ₹30,000"]
+    title: "Dining Table Set",
+    text: ["(Table + Chairs) ₹30,000"]
   },
   {
     img: OtheresFurnitureIcons,
@@ -36,7 +36,7 @@ const ModalData = [
   {
     img: MattressIcon,
     title: "Mattress",
-    text: ["Flat ₹8000"]
+    text: ["₹8000"]
   }
 ];
 
