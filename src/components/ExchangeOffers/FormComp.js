@@ -41,30 +41,24 @@ const customStyles = {
 
 const PRODUCTS = [
   { value: "1", label: "Beds; Exchange value = 30,000" },
-  { value: "2", label: "2 Door Wardrobe; Exchange value = 15,000" },
+  { value: "2", label: "2 Door Wardrobe; Exchange value = 20,000" },
   {
     value: "3",
     label: "3 Door Wardrobes / Other Wardrobes; Exchange value = 25,000"
   },
   { value: "4", label: "1 Seater Sofa; Exchange value = 10,000" },
-  { value: "5", label: "2 Seater Sofa; Exchange value = 20,000" },
+  { value: "5", label: "2 Seater Sofa; Exchange value = 25,000" },
   { value: "6", label: "3 Seater Sofa; Exchange value = 40,000" },
   {
     value: "7",
     label:
-      "*4 Seater Dining Table Set (Table + Chairs); Exchange value = 15,000"
+      "Dining Table set / Other Dining Table set (Table + Chairs); Exchange value = 30,000"
   },
   {
     value: "8",
-    label:
-      "*6 Seater Dining Table set / Other Dining Table set (Table +Chairs); Exchange value = 30,000"
+    label: "Other Furniture; Exchange value = 5,000"
   },
-  {
-    value: "9",
-    label: "Other Furniture (Plastic Table/Chair); Exchange value = 5,000"
-  },
-  { value: "10", label: "Mattress Cotton/Coir/foam; Exchange value = 6,000" },
-  { value: "11", label: "Spring Mattress; Exchange value = 8,000" }
+  { value: "9", label: "Mattress Spring/Cotton/Coir/foam; Exchange value = 8,000" }
 ];
 
 const CITIES = [
