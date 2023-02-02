@@ -144,8 +144,8 @@ const ExchangeWarning = props => {
             fontSize: "14px"
           }}
         >
-          Eg: Exchange value of old bed is ₹20,000, so you can buy upto ₹80,000
-          to avail this ₹20,000 discount (25% Discount)
+          Eg: Exchange value of old bed is ₹30,000, so you can buy upto ₹1,20,000
+          to avail this ₹30,000 discount (25% Discount)
         </div>
         <div
           style={{
