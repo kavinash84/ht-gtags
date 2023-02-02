@@ -1,13 +1,7 @@
-import React, { Component } from "react";
-import ExchangeOffers from "components/ExchangeOffers/LandingPage";
-import PropTypes from "prop-types";
-import { notifSend } from "redux/modules/notifs";
-// import ModularKitchenContainer from 'components/StaticPages/ModularKitchen';
-// import OtherMenuFooter from 'containers/OtherMenuFooter';
-
-// @connect(({ modularkitchen }) => ({
-//   modularkitchen
-// }))
+import React, { Component } from 'react';
+import ExchangeOffers from 'components/ExchangeOffers/LandingPage';
+import PropTypes from 'prop-types';
+// import { notifSend } from 'redux/modules/notifs';
 export default class ExchangeOfferContainer extends Component {
   static propTypes = {
     history: PropTypes.object.isRequired
@@ -17,28 +11,13 @@ export default class ExchangeOfferContainer extends Component {
     store: PropTypes.object.isRequired
   };
 
-  componentDidMount() {
-    // const { history } = this.props;
-    // const { dispatch } = this.context.store;
-    // history.push("/");
-    // dispatch(
-    //   notifSend({
-    //     type: "warning",
-    //     msg: "This offer has been expired.",
-    //     dismissAfter: 4000
-    //   })
-    // );
-  }
+  componentDidMount() {}
 
   render() {
     const { history } = this.props;
     return (
       <div className="wrapper">
-        {/* <ExchangeOffers history={history} />
-         */}
-        <h4 style={{ color: "black", fontSize: "30px", marginTop: "40px", textAlign: "center" }}>
-          This Offer has expired
-        </h4>
+        <ExchangeOffers history={history} />
       </div>
     );
   }

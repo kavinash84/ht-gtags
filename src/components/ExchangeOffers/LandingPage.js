@@ -64,7 +64,7 @@ class LandingPage extends Component {
         <LandingPageLogo />
         <div>
           <img
-            src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/LP-banner.jpg`}
+            src={`${BASE_IMAGE_URL}/media/cms/banner/exchange-offer/header_banner.png`}
             alt="Banner"
             style={{ width: "100%", height: "auto" }}
           />
@@ -97,7 +97,7 @@ class LandingPage extends Component {
               >
                 <li style={{ marginBottom: "5%" }}>
                   <p>
-                  Upload a picture of any old sofas, recliners, beds, wardrobes, dining sets, mattress and other furniture.
+                  Upload a picture of any old sofas, recliners, beds, wardrobes, dining sets, mattress and more.
                   </p>
                 </li>
                 <li style={{ marginBottom: "5%" }}>
@@ -105,7 +105,7 @@ class LandingPage extends Component {
                 </li>
                 <li>
                   <p>
-                  Visit the nearest HomeTown store or shop online at hometown.in to redeem your exchange voucher code on a wide range of sofas, recliners, beds, wardrobes, dining sets, mattress and other furniture.
+                  Visit the nearest HomeTown store or shop online at hometown.in to redeem your exchange voucher code on a wide range of furniture, mattress, homeware, decore, furnishings and much more...
                   </p>
                 </li>
               </ul>
@@ -132,7 +132,7 @@ class LandingPage extends Component {
           </div> */}
           <div style={{ marginTop: "15px" }}>
             <img
-              src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/below-banner.jpg`}
+              src={`${BASE_IMAGE_URL}/media/cms/banner/exchange-offer/footer-banner-4.png`}
               alt="BottomBanner"
               style={{ width: "100%", height: "auto" }}
             />
