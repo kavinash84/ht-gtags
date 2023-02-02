@@ -11,33 +11,32 @@ const ModalData = [
   {
     img: SofaIcon,
     title: "Sofas",
-    text: ["3 Seater ₹25,000", "2 Seater ₹15,000", "1 Seater ₹6000"]
+    text: ["3 Seater ₹40,000", "2 Seater ₹25,000", "1 Seater ₹10000"]
   },
   {
     img: BedIcon,
     title: "Beds",
-    text: ["Any Bed ₹20000"]
+    text: ["Flat ₹30000"]
   },
   {
     img: WardrobeIcon,
     title: "Wardrobes",
-    text: ["2 Door ₹10,000", "3/4 Door ₹15,000"]
+    text: ["2 Door ₹20,000", "3/4 Door ₹25,000"]
   },
   {
     img: DiningTable,
     title: "Dining Tables",
-    text: ["4 Seater ₹10,000", "6 Seater ₹20,000"]
+    text: ["Flat ₹30,000"]
   },
   {
     img: OtheresFurnitureIcons,
     title: "Other Furniture",
-    text: ["Flat ₹3000"]
+    text: ["Flat ₹5000"]
   },
-
   {
     img: MattressIcon,
     title: "Mattress",
-    text: ["Coir/Foam ₹4000", "Spring ₹6000", "Cotton ₹4000"]
+    text: ["Flat ₹8000"]
   }
 ];
 
