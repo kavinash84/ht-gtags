@@ -18,16 +18,9 @@ class SuccessPage extends Component {
     store: PropTypes.object.isRequired
   };
   componentDidMount() {
-    // if (window && window.dataLayer) {
-    //   window.dataLayer.push({
-    //     action: 'Page View',
-    //     category: 'Exchange Offers',
-    //     label: 'Track'
-    //   });
-    // }
-    // if (window && window.fbq) {
-    //   window.fbq("track", "SubscribeE&U");
-    // }
+    if (window && window.fbq) {
+      window.fbq("track", "LeadE&U");
+    }
   }
   copyFunction() {
     const { dispatch } = this.context.store;

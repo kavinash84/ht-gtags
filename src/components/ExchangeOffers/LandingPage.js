@@ -24,15 +24,8 @@ class LandingPage extends Component {
     };
   }
   componentDidMount() {
-    // if (window && window.dataLayer) {
-    //   window.dataLayer.push({
-    //     action: 'Page View',
-    //     category: 'Exchange Offers',
-    //     label: 'Track'
-    //   });
-    // }
     if (window && window.fbq) {
-      window.fbq("track", "PageViewE&U");
+      window.fbq('track', 'PageViewE&U');
     }
   }
   getUI = () => {
