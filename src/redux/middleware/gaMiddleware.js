@@ -10,19 +10,16 @@ export default function gaMiddleware() {
       const {
         analytics: { isFirstHit }
       } = getState();
-      if (pathname !== '/exchange-offers') {
-        if (window && window.dataLayer) {
-          if (type === "TRACK_PAGEVIEW") {
-            const {
-              location: { pathname, search }
-            } = window;
-            window.dataLayer.push({
-              event: "pageviewtracking",
-              vpv: `${pathname}${search}`.trim()
-            });
-          }
+      if (window && window.dataLayer) {
+        if (type === "TRACK_PAGEVIEW") {
+          const {
+            location: { pathname, search }
+          } = window;
+          window.dataLayer.push({
+            event: "pageviewtracking",
+            vpv: `${pathname}${search}`.trim()
+          });
         }
-
         // if (
         //   (type === 'wishList/REMOVE_FROM_WISHLIST_SUCCESS' ||
         //   type === 'wishList/ADD_TO_WISHLIST_SUCCESS' ||
@@ -131,9 +128,9 @@ export default function gaMiddleware() {
             );
             const category = checkKey
               ? checkKey
-                .filter(x => x !== null)
-                .map(item => item.url_key)
-                .join("/")
+                  .filter(x => x !== null)
+                  .map(item => item.url_key)
+                  .join("/")
               : "";
             if (product) {
               const { name, sku, price, brand, color } = product.data;
@@ -235,9 +232,9 @@ export default function gaMiddleware() {
           const checkKey = isKeyExists(data, "metadata.category_details");
           const category = checkKey
             ? checkKey
-              .filter(x => x !== null)
-              .map(item => item.url_key)
-              .join("/")
+                .filter(x => x !== null)
+                .map(item => item.url_key)
+                .join("/")
             : "";
           const PACKET_SIZE = 10;
 
