@@ -317,7 +317,7 @@ export default class App extends Component {
             </script>
             {/* <!-- Meta Pixel Code --> */}
 
-            {pathname !== '/exchange-offers' && (
+            {pathname !== '/exchange-offers' || pathname !== '/exchange-offers?submit=thankyou&utm_source=Website&utm_medium=Website&utm_campaign=Website&utm_term=Website' && (
               <script type="text/javascript">
                 {`
             !function(f,b,e,v,n,t,s)
