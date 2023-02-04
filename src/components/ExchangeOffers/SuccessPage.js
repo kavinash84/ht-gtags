@@ -17,11 +17,7 @@ class SuccessPage extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
-  componentDidMount() {
-    if (window && window.fbq) {
-      window.fbq("track", "LeadE&U");
-    }
-  }
+
   copyFunction() {
     const { dispatch } = this.context.store;
     /* Get the text field */
@@ -65,7 +61,7 @@ class SuccessPage extends Component {
           <script>
             {` gtag('event', 'conversion', {'send_to': 'AW-832074530/j9-7CM6CpqQDEKLm4YwD'}); `}
           </script>
-          <script type="text/javascript">
+           <script type="text/javascript">
             {`
              !function(f,b,e,v,n,t,s)
              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -79,22 +75,10 @@ class SuccessPage extends Component {
              fbq('track', 'Lead');
             `}
           </script>
-          <noscript>
-            {`<img height="1" width="1" style="display:none"
-src=https://www.facebook.com/tr?id=1024172491523922&ev=Lead&noscript=1
-/>
-`}
-          </noscript>
+          
           {/* <!-- End Meta Pixel Code --> */}
         </Helmet>
-        {/* <noscript>
-          <img
-            height="1"
-            width="1"
-            style="display:none"
-            src="https://www.facebook.com/tr?id=171725297723956&ev=PageView&noscript=1"
-          />
-        </noscript> */}
+        
         <noscript>
           <img src="https://ttrk.ringocount.com/pixel?adid=621c50fcfba3a36de041935b" />
         </noscript>

@@ -23,11 +23,7 @@ class LandingPage extends Component {
       mobile: ""
     };
   }
-  componentDidMount() {
-    if (window && window.fbq) {
-      window.fbq('track', 'PageViewE&U');
-    }
-  }
+
   getUI = () => {
     const { UI } = this.state;
     const { history, seoInfo } = this.props;
@@ -42,6 +38,7 @@ class LandingPage extends Component {
             name="description"
             content={seoInfo && seoInfo.meta_description}
           />
+
           <script
             async
             src="https://www.googletagmanager.com/gtag/js?id=AW-832074530"
@@ -50,9 +47,9 @@ class LandingPage extends Component {
             {` window.dataLayer = window.dataLayer || [];
                function gtag(){dataLayer.push(arguments);}
                gtag('js', new Date());
-
                gtag('config', 'AW-832074530'); `}
           </script>
+
         </Helmet>
         <LandingPageLogo />
         <div>
@@ -90,7 +87,7 @@ class LandingPage extends Component {
               >
                 <li style={{ marginBottom: "5%" }}>
                   <p>
-                  Upload a picture of any old sofas, recliners, beds, wardrobes, dining sets, mattress and more.
+                    Upload a picture of any old sofas, recliners, beds, wardrobes, dining sets, mattress and more.
                   </p>
                 </li>
                 <li style={{ marginBottom: "5%" }}>
@@ -98,7 +95,7 @@ class LandingPage extends Component {
                 </li>
                 <li>
                   <p>
-                  Visit the nearest HomeTown store or shop online at hometown.in to redeem your exchange voucher code on a wide range of furniture, mattress, homeware, decore, furnishings and much more...
+                    Visit the nearest HomeTown store or shop online at hometown.in to redeem your exchange voucher code on a wide range of furniture, mattress, homeware, decore, furnishings and much more...
                   </p>
                 </li>
               </ul>
@@ -119,7 +116,7 @@ class LandingPage extends Component {
             </div>
           </div>
         </div>
-        <div style={{ borderTop: "1px solid #595959", marginTop:'30px'}}>
+        <div style={{ borderTop: "1px solid #595959", marginTop: '30px' }}>
           {/* <div className="col-12 mb-2">
             <h2 className="valueTitle">VALUE FOR YOUR OLD PRODUCTS</h2>
           </div> */}
