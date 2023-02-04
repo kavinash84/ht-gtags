@@ -23,11 +23,7 @@ class LandingPage extends Component {
       mobile: ""
     };
   }
-  // componentDidMount() {
-  //   if (window && window.fbq) {
-  //     window.fbq('track', 'PageViewE&U');
-  //   }
-  // }
+  
   getUI = () => {
     const { UI } = this.state;
     const { history, seoInfo } = this.props;
@@ -42,17 +38,7 @@ class LandingPage extends Component {
             name="description"
             content={seoInfo && seoInfo.meta_description}
           />
-          <script
-            async
-            src="https://www.googletagmanager.com/gtag/js?id=AW-832074530"
-          ></script>
-          <script>
-            {` window.dataLayer = window.dataLayer || [];
-               function gtag(){dataLayer.push(arguments);}
-               gtag('js', new Date());
-
-               gtag('config', 'AW-832074530'); `}
-          </script>
+          
         </Helmet>
         <LandingPageLogo />
         <div>

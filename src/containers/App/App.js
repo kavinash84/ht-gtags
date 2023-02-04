@@ -317,7 +317,7 @@ export default class App extends Component {
             </script>
             {/* <!-- Meta Pixel Code --> */}
 
-            {pathname !== '/exchange-offers' || '/exchange-offers?submit=thankyou&utm_source=Website&utm_medium=Website&utm_campaign=Website&utm_term=Website' ? (
+            {pathname !== '/exchange-offers' && (
               <script type="text/javascript">
                 {`
             !function(f,b,e,v,n,t,s)
@@ -332,9 +332,8 @@ export default class App extends Component {
              fbq('track', 'PageView');
              `}
               </script>
-            ) : (
-              null
-            )}
+            )
+            }
 
             {/* <!-- End Meta Pixel Code --> */}
             {/* <!-- Global site tag (gtag.js) - Google Ads: 845903914 --> */}
