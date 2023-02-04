@@ -17,11 +17,11 @@ class SuccessPage extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
-  componentDidMount() {
-    if (window && window.fbq) {
-      window.fbq("track", "LeadE&U");
-    }
-  }
+  // componentDidMount() {
+  //   if (window && window.fbq) {
+  //     window.fbq("track", "LeadE&U");
+  //   }
+  // }
   copyFunction() {
     const { dispatch } = this.context.store;
     /* Get the text field */

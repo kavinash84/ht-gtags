@@ -23,11 +23,11 @@ class LandingPage extends Component {
       mobile: ""
     };
   }
-  componentDidMount() {
-    if (window && window.fbq) {
-      window.fbq('track', 'PageViewE&U');
-    }
-  }
+  // componentDidMount() {
+  //   if (window && window.fbq) {
+  //     window.fbq('track', 'PageViewE&U');
+  //   }
+  // }
   getUI = () => {
     const { UI } = this.state;
     const { history, seoInfo } = this.props;
