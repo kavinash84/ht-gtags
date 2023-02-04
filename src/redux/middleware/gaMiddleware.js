@@ -10,8 +10,8 @@ export default function gaMiddleware() {
       const {
         analytics: { isFirstHit }
       } = getState();
-      if (window && window.dataLayer) {
-        if (pathname !== '/exchange-offers') {
+      if (pathname !== '/exchange-offers') {
+        if (window && window.dataLayer) {
           if (type === "TRACK_PAGEVIEW") {
             const {
               location: { pathname, search }
