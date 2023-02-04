@@ -47,7 +47,7 @@ class SuccessPage extends Component {
             name="description"
             content={seoInfo && seoInfo.meta_description}
           />
-          {/* <script
+          <script
             async
             src="https://www.googletagmanager.com/gtag/js?id=AW-832074530"
           ></script>
@@ -60,7 +60,7 @@ class SuccessPage extends Component {
           </script>
           <script>
             {` gtag('event', 'conversion', {'send_to': 'AW-832074530/j9-7CM6CpqQDEKLm4YwD'}); `}
-          </script> */}
+          </script>
            <script type="text/javascript">
             {`
              !function(f,b,e,v,n,t,s)
