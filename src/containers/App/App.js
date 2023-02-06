@@ -317,7 +317,8 @@ export default class App extends Component {
             </script>
             {/* <!-- Meta Pixel Code --> */}
 
-            {pathname !== '/exchange-offers' && (
+            {/*
+              pathname !== '/exchange-offers' && (
               <script type="text/javascript">
                 {`
             !function(f,b,e,v,n,t,s)
@@ -333,7 +334,7 @@ export default class App extends Component {
              `}
               </script>
             )
-            }
+              */}
 
             {/* <!-- End Meta Pixel Code --> */}
             {/* <!-- Global site tag (gtag.js) - Google Ads: 845903914 --> */}
