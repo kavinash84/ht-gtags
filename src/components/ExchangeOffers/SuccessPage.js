@@ -61,6 +61,7 @@ class SuccessPage extends Component {
           <script>
             {` gtag('event', 'conversion', {'send_to': 'AW-832074530/j9-7CM6CpqQDEKLm4YwD'}); `}
           </script>
+          {/*
            <script type="text/javascript">
             {`
              !function(f,b,e,v,n,t,s)
@@ -75,10 +76,10 @@ class SuccessPage extends Component {
              fbq('track', 'Lead');
             `}
           </script>
-          
+          */}
           {/* <!-- End Meta Pixel Code --> */}
         </Helmet>
-        
+
         <noscript>
           <img src="https://ttrk.ringocount.com/pixel?adid=621c50fcfba3a36de041935b" />
         </noscript>
