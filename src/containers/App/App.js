@@ -274,10 +274,8 @@ export default class App extends Component {
       notifs,
       webtochat: { visible }
     } = this.props;
-    const { search, pathname } = location;
-    const url = this.checkIfSlash(pathname || '/');
-    const thankYouPage = (pathname && pathname === '/exchange-offers' && search && search.includes('submit=thankyou'))
-      ? 'yes' : 'no';
+    const pathname = (location && location.pathname) || "/";
+    const url = this.checkIfSlash(pathname);
 
     return (
       <ThemeProvider>
@@ -319,7 +317,7 @@ export default class App extends Component {
             </script>
             {/* <!-- Meta Pixel Code --> */}
 
-            {thankYouPage !== 'yes' && (
+            {pathname !== '/exchange-offers' && (
               <script type="text/javascript">
                 {`
             !function(f,b,e,v,n,t,s)
