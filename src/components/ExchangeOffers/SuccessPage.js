@@ -82,7 +82,7 @@ class SuccessPage extends Component {
                 s.parentNode.insertBefore(t,s)}(window, document,'script',
                 'https://connect.facebook.net/en_US/fbevents.js');
                 fbq('init', '1024172491523922');
-                fbq('track', 'HTElead');
+                fbq('track', 'Lead');
               `}
           </script>
           <noscript>
