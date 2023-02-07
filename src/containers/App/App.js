@@ -315,40 +315,45 @@ export default class App extends Component {
                     };
                   `}
             </script>
+
             {/* <!-- Meta Pixel Code --> */}
-            <script type="text/javascript">
-              {`
-            !function(f,b,e,v,n,t,s)
-             {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-             n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-             if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-             n.queue=[];t=b.createElement(e);t.async=!0;
-             t.src=v;s=b.getElementsByTagName(e)[0];
-             s.parentNode.insertBefore(t,s)}(window, document,'script',
-             'https://connect.facebook.net/en_US/fbevents.js');
-             fbq('init', '1024172491523922');
-             fbq('track', 'PageView');
-             `}
-            </script>
+            {
+              pathname !== '/exchange-offers' && (
+                <script type="text/javascript">
+                  {`
+                    !function(f,b,e,v,n,t,s)
+                     {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+                     n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+                     if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+                     n.queue=[];t=b.createElement(e);t.async=!0;
+                     t.src=v;s=b.getElementsByTagName(e)[0];
+                     s.parentNode.insertBefore(t,s)}(window, document,'script',
+                     'https://connect.facebook.net/en_US/fbevents.js');
+                     fbq('init', '1024172491523922');
+                     fbq('track', 'PageView');
+                  `}
+                </script>
+              )
+            }
             {/* <!-- End Meta Pixel Code --> */}
+
             {/* <!-- Global site tag (gtag.js) - Google Ads: 845903914 --> */}
             <script
               async
               src="https://www.googletagmanager.com/gtag/js?id=AW-845903914"
-            ></script>
+            />
             <script>
               {`
-               window.dataLayer = window.dataLayer || [];
-               function gtag(){dataLayer.push(arguments);}
-               gtag('js', new Date());
-
-               gtag('config', 'AW-845903914');
-               `}
+                 window.dataLayer = window.dataLayer || [];
+                 function gtag(){dataLayer.push(arguments);}
+                 gtag('js', new Date());
+                 gtag('config', 'AW-845903914');
+              `}
             </script>
             <script
               src="https://libraries.unbxdapi.com/recs-sdk/v2.2.0/unbxd_recs_template_sdk_apac.js"
               async
-            ></script>
+            />
             <script id="_webengage_script_tag" type="text/javascript">
               {`
               var webengage;!function(w,e,b,n,g){function o(e,t){e[t[t.length-1]]=function(){r.__queue.push([t.join("."),
