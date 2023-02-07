@@ -47,10 +47,7 @@ class SuccessPage extends Component {
   //     }));
   // }
   render() {
-    const { seoInfo, validity, location } = this.props;
-    const { pathname, search } = location;
-    console.log('pathname', pathname);
-    console.log('search', search);
+    const { seoInfo, validity } = this.props;
     return (
       <section>
         <Helmet title={`${(seoInfo && seoInfo.page_title) || ''}`}>
