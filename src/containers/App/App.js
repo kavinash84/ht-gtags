@@ -316,11 +316,8 @@ export default class App extends Component {
                   `}
             </script>
             {/* <!-- Meta Pixel Code --> */}
-
-            {/*
-              pathname !== '/exchange-offers' && (
-              <script type="text/javascript">
-                {`
+            <script type="text/javascript">
+              {`
             !function(f,b,e,v,n,t,s)
              {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
              n.callMethod.apply(n,arguments):n.queue.push(arguments)};
@@ -332,10 +329,7 @@ export default class App extends Component {
              fbq('init', '1024172491523922');
              fbq('track', 'PageView');
              `}
-              </script>
-            )
-              */}
-
+            </script>
             {/* <!-- End Meta Pixel Code --> */}
             {/* <!-- Global site tag (gtag.js) - Google Ads: 845903914 --> */}
             <script
