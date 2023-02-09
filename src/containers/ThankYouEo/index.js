@@ -1,6 +1,6 @@
 import { provideHooks } from 'redial';
 import HomeTownLoader from '../../containers/Loader';
-import { loadExchangeOffer } from '../../redux/modules/designBuild';
+import { loadExchangeOffer } from '../../redux/modules/designbuild';
 
 const hooks = {
   fetch: async ({ store: { dispatch } }) => {
