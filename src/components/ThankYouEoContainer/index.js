@@ -51,7 +51,10 @@ class ThankYouEoContainer extends Component {
             </script>
             {/* Meta Pixel Code  */}
             <script>
-              {'fbq(\'track\', \'Lead\');'}
+              {`fbq('trackSingle', '1024172491523922', 'PageView');`}
+            </script>
+            <script>
+              {`fbq('trackSingleCustom', '1024172491523922', 'HTElead');`}
             </script>
             <noscript>
               {`
