@@ -63,6 +63,7 @@ import oneLacPackage from "./containers/oneLacPackage";
 // Thank you pages
 import ThankyouMk from "./containers/ThankyouMk";
 import ThankyouDb from "./containers/ThankyouDb";
+import ThankYouEo from "./containers/ThankYouEo";
 
 /* checkout */
 import DeliveryAddress from "containers/DeliveryAddress";
@@ -277,6 +278,7 @@ const routes = [
       { path: "/smartsters", exact: true, component: Smartsters },
       { path: "/thankyou-mk", exact: true, component: ThankyouMk },
       { path: "/thankyou-db", exact: true, component: ThankyouDb },
+      { path: "/thank-you-eo", exact: true, component: ThankYouEo },
       { component: NotFound }
     ]
   }
