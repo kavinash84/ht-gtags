@@ -11,22 +11,12 @@ import { setExchangeCoupon } from '../../redux/modules/designbuild';
 const PRODUCTS = [
   { value: '1', label: 'Beds; Exchange value = 30,000' },
   { value: '2', label: '2 Door Wardrobe; Exchange value = 20,000' },
-  {
-    value: '3',
-    label: '3 Door Wardrobes / Other Wardrobes; Exchange value = 25,000'
-  },
+  { value: '3', label: '3 Door Wardrobes / Other Wardrobes; Exchange value = 25,000' },
   { value: '4', label: '1 Seater Sofa; Exchange value = 10,000' },
   { value: '5', label: '2 Seater Sofa; Exchange value = 25,000' },
   { value: '6', label: '3 Seater Sofa; Exchange value = 40,000' },
-  {
-    value: '7',
-    label:
-      'Dining Table set / Other Dining Table set (Table + Chairs); Exchange value = 30,000'
-  },
-  {
-    value: '8',
-    label: 'Other Furniture; Exchange value = 5,000'
-  },
+  { value: '7', label: 'Dining Table set / Other Dining Table set (Table + Chairs); Exchange value = 30,000' },
+  { value: '8', label: 'Other Furniture; Exchange value = 5,000' },
   { value: '9', label: 'Mattress Spring/Cotton/Coir/foam; Exchange value = 8,000' }
 ];
 
@@ -74,7 +64,7 @@ const initialState = {
   selectedProduct: {},
   selectedProductError: false,
   selectedProductErrorMessage: '',
-  isSubmitting: false,
+  isSubmiting: false,
   isSubmitted: false,
   isFailedToSubmit: false,
   submissionError: '',
@@ -90,7 +80,6 @@ export default class ContactUs extends Component {
   static contextTypes = {
     store: PropTypes.object.isRequired
   };
-
   constructor(props) {
     super(props);
     this.state = {
@@ -98,7 +87,6 @@ export default class ContactUs extends Component {
     };
     this.platform = '';
   }
-
   componentDidMount() {
     let path = '';
     const windowGlobal = typeof window !== 'undefined' && window ? window : '';
@@ -173,6 +161,252 @@ export default class ContactUs extends Component {
       });
     }
   };
+  handleFirstNameInput = e => {
+    //eslint-disable-line
+    const {
+      target: { value }
+    } = e;
+    const checkError = validateName(value);
+    const check = checkSpecialCharAndNum(value);
+    let error = '';
+    if (checkError.error && checkError.errorMessage) {
+      error = checkError.errorMessage;
+    } else if (check) {
+      error = 'Special Characters And Numbers Are Not Allowed !';
+    }
+    this.setState({
+      firstName: value,
+      firstNameError: checkError.error || check,
+      firstNameErrorMessage: error
+    });
+  };
+  handleLastNameInput = e => {
+    //eslint-disable-line
+    const {
+      target: { value }
+    } = e;
+    const checkError = validateName(value);
+    const check = checkSpecialCharAndNum(value);
+    let error = '';
+    if (checkError.error && checkError.errorMessage) {
+      error = checkError.errorMessage;
+    } else if (check) {
+      error = 'Special Characters And Numbers Are Not Allowed !';
+    }
+    this.setState({
+      lastName: value,
+      lastNameError: checkError.error || check,
+      lastNameErrorMessage: error
+    });
+  };
+  handleMobileInput = e => {
+    const {
+      target: { value }
+    } = e;
+    const checkError = validateMobile(value);
+    if (value.length > 10) return;
+    this.setState({
+      mobile: value,
+      mobileError: checkError.error,
+      mobileErrorMessage: checkError.error ? checkError.errorMessage : ''
+    });
+  };
+  handleEmailInput = e => {
+    const {
+      target: { value }
+    } = e;
+    const checkError = validateEmail(value);
+    this.setState({
+      email: value,
+      emailError: checkError.error,
+      emailErrorMessage: checkError.error ? checkError.errorMessage : ''
+    });
+  };
+  handleCityChange = e => {
+    const city = { value: e.target.value };
+    const { value } = city;
+    const checkError = validateOption(value);
+    this.setState({
+      selectedCity: city,
+      selectedCityError: checkError.error,
+      selectedCityErrorMessage: checkError.error ? checkError.errorMessage : ''
+    });
+  };
+  handleProductChange = e => {
+    const product = { value: e.target.value };
+    const { value } = product;
+    const checkError = validateOption(value);
+    this.setState({
+      selectedProduct: product,
+      selectedProductError: checkError.error,
+      selectedProductErrorMessage: checkError.error
+        ? checkError.errorMessage
+        : ''
+    });
+  };
+  handleSubmit = e => {
+    e.preventDefault();
+    const {
+      firstName,
+      lastName,
+      mobile,
+      email,
+      selectedCity: { value: exchangeCity },
+      selectedProduct: { value: exchangeProduct },
+      imageFile
+    } = this.state;
+    const { switchUI } = this.props;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const source = urlParams.get('utm_source')
+      ? urlParams.get('utm_source')
+      : 'Website';
+    const campaign = urlParams.get('utm_campaign')
+      ? urlParams.get('utm_campaign')
+      : 'Website';
+    const medium = urlParams.get('utm_medium')
+      ? urlParams.get('utm_medium')
+      : 'Website';
+    const term = urlParams.get('utm_term')
+      ? urlParams.get('utm_term')
+      : 'Website';
+
+    const checkFirstName = validateName(firstName);
+    const checkFirstNameCharAndNum = checkSpecialCharAndNum(firstName);
+    const checkLastName = validateName(lastName);
+    const checkLastNameCharAndNum = checkSpecialCharAndNum(lastName);
+    const checkMobileNumber = validateMobile(mobile);
+    const checkEmail = validateEmail(email);
+    const checkSelectedCity = validateOption(exchangeCity);
+    const checkSelectedProduct = validateOption(exchangeProduct);
+    // const imageAvailable = !!imagePreviewUrl;
+
+    if (
+      checkFirstName.error ||
+      checkFirstNameCharAndNum ||
+      checkMobileNumber.error ||
+      checkEmail.error ||
+      checkSelectedCity.error ||
+      checkSelectedProduct.error ||
+      imageFile === ''
+    ) {
+      return this.setState({
+        firstNameError: checkFirstName.error || checkFirstNameCharAndNum,
+        firstNameErrorMessage: checkFirstNameCharAndNum
+          ? 'Special characters are not allowed in name field !'
+          : checkFirstName.errorMessage,
+        lastNameError: checkLastName.error || checkLastNameCharAndNum,
+        lastNameErrorMessage: checkLastNameCharAndNum
+          ? 'Special characters are not allowed in name field !'
+          : checkFirstName.errorMessage,
+        mobileError: checkMobileNumber.error,
+        mobileErrorMessage: checkMobileNumber.errorMessage,
+        emailError: checkEmail.error,
+        emailErrorMessage: checkEmail.errorMessage,
+        selectedCityError: checkSelectedCity.error,
+        selectedCityErrorMessage: checkSelectedCity.errorMessage,
+        selectedProductError: checkSelectedProduct.error,
+        selectedProductErrorMessage: checkSelectedProduct.errorMessage,
+        imageFileError: true,
+        isSubmitted: false
+      });
+    }
+
+    const formData = new FormData();
+    formData.append('fname', firstName);
+    formData.append('lname', lastName);
+    formData.append('email', email);
+    formData.append('mobile', mobile);
+    formData.append('city', exchangeCity);
+    formData.append('product', `${exchangeProduct}`);
+    formData.append('image', imageFile);
+    formData.append('source', source);
+    formData.append('campaign', campaign);
+    formData.append('medium', medium);
+    formData.append('term', term);
+    this.setState({
+      isSubmiting: true
+    });
+    apiInstanceTest
+      .post('/tesla/offers/cashback-offers', formData)
+      .then(response => {
+        if (response.data.error_message) {
+          const { dispatch } = this.context.store;
+          this.setState({
+            isSubmiting: false,
+            isSubmitted: false,
+            isFailedToSubmit: true
+            // submissionError: message
+          });
+          dispatch(notifSend({
+              type: 'warning',
+              msg:
+                response.data.error_message ||
+                'Ooops..! Something went wrong. Try again',
+              dismissAfter: 3000
+            }));
+        } else {
+          this.setState(
+            {
+              ...initialState,
+              isSubmiting: false,
+              isSubmitted: true,
+              isFailedToSubmit: false,
+              submissionError: ''
+            },
+            () => {
+              const { history } = this.props;
+              const { dispatch } = this.context.store;
+              dispatch(setExchangeCoupon({
+                  coupon: response.data.coupon,
+                  validity: response.data.endDate
+                }));
+              history.push({
+                pathname: '/thank-you-eo',
+                search: `?utm_source=${source}&utm_medium=${medium}&utm_campaign=${campaign}&utm_term=${term}`
+              });
+            }
+          );
+        }
+      })
+      .catch(error => {
+        const {
+          response: {
+            data: { error_message: message }
+          }
+        } = error;
+        const { dispatch } = this.context.store;
+        this.setState({
+          isSubmiting: false,
+          isSubmitted: false,
+          isFailedToSubmit: true,
+          submissionError: message
+        });
+        dispatch(notifSend({
+            type: 'warning',
+            msg: message || 'Ooops..! Something went wrong. Try again',
+            dismissAfter: 3000
+          }));
+      });
+  };
+  isDisabled = () => {
+    const {
+      firstNameError,
+      mobileError,
+      emailError,
+      selectedCityError,
+      selectedProductError,
+      imgSizeError,
+      imgTypeError
+    } = this.state;
+    return firstNameError ||
+      mobileError ||
+      emailError ||
+      selectedCityError ||
+      imgSizeError ||
+      imgTypeError ||
+      selectedProductError;
+  };
   getUI = () => {
     const {
       firstName,
@@ -193,7 +427,7 @@ export default class ContactUs extends Component {
       selectedProduct,
       selectedProductError,
       selectedProductErrorMessage,
-      isSubmitting,
+      isSubmiting,
       imageFileError,
       imageFileErrorMessage,
       imagePreviewUrl,
@@ -426,7 +660,7 @@ export default class ContactUs extends Component {
                     width: '75px',
                     cursor: 'pointer'
                   }}
-                  disabled={isSubmitting || this.isDisabled()}
+                  disabled={isSubmiting || this.isDisabled()}
                 >
                   Submit
                 </button>
@@ -449,242 +683,6 @@ export default class ContactUs extends Component {
       </form>
     );
   };
-
-  handleFirstNameInput = e => {
-    //eslint-disable-line
-    const {
-      target: { value }
-    } = e;
-    const checkError = validateName(value);
-    const check = checkSpecialCharAndNum(value);
-    let error = '';
-    if (checkError.error && checkError.errorMessage) {
-      error = checkError.errorMessage;
-    } else if (check) {
-      error = 'Special Characters And Numbers Are Not Allowed !';
-    }
-    this.setState({
-      firstName: value,
-      firstNameError: checkError.error || check,
-      firstNameErrorMessage: error
-    });
-  };
-  handleLastNameInput = e => {
-    //eslint-disable-line
-    const {
-      target: { value }
-    } = e;
-    const checkError = validateName(value);
-    const check = checkSpecialCharAndNum(value);
-    let error = '';
-    if (checkError.error && checkError.errorMessage) {
-      error = checkError.errorMessage;
-    } else if (check) {
-      error = 'Special Characters And Numbers Are Not Allowed !';
-    }
-    this.setState({
-      lastName: value,
-      lastNameError: checkError.error || check,
-      lastNameErrorMessage: error
-    });
-  };
-  handleMobileInput = e => {
-    const {
-      target: { value }
-    } = e;
-    const checkError = validateMobile(value);
-    if (value.length > 10) return;
-    this.setState({
-      mobile: value,
-      mobileError: checkError.error,
-      mobileErrorMessage: checkError.error ? checkError.errorMessage : ''
-    });
-  };
-  handleEmailInput = e => {
-    const {
-      target: { value }
-    } = e;
-    const checkError = validateEmail(value);
-    this.setState({
-      email: value,
-      emailError: checkError.error,
-      emailErrorMessage: checkError.error ? checkError.errorMessage : ''
-    });
-  };
-  handleCityChange = e => {
-    const city = { value: e.target.value };
-    const { value } = city;
-    const checkError = validateOption(value);
-    this.setState({
-      selectedCity: city,
-      selectedCityError: checkError.error,
-      selectedCityErrorMessage: checkError.error ? checkError.errorMessage : ''
-    });
-  };
-  handleProductChange = e => {
-    const product = { value: e.target.value };
-    const { value } = product;
-    const checkError = validateOption(value);
-    this.setState({
-      selectedProduct: product,
-      selectedProductError: checkError.error,
-      selectedProductErrorMessage: checkError.error
-        ? checkError.errorMessage
-        : ''
-    });
-  };
-  handleSubmit = e => {
-    e.preventDefault();
-    const {
-      firstName,
-      lastName,
-      mobile,
-      email,
-      selectedCity: { value: exchangeCity },
-      selectedProduct: { value: exchangeProduct },
-      imageFile
-    } = this.state;
-
-    const urlParams = new URLSearchParams(window.location.search);
-    const source = urlParams.get('utm_source')
-      ? urlParams.get('utm_source')
-      : 'Website';
-    const campaign = urlParams.get('utm_campaign')
-      ? urlParams.get('utm_campaign')
-      : 'Website';
-    const medium = urlParams.get('utm_medium')
-      ? urlParams.get('utm_medium')
-      : 'Website';
-    const term = urlParams.get('utm_term')
-      ? urlParams.get('utm_term')
-      : 'Website';
-
-    const checkFirstName = validateName(firstName);
-    const checkFirstNameCharAndNum = checkSpecialCharAndNum(firstName);
-    const checkLastName = validateName(lastName);
-    const checkLastNameCharAndNum = checkSpecialCharAndNum(lastName);
-    const checkMobileNumber = validateMobile(mobile);
-    const checkEmail = validateEmail(email);
-    const checkSelectedCity = validateOption(exchangeCity);
-    const checkSelectedProduct = validateOption(exchangeProduct);
-    // const imageAvailable = !!imagePreviewUrl;
-
-    if (
-      checkFirstName.error ||
-      checkFirstNameCharAndNum ||
-      checkMobileNumber.error ||
-      checkEmail.error ||
-      checkSelectedCity.error ||
-      checkSelectedProduct.error ||
-      imageFile === ''
-    ) {
-      return this.setState({
-        firstNameError: checkFirstName.error || checkFirstNameCharAndNum,
-        firstNameErrorMessage: checkFirstNameCharAndNum
-          ? 'Special characters are not allowed in name field !'
-          : checkFirstName.errorMessage,
-        lastNameError: checkLastName.error || checkLastNameCharAndNum,
-        lastNameErrorMessage: checkLastNameCharAndNum
-          ? 'Special characters are not allowed in name field !'
-          : checkFirstName.errorMessage,
-        mobileError: checkMobileNumber.error,
-        mobileErrorMessage: checkMobileNumber.errorMessage,
-        emailError: checkEmail.error,
-        emailErrorMessage: checkEmail.errorMessage,
-        selectedCityError: checkSelectedCity.error,
-        selectedCityErrorMessage: checkSelectedCity.errorMessage,
-        selectedProductError: checkSelectedProduct.error,
-        selectedProductErrorMessage: checkSelectedProduct.errorMessage,
-        imageFileError: true,
-      });
-    }
-
-    const formData = new FormData();
-    formData.append('fname', firstName);
-    formData.append('lname', lastName);
-    formData.append('email', email);
-    formData.append('mobile', mobile);
-    formData.append('city', exchangeCity);
-    formData.append('product', `${exchangeProduct}`);
-    formData.append('image', imageFile);
-    formData.append('source', source);
-    formData.append('campaign', campaign);
-    formData.append('medium', medium);
-    formData.append('term', term);
-    this.setState({
-      isSubmitting: true
-    });
-
-    apiInstanceTest
-      .post('/tesla/offers/cashback-offers', formData)
-      .then(response => {
-        if (response.data.error_message) {
-          const { dispatch } = this.context.store;
-          this.setState({
-            isSubmitting: false,
-          });
-          dispatch(notifSend({
-            type: 'warning',
-            msg:
-              response.data.error_message ||
-              'Ooops..! Something went wrong. Try again',
-            dismissAfter: 3000
-          }));
-        } else {
-          this.setState(
-            { open: true },
-            () => {
-              const { dispatch } = this.context.store;
-              dispatch(setExchangeCoupon({
-                  coupon: response.data.coupon,
-                  validity: response.data.endDate
-                }));
-              const { history } = this.props;
-              history.push({
-                pathname: '/thank-you-eo',
-                search: `?utm_source=${source}&utm_medium=${medium}&utm_campaign=${campaign}&utm_term=${term}`
-              });
-            }
-          );
-        }
-      })
-      .catch(error => {
-        const {
-          response: {
-            data: { error_message: message }
-          }
-        } = error;
-        const { dispatch } = this.context.store;
-        this.setState({
-          isSubmitting: false,
-        });
-        dispatch(notifSend({
-          type: 'warning',
-          msg: message || 'Ooops..! Something went wrong. Try again',
-          dismissAfter: 3000
-        }));
-      });
-  };
-  // eslint-disable-next-line react/sort-comp
-  isDisabled = () => {
-    const {
-      firstNameError,
-      mobileError,
-      emailError,
-      selectedCityError,
-      selectedProductError,
-      imgSizeError,
-      imgTypeError
-    } = this.state;
-    return firstNameError ||
-      mobileError ||
-      emailError ||
-      selectedCityError ||
-      imgSizeError ||
-      imgTypeError ||
-      selectedProductError;
-  };
-
   render() {
     return this.getUI();
   }
@@ -694,4 +692,9 @@ ExchangeOffers.defaultProps = {
   loading: false,
   loaded: false,
   data: {},
+  sendFormData: () => { }
+};
+
+ExchangeOffers.propTypes = {
+  sendFormData: PropTypes.func
 };

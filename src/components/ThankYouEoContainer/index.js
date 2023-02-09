@@ -44,7 +44,6 @@ class ThankYouEoContainer extends Component {
               {` window.dataLayer = window.dataLayer || [];
                function gtag(){dataLayer.push(arguments);}
                gtag('js', new Date());
-
                gtag('config', 'AW-832074530'); `}
             </script>
             <script>
