@@ -8,9 +8,7 @@ const hooks = {
   }
 };
 
-const ExchangeOffer = HomeTownLoader({
-  loader: () =>
-    import('./exhangeOfferContainer')
+const ThankYouEo = HomeTownLoader({
+  loader: () => import('./ThankYouEo')
 });
-
-export default provideHooks(hooks)(ExchangeOffer);
+export default provideHooks(hooks)(ThankYouEo);

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import ExchangeOffers from 'components/ExchangeOffers/LandingPage';
 import PropTypes from 'prop-types';
-// import { notifSend } from 'redux/modules/notifs';
+import ExchangeOffers from '../../components/ExchangeOffers/LandingPage';
+
 export default class ExchangeOfferContainer extends Component {
   static propTypes = {
     history: PropTypes.object.isRequired
