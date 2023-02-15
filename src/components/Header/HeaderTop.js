@@ -200,7 +200,7 @@ export default class HeaderTop extends Component {
         <Row sx={{ alignItems: "center" }} mx={[0, 0, 0, -16]}>
           <Col width={3 / 12}>
             <Link to={HOME_URL}>
-              <img src={LogoIcon} alt="Hometown" />
+              <img src={LogoIcon} alt="Hometown" style={{width:"210px"}} />
             </Link>
           </Col>
           <Col width={5.5 / 12}>
