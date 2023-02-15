@@ -52,7 +52,7 @@ import LoginForm from "components/LoginForms";
 import SignupForm from "components/Signup/SignupForm";
 import ProductSummaryList from "components/Checkout/ProductSummaryList";
 
-const LogoIcon = require("../../../static/logo.png");
+const LogoIcon = require("../../../static/new-logo.png");
 const PincodeModalIcon = require("../../../static/map-placeholder.svg");
 
 const onClick = history => e => {
