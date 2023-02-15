@@ -14,7 +14,7 @@ const LandingPageLogo = () => (
       <a href="https://www.hometown.in" target="_blank" rel="noopener">
         <img
           className="img-fluid"
-          src={`${BASE_IMAGE_URL}/media/cms/extras-desktop/logo-ht.png`}
+          src={`${BASE_IMAGE_URL}/media/cms/hometownnew/HT-Logo.png`}
           alt="HomeTown"
           style={{ margin: "15px 0px" }}
         />
