@@ -482,7 +482,7 @@ class Campaign extends Component {
 
   render() {
     const { landing } = this.props;
-    const uiHtml = landing.data.items.text;
+    const uiHtml = landing.data.items.layout;
     // console.log(JSON.stringify(uiHtml));
     return (
       <div>
