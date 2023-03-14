@@ -110,21 +110,21 @@ class BlogComp extends React.Component {
           <div className={styles.posts}>
             {catagoryPosts.length
               ? catagoryPosts.map(item => (
-                  <Link
-                    to={`/blog/${item.post_key}`}
-                    style={{ width: "33.33%" }}
-                  >
-                    <div className={styles.post}>
-                      <div className={styles.image_container}>
-                        <img className={styles.image} src={item.main_image} />
-                      </div>
-                      <div className={styles.title}>{item.post_title}</div>
-                      <div className={styles.date}>
-                        {moment(item.date, "DD/MM/YYYY").format("Do MMMM YYYY")}
-                      </div>
+                <Link
+                  to={`/blog/${item.post_key}`}
+                  style={{ width: "33.33%" }}
+                >
+                  <div className={styles.post}>
+                    <div className={styles.image_container}>
+                      <img className={styles.image} src={item.main_image} />
                     </div>
-                  </Link>
-                ))
+                    <div className={styles.title} >{item.post_title}</div>
+                    <div className={styles.date}>
+                      {moment(item.date, "DD/MM/YYYY").format("Do MMMM YYYY")}
+                    </div>
+                  </div>
+                </Link>
+              ))
               : null}
           </div>
           <div className={styles.showMoreContainer}>
