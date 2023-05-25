@@ -108,6 +108,7 @@ import ExchangeOffer from "./containers/Exchange-offer";
 import BlogsContainer from "./containers/BlogsContainer";
 import BlogContainer from "./containers/BlogContainer";
 import Mattresses from "./containers/Mattresses";
+import ThankyouScreen from "./containers/Campaigns/ThankYouScreen";
 
 const createRegex = data => data.join("|");
 
@@ -279,6 +280,8 @@ const routes = [
       { path: "/thankyou-mk", exact: true, component: ThankyouMk },
       { path: "/thankyou-db", exact: true, component: ThankyouDb },
       { path: "/thank-you-eo", exact: true, component: ThankYouEo },
+      { path: "/thank-you", exact: true, component: ThankyouScreen },
+
       { component: NotFound }
     ]
   }

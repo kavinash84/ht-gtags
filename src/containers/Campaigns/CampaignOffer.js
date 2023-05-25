@@ -13,6 +13,9 @@ import { connect } from "react-redux";
 
 import moment from "moment";
 import ThankYouPage from "./ThankYouScreen";
+import SignInScreenComponent from "./SignInScreenComponent";
+import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 const startTime = date =>
   date
@@ -389,7 +392,8 @@ class Campaign extends Component {
       setStateAndCity(stores);
       dispatch(addToSelectForDemo(state));
       if (successData && successData.successPageHtml)
-        this.setState({ isModalOpen: true });
+        // this.setState({ isModalOpen: true });
+        this.setState({ redirectToSignIn: true });
     }
     if (prevState.isLoggedIn !== isLoggedIn) {
       resetForm(form, isLoggedIn, profileData);
@@ -483,7 +487,10 @@ class Campaign extends Component {
   render() {
     const { landing } = this.props;
     const uiHtml = landing.data.items.layout;
-    // console.log(JSON.stringify(uiHtml));
+    console.log("LANDING :: ", JSON.stringify(landing));
+    if (this.state.redirectToSignIn) {
+      return <Redirect to="/thank-you" />;
+    }
     return (
       <div>
         <Header />
@@ -494,12 +501,15 @@ class Campaign extends Component {
             dangerouslySetInnerHTML={{ __html: uiHtml }}
           />
         )}
-        <ResponsiveModal
+        {/* <Link to="/signin"> */}
+        {/* <ResponsiveModal
           onCloseModal={() => this.setState({ isModalOpen: false })}
           open={this.state.isModalOpen}
-        >
-          <ThankYouPage />
-        </ResponsiveModal>
+        > */}
+        {/* <ThankYouPage /> */}
+        {/* <SignInScreenComponent /> */}
+        {/* </ResponsiveModal> */}
+        {/* </Link> */}
         <Footer />
       </div>
     );
